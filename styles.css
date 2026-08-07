@@ -207,7 +207,7 @@ img, svg { display: block; max-width: 100%; }
   height: var(--header);
   padding: 0 var(--pad);
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  background: color-mix(in srgb, var(--bg) 96%, transparent);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(20px) saturate(1.3);
   -webkit-backdrop-filter: blur(20px) saturate(1.3);
@@ -215,7 +215,8 @@ img, svg { display: block; max-width: 100%; }
 }
 .site-header.scrolled {
   border-bottom-color: var(--line2);
-  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  background: color-mix(in srgb, var(--bg) 99%, transparent);
+  box-shadow: var(--shadow-sm);
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; }
 .brand-mark {
@@ -952,6 +953,8 @@ h1 em, h2 em {
   position: absolute;
   inset: 0;
   pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
 }
 .ambient-tags-fx span {
   position: absolute;
@@ -960,7 +963,7 @@ h1 em, h2 em {
   padding: 5px 12px;
   border: 1px solid color-mix(in srgb, var(--gold) 25%, transparent);
   border-radius: 999px;
-  background: color-mix(in srgb, var(--gold) 6%, transparent);
+  background: color-mix(in srgb, var(--bg) 70%, transparent);
   color: color-mix(in srgb, var(--gold) 55%, var(--muted));
   font: 600 9px var(--mono);
   letter-spacing: .08em;
@@ -969,10 +972,15 @@ h1 em, h2 em {
   backdrop-filter: blur(8px);
   animation: tag-float 6s ease-in-out infinite alternate;
   animation-delay: var(--d);
+  opacity: .55;
 }
 @keyframes tag-float {
-  0% { transform: translateY(0) scale(1); opacity: .35; }
-  100% { transform: translateY(-12px) scale(1.05); opacity: .65; }
+  0% { transform: translateY(0) scale(1); }
+  100% { transform: translateY(-12px) scale(1.05); }
+}
+/* keep the floating tags clear of the readable hero column and off small screens */
+@media (max-width: 1180px) {
+  .ambient-tags-fx { display: none; }
 }
 
 /* —— disciplines section —— */
@@ -1001,9 +1009,13 @@ h1 em, h2 em {
 .disc-kungfu:hover { border-color: color-mix(in srgb, var(--gold) 45%, var(--line)); }
 .disc-mindfulness:hover { border-color: color-mix(in srgb, var(--accent) 35%, var(--line)); }
 .disc-icon {
-  font-size: 28px;
-  line-height: 1;
+  display: inline-flex;
+  width: 34px; height: 34px;
+  color: var(--accent);
 }
+.disc-icon svg { width: 100%; height: 100%; }
+.disc-kungfu .disc-icon { color: var(--gold-2); }
+.disc-mindfulness .disc-icon { color: var(--muted); }
 .disc-card h3 {
   margin: 0;
   font: 500 22px/1.1 var(--display);
@@ -1038,16 +1050,61 @@ h1 em, h2 em {
 .disc-kungfu .disc-tags li { border-color: color-mix(in srgb, var(--gold) 25%, var(--line)); }
 
 /* —— timeline image —— */
-.timeline-img-wrap {
+.mini-timeline {
   border: 1px solid var(--line2);
   border-radius: var(--radius-lg);
-  overflow: hidden;
   background: var(--surface);
+  padding: 30px clamp(20px, 4vw, 40px) 24px;
+  overflow-x: auto;
 }
-.timeline-img-wrap img {
-  width: 100%;
-  height: auto;
-  display: block;
+.mini-timeline-track {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  min-width: 620px;
+  padding-top: 14px;
+}
+.mini-timeline-track::before {
+  content: "";
+  position: absolute;
+  left: 6px; right: 6px; top: 3px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--line2) 6%, var(--line2) 94%, transparent);
+}
+.mt-item {
+  position: relative;
+  flex: 1;
+  display: flex; flex-direction: column; gap: 6px;
+  text-align: center;
+}
+.mt-item::before {
+  content: "";
+  position: absolute;
+  top: -14px; left: 50%; transform: translateX(-50%);
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1.5px solid var(--muted2);
+}
+.mt-item.mt-gold::before { border-color: var(--gold); background: var(--gold); }
+.mt-item.mt-live::before {
+  border-color: var(--accent); background: var(--accent);
+  box-shadow: 0 0 0 4px var(--accent-soft);
+}
+.mt-item b {
+  font: 500 15px var(--display);
+  color: var(--ink);
+}
+.mt-item i {
+  font: 600 9.5px var(--sans);
+  font-style: normal;
+  letter-spacing: .02em;
+  color: var(--muted);
+  line-height: 1.3;
+}
+@media (max-width: 640px) {
+  .mini-timeline-track { min-width: 560px; }
 }
 
 /* —— responsive —— */

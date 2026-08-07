@@ -26,16 +26,6 @@
     <div class="ambient-orb ambient-orb-b"></div>
     <div class="ambient-grain"></div>
     <div class="ambient-grid-fx" aria-hidden="true"></div>
-    <div class="ambient-tags-fx" aria-hidden="true">
-      <span style="--tx:8%;--ty:18%;--d:0s">Asana</span>
-      <span style="--tx:85%;--ty:12%;--d:.7s">Pranayama</span>
-      <span style="--tx:12%;--ty:72%;--d:1.4s">Mindfulness</span>
-      <span style="--tx:78%;--ty:68%;--d:2.1s">Kung Fu</span>
-      <span style="--tx:48%;--ty:8%;--d:2.8s">Meditación</span>
-      <span style="--tx:90%;--ty:42%;--d:3.5s">Wellness</span>
-      <span style="--tx:5%;--ty:48%;--d:1s">Presencia</span>
-      <span style="--tx:52%;--ty:82%;--d:1.7s">Shaolin</span>
-    </div>
   </div>
 
   <a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
@@ -66,8 +56,8 @@
         <button type="button" class="ctrl-btn" data-set-lang="en" aria-pressed="false">EN</button>
       </div>
       <div class="ctrl-group" role="group" aria-label="Theme">
-        <button type="button" class="ctrl-btn" data-set-theme="light" aria-pressed="true" title="Light" aria-label="Light">☀</button>
-        <button type="button" class="ctrl-btn" data-set-theme="dark" aria-pressed="false" title="Dark" aria-label="Dark">☾</button>
+        <button type="button" class="ctrl-btn ctrl-icon" data-set-theme="light" aria-pressed="true" title="Light" aria-label="Light"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="4.6" stroke="currentColor" stroke-width="1.4"/><path d="M12 2.5v3M12 18.5v3M21.5 12h-3M5.5 12h-3M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1M18.4 18.4l-2.1-2.1M7.7 7.7 5.6 5.6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
+        <button type="button" class="ctrl-btn ctrl-icon" data-set-theme="dark" aria-pressed="false" title="Dark" aria-label="Dark"><svg viewBox="0 0 24 24" fill="none"><path d="M20 14.2A8.6 8.6 0 1 1 9.8 4a6.7 6.7 0 0 0 10.2 10.2z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" fill="none"/></svg></button>
       </div>
       <a class="btn primary small" href="./CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-i18n="navCv">CV Yoga ↗</a>
     </nav>
@@ -79,6 +69,12 @@
   <main id="main">
     <!-- ═══════════════ HERO ═══════════════ -->
     <section class="hero" id="inicio">
+      <div class="ambient-tags-fx" aria-hidden="true">
+        <span style="--tx:2%;--ty:3%;--d:0s">Asana</span>
+        <span style="--tx:90%;--ty:7%;--d:.7s">Pranayama</span>
+        <span style="--tx:88%;--ty:80%;--d:2.1s">Kung Fu</span>
+        <span style="--tx:70%;--ty:89%;--d:1.7s">Shaolin</span>
+      </div>
       <div class="hero-inner">
         <p class="kicker" data-i18n="heroKicker">YOGA · KUNG FU SHAOLIN · MINDFULNESS · MURCIA</p>
         <h1 data-i18n-html="heroTitle">Presencia.<br>Respiración.<br><em>Práctica real.</em></h1>
@@ -238,7 +234,7 @@
       </div>
       <div class="disc-grid">
         <article class="disc-card disc-yoga">
-          <span class="disc-icon">🧘</span>
+          <span class="disc-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="8" r="3" stroke="currentColor" stroke-width="1.3"/><path d="M16 11v4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><path d="M16 15c-4 0-7 2-9 6M16 15c4 0 7 2 9 6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" fill="none"/><path d="M8 21c2.6-1.6 5.2-2.4 8-2.4s5.4.8 8 2.4" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" opacity=".55" fill="none"/></svg></span>
           <h3 data-i18n="disc1t">Yoga</h3>
           <p data-i18n="disc1p">Asanas, pranayama y meditación. Clases multi-nivel, talleres y retiros. Certificación oficial (Madrid 2019).</p>
           <ul class="disc-tags">
@@ -246,7 +242,7 @@
           </ul>
         </article>
         <article class="disc-card disc-kungfu">
-          <span class="disc-icon">🥋</span>
+          <span class="disc-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1" opacity=".35"/><path d="M16 7l7 16H9z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round" fill="none"/><path d="M16 13l3.4 10M16 13l-3.4 10" stroke="currentColor" stroke-width=".9" opacity=".5" fill="none"/></svg></span>
           <h3 data-i18n="disc2t">Kung Fu Shaolin</h3>
           <p data-i18n="disc2p">Disciplina marcial y filosofía del cuerpo como sistema. Formas, acondicionamiento y presencia. Shaolin Temple Spain (2016—2019).</p>
           <ul class="disc-tags">
@@ -254,7 +250,7 @@
           </ul>
         </article>
         <article class="disc-card disc-mindfulness">
-          <span class="disc-icon">✦</span>
+          <span class="disc-icon" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><circle cx="16" cy="16" r="13" stroke="currentColor" stroke-width="1" opacity=".3"/><path d="M16 5c.8 4.6 2.4 6.2 7 7-4.6.8-6.2 2.4-7 7-.8-4.6-2.4-6.2-7-7 4.6-.8 6.2-2.4 7-7z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round" fill="none"/></svg></span>
           <h3 data-i18n="disc3t">Mindfulness & Wellness</h3>
           <p data-i18n="disc3p">Bienestar corporativo, salud mental de equipos y facilitación de grupos. Wellness Ambassador Google/YouTube (Majorel).</p>
           <ul class="disc-tags">
@@ -262,8 +258,16 @@
           </ul>
         </article>
       </div>
-      <div class="timeline-img-wrap">
-        <img src="https://www.genspark.ai/api/files/s/Lin221F8?cache_control=3600" alt="Timeline horizontal carrera 2011-2026" loading="lazy" />
+      <div class="mini-timeline" role="img" aria-label="Línea de tiempo 2011–2026: Turismo, Kung Fu Shaolin, certificación de yoga, Majorel, Mood Fitness">
+        <div class="mini-timeline-track">
+          <span class="mt-item"><b>2011</b><i data-i18n="mt1">Turismo · Murcia</i></span>
+          <span class="mt-item"><b>2012</b><i data-i18n="mt2">Erasmus · Italia</i></span>
+          <span class="mt-item"><b>2016</b><i data-i18n="mt3">Kung Fu Shaolin</i></span>
+          <span class="mt-item mt-gold"><b>2019</b><i data-i18n="mt4">Certificación Yoga</i></span>
+          <span class="mt-item"><b>2020</b><i data-i18n="mt5">Majorel · Google/YT</i></span>
+          <span class="mt-item mt-live"><b>2022</b><i data-i18n="mt6">Mood Fitness</i></span>
+          <span class="mt-item"><b>2026</b><i data-i18n="mt7">Hoy</i></span>
+        </div>
       </div>
     </section>
 
@@ -332,8 +336,8 @@
       <div class="cv-band-inner">
         <div>
           <p class="kicker" data-i18n="cvKicker">CURRICULUM · 1 PÁGINA</p>
-          <h2 data-i18n-html="cvH2">CV Yoga zen.<br><em>ES y EN.</em></h2>
-          <p data-i18n="cvP">Diseño editorial de una sola página. Descarga el PDF en el idioma que necesites o deja que el sitio elija al cambiar ES/EN.</p>
+          <h2 data-i18n-html="cvH2">CV y carta.<br><em>ES y EN.</em></h2>
+          <p data-i18n="cvP">Diseño editorial de una sola página. Descarga el CV y la carta de presentación en el idioma que necesites.</p>
           <div class="cv-actions">
             <a class="btn primary" href="./CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-i18n="cvCta">Descargar CV activo</a>
             <a class="btn ghost" href="#contacto" data-i18n="heroCta1">Contactar</a>
@@ -341,15 +345,27 @@
         </div>
         <div class="cv-cards">
           <a class="cv-card" href="./CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer">
-            <span>ESPAÑOL</span>
+            <span>ESPAÑOL · CV</span>
             <strong data-i18n="cvEsTitle">CV Yoga ES</strong>
             <small data-i18n="cvEsSub">PDF · 1 página · diseño zen</small>
             <span class="btn small ghost" data-i18n="cvOpen">Abrir PDF ↗</span>
           </a>
           <a class="cv-card" href="./CV_Gracian_Baena_Yoga_EN.pdf" target="_blank" rel="noreferrer">
-            <span>ENGLISH</span>
+            <span>ENGLISH · CV</span>
             <strong data-i18n="cvEnTitle">Yoga CV EN</strong>
             <small data-i18n="cvEnSub">PDF · 1 page · zen layout</small>
+            <span class="btn small ghost" data-i18n="cvOpen">Open PDF ↗</span>
+          </a>
+          <a class="cv-card" href="./Carta_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer">
+            <span>ESPAÑOL · CARTA</span>
+            <strong data-i18n="letterEsTitle">Carta ES</strong>
+            <small data-i18n="letterEsSub">PDF · 1 página · carta de presentación</small>
+            <span class="btn small ghost" data-i18n="cvOpen">Abrir PDF ↗</span>
+          </a>
+          <a class="cv-card" href="./Cover_Letter_Gracian_Baena_Yoga_EN.pdf" target="_blank" rel="noreferrer">
+            <span>ENGLISH · LETTER</span>
+            <strong data-i18n="letterEnTitle">Cover Letter EN</strong>
+            <small data-i18n="letterEnSub">PDF · 1 page · cover letter</small>
             <span class="btn small ghost" data-i18n="cvOpen">Open PDF ↗</span>
           </a>
         </div>

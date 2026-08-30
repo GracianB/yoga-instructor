@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>Gracián Baena — CV Yoga</title>
+  <link rel="canonical" href="https://gracianb.github.io/yoga-instructor/cv.html">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Manrope:wght@500;700;800&display=swap">
+  <style>
+    :root {
+      --paper: #f7f3ea; --ink: #1e2a1f; --sage: #2f6b4f; --gold: #c99a24;
+      --muted: #5a6354; --line: #d6d0be; --white: #fffdf7;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #e8e2d2; color: var(--ink); font-family: Manrope, system-ui, sans-serif; }
+    .sheet {
+      width: min(820px, 100%);
+      margin: 24px auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      box-shadow: 0 24px 60px rgba(30,42,31,.1);
+      position: relative;
+    }
+    .sheet::before {
+      content: ""; position: absolute; inset: 0 auto 0 0; width: 10px;
+      background: linear-gradient(#1e2a1f 0 70%, #2f6b4f);
+    }
+    .inner { padding: 36px 40px 32px 48px; }
+    .top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-start; }
+    .mark {
+      width: 52px; height: 52px; border: 1px solid var(--sage); border-radius: 50%;
+      display: grid; place-items: center; font: italic 500 16px/1 Fraunces, serif;
+    }
+    h1 { margin: 0; font: 500 40px/1 Fraunces, serif; letter-spacing: -.03em; }
+    .role { margin: 6px 0 0; color: var(--sage); font: 800 11px/1.3 Manrope; letter-spacing: .16em; text-transform: uppercase; }
+    .tag { margin: 14px 0 8px; font: italic 400 22px/1.2 Fraunces, serif; }
+    .breath { width: 100%; height: 36px; margin: 4px 0 10px; }
+    .meta { color: var(--muted); font-size: 13px; }
+    .meta a { color: var(--sage); text-decoration: none; }
+    .ctrl { display: flex; gap: 8px; }
+    .ctrl button, .ctrl a {
+      min-height: 36px; padding: 0 12px; border: 1px solid var(--line); background: transparent;
+      font: 800 10px Manrope; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; color: inherit; text-decoration: none; display: grid; place-items: center;
+    }
+    .ctrl button.is-on { background: var(--sage); color: #fff; border-color: var(--sage); }
+    .doors { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin: 22px 0; }
+    .doors article { background: var(--white); border: 1px solid var(--line); padding: 12px 14px; border-left: 3px solid var(--sage); }
+    .doors span { color: var(--sage); font: 800 10px Manrope; letter-spacing: .12em; }
+    .doors h3 { margin: 4px 0 6px; font: 500 20px/1 Fraunces, serif; }
+    .doors p { margin: 0; color: var(--muted); font-size: 13px; }
+    .k { margin: 18px 0 8px; color: var(--sage); font: 800 10px Manrope; letter-spacing: .16em; text-transform: uppercase; }
+    .job { display: grid; grid-template-columns: 140px 1fr; gap: 8px 16px; margin: 0 0 12px; }
+    .job b { color: var(--sage); font-size: 11px; letter-spacing: .04em; }
+    .job h3 { margin: 0; font: 500 18px/1.2 Fraunces, serif; }
+    .job small { color: var(--muted); font-size: 12px; }
+    .job p { margin: 4px 0 0; font-size: 14px; }
+    .split { display: grid; grid-template-columns: 1.2fr .8fr; gap: 24px; }
+    blockquote { margin: 16px 0 0; font: italic 400 20px/1.35 Fraunces, serif; }
+    .foot { margin-top: 22px; padding-top: 12px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font-size: 12px; }
+    @media (max-width: 700px) {
+      .inner { padding: 24px 20px 24px 28px; }
+      .doors, .job, .split, .top { grid-template-columns: 1fr; display: grid; }
+      h1 { font-size: 32px; }
+    }
+    @media print {
+      body { background: #fff; }
+      .sheet { margin: 0; border: 0; box-shadow: none; width: 100%; }
+      .ctrl { display: none; }
+      a { color: inherit; text-decoration: none; }
+    }
+  </style>
+</head>
+<body>
+  <article class="sheet">
+    <div class="inner">
+      <div class="top">
+        <div>
+          <div class="mark">GB</div>
+          <h1>Gracián Baena</h1>
+          <p class="role" data-i="role">Instructor de yoga · Murcia</p>
+        </div>
+        <div class="ctrl">
+          <button type="button" id="es" class="is-on">ES</button>
+          <button type="button" id="en">EN</button>
+          <a href="./Gracian_Baena_CV_Yoga_ES.pdf" data-pdf>PDF ↗</a>
+        </div>
+      </div>
+      <p class="tag" data-i="tag">Presencia. Respiración. Práctica real.</p>
+      <svg class="breath" viewBox="0 0 620 40" aria-hidden="true">
+        <path d="M8,32 C48,32 58,8 92,8 C140,8 148,8 250,8 C300,8 330,32 430,32 C480,32 500,32 612,32" fill="none" stroke="#c99a24" stroke-width="2.6" stroke-linecap="round"/>
+        <text x="50" y="38" fill="#c99a24" font-size="9" font-family="Manrope" font-weight="700">4</text>
+        <text x="170" y="38" fill="#c99a24" font-size="9" font-family="Manrope" font-weight="700">7</text>
+        <text x="340" y="38" fill="#c99a24" font-size="9" font-family="Manrope" font-weight="700">8</text>
+      </svg>
+      <p class="meta">
+        <a href="mailto:gracianbaenagonzalez@gmail.com">gracianbaenagonzalez@gmail.com</a>
+        · <a href="tel:+34687470725">+34 687 470 725</a>
+        · <a href="https://gracianb.github.io/yoga-instructor/">yoga-instructor</a>
+        · no Instagram
+      </p>
+
+      <div class="doors">
+        <article><span>01</span><h3 data-i="d1t">Sala</h3><p data-i="d1p">Clases multi-nivel. Entras, respiras, sales distinto.</p></article>
+        <article><span>02</span><h3 data-i="d2t">1:1</h3><p data-i="d2p">Movilidad, estrés, hábito. Una persona, un criterio.</p></article>
+        <article><span>03</span><h3 data-i="d3t">Equipos</h3><p data-i="d3p">Bienestar en el trabajo. Lo hice en Google / YouTube.</p></article>
+      </div>
+
+      <p class="k" data-i="exp">Experiencia</p>
+      <div class="job"><b>ABR 2022 — JUN 2026</b><div><h3>Mood Fitness · Murcia</h3><small data-i="j1s">Instructor · planta baja, González Adalid 12</small><p data-i="j1p">Clases multi-nivel hasta el cambio de titularidad. El nuevo equipo gestiona y da las clases. Alumnos que siguen: María José, Mariángeles, Patricio — lunes y miércoles 8:30. Desde el inicio.</p></div></div>
+      <div class="job"><b>2020 — 2021</b><div><h3>Majorel · Google / YouTube</h3><small data-i="j2s">Wellness Ambassador · yoga corporativo</small><p data-i="j2p">Programas de yoga y bienestar para equipos IT + ES.</p></div></div>
+      <div class="job"><b>2019 — 2022</b><div><h3 data-i="j3t">Clases particulares</h3><small data-i="j3s">Instructor personalizado</small><p data-i="j3p">Movilidad, estrés, constancia y técnica.</p></div></div>
+      <div class="job"><b>2016 — 2019</b><div><h3>Shaolin Temple</h3><small>Kung Fu Shaolin</small><p data-i="j4p">Disciplina, presencia y constancia. La base antes de la sala.</p></div></div>
+
+      <div class="split">
+        <div>
+          <p class="k" data-i="edu">Formación</p>
+          <h3 style="margin:0;font:500 18px Fraunces,serif;">Instructor de Yoga · Madrid · 2019</h3>
+          <p class="meta" data-i="edup">Certificación oficial. Asanas, pranayama, filosofía. Prácticas en Madrid. Turismo (Erasmus Bergamo 2012 · Murcia 2011).</p>
+          <blockquote data-i="q">Busco clases transformadoras y honestas: cuerpo, respiración y atención. Sin postureo. Con método y calidez.</blockquote>
+        </div>
+        <div>
+          <p class="k" data-i="lang">Idiomas</p>
+          <p>ES nativo · EN C1 · IT C1 · PT · FR</p>
+          <p class="k" data-i="av">Disponibilidad</p>
+          <p data-i="avp">Fines de semana · tardes y noches. Murcia.</p>
+        </div>
+      </div>
+      <div class="foot">
+        <span>4–7–8 · presencia · respiración · práctica real</span>
+        <a href="https://gracianb.github.io/yoga-instructor/">gracianb.github.io/yoga-instructor</a>
+      </div>
+    </div>
+  </article>
+  <script>
+    const T = {
+      es: { role:"Instructor de yoga · Murcia", tag:"Presencia. Respiración. Práctica real.", d1t:"Sala", d1p:"Clases multi-nivel. Entras, respiras, sales distinto.", d2t:"1:1", d2p:"Movilidad, estrés, hábito. Una persona, un criterio.", d3t:"Equipos", d3p:"Bienestar en el trabajo. Lo hice en Google / YouTube.", exp:"Experiencia", j1s:"Instructor · planta baja, González Adalid 12", j1p:"Clases multi-nivel hasta el cambio de titularidad. El nuevo equipo gestiona y da las clases. Alumnos que siguen: María José, Mariángeles, Patricio — lunes y miércoles 8:30. Desde el inicio.", j2s:"Wellness Ambassador · yoga corporativo", j2p:"Programas de yoga y bienestar para equipos IT + ES.", j3t:"Clases particulares", j3s:"Instructor personalizado", j3p:"Movilidad, estrés, constancia y técnica.", j4p:"Disciplina, presencia y constancia. La base antes de la sala.", edu:"Formación", edup:"Certificación oficial. Asanas, pranayama, filosofía. Prácticas en Madrid. Turismo (Erasmus Bergamo 2012 · Murcia 2011).", q:"Busco clases transformadoras y honestas: cuerpo, respiración y atención. Sin postureo. Con método y calidez.", lang:"Idiomas", av:"Disponibilidad", avp:"Fines de semana · tardes y noches. Murcia.", pdf:"./Gracian_Baena_CV_Yoga_ES.pdf" },
+      en: { role:"Yoga instructor · Murcia", tag:"Presence. Breath. Real practice.", d1t:"Studio", d1p:"Multi-level classes. Walk in, breathe, leave different.", d2t:"1:1", d2p:"Mobility, stress, habit. One person, one criterion.", d3t:"Teams", d3p:"Wellbeing at work. I did it at Google / YouTube.", exp:"Experience", j1s:"Instructor · ground floor, González Adalid 12", j1p:"Multi-level classes until the change of ownership. The new managers teach. Students who stayed: María José, Mariángeles, Patricio — Mon & Wed 8:30. From day one.", j2s:"Wellness Ambassador · corporate yoga", j2p:"Yoga and wellbeing programmes for IT + ES teams.", j3t:"Private classes", j3s:"Personalised instructor", j3p:"Mobility, stress, consistency and technique.", j4p:"Discipline, presence and consistency. The base before the studio.", edu:"Training", edup:"Official certification. Asana, pranayama, philosophy. Placements in Madrid. Tourism (Erasmus Bergamo 2012 · Murcia 2011).", q:"Honest, transformative classes: body, breath and attention. No performance. Method and warmth.", lang:"Languages", av:"Availability", avp:"Weekends · evenings and nights. Murcia.", pdf:"./Gracian_Baena_CV_Yoga_EN.pdf" }
+    };
+    function apply(lang) {
+      const t = T[lang];
+      document.documentElement.lang = lang;
+      document.querySelectorAll("[data-i]").forEach(el => { if (t[el.dataset.i]) el.textContent = t[el.dataset.i]; });
+      document.querySelector("[data-pdf]").href = t.pdf;
+      document.getElementById("es").classList.toggle("is-on", lang === "es");
+      document.getElementById("en").classList.toggle("is-on", lang === "en");
+    }
+    document.getElementById("es").onclick = () => apply("es");
+    document.getElementById("en").onclick = () => apply("en");
+  </script>
+</body>
+</html>

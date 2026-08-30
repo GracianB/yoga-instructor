@@ -24,24 +24,23 @@ INK = (30, 42, 31)
 W, H, M = 210, 297, 18
 
 
-def cycle_478(cycles=2, spu=10):
-    """Inhale 4, hold 7, exhale 8. y: 0 baseline → 1 peak."""
+def cycle_pattern(inhale, hold, exhale, cycles=2, spu=10):
     pts = []
     t = 0.0
     dt = 1.0 / spu
     for _ in range(cycles):
-        for i in range(4 * spu):
-            u = i / (4 * spu)
+        for i in range(inhale * spu):
+            u = i / (inhale * spu)
             pts.append((t, 0.5 - 0.5 * math.cos(math.pi * u)))
             t += dt
-        for _i in range(7 * spu):
+        for _i in range(hold * spu):
             pts.append((t, 1.0))
             t += dt
-        for i in range(8 * spu):
-            u = i / (8 * spu)
+        for i in range(exhale * spu):
+            u = i / (exhale * spu)
             pts.append((t, 0.5 + 0.5 * math.cos(math.pi * u)))
             t += dt
-    return pts
+    return pts, inhale + hold + exhale, (inhale, hold, exhale)
 
 
 class Doc(FPDF):
@@ -61,8 +60,8 @@ class Doc(FPDF):
         self.set_fill_color(*SAGE)
         self.rect(6, 0, 1.4, H, "F")
 
-    def breath(self, x, y, w, h=11, labels=False):
-        raw = cycle_478(2, 10)
+    def breath(self, x, y, w, h=9, labels=False, inhale=4, hold=7, exhale=8):
+        raw, cycle, beats = cycle_pattern(inhale, hold, exhale, 2, 10)
         tmax = raw[-1][0] or 1
         pts = []
         for tx, ty in raw:
@@ -70,20 +69,19 @@ class Doc(FPDF):
             ny = y + (1 - ty) * h
             pts.append((nx, ny))
         self.set_draw_color(*GOLD)
-        self.set_line_width(0.7)
+        self.set_line_width(0.65)
         self.polyline(pts, style="D")
         if labels:
-            unit = w / (19 * 2)
+            unit = w / (cycle * 2)
             self.set_font("Sans", "B", 6.5)
             self.set_text_color(*GOLD)
-            self.set_xy(x + 4 * unit * 0.05, y + h + 1.2)
-            self.cell(4 * unit, 3.2, "4", align="C")
-            self.set_xy(x + 4 * unit, y + h + 1.2)
-            self.cell(7 * unit, 3.2, "7", align="C")
-            self.set_xy(x + 11 * unit, y + h + 1.2)
-            self.cell(8 * unit, 3.2, "8", align="C")
-            return y + h + 6
-        return y + h + 4
+            x0 = x
+            for n in beats:
+                self.set_xy(x0, y + h + 1.1)
+                self.cell(n * unit, 3.2, str(n), align="C")
+                x0 += n * unit
+            return y + h + 5.5
+        return y + h + 3.5
 
     def kicker(self, text, y):
         self.set_xy(M, y)
@@ -126,7 +124,8 @@ def header(pdf, role, place, tagline, contacts):
     pdf.set_font("Serif", "I", 16)
     pdf.set_text_color(*FOREST)
     pdf.cell(0, 7, tagline)
-    y = pdf.breath(M, y + 14, W - M * 2, 12, labels=True)
+    y = pdf.breath(M, y + 12, W - M * 2, 8, labels=True, inhale=4, hold=7, exhale=8)
+    y = pdf.breath(M, y + 2, W - M * 2, 8, labels=True, inhale=4, hold=4, exhale=4)
     pdf.set_xy(M, y + 2)
     pdf.set_font("Sans", "", 8)
     pdf.set_text_color(*MUTED)
@@ -278,9 +277,11 @@ def cv(lang):
     pdf.multi_cell(70, 4.2, "ES nativo\nEN C1    IT C1\nPT básico    FR básico" if es
                    else "ES native\nEN C1    IT C1\nPT basic    FR basic")
 
-    y = max(pdf.get_y(), y + 18) + 6
-    y = pdf.breath(M, y, W - M * 2, 10, labels=False)
-    y += 4
+    y = max(pdf.get_y(), y + 16) + 5
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=7, exhale=8)
+    y += 2
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=4, exhale=4)
+    y += 3
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 13)
     pdf.set_text_color(*FOREST)
@@ -334,9 +335,11 @@ def cover(es):
         pdf.set_xy(M, y)
         pdf.multi_cell(W - M * 2, 6, p)
         y = pdf.get_y() + 6
-    y += 6
-    y = pdf.breath(M, y, W - M * 2, 10, labels=False)
-    y += 6
+    y += 5
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=7, exhale=8)
+    y += 2
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=4, exhale=4)
+    y += 5
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 12)
     pdf.set_text_color(*FOREST)

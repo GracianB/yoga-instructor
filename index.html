@@ -17,9 +17,9 @@
   <meta property="og:image" content="https://gracianb.github.io/GracianB/og-cover.png">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="./favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="./styles.css?v=yoga4">
-  <script src="./i18n.js?v=yoga4"></script>
-  <script src="./main.js?v=yoga4" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=yoga5">
+  <script src="./i18n.js?v=yoga5"></script>
+  <script src="./main.js?v=yoga5" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -51,6 +51,7 @@
     </a>
     <nav class="nav" id="nav">
       <a href="#sobre" data-i18n="navAbout">Sobre mí</a>
+      <a href="#campo" data-i18n="navField">Campo</a>
       <a href="#experiencia" data-i18n="navExp">Experiencia</a>
       <a href="#cv" data-i18n="navCvSection">CV</a>
       <a href="#contacto" data-i18n="navContact">Contacto</a>
@@ -104,6 +105,36 @@
           <li><span>03</span><b data-i18n="card3">Bienestar de equipos</b></li>
         </ol>
       </aside>
+    </section>
+
+    <section class="section campo reveal" id="campo">
+      <div class="section-head">
+        <p class="kicker" data-i18n="fieldKicker">CAMPO · PULSO</p>
+        <h2 data-i18n-html="fieldH2">Respirar.<br><em>O entrar al vórtice.</em></h2>
+        <p class="about-lead" data-i18n="fieldP">La misma presencia, otro medio. Un instrumental lento para practicar — y el campo de partículas si quieres jugar.</p>
+      </div>
+      <div class="campo-grid">
+        <article class="campo-audio">
+          <header>
+            <span data-i18n="fieldTrack">SUSTAINED FOCUS</span>
+            <a href="https://suno.com/s/Zq81WeM02AVZnhuC" target="_blank" rel="noreferrer">Suno ↗</a>
+          </header>
+          <p data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM. For practice, not for singing.</p>
+          <audio id="focus-audio" src="./audio/sustained-focus.mp3" preload="metadata" loop></audio>
+          <div class="audio-bar">
+            <button type="button" class="btn primary small" id="audio-play" data-i18n="fieldPlay">Play</button>
+            <button type="button" class="btn ghost small" id="audio-mute" data-i18n="fieldMute">Mute</button>
+            <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" aria-label="Volume">
+          </div>
+        </article>
+        <article class="campo-vortex">
+          <header>
+            <span>VORTEX</span>
+            <a href="https://vortex-gilt-xi.vercel.app/" target="_blank" rel="noreferrer" data-i18n="fieldOpen">Abrir ↗</a>
+          </header>
+          <iframe title="Vortex" src="https://vortex-gilt-xi.vercel.app/" loading="lazy" referrerpolicy="no-referrer"></iframe>
+        </article>
+      </div>
     </section>
 
     <!-- ABOUT -->

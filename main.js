@@ -155,4 +155,28 @@
   } else {
     reveals.forEach((el) => el.classList.add("is-in"));
   }
+
+  const audio = document.getElementById("focus-audio");
+  const playBtn = document.getElementById("audio-play");
+  const muteBtn = document.getElementById("audio-mute");
+  const vol = document.getElementById("audio-vol");
+  if (audio && playBtn) {
+    audio.volume = vol ? Number(vol.value) : 0.45;
+    playBtn.addEventListener("click", async () => {
+      if (audio.paused) {
+        try { await audio.play(); playBtn.textContent = "Pause"; } catch (_) {}
+      } else {
+        audio.pause();
+        playBtn.textContent = playBtn.getAttribute("data-i18n") === "fieldPlay" ? (document.documentElement.lang === "en" ? "Play" : "Play") : "Play";
+      }
+    });
+    muteBtn?.addEventListener("click", () => {
+      audio.muted = !audio.muted;
+      muteBtn.textContent = audio.muted ? "Unmute" : (document.documentElement.lang === "en" ? "Mute" : "Silencio");
+    });
+    vol?.addEventListener("input", () => {
+      audio.volume = Number(vol.value);
+      if (audio.volume > 0 && audio.muted) audio.muted = false;
+    });
+  }
 })();

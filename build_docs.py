@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Yoga CV + letters. One page. Matches the site: paper, forest, sage, breath line."""
+import math
 from pathlib import Path
 from fpdf import FPDF
 
@@ -14,18 +15,33 @@ PAPER = (247, 243, 234)
 FOREST = (30, 42, 31)
 SAGE = (47, 107, 79)
 SAGE_L = (125, 202, 165)
+GOLD = (201, 154, 36)
 MUTED = (90, 99, 84)
 LINE = (214, 208, 190)
 WHITE = (255, 253, 247)
 INK = (30, 42, 31)
 
 W, H, M = 210, 297, 18
-BREATH = [
-    (0, 20), (30, 18), (60, 14), (90, 10), (120, 8), (150, 10),
-    (180, 16), (210, 22), (240, 26), (270, 28), (300, 26), (330, 20),
-    (360, 14), (390, 10), (420, 10), (450, 14), (480, 20), (510, 24),
-    (540, 26), (570, 24), (600, 20), (620, 20),
-]
+
+
+def cycle_478(cycles=2, spu=10):
+    """Inhale 4, hold 7, exhale 8. y: 0 baseline → 1 peak."""
+    pts = []
+    t = 0.0
+    dt = 1.0 / spu
+    for _ in range(cycles):
+        for i in range(4 * spu):
+            u = i / (4 * spu)
+            pts.append((t, 0.5 - 0.5 * math.cos(math.pi * u)))
+            t += dt
+        for _i in range(7 * spu):
+            pts.append((t, 1.0))
+            t += dt
+        for i in range(8 * spu):
+            u = i / (8 * spu)
+            pts.append((t, 0.5 + 0.5 * math.cos(math.pi * u)))
+            t += dt
+    return pts
 
 
 class Doc(FPDF):
@@ -45,20 +61,29 @@ class Doc(FPDF):
         self.set_fill_color(*SAGE)
         self.rect(6, 0, 1.4, H, "F")
 
-    def breath(self, x, y, w, h=7, color=SAGE):
-        xs = [p[0] for p in BREATH]
-        ys = [p[1] for p in BREATH]
-        minx, maxx = min(xs), max(xs)
-        miny, maxy = min(ys), max(ys)
+    def breath(self, x, y, w, h=11, labels=False):
+        raw = cycle_478(2, 10)
+        tmax = raw[-1][0] or 1
         pts = []
-        for px, py in BREATH:
-            nx = x + (px - minx) / (maxx - minx) * w
-            ny = y + (py - miny) / (maxy - miny) * h
+        for tx, ty in raw:
+            nx = x + tx / tmax * w
+            ny = y + (1 - ty) * h
             pts.append((nx, ny))
-        self.set_draw_color(*color)
-        self.set_line_width(0.55)
+        self.set_draw_color(*GOLD)
+        self.set_line_width(0.7)
         self.polyline(pts, style="D")
-        return y + h + 2
+        if labels:
+            unit = w / (19 * 2)
+            self.set_font("Sans", "B", 6.5)
+            self.set_text_color(*GOLD)
+            self.set_xy(x + 4 * unit * 0.05, y + h + 1.2)
+            self.cell(4 * unit, 3.2, "4", align="C")
+            self.set_xy(x + 4 * unit, y + h + 1.2)
+            self.cell(7 * unit, 3.2, "7", align="C")
+            self.set_xy(x + 11 * unit, y + h + 1.2)
+            self.cell(8 * unit, 3.2, "8", align="C")
+            return y + h + 6
+        return y + h + 4
 
     def kicker(self, text, y):
         self.set_xy(M, y)
@@ -101,12 +126,12 @@ def header(pdf, role, place, tagline, contacts):
     pdf.set_font("Serif", "I", 16)
     pdf.set_text_color(*FOREST)
     pdf.cell(0, 7, tagline)
-    y = pdf.breath(M, y + 9, W - M * 2, 8, SAGE)
-    pdf.set_xy(M, y + 1)
+    y = pdf.breath(M, y + 14, W - M * 2, 12, labels=True)
+    pdf.set_xy(M, y + 2)
     pdf.set_font("Sans", "", 8)
     pdf.set_text_color(*MUTED)
     pdf.cell(0, 4, contacts)
-    return y + 8
+    return y + 9
 
 
 def footer(pdf, url):
@@ -253,9 +278,9 @@ def cv(lang):
     pdf.multi_cell(70, 4.2, "ES nativo\nEN C1    IT C1\nPT básico    FR básico" if es
                    else "ES native\nEN C1    IT C1\nPT basic    FR basic")
 
-    y = max(pdf.get_y(), y + 18) + 4
-    y = pdf.breath(M, y, W - M * 2, 7, SAGE)
-    y += 2
+    y = max(pdf.get_y(), y + 18) + 6
+    y = pdf.breath(M, y, W - M * 2, 10, labels=False)
+    y += 4
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 13)
     pdf.set_text_color(*FOREST)
@@ -309,9 +334,9 @@ def cover(es):
         pdf.set_xy(M, y)
         pdf.multi_cell(W - M * 2, 6, p)
         y = pdf.get_y() + 6
-    y += 2
-    y = pdf.breath(M, y, 90, 7, SAGE)
-    y += 4
+    y += 6
+    y = pdf.breath(M, y, W - M * 2, 10, labels=False)
+    y += 6
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 12)
     pdf.set_text_color(*FOREST)

@@ -340,12 +340,12 @@ def cover(es):
     y += 12
     paras = [
         "Enseño yoga desde 2019. No vendo una estética. Guío práctica: cuerpo, respiración y atención. En sala, en 1:1 y con equipos.",
-        "En Mood Fitness (Murcia, González Adalid 12, planta baja) di clase hasta junio 2026. El centro cambió de titular: los nuevos gestores son también el profesorado. Se acabó el hueco. Yo sigo. María José, Mariángeles y Patricio — y otros — estuvieron desde el principio. Algunos siguen a las 8:30, lunes y miércoles.",
+        "En Mood Fitness (Murcia, González Adalid 12, planta baja) di clase hasta junio 2026. El centro cambió de titular: los nuevos gestores son también el profesorado. Se acabó el hueco. Yo sigo.",
         "Antes: yoga corporativo en Majorel para equipos de Google / YouTube. Antes aún, Shaolin. No tengo Instagram: el portfolio y el CV bastan.",
         "Busco un espacio honesto. Multi-nivel, sin postureo, con método. De momento: fines de semana, tardes y noches. Si encaja, hablemos.",
     ] if es else [
         "I have taught yoga since 2019. I do not sell an aesthetic. I guide practice: body, breath and attention. Studio, 1:1, teams.",
-        "At Mood Fitness (Murcia, González Adalid 12, ground floor) I taught through June 2026. Ownership changed: the new managers also teach. The slot ended. I did not. María José, Mariángeles and Patricio — and others — were there from the start. Some still come at 8:30, Monday and Wednesday.",
+        "At Mood Fitness (Murcia, González Adalid 12, ground floor) I taught through June 2026. Ownership changed: the new managers also teach. The slot ended. I did not.",
         "Before that: corporate yoga at Majorel for Google / YouTube teams. Before that, Shaolin. I have no Instagram: the portfolio and the CV are enough.",
         "I am looking for an honest room. Multi-level, no performance, method. For now: weekends, evenings and nights. If that fits, let’s talk.",
     ]

@@ -147,8 +147,7 @@ def header(pdf, role, place, tagline, contacts):
     pdf.set_font("Serif", "I", 16)
     pdf.set_text_color(*FOREST)
     pdf.cell(0, 7, tagline)
-    y = pdf.breath(M, y + 12, W - M * 2, 9, labels=True, pattern="478")
-    y = pdf.breath(M, y + 2, W - M * 2, 9, labels=True, pattern="4444")
+    y = pdf.breath(M, y + 12, W - M * 2, 10, labels=True, pattern="478")
     pdf.set_xy(M, y + 2)
     pdf.set_font("Sans", "", 8)
     pdf.set_text_color(*MUTED)
@@ -301,10 +300,6 @@ def cv(lang):
                    else "ES native\nEN C1    IT C1\nPT basic    FR basic")
 
     y = max(pdf.get_y(), y + 16) + 5
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="478")
-    y += 2
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="4444")
-    y += 3
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 13)
     pdf.set_text_color(*FOREST)
@@ -360,8 +355,6 @@ def cover(es):
         y = pdf.get_y() + 6
     y += 5
     y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="478")
-    y += 2
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="4444")
     y += 5
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 12)

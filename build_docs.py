@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Yoga CV + cover letters. One page. Same system as the site."""
+"""Yoga CV + letters. One page. Matches the site: paper, forest, sage, breath line."""
 from pathlib import Path
 from fpdf import FPDF
 
@@ -15,12 +15,17 @@ FOREST = (30, 42, 31)
 SAGE = (47, 107, 79)
 SAGE_L = (125, 202, 165)
 MUTED = (90, 99, 84)
-LINE = (210, 204, 186)
+LINE = (214, 208, 190)
 WHITE = (255, 253, 247)
+INK = (30, 42, 31)
 
-W = 210
-H = 297
-M = 16
+W, H, M = 210, 297, 18
+BREATH = [
+    (0, 20), (30, 18), (60, 14), (90, 10), (120, 8), (150, 10),
+    (180, 16), (210, 22), (240, 26), (270, 28), (300, 26), (330, 20),
+    (360, 14), (390, 10), (420, 10), (450, 14), (480, 20), (510, 24),
+    (540, 26), (570, 24), (600, 20), (620, 20),
+]
 
 
 class Doc(FPDF):
@@ -36,95 +41,131 @@ class Doc(FPDF):
         self.set_fill_color(*PAPER)
         self.rect(0, 0, W, H, "F")
         self.set_fill_color(*FOREST)
-        self.rect(0, 0, 5.5, H, "F")
+        self.rect(0, 0, 6, H, "F")
         self.set_fill_color(*SAGE)
-        self.rect(5.5, 0, 1.2, H, "F")
+        self.rect(6, 0, 1.4, H, "F")
+
+    def breath(self, x, y, w, h=7, color=SAGE):
+        xs = [p[0] for p in BREATH]
+        ys = [p[1] for p in BREATH]
+        minx, maxx = min(xs), max(xs)
+        miny, maxy = min(ys), max(ys)
+        pts = []
+        for px, py in BREATH:
+            nx = x + (px - minx) / (maxx - minx) * w
+            ny = y + (py - miny) / (maxy - miny) * h
+            pts.append((nx, ny))
+        self.set_draw_color(*color)
+        self.set_line_width(0.55)
+        self.polyline(pts, style="D")
+        return y + h + 2
 
     def kicker(self, text, y):
-        self.set_xy(M + 2, y)
-        self.set_font("Sans", "B", 8)
+        self.set_xy(M, y)
+        self.set_font("Sans", "B", 7.5)
         self.set_text_color(*SAGE)
-        self.cell(0, 5, text.upper())
-        return y + 6
+        self.cell(0, 4, text.upper())
+        return y + 5.5
 
-    def rule(self, y):
+    def rule(self, y, gap=4):
         self.set_draw_color(*LINE)
-        self.set_line_width(0.25)
-        self.line(M + 2, y, W - M, y)
-        return y + 3.5
+        self.set_line_width(0.22)
+        self.line(M, y, W - M, y)
+        return y + gap
 
 
-def header(pdf, role, tag, tagline, contacts):
-    y = 16
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "B", 26)
+def mark(pdf, x, y, size=15):
+    pdf.set_draw_color(*SAGE)
+    pdf.set_line_width(0.5)
+    pdf.set_fill_color(*PAPER)
+    pdf.ellipse(x, y, size, size, style="D")
+    pdf.set_font("Serif", "I", 11)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 10, "Gracián Baena")
-    y += 11
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Sans", "B", 9)
+    pdf.set_xy(x, y + 4)
+    pdf.cell(size, 7, "GB", align="C")
+
+
+def header(pdf, role, place, tagline, contacts):
+    y = 14
+    mark(pdf, M, y, 16)
+    pdf.set_xy(M + 20, y + 1)
+    pdf.set_font("Serif", "B", 24)
+    pdf.set_text_color(*FOREST)
+    pdf.cell(0, 9, "Gracián Baena")
+    pdf.set_xy(M + 20, y + 9.5)
+    pdf.set_font("Sans", "B", 8)
     pdf.set_text_color(*SAGE)
-    pdf.cell(0, 5, f"{role}  ·  {tag}")
-    y += 7
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "I", 13)
+    pdf.cell(0, 4.5, f"{role}  ·  {place}")
+    y = 36
+    pdf.set_xy(M, y)
+    pdf.set_font("Serif", "I", 16)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 6, tagline)
-    y += 8
-    pdf.set_xy(M + 2, y)
+    pdf.cell(0, 7, tagline)
+    y = pdf.breath(M, y + 9, W - M * 2, 8, SAGE)
+    pdf.set_xy(M, y + 1)
     pdf.set_font("Sans", "", 8)
     pdf.set_text_color(*MUTED)
-    pdf.cell(0, 4.5, contacts)
-    return pdf.rule(y + 7)
+    pdf.cell(0, 4, contacts)
+    return y + 8
 
 
 def footer(pdf, url):
     pdf.set_fill_color(*FOREST)
-    pdf.rect(0, H - 12, W, 12, "F")
-    pdf.set_xy(M + 2, H - 10)
+    pdf.rect(0, H - 14, W, 14, "F")
+    pdf.set_xy(M, H - 11)
     pdf.set_font("Sans", "", 8)
     pdf.set_text_color(*SAGE_L)
-    pdf.cell(0, 6, url, link=url)
+    pdf.cell(90, 6, "Presencia  ·  Respiración  ·  Práctica real")
+    pdf.set_font("Sans", "B", 8)
+    pdf.cell(0, 6, url, align="R", link=url)
 
 
 def doors(pdf, y, title, items):
     y = pdf.kicker(title, y)
-    col_w = (W - M * 2 - 4) / 3
-    x0 = M + 2
+    col_w = (W - M * 2) / 3
     for i, (h, p) in enumerate(items):
-        x = x0 + i * col_w
+        x = M + i * col_w
         pdf.set_fill_color(*WHITE)
-        pdf.rect(x, y, col_w - 3, 24, "F")
-        pdf.set_xy(x + 2.5, y + 2.5)
-        pdf.set_font("Sans", "B", 8)
+        pdf.rect(x, y, col_w - 3.5, 28, "F")
+        pdf.set_draw_color(*LINE)
+        pdf.set_line_width(0.2)
+        pdf.rect(x, y, col_w - 3.5, 28)
+        pdf.set_fill_color(*SAGE)
+        pdf.rect(x, y, 1.6, 28, "F")
+        pdf.set_xy(x + 5, y + 3)
+        pdf.set_font("Sans", "B", 7.5)
         pdf.set_text_color(*SAGE)
-        pdf.cell(col_w - 8, 4, f"0{i+1}  {h}")
-        pdf.set_xy(x + 2.5, y + 8)
-        pdf.set_font("Sans", "", 8)
+        pdf.cell(col_w - 10, 4, f"0{i+1}")
+        pdf.set_xy(x + 5, y + 7.5)
+        pdf.set_font("Serif", "B", 12)
         pdf.set_text_color(*FOREST)
-        pdf.multi_cell(col_w - 8, 3.7, p)
-    return y + 28
+        pdf.cell(col_w - 10, 5, h)
+        pdf.set_xy(x + 5, y + 14)
+        pdf.set_font("Sans", "", 8)
+        pdf.set_text_color(*MUTED)
+        pdf.multi_cell(col_w - 10, 3.6, p)
+    return y + 32
 
 
 def job(pdf, y, dates, place, title, body):
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Sans", "B", 8)
+    pdf.set_xy(M, y)
+    pdf.set_font("Sans", "B", 7.5)
     pdf.set_text_color(*SAGE)
-    pdf.cell(38, 4.5, dates)
-    pdf.set_font("Serif", "B", 11)
+    pdf.cell(42, 4.4, dates)
+    pdf.set_font("Serif", "B", 12)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 4.5, place)
-    y += 5
-    pdf.set_xy(M + 40, y)
+    pdf.cell(0, 4.4, place)
+    y += 5.2
+    pdf.set_xy(M + 42, y)
     pdf.set_font("Sans", "B", 8)
     pdf.set_text_color(*MUTED)
     pdf.cell(0, 4, title)
-    y += 4.5
-    pdf.set_xy(M + 40, y)
+    y += 4.4
+    pdf.set_xy(M + 42, y)
     pdf.set_font("Sans", "", 8.5)
     pdf.set_text_color(*FOREST)
-    pdf.multi_cell(W - M * 2 - 40, 3.7, body)
-    return pdf.get_y() + 3.2
+    pdf.multi_cell(W - M * 2 - 42, 3.8, body)
+    return pdf.get_y() + 3.4
 
 
 def save(pdf, *names):
@@ -132,229 +173,160 @@ def save(pdf, *names):
     for name in names:
         path = ROOT / name
         path.write_bytes(data)
-        print("wrote", path, path.stat().st_size)
+        print("wrote", path.name, path.stat().st_size)
 
 
-def cv_es():
+def cv(lang):
+    es = lang == "es"
     pdf = Doc()
     y = header(
         pdf,
-        "INSTRUCTOR DE YOGA",
+        "INSTRUCTOR DE YOGA" if es else "YOGA INSTRUCTOR",
         "MURCIA",
-        "Presencia. Respiración. Práctica real.",
-        "gracianbaenagonzalez@gmail.com   ·   +34 687 470 725   ·   linkedin.com/in/gracianbaena   ·   gracianb.github.io/yoga-instructor",
+        "Presencia. Respiración. Práctica real." if es else "Presence. Breath. Real practice.",
+        "gracianbaenagonzalez@gmail.com    +34 687 470 725    linkedin.com/in/gracianbaena    gracianb.github.io/yoga-instructor",
     )
     y = doors(
         pdf,
         y,
-        "Cómo trabajo",
+        "Cómo trabajo" if es else "How I work",
         [
-            ("SALA", "Clases multi-nivel. Entras, respiras, sales distinto. Sin teatro."),
-            ("1:1", "Movilidad, estrés, hábito. Una persona, un criterio."),
-            ("EQUIPOS", "Bienestar en el trabajo. Lo hice en Google / YouTube."),
+            ("Sala" if es else "Studio",
+             "Clases multi-nivel. Entras, respiras, sales distinto." if es
+             else "Multi-level classes. Walk in, breathe, leave different."),
+            ("1:1",
+             "Movilidad, estrés, hábito. Una persona, un criterio." if es
+             else "Mobility, stress, habit. One person, one criterion."),
+            ("Equipos" if es else "Teams",
+             "Bienestar en el trabajo. Lo hice en Google / YouTube." if es
+             else "Wellbeing at work. I did it at Google / YouTube."),
         ],
     )
-    y = pdf.kicker("Experiencia", y)
+    y = pdf.rule(y, 5)
+    y = pdf.kicker("Experiencia" if es else "Experience", y)
     y = job(
-        pdf, y, "ABR 2022 — JUN 2026", "Mood Fitness · Murcia",
-        "Instructor de yoga",
-        "Clases multi-nivel en sala: presencia, seguridad y progresión. Murcia, hasta el cierre del centro por cambio de titularidad.",
+        pdf, y, "ABR 2022 — JUN 2026" if es else "APR 2022 — JUN 2026",
+        "Mood Fitness · Murcia",
+        "Instructor de yoga" if es else "Yoga instructor",
+        "Clases multi-nivel en sala: presencia, seguridad y progresión. Hasta el cierre del centro por cambio de titularidad."
+        if es else "Multi-level studio classes: presence, safety and progression. Until the centre closed after a change of ownership.",
     )
     y = job(
         pdf, y, "2020 — 2021", "Majorel · Google / YouTube",
-        "Wellness Ambassador · yoga corporativo",
-        "Programas de yoga y bienestar para equipos IT + ES. Salud mental y hábito en un entorno de operaciones globales.",
+        "Wellness Ambassador · yoga corporativo" if es else "Wellness Ambassador · corporate yoga",
+        "Programas de yoga y bienestar para equipos IT + ES. Salud mental y hábito."
+        if es else "Yoga and wellbeing programmes for IT + ES teams. Mental health and habit.",
     )
     y = job(
-        pdf, y, "2019 — 2022", "Clases particulares",
-        "Instructor personalizado",
-        "Sesiones adaptadas: movilidad, estrés, constancia y técnica.",
+        pdf, y, "2019 — 2022",
+        "Clases particulares" if es else "Private classes",
+        "Instructor personalizado" if es else "Personalised instructor",
+        "Sesiones adaptadas: movilidad, estrés, constancia y técnica."
+        if es else "Sessions tailored to mobility, stress, consistency and technique.",
     )
     y = job(
         pdf, y, "2016 — 2019", "Shaolin Temple",
         "Kung Fu Shaolin",
-        "Disciplina, presencia y constancia. La base física antes de la sala.",
+        "Disciplina, presencia y constancia. La base física antes de la sala."
+        if es else "Discipline, presence and consistency. The physical base before the studio.",
     )
-    y = pdf.rule(y)
-    y = pdf.kicker("Formación", y)
-    pdf.set_xy(M + 2, y)
+    y = pdf.rule(y, 5)
+    split = y
+    y = pdf.kicker("Formación" if es else "Training", y)
+    pdf.set_xy(M, y)
     pdf.set_font("Serif", "B", 11)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 5, "Instructor de Yoga · Madrid · 2019")
-    y += 5.5
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Sans", "", 8.5)
+    pdf.cell(88, 5, "Instructor de Yoga · Madrid · 2019" if es else "Yoga Instructor · Madrid · 2019")
+    pdf.set_xy(M, y + 5.5)
+    pdf.set_font("Sans", "", 8)
     pdf.set_text_color(*MUTED)
-    pdf.multi_cell(W - M * 2, 3.8, "Certificación oficial. Formación intensiva en asanas, pranayama y filosofía. Prácticas en Madrid. Complemento: Grado en Turismo (Erasmus, Bergamo 2012) y Diplomatura en Turismo (Murcia 2011).")
-    y = pdf.get_y() + 4
-    y = pdf.rule(y)
-    y = pdf.kicker("Idiomas", y)
-    pdf.set_xy(M + 2, y)
+    pdf.multi_cell(88, 3.6, "Certificación oficial. Asanas, pranayama y filosofía. Prácticas en Madrid."
+                   if es else "Official certification. Asana, pranayama and philosophy. Placements in Madrid.")
+
+    pdf.set_xy(M + 96, split)
+    pdf.set_font("Sans", "B", 7.5)
+    pdf.set_text_color(*SAGE)
+    pdf.cell(0, 4, "IDIOMAS" if es else "LANGUAGES")
+    pdf.set_xy(M + 96, split + 6)
     pdf.set_font("Sans", "", 9)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 5, "ES nativo   ·   EN C1   ·   IT C1   ·   PT básico   ·   FR básico")
-    y += 8
-    y = pdf.rule(y)
-    y = pdf.kicker("Filosofía", y)
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "I", 12)
+    pdf.multi_cell(70, 4.2, "ES nativo\nEN C1    IT C1\nPT básico    FR básico" if es
+                   else "ES native\nEN C1    IT C1\nPT basic    FR basic")
+
+    y = max(pdf.get_y(), y + 18) + 4
+    y = pdf.breath(M, y, W - M * 2, 7, SAGE)
+    y += 2
+    pdf.set_xy(M, y)
+    pdf.set_font("Serif", "I", 13)
     pdf.set_text_color(*FOREST)
-    pdf.multi_cell(W - M * 2, 5.2, "Busco clases transformadoras y honestas: cuerpo, respiración y atención. Sin postureo. Con método y calidez.")
-    y = pdf.get_y() + 8
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Sans", "B", 8)
+    quote = ("Busco clases transformadoras y honestas: cuerpo, respiración y atención. Sin postureo. Con método y calidez."
+             if es else "Honest, transformative classes: body, breath and attention. No performance. Method and warmth.")
+    pdf.multi_cell(W - M * 2, 5.6, quote)
+    y = pdf.get_y() + 6
+    pdf.set_xy(M, y)
+    pdf.set_font("Sans", "B", 7.5)
     pdf.set_text_color(*SAGE)
-    pdf.cell(0, 5, "ASANA   ·   PRANAYAMA   ·   MEDITACIÓN   ·   MINDFULNESS   ·   FACILITACIÓN")
+    pdf.cell(0, 4, "ASANA  ·  PRANAYAMA  ·  MEDITACIÓN  ·  MINDFULNESS  ·  FACILITACIÓN" if es
+             else "ASANA  ·  PRANAYAMA  ·  MEDITATION  ·  MINDFULNESS  ·  FACILITATION")
     footer(pdf, "https://gracianb.github.io/yoga-instructor/")
-    save(pdf, "Gracian_Baena_CV_Yoga_ES.pdf", "CV_Gracian_Baena_Yoga_ES.pdf", "assets/CV_Gracian_Baena_Yoga_ES.pdf")
+    if es:
+        save(pdf, "Gracian_Baena_CV_Yoga_ES.pdf", "CV_Gracian_Baena_Yoga_ES.pdf", "assets/CV_Gracian_Baena_Yoga_ES.pdf")
+    else:
+        save(pdf, "Gracian_Baena_CV_Yoga_EN.pdf", "CV_Gracian_Baena_Yoga_EN.pdf", "assets/CV_Gracian_Baena_Yoga_EN.pdf")
 
 
-def cv_en():
+def cover(es):
     pdf = Doc()
     y = header(
         pdf,
-        "YOGA INSTRUCTOR",
+        "INSTRUCTOR DE YOGA" if es else "YOGA INSTRUCTOR",
         "MURCIA",
-        "Presence. Breath. Real practice.",
-        "gracianbaenagonzalez@gmail.com   ·   +34 687 470 725   ·   linkedin.com/in/gracianbaena   ·   gracianb.github.io/yoga-instructor",
+        "Presencia. Respiración. Práctica real." if es else "Presence. Breath. Real practice.",
+        "gracianbaenagonzalez@gmail.com    +34 687 470 725    gracianb.github.io/yoga-instructor",
     )
-    y = doors(
-        pdf,
-        y,
-        "How I work",
-        [
-            ("STUDIO", "Multi-level classes. You walk in, you breathe, you leave different."),
-            ("1:1", "Mobility, stress, habit. One person, one criterion."),
-            ("TEAMS", "Wellbeing at work. I did it at Google / YouTube."),
-        ],
-    )
-    y = pdf.kicker("Experience", y)
-    y = job(
-        pdf, y, "APR 2022 — JUN 2026", "Mood Fitness · Murcia",
-        "Yoga instructor",
-        "Multi-level studio classes: presence, safety and progression. Murcia, until the centre closed after a change of ownership.",
-    )
-    y = job(
-        pdf, y, "2020 — 2021", "Majorel · Google / YouTube",
-        "Wellness Ambassador · corporate yoga",
-        "Yoga and wellbeing programmes for IT + ES teams. Mental health and habit in a global operations setting.",
-    )
-    y = job(
-        pdf, y, "2019 — 2022", "Private classes",
-        "Personalised instructor",
-        "Sessions tailored to mobility, stress, consistency and technique.",
-    )
-    y = job(
-        pdf, y, "2016 — 2019", "Shaolin Temple",
-        "Shaolin Kung Fu",
-        "Discipline, presence and consistency. The physical base before the studio.",
-    )
-    y = pdf.rule(y)
-    y = pdf.kicker("Training", y)
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "B", 11)
-    pdf.set_text_color(*FOREST)
-    pdf.cell(0, 5, "Yoga Instructor · Madrid · 2019")
-    y += 5.5
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Sans", "", 8.5)
-    pdf.set_text_color(*MUTED)
-    pdf.multi_cell(W - M * 2, 3.8, "Official certification. Intensive training in asana, pranayama and philosophy. Practice placements in Madrid. Also: Tourism Degree (Erasmus, Bergamo 2012) and Tourism Diploma (Murcia 2011).")
-    y = pdf.get_y() + 4
-    y = pdf.rule(y)
-    y = pdf.kicker("Languages", y)
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Sans", "", 9)
-    pdf.set_text_color(*FOREST)
-    pdf.cell(0, 5, "ES native   ·   EN C1   ·   IT C1   ·   PT basic   ·   FR basic")
-    y += 8
-    y = pdf.rule(y)
-    y = pdf.kicker("Philosophy", y)
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "I", 12)
-    pdf.set_text_color(*FOREST)
-    pdf.multi_cell(W - M * 2, 5.2, "Honest, transformative classes: body, breath and attention. No performance. Method and warmth.")
-    y = pdf.get_y() + 8
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Sans", "B", 8)
-    pdf.set_text_color(*SAGE)
-    pdf.cell(0, 5, "ASANA   ·   PRANAYAMA   ·   MEDITATION   ·   MINDFULNESS   ·   FACILITATION")
-    footer(pdf, "https://gracianb.github.io/yoga-instructor/")
-    save(pdf, "Gracian_Baena_CV_Yoga_EN.pdf", "CV_Gracian_Baena_Yoga_EN.pdf", "assets/CV_Gracian_Baena_Yoga_EN.pdf")
-
-
-def letter(pdf, date, greeting, paras, close, name):
-    y = header(
-        pdf,
-        "INSTRUCTOR DE YOGA" if "Estimad" in greeting or "Hola" in greeting else "YOGA INSTRUCTOR",
-        "MURCIA",
-        "Presencia. Respiración. Práctica real." if "Estimad" in greeting or "Hola" in greeting else "Presence. Breath. Real practice.",
-        "gracianbaenagonzalez@gmail.com   ·   +34 687 470 725   ·   gracianb.github.io/yoga-instructor",
-    )
-    pdf.set_xy(M + 2, y)
+    pdf.set_xy(M, y)
     pdf.set_font("Sans", "", 9)
     pdf.set_text_color(*MUTED)
-    pdf.cell(0, 5, date)
-    y += 10
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "B", 12)
+    pdf.cell(0, 5, "Murcia, agosto 2026" if es else "Murcia, August 2026")
+    y += 12
+    pdf.set_xy(M, y)
+    pdf.set_font("Serif", "B", 14)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 6, greeting)
-    y += 10
-    pdf.set_font("Serif", "", 11)
+    pdf.cell(0, 7, "Hola." if es else "Hello.")
+    y += 12
+    paras = [
+        "Enseño yoga desde 2019. No vendo una estética. Guío práctica: cuerpo, respiración y atención. En sala, en 1:1 y con equipos.",
+        "En Mood Fitness (Murcia) di clase hasta junio 2026, cuando el centro cerró. Antes, yoga corporativo en Majorel para equipos de Google / YouTube. Antes aún, Shaolin: disciplina que se nota en cómo se sostiene una clase.",
+        "Busco un espacio —o un equipo— donde la práctica sea honesta. Multi-nivel, sin postureo, con método y calidez. Si encaja, hablemos.",
+    ] if es else [
+        "I have taught yoga since 2019. I do not sell an aesthetic. I guide practice: body, breath and attention. In the studio, one to one, and with teams.",
+        "At Mood Fitness (Murcia) I taught through June 2026, when the centre closed. Before that, corporate yoga at Majorel for Google / YouTube teams. Before that, Shaolin: discipline you can feel in how a class is held.",
+        "I am looking for a room — or a team — where practice stays honest. Multi-level, no performance, method and warmth. If that fits, let’s talk.",
+    ]
+    pdf.set_font("Serif", "", 12)
     pdf.set_text_color(*FOREST)
     for p in paras:
-        pdf.set_xy(M + 2, y)
-        pdf.multi_cell(W - M * 2, 5.4, p)
-        y = pdf.get_y() + 5
+        pdf.set_xy(M, y)
+        pdf.multi_cell(W - M * 2, 6, p)
+        y = pdf.get_y() + 6
+    y += 2
+    y = pdf.breath(M, y, 90, 7, SAGE)
     y += 4
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "I", 11)
-    pdf.cell(0, 6, close)
-    y += 8
-    pdf.set_xy(M + 2, y)
-    pdf.set_font("Serif", "B", 13)
-    pdf.cell(0, 6, name)
+    pdf.set_xy(M, y)
+    pdf.set_font("Serif", "I", 12)
+    pdf.set_text_color(*FOREST)
+    pdf.cell(0, 6, "Gracias por el tiempo." if es else "Thank you for your time.")
+    y += 10
+    pdf.set_xy(M, y)
+    pdf.set_font("Serif", "B", 14)
+    pdf.cell(0, 6, "Gracián Baena")
     footer(pdf, "https://gracianb.github.io/yoga-instructor/")
-
-
-def carta_es():
-    pdf = Doc()
-    letter(
-        pdf,
-        "Murcia, agosto 2026",
-        "Hola.",
-        [
-            "Enseño yoga desde 2019. No vendo una estética. Guío práctica: cuerpo, respiración y atención. En sala, en 1:1 y con equipos.",
-            "En Mood Fitness (Murcia) di clase hasta junio 2026, cuando el centro cerró. Antes, yoga corporativo en Majorel para equipos de Google / YouTube. Antes aún, Shaolin: disciplina que se nota en cómo se sostiene una clase.",
-            "Busco un espacio —o un equipo— donde la práctica sea honesta. Multi-nivel, sin postureo, con método y calidez. Si encaja, hablemos.",
-        ],
-        "Gracias por el tiempo.",
-        "Gracián Baena",
-    )
-    save(pdf, "Gracian_Baena_Carta_Yoga_ES.pdf")
-
-
-def letter_en():
-    pdf = Doc()
-    letter(
-        pdf,
-        "Murcia, August 2026",
-        "Hello.",
-        [
-            "I have taught yoga since 2019. I do not sell an aesthetic. I guide practice: body, breath and attention. In the studio, one to one, and with teams.",
-            "At Mood Fitness (Murcia) I taught through June 2026, when the centre closed. Before that, corporate yoga at Majorel for Google / YouTube teams. Before that, Shaolin: discipline you can feel in how a class is held.",
-            "I am looking for a room — or a team — where practice stays honest. Multi-level, no performance, method and warmth. If that fits, let’s talk.",
-        ],
-        "Thank you for your time.",
-        "Gracián Baena",
-    )
-    save(pdf, "Gracian_Baena_Cover_Letter_Yoga_EN.pdf")
+    save(pdf, "Gracian_Baena_Carta_Yoga_ES.pdf" if es else "Gracian_Baena_Cover_Letter_Yoga_EN.pdf")
 
 
 if __name__ == "__main__":
-    cv_es()
-    cv_en()
-    carta_es()
-    letter_en()
+    cv("es")
+    cv("en")
+    cover(True)
+    cover(False)
     print("done")

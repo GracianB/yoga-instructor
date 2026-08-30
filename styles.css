@@ -455,12 +455,17 @@ h1 em, h2 em { color: var(--gold); font-style: italic; font-weight: 400; }
 }
 .philo {
   padding: clamp(36px, 6vw, 56px) clamp(24px, 4vw, 48px);
-  background: var(--ink);
-  color: var(--bg);
+  background: #1c261e;
+  color: #e6eadf;
   box-shadow: var(--shadow);
   position: relative;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, var(--gold) 25%, transparent);
+  border: 1px solid rgba(125, 202, 165, 0.22);
+}
+[data-theme="dark"] .philo {
+  background: #121812;
+  color: #cfd6c6;
+  border-color: rgba(125, 202, 165, 0.18);
 }
 .philo::before {
   content: "";
@@ -470,7 +475,7 @@ h1 em, h2 em { color: var(--gold); font-style: italic; font-weight: 400; }
   width: 55%;
   height: 90%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(218,164,40,.14), transparent 68%);
+  background: radial-gradient(circle, rgba(125, 202, 165, .12), transparent 68%);
   pointer-events: none;
 }
 .philo-top {
@@ -483,13 +488,13 @@ h1 em, h2 em { color: var(--gold); font-style: italic; font-weight: 400; }
   z-index: 1;
 }
 .philo .kicker {
-  color: var(--gold);
+  color: #7dcaa5;
   margin: 0;
 }
 .philo-mark {
-  color: var(--gold);
+  color: #7dcaa5;
   font-size: 18px;
-  opacity: .85;
+  opacity: .7;
 }
 .philo blockquote {
   margin: 0 0 8px;
@@ -500,19 +505,22 @@ h1 em, h2 em { color: var(--gold); font-style: italic; font-weight: 400; }
   margin: 0 0 10px;
   font: italic 400 clamp(24px, 3.6vw, 40px)/1.22 var(--display);
   letter-spacing: -.02em;
-  color: var(--bg);
+  color: #dce3d4;
   max-width: 22ch;
+}
+[data-theme="dark"] .philo blockquote p {
+  color: #c5cebb;
 }
 .philo blockquote .philo-second {
   margin: 0;
   font-size: clamp(16px, 1.8vw, 20px);
-  color: color-mix(in srgb, var(--bg) 78%, transparent);
+  color: #9aaa96;
   max-width: 28ch;
 }
 .philo-divider {
   margin: 22px 0 20px;
-  color: var(--gold);
-  opacity: .85;
+  color: #7dcaa5;
+  opacity: .7;
   max-width: 420px;
   position: relative;
   z-index: 1;
@@ -533,24 +541,24 @@ h1 em, h2 em { color: var(--gold); font-style: italic; font-weight: 400; }
 }
 .tags li {
   padding: 8px 12px;
-  border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
-  background: color-mix(in srgb, var(--gold) 8%, transparent);
-  color: color-mix(in srgb, var(--bg) 90%, transparent);
+  border: 1px solid rgba(125, 202, 165, 0.28);
+  background: rgba(125, 202, 165, 0.08);
+  color: #c5cebb;
   font: 700 11px var(--sans);
   letter-spacing: .07em;
   text-transform: uppercase;
   transition: background .2s, border-color .2s, color .2s;
 }
 .tags li:hover {
-  background: var(--gold);
-  border-color: var(--gold);
-  color: #1e2a1f;
+  background: #7dcaa5;
+  border-color: #7dcaa5;
+  color: #121812;
 }
 .philo-foot {
   margin: 0;
   padding-top: 16px;
-  border-top: 1px solid color-mix(in srgb, var(--bg) 16%, transparent);
-  color: color-mix(in srgb, var(--bg) 48%, transparent);
+  border-top: 1px solid rgba(125, 202, 165, 0.16);
+  color: #8a9786;
   font: 700 11px var(--sans);
   letter-spacing: .14em;
   text-transform: uppercase;

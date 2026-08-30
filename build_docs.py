@@ -24,23 +24,45 @@ INK = (30, 42, 31)
 W, H, M = 210, 297, 18
 
 
-def cycle_pattern(inhale, hold, exhale, cycles=2, spu=10):
+def cycle_spec(steps, spu=12):
+    """steps: list of ('in'|'hold'|'out'|'rest', beats). One cycle. y 0..1."""
     pts = []
     t = 0.0
     dt = 1.0 / spu
-    for _ in range(cycles):
-        for i in range(inhale * spu):
-            u = i / (inhale * spu)
-            pts.append((t, 0.5 - 0.5 * math.cos(math.pi * u)))
-            t += dt
-        for _i in range(hold * spu):
-            pts.append((t, 1.0))
-            t += dt
-        for i in range(exhale * spu):
-            u = i / (exhale * spu)
-            pts.append((t, 0.5 + 0.5 * math.cos(math.pi * u)))
-            t += dt
-    return pts, inhale + hold + exhale, (inhale, hold, exhale)
+    y = 0.0
+    beats = []
+    for kind, n in steps:
+        beats.append(n)
+        if kind == "in":
+            for i in range(n * spu):
+                u = i / (n * spu)
+                y = 0.5 - 0.5 * math.cos(math.pi * u)
+                pts.append((t, y))
+                t += dt
+            y = 1.0
+        elif kind == "hold":
+            for _i in range(n * spu):
+                pts.append((t, 1.0))
+                t += dt
+            y = 1.0
+        elif kind == "out":
+            for i in range(n * spu):
+                u = i / (n * spu)
+                y = 0.5 + 0.5 * math.cos(math.pi * u)
+                pts.append((t, y))
+                t += dt
+            y = 0.0
+        else:
+            for _i in range(n * spu):
+                pts.append((t, 0.0))
+                t += dt
+            y = 0.0
+        pts.append((t, y))
+    return pts, sum(beats), beats
+
+
+PAT_478 = [("in", 4), ("hold", 7), ("out", 8)]
+PAT_4444 = [("in", 4), ("hold", 4), ("out", 4), ("rest", 4)]
 
 
 class Doc(FPDF):
@@ -60,8 +82,9 @@ class Doc(FPDF):
         self.set_fill_color(*SAGE)
         self.rect(6, 0, 1.4, H, "F")
 
-    def breath(self, x, y, w, h=9, labels=False, inhale=4, hold=7, exhale=8):
-        raw, cycle, beats = cycle_pattern(inhale, hold, exhale, 2, 10)
+    def breath(self, x, y, w, h=9, labels=False, pattern="478"):
+        steps = PAT_478 if pattern == "478" else PAT_4444
+        raw, cycle, beats = cycle_spec(steps)
         tmax = raw[-1][0] or 1
         pts = []
         for tx, ty in raw:
@@ -69,18 +92,18 @@ class Doc(FPDF):
             ny = y + (1 - ty) * h
             pts.append((nx, ny))
         self.set_draw_color(*GOLD)
-        self.set_line_width(0.65)
+        self.set_line_width(0.7)
         self.polyline(pts, style="D")
         if labels:
-            unit = w / (cycle * 2)
-            self.set_font("Sans", "B", 6.5)
+            self.set_font("Sans", "B", 7)
             self.set_text_color(*GOLD)
             x0 = x
             for n in beats:
-                self.set_xy(x0, y + h + 1.1)
-                self.cell(n * unit, 3.2, str(n), align="C")
-                x0 += n * unit
-            return y + h + 5.5
+                seg = w * (n / cycle)
+                self.set_xy(x0, y + h + 1.2)
+                self.cell(seg, 3.4, str(n), align="C")
+                x0 += seg
+            return y + h + 6
         return y + h + 3.5
 
     def kicker(self, text, y):
@@ -124,8 +147,8 @@ def header(pdf, role, place, tagline, contacts):
     pdf.set_font("Serif", "I", 16)
     pdf.set_text_color(*FOREST)
     pdf.cell(0, 7, tagline)
-    y = pdf.breath(M, y + 12, W - M * 2, 8, labels=True, inhale=4, hold=7, exhale=8)
-    y = pdf.breath(M, y + 2, W - M * 2, 8, labels=True, inhale=4, hold=4, exhale=4)
+    y = pdf.breath(M, y + 12, W - M * 2, 9, labels=True, pattern="478")
+    y = pdf.breath(M, y + 2, W - M * 2, 9, labels=True, pattern="4444")
     pdf.set_xy(M, y + 2)
     pdf.set_font("Sans", "", 8)
     pdf.set_text_color(*MUTED)
@@ -278,9 +301,9 @@ def cv(lang):
                    else "ES native\nEN C1    IT C1\nPT basic    FR basic")
 
     y = max(pdf.get_y(), y + 16) + 5
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=7, exhale=8)
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="478")
     y += 2
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=4, exhale=4)
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="4444")
     y += 3
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 13)
@@ -336,9 +359,9 @@ def cover(es):
         pdf.multi_cell(W - M * 2, 6, p)
         y = pdf.get_y() + 6
     y += 5
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=7, exhale=8)
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="478")
     y += 2
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, inhale=4, hold=4, exhale=4)
+    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="4444")
     y += 5
     pdf.set_xy(M, y)
     pdf.set_font("Serif", "I", 12)

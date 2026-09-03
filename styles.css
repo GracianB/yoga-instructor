@@ -132,7 +132,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(18px) saturate(1.15);
 }
-.brand { display: flex; align-items: center; gap: 12px; min-height: 44px; }
+.brand { display: flex; align-items: center; gap: 12px; min-height: 44px; min-width: 0; }
 .brand-mark {
   width: 40px; height: 40px;
   display: grid; place-items: center;
@@ -151,9 +151,11 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   border-color: var(--sage);
   box-shadow: 0 0 24px var(--gold-soft);
 }
-.brand-text { display: flex; flex-direction: column; gap: 2px; }
-.brand-text b { display: block; font: 800 11px/1.2 var(--mono); letter-spacing: .16em; }
-.brand-text small { color: var(--muted); font: 700 9px/1.3 var(--mono); letter-spacing: .14em; }
+.brand-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.brand-text b { display: block; font: 800 11px/1.2 var(--mono); letter-spacing: .16em; white-space: nowrap; }
+.brand-text small { color: var(--muted); font: 700 9px/1.3 var(--mono); letter-spacing: .14em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.nav-cv { display: none; }
 
 .nav { display: flex; align-items: center; gap: clamp(10px, 1.2vw, 18px); }
 .nav > a {
@@ -713,6 +715,7 @@ h1 em, h2 em { color: var(--sage); font-style: italic; font-weight: 400; }
     background: var(--bg); border-bottom: 1px solid var(--line);
     max-height: calc(100svh - var(--header));
     overflow: auto;
+    z-index: 90;
   }
   .nav.open { display: flex; }
   .nav > a, .nav .ctrl-group, .nav .btn {
@@ -720,7 +723,10 @@ h1 em, h2 em { color: var(--sage); font-style: italic; font-weight: 400; }
     border-bottom: 1px solid var(--line); padding: 12px 0;
     border-radius: 0;
   }
-  .brand-text { display: none; }
+  .brand { flex: 1 1 auto; overflow: hidden; }
+  .brand-text { display: flex; }
+  .header-cv { display: none; }
+  .nav-cv { display: inline-flex; }
   .hero-actions .btn { flex: 1 1 calc(50% - 10px); }
 }
 
@@ -728,6 +734,10 @@ h1 em, h2 em { color: var(--sage); font-style: italic; font-weight: 400; }
   .hero-stats { grid-template-columns: 1fr; }
   .hero-actions .btn { flex: 1 1 100%; }
   .contact-actions .btn { flex: 1 1 calc(50% - 10px); }
+  .site-header { gap: 8px; padding: 0 12px; }
+  .brand { gap: 8px; }
+  .header-actions { gap: 6px; }
+  .ctrl-btn { min-width: 36px; padding: 0 8px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -131,6 +131,7 @@
   menuToggle?.addEventListener("click", () => {
     const open = !nav?.classList.contains("open");
     nav?.classList.toggle("open", open);
+    menuToggle.classList.toggle("is-open", open);
     menuToggle.setAttribute("aria-expanded", String(open));
   });
   nav?.querySelectorAll("a").forEach((a) => {

@@ -61,7 +61,6 @@
     const audio = document.getElementById("focus-audio");
     const playBtn = document.getElementById("audio-play");
     const muteBtn = document.getElementById("audio-mute");
-    const t = I18N[lang] || I18N.es;
     if (playBtn && audio && audio.paused) playBtn.textContent = t.fieldPlay || "Play";
     if (muteBtn && audio) muteBtn.textContent = audio.muted
       ? (lang === "en" ? "Unmute" : "Sonido")
@@ -151,18 +150,28 @@
 
   // Scroll reveal
   const reveals = document.querySelectorAll(".reveal");
+  const markInView = (el) => el.classList.add("is-in");
   if (reveals.length && "IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add("is-in");
+          markInView(entry.target);
           io.unobserve(entry.target);
         }
       });
     }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
     reveals.forEach((el) => io.observe(el));
+    // Immediately mark anything already in the viewport
+    reveals.forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) markInView(el);
+    });
+    // Belt-and-suspenders: if nothing revealed after 100ms, show all
+    setTimeout(() => {
+      const anyIn = Array.from(reveals).some((el) => el.classList.contains("is-in"));
+      if (!anyIn) reveals.forEach(markInView);
+    }, 100);
   } else {
-    reveals.forEach((el) => el.classList.add("is-in"));
+    reveals.forEach(markInView);
   }
 
   const audio = document.getElementById("focus-audio");

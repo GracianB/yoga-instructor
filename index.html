@@ -20,9 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=fix-reveal1">
-  <script src="./i18n.js?v=fix-reveal1"></script>
-  <script src="./main.js?v=fix-reveal1" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=portada2">
+  <script src="./i18n.js?v=portada2"></script>
+  <script src="./main.js?v=portada2" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -84,36 +84,62 @@
     <section class="hero" id="inicio" data-breath="idle">
       <div class="hero-atmosphere" aria-hidden="true">
         <div class="hero-grain"></div>
-        <div class="hero-orb hero-orb-1"></div>
-        <div class="hero-orb hero-orb-2"></div>
-        <div class="hero-orb hero-orb-3"></div>
-        <svg class="hero-mandala" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <g class="mandala-rings">
-            <circle class="ring ring-a" cx="210" cy="210" r="168" stroke="currentColor" stroke-width="0.6" opacity="0.28"/>
-            <circle class="ring ring-b" cx="210" cy="210" r="132" stroke="currentColor" stroke-width="0.7" opacity="0.34"/>
-            <circle class="ring ring-c" cx="210" cy="210" r="96" stroke="currentColor" stroke-width="0.9" opacity="0.42"/>
-            <circle class="ring ring-d" cx="210" cy="210" r="58" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
-            <circle class="ring ring-core" cx="210" cy="210" r="18" fill="currentColor" opacity="0.14"/>
-          </g>
-          <g class="mandala-petals" stroke="currentColor" stroke-width="0.55" opacity="0.3">
-            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z"/>
-            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(45 210 210)"/>
-            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(90 210 210)"/>
-            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(135 210 210)"/>
-          </g>
-          <g class="mandala-orbit">
-            <circle class="orbit-dot" cx="210" cy="42" r="3.2" fill="currentColor"/>
-            <circle class="orbit-dot delay" cx="378" cy="210" r="2.4" fill="currentColor" opacity="0.7"/>
-            <circle class="orbit-dot delay2" cx="210" cy="378" r="2" fill="currentColor" opacity="0.55"/>
-          </g>
-        </svg>
+        <div class="hero-vignette"></div>
+        <div class="hero-halo"></div>
+        <div class="orb-parallax" style="--depth:1"><div class="hero-orb hero-orb-1"></div></div>
+        <div class="orb-parallax" style="--depth:1.6"><div class="hero-orb hero-orb-2"></div></div>
+        <div class="orb-parallax" style="--depth:0.7"><div class="hero-orb hero-orb-3"></div></div>
+        <div class="hero-sparks">
+          <span class="spark" style="--sx0:6%; --sy0:10%; --size:5px; --dur:15s; --delay:0s; --drift:16px; --rise:-260px;"></span>
+          <span class="spark" style="--sx0:16%; --sy0:4%; --size:3px; --dur:12s; --delay:2.4s; --drift:-10px; --rise:-200px;"></span>
+          <span class="spark" style="--sx0:28%; --sy0:14%; --size:4px; --dur:18s; --delay:5s; --drift:12px; --rise:-320px;"></span>
+          <span class="spark" style="--sx0:44%; --sy0:6%; --size:3px; --dur:14s; --delay:1s; --drift:-14px; --rise:-240px;"></span>
+          <span class="spark" style="--sx0:58%; --sy0:12%; --size:5px; --dur:20s; --delay:7s; --drift:18px; --rise:-300px;"></span>
+          <span class="spark" style="--sx0:70%; --sy0:5%; --size:3px; --dur:13s; --delay:3.5s; --drift:-8px; --rise:-220px;"></span>
+          <span class="spark" style="--sx0:82%; --sy0:16%; --size:4px; --dur:17s; --delay:6.2s; --drift:14px; --rise:-280px;"></span>
+          <span class="spark" style="--sx0:92%; --sy0:8%; --size:3px; --dur:11s; --delay:0.8s; --drift:-12px; --rise:-190px;"></span>
+        </div>
+        <div class="mandala-parallax" style="--depth:1.2">
+          <svg class="hero-mandala" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g class="mandala-rings">
+              <circle class="ring ring-e" cx="210" cy="210" r="196" stroke="currentColor" stroke-width="0.5" opacity="0.16"/>
+              <circle class="ring ring-a" cx="210" cy="210" r="168" stroke="currentColor" stroke-width="0.6" opacity="0.28"/>
+              <circle class="ring ring-b" cx="210" cy="210" r="132" stroke="currentColor" stroke-width="0.7" opacity="0.34"/>
+              <circle class="ring ring-c" cx="210" cy="210" r="96" stroke="currentColor" stroke-width="0.9" opacity="0.42"/>
+              <circle class="ring ring-d" cx="210" cy="210" r="58" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+              <circle class="ring ring-core" cx="210" cy="210" r="18" fill="currentColor" opacity="0.14"/>
+            </g>
+            <g class="mandala-petals" stroke="currentColor" stroke-width="0.55" opacity="0.3">
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z"/>
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(45 210 210)"/>
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(90 210 210)"/>
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(135 210 210)"/>
+            </g>
+            <g class="mandala-petals-sub" stroke="currentColor" stroke-width="0.4" opacity="0.16">
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(22.5 210 210)"/>
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(67.5 210 210)"/>
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(112.5 210 210)"/>
+              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(157.5 210 210)"/>
+            </g>
+            <g class="mandala-orbit">
+              <circle class="orbit-dot" cx="210" cy="42" r="3.2" fill="currentColor"/>
+              <circle class="orbit-dot delay" cx="378" cy="210" r="2.4" fill="currentColor" opacity="0.7"/>
+              <circle class="orbit-dot delay2" cx="210" cy="378" r="2" fill="currentColor" opacity="0.55"/>
+            </g>
+            <g class="mandala-orbit-outer">
+              <circle class="orbit-dot-outer" cx="210" cy="14" r="1.8" fill="currentColor" opacity="0.5"/>
+              <circle class="orbit-dot-outer delay" cx="406" cy="210" r="1.6" fill="currentColor" opacity="0.4"/>
+              <circle class="orbit-dot-outer delay2" cx="210" cy="406" r="1.4" fill="currentColor" opacity="0.35"/>
+              <circle class="orbit-dot-outer delay3" cx="14" cy="210" r="1.5" fill="currentColor" opacity="0.4"/>
+            </g>
+          </svg>
+        </div>
         <svg class="hero-breath-wave" viewBox="0 0 640 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <path class="breath-wave-path" d="M0 52 C80 52 80 22 160 22 C240 22 240 68 320 68 C400 68 400 28 480 28 C560 28 560 52 640 52" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.45"/>
           <path class="breath-wave-path soft" d="M0 58 C70 58 90 34 170 34 C250 34 250 64 330 64 C410 64 420 40 500 40 C580 40 590 58 640 58" stroke="currentColor" stroke-width="1" fill="none" opacity="0.22"/>
         </svg>
         <p class="breath-caption"><span class="breath-phase" data-i18n="breathLabel">4 · 7 · 8</span></p>
       </div>
-
       <div class="hero-stage">
         <div class="hero-inner">
           <p class="kicker" data-i18n="heroKicker">INSTRUCTOR DE YOGA CERTIFICADO · MURCIA</p>

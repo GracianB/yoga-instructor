@@ -159,13 +159,18 @@ class Doc(FPDF):
 
 
 def mark(pdf, x, y, size=15.5):
+    # Soft sage disc
     pdf.set_fill_color(*PAPER_W)
     pdf.set_draw_color(*SAGE)
-    pdf.set_line_width(0.55)
+    pdf.set_line_width(0.65)
     pdf.ellipse(x, y, size, size, style="DF")
-    # inner ring
+    # Gold outer halo ring
+    pdf.set_draw_color(*GOLD)
+    pdf.set_line_width(0.35)
+    pdf.ellipse(x - 0.55, y - 0.55, size + 1.1, size + 1.1, style="D")
+    # Inner sage-soft ring
     pdf.set_draw_color(*SAGE_SOFT)
-    pdf.set_line_width(0.25)
+    pdf.set_line_width(0.28)
     pdf.ellipse(x + 1.6, y + 1.6, size - 3.2, size - 3.2, style="D")
     pdf.set_font("Serif", "I", 10.5)
     pdf.set_text_color(*FOREST)
@@ -223,6 +228,8 @@ def doors(pdf, y, title, items):
         pdf.rect(x, y, col_w - 3.2, card_h)
         pdf.set_fill_color(*SAGE)
         pdf.rect(x, y, 1.7, card_h, "F")
+        pdf.set_fill_color(*GOLD)
+        pdf.rect(x + 1.7, y, col_w - 3.2 - 1.7, 0.4, "F")
         pdf.set_xy(x + 5, y + 3.2)
         pdf.set_font("Mono", "B", 7)
         pdf.set_text_color(*SAGE)
@@ -265,14 +272,20 @@ def chip(pdf, x, y, w, h, label, sub):
     pdf.set_draw_color(*LINE)
     pdf.set_line_width(0.2)
     pdf.rect(x, y, w, h, "DF")
-    pdf.set_xy(x + 2.2, y + 1.6)
+    # Sage accent bar
+    pdf.set_fill_color(*SAGE)
+    pdf.rect(x, y, 1.35, h, "F")
+    # Soft gold top tick
+    pdf.set_fill_color(*GOLD)
+    pdf.rect(x, y, w, 0.35, "F")
+    pdf.set_xy(x + 3.0, y + 1.6)
     pdf.set_font("Mono", "B", 7)
     pdf.set_text_color(*SAGE)
-    pdf.cell(w - 4, 3.2, label)
-    pdf.set_xy(x + 2.2, y + 5.2)
+    pdf.cell(w - 5, 3.2, label)
+    pdf.set_xy(x + 3.0, y + 5.2)
     pdf.set_font("Sans", "", 7.2)
     pdf.set_text_color(*MUTED)
-    pdf.cell(w - 4, 3.2, sub)
+    pdf.cell(w - 5, 3.2, sub)
 
 
 def save(pdf, *names):

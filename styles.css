@@ -3692,3 +3692,9 @@ body::before {
 @media (min-width: 900px) {
   [data-theme="light"] .hero-mandala { opacity: 0.99 !important; }
 }
+
+/* ============================================================
+   YOGA FINAL1 — ship stamp (unify cache-bust after neon1 stack)
+   Stack: mandala-max → yoga-final → yoga-neon1 → this stamp.
+   Light + dark definitive neon retained; hover shine retained.
+   ============================================================ */

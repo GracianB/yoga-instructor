@@ -27,6 +27,17 @@
   --clay: #c4a574;
   --paper: #fffef8;
   --gold: #b8921f;
+  --blush: #e8b4b8;
+  --blush-soft: #f2d4d8;
+  --blush-deep: #d4a5a5;
+  --blush-glow: rgba(232, 180, 184, 0.22);
+  --petal-a: #e8b4b8;
+  --petal-b: #f2d4d8;
+  --petal-c: #d4a5a5;
+  --petal-edge: #c9a227;
+  --lotus-sub-a: #d4a5a5;
+  --lotus-sub-b: #b8921f;
+  --lotus-sub-c: #c4a574;
   --header: 68px;
   --pad: clamp(18px, 4.8vw, 72px);
   --max: 1080px;
@@ -60,6 +71,17 @@
   --clay: #8a6a3d;
   --paper: #101218;
   --gold: #f3d437;
+  --blush: #7dcaa5;
+  --blush-soft: #9ee0c0;
+  --blush-deep: #5aa888;
+  --blush-glow: rgba(125, 202, 165, 0.2);
+  --petal-a: #7dcaa5;
+  --petal-b: #9ee0c0;
+  --petal-c: #7dcaa5;
+  --petal-edge: #f3d437;
+  --lotus-sub-a: #c4a574;
+  --lotus-sub-b: #f3d437;
+  --lotus-sub-c: #8a6a3d;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
   --shadow-sm: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
@@ -1661,6 +1683,18 @@ html, body { overflow-x: clip; }
   --clay: #c4a574;
   --paper: #fffef9;
   --gold: #b8921f;
+  /* Mandala / atmosphere pastels — soft presence, not site-wide pink */
+  --blush: #e8b4b8;
+  --blush-soft: #f2d4d8;
+  --blush-deep: #d4a5a5;
+  --blush-glow: rgba(232, 180, 184, 0.24);
+  --petal-a: #e8b4b8;
+  --petal-b: #f2d4d8;
+  --petal-c: #d4a5a5;
+  --petal-edge: #c9a227;
+  --lotus-sub-a: #d4a5a5;
+  --lotus-sub-b: #b8921f;
+  --lotus-sub-c: #c4a574;
   --r: 10px;
   --r-lg: 18px;
   --max: 1100px;
@@ -1690,6 +1724,18 @@ html, body { overflow-x: clip; }
   --clay: #8a6a3d;
   --paper: #11151a;
   --gold: #f3d437;
+  /* Dark keeps sage/neon energy; petal vars map to sage/gold */
+  --blush: #7dcaa5;
+  --blush-soft: #9ee0c0;
+  --blush-deep: #5aa888;
+  --blush-glow: rgba(125, 202, 165, 0.2);
+  --petal-a: #7dcaa5;
+  --petal-b: #9ee0c0;
+  --petal-c: #7dcaa5;
+  --petal-edge: #f3d437;
+  --lotus-sub-a: #c4a574;
+  --lotus-sub-b: #f3d437;
+  --lotus-sub-c: #8a6a3d;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.5);
   --shadow-sm: 0 14px 36px rgba(0, 0, 0, 0.35);
 }
@@ -2586,9 +2632,18 @@ body::before {
   filter: blur(32px) saturate(1.25);
 }
 [data-theme="light"] .mandala-conic-halo {
-  opacity: 0.28;
+  opacity: 0.38;
   mix-blend-mode: multiply;
-  filter: blur(26px) saturate(1.05);
+  filter: blur(24px) saturate(1.12);
+  background: conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--sage) 40%, transparent),
+    color-mix(in srgb, var(--blush) 48%, transparent),
+    color-mix(in srgb, var(--gold) 32%, transparent),
+    color-mix(in srgb, var(--blush-soft) 44%, transparent),
+    color-mix(in srgb, var(--sage-bright) 30%, transparent),
+    color-mix(in srgb, var(--sage) 40%, transparent)
+  );
 }
 
 /* Mandala size + opacity boost + layered glow */
@@ -2606,17 +2661,17 @@ body::before {
     drop-shadow(0 0 64px color-mix(in srgb, var(--sage-bright) 14%, transparent)) !important;
 }
 [data-theme="light"] .hero-mandala {
-  opacity: 0.62 !important;
+  opacity: 0.74 !important;
   filter:
-    drop-shadow(0 0 14px color-mix(in srgb, var(--sage) 26%, transparent))
-    drop-shadow(0 0 32px color-mix(in srgb, var(--earth) 14%, transparent))
-    drop-shadow(0 0 48px color-mix(in srgb, var(--gold) 10%, transparent)) !important;
+    drop-shadow(0 0 12px color-mix(in srgb, var(--blush) 28%, transparent))
+    drop-shadow(0 0 28px color-mix(in srgb, var(--sage) 22%, transparent))
+    drop-shadow(0 0 44px color-mix(in srgb, var(--gold) 14%, transparent)) !important;
 }
 
 /* Multi-color ring / petal / orbit palette via CSS color inheritance */
 .mandala-glow-disc { color: var(--sage); opacity: 0.9; }
-.mandala-lotus-fill { color: var(--sage); }
-.mandala-lotus-fill-sub { color: var(--earth); }
+.mandala-lotus-fill { color: var(--petal-a, var(--sage)); }
+.mandala-lotus-fill-sub { color: var(--lotus-sub-a, var(--earth)); }
 
 .ring-outermost,
 .ring-e,
@@ -2632,8 +2687,8 @@ body::before {
 .ring-core,
 .ring-core-stroke { color: var(--sage-bright); }
 
-.mandala-petals { color: var(--sage); }
-.mandala-petals-sub { color: color-mix(in srgb, var(--earth) 70%, var(--gold)); }
+.mandala-petals { color: var(--petal-c, var(--sage)); }
+.mandala-petals-sub { color: color-mix(in srgb, var(--petal-a, var(--earth)) 55%, var(--gold)); }
 
 .mandala-sparks { color: var(--sage-bright); }
 .mandala-sparks .spark-mark.gold { color: var(--gold); }
@@ -2648,6 +2703,37 @@ body::before {
 .mandala-orbit-outer { color: var(--sage); }
 .mandala-orbit-outer .orbit-dot-outer.gold { color: var(--gold); }
 .mandala-orbit-outer .orbit-dot-outer.clay { color: var(--clay); }
+
+/* Light: blush petals, sage rings, gold accents, stronger stroke read on cream */
+[data-theme="light"] .mandala-lotus-fill { color: var(--blush); opacity: 0.72; }
+[data-theme="light"] .mandala-lotus-fill-sub { color: var(--blush-deep); opacity: 0.55; }
+[data-theme="light"] .mandala-petals {
+  color: var(--blush-deep);
+  opacity: 0.72;
+  stroke-width: 0.95;
+  filter: drop-shadow(0 0 2px color-mix(in srgb, var(--gold) 35%, transparent));
+}
+[data-theme="light"] .mandala-petals-sub {
+  color: color-mix(in srgb, var(--blush) 50%, var(--gold));
+  opacity: 0.52;
+  stroke-width: 0.75;
+}
+[data-theme="light"] .ring-outermost,
+[data-theme="light"] .ring-e,
+[data-theme="light"] .ring-f,
+[data-theme="light"] .ring-a,
+[data-theme="light"] .ring-g { color: var(--sage); }
+[data-theme="light"] .ring-b,
+[data-theme="light"] .ring-h { color: color-mix(in srgb, var(--sage) 70%, var(--earth)); }
+[data-theme="light"] .ring-c,
+[data-theme="light"] .ring-i,
+[data-theme="light"] .ring-d { color: color-mix(in srgb, var(--gold) 45%, var(--sage)); }
+[data-theme="light"] .ring-core,
+[data-theme="light"] .ring-core-stroke { color: var(--gold); }
+[data-theme="light"] .mandala-sparks { color: var(--blush-deep); }
+[data-theme="light"] .mandala-orbit { color: var(--blush); }
+[data-theme="light"] .mandala-orbit-mid { color: var(--blush-deep); }
+[data-theme="light"] .mandala-glow-disc { color: var(--blush); opacity: 1; }
 
 /* Soft neon accent on outer dashed ring (subtle) */
 .ring-outermost {
@@ -2838,7 +2924,7 @@ body::before {
     opacity: 0.72 !important;
   }
   [data-theme="dark"] .hero-mandala { opacity: 0.92 !important; }
-  [data-theme="light"] .hero-mandala { opacity: 0.64 !important; }
+  [data-theme="light"] .hero-mandala { opacity: 0.76 !important; }
   .mandala-conic-halo {
     width: min(82vmin, 660px);
     height: min(82vmin, 660px);
@@ -2878,5 +2964,258 @@ body::before {
     right: -8%;
     transform: none;
     opacity: 0.22;
+  }
+}
+
+/* ============================================================
+   MANDALA MAX — light pastels + hover delight (v=mandala-max1)
+   Dark stays strong sage/neon; light gets soft blush presence.
+   ============================================================ */
+
+/* Soft blush wash — light atmosphere only */
+[data-theme="light"] .hero-halo {
+  background:
+    radial-gradient(circle at 40% 40%, color-mix(in srgb, var(--blush) 42%, transparent), transparent 62%),
+    radial-gradient(circle at 70% 60%, color-mix(in srgb, var(--sage-glow) 80%, transparent), transparent 70%) !important;
+  opacity: 0.58 !important;
+  filter: blur(58px) !important;
+}
+[data-theme="light"] .hero-orb-1 {
+  background: radial-gradient(circle, color-mix(in srgb, var(--blush-soft) 48%, transparent), transparent 68%) !important;
+  opacity: 0.5 !important;
+}
+[data-theme="light"] .hero-orb-2 {
+  background: radial-gradient(circle, color-mix(in srgb, var(--blush) 28%, color-mix(in srgb, var(--earth) 22%, transparent)), transparent 70%) !important;
+}
+[data-theme="light"] .hero-orb-3 {
+  background: radial-gradient(circle, color-mix(in srgb, var(--gold) 22%, color-mix(in srgb, var(--blush-soft) 18%, transparent)), transparent 72%) !important;
+  opacity: 0.4 !important;
+}
+[data-theme="light"] .fx-wash {
+  background:
+    radial-gradient(ellipse 75% 48% at 50% -8%, var(--sage-glow), transparent 58%),
+    radial-gradient(ellipse 50% 36% at 92% 18%, color-mix(in srgb, var(--blush) 14%, transparent), transparent 55%),
+    radial-gradient(ellipse 55% 38% at 100% 70%, color-mix(in srgb, var(--clay) 14%, transparent), transparent 52%),
+    radial-gradient(ellipse 48% 32% at 0% 55%, color-mix(in srgb, var(--earth) 11%, transparent), transparent 52%) !important;
+}
+
+/* Readable title/CTAs — keep ink crisp over pastel wash */
+.hero-inner,
+.hero h1,
+.hero-lead,
+.hero-actions,
+.hero-presence-strip,
+.hero-stats {
+  position: relative;
+  z-index: 3;
+}
+.hero h1 {
+  text-shadow: 0 1px 0 color-mix(in srgb, var(--surface) 70%, transparent);
+}
+[data-theme="light"] .hero h1 {
+  text-shadow:
+    0 1px 0 rgba(255, 254, 249, 0.85),
+    0 0 24px rgba(243, 239, 228, 0.65);
+}
+
+/* Smooth transitions for hover delight */
+.hero-mandala,
+.mandala-conic-halo,
+.mandala-glow-disc,
+.mandala-lotus-fill,
+.mandala-lotus-fill-sub,
+.mandala-petals,
+.mandala-petals-sub,
+.mandala-rings,
+.mandala-sparks,
+.ring-core,
+.ring-core-stroke,
+.ring-outermost,
+.orbit-dot,
+.orbit-dot-mid,
+.orbit-dot-outer,
+.spark-mark,
+.hero-halo,
+.hero-orb-1,
+.hero-orb-2,
+.hero-orb-3 {
+  transition:
+    opacity 0.42s var(--ease, cubic-bezier(.22, 1, .36, 1)),
+    filter 0.45s var(--ease, cubic-bezier(.22, 1, .36, 1)),
+    transform 0.45s var(--ease, cubic-bezier(.22, 1, .36, 1));
+}
+
+/* Hover / fine-pointer delight — hero stage easy to hit */
+@media (hover: hover) and (pointer: fine) {
+  .hero:hover .mandala-conic-halo {
+    opacity: 0.55;
+    filter: blur(22px) saturate(1.28) brightness(1.12);
+  }
+  [data-theme="dark"] .hero:hover .mandala-conic-halo {
+    opacity: 0.62;
+    filter: blur(28px) saturate(1.35) brightness(1.15);
+  }
+  [data-theme="light"] .hero:hover .mandala-conic-halo {
+    opacity: 0.52;
+    filter: blur(20px) saturate(1.22) brightness(1.1);
+  }
+
+  .hero:hover .hero-mandala {
+    opacity: 0.92 !important;
+    filter:
+      drop-shadow(0 0 22px color-mix(in srgb, var(--sage) 42%, transparent))
+      drop-shadow(0 0 48px color-mix(in srgb, var(--gold) 22%, transparent))
+      drop-shadow(0 0 72px color-mix(in srgb, var(--blush, var(--sage-bright)) 18%, transparent)) !important;
+  }
+  [data-theme="light"] .hero:hover .hero-mandala {
+    opacity: 0.9 !important;
+    filter:
+      drop-shadow(0 0 16px color-mix(in srgb, var(--blush) 40%, transparent))
+      drop-shadow(0 0 36px color-mix(in srgb, var(--sage) 28%, transparent))
+      drop-shadow(0 0 56px color-mix(in srgb, var(--gold) 20%, transparent)) !important;
+  }
+
+  .hero:hover .mandala-petals {
+    opacity: 0.92;
+    filter:
+      drop-shadow(0 0 5px currentColor)
+      drop-shadow(0 0 12px color-mix(in srgb, var(--petal-edge, var(--gold)) 55%, transparent))
+      brightness(1.28);
+  }
+  .hero:hover .mandala-petals-sub {
+    opacity: 0.78;
+    filter:
+      drop-shadow(0 0 4px currentColor)
+      drop-shadow(0 0 10px color-mix(in srgb, var(--gold) 40%, transparent))
+      brightness(1.22);
+  }
+  .hero:hover .mandala-lotus-fill {
+    opacity: 0.85;
+    filter: brightness(1.18) saturate(1.12);
+  }
+  .hero:hover .mandala-lotus-fill-sub {
+    opacity: 0.7;
+    filter: brightness(1.15);
+  }
+  .hero:hover .mandala-glow-disc {
+    opacity: 1;
+    filter: brightness(1.25);
+  }
+
+  .hero:hover .mandala-rings {
+    filter: brightness(1.18);
+  }
+  .hero:hover .ring-outermost,
+  .hero:hover .ring-a,
+  .hero:hover .ring-b,
+  .hero:hover .ring-c,
+  .hero:hover .ring-d {
+    filter: drop-shadow(0 0 5px currentColor) brightness(1.25);
+  }
+  .hero:hover .ring-core,
+  .hero:hover .ring-core-stroke {
+    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--sage-bright) 70%, transparent))
+            drop-shadow(0 0 22px color-mix(in srgb, var(--gold) 45%, transparent))
+            brightness(1.35);
+  }
+
+  .hero:hover .orbit-dot,
+  .hero:hover .orbit-dot-mid,
+  .hero:hover .orbit-dot-outer {
+    filter: drop-shadow(0 0 6px currentColor) brightness(1.45);
+    opacity: 1;
+  }
+  .hero:hover .mandala-sparks,
+  .hero:hover .spark-mark {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px currentColor) brightness(1.4);
+  }
+
+  .hero:hover .hero-halo {
+    opacity: 0.72;
+    filter: blur(52px) brightness(1.12);
+  }
+  [data-theme="light"] .hero:hover .hero-halo {
+    opacity: 0.7;
+  }
+  .hero:hover .hero-orb-1,
+  .hero:hover .hero-orb-2,
+  .hero:hover .hero-orb-3 {
+    filter: blur(48px) brightness(1.15);
+    opacity: 0.62;
+  }
+}
+
+/* Touch: brief brighten on press, no stuck hover */
+@media (hover: none) {
+  .hero:active .mandala-petals,
+  .hero:active .mandala-petals-sub {
+    opacity: 0.88;
+    filter: drop-shadow(0 0 6px currentColor) brightness(1.2);
+  }
+  .hero:active .ring-core,
+  .hero:active .ring-core-stroke {
+    filter: drop-shadow(0 0 12px color-mix(in srgb, var(--gold) 50%, transparent)) brightness(1.25);
+  }
+  .hero:active .orbit-dot,
+  .hero:active .orbit-dot-mid,
+  .hero:active .orbit-dot-outer {
+    opacity: 1;
+    filter: drop-shadow(0 0 5px currentColor);
+  }
+  .hero:active .hero-mandala {
+    opacity: 0.85 !important;
+  }
+}
+
+/* Reduced motion: keep opacity brighten, no extra spin/transform drama */
+@media (prefers-reduced-motion: reduce) {
+  .hero-mandala,
+  .mandala-conic-halo,
+  .mandala-glow-disc,
+  .mandala-lotus-fill,
+  .mandala-lotus-fill-sub,
+  .mandala-petals,
+  .mandala-petals-sub,
+  .mandala-rings,
+  .mandala-sparks,
+  .ring-core,
+  .ring-core-stroke,
+  .orbit-dot,
+  .orbit-dot-mid,
+  .orbit-dot-outer,
+  .spark-mark,
+  .hero-halo,
+  .hero-orb-1,
+  .hero-orb-2,
+  .hero-orb-3 {
+    transition: opacity 0.35s ease, filter 0.35s ease !important;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .hero:hover .mandala-petals,
+    .hero:hover .mandala-petals-sub,
+    .hero:hover .ring-core,
+    .hero:hover .orbit-dot,
+    .hero:hover .orbit-dot-mid,
+    .hero:hover .orbit-dot-outer,
+    .hero:hover .spark-mark {
+      /* opacity + filter only — already set above */
+      transform: none !important;
+    }
+  }
+}
+
+/* Short viewport / mobile: keep pastels readable, no overflow */
+@media (max-width: 899px) {
+  [data-theme="light"] .hero-mandala {
+    opacity: 0.52 !important;
+  }
+  [data-theme="light"] .mandala-conic-halo {
+    opacity: 0.26;
+  }
+}
+@media (min-width: 900px) and (max-height: 820px) {
+  [data-theme="light"] .hero-mandala {
+    opacity: 0.68 !important;
   }
 }

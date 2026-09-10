@@ -199,6 +199,7 @@
     });
   }
 
+
   // Presence hero — 4-7-8 breath phase labels + reduced-motion class
   const hero = document.querySelector(".hero");
   if (hero) {
@@ -223,6 +224,22 @@
       };
       tick();
       setInterval(tick, 200);
+
+      // Subtle pointer parallax → --px / --py on .hero (~±14px)
+      const max = 14;
+      const onMove = (e) => {
+        const r = hero.getBoundingClientRect();
+        const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        hero.style.setProperty("--px", (x * max).toFixed(2) + "px");
+        hero.style.setProperty("--py", (y * max).toFixed(2) + "px");
+      };
+      const onLeave = () => {
+        hero.style.setProperty("--px", "0px");
+        hero.style.setProperty("--py", "0px");
+      };
+      hero.addEventListener("pointermove", onMove);
+      hero.addEventListener("pointerleave", onLeave);
     }
   }
 

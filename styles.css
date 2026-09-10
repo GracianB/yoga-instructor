@@ -3515,3 +3515,180 @@ body::before {
   [data-theme="light"] .mandala-petals { opacity: 0.9 !important; }
   [data-theme="light"] .mandala-conic-halo { opacity: 0.36 !important; }
 }
+
+/* ============================================================
+   YOGA NEON1 — petal neon amp (esp. light on cream)
+   Electric mint/sage/gold that reads as glow, not dusty blush.
+   Soft pastel stage preserved; text z-index untouched.
+   ============================================================ */
+
+[data-theme="light"] {
+  /* Brighter electric tokens — neon ON cream, not forest ink */
+  --neon-sage: #12a866;
+  --neon-mint: #2dd4a0;
+  --neon-gold: #f0c21a;
+  --petal-a: #e0707c;
+  --petal-b: #f0a8b0;
+  --petal-c: #c45a68;
+  --petal-edge: #e8b820;
+  --blush: #e0707c;
+  --blush-soft: #f2c0c6;
+  --blush-deep: #c45a68;
+  --blush-glow: rgba(224, 112, 124, 0.5);
+  --sage-glow: rgba(18, 168, 102, 0.38);
+  --sage-bright: #1fbf78;
+}
+
+[data-theme="dark"] {
+  --neon-sage: #9aecc8;
+  --neon-mint: #c8ffe6;
+  --neon-gold: #ffe98a;
+  --sage-glow: rgba(180, 245, 214, 0.45);
+}
+
+[data-theme="light"] .hero-mandala {
+  opacity: 0.98 !important;
+  filter:
+    drop-shadow(0 0 6px color-mix(in srgb, var(--neon-mint) 75%, transparent))
+    drop-shadow(0 0 16px color-mix(in srgb, var(--neon-sage) 62%, transparent))
+    drop-shadow(0 0 32px color-mix(in srgb, var(--neon-gold) 48%, transparent))
+    drop-shadow(0 0 56px color-mix(in srgb, var(--blush-deep) 40%, transparent))
+    drop-shadow(0 0 90px color-mix(in srgb, var(--neon-sage) 28%, transparent)) !important;
+}
+
+[data-theme="dark"] .hero-mandala {
+  opacity: 1 !important;
+  filter:
+    drop-shadow(0 0 12px color-mix(in srgb, var(--neon-mint) 78%, transparent))
+    drop-shadow(0 0 28px color-mix(in srgb, var(--sage) 55%, transparent))
+    drop-shadow(0 0 52px color-mix(in srgb, var(--neon-gold) 38%, transparent))
+    drop-shadow(0 0 96px color-mix(in srgb, var(--sage-bright) 28%, transparent)) !important;
+}
+
+/* Light conic: glow instead of multiply-mud */
+[data-theme="light"] .mandala-conic-halo {
+  opacity: 0.62 !important;
+  mix-blend-mode: soft-light;
+  filter: blur(18px) saturate(1.55) brightness(1.14) !important;
+  background: conic-gradient(
+    from 12deg,
+    color-mix(in srgb, var(--neon-mint) 70%, transparent),
+    color-mix(in srgb, var(--neon-gold) 58%, transparent),
+    color-mix(in srgb, var(--blush-deep) 55%, transparent),
+    color-mix(in srgb, var(--neon-sage) 68%, transparent),
+    color-mix(in srgb, var(--neon-mint) 62%, transparent),
+    color-mix(in srgb, var(--neon-gold) 50%, transparent),
+    color-mix(in srgb, var(--neon-mint) 70%, transparent)
+  ) !important;
+}
+
+[data-theme="dark"] .mandala-conic-halo {
+  opacity: 0.66 !important;
+  filter: blur(28px) saturate(1.5) brightness(1.18) !important;
+}
+
+[data-theme="light"] .mandala-petals {
+  opacity: 1 !important;
+  stroke-width: 2.05 !important;
+  filter:
+    drop-shadow(0 0 2px color-mix(in srgb, var(--neon-mint) 90%, transparent))
+    drop-shadow(0 0 6px color-mix(in srgb, var(--neon-gold) 75%, transparent))
+    drop-shadow(0 0 14px color-mix(in srgb, var(--neon-sage) 65%, transparent))
+    drop-shadow(0 0 26px color-mix(in srgb, var(--blush-deep) 45%, transparent))
+    brightness(1.18) contrast(1.06) !important;
+}
+
+[data-theme="light"] .mandala-petals-sub {
+  color: color-mix(in srgb, var(--neon-sage) 55%, var(--neon-gold)) !important;
+  opacity: 0.95 !important;
+  stroke-width: 1.55 !important;
+  filter:
+    drop-shadow(0 0 2px color-mix(in srgb, var(--neon-gold) 80%, transparent))
+    drop-shadow(0 0 8px color-mix(in srgb, var(--neon-mint) 55%, transparent))
+    drop-shadow(0 0 16px color-mix(in srgb, var(--neon-sage) 40%, transparent))
+    brightness(1.12) !important;
+}
+
+[data-theme="dark"] .mandala-petals {
+  opacity: 1 !important;
+  stroke-width: 1.95 !important;
+  filter:
+    drop-shadow(0 0 4px color-mix(in srgb, var(--neon-mint) 90%, transparent))
+    drop-shadow(0 0 14px color-mix(in srgb, var(--neon-gold) 55%, transparent))
+    drop-shadow(0 0 28px color-mix(in srgb, var(--sage) 48%, transparent))
+    brightness(1.22) !important;
+}
+
+[data-theme="dark"] .mandala-petals-sub {
+  opacity: 0.92 !important;
+  stroke-width: 1.4 !important;
+  filter:
+    drop-shadow(0 0 4px currentColor)
+    drop-shadow(0 0 12px color-mix(in srgb, var(--neon-gold) 50%, transparent))
+    brightness(1.16) !important;
+}
+
+[data-theme="light"] .mandala-lotus-fill {
+  opacity: 0.95 !important;
+  filter:
+    drop-shadow(0 0 12px color-mix(in srgb, var(--neon-sage) 45%, transparent))
+    drop-shadow(0 0 22px color-mix(in srgb, var(--blush) 35%, transparent)) !important;
+}
+
+[data-theme="light"] .ring-outermost,
+[data-theme="light"] .ring-e,
+[data-theme="light"] .ring-a,
+[data-theme="light"] .ring-b,
+[data-theme="light"] .ring-c,
+[data-theme="light"] .ring-d {
+  color: var(--neon-sage) !important;
+  opacity: 0.88 !important;
+}
+
+[data-theme="light"] .ring-core,
+[data-theme="light"] .ring-core-stroke {
+  color: var(--neon-gold) !important;
+  filter:
+    drop-shadow(0 0 10px color-mix(in srgb, var(--neon-gold) 80%, transparent))
+    drop-shadow(0 0 22px color-mix(in srgb, var(--neon-mint) 55%, transparent)) !important;
+}
+
+[data-theme="light"] .hero-halo {
+  opacity: 0.78 !important;
+  filter: blur(48px) saturate(1.35) !important;
+  background:
+    radial-gradient(circle at 42% 40%, color-mix(in srgb, var(--neon-mint) 42%, transparent), transparent 58%),
+    radial-gradient(circle at 68% 55%, color-mix(in srgb, var(--neon-sage) 36%, transparent), transparent 66%),
+    radial-gradient(circle at 55% 72%, color-mix(in srgb, var(--neon-gold) 26%, transparent), transparent 62%) !important;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  [data-theme="light"] .hero:hover .mandala-petals {
+    filter:
+      drop-shadow(0 0 4px currentColor)
+      drop-shadow(0 0 12px color-mix(in srgb, var(--neon-gold) 85%, transparent))
+      drop-shadow(0 0 28px color-mix(in srgb, var(--neon-mint) 65%, transparent))
+      drop-shadow(0 0 48px color-mix(in srgb, var(--neon-sage) 45%, transparent))
+      brightness(1.38) !important;
+  }
+  [data-theme="light"] .hero:hover .hero-mandala {
+    filter:
+      drop-shadow(0 0 10px color-mix(in srgb, var(--neon-mint) 80%, transparent))
+      drop-shadow(0 0 26px color-mix(in srgb, var(--neon-sage) 65%, transparent))
+      drop-shadow(0 0 52px color-mix(in srgb, var(--neon-gold) 48%, transparent))
+      drop-shadow(0 0 88px color-mix(in srgb, var(--blush-deep) 36%, transparent)) !important;
+  }
+}
+
+/* Kill earlier mobile fade that buried light petals */
+@media (max-width: 899px) {
+  [data-theme="light"] .hero-mandala { opacity: 0.86 !important; }
+  [data-theme="light"] .mandala-petals { opacity: 1 !important; }
+  [data-theme="light"] .mandala-conic-halo { opacity: 0.48 !important; }
+}
+@media (min-width: 900px) and (max-height: 820px) {
+  [data-theme="light"] .hero-mandala { opacity: 0.94 !important; }
+}
+@media (min-width: 900px) {
+  [data-theme="light"] .hero-mandala { opacity: 0.99 !important; }
+}

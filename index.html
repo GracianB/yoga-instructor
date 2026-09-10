@@ -20,9 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=campo-vortex1">
-  <script src="./i18n.js?v=campo-vortex1"></script>
-  <script src="./main.js?v=campo-vortex1" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=campo-player1">
+  <script src="./i18n.js?v=campo-player1"></script>
+  <script src="./main.js?v=campo-player1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -267,27 +267,32 @@
         <h2 data-i18n-html="fieldH2">Respirar.<br><em>O entrar al vórtice.</em></h2>
         <p class="about-lead" data-i18n="fieldP">La misma presencia, otro medio. Un instrumental lento para practicar — y el campo de partículas si quieres jugar.</p>
       </div>
-      <div class="campo-grid">
-        <article class="campo-audio">
-          <header>
-            <span data-i18n="fieldTrack">SUSTAINED FOCUS</span>
-            <a href="https://suno.com/s/Zq81WeM02AVZnhuC" target="_blank" rel="noreferrer">Suno ↗</a>
-          </header>
-          <p data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM. For practice, not for singing.</p>
-          <audio id="focus-audio" src="./audio/sustained-focus.mp3" preload="metadata" loop></audio>
-          <div class="audio-bar">
-            <button type="button" class="btn primary small" id="audio-play" data-i18n="fieldPlay">Play</button>
-            <button type="button" class="btn ghost small" id="audio-mute" data-i18n="fieldMute">Mute</button>
+      <div class="campo-stage">
+        <div class="focus-player" id="focus-player">
+          <button type="button" class="player-play" id="audio-play" aria-label="Play">
+            <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l12-6.5z"/></svg>
+            <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+          </button>
+          <div class="player-meta">
+            <strong data-i18n="fieldTrack">SUSTAINED FOCUS</strong>
+            <small data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM.</small>
+          </div>
+          <div class="player-timeline">
+            <span id="audio-cur">0:00</span>
+            <input type="range" id="audio-seek" min="0" max="100" value="0" step="0.1" aria-label="Seek">
+            <span id="audio-dur">0:00</span>
+          </div>
+          <div class="player-vol">
+            <button type="button" class="player-mute" id="audio-mute" data-i18n="fieldMute">Mute</button>
             <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" aria-label="Volume">
           </div>
-        </article>
-        <article class="campo-vortex">
-          <header>
-            <span>VORTEX</span>
-            <a href="https://vortex-gilt-xi.vercel.app/" target="_blank" rel="noreferrer" data-i18n="fieldOpen">Abrir ↗</a>
-          </header>
-          <iframe title="Vortex" src="https://vortex-gilt-xi.vercel.app/" loading="lazy" referrerpolicy="no-referrer"></iframe>
-        </article>
+          <a class="player-link" href="https://suno.com/s/Zq81WeM02AVZnhuC" target="_blank" rel="noreferrer">Suno ↗</a>
+          <a class="player-link player-vortex" href="https://vortex-gilt-xi.vercel.app/" target="_blank" rel="noreferrer" data-i18n="fieldOpen">Abrir ↗</a>
+          <audio id="focus-audio" src="./audio/sustained-focus.mp3" preload="metadata" loop></audio>
+        </div>
+        <div class="campo-vortex-full">
+          <iframe title="Vortex" src="https://vortex-gilt-xi.vercel.app/" loading="lazy" referrerpolicy="no-referrer" allow="autoplay"></iframe>
+        </div>
       </div>
     </section>
 

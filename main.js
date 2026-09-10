@@ -61,10 +61,12 @@
     const audio = document.getElementById("focus-audio");
     const playBtn = document.getElementById("audio-play");
     const muteBtn = document.getElementById("audio-mute");
-    if (playBtn && audio && audio.paused) playBtn.textContent = t.fieldPlay || "Play";
-    if (muteBtn && audio) muteBtn.textContent = audio.muted
-      ? (lang === "en" ? "Unmute" : "Sonido")
-      : (t.fieldMute || "Mute");
+    if (playBtn && audio) {
+      playBtn.setAttribute("aria-label", audio.paused ? (t.fieldPlay || "Play") : (t.fieldPause || "Pause"));
+    }
+    if (muteBtn && audio) {
+      muteBtn.textContent = audio.muted ? (t.fieldUnmute || "Audio") : (t.fieldMute || "Mute");
+    }
   }
 
   function applyTheme() {
@@ -178,25 +180,62 @@
   const playBtn = document.getElementById("audio-play");
   const muteBtn = document.getElementById("audio-mute");
   const vol = document.getElementById("audio-vol");
+  const seek = document.getElementById("audio-seek");
+  const curEl = document.getElementById("audio-cur");
+  const durEl = document.getElementById("audio-dur");
+  const player = document.getElementById("focus-player");
+  const fmt = (s) => {
+    if (!isFinite(s) || s < 0) return "0:00";
+    const m = Math.floor(s / 60);
+    const sec = Math.floor(s % 60);
+    return m + ":" + String(sec).padStart(2, "0");
+  };
+  const i18nT = () => (window.YOGA_I18N && window.YOGA_I18N[document.documentElement.lang === "en" ? "en" : "es"]) || {};
+  const paintMute = () => {
+    if (!muteBtn || !audio) return;
+    const t = i18nT();
+    muteBtn.textContent = audio.muted ? (t.fieldUnmute || "Audio") : (t.fieldMute || "Mute");
+  };
   if (audio && playBtn) {
     audio.volume = vol ? Number(vol.value) : 0.45;
     playBtn.addEventListener("click", async () => {
       if (audio.paused) {
-        try { await audio.play(); playBtn.textContent = "Pause"; } catch (_) {}
+        try { await audio.play(); } catch (_) {}
       } else {
         audio.pause();
-        const t = (window.YOGA_I18N && window.YOGA_I18N[lang]) || {};
-        playBtn.textContent = t.fieldPlay || "Play";
       }
+    });
+    audio.addEventListener("play", () => {
+      player?.classList.add("is-playing");
+      playBtn.setAttribute("aria-label", i18nT().fieldPause || "Pause");
+    });
+    audio.addEventListener("pause", () => {
+      player?.classList.remove("is-playing");
+      playBtn.setAttribute("aria-label", i18nT().fieldPlay || "Play");
+    });
+    audio.addEventListener("loadedmetadata", () => {
+      if (durEl) durEl.textContent = fmt(audio.duration);
+    });
+    audio.addEventListener("timeupdate", () => {
+      if (curEl) curEl.textContent = fmt(audio.currentTime);
+      if (seek && audio.duration) seek.value = String((audio.currentTime / audio.duration) * 100);
+    });
+    seek?.addEventListener("input", () => {
+      if (!audio.duration) return;
+      audio.currentTime = (Number(seek.value) / 100) * audio.duration;
     });
     muteBtn?.addEventListener("click", () => {
       audio.muted = !audio.muted;
-      muteBtn.textContent = audio.muted ? "Unmute" : (document.documentElement.lang === "en" ? "Mute" : "Silencio");
+      paintMute();
     });
     vol?.addEventListener("input", () => {
       audio.volume = Number(vol.value);
-      if (audio.volume > 0 && audio.muted) audio.muted = false;
+      if (audio.volume > 0 && audio.muted) {
+        audio.muted = false;
+        paintMute();
+      }
     });
+    paintMute();
   }
 
 

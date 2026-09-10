@@ -58,6 +58,14 @@
     });
 
     syncCvLinks();
+    const audio = document.getElementById("focus-audio");
+    const playBtn = document.getElementById("audio-play");
+    const muteBtn = document.getElementById("audio-mute");
+    const t = I18N[lang] || I18N.es;
+    if (playBtn && audio && audio.paused) playBtn.textContent = t.fieldPlay || "Play";
+    if (muteBtn && audio) muteBtn.textContent = audio.muted
+      ? (lang === "en" ? "Unmute" : "Sonido")
+      : (t.fieldMute || "Mute");
   }
 
   function applyTheme() {
@@ -168,7 +176,8 @@
         try { await audio.play(); playBtn.textContent = "Pause"; } catch (_) {}
       } else {
         audio.pause();
-        playBtn.textContent = playBtn.getAttribute("data-i18n") === "fieldPlay" ? (document.documentElement.lang === "en" ? "Play" : "Play") : "Play";
+        const t = (window.YOGA_I18N && window.YOGA_I18N[lang]) || {};
+        playBtn.textContent = t.fieldPlay || "Play";
       }
     });
     muteBtn?.addEventListener("click", () => {

@@ -20,9 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=v2x2">
-  <script src="./i18n.js?v=v2x2"></script>
-  <script src="./main.js?v=v2x2" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=presence1">
+  <script src="./i18n.js?v=presence1"></script>
+  <script src="./main.js?v=presence1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -80,39 +80,74 @@
   </header>
 
   <main id="main">
-    <!-- HERO -->
-    <section class="hero" id="inicio">
-      <div class="hero-inner">
-        <p class="kicker" data-i18n="heroKicker">INSTRUCTOR DE YOGA CERTIFICADO · MURCIA</p>
-        <h1 data-i18n-html="heroTitle">Presencia.<br>Respiración.<br><em>Práctica real.</em></h1>
-        <p class="hero-lead" data-i18n="heroLead">
-          Instructor certificado (Madrid 2019). Yoga corporativo en Majorel · Google / YouTube. Sala en Mood Fitness (Murcia) hasta junio 2026.
-        </p>
-        <div class="hero-actions">
-          <a class="btn primary" href="#contacto" data-i18n="heroCta1">Hablemos</a>
-          <a class="btn ghost" href="./Gracian_Baena_CV_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-i18n="heroCta2">CV Yoga</a>
-          <a class="btn ghost" href="https://gracianb.github.io/GracianB/" target="_blank" rel="noreferrer" data-i18n="heroCta3">El otro track →</a>
-        </div>
-        <ul class="hero-stats">
-          <li><strong>2019</strong><span data-i18n="stat1">Certificación oficial · Madrid</span></li>
-          <li><strong>2020—21</strong><span data-i18n="stat2">Yoga corporativo · Google/YouTube</span></li>
-          <li><strong>2022—26</strong><span data-i18n="stat3">Mood Fitness · Murcia · hasta jun 2026</span></li>
-          <li><strong>5</strong><span data-i18n="stat4">idiomas</span></li>
-        </ul>
+    <!-- HERO — presence practice space -->
+    <section class="hero" id="inicio" data-breath="idle">
+      <div class="hero-atmosphere" aria-hidden="true">
+        <div class="hero-grain"></div>
+        <div class="hero-orb hero-orb-1"></div>
+        <div class="hero-orb hero-orb-2"></div>
+        <div class="hero-orb hero-orb-3"></div>
+        <svg class="hero-mandala" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="mandala-rings">
+            <circle class="ring ring-a" cx="210" cy="210" r="168" stroke="currentColor" stroke-width="0.6" opacity="0.28"/>
+            <circle class="ring ring-b" cx="210" cy="210" r="132" stroke="currentColor" stroke-width="0.7" opacity="0.34"/>
+            <circle class="ring ring-c" cx="210" cy="210" r="96" stroke="currentColor" stroke-width="0.9" opacity="0.42"/>
+            <circle class="ring ring-d" cx="210" cy="210" r="58" stroke="currentColor" stroke-width="1.1" opacity="0.5"/>
+            <circle class="ring ring-core" cx="210" cy="210" r="18" fill="currentColor" opacity="0.14"/>
+          </g>
+          <g class="mandala-petals" stroke="currentColor" stroke-width="0.55" opacity="0.3">
+            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z"/>
+            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(45 210 210)"/>
+            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(90 210 210)"/>
+            <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(135 210 210)"/>
+          </g>
+          <g class="mandala-orbit">
+            <circle class="orbit-dot" cx="210" cy="42" r="3.2" fill="currentColor"/>
+            <circle class="orbit-dot delay" cx="378" cy="210" r="2.4" fill="currentColor" opacity="0.7"/>
+            <circle class="orbit-dot delay2" cx="210" cy="378" r="2" fill="currentColor" opacity="0.55"/>
+          </g>
+        </svg>
+        <svg class="hero-breath-wave" viewBox="0 0 640 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="breath-wave-path" d="M0 52 C80 52 80 22 160 22 C240 22 240 68 320 68 C400 68 400 28 480 28 C560 28 560 52 640 52" stroke="currentColor" stroke-width="1.4" fill="none" opacity="0.45"/>
+          <path class="breath-wave-path soft" d="M0 58 C70 58 90 34 170 34 C250 34 250 64 330 64 C410 64 420 40 500 40 C580 40 590 58 640 58" stroke="currentColor" stroke-width="1" fill="none" opacity="0.22"/>
+        </svg>
+        <p class="breath-caption"><span class="breath-phase" data-i18n="breathLabel">4 · 7 · 8</span></p>
       </div>
-      <aside class="hero-card" aria-hidden="true">
-        <header>
-          <span data-i18n="cardLabel">PRACTICE / PROFILE</span>
-          <b class="dot">MURCIA</b>
-        </header>
-        <p class="card-big">YOGA</p>
-        <p class="card-sub" data-i18n="cardSub">Asana · Pranayama · Mindfulness · Facilitación</p>
-        <ol>
-          <li><span>01</span><b data-i18n="card1">Presencia en sala</b></li>
-          <li><span>02</span><b data-i18n="card2">Adaptación a niveles</b></li>
-          <li><span>03</span><b data-i18n="card3">Bienestar de equipos</b></li>
-        </ol>
-      </aside>
+
+      <div class="hero-stage">
+        <div class="hero-inner">
+          <p class="kicker" data-i18n="heroKicker">INSTRUCTOR DE YOGA CERTIFICADO · MURCIA</p>
+          <h1 data-i18n-html="heroTitle">Presencia.<br>Respiración.<br><em>Práctica real.</em></h1>
+          <p class="hero-lead" data-i18n="heroLead">
+            Instructor certificado (Madrid 2019). Yoga corporativo en Majorel · Google / YouTube. Sala en Mood Fitness (Murcia) hasta junio 2026.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#contacto" data-i18n="heroCta1">Hablemos</a>
+            <a class="btn ghost" href="./Gracian_Baena_CV_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-i18n="heroCta2">CV Yoga</a>
+            <a class="btn ghost" href="https://gracianb.github.io/GracianB/" target="_blank" rel="noreferrer" data-i18n="heroCta3">El otro track →</a>
+          </div>
+          <ul class="hero-stats">
+            <li><strong>2019</strong><span data-i18n="stat1">Certificación oficial · Madrid</span></li>
+            <li><strong>2020—21</strong><span data-i18n="stat2">Yoga corporativo · Google/YouTube</span></li>
+            <li><strong>2022—26</strong><span data-i18n="stat3">Mood Fitness · Murcia · hasta jun 2026</span></li>
+            <li><strong>5</strong><span data-i18n="stat4">idiomas</span></li>
+          </ul>
+        </div>
+        <aside class="hero-card" aria-hidden="true">
+          <div class="hero-card-glow"></div>
+          <header>
+            <span data-i18n="cardLabel">YOGA · PRESENCE</span>
+            <b class="dot">MURCIA</b>
+          </header>
+          <p class="card-big">YOGA</p>
+          <p class="card-sub" data-i18n="cardSub">Asana · Pranayama · Mindfulness · Facilitación</p>
+          <ol>
+            <li><span>01</span><b data-i18n="card1">Presencia en sala</b></li>
+            <li><span>02</span><b data-i18n="card2">Adaptación a niveles</b></li>
+            <li><span>03</span><b data-i18n="card3">Bienestar de equipos</b></li>
+          </ol>
+        </aside>
+      </div>
     </section>
 
     <section class="section campo reveal" id="campo">

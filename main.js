@@ -180,4 +180,32 @@
       if (audio.volume > 0 && audio.muted) audio.muted = false;
     });
   }
+
+  // Presence hero — 4-7-8 breath phase labels + reduced-motion class
+  const hero = document.querySelector(".hero");
+  if (hero) {
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) {
+      hero.setAttribute("data-breath", "still");
+      document.documentElement.classList.add("reduce-motion");
+    } else {
+      hero.setAttribute("data-breath", "cycle");
+      const phaseEl = hero.querySelector(".breath-phase");
+      const labels = { inhale: "4", hold: "7", exhale: "8" };
+      // 19s cycle: inhale 0–4, hold 4–11, exhale 11–19
+      const tick = () => {
+        const t = (performance.now() / 1000) % 19;
+        let phase = "exhale";
+        if (t < 4) phase = "inhale";
+        else if (t < 11) phase = "hold";
+        hero.setAttribute("data-phase", phase);
+        if (phaseEl && !phaseEl.hasAttribute("data-i18n-locked")) {
+          // Keep "4 · 7 · 8" caption; mark active digit via data-phase for CSS
+        }
+      };
+      tick();
+      setInterval(tick, 200);
+    }
+  }
+
 })();

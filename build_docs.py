@@ -319,53 +319,119 @@ def cv(lang):
         save(pdf, "Gracian_Baena_CV_Yoga_EN.pdf", "CV_Gracian_Baena_Yoga_EN.pdf", "assets/CV_Gracian_Baena_Yoga_EN.pdf")
 
 
+def letter_header(pdf, role, place, tagline, contacts):
+    """Letter header: same visual language, quieter breath motif (no floating 4-7-8)."""
+    y = 14
+    mark(pdf, M, y, 16)
+    pdf.set_xy(M + 20, y + 1)
+    pdf.set_font("Serif", "B", 24)
+    pdf.set_text_color(*FOREST)
+    pdf.cell(0, 9, "Gracián Baena")
+    pdf.set_xy(M + 20, y + 9.5)
+    pdf.set_font("Sans", "B", 8)
+    pdf.set_text_color(*SAGE)
+    pdf.cell(0, 4.5, f"{role}  ·  {place}")
+    y = 34
+    pdf.set_xy(M, y)
+    pdf.set_font("Serif", "I", 15)
+    pdf.set_text_color(*FOREST)
+    pdf.cell(0, 6.5, tagline)
+    y = pdf.breath(M, y + 10, W - M * 2, 7, labels=False, pattern="478")
+    pdf.set_xy(M, y + 1.5)
+    pdf.set_font("Sans", "", 8)
+    pdf.set_text_color(*MUTED)
+    pdf.cell(0, 4, contacts)
+    return y + 8
+
+
 def cover(es):
     pdf = Doc()
-    y = header(
+    y = letter_header(
         pdf,
         "INSTRUCTOR DE YOGA" if es else "YOGA INSTRUCTOR",
         "MURCIA",
         "Presencia. Respiración. Práctica real." if es else "Presence. Breath. Real practice.",
         "gracianbaenagonzalez@gmail.com    +34 687 470 725    gracianb.github.io/yoga-instructor",
     )
+    y = pdf.rule(y, 7)
     pdf.set_xy(M, y)
     pdf.set_font("Sans", "", 9)
     pdf.set_text_color(*MUTED)
-    pdf.cell(0, 5, "Murcia, agosto 2026" if es else "Murcia, August 2026")
-    y += 12
+    pdf.cell(0, 4.5, "Murcia, septiembre 2026" if es else "Murcia, September 2026")
+    y += 11
+
     pdf.set_xy(M, y)
-    pdf.set_font("Serif", "B", 14)
+    pdf.set_font("Serif", "B", 13)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 7, "Hola." if es else "Hello.")
-    y += 12
+    pdf.cell(0, 6, "Hola," if es else "Hello,")
+    y += 10
+
     paras = [
-        "Enseño yoga desde 2019. No vendo una estética. Guío práctica: cuerpo, respiración y atención. En sala, en 1:1 y con equipos.",
-        "En Mood Fitness (Murcia, González Adalid 12, planta baja) di clase hasta junio 2026. El centro cambió de titular: los nuevos gestores son también el profesorado. Se acabó el hueco. Yo sigo.",
-        "Antes: yoga corporativo en Majorel para equipos de Google / YouTube. Antes aún, Shaolin. No tengo Instagram: el portfolio y el CV bastan.",
-        "Busco un espacio honesto. Multi-nivel, sin postureo, con método. De momento: fines de semana, tardes y noches. Si encaja, hablemos.",
+        (
+            "Enseño yoga desde 2019. Lo que ofrezco es presencia, respiración y práctica real "
+            "— no una estética. Clases multi-nivel en sala, sesiones 1:1 y trabajo con equipos, "
+            "siempre con método y calidez."
+        ),
+        (
+            "Hasta junio de 2026 di clase en Mood Fitness (Murcia, González Adalid 12). "
+            "Tras un cambio de titularidad el hueco se cerró; yo sigo enseñando. "
+            "Antes, como Wellness Ambassador en Majorel, llevé programas de yoga y "
+            "bienestar para equipos de Google y YouTube. La base de disciplina y "
+            "presencia viene del Shaolin Temple."
+        ),
+        (
+            "Busco un espacio honesto para clases multi-nivel: cuerpo, respiración y "
+            "atención, con método y sin postureo. De momento estoy disponible fines de "
+            "semana, tardes y noches."
+        ),
+        (
+            "Si encaja con lo que buscáis, estaré encantado de conversar o concertar "
+            "una clase. Gracias por el tiempo."
+        ),
     ] if es else [
-        "I have taught yoga since 2019. I do not sell an aesthetic. I guide practice: body, breath and attention. Studio, 1:1, teams.",
-        "At Mood Fitness (Murcia, González Adalid 12, ground floor) I taught through June 2026. Ownership changed: the new managers also teach. The slot ended. I did not.",
-        "Before that: corporate yoga at Majorel for Google / YouTube teams. Before that, Shaolin. I have no Instagram: the portfolio and the CV are enough.",
-        "I am looking for an honest room. Multi-level, no performance, method. For now: weekends, evenings and nights. If that fits, let’s talk.",
+        (
+            "I have taught yoga since 2019. What I offer is presence, breath and real "
+            "practice — not an aesthetic. Multi-level studio classes, one-to-one sessions "
+            "and team work, always with method and warmth."
+        ),
+        (
+            "Through June 2026 I taught at Mood Fitness in Murcia (González Adalid 12). "
+            "After a change of ownership the slot closed; I continue teaching. Before "
+            "that, as Wellness Ambassador at Majorel, I ran yoga and wellbeing "
+            "programmes for Google and YouTube teams. My foundation in discipline and "
+            "presence comes from Shaolin Temple."
+        ),
+        (
+            "I am looking for an honest multi-level space: body, breath and attention, "
+            "with method and without performance. For now I am available weekends, "
+            "evenings and nights."
+        ),
+        (
+            "If that sounds like a fit, I would welcome a conversation or a trial class. "
+            "Thank you for your time."
+        ),
     ]
-    pdf.set_font("Serif", "", 12)
+
+    pdf.set_font("Serif", "", 11.5)
     pdf.set_text_color(*FOREST)
     for p in paras:
         pdf.set_xy(M, y)
-        pdf.multi_cell(W - M * 2, 6, p)
-        y = pdf.get_y() + 6
-    y += 5
-    y = pdf.breath(M, y, W - M * 2, 8, labels=False, pattern="478")
-    y += 5
+        pdf.multi_cell(W - M * 2, 6.2, p, align="L")
+        y = pdf.get_y() + 6.5
+
+    # Signature block with breathing room, still above footer
+    y = max(y + 4, H - 52)
+    y = pdf.breath(M, y, (W - M * 2) * 0.5, 5, labels=False, pattern="478")
+    y += 7
     pdf.set_xy(M, y)
-    pdf.set_font("Serif", "I", 12)
+    pdf.set_font("Serif", "B", 13)
     pdf.set_text_color(*FOREST)
-    pdf.cell(0, 6, "Gracias por el tiempo." if es else "Thank you for your time.")
-    y += 10
-    pdf.set_xy(M, y)
-    pdf.set_font("Serif", "B", 14)
     pdf.cell(0, 6, "Gracián Baena")
+    y += 7
+    pdf.set_xy(M, y)
+    pdf.set_font("Sans", "", 8)
+    pdf.set_text_color(*MUTED)
+    pdf.cell(0, 4, "Murcia  ·  gracianb.github.io/yoga-instructor")
     footer(pdf, "https://gracianb.github.io/yoga-instructor/")
     save(pdf, "Gracian_Baena_Carta_Yoga_ES.pdf" if es else "Gracian_Baena_Cover_Letter_Yoga_EN.pdf")
 

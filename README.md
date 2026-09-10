@@ -1,10 +1,10 @@
 <div align="center">
 
-[![Typing](https://readme-typing-svg.demolab.com?font=Fraunces&weight=500&size=28&duration=3200&pause=900&color=7DCAA5&center=true&vCenter=true&width=900&height=55&lines=Presencia.+Respiraci%C3%B3n.+Pr%C3%A1ctica+real.;Presence.+Breath.+Real+practice.;Murcia+%C2%B7+2019%E2%80%932026;Yoga+corporativo+%C2%B7+Google+%2F+YouTube;Graci%C3%A1n+Baena+%C2%B7+mundo+02)](https://gracianb.github.io/yoga-instructor/)
+[![Typing](https://readme-typing-svg.demolab.com?font=Fraunces&weight=500&size=28&duration=3200&pause=900&color=7DCAA5&center=true&vCenter=true&width=900&height=55&lines=Presencia.+Respiraci%C3%B3n.+Pr%C3%A1ctica+real.;Presence.+Breath.+Real+practice.;Murcia+%C2%B7+2019%E2%80%932026;Yoga+corporativo+%C2%B7+Google+%2F+YouTube;Graci%C3%A1n+Baena+%C2%B7+mundo+03)](https://gracianb.github.io/yoga-instructor/)
 
 # **GRACIÁN BAENA**
 
-### Instructor de Yoga · Yoga Instructor — mundo 02 del hub
+### Instructor de Yoga · Yoga Instructor — mundo 03 del hub
 
 **Presencia. Respiración. Práctica real.** Sage accent · hub chrome (Fraunces · Inter · JetBrains · GB→hub).
 
@@ -17,7 +17,7 @@
 [![Live](https://img.shields.io/badge/%F0%9F%9A%80_LIVE-yoga--instructor-7dcaa5?style=for-the-badge&labelColor=1E2A1F)](https://gracianb.github.io/yoga-instructor/)
 [![Hub](https://img.shields.io/badge/HUB-GracianB-f3d437?style=for-the-badge&labelColor=1E2A1F)](https://gracianb.github.io/GracianB/)
 [![Corporate](https://img.shields.io/badge/01-professional--deck-f4f3ee?style=for-the-badge&labelColor=1E2A1F)](https://gracianb.github.io/professional-deck/)
-[![Play](https://img.shields.io/badge/03-PLAY-7af3ff?style=for-the-badge&labelColor=1E2A1F)](https://gracianb.github.io/systems-lab/)
+[![Play](https://img.shields.io/badge/02-PLAY-7af3ff?style=for-the-badge&labelColor=1E2A1F)](https://gracianb.github.io/systems-lab/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-gracianbaena-0A66C2?style=for-the-badge&labelColor=1E2A1F&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/gracianbaena)
 [![Agenda](https://img.shields.io/badge/Agenda-30_min-f4f3ee?style=for-the-badge&labelColor=1E2A1F)](https://calendar.app.google/n99psBFktwYyoAWi9)
 [![CV ES](https://img.shields.io/badge/CV_Yoga-ES-7dcaa5?style=for-the-badge&labelColor=1E2A1F)](./Gracian_Baena_CV_Yoga_ES.pdf)
@@ -62,7 +62,7 @@ Enseño con presencia, escucha y método: clases multi-nivel, 1:1 y bienestar en
          ┌─────────────────────┼─────────────────────┐
          ▼                     ▼                     ▼
 ┌─────────────────┐   ┌─────────────────┐   ┌─────────────────┐
-│ 01 professional │   │ 02 yoga-        │   │ 03 PLAY         │
+│ 01 professional │   │ 02 PLAY         │   │ 03 yoga-        │
 │ deck            │   │ instructor  ★   │   │ systems-lab     │
 │ CS × Data × AI  │   │ Presence        │   │ técnica         │
 └─────────────────┘   └─────────────────┘   └─────────────────┘
@@ -72,8 +72,8 @@ Enseño con presencia, escucha y método: clases multi-nivel, 1:1 y bienestar en
 |:-------|:-----|
 | **Hub** | [gracianb.github.io/GracianB](https://gracianb.github.io/GracianB/) |
 | **01 Corporate** | [professional-deck](https://gracianb.github.io/professional-deck/) |
-| **02 Yoga** | [yoga-instructor](https://gracianb.github.io/yoga-instructor/) |
-| **03 PLAY** | [systems-lab](https://gracianb.github.io/systems-lab/) |
+| **02 PLAY** | [systems-lab](https://gracianb.github.io/systems-lab/) |
+| **03 Yoga** | [yoga-instructor](https://gracianb.github.io/yoga-instructor/) |
 
 ---
 
@@ -137,6 +137,6 @@ ESCUCHAR  →  GUIAR  →  RESPIRAR  →  INTEGRAR
 
 **Presencia × Respiración × Práctica**
 
-<sub>Murcia · 2026 · Gracián Baena · mundo 02</sub>
+<sub>Murcia · 2026 · Gracián Baena · mundo 03</sub>
 
 </div>

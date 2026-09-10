@@ -363,7 +363,7 @@ h1 em, h2 em { color: var(--sage); font-style: italic; font-weight: 400; }
 .hero-card li span { color: var(--sage); font: 800 11px var(--mono); }
 
 @media (min-width: 900px) {
-  .hero { grid-template-columns: 1.15fr .85fr; }
+  .hero { grid-template-columns: 1fr; }
 }
 
 /* —— sections —— */
@@ -669,7 +669,7 @@ h1 em, h2 em { color: var(--sage); font-style: italic; font-weight: 400; }
   .hero-stats { grid-template-columns: 1fr; }
   .brand-text b { font-size: 10px; letter-spacing: .12em; }
   .brand-text small { font-size: 8px; }
-  .hero-card { min-height: 280px; }
+  .hero-presence-strip { min-height: 0; }
 }
 @media (min-width: 901px) {
   .header-cv { display: inline-flex; }
@@ -2067,4 +2067,485 @@ body::before {
 .hero-atmosphere { opacity: 1; }
 .hero-card {
   border-radius: 20px !important;
+}
+
+
+/* ============================================================
+   PORTADA SPECTACLE — cinematic presence stage (v=portada3)
+   Mandala + breath are the star. No opaque card cover.
+   ============================================================ */
+
+.hero {
+  position: relative !important;
+  isolation: isolate !important;
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  box-sizing: border-box !important;
+  padding: clamp(16px, 3.2vh, 40px) var(--pad) clamp(28px, 4.5vh, 52px) !important;
+  min-height: calc(100svh - var(--header)) !important;
+  height: auto !important;
+  max-height: none !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  align-content: center !important;
+  gap: 0 !important;
+  overflow: hidden !important;
+  overflow-x: clip !important;
+}
+
+.hero-atmosphere {
+  z-index: 0;
+}
+
+/* Larger, brighter orbs */
+.hero-orb-1 {
+  width: min(58vw, 520px) !important;
+  height: min(58vw, 520px) !important;
+  top: -12% !important;
+  right: 2% !important;
+  opacity: 0.78 !important;
+  filter: blur(48px) !important;
+}
+.hero-orb-2 {
+  width: min(48vw, 400px) !important;
+  height: min(48vw, 400px) !important;
+  bottom: 2% !important;
+  left: -6% !important;
+  opacity: 0.58 !important;
+  filter: blur(52px) !important;
+}
+.hero-orb-3 {
+  width: min(36vw, 300px) !important;
+  height: min(36vw, 300px) !important;
+  top: 38% !important;
+  left: 46% !important;
+  opacity: 0.5 !important;
+  filter: blur(44px) !important;
+}
+
+/* Halo stronger + centered toward mandala */
+.hero-halo {
+  width: min(72vw, 720px) !important;
+  height: min(72vw, 720px) !important;
+  left: auto !important;
+  right: -8% !important;
+  top: 6% !important;
+  opacity: 0.72 !important;
+  filter: blur(56px) !important;
+  background: radial-gradient(circle, color-mix(in srgb, var(--sage) 55%, transparent), transparent 70%) !important;
+}
+[data-theme="dark"] .hero-halo {
+  opacity: 0.85 !important;
+  background: radial-gradient(circle, color-mix(in srgb, var(--sage) 48%, transparent), transparent 72%) !important;
+}
+
+/* Mandala: large center-right presence in open space */
+.hero-mandala {
+  position: absolute !important;
+  width: min(78vmin, 620px) !important;
+  height: min(78vmin, 620px) !important;
+  top: 48% !important;
+  left: auto !important;
+  right: max(-2%, calc(50% - 380px)) !important;
+  transform: translateY(-50%) !important;
+  opacity: 0.58 !important;
+  color: var(--sage) !important;
+  z-index: 1 !important;
+  pointer-events: none;
+}
+[data-theme="dark"] .hero-mandala {
+  opacity: 0.82 !important;
+  filter: drop-shadow(0 0 28px color-mix(in srgb, var(--sage) 28%, transparent));
+}
+[data-theme="light"] .hero-mandala {
+  opacity: 0.55 !important;
+  filter: drop-shadow(0 0 18px color-mix(in srgb, var(--sage) 18%, transparent));
+}
+
+/* Breath wave: thicker, brighter, more present */
+.hero-breath-wave {
+  left: max(var(--pad), 8%) !important;
+  right: max(var(--pad), 8%) !important;
+  bottom: clamp(36px, 5.5vh, 56px) !important;
+  height: clamp(48px, 8vh, 84px) !important;
+  max-width: none !important;
+  width: auto !important;
+  opacity: 0.92 !important;
+  z-index: 1 !important;
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--sage) 35%, transparent));
+}
+.breath-caption {
+  opacity: 0.9 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.26em !important;
+  z-index: 2;
+}
+
+/* Single-column stage: text LEFT, atmosphere full-bleed behind */
+.hero-stage {
+  position: relative !important;
+  z-index: 3 !important;
+  display: grid !important;
+  grid-template-columns: 1fr !important;
+  gap: 0 !important;
+  align-items: start !important;
+  width: 100% !important;
+  max-width: var(--max) !important;
+  margin: 0 auto !important;
+  min-width: 0 !important;
+}
+.hero-inner {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  min-width: 0 !important;
+  max-width: min(560px, 100%) !important;
+  position: relative;
+  z-index: 3;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 6.8vmin, 76px) !important;
+  max-width: 12ch !important;
+  text-shadow: 0 2px 28px color-mix(in srgb, var(--bg) 55%, transparent);
+}
+.hero-lead {
+  max-width: 42ch !important;
+}
+
+/* Glassier stats so atmosphere shows through */
+.hero-stats {
+  max-width: 520px;
+}
+.hero-stats li {
+  background: color-mix(in srgb, var(--surface) 55%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--sage) 18%, transparent) !important;
+  backdrop-filter: blur(14px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.1) !important;
+}
+
+/* Slim horizontal glass strip — NEVER covers mandala */
+.hero-presence-strip {
+  position: relative;
+  z-index: 3;
+  margin: 0 0 clamp(12px, 2vh, 18px);
+  padding: 10px 14px 12px;
+  max-width: 540px;
+  width: 100%;
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--sage) 28%, transparent);
+  background:
+    linear-gradient(135deg,
+      color-mix(in srgb, var(--sage) 10%, transparent),
+      color-mix(in srgb, var(--surface) 42%, transparent) 55%,
+      color-mix(in srgb, var(--earth) 6%, transparent));
+  backdrop-filter: blur(16px) saturate(1.15);
+  -webkit-backdrop-filter: blur(16px) saturate(1.15);
+  box-shadow:
+    0 8px 28px color-mix(in srgb, var(--ink) 6%, transparent),
+    inset 0 1px 0 color-mix(in srgb, #fff 14%, transparent);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.presence-kicker {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  font: 700 10px/1.2 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--sage) 85%, var(--muted));
+}
+.presence-sep { opacity: 0.55; }
+.presence-sub {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.35;
+  color: var(--muted);
+}
+.presence-items {
+  list-style: none;
+  margin: 2px 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+}
+.presence-items li {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font: 500 13px/1.2 var(--display);
+  color: var(--ink);
+  white-space: nowrap;
+}
+.presence-items li span {
+  font: 800 10px/1 var(--mono);
+  letter-spacing: 0.06em;
+  color: var(--sage);
+}
+
+/* Scroll cue */
+.hero-scroll-cue {
+  position: absolute;
+  z-index: 4;
+  left: 50%;
+  bottom: clamp(10px, 2vh, 18px);
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--sage) 22%, transparent);
+  background: color-mix(in srgb, var(--surface) 35%, transparent);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: color-mix(in srgb, var(--sage) 80%, var(--muted));
+  font: 700 10px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  text-decoration: none;
+  opacity: 0.82;
+  transition: opacity .25s, border-color .25s, color .25s;
+}
+.hero-scroll-cue::before {
+  content: "↓";
+  font-size: 12px;
+  letter-spacing: 0;
+}
+.hero-scroll-cue:hover {
+  opacity: 1;
+  color: var(--sage);
+  border-color: color-mix(in srgb, var(--sage) 45%, transparent);
+}
+
+/* Hide legacy card if any remnant */
+.hero-card { display: none !important; }
+
+/* Animations — more dramatic breath + strip rise */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-inner > * {
+    opacity: 0;
+    animation: heroRise 0.9s var(--ease) forwards;
+  }
+  .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-inner > *:nth-child(2) { animation-delay: 0.16s; }
+  .hero-inner > *:nth-child(3) { animation-delay: 0.28s; }
+  .hero-inner > *:nth-child(4) { animation-delay: 0.4s; }
+  .hero-inner > *:nth-child(5) { animation-delay: 0.52s; }
+  .hero-inner > *:nth-child(6) { animation-delay: 0.64s; }
+
+  .hero-scroll-cue {
+    animation: heroRise 1s var(--ease) 0.9s both;
+  }
+
+  .hero[data-breath="cycle"] .hero-halo,
+  .hero[data-breath="cycle"] .hero-orb-1,
+  .hero[data-breath="cycle"] .hero-orb-2,
+  .hero[data-breath="cycle"] .hero-orb-3 {
+    animation: breath478 19s ease-in-out infinite;
+  }
+  .hero[data-breath="cycle"] .hero-orb-2 { animation-delay: -6s; }
+  .hero[data-breath="cycle"] .hero-orb-3 { animation-delay: -12s; }
+  .hero[data-breath="cycle"] .hero-halo { animation-delay: -3s; }
+
+  .hero[data-breath="cycle"] .mandala-rings {
+    transform-origin: 210px 210px;
+    animation: breath478 19s ease-in-out infinite;
+  }
+
+  .hero-sparks .spark {
+    animation: sparkFloat var(--dur, 15s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+
+  @keyframes breath478 {
+    0% { transform: scale(1); opacity: 0.48; }
+    21.05% { transform: scale(1.14); opacity: 0.92; }
+    57.89% { transform: scale(1.14); opacity: 0.95; }
+    100% { transform: scale(1); opacity: 0.48; }
+  }
+  @keyframes ringPulse {
+    0% { transform: scale(1); opacity: 0.36; }
+    21.05% { transform: scale(1.06); opacity: 0.72; }
+    57.89% { transform: scale(1.06); opacity: 0.78; }
+    100% { transform: scale(1); opacity: 0.36; }
+  }
+  @keyframes corePulse {
+    0% { transform: scale(1); opacity: 0.18; }
+    21.05% { transform: scale(1.45); opacity: 0.4; }
+    57.89% { transform: scale(1.45); opacity: 0.44; }
+    100% { transform: scale(1); opacity: 0.18; }
+  }
+  @keyframes waveFade {
+    0% { opacity: 0.4; }
+    21.05% { opacity: 0.85; }
+    57.89% { opacity: 0.78; }
+    100% { opacity: 0.4; }
+  }
+  @keyframes sparkFloat {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.55); }
+    12% { opacity: 0.95; }
+    70% { opacity: 0.55; }
+    100% { opacity: 0; transform: translate(var(--drift, 12px), var(--rise, -240px)) scale(1.15); }
+  }
+  @keyframes heroRise {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: none; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-inner > *,
+  .hero-scroll-cue,
+  .hero-presence-strip {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+  .hero-sparks .spark { opacity: 0 !important; animation: none !important; }
+  .hero-mandala { opacity: 0.5 !important; }
+  .hero-orb { opacity: 0.4 !important; }
+  .orb-parallax,
+  .mandala-parallax { transition: none !important; transform: none !important; }
+}
+
+/* Desktop ≥900: text left, mandala open in right half */
+@media (min-width: 900px) {
+  .hero-stage {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-inner {
+    max-width: min(540px, 48vw) !important;
+  }
+  .hero-mandala {
+    width: min(78vmin, 620px) !important;
+    height: min(78vmin, 620px) !important;
+    right: clamp(-1%, 4vw, 8%) !important;
+    top: 46% !important;
+    opacity: 0.62 !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: 0.85 !important; }
+  [data-theme="light"] .hero-mandala { opacity: 0.56 !important; }
+  .hero-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
+/* Short viewports: compress type/padding, KEEP mandala visible */
+@media (min-width: 900px) and (max-height: 820px) {
+  .hero {
+    min-height: calc(100svh - var(--header)) !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 10px var(--pad) 36px !important;
+    align-content: center !important;
+  }
+  .hero h1 {
+    font-size: clamp(30px, 5.2vmin, 52px) !important;
+    margin: 2px 0 8px !important;
+  }
+  .hero-lead {
+    margin-bottom: 10px !important;
+    font-size: 14px !important;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .hero-actions { margin-bottom: 10px !important; }
+  .hero-actions .btn { min-height: 38px; padding: 0 14px; font-size: 12px; }
+  .hero-presence-strip { padding: 8px 12px 10px; margin-bottom: 10px; }
+  .presence-items li { font-size: 12px; }
+  .presence-sub { font-size: 11px; }
+  .hero-stats { padding-top: 8px !important; gap: 6px !important; }
+  .hero-stats li { padding: 7px 10px !important; }
+  .hero-stats strong { font-size: 16px !important; }
+  .hero-stats span { font-size: 10px !important; }
+  .hero-mandala {
+    width: min(62vmin, 460px) !important;
+    height: min(62vmin, 460px) !important;
+    opacity: 0.58 !important;
+    display: block !important;
+    visibility: visible !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: 0.78 !important; }
+  .hero-breath-wave { height: 40px !important; bottom: 30px !important; }
+  .breath-caption { top: 6px; font-size: 9px; }
+  .hero-scroll-cue { bottom: 6px; font-size: 9px; padding: 4px 10px; }
+}
+
+@media (min-width: 900px) and (min-height: 821px) {
+  .hero {
+    min-height: calc(100svh - var(--header)) !important;
+  }
+}
+
+/* Mobile: mandala watermark top-right, strip stacks, no card */
+@media (max-width: 899px) {
+  .hero {
+    min-height: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    padding: 20px var(--pad) 56px !important;
+  }
+  .hero-stage { grid-template-columns: 1fr !important; }
+  .hero-inner { max-width: 100% !important; }
+  .hero-mandala {
+    width: min(58vw, 260px) !important;
+    height: min(58vw, 260px) !important;
+    top: 4% !important;
+    right: -10% !important;
+    left: auto !important;
+    transform: none !important;
+    opacity: 0.34 !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: 0.48 !important; }
+  .hero h1 {
+    font-size: clamp(34px, 10vw, 52px) !important;
+    max-width: 12ch !important;
+  }
+  .hero-presence-strip {
+    max-width: 100%;
+  }
+  .presence-items {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+  .hero-stats {
+    grid-template-columns: 1fr 1fr !important;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  .hero-breath-wave {
+    bottom: 44px !important;
+    height: 40px !important;
+    opacity: 0.7 !important;
+  }
+  .hero-scroll-cue {
+    bottom: 12px;
+  }
+  .hero-orb-1, .hero-orb-2, .hero-orb-3 {
+    opacity: 0.45 !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-stats {
+    grid-template-columns: 1fr !important;
+  }
+  .hero-breath-wave { opacity: 0.65 !important; }
+  .presence-items li { white-space: normal; }
 }

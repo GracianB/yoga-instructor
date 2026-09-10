@@ -1029,9 +1029,7 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
    PRESENCE HERO v3 — spectacular practice-space opening
    Cream/sage · 4-7-8 breath · viewport-fit · no overflow
    ============================================================ */
-
 html, body { overflow-x: clip; }
-
 .hero {
   position: relative;
   isolation: isolate;
@@ -1050,7 +1048,6 @@ html, body { overflow-x: clip; }
   overflow: hidden;
   overflow-x: clip;
 }
-
 .hero-atmosphere {
   position: absolute;
   inset: 0;
@@ -1059,7 +1056,6 @@ html, body { overflow-x: clip; }
   color: var(--sage);
   overflow: hidden;
 }
-
 .hero-grain {
   position: absolute;
   inset: -20%;
@@ -1072,7 +1068,6 @@ html, body { overflow-x: clip; }
   mix-blend-mode: soft-light;
   opacity: 0.35;
 }
-
 .hero-orb {
   position: absolute;
   border-radius: 50%;
@@ -1103,7 +1098,6 @@ html, body { overflow-x: clip; }
   background: radial-gradient(circle, color-mix(in srgb, var(--sage-2, var(--sage)) 28%, transparent), transparent 72%);
   opacity: 0.35;
 }
-
 .hero-mandala {
   position: absolute;
   width: min(52vmin, 420px);
@@ -1115,7 +1109,6 @@ html, body { overflow-x: clip; }
   color: var(--sage);
 }
 [data-theme="dark"] .hero-mandala { opacity: 0.7; }
-
 .hero-breath-wave {
   position: absolute;
   left: var(--pad);
@@ -1127,7 +1120,6 @@ html, body { overflow-x: clip; }
   color: var(--sage);
   opacity: 0.7;
 }
-
 .breath-caption {
   position: absolute;
   top: clamp(10px, 2vh, 18px);
@@ -1139,7 +1131,57 @@ html, body { overflow-x: clip; }
   color: color-mix(in srgb, var(--sage) 70%, var(--muted));
   opacity: 0.75;
 }
-
+/* —— depth: vignette + backlight halo —— */
+.hero-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 92% 72% at 50% 38%, transparent 42%, color-mix(in srgb, var(--bg) 60%, transparent) 100%);
+  z-index: 0;
+}
+[data-theme="dark"] .hero-vignette {
+  background: radial-gradient(ellipse 92% 72% at 50% 38%, transparent 36%, rgba(0, 0, 0, 0.6) 100%);
+}
+.hero-halo {
+  position: absolute;
+  z-index: 0;
+  width: min(58vw, 560px);
+  height: min(58vw, 560px);
+  left: -10%;
+  top: 14%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sage-glow), transparent 70%);
+  filter: blur(64px);
+  opacity: 0.5;
+}
+/* —— parallax layers (pointer-driven depth) —— */
+.orb-parallax,
+.mandala-parallax {
+  position: absolute;
+  inset: 0;
+  transform: translate(calc(var(--px, 0px) * var(--depth, 1)), calc(var(--py, 0px) * var(--depth, 1)));
+  transition: transform 0.5s cubic-bezier(.22, 1, .36, 1);
+  will-change: transform;
+}
+/* —— floating light motes (incense-like drift) —— */
+.hero-sparks {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+.spark {
+  position: absolute;
+  left: var(--sx0, 10%);
+  bottom: var(--sy0, 4%);
+  width: var(--size, 4px);
+  height: var(--size, 4px);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--sage-bright, var(--sage)), transparent 72%);
+  opacity: 0;
+  filter: blur(0.4px);
+}
+[data-theme="dark"] .spark { filter: blur(0.4px) brightness(1.35); }
+.mandala-orbit-outer { transform-origin: 210px 210px; }
 .hero-stage {
   position: relative;
   z-index: 2;
@@ -1150,7 +1192,6 @@ html, body { overflow-x: clip; }
   width: 100%;
   min-width: 0;
 }
-
 .hero-inner {
   display: flex;
   flex-direction: column;
@@ -1158,11 +1199,9 @@ html, body { overflow-x: clip; }
   min-width: 0;
   max-width: 100%;
 }
-
 .hero .kicker {
   margin: 0 0 4px !important;
 }
-
 .hero h1 {
   font-family: var(--display) !important;
   font-weight: 600 !important;
@@ -1172,13 +1211,11 @@ html, body { overflow-x: clip; }
   margin: clamp(4px, 1vh, 10px) 0 clamp(8px, 1.4vh, 14px) !important;
   max-width: 11ch !important;
 }
-
 .hero h1 em {
   color: var(--sage) !important;
   font-style: italic !important;
   font-weight: 500 !important;
 }
-
 .hero-lead {
   margin: 0 0 clamp(12px, 2vh, 20px) !important;
   max-width: 40ch !important;
@@ -1186,14 +1223,12 @@ html, body { overflow-x: clip; }
   line-height: 1.5 !important;
   color: var(--muted);
 }
-
 .hero-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
   margin-bottom: clamp(14px, 2.4vh, 24px) !important;
 }
-
 .hero-stats {
   list-style: none;
   margin: 0 !important;
@@ -1203,7 +1238,6 @@ html, body { overflow-x: clip; }
   gap: 8px !important;
   border-top: 1px solid color-mix(in srgb, var(--sage) 18%, var(--line));
 }
-
 .hero-stats li {
   min-height: 0 !important;
   padding: 10px 12px !important;
@@ -1217,24 +1251,20 @@ html, body { overflow-x: clip; }
   box-shadow: none !important;
   transform: none !important;
 }
-
 .hero-stats li:hover {
   border-color: color-mix(in srgb, var(--sage) 40%, var(--line)) !important;
   transform: none !important;
   box-shadow: var(--shadow-sm) !important;
 }
-
 .hero-stats strong {
   font: 550 clamp(18px, 2.4vmin, 24px)/1.05 var(--display) !important;
   color: var(--sage) !important;
   margin: 0 !important;
 }
-
 .hero-stats span {
   color: var(--muted) !important;
   font: 600 11px/1.35 var(--sans) !important;
 }
-
 /* Floating practice card */
 .hero-card {
   position: relative;
@@ -1263,7 +1293,6 @@ html, body { overflow-x: clip; }
   max-width: 420px;
   justify-self: end;
 }
-
 .hero-card-glow {
   position: absolute;
   inset: auto -20% -30% 20%;
@@ -1272,7 +1301,6 @@ html, body { overflow-x: clip; }
   pointer-events: none;
   filter: blur(8px);
 }
-
 .hero-card::before {
   content: "";
   position: absolute;
@@ -1281,7 +1309,6 @@ html, body { overflow-x: clip; }
   background: linear-gradient(to bottom, var(--sage), color-mix(in srgb, var(--earth) 70%, var(--sage)));
   z-index: 1;
 }
-
 .hero-card header {
   position: relative;
   z-index: 1;
@@ -1295,9 +1322,7 @@ html, body { overflow-x: clip; }
   font: 700 10px var(--mono);
   letter-spacing: 0.16em;
 }
-
 .hero-card .dot { color: var(--sage); font-weight: 800; }
-
 .hero-card .card-big {
   position: relative;
   z-index: 1;
@@ -1306,7 +1331,6 @@ html, body { overflow-x: clip; }
   color: var(--sage) !important;
   letter-spacing: -0.04em !important;
 }
-
 .hero-card .card-sub {
   position: relative;
   z-index: 1;
@@ -1315,7 +1339,6 @@ html, body { overflow-x: clip; }
   font-size: 13px !important;
   line-height: 1.45;
 }
-
 .hero-card ol {
   position: relative;
   z-index: 1;
@@ -1323,7 +1346,6 @@ html, body { overflow-x: clip; }
   margin: auto 0 0 !important;
   padding: 0 18px 16px 22px !important;
 }
-
 .hero-card li {
   display: flex;
   align-items: center;
@@ -1333,15 +1355,32 @@ html, body { overflow-x: clip; }
   border-top: 1px solid color-mix(in srgb, var(--sage) 12%, var(--line));
   font: 500 clamp(15px, 2vmin, 18px) var(--display) !important;
 }
-
 .hero-card li span {
   color: var(--sage);
   font: 800 10px var(--mono);
   letter-spacing: 0.06em;
 }
-
 /* —— Breath animations (4-7-8 = 19s) —— */
 @media (prefers-reduced-motion: no-preference) {
+  .hero-inner > * {
+    opacity: 0;
+    animation: heroRise 0.9s var(--ease) forwards;
+  }
+  .hero-inner > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-inner > *:nth-child(2) { animation-delay: 0.16s; }
+  .hero-inner > *:nth-child(3) { animation-delay: 0.3s; }
+  .hero-inner > *:nth-child(4) { animation-delay: 0.44s; }
+  .hero-inner > *:nth-child(5) { animation-delay: 0.58s; }
+  .hero-card {
+    animation: heroCardIn 1s var(--ease) 0.4s backwards;
+  }
+  .hero[data-breath="cycle"] .hero-card {
+    animation: heroCardIn 1s var(--ease) 0.4s backwards, cardFloat 9s ease-in-out 1.4s infinite;
+  }
+  .hero[data-breath="cycle"] .hero-halo {
+    animation: breath478 19s ease-in-out infinite;
+    animation-delay: -3s;
+  }
   .hero[data-breath="cycle"] .hero-orb-1,
   .hero[data-breath="cycle"] .hero-orb-2,
   .hero[data-breath="cycle"] .hero-orb-3 {
@@ -1349,7 +1388,24 @@ html, body { overflow-x: clip; }
   }
   .hero[data-breath="cycle"] .hero-orb-2 { animation-delay: -6s; }
   .hero[data-breath="cycle"] .hero-orb-3 { animation-delay: -12s; }
-
+  .hero[data-breath="cycle"] .mandala-orbit-outer {
+    animation: slowSpin 90s linear infinite reverse;
+  }
+  .hero-sparks .spark {
+    animation: sparkFloat var(--dur, 15s) ease-in-out infinite;
+    animation-delay: var(--delay, 0s);
+  }
+  .hero-card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: linear-gradient(115deg, transparent 42%, color-mix(in srgb, var(--sage) 16%, transparent) 52%, transparent 62%);
+    transform: translateX(-130%);
+    animation: cardShimmer 9s ease-in-out infinite;
+    animation-delay: 1.2s;
+    pointer-events: none;
+  }
   .hero[data-breath="cycle"] .mandala-rings {
     transform-origin: 210px 210px;
     animation: breath478 19s ease-in-out infinite;
@@ -1362,18 +1418,21 @@ html, body { overflow-x: clip; }
     transform-origin: 210px 210px;
     animation: corePulse 19s ease-in-out infinite;
   }
-
   .hero[data-breath="cycle"] .mandala-petals {
     transform-origin: 210px 210px;
     animation: slowSpin 72s linear infinite;
   }
+  .hero[data-breath="cycle"] .mandala-petals-sub {
+    transform-origin: 210px 210px;
+    animation: slowSpin 96s linear infinite reverse;
+  }
+  .hero[data-breath="cycle"] .ring-e { animation: ringPulse 19s ease-in-out -1.5s infinite; transform-origin: 210px 210px; }
   .hero[data-breath="cycle"] .mandala-orbit {
     transform-origin: 210px 210px;
     animation: slowSpin 48s linear infinite;
   }
   .hero[data-breath="cycle"] .orbit-dot.delay { animation: dotGlow 19s ease-in-out -4s infinite; }
   .hero[data-breath="cycle"] .orbit-dot.delay2 { animation: dotGlow 19s ease-in-out -9s infinite; }
-
   .hero[data-breath="cycle"] .breath-wave-path {
     stroke-dasharray: 12 10;
     animation: waveDrift 19s linear infinite, waveFade 19s ease-in-out infinite;
@@ -1381,15 +1440,28 @@ html, body { overflow-x: clip; }
   .hero[data-breath="cycle"] .breath-wave-path.soft {
     animation: waveDrift 28s linear reverse infinite, waveFade 19s ease-in-out -4s infinite;
   }
-
-  .hero[data-breath="cycle"] .hero-card {
-    animation: cardFloat 9s ease-in-out infinite;
-  }
-
   .hero[data-phase="inhale"] .breath-caption { opacity: 0.95; }
   .hero[data-phase="hold"] .breath-caption { opacity: 0.7; letter-spacing: 0.28em; }
   .hero[data-phase="exhale"] .breath-caption { opacity: 0.55; }
 
+  @keyframes heroRise {
+    from { opacity: 0; transform: translateY(28px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes heroCardIn {
+    from { opacity: 0; transform: translateY(20px) scale(0.98); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes sparkFloat {
+    0% { opacity: 0; transform: translate(0, 0) scale(0.55); }
+    12% { opacity: 0.75; }
+    70% { opacity: 0.4; }
+    100% { opacity: 0; transform: translate(var(--drift, 12px), var(--rise, -240px)) scale(1); }
+  }
+  @keyframes cardShimmer {
+    0%, 100% { transform: translateX(-130%); }
+    45% { transform: translateX(130%); }
+  }
   @keyframes breath478 {
     0% { transform: scale(1); opacity: 0.38; }
     21.05% { transform: scale(1.1); opacity: 0.72; }   /* inhale 4/19 */
@@ -1431,22 +1503,32 @@ html, body { overflow-x: clip; }
     50% { opacity: 1; }
   }
 }
-
 @media (prefers-reduced-motion: reduce) {
+  .hero-inner > *,
   .hero-orb,
+  .hero-halo,
   .mandala-rings,
   .mandala-petals,
+  .mandala-petals-sub,
   .mandala-orbit,
+  .mandala-orbit-outer,
   .ring,
   .ring-core,
   .breath-wave-path,
-  .hero-card {
+  .hero-card,
+  .hero-card::after,
+  .hero-sparks .spark {
     animation: none !important;
   }
+  .hero-inner > * { opacity: 1 !important; transform: none !important; }
+  .hero-card { opacity: 1 !important; transform: none !important; }
+  .hero-card::after { content: none !important; }
+  .hero-sparks .spark { opacity: 0 !important; }
+  .orb-parallax,
+  .mandala-parallax { transition: none !important; transform: none !important; }
   .hero-mandala { opacity: 0.4; }
   .hero-orb { opacity: 0.35; }
 }
-
 /* Desktop two-column stage — fits ~1280×800 */
 @media (min-width: 900px) {
   .hero-stage {
@@ -1465,7 +1547,6 @@ html, body { overflow-x: clip; }
     grid-template-columns: 1fr 1fr !important;
   }
 }
-
 /* Short desktop viewports — critical overflow fix */
 @media (min-width: 900px) and (max-height: 820px) {
   .hero {
@@ -1501,13 +1582,11 @@ html, body { overflow-x: clip; }
   .hero-breath-wave { height: 32px; bottom: 4px; }
   .breath-caption { top: 6px; font-size: 9px; }
 }
-
 @media (min-width: 900px) and (min-height: 821px) {
   .hero {
     min-height: calc(100svh - var(--header)) !important;
   }
 }
-
 /* Phone */
 @media (max-width: 899px) {
   .hero {
@@ -1548,7 +1627,6 @@ html, body { overflow-x: clip; }
     justify-content: center;
   }
 }
-
 @media (max-width: 720px) {
   .hero-stats {
     grid-template-columns: 1fr !important;

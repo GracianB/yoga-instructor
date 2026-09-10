@@ -20,9 +20,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=portada3">
-  <script src="./i18n.js?v=portada3"></script>
-  <script src="./main.js?v=portada3" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=mandala-ultra1">
+  <script src="./i18n.js?v=mandala-ultra1"></script>
+  <script src="./main.js?v=mandala-ultra1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -92,49 +92,122 @@
         <div class="hero-sparks">
           <span class="spark" style="--sx0:6%; --sy0:10%; --size:7px; --dur:15s; --delay:0s; --drift:18px; --rise:-280px;"></span>
           <span class="spark" style="--sx0:16%; --sy0:4%; --size:4px; --dur:12s; --delay:2.4s; --drift:-12px; --rise:-220px;"></span>
-          <span class="spark" style="--sx0:28%; --sy0:14%; --size:6px; --dur:18s; --delay:5s; --drift:14px; --rise:-340px;"></span>
+          <span class="spark spark-clay" style="--sx0:28%; --sy0:14%; --size:6px; --dur:18s; --delay:5s; --drift:14px; --rise:-340px;"></span>
           <span class="spark" style="--sx0:44%; --sy0:6%; --size:4px; --dur:14s; --delay:1s; --drift:-16px; --rise:-260px;"></span>
-          <span class="spark" style="--sx0:58%; --sy0:12%; --size:7px; --dur:20s; --delay:7s; --drift:20px; --rise:-320px;"></span>
+          <span class="spark spark-gold" style="--sx0:58%; --sy0:12%; --size:7px; --dur:20s; --delay:7s; --drift:20px; --rise:-320px;"></span>
           <span class="spark" style="--sx0:70%; --sy0:5%; --size:4px; --dur:13s; --delay:3.5s; --drift:-10px; --rise:-240px;"></span>
-          <span class="spark" style="--sx0:82%; --sy0:16%; --size:6px; --dur:17s; --delay:6.2s; --drift:16px; --rise:-300px;"></span>
+          <span class="spark spark-gold" style="--sx0:82%; --sy0:16%; --size:6px; --dur:17s; --delay:6.2s; --drift:16px; --rise:-300px;"></span>
           <span class="spark" style="--sx0:92%; --sy0:8%; --size:4px; --dur:11s; --delay:0.8s; --drift:-14px; --rise:-210px;"></span>
           <span class="spark" style="--sx0:36%; --sy0:22%; --size:5px; --dur:16s; --delay:4.1s; --drift:10px; --rise:-250px;"></span>
           <span class="spark" style="--sx0:64%; --sy0:20%; --size:5px; --dur:19s; --delay:8.2s; --drift:-18px; --rise:-310px;"></span>
-          <span class="spark" style="--sx0:12%; --sy0:28%; --size:3px; --dur:14s; --delay:1.8s; --drift:8px; --rise:-180px;"></span>
+          <span class="spark spark-clay" style="--sx0:12%; --sy0:28%; --size:3px; --dur:14s; --delay:1.8s; --drift:8px; --rise:-180px;"></span>
           <span class="spark" style="--sx0:78%; --sy0:28%; --size:4px; --dur:15s; --delay:5.5s; --drift:-9px; --rise:-200px;"></span>
         </div>
         <div class="mandala-parallax" style="--depth:1.2">
+          <div class="mandala-conic-halo" aria-hidden="true"></div>
           <svg class="hero-mandala" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="mandalaGlowDisc" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--sage)" stop-opacity="0.22"/>
+                <stop offset="45%" stop-color="var(--sage-bright)" stop-opacity="0.08"/>
+                <stop offset="100%" stop-color="var(--sage)" stop-opacity="0"/>
+              </radialGradient>
+              <linearGradient id="lotusGradSage" x1="210" y1="48" x2="210" y2="188" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="var(--sage)" stop-opacity="0.3"/>
+                <stop offset="55%" stop-color="var(--sage-bright)" stop-opacity="0.1"/>
+                <stop offset="100%" stop-color="var(--sage)" stop-opacity="0.02"/>
+              </linearGradient>
+              <linearGradient id="lotusGradEarth" x1="210" y1="70" x2="210" y2="170" gradientUnits="userSpaceOnUse">
+                <stop offset="0%" stop-color="var(--earth)" stop-opacity="0.26"/>
+                <stop offset="50%" stop-color="var(--gold)" stop-opacity="0.1"/>
+                <stop offset="100%" stop-color="var(--clay)" stop-opacity="0.02"/>
+              </linearGradient>
+              <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" stop-color="var(--sage-bright)" stop-opacity="0.6"/>
+                <stop offset="55%" stop-color="var(--gold)" stop-opacity="0.18"/>
+                <stop offset="100%" stop-color="var(--sage)" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <!-- Soft glow disc behind rings -->
+            <circle class="mandala-glow-disc" cx="210" cy="210" r="198" fill="url(#mandalaGlowDisc)"/>
+            <!-- Soft filled lotus arcs (low opacity) -->
+            <g class="mandala-lotus-fill" fill="url(#lotusGradSage)" stroke="none" opacity="0.55">
+              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z"/>
+              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(60 210 210)"/>
+              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(120 210 210)"/>
+              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(180 210 210)"/>
+              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(240 210 210)"/>
+              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(300 210 210)"/>
+            </g>
+            <g class="mandala-lotus-fill-sub" fill="url(#lotusGradEarth)" stroke="none" opacity="0.4">
+              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(30 210 210)"/>
+              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(90 210 210)"/>
+              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(150 210 210)"/>
+              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(210 210 210)"/>
+              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(270 210 210)"/>
+              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(330 210 210)"/>
+            </g>
             <g class="mandala-rings">
-              <circle class="ring ring-e" cx="210" cy="210" r="196" stroke="currentColor" stroke-width="0.5" opacity="0.28"/>
-              <circle class="ring ring-a" cx="210" cy="210" r="168" stroke="currentColor" stroke-width="0.7" opacity="0.42"/>
-              <circle class="ring ring-b" cx="210" cy="210" r="132" stroke="currentColor" stroke-width="0.85" opacity="0.5"/>
-              <circle class="ring ring-c" cx="210" cy="210" r="96" stroke="currentColor" stroke-width="1" opacity="0.58"/>
-              <circle class="ring ring-d" cx="210" cy="210" r="58" stroke="currentColor" stroke-width="1.25" opacity="0.68"/>
-              <circle class="ring ring-core" cx="210" cy="210" r="18" fill="currentColor" opacity="0.22"/>
+              <circle class="ring ring-outermost" cx="210" cy="210" r="204" stroke="currentColor" stroke-width="0.35" opacity="0.18" stroke-dasharray="2 6"/>
+              <circle class="ring ring-e" cx="210" cy="210" r="196" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+              <circle class="ring ring-f" cx="210" cy="210" r="182" stroke="currentColor" stroke-width="0.45" opacity="0.22"/>
+              <circle class="ring ring-a" cx="210" cy="210" r="168" stroke="currentColor" stroke-width="0.7" opacity="0.44"/>
+              <circle class="ring ring-g" cx="210" cy="210" r="150" stroke="currentColor" stroke-width="0.55" opacity="0.28" stroke-dasharray="1.5 4"/>
+              <circle class="ring ring-b" cx="210" cy="210" r="132" stroke="currentColor" stroke-width="0.85" opacity="0.52"/>
+              <circle class="ring ring-h" cx="210" cy="210" r="114" stroke="currentColor" stroke-width="0.5" opacity="0.32"/>
+              <circle class="ring ring-c" cx="210" cy="210" r="96" stroke="currentColor" stroke-width="1" opacity="0.6"/>
+              <circle class="ring ring-i" cx="210" cy="210" r="76" stroke="currentColor" stroke-width="0.55" opacity="0.36"/>
+              <circle class="ring ring-d" cx="210" cy="210" r="58" stroke="currentColor" stroke-width="1.25" opacity="0.7"/>
+              <circle class="ring ring-inner" cx="210" cy="210" r="36" stroke="currentColor" stroke-width="0.9" opacity="0.55"/>
+              <circle class="ring ring-core" cx="210" cy="210" r="18" fill="url(#coreGrad)" opacity="0.85"/>
+              <circle class="ring ring-core-stroke" cx="210" cy="210" r="18" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.55"/>
             </g>
-            <g class="mandala-petals" stroke="currentColor" stroke-width="0.65" opacity="0.42">
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z"/>
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(45 210 210)"/>
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(90 210 210)"/>
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(135 210 210)"/>
+            <g class="mandala-petals" stroke="currentColor" stroke-width="0.7" fill="none" opacity="0.48">
+              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z"/>
+              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z" transform="rotate(45 210 210)"/>
+              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z" transform="rotate(90 210 210)"/>
+              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z" transform="rotate(135 210 210)"/>
             </g>
-            <g class="mandala-petals-sub" stroke="currentColor" stroke-width="0.5" opacity="0.26">
+            <g class="mandala-petals-sub" stroke="currentColor" stroke-width="0.55" fill="none" opacity="0.32">
               <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(22.5 210 210)"/>
               <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(67.5 210 210)"/>
               <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(112.5 210 210)"/>
               <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(157.5 210 210)"/>
             </g>
+            <!-- Tiny diamond / spark marks on mid ring -->
+            <g class="mandala-sparks" fill="currentColor" opacity="0.55">
+              <path class="spark-mark" d="M210 54 L213 60 L210 66 L207 60 Z"/>
+              <path class="spark-mark delay" d="M210 54 L213 60 L210 66 L207 60 Z" transform="rotate(90 210 210)"/>
+              <path class="spark-mark delay2" d="M210 54 L213 60 L210 66 L207 60 Z" transform="rotate(180 210 210)"/>
+              <path class="spark-mark delay3" d="M210 54 L213 60 L210 66 L207 60 Z" transform="rotate(270 210 210)"/>
+              <path class="spark-mark gold" d="M366 210 L369 214 L366 218 L363 214 Z" opacity="0.7"/>
+              <path class="spark-mark gold delay" d="M54 210 L57 214 L54 218 L51 214 Z" opacity="0.65"/>
+            </g>
             <g class="mandala-orbit">
               <circle class="orbit-dot" cx="210" cy="42" r="3.2" fill="currentColor"/>
-              <circle class="orbit-dot delay" cx="378" cy="210" r="2.4" fill="currentColor" opacity="0.7"/>
-              <circle class="orbit-dot delay2" cx="210" cy="378" r="2" fill="currentColor" opacity="0.55"/>
+              <circle class="orbit-dot delay" cx="378" cy="210" r="2.6" fill="currentColor" opacity="0.75"/>
+              <circle class="orbit-dot delay2" cx="210" cy="378" r="2.2" fill="currentColor" opacity="0.6"/>
+              <circle class="orbit-dot delay3" cx="42" cy="210" r="2.4" fill="currentColor" opacity="0.65"/>
+              <circle class="orbit-dot gold" cx="329" cy="91" r="1.8" fill="currentColor" opacity="0.55"/>
+              <circle class="orbit-dot clay" cx="91" cy="329" r="1.6" fill="currentColor" opacity="0.5"/>
+            </g>
+            <g class="mandala-orbit-mid">
+              <circle class="orbit-dot-mid" cx="210" cy="78" r="2" fill="currentColor" opacity="0.55"/>
+              <circle class="orbit-dot-mid delay" cx="342" cy="210" r="1.7" fill="currentColor" opacity="0.45"/>
+              <circle class="orbit-dot-mid delay2" cx="210" cy="342" r="1.5" fill="currentColor" opacity="0.4"/>
+              <circle class="orbit-dot-mid delay3" cx="78" cy="210" r="1.6" fill="currentColor" opacity="0.45"/>
+              <circle class="orbit-dot-mid gold" cx="303" cy="117" r="1.3" fill="currentColor" opacity="0.5"/>
+              <circle class="orbit-dot-mid gold delay" cx="117" cy="303" r="1.2" fill="currentColor" opacity="0.45"/>
             </g>
             <g class="mandala-orbit-outer">
-              <circle class="orbit-dot-outer" cx="210" cy="14" r="1.8" fill="currentColor" opacity="0.5"/>
-              <circle class="orbit-dot-outer delay" cx="406" cy="210" r="1.6" fill="currentColor" opacity="0.4"/>
-              <circle class="orbit-dot-outer delay2" cx="210" cy="406" r="1.4" fill="currentColor" opacity="0.35"/>
-              <circle class="orbit-dot-outer delay3" cx="14" cy="210" r="1.5" fill="currentColor" opacity="0.4"/>
+              <circle class="orbit-dot-outer" cx="210" cy="14" r="1.9" fill="currentColor" opacity="0.55"/>
+              <circle class="orbit-dot-outer delay" cx="406" cy="210" r="1.7" fill="currentColor" opacity="0.45"/>
+              <circle class="orbit-dot-outer delay2" cx="210" cy="406" r="1.5" fill="currentColor" opacity="0.4"/>
+              <circle class="orbit-dot-outer delay3" cx="14" cy="210" r="1.6" fill="currentColor" opacity="0.45"/>
+              <circle class="orbit-dot-outer gold" cx="349" cy="71" r="1.3" fill="currentColor" opacity="0.5"/>
+              <circle class="orbit-dot-outer clay" cx="71" cy="349" r="1.2" fill="currentColor" opacity="0.42"/>
+              <circle class="orbit-dot-outer gold delay" cx="349" cy="349" r="1.25" fill="currentColor" opacity="0.4"/>
+              <circle class="orbit-dot-outer clay delay2" cx="71" cy="71" r="1.15" fill="currentColor" opacity="0.38"/>
             </g>
           </svg>
         </div>

@@ -2549,3 +2549,334 @@ body::before {
   .hero-breath-wave { opacity: 0.65 !important; }
   .presence-items li { white-space: normal; }
 }
+
+/* ============================================================
+   MANDALA ULTRA — richer multi-color living mandala (v=mandala-ultra1)
+   Builds on portada3 cinematic stage. No opaque card.
+   ============================================================ */
+
+/* Soft rotating conic halo behind mandala (sage → earth → gold) */
+.mandala-conic-halo {
+  position: absolute;
+  top: 48%;
+  left: auto;
+  right: max(-2%, calc(50% - 380px));
+  width: min(82vmin, 660px);
+  height: min(82vmin, 660px);
+  transform: translateY(-50%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.34;
+  background: conic-gradient(
+    from 0deg,
+    color-mix(in srgb, var(--sage) 42%, transparent),
+    color-mix(in srgb, var(--earth) 32%, transparent),
+    color-mix(in srgb, var(--gold) 28%, transparent),
+    color-mix(in srgb, var(--sage-bright) 36%, transparent),
+    color-mix(in srgb, var(--clay) 26%, transparent),
+    color-mix(in srgb, var(--sage) 42%, transparent)
+  );
+  filter: blur(28px) saturate(1.15);
+  mix-blend-mode: soft-light;
+}
+[data-theme="dark"] .mandala-conic-halo {
+  opacity: 0.48;
+  mix-blend-mode: screen;
+  filter: blur(32px) saturate(1.25);
+}
+[data-theme="light"] .mandala-conic-halo {
+  opacity: 0.28;
+  mix-blend-mode: multiply;
+  filter: blur(26px) saturate(1.05);
+}
+
+/* Mandala size + opacity boost + layered glow */
+.hero-mandala {
+  width: min(82vmin, 660px) !important;
+  height: min(82vmin, 660px) !important;
+  opacity: 0.68 !important;
+  z-index: 1 !important;
+}
+[data-theme="dark"] .hero-mandala {
+  opacity: 0.9 !important;
+  filter:
+    drop-shadow(0 0 18px color-mix(in srgb, var(--sage) 38%, transparent))
+    drop-shadow(0 0 42px color-mix(in srgb, var(--gold) 16%, transparent))
+    drop-shadow(0 0 64px color-mix(in srgb, var(--sage-bright) 14%, transparent)) !important;
+}
+[data-theme="light"] .hero-mandala {
+  opacity: 0.62 !important;
+  filter:
+    drop-shadow(0 0 14px color-mix(in srgb, var(--sage) 26%, transparent))
+    drop-shadow(0 0 32px color-mix(in srgb, var(--earth) 14%, transparent))
+    drop-shadow(0 0 48px color-mix(in srgb, var(--gold) 10%, transparent)) !important;
+}
+
+/* Multi-color ring / petal / orbit palette via CSS color inheritance */
+.mandala-glow-disc { color: var(--sage); opacity: 0.9; }
+.mandala-lotus-fill { color: var(--sage); }
+.mandala-lotus-fill-sub { color: var(--earth); }
+
+.ring-outermost,
+.ring-e,
+.ring-f { color: var(--sage); }
+.ring-a,
+.ring-g { color: var(--sage-bright); }
+.ring-b,
+.ring-h { color: var(--earth); }
+.ring-c,
+.ring-i { color: color-mix(in srgb, var(--gold) 55%, var(--sage)); }
+.ring-d,
+.ring-inner { color: var(--sage-bright); }
+.ring-core,
+.ring-core-stroke { color: var(--sage-bright); }
+
+.mandala-petals { color: var(--sage); }
+.mandala-petals-sub { color: color-mix(in srgb, var(--earth) 70%, var(--gold)); }
+
+.mandala-sparks { color: var(--sage-bright); }
+.mandala-sparks .spark-mark.gold { color: var(--gold); }
+
+.mandala-orbit { color: var(--sage-bright); }
+.mandala-orbit .orbit-dot.gold { color: var(--gold); }
+.mandala-orbit .orbit-dot.clay { color: var(--clay); }
+
+.mandala-orbit-mid { color: var(--earth); transform-origin: 210px 210px; }
+.mandala-orbit-mid .orbit-dot-mid.gold { color: var(--gold); }
+
+.mandala-orbit-outer { color: var(--sage); }
+.mandala-orbit-outer .orbit-dot-outer.gold { color: var(--gold); }
+.mandala-orbit-outer .orbit-dot-outer.clay { color: var(--clay); }
+
+/* Soft neon accent on outer dashed ring (subtle) */
+.ring-outermost {
+  filter: drop-shadow(0 0 4px color-mix(in srgb, var(--sage-bright) 35%, transparent));
+}
+.ring-core {
+  filter: drop-shadow(0 0 6px color-mix(in srgb, var(--sage-bright) 45%, transparent));
+}
+
+/* Gold / clay floating sparks */
+.spark.spark-gold {
+  background: radial-gradient(circle, var(--gold), transparent 72%) !important;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--gold) 50%, transparent);
+}
+.spark.spark-clay {
+  background: radial-gradient(circle, var(--clay), transparent 72%) !important;
+  box-shadow: 0 0 6px color-mix(in srgb, var(--clay) 40%, transparent);
+}
+
+/* Living animations — stronger breath, counter-rotate, orbit pulse */
+@media (prefers-reduced-motion: no-preference) {
+  .hero[data-breath="cycle"] .mandala-conic-halo {
+    animation: mandalaConicSpin 48s linear infinite, mandalaHaloBreathe 19s ease-in-out infinite;
+    transform-origin: center center;
+  }
+
+  .hero[data-breath="cycle"] .mandala-glow-disc {
+    transform-origin: 210px 210px;
+    animation: glowDiscBreathe 19s ease-in-out infinite;
+  }
+
+  .hero[data-breath="cycle"] .mandala-lotus-fill {
+    transform-origin: 210px 210px;
+    animation: slowSpin 84s linear infinite, lotusOpacityBreathe 19s ease-in-out infinite;
+  }
+  .hero[data-breath="cycle"] .mandala-lotus-fill-sub {
+    transform-origin: 210px 210px;
+    animation: slowSpin 110s linear infinite reverse, lotusOpacityBreathe 19s ease-in-out -5s infinite;
+  }
+
+  .hero[data-breath="cycle"] .mandala-rings {
+    transform-origin: 210px 210px;
+    animation: breath478Ultra 19s ease-in-out infinite;
+  }
+  .hero[data-breath="cycle"] .ring-outermost { animation: ringPulseUltra 19s ease-in-out -1s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-e { animation: ringPulseUltra 19s ease-in-out -1.5s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-f { animation: ringPulseUltra 19s ease-in-out -2.2s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-a { animation: ringPulseUltra 19s ease-in-out infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-g { animation: ringPulseUltra 19s ease-in-out -3.5s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-b { animation: ringPulseUltra 19s ease-in-out -3s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-h { animation: ringPulseUltra 19s ease-in-out -4.5s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-c { animation: ringPulseUltra 19s ease-in-out -6s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-i { animation: ringPulseUltra 19s ease-in-out -7s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-d { animation: ringPulseUltra 19s ease-in-out -9s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-inner { animation: ringPulseUltra 19s ease-in-out -10s infinite; transform-origin: 210px 210px; }
+  .hero[data-breath="cycle"] .ring-core,
+  .hero[data-breath="cycle"] .ring-core-stroke {
+    transform-origin: 210px 210px;
+    animation: corePulseUltra 19s ease-in-out infinite;
+  }
+
+  .hero[data-breath="cycle"] .mandala-petals {
+    transform-origin: 210px 210px;
+    animation: slowSpin 64s linear infinite;
+  }
+  .hero[data-breath="cycle"] .mandala-petals-sub {
+    transform-origin: 210px 210px;
+    animation: slowSpin 88s linear infinite reverse;
+  }
+
+  .hero[data-breath="cycle"] .mandala-sparks {
+    transform-origin: 210px 210px;
+    animation: slowSpin 120s linear infinite;
+  }
+  .hero[data-breath="cycle"] .spark-mark { animation: sparkMarkGlow 19s ease-in-out infinite; }
+  .hero[data-breath="cycle"] .spark-mark.delay { animation: sparkMarkGlow 19s ease-in-out -4s infinite; }
+  .hero[data-breath="cycle"] .spark-mark.delay2 { animation: sparkMarkGlow 19s ease-in-out -8s infinite; }
+  .hero[data-breath="cycle"] .spark-mark.delay3 { animation: sparkMarkGlow 19s ease-in-out -12s infinite; }
+
+  .hero[data-breath="cycle"] .mandala-orbit {
+    transform-origin: 210px 210px;
+    animation: slowSpin 42s linear infinite;
+  }
+  .hero[data-breath="cycle"] .mandala-orbit-mid {
+    transform-origin: 210px 210px;
+    animation: slowSpin 58s linear infinite reverse;
+  }
+  .hero[data-breath="cycle"] .mandala-orbit-outer {
+    transform-origin: 210px 210px;
+    animation: slowSpin 78s linear infinite reverse;
+  }
+
+  .hero[data-breath="cycle"] .orbit-dot,
+  .hero[data-breath="cycle"] .orbit-dot-mid,
+  .hero[data-breath="cycle"] .orbit-dot-outer {
+    animation: dotGlowUltra 19s ease-in-out infinite;
+  }
+  .hero[data-breath="cycle"] .orbit-dot.delay,
+  .hero[data-breath="cycle"] .orbit-dot-mid.delay,
+  .hero[data-breath="cycle"] .orbit-dot-outer.delay { animation: dotGlowUltra 19s ease-in-out -4s infinite; }
+  .hero[data-breath="cycle"] .orbit-dot.delay2,
+  .hero[data-breath="cycle"] .orbit-dot-mid.delay2,
+  .hero[data-breath="cycle"] .orbit-dot-outer.delay2 { animation: dotGlowUltra 19s ease-in-out -8s infinite; }
+  .hero[data-breath="cycle"] .orbit-dot.delay3,
+  .hero[data-breath="cycle"] .orbit-dot-mid.delay3,
+  .hero[data-breath="cycle"] .orbit-dot-outer.delay3 { animation: dotGlowUltra 19s ease-in-out -12s infinite; }
+
+  @keyframes breath478Ultra {
+    0% { transform: scale(1); opacity: 0.55; }
+    21.05% { transform: scale(1.16); opacity: 0.98; }
+    57.89% { transform: scale(1.16); opacity: 1; }
+    100% { transform: scale(1); opacity: 0.55; }
+  }
+  @keyframes ringPulseUltra {
+    0% { transform: scale(1); opacity: 0.32; }
+    21.05% { transform: scale(1.07); opacity: 0.82; }
+    57.89% { transform: scale(1.07); opacity: 0.88; }
+    100% { transform: scale(1); opacity: 0.32; }
+  }
+  @keyframes corePulseUltra {
+    0% { transform: scale(1); opacity: 0.35; }
+    21.05% { transform: scale(1.55); opacity: 0.78; }
+    57.89% { transform: scale(1.55); opacity: 0.85; }
+    100% { transform: scale(1); opacity: 0.35; }
+  }
+  @keyframes glowDiscBreathe {
+    0% { opacity: 0.55; transform: scale(0.96); }
+    21.05% { opacity: 1; transform: scale(1.06); }
+    57.89% { opacity: 0.95; transform: scale(1.06); }
+    100% { opacity: 0.55; transform: scale(0.96); }
+  }
+  @keyframes lotusOpacityBreathe {
+    0%, 100% { opacity: 0.32; }
+    21.05%, 57.89% { opacity: 0.62; }
+  }
+  @keyframes mandalaConicSpin {
+    from { rotate: 0deg; }
+    to { rotate: 360deg; }
+  }
+  @keyframes mandalaHaloBreathe {
+    0%, 100% { opacity: 0.22; }
+    21.05%, 57.89% { opacity: 0.48; }
+  }
+  @keyframes dotGlowUltra {
+    0%, 100% { opacity: 0.35; filter: drop-shadow(0 0 0 transparent); }
+    21.05%, 57.89% { opacity: 1; filter: drop-shadow(0 0 5px currentColor); }
+  }
+  @keyframes sparkMarkGlow {
+    0%, 100% { opacity: 0.3; }
+    21.05%, 57.89% { opacity: 0.9; }
+  }
+  @keyframes slowSpin {
+    to { transform: rotate(360deg); }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mandala-conic-halo,
+  .mandala-glow-disc,
+  .mandala-lotus-fill,
+  .mandala-lotus-fill-sub,
+  .mandala-rings,
+  .mandala-petals,
+  .mandala-petals-sub,
+  .mandala-sparks,
+  .mandala-orbit,
+  .mandala-orbit-mid,
+  .mandala-orbit-outer,
+  .ring-outermost, .ring-e, .ring-f, .ring-a, .ring-g, .ring-b, .ring-h,
+  .ring-c, .ring-i, .ring-d, .ring-inner, .ring-core, .ring-core-stroke,
+  .orbit-dot, .orbit-dot-mid, .orbit-dot-outer, .spark-mark {
+    animation: none !important;
+  }
+  .mandala-conic-halo {
+    opacity: 0.18 !important;
+    rotate: none !important;
+  }
+  .hero-mandala { opacity: 0.52 !important; }
+}
+
+/* Align conic halo with mandala position breakpoints */
+@media (min-width: 900px) {
+  .hero-mandala {
+    width: min(82vmin, 660px) !important;
+    height: min(82vmin, 660px) !important;
+    right: clamp(-1%, 3vw, 7%) !important;
+    top: 46% !important;
+    opacity: 0.72 !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: 0.92 !important; }
+  [data-theme="light"] .hero-mandala { opacity: 0.64 !important; }
+  .mandala-conic-halo {
+    width: min(82vmin, 660px);
+    height: min(82vmin, 660px);
+    right: clamp(-1%, 3vw, 7%);
+    top: 46%;
+  }
+}
+
+@media (min-width: 900px) and (max-height: 820px) {
+  .hero-mandala {
+    width: min(66vmin, 500px) !important;
+    height: min(66vmin, 500px) !important;
+    opacity: 0.62 !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: 0.82 !important; }
+  .mandala-conic-halo {
+    width: min(66vmin, 500px);
+    height: min(66vmin, 500px);
+    opacity: 0.28;
+  }
+}
+
+@media (max-width: 899px) {
+  .hero-mandala {
+    width: min(62vw, 280px) !important;
+    height: min(62vw, 280px) !important;
+    top: 4% !important;
+    right: -8% !important;
+    transform: none !important;
+    opacity: 0.4 !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: 0.55 !important; }
+  .mandala-conic-halo {
+    width: min(62vw, 280px);
+    height: min(62vw, 280px);
+    top: 4%;
+    right: -8%;
+    transform: none;
+    opacity: 0.22;
+  }
+}

@@ -1,144 +1,179 @@
 <div align="center">
 
-# 🪷 GRACIÁN BAENA
+<a href="https://gracianb.github.io/yoga-instructor/">
 
-### **Presence · Breath · Real Practice**
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D2A1F,45:7DCAA5,75:F3D437,100:FAF7F2&height=230&section=header&text=GRACI%C3%81N%20BAENA&fontSize=48&fontColor=FFFFFF&fontAlignY=38&desc=PRESENCE%20%C2%B7%20BREATH%20%C2%B7%20REAL%20PRACTICE&descSize=18&descAlignY=58&animation=fadeIn" width="100%"/>
 
-[![LIVE](https://img.shields.io/badge/🚀_LIVE-Yoga_Instructor-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
-[![HUB](https://img.shields.io/badge/◉_HUB-GracianB-F3D437?style=for-the-badge\&labelColor=2A240D)](https://gracianb.github.io/GracianB/)
-[![ES%20%2F%20EN](https://img.shields.io/badge/🌐_ES_%2F_EN-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+</a>
 
 <br>
 
-> **A yoga practice built around presence, breath, attention and real human connection.**
+<a href="https://gracianb.github.io/yoga-instructor/">
+
+<img src="https://readme-typing-svg.demolab.com?font=Fraunces&weight=500&size=30&duration=2800&pause=900&color=7DCAA5&center=true&vCenter=true&width=950&height=60&lines=Presence+%C2%B7+Breath+%C2%B7+Real+Practice;Yoga+Instructor+%C2%B7+Madrid+2019;Movement+%C2%97+Breath+%C2%97+Attention;Corporate+Wellness+%C2%B7+1%3A1+%C2%B7+Studio;Yoga+without+performance.;Graci%C3%A1n+Baena+%C2%B7+Murcia+%C2%B7+Spain" alt="Yoga animated header"/>
+
+</a>
 
 <br>
 
-**MURCIA · SPAIN · 2019—2026**
+[![LIVE](https://img.shields.io/badge/%F0%9F%AA%B7_LIVE-YOGA_INSTRUCTOR-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+[![HUB](https://img.shields.io/badge/%E2%97%89_HUB-GracianB-F3D437?style=for-the-badge\&labelColor=2A240D)](https://gracianb.github.io/GracianB/)
+[![ES/EN](https://img.shields.io/badge/%F0%9F%8C%90-ES_%2F_EN-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+[![LIGHT/DARK](https://img.shields.io/badge/%E2%98%BC_%2F_%F0%9F%8C%99-LIGHT_%2F_DARK-F3D437?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+
+<br>
+
+### **Presence · Breath · Movement · Attention**
+
+> **A practice designed to bring you back to where you are.**
+
+<br>
+
+`MURCIA · SPAIN · 2019—2026`
 
 </div>
 
 ---
 
-# 🇪🇸 Español
+# 🇪🇸 ESPAÑOL
 
-## 🪷 Yoga, sin demasiada ceremonia
+# 🪷 Yoga, sin necesidad de demostrar nada
 
-Para mí, el yoga no consiste en hacer la postura más complicada de la sala.
+Para mí, el yoga no consiste en hacer la postura más difícil de la sala.
 
-Consiste en **aprender a estar presente**.
+Ni en tocarte los pies.
 
-La práctica combina movimiento, respiración, atención y escucha para crear un espacio en el que el cuerpo pueda trabajar, la mente pueda bajar el ruido y cada persona pueda encontrar su propio ritmo.
+Ni en parecer iluminado durante 90 minutos.
 
-**Sin postureo. Sin competir. Sin convertir cada clase en una demostración.**
+Consiste en algo bastante más sencillo:
 
-Con método, presencia y humanidad.
+## **estar presente.**
 
-```text
-                 PRESENCIA
-                     │
-                     ▼
-               ┌───────────┐
-               │  ESCUCHAR │
-               └─────┬─────┘
-                     │
-                     ▼
-               ┌───────────┐
-               │   GUIAR   │
-               └─────┬─────┘
-                     │
-              ┌──────┴──────┐
-              ▼             ▼
-         RESPIRACIÓN     MOVIMIENTO
-              │             │
-              └──────┬──────┘
-                     ▼
-               ┌───────────┐
-               │ INTEGRAR  │
-               └───────────┘
-```
+La práctica combina **movimiento, respiración, atención y escucha** para crear un espacio donde el cuerpo pueda trabajar, la mente pueda reducir el ruido y cada persona pueda encontrar su propio ritmo.
+
+**Sin competir.
+Sin postureo.
+Sin convertir la práctica en una actuación.**
+
+Solo presencia, método y humanidad.
 
 ---
 
-## ✦ Mi enfoque
+# ✦ Mi forma de entender el yoga
 
-| Principio       | Qué significa en la práctica                                                                 |
-| :-------------- | :------------------------------------------------------------------------------------------- |
-| **Presencia**   | Estar realmente en la práctica, no simplemente ejecutar movimientos.                         |
-| **Respiración** | Utilizar el pranayama y la respiración consciente como herramienta de regulación y atención. |
-| **Movimiento**  | Trabajar el cuerpo desde la escucha, el control y la adaptación.                             |
-| **Atención**    | Reducir el ruido y desarrollar una relación más consciente con el cuerpo.                    |
-| **Adaptación**  | No todas las personas necesitan hacer lo mismo para practicar bien.                          |
-| **Integración** | Que la práctica tenga sentido también fuera de la esterilla.                                 |
+```text
+                         PRESENCIA
+                             │
+                             ▼
+                       ┌───────────┐
+                       │  ESCUCHAR │
+                       └─────┬─────┘
+                             │
+                             ▼
+                       ┌───────────┐
+                       │  RESPIRAR │
+                       └─────┬─────┘
+                             │
+                     ┌───────┴───────┐
+                     ▼               ▼
+                MOVIMIENTO        ATENCIÓN
+                     │               │
+                     └───────┬───────┘
+                             ▼
+                       ┌───────────┐
+                       │  INTEGRAR │
+                       └───────────┘
+                             │
+                             ▼
+                       VIDA DIARIA
+```
+
+### La esterilla es el lugar donde empieza la práctica.
+
+No necesariamente donde termina.
+
+---
+
+# 🧘 Quién soy
+
+Soy **Gracián Baena**, instructor de yoga formado en Madrid en 2019.
+
+Mi experiencia como instructor convive con una trayectoria profesional internacional en **atención al cliente, operaciones, formación y bienestar**.
+
+Ese recorrido me ha enseñado algo que considero fundamental para enseñar:
+
+> **Antes de intentar dirigir a una persona, hay que aprender a escucharla.**
+
+En una clase eso significa observar.
+
+Escuchar.
+
+Adaptar.
+
+Guiar.
+
+Y saber cuándo intervenir y cuándo dejar espacio.
+
+---
+
+# 🌿 Los principios
+
+| PRINCIPIO       | EN LA PRÁCTICA                                                   |
+| :-------------- | :--------------------------------------------------------------- |
+| **Presencia**   | Estar realmente aquí, no simplemente ejecutar movimientos.       |
+| **Respiración** | Utilizar la respiración consciente como herramienta de atención. |
+| **Movimiento**  | Explorar el cuerpo desde el control, la movilidad y la escucha.  |
+| **Atención**    | Reducir el ruido y observar lo que está ocurriendo.              |
+| **Adaptación**  | Cada cuerpo, cada día y cada persona requieren algo diferente.   |
+| **Integración** | Llevar parte de la práctica más allá de la esterilla.            |
 
 > **La práctica no tiene que impresionar a nadie. Tiene que servirte a ti.**
 
 ---
 
-## 🧘 Quién soy
+# 🌱 La práctica
 
-Soy **Gracián Baena**, instructor de yoga formado en Madrid en 2019.
+No entiendo el yoga como una colección de posturas.
 
-Mi experiencia combina la enseñanza de yoga con una trayectoria profesional internacional en entornos de atención al cliente, operaciones, formación y bienestar.
-
-Ese cruce me ha enseñado algo bastante sencillo:
-
-**trabajar con personas requiere escuchar antes de intentar dirigirlas.**
-
-Y eso también funciona encima de una esterilla.
-
-### En pocas palabras
-
-|                             |                                                   |
-| :-------------------------- | :------------------------------------------------ |
-| 📍 **Base**                 | Murcia, España                                    |
-| 🎓 **Certificación**        | Instructor de Yoga · Madrid · 2019                |
-| 🏛️ **Experiencia en sala** | Mood Fitness · abril 2022 — junio 2026            |
-| 🏢 **Wellness corporativo** | Programas de bienestar · Google / YouTube         |
-| 🌍 **Experiencia**          | Entornos internacionales y multiculturales        |
-| 🗣️ **Idiomas**             | Español · Inglés · Italiano · Portugués · Francés |
-
----
-
-# 🌿 La práctica
-
-El objetivo no es acumular posturas.
-
-Es construir una práctica que tenga sentido para la persona que está delante.
+Lo entiendo como un sistema de herramientas.
 
 ### `ASANA`
 
-Trabajo físico y exploración del movimiento.
+Movimiento, estabilidad, movilidad y conciencia corporal.
 
-Prácticas adaptables a diferentes niveles, cuerpos y objetivos.
+La postura es un medio.
+
+No el objetivo.
 
 ### `PRANAYAMA`
 
 Respiración consciente y técnicas respiratorias integradas en la práctica.
 
+Respirar también es una forma de prestar atención.
+
 ### `MEDITACIÓN`
 
-Atención, quietud y observación.
+Quietud, observación y presencia.
 
-No hace falta convertirse en monje. Basta con empezar a quedarse quieto unos minutos.
+No hace falta desaparecer del mundo.
+
+A veces basta con dejar de correr durante unos minutos.
 
 ### `CORPORATIVO`
 
-Wellness y práctica adaptada a equipos y entornos de trabajo.
+Prácticas adaptadas a equipos y entornos profesionales.
 
-El objetivo: crear un espacio de pausa, movilidad y atención dentro de contextos profesionales.
+Espacios para **moverse, respirar, pausar y recuperar atención** durante la jornada.
 
 ### `1:1`
 
-Sesiones individuales adaptadas a la persona, su experiencia y sus necesidades.
+Sesiones individuales adaptadas a la persona, su experiencia, sus objetivos y su momento.
 
 ---
 
-## 🧭 Cómo entiendo una clase
+# 🧭 Una clase no es una lista
 
-Una buena clase no debería sentirse como una lista de instrucciones.
-
-Debería tener un recorrido.
+Una clase debería tener un recorrido.
 
 ```text
 OBSERVAR
@@ -160,122 +195,25 @@ INTEGRAR
 
 ### La persona practica.
 
-### El cuerpo marca parte del camino.
+### El cuerpo proporciona información.
+
+### La respiración acompaña.
+
+### La atención conecta todo.
 
 ---
 
-# 🌐 El proyecto
+# 🏛️ Experiencia real
 
-Este repositorio contiene el **Mundo 03 · Yoga** dentro del ecosistema personal de Gracián Baena.
-
-No es solamente una página de presentación.
-
-Es una pieza digital diseñada para representar esta parte de mi trayectoria con la misma atención al detalle que aplico a mis proyectos profesionales y técnicos.
-
-### El ecosistema completo
-
-```text
-                         ┌───────────────┐
-                         │   GRACIANB    │
-                         │      HUB      │
-                         └───────┬───────┘
-                                 │
-              ┌──────────────────┼──────────────────┐
-              │                  │                  │
-              ▼                  ▼                  ▼
-       ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-       │ 01          │    │ 02          │    │ 03  ★       │
-       │ EXPERIENCE  │    │ PLAY        │    │ YOGA        │
-       │             │    │             │    │             │
-       │ CS × DATA   │    │ AI × SYSTEM │    │ PRESENCE    │
-       │ × AI        │    │ EXPERIMENTS │    │ BREATH      │
-       │             │    │             │    │ PRACTICE    │
-       └─────────────┘    └─────────────┘    └─────────────┘
-```
-
-|   Mundo  | Proyecto                                                           | Enfoque                                   |
-| :------: | :----------------------------------------------------------------- | :---------------------------------------- |
-|  **01**  | [Professional Deck](https://gracianb.github.io/professional-deck/) | Customer Success × Data × AI × Automation |
-|  **02**  | [Systems Lab](https://gracianb.github.io/systems-lab/)             | AI × Automation × Development × Systems   |
-| **03 ★** | **Yoga Instructor**                                                | **Presence × Breath × Practice**          |
-
-[**← Volver al Hub principal**](https://gracianb.github.io/GracianB/)
-
----
-
-# 🚀 Portfolio Live
-
-<div align="center">
-
-## [gracianb.github.io/yoga-instructor](https://gracianb.github.io/yoga-instructor/)
-
-<br>
-
-[![Open Portfolio](https://img.shields.io/badge/🪷_ABRIR_PORTFOLIO-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
-
-</div>
-
-### La experiencia digital
-
-| Elemento          | Implementación                    |
-| :---------------- | :-------------------------------- |
-| 🌐 **Idiomas**    | Español / Inglés                  |
-| 🎨 **Tema**       | Light / Dark                      |
-| 🔤 **Tipografía** | Fraunces · Inter · JetBrains Mono |
-| 🪷 **Identidad**  | Organic / Editorial / Calm        |
-| ✨ **Visual**      | Mandala · Breath Animation        |
-| 📄 **Documentos** | CV · Cartas de presentación       |
-| 📱 **Responsive** | Desktop · Tablet · Mobile         |
-| ⚡ **Hosting**     | GitHub Pages                      |
-
----
-
-# 📋 Documentos
-
-Los documentos profesionales relacionados con yoga están disponibles directamente desde este repositorio.
-
-<div align="center">
-
-| Documento                 |                       🇪🇸 Español                      |                          🇬🇧 English                          |
-| :------------------------ | :-----------------------------------------------------: | :------------------------------------------------------------: |
-| **CV Yoga**               |   [📄 Ver / descargar](./Gracian_Baena_CV_Yoga_ES.pdf)  |      [📄 View / download](./Gracian_Baena_CV_Yoga_EN.pdf)      |
-| **Carta de presentación** | [📄 Ver / descargar](./Gracian_Baena_Carta_Yoga_ES.pdf) | [📄 View / download](./Gracian_Baena_Cover_Letter_Yoga_EN.pdf) |
-
-</div>
-
-> Los documentos canónicos también forman parte del [Hub central](https://gracianb.github.io/GracianB/).
-
----
-
-# 🏢 Experiencia corporativa
-
-La práctica de yoga también ha tenido una dimensión profesional y corporativa.
-
-### Wellness · Google / YouTube
-
-Experiencia vinculada a programas de bienestar en entorno corporativo durante mi etapa en **Majorel**.
-
-La idea detrás del yoga corporativo es sencilla:
-
-**crear un espacio breve y accesible para moverse, respirar y recuperar atención dentro de un contexto profesional.**
-
-No se trata de convertir la oficina en un ashram.
-
-Se trata de introducir una pausa que tenga sentido.
-
----
-
-# 🏛️ Experiencia en sala
-
-### Mood Fitness
+## Mood Fitness
 
 **Abril 2022 — Junio 2026**
 
-Experiencia como instructor en entorno de gimnasio/sala, trabajando con personas con diferentes niveles de experiencia y necesidades.
+Experiencia como instructor en entorno de gimnasio y sala, trabajando con personas con diferentes niveles de experiencia y necesidades.
 
-La enseñanza en sala aporta algo que ningún certificado puede sustituir:
+La enseñanza real aporta algo que ningún certificado puede sustituir:
 
-**horas reales observando personas reales.**
+## **observar personas reales.**
 
 Aprender cuándo explicar.
 
@@ -283,25 +221,51 @@ Cuándo demostrar.
 
 Cuándo corregir.
 
+Cuándo adaptar.
+
 Cuándo dejar espacio.
 
-Y, sobre todo, cuándo dejar de hablar.
+Y, sobre todo:
+
+### cuándo dejar de hablar.
+
+---
+
+# 🏢 Yoga corporativo
+
+## Wellness · Google / YouTube
+
+Experiencia vinculada a programas de bienestar corporativo durante mi etapa en **Majorel**.
+
+El objetivo no era convertir una oficina en un ashram.
+
+Era mucho más sencillo:
+
+> **Crear un espacio accesible para moverse, respirar y recuperar atención dentro de un entorno profesional.**
+
+Una pausa.
+
+Un cambio de ritmo.
+
+Un momento para volver al cuerpo.
 
 ---
 
 # 🧠 Lo que intento enseñar
 
-No busco que alguien salga de una clase pensando:
+No quiero que alguien termine una clase pensando:
 
 > "Qué postura tan impresionante he hecho."
 
-Prefiero que salga pensando:
+Prefiero algo mucho más sencillo:
 
 > **"Hoy he estado realmente aquí."**
 
-La práctica puede mejorar movilidad, conciencia corporal, respiración y capacidad de atención, pero cada persona llega con un contexto diferente.
+La práctica puede trabajar movilidad, conciencia corporal, respiración y atención.
 
-Por eso el enfoque es:
+Pero cada persona llega con una historia diferente.
+
+Por eso:
 
 ```text
 PERSONA
@@ -315,27 +279,130 @@ ATENCIÓN
 PRÁCTICA ADAPTADA
 ```
 
+No hay una única forma correcta de practicar.
+
+Hay una forma que tiene sentido **para ti hoy**.
+
 ---
 
-# 🪷 Una práctica humana
+# 🪷 Yoga sin Instagram
 
-Yoga puede ser físico.
+La práctica no necesita parecer espectacular para ser válida.
 
-Puede ser contemplativo.
+Puede ser:
 
-Puede ser intenso.
+**intensa.**
 
-Puede ser suave.
+**suave.**
 
-Puede ser diferente cada día.
+**física.**
 
-Y no pasa nada.
+**contemplativa.**
 
-La práctica no necesita parecerse a Instagram para ser válida.
+**larga.**
 
-### No hay una única forma correcta de estar en la esterilla.
+**corta.**
 
-Hay una práctica que tiene sentido para ti hoy.
+**silenciosa.**
+
+**diferente cada día.**
+
+Y está bien.
+
+Porque el objetivo no es construir una imagen de cómo debería verse el yoga.
+
+Es construir una relación más consciente con tu propia experiencia.
+
+---
+
+# 📍 En pocas palabras
+
+|                           |                                                   |
+| :------------------------ | :------------------------------------------------ |
+| 📍 **Base**               | Murcia, España                                    |
+| 🎓 **Formación**          | Instructor de Yoga · Madrid · 2019                |
+| 🏛️ **Sala**              | Mood Fitness · 2022—2026                          |
+| 🏢 **Corporate Wellness** | Google / YouTube                                  |
+| 🌍 **Experiencia**        | Internacional y multicultural                     |
+| 🗣️ **Idiomas**           | Español · Inglés · Italiano · Portugués · Francés |
+
+---
+
+# 🚀 Portfolio LIVE
+
+<div align="center">
+
+## 🪷 [gracianb.github.io/yoga-instructor](https://gracianb.github.io/yoga-instructor/)
+
+<br>
+
+[![OPEN YOGA](https://img.shields.io/badge/%F0%9F%AA%B7_OPEN_YOGA_PORTFOLIO-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+
+</div>
+
+### La experiencia digital
+
+| Elemento          | Implementación                         |
+| :---------------- | :------------------------------------- |
+| 🌐 **Idiomas**    | Español / English                      |
+| 🎨 **Tema**       | Light / Dark                           |
+| 🌿 **Identidad**  | Organic · Editorial · Calm             |
+| 🔤 **Tipografía** | Fraunces · Inter · JetBrains Mono      |
+| 🪷 **Visuales**   | Mandala · Breath Animation             |
+| ✨ **Interacción** | Motion · Transitions · Ambient Effects |
+| 📱 **Responsive** | Desktop · Tablet · Mobile              |
+| 📄 **Documentos** | CV · Cover Letters                     |
+| ⚡ **Hosting**     | GitHub Pages                           |
+
+---
+
+# 📄 Documentos profesionales
+
+<div align="center">
+
+| DOCUMENTO                |                 🇪🇸 ESPAÑOL                |                    🇬🇧 ENGLISH                    |
+| :----------------------- | :-----------------------------------------: | :------------------------------------------------: |
+| **CV Yoga**              |   [📄 PDF](./Gracian_Baena_CV_Yoga_ES.pdf)  |      [📄 PDF](./Gracian_Baena_CV_Yoga_EN.pdf)      |
+| **Carta / Cover Letter** | [📄 PDF](./Gracian_Baena_Carta_Yoga_ES.pdf) | [📄 PDF](./Gracian_Baena_Cover_Letter_Yoga_EN.pdf) |
+
+</div>
+
+---
+
+# 🌐 World 03 · Yoga
+
+Yoga forma parte de un ecosistema personal más amplio.
+
+No compite con mis otros proyectos.
+
+Los complementa.
+
+```text
+                         ┌───────────────┐
+                         │   GRACIANB    │
+                         │      HUB      │
+                         └───────┬───────┘
+                                 │
+              ┌──────────────────┼──────────────────┐
+              │                  │                  │
+              ▼                  ▼                  ▼
+       ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+       │ 01          │    │ 02          │    │ 03 ★        │
+       │ EXPERIENCE  │    │ PLAY        │    │ YOGA        │
+       │             │    │             │    │             │
+       │ PEOPLE      │    │ SYSTEMS     │    │ PRESENCE    │
+       │ DATA        │    │ AI          │    │ BREATH      │
+       │ AI          │    │ AUTOMATION   │    │ PRACTICE    │
+       └─────────────┘    └─────────────┘    └─────────────┘
+```
+
+|   WORLD  | PROJECT                                                            | FOCUS                            |
+| :------: | :----------------------------------------------------------------- | :------------------------------- |
+|  **01**  | [Professional Deck](https://gracianb.github.io/professional-deck/) | Customer Success × Data × AI     |
+|  **02**  | [Systems Lab](https://gracianb.github.io/systems-lab/)             | AI × Automation × Systems        |
+| **03 ★** | **Yoga Instructor**                                                | **Presence × Breath × Practice** |
+
+[**← Volver al Hub principal**](https://gracianb.github.io/GracianB/)
 
 ---
 
@@ -343,120 +410,80 @@ Hay una práctica que tiene sentido para ti hoy.
 
 <div align="center">
 
-### ¿Hablamos?
+### **Hablemos.**
 
-[![Email](https://img.shields.io/badge/✉️_Email-Contacto-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](mailto:gracianbaenagonzalez@gmail.com)
+<br>
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Gracián_Baena-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white\&labelColor=0A2540)](https://www.linkedin.com/in/gracianbaena)
+[![EMAIL](https://img.shields.io/badge/%E2%9C%89%EF%B8%8F_EMAIL-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](mailto:gracianbaenagonzalez@gmail.com)
 
-[![Calendar](https://img.shields.io/badge/📅_Agenda-30_min-F3D437?style=for-the-badge\&labelColor=2A240D)](https://calendar.app.google/n99psBFktwYyoAWi9)
+[![LINKEDIN](https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white\&labelColor=0D2A1F)](https://www.linkedin.com/in/gracianbaena)
 
-[![Yoga Website](https://img.shields.io/badge/🪷_Yoga_Website-LIVE-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+[![CALENDAR](https://img.shields.io/badge/%F0%9F%93%85_BOOK_30_MIN-F3D437?style=for-the-badge\&labelColor=2A240D)](https://calendar.app.google/n99psBFktwYyoAWi9)
+
+[![YOGA](https://img.shields.io/badge/%F0%9F%AA%B7_YOGA_LIVE-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
 
 </div>
 
 ---
 
-# 🧭 Navegación
+<br>
 
-<div align="center">
+# 🇬🇧 ENGLISH
 
-**01 · EXPERIENCE**
+# 🪷 Yoga, without having to prove anything
 
-[Professional Deck](https://gracianb.github.io/professional-deck/)
+For me, yoga is not about performing the most difficult posture in the room.
 
-**02 · PLAY**
+It is not about touching your toes.
 
-[Systems Lab](https://gracianb.github.io/systems-lab/)
+And it is definitely not about looking enlightened for 90 minutes.
 
-**03 · YOGA ★**
+It is about something much simpler:
 
-[Yoga Instructor](https://gracianb.github.io/yoga-instructor/)
+## **being present.**
 
-**◉ HUB**
+The practice combines **movement, breath, attention and listening** to create a space where the body can work, the mind can become quieter and each person can find their own rhythm.
 
-[GracianB](https://gracianb.github.io/GracianB/)
+**No competition.
+No performance.
+No posturing.**
 
-</div>
+Just presence, method and humanity.
 
 ---
 
-<div align="center">
-
-<br>
-
-# 🪷 PRESENCIA × RESPIRACIÓN × PRÁCTICA REAL
-
-### **Gracián Baena · Murcia · España**
-
-`WORLD 03 · YOGA`
-
-<br>
-
-> *La práctica empieza cuando dejas de intentar demostrarla.*
-
-<br>
-
-[🌐 Yoga](https://gracianb.github.io/yoga-instructor/) · [◉ Hub](https://gracianb.github.io/GracianB/) · [01 Experience](https://gracianb.github.io/professional-deck/) · [02 Play](https://gracianb.github.io/systems-lab/)
-
-</div>
-
----
-
-<hr>
-
-# 🇬🇧 English
-
-## 🪷 Yoga, without too much ceremony
-
-For me, yoga is not about performing the most complicated posture in the room.
-
-It is about **learning how to be present**.
-
-The practice combines movement, breath, attention and listening to create a space where the body can work, the mind can become quieter and each person can find their own rhythm.
-
-**No posturing. No competition. No turning every class into a performance.**
-
-Just method, presence and humanity.
+# ✦ My approach
 
 ```text
-                 PRESENCE
-                     │
-                     ▼
-               ┌───────────┐
-               │   LISTEN  │
-               └─────┬─────┘
-                     │
-                     ▼
-               ┌───────────┐
-               │   GUIDE   │
-               └─────┬─────┘
-                     │
-              ┌──────┴──────┐
-              ▼             ▼
-             BREATH       MOVEMENT
-              │             │
-              └──────┬──────┘
-                     ▼
-               ┌───────────┐
-               │ INTEGRATE │
-               └───────────┘
+                         PRESENCE
+                             │
+                             ▼
+                       ┌───────────┐
+                       │   LISTEN  │
+                       └─────┬─────┘
+                             │
+                             ▼
+                       ┌───────────┐
+                       │  BREATHE  │
+                       └─────┬─────┘
+                             │
+                     ┌───────┴───────┐
+                     ▼               ▼
+                  MOVEMENT        ATTENTION
+                     │               │
+                     └───────┬───────┘
+                             ▼
+                       ┌───────────┐
+                       │ INTEGRATE │
+                       └───────────┘
+                             │
+                             ▼
+                         DAILY LIFE
 ```
 
----
+### The mat is where the practice begins.
 
-## ✦ My approach
-
-| Principle       | What it means in practice                                                      |
-| :-------------- | :----------------------------------------------------------------------------- |
-| **Presence**    | Being genuinely present rather than simply executing movements.                |
-| **Breath**      | Using conscious breathing and pranayama as tools for regulation and attention. |
-| **Movement**    | Exploring the body through awareness, control and adaptation.                  |
-| **Attention**   | Reducing noise and developing a more conscious relationship with the body.     |
-| **Adaptation**  | Different people do not need to practice in exactly the same way.              |
-| **Integration** | Making the practice meaningful beyond the mat.                                 |
-
-> **The practice does not have to impress anyone. It has to serve you.**
+Not necessarily where it ends.
 
 ---
 
@@ -464,66 +491,82 @@ Just method, presence and humanity.
 
 I'm **Gracián Baena**, a yoga instructor trained in Madrid in 2019.
 
-My yoga teaching experience exists alongside an international professional background in customer-facing environments, operations, training and wellness.
+My teaching experience exists alongside an international professional background in **customer-facing environments, operations, training and wellness**.
 
-That combination has taught me something quite simple:
+That combination has taught me something I consider essential to teaching:
 
-**working with people means listening before trying to lead them.**
+> **Before trying to guide someone, learn how to listen to them.**
 
-The same applies on the mat.
+In a class, that means observing.
 
-### In brief
+Listening.
 
-|                           |                                                   |
-| :------------------------ | :------------------------------------------------ |
-| 📍 **Based in**           | Murcia, Spain                                     |
-| 🎓 **Certification**      | Yoga Instructor · Madrid · 2019                   |
-| 🏛️ **Studio experience** | Mood Fitness · April 2022 — June 2026             |
-| 🏢 **Corporate wellness** | Wellness Programs · Google / YouTube              |
-| 🌍 **Experience**         | International and multicultural environments      |
-| 🗣️ **Languages**         | Spanish · English · Italian · Portuguese · French |
+Adapting.
+
+Guiding.
+
+And knowing when to step back.
 
 ---
 
-# 🌿 The practice
+# 🌿 Principles
 
-The goal is not to collect postures.
+| PRINCIPLE       | IN PRACTICE                                                  |
+| :-------------- | :----------------------------------------------------------- |
+| **Presence**    | Being genuinely here rather than simply executing movements. |
+| **Breath**      | Using conscious breathing as a tool for attention.           |
+| **Movement**    | Exploring the body through control, mobility and awareness.  |
+| **Attention**   | Reducing noise and noticing what is happening.               |
+| **Adaptation**  | Every body, every day and every person is different.         |
+| **Integration** | Bringing part of the practice beyond the mat.                |
 
-It is to build a practice that makes sense for the person standing in front of you.
+> **The practice does not have to impress anyone. It has to serve you.**
+
+---
+
+# 🌱 The practice
+
+I do not see yoga as a collection of postures.
+
+I see it as a set of tools.
 
 ### `ASANA`
 
-Physical practice and movement exploration.
+Movement, stability, mobility and body awareness.
 
-Adaptable to different levels, bodies and goals.
+The posture is a means.
+
+Not the destination.
 
 ### `PRANAYAMA`
 
 Conscious breathing and breathing techniques integrated into practice.
 
+Breathing is also a way of paying attention.
+
 ### `MEDITATION`
 
-Attention, stillness and observation.
+Stillness, observation and presence.
 
-You do not have to become a monk. Starting with a few quiet minutes is enough.
+You do not have to disappear from the world.
+
+Sometimes you simply need to stop running for a few minutes.
 
 ### `CORPORATE`
 
-Wellness and practice adapted to teams and workplace environments.
+Yoga and wellness practices adapted to teams and professional environments.
 
-The goal is simple: create space for movement, breathing and attention within professional contexts.
+Creating space to **move, breathe, pause and recover attention** during the working day.
 
 ### `1:1`
 
-Individual sessions adapted to the person, their experience and their needs.
+Individual sessions adapted to the person, their experience, goals and current context.
 
 ---
 
-# 🧭 How I see a class
+# 🧭 A class is not a list
 
-A good class should not feel like a list of instructions.
-
-It should have a journey.
+A good class should have a journey.
 
 ```text
 OBSERVE
@@ -545,122 +588,25 @@ INTEGRATE
 
 ### The student practices.
 
-### The body helps shape the path.
+### The body provides information.
+
+### The breath accompanies the process.
+
+### Attention connects everything.
 
 ---
 
-# 🌐 The project
+# 🏛️ Real teaching experience
 
-This repository represents **World 03 · Yoga** within the Gracián Baena personal ecosystem.
-
-It is more than a profile page.
-
-It is a digital space designed to represent this part of my journey with the same attention to detail I bring to my professional and technical work.
-
-### The complete ecosystem
-
-```text
-                         ┌───────────────┐
-                         │   GRACIANB    │
-                         │      HUB      │
-                         └───────┬───────┘
-                                 │
-              ┌──────────────────┼──────────────────┐
-              │                  │                  │
-              ▼                  ▼                  ▼
-       ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
-       │ 01          │    │ 02          │    │ 03  ★       │
-       │ EXPERIENCE  │    │ PLAY        │    │ YOGA        │
-       │             │    │             │    │             │
-       │ CS × DATA   │    │ AI × SYSTEM │    │ PRESENCE    │
-       │ × AI        │    │ EXPERIMENTS │    │ BREATH      │
-       │             │    │             │    │ PRACTICE    │
-       └─────────────┘    └─────────────┘    └─────────────┘
-```
-
-|   World  | Project                                                            | Focus                                     |
-| :------: | :----------------------------------------------------------------- | :---------------------------------------- |
-|  **01**  | [Professional Deck](https://gracianb.github.io/professional-deck/) | Customer Success × Data × AI × Automation |
-|  **02**  | [Systems Lab](https://gracianb.github.io/systems-lab/)             | AI × Automation × Development × Systems   |
-| **03 ★** | **Yoga Instructor**                                                | **Presence × Breath × Practice**          |
-
-[**← Back to the main Hub**](https://gracianb.github.io/GracianB/)
-
----
-
-# 🚀 Live Portfolio
-
-<div align="center">
-
-## [gracianb.github.io/yoga-instructor](https://gracianb.github.io/yoga-instructor/)
-
-<br>
-
-[![Open Portfolio](https://img.shields.io/badge/🪷_OPEN_PORTFOLIO-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
-
-</div>
-
-### Digital experience
-
-| Element           | Implementation                    |
-| :---------------- | :-------------------------------- |
-| 🌐 **Languages**  | English / Spanish                 |
-| 🎨 **Theme**      | Light / Dark                      |
-| 🔤 **Typography** | Fraunces · Inter · JetBrains Mono |
-| 🪷 **Identity**   | Organic / Editorial / Calm        |
-| ✨ **Visuals**     | Mandala · Breath Animation        |
-| 📄 **Documents**  | CV · Cover Letters                |
-| 📱 **Responsive** | Desktop · Tablet · Mobile         |
-| ⚡ **Hosting**     | GitHub Pages                      |
-
----
-
-# 📋 Documents
-
-Yoga-related professional documents are available directly from this repository.
-
-<div align="center">
-
-| Document         |                          🇬🇧 English                          |                       🇪🇸 Español                      |
-| :--------------- | :------------------------------------------------------------: | :-----------------------------------------------------: |
-| **Yoga CV**      |      [📄 View / download](./Gracian_Baena_CV_Yoga_EN.pdf)      |   [📄 Ver / descargar](./Gracian_Baena_CV_Yoga_ES.pdf)  |
-| **Cover Letter** | [📄 View / download](./Gracian_Baena_Cover_Letter_Yoga_EN.pdf) | [📄 Ver / descargar](./Gracian_Baena_Carta_Yoga_ES.pdf) |
-
-</div>
-
-> The canonical documents are also available through the [Central Hub](https://gracianb.github.io/GracianB/).
-
----
-
-# 🏢 Corporate experience
-
-Yoga has also been part of a professional and corporate context.
-
-### Wellness · Google / YouTube
-
-Experience connected to wellness programs in a corporate environment during my time at **Majorel**.
-
-The idea behind corporate yoga is simple:
-
-**create an accessible space to move, breathe and recover attention within a professional environment.**
-
-It is not about turning the office into an ashram.
-
-It is about introducing a pause that actually makes sense.
-
----
-
-# 🏛️ Studio experience
-
-### Mood Fitness
+## Mood Fitness
 
 **April 2022 — June 2026**
 
-Experience teaching in a studio/gym environment, working with people with different levels of experience, physical backgrounds and needs.
+Teaching experience in a gym and studio environment, working with people with different levels of experience, physical backgrounds and needs.
 
-Teaching in a real room gives you something no certificate can replace:
+Real teaching gives you something no certificate can replace:
 
-**hours of observing real people.**
+## **observing real people.**
 
 Learning when to explain.
 
@@ -668,15 +614,39 @@ When to demonstrate.
 
 When to correct.
 
+When to adapt.
+
 When to leave space.
 
-And, most importantly, when to stop talking.
+And, most importantly:
+
+### when to stop talking.
+
+---
+
+# 🏢 Corporate Yoga
+
+## Wellness · Google / YouTube
+
+Experience connected to corporate wellness programs during my time at **Majorel**.
+
+The goal was not to turn an office into an ashram.
+
+It was much simpler:
+
+> **Create an accessible space to move, breathe and recover attention within a professional environment.**
+
+A pause.
+
+A change of rhythm.
+
+A moment to return to the body.
 
 ---
 
 # 🧠 What I try to teach
 
-I do not want someone to leave a class thinking:
+I do not want someone to finish a class thinking:
 
 > "That was an impressive posture."
 
@@ -684,9 +654,11 @@ I'd rather they leave thinking:
 
 > **"I was really here today."**
 
-Yoga can support mobility, body awareness, breathing and attention, but everyone arrives with a different context.
+Yoga can support mobility, body awareness, breathing and attention.
 
-That is why the approach is:
+But everyone arrives with a different context.
+
+So:
 
 ```text
 PERSON
@@ -700,27 +672,130 @@ ATTENTION
 ADAPTED PRACTICE
 ```
 
+There is no single correct way to practice.
+
+There is a way that makes sense **for you today**.
+
 ---
 
-# 🪷 A human practice
+# 🪷 Yoga without Instagram
 
-Yoga can be physical.
+The practice does not have to look impressive to be valid.
 
-It can be contemplative.
+It can be:
 
-It can be intense.
+**intense.**
 
-It can be gentle.
+**gentle.**
 
-It can be different every day.
+**physical.**
 
-And that is perfectly fine.
+**contemplative.**
 
-The practice does not have to look like Instagram to be valid.
+**long.**
 
-### There is no single correct way to be on the mat.
+**short.**
 
-There is a practice that makes sense for you today.
+**quiet.**
+
+**different every day.**
+
+And that is fine.
+
+Because the goal is not to build an image of what yoga should look like.
+
+It is to build a more conscious relationship with your own experience.
+
+---
+
+# 📍 In brief
+
+|                           |                                                   |
+| :------------------------ | :------------------------------------------------ |
+| 📍 **Based in**           | Murcia, Spain                                     |
+| 🎓 **Training**           | Yoga Instructor · Madrid · 2019                   |
+| 🏛️ **Studio**            | Mood Fitness · 2022—2026                          |
+| 🏢 **Corporate Wellness** | Google / YouTube                                  |
+| 🌍 **Experience**         | International & multicultural                     |
+| 🗣️ **Languages**         | Spanish · English · Italian · Portuguese · French |
+
+---
+
+# 🚀 Live Portfolio
+
+<div align="center">
+
+## 🪷 [gracianb.github.io/yoga-instructor](https://gracianb.github.io/yoga-instructor/)
+
+<br>
+
+[![OPEN YOGA](https://img.shields.io/badge/%F0%9F%AA%B7_OPEN_YOGA_PORTFOLIO-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+
+</div>
+
+### Digital experience
+
+| Element           | Implementation                         |
+| :---------------- | :------------------------------------- |
+| 🌐 **Languages**  | Spanish / English                      |
+| 🎨 **Theme**      | Light / Dark                           |
+| 🌿 **Identity**   | Organic · Editorial · Calm             |
+| 🔤 **Typography** | Fraunces · Inter · JetBrains Mono      |
+| 🪷 **Visuals**    | Mandala · Breath Animation             |
+| ✨ **Interaction** | Motion · Transitions · Ambient Effects |
+| 📱 **Responsive** | Desktop · Tablet · Mobile              |
+| 📄 **Documents**  | CV · Cover Letters                     |
+| ⚡ **Hosting**     | GitHub Pages                           |
+
+---
+
+# 📄 Professional Documents
+
+<div align="center">
+
+| DOCUMENT         |                    🇬🇧 ENGLISH                    |                 🇪🇸 ESPAÑOL                |
+| :--------------- | :------------------------------------------------: | :-----------------------------------------: |
+| **Yoga CV**      |      [📄 PDF](./Gracian_Baena_CV_Yoga_EN.pdf)      |   [📄 PDF](./Gracian_Baena_CV_Yoga_ES.pdf)  |
+| **Cover Letter** | [📄 PDF](./Gracian_Baena_Cover_Letter_Yoga_EN.pdf) | [📄 PDF](./Gracian_Baena_Carta_Yoga_ES.pdf) |
+
+</div>
+
+---
+
+# 🌐 World 03 · Yoga
+
+Yoga is part of a larger personal ecosystem.
+
+It does not compete with the other projects.
+
+It complements them.
+
+```text
+                         ┌───────────────┐
+                         │   GRACIANB    │
+                         │      HUB      │
+                         └───────┬───────┘
+                                 │
+              ┌──────────────────┼──────────────────┐
+              │                  │                  │
+              ▼                  ▼                  ▼
+       ┌─────────────┐    ┌─────────────┐    ┌─────────────┐
+       │ 01          │    │ 02          │    │ 03 ★        │
+       │ EXPERIENCE  │    │ PLAY        │    │ YOGA        │
+       │             │    │             │    │             │
+       │ PEOPLE      │    │ SYSTEMS     │    │ PRESENCE    │
+       │ DATA        │    │ AI          │    │ BREATH      │
+       │ AI          │    │ AUTOMATION   │    │ PRACTICE    │
+       └─────────────┘    └─────────────┘    └─────────────┘
+```
+
+|   WORLD  | PROJECT                                                            | FOCUS                            |
+| :------: | :----------------------------------------------------------------- | :------------------------------- |
+|  **01**  | [Professional Deck](https://gracianb.github.io/professional-deck/) | Customer Success × Data × AI     |
+|  **02**  | [Systems Lab](https://gracianb.github.io/systems-lab/)             | AI × Automation × Systems        |
+| **03 ★** | **Yoga Instructor**                                                | **Presence × Breath × Practice** |
+
+[**← Back to the main Hub**](https://gracianb.github.io/GracianB/)
 
 ---
 
@@ -728,39 +803,17 @@ There is a practice that makes sense for you today.
 
 <div align="center">
 
-### Let's talk.
+### **Let's talk.**
 
-[![Email](https://img.shields.io/badge/✉️_Email-Contact-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](mailto:gracianbaenagonzalez@gmail.com)
+<br>
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Gracián_Baena-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white\&labelColor=0A2540)](https://www.linkedin.com/in/gracianbaena)
+[![EMAIL](https://img.shields.io/badge/%E2%9C%89%EF%B8%8F_EMAIL-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](mailto:gracianbaenagonzalez@gmail.com)
 
-[![Calendar](https://img.shields.io/badge/📅_Calendar-30_min-F3D437?style=for-the-badge\&labelColor=2A240D)](https://calendar.app.google/n99psBFktwYyoAWi9)
+[![LINKEDIN](https://img.shields.io/badge/LINKEDIN-0A66C2?style=for-the-badge\&logo=linkedin\&logoColor=white\&labelColor=0D2A1F)](https://www.linkedin.com/in/gracianbaena)
 
-[![Yoga Website](https://img.shields.io/badge/🪷_Yoga_Website-LIVE-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
+[![CALENDAR](https://img.shields.io/badge/%F0%9F%93%85_BOOK_30_MIN-F3D437?style=for-the-badge\&labelColor=0D2A1F)](https://calendar.app.google/n99psBFktwYyoAWi9)
 
-</div>
-
----
-
-# 🧭 Navigation
-
-<div align="center">
-
-**01 · EXPERIENCE**
-
-[Professional Deck](https://gracianb.github.io/professional-deck/)
-
-**02 · PLAY**
-
-[Systems Lab](https://gracianb.github.io/systems-lab/)
-
-**03 · YOGA ★**
-
-[Yoga Instructor](https://gracianb.github.io/yoga-instructor/)
-
-**◉ HUB**
-
-[GracianB](https://gracianb.github.io/GracianB/)
+[![YOGA](https://img.shields.io/badge/%F0%9F%AA%B7_YOGA_LIVE-7DCAA5?style=for-the-badge\&labelColor=0D2A1F)](https://gracianb.github.io/yoga-instructor/)
 
 </div>
 
@@ -770,11 +823,13 @@ There is a practice that makes sense for you today.
 
 <br>
 
-# 🪷 PRESENCE × BREATH × REAL PRACTICE
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:FAF7F2,45:7DCAA5,75:F3D437,100:0D2A1F&height=160&section=footer&animation=fadeIn" width="100%"/>
 
-### **Gracián Baena · Murcia · Spain**
+### **PRESENCE × BREATH × REAL PRACTICE**
 
 `WORLD 03 · YOGA`
+
+**Gracián Baena · Murcia · Spain · 2026**
 
 <br>
 
@@ -782,12 +837,15 @@ There is a practice that makes sense for you today.
 
 <br>
 
-[🌐 Yoga](https://gracianb.github.io/yoga-instructor/) · [◉ Hub](https://gracianb.github.io/GracianB/) · [01 Experience](https://gracianb.github.io/professional-deck/) · [02 Play](https://gracianb.github.io/systems-lab/)
+[🪷 Yoga](https://gracianb.github.io/yoga-instructor/) ·
+[◉ Hub](https://gracianb.github.io/GracianB/) ·
+[01 Experience](https://gracianb.github.io/professional-deck/) ·
+[02 Play](https://gracianb.github.io/systems-lab/)
 
 </div>
 
 <!--
-World 03 · Yoga Instructor
+WORLD 03 · YOGA
 Presence × Breath × Real Practice
 Gracián Baena · Murcia · Spain · 2026
 -->

@@ -3964,3 +3964,123 @@ body::before {
   transform: translateY(-4px);
   box-shadow: 0 18px 40px color-mix(in srgb, var(--sage) 16%, transparent);
 }
+
+/* ══════════════════════════════════════════════════════════════
+   ZEN MAX PASS · v=zen-max-1
+   Breathing intro · rising motes · warm spotlight · scroll rail ·
+   magnetic CTAs — calm register, sage / gold / clay
+   ══════════════════════════════════════════════════════════════ */
+
+/* —— rising motes canvas —— */
+.fx-motes {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  pointer-events: none;
+  opacity: .9;
+  mix-blend-mode: multiply;
+}
+[data-theme="dark"] .fx-motes { mix-blend-mode: screen; opacity: .8; }
+
+/* —— scroll progress rail —— */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 60;
+  height: 2px; pointer-events: none; background: transparent;
+}
+.scroll-progress i {
+  display: block; height: 100%; width: var(--sp, 0%);
+  background: linear-gradient(90deg, var(--sage), var(--gold) 55%, var(--clay));
+  box-shadow: 0 0 10px var(--sage-glow);
+  transition: width .12s linear;
+}
+
+/* —— warm cursor spotlight —— */
+.spotlight {
+  position: fixed; inset: 0; z-index: 1; pointer-events: none;
+  opacity: 0; transition: opacity .6s var(--ease);
+  mix-blend-mode: multiply;
+  background: radial-gradient(240px circle at var(--sx,50%) var(--sy,50%),
+    color-mix(in srgb, var(--sage) 12%, transparent), transparent 62%);
+}
+[data-theme="dark"] .spotlight {
+  mix-blend-mode: screen;
+  background: radial-gradient(240px circle at var(--sx,50%) var(--sy,50%),
+    color-mix(in srgb, var(--sage) 16%, transparent), transparent 62%);
+}
+body.has-spot .spotlight { opacity: 1; }
+
+/* —— breathing intro overlay —— */
+.zintro { display: none; }
+html.intro-on .zintro {
+  display: grid; place-content: center; justify-items: center; gap: 22px;
+  position: fixed; inset: 0; z-index: 300;
+  opacity: 1;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 42%, color-mix(in srgb, var(--sage) 10%, var(--bg)), var(--bg) 72%);
+}
+html.intro-on body { overflow: hidden; }
+html.intro-done .zintro {
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .7s var(--ease), visibility 0s .7s;
+}
+html.intro-done body { overflow: auto; }
+@keyframes zi-fade-in { from { opacity: 0; } to { opacity: 1; } }
+
+.zintro-core { position: relative; width: 160px; height: 160px; display: grid; place-items: center; }
+.zintro-mandala { position: absolute; inset: 0; color: var(--sage); overflow: visible; }
+.zi-ring {
+  stroke: color-mix(in srgb, var(--sage) 60%, transparent);
+  stroke-dasharray: 440; stroke-dashoffset: 440;
+  transform-origin: 80px 80px;
+  animation: zi-draw 1.5s var(--ease) forwards;
+}
+.zi-ring-2 { stroke: color-mix(in srgb, var(--gold) 55%, transparent); stroke-dasharray: 340; stroke-dashoffset: 340; animation-delay: .2s; }
+.zi-ring-3 { stroke: color-mix(in srgb, var(--clay) 60%, transparent); stroke-dasharray: 240; stroke-dashoffset: 240; animation-delay: .4s; }
+@keyframes zi-draw { to { stroke-dashoffset: 0; } }
+.zi-petals { stroke: color-mix(in srgb, var(--sage) 45%, transparent); fill: none; opacity: 0; transform-origin: 80px 80px; animation: zi-petals-in 1.4s var(--ease) .5s forwards, zi-spin 26s linear 1.6s infinite; }
+@keyframes zi-petals-in { from { opacity: 0; transform: scale(.85); } to { opacity: .9; transform: scale(1); } }
+@keyframes zi-spin { to { transform: rotate(360deg); } }
+.zi-core-dot { fill: var(--sage); transform-origin: 80px 80px; animation: zi-breathe 4.2s ease-in-out .6s infinite; }
+@keyframes zi-breathe { 0%,100% { transform: scale(.7); opacity: .6; } 50% { transform: scale(1.35); opacity: 1; } }
+.zintro-gb {
+  position: relative; z-index: 1;
+  font: 700 22px/1 var(--mono); letter-spacing: .1em; color: var(--ink);
+  opacity: 0; animation: zi-gb .9s var(--ease) .7s both;
+}
+@keyframes zi-gb { from { opacity: 0; letter-spacing: .5em; filter: blur(4px); } to { opacity: 1; letter-spacing: .1em; filter: none; } }
+.zintro-breath {
+  margin: 0; font: 400 italic 15px/1.4 var(--display); color: var(--muted);
+  opacity: 0; animation: zi-fade 1.2s ease .9s forwards;
+}
+@keyframes zi-fade { to { opacity: 1; } }
+.zintro-words { display: flex; gap: 8px 16px; flex-wrap: wrap; justify-content: center; }
+.zintro-words .zw { font: 700 10px/1 var(--mono); letter-spacing: .22em; text-transform: uppercase; opacity: 0; animation: zw-in .7s var(--ease) both; }
+.zw-1 { color: var(--sage); animation-delay: 1s; }
+.zw-2 { color: var(--gold); animation-delay: 1.2s; }
+.zw-3 { color: var(--clay); animation-delay: 1.4s; }
+@keyframes zw-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.zintro-bar { width: 170px; height: 2px; border-radius: 2px; background: color-mix(in srgb, var(--ink) 10%, transparent); overflow: hidden; }
+.zintro-bar i { display: block; height: 100%; width: 0; background: linear-gradient(90deg, var(--sage), var(--gold), var(--clay)); animation: zi-load 2s var(--ease) .3s forwards; }
+@keyframes zi-load { to { width: 100%; } }
+
+/* —— magnetic hero CTAs —— */
+.hero-actions .btn {
+  transform: translate(var(--mfx, 0px), var(--mfy, 0px));
+  transition: transform .2s var(--ease), background .2s, color .2s, border-color .2s, box-shadow .25s;
+}
+
+/* —— live breath caption emphasis —— */
+.breath-caption .breath-phase { transition: color .5s var(--ease), letter-spacing .5s var(--ease); }
+.hero[data-phase="inhale"] .breath-phase { color: var(--sage); }
+.hero[data-phase="hold"] .breath-phase { color: var(--gold); }
+.hero[data-phase="exhale"] .breath-phase { color: var(--clay); }
+
+@media (max-width: 640px) {
+  .zintro-core { width: 128px; height: 128px; }
+  .spotlight { display: none; }
+  .breath-caption { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-motes { display: none; }
+  .spotlight { display: none !important; }
+  .zi-ring, .zi-ring-2, .zi-ring-3, .zi-petals, .zi-core-dot, .zintro-gb, .zintro-breath, .zintro-words .zw, .zintro-bar i { animation: none !important; opacity: 1; stroke-dashoffset: 0; }
+}

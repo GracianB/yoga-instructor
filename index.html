@@ -20,9 +20,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=campo-player1">
-  <script src="./i18n.js?v=campo-player1"></script>
-  <script src="./main.js?v=campo-player1" defer></script>
+  <link rel="stylesheet" href="./styles.css?v=zen-max-1">
+  <script>
+    /* zen intro boot — decide before first paint, with failsafe */
+    (function () {
+      try {
+        var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var seen = false;
+        try { seen = sessionStorage.getItem("gb-yoga-intro-seen") === "1"; } catch (e) {}
+        if (!reduce && !seen) {
+          document.documentElement.classList.add("intro-on");
+          setTimeout(function () { document.documentElement.classList.add("intro-done"); }, 3200);
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <script src="./i18n.js?v=zen-max-1"></script>
+  <script src="./main.js?v=zen-max-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -42,11 +56,41 @@
   </script>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><i></i></div>
+  <div class="spotlight" aria-hidden="true"></div>
+
   <div class="fx" aria-hidden="true">
+    <canvas class="fx-motes"></canvas>
     <div class="fx-wash"></div>
     <div class="fx-orb fx-orb-a"></div>
     <div class="fx-orb fx-orb-b"></div>
   </div>
+
+  <div class="zintro" id="zintro" aria-hidden="true">
+    <div class="zintro-core">
+      <svg class="zintro-mandala" viewBox="0 0 160 160" width="160" height="160" fill="none">
+        <circle class="zi-ring" cx="80" cy="80" r="70" stroke-width="1"/>
+        <circle class="zi-ring zi-ring-2" cx="80" cy="80" r="54" stroke-width="1"/>
+        <circle class="zi-ring zi-ring-3" cx="80" cy="80" r="38" stroke-width="1"/>
+        <g class="zi-petals" stroke-width="1.4">
+          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z"/>
+          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z" transform="rotate(45 80 80)"/>
+          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z" transform="rotate(90 80 80)"/>
+          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z" transform="rotate(135 80 80)"/>
+        </g>
+        <circle class="zi-core-dot" cx="80" cy="80" r="6"/>
+      </svg>
+      <span class="zintro-gb">GB</span>
+    </div>
+    <p class="zintro-breath"><span data-i18n="introBreath">Inhala… exhala</span></p>
+    <div class="zintro-words">
+      <span class="zw zw-1" data-i18n="introW1">Presencia</span>
+      <span class="zw zw-2" data-i18n="introW2">Respiración</span>
+      <span class="zw zw-3" data-i18n="introW3">Práctica</span>
+    </div>
+    <div class="zintro-bar"><i></i></div>
+  </div>
+
   <a class="skip" href="#main" data-i18n="skip">Saltar al contenido</a>
 
   <header class="site-header">

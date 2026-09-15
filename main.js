@@ -283,3 +283,154 @@
   }
 
 })();
+/* ══════════════════════════════════════════════════════════════
+   ZEN MAX PASS · v=zen-max-1 — added behaviours (self-contained)
+   ══════════════════════════════════════════════════════════════ */
+(() => {
+  "use strict";
+  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const root = document.documentElement;
+  const rAF = window.requestAnimationFrame || ((f) => setTimeout(f, 16));
+
+  /* —— 1 · breathing intro —— */
+  (function intro() {
+    if (!root.classList.contains("intro-on")) return;
+    try { sessionStorage.setItem("gb-yoga-intro-seen", "1"); } catch (_) {}
+    let done = false;
+    const finish = () => { if (done) return; done = true; root.classList.add("intro-done"); };
+    const timer = setTimeout(finish, 2400);
+    const skip = () => { clearTimeout(timer); finish(); };
+    ["pointerdown", "keydown", "wheel", "touchstart"].forEach((ev) =>
+      window.addEventListener(ev, skip, { once: true, passive: true }));
+  })();
+
+  /* —— 2 · scroll progress rail —— */
+  (function rail() {
+    let ticking = false;
+    const update = () => {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max > 0 ? (h.scrollTop || 0) / max * 100 : 0;
+      root.style.setProperty("--sp", pct.toFixed(2) + "%");
+      ticking = false;
+    };
+    window.addEventListener("scroll", () => { if (!ticking) { ticking = true; rAF(update); } }, { passive: true });
+    update();
+  })();
+
+  /* —— 3 · warm cursor spotlight —— */
+  (function spotlight() {
+    if (reduce || !fine) return;
+    let shown = false;
+    window.addEventListener("pointermove", (e) => {
+      root.style.setProperty("--sx", (e.clientX / window.innerWidth * 100).toFixed(1) + "%");
+      root.style.setProperty("--sy", (e.clientY / window.innerHeight * 100).toFixed(1) + "%");
+      if (!shown) { shown = true; document.body.classList.add("has-spot"); }
+    }, { passive: true });
+  })();
+
+  /* —— 4 · magnetic hero CTAs —— */
+  (function magnetic() {
+    if (reduce || !fine) return;
+    document.querySelectorAll(".hero-actions .btn").forEach((btn) => {
+      btn.addEventListener("pointermove", (e) => {
+        const r = btn.getBoundingClientRect();
+        btn.style.setProperty("--mfx", ((e.clientX - (r.left + r.width / 2)) * 0.22).toFixed(1) + "px");
+        btn.style.setProperty("--mfy", ((e.clientY - (r.top + r.height / 2)) * 0.3).toFixed(1) + "px");
+      });
+      btn.addEventListener("pointerleave", () => {
+        btn.style.setProperty("--mfx", "0px");
+        btn.style.setProperty("--mfy", "0px");
+      });
+    });
+  })();
+
+  /* —— 5 · live 4-7-8 breath caption —— */
+  (function breath() {
+    if (reduce) return;
+    const hero = document.querySelector(".hero");
+    const phaseEl = hero && hero.querySelector(".breath-phase");
+    if (!phaseEl) return;
+    const words = {
+      es: { inhale: "Inhala", hold: "Sostén", exhale: "Exhala" },
+      en: { inhale: "Inhale", hold: "Hold", exhale: "Exhale" }
+    };
+    const tick = () => {
+      const t = (performance.now() / 1000) % 19;
+      let phase, left;
+      if (t < 4) { phase = "inhale"; left = Math.ceil(4 - t); }
+      else if (t < 11) { phase = "hold"; left = Math.ceil(11 - t); }
+      else { phase = "exhale"; left = Math.ceil(19 - t); }
+      const lang = root.lang === "en" ? "en" : "es";
+      phaseEl.textContent = words[lang][phase] + " · " + left;
+    };
+    tick();
+    setInterval(tick, 250);
+  })();
+
+  /* —— 6 · rising motes (soft, warm, drift up) —— */
+  (function motes() {
+    const canvas = document.querySelector(".fx-motes");
+    if (!canvas || reduce) return;
+    const ctx = canvas.getContext("2d", { alpha: true });
+    if (!ctx) return;
+    const PAL = {
+      light: [[47,107,79],[184,146,31],[138,106,61],[201,162,39]],
+      dark:  [[125,202,165],[243,212,55],[196,165,116],[158,224,192]]
+    };
+    let w = 0, h = 0, dpr = 1, parts = [];
+    const mouse = { x: -9999, y: -9999, active: false };
+    const pal = () => (root.getAttribute("data-theme") === "dark" ? PAL.dark : PAL.light);
+
+    function resize() {
+      w = window.innerWidth; h = window.innerHeight;
+      dpr = Math.min(2, window.devicePixelRatio || 1);
+      canvas.width = w * dpr; canvas.height = h * dpr;
+      canvas.style.width = w + "px"; canvas.style.height = h + "px";
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const count = Math.max(22, Math.min(54, Math.round(w * h / 30000)));
+      const P = pal();
+      parts = [];
+      for (let i = 0; i < count; i++) {
+        parts.push({
+          x: Math.random() * w, y: Math.random() * h,
+          vx: (Math.random() - 0.5) * 0.14,
+          vy: -(Math.random() * 0.28 + 0.08),
+          r: Math.random() * 1.6 + 0.9,
+          a: Math.random() * 0.35 + 0.18,
+          sway: Math.random() * 6.28,
+          c: P[(Math.random() * P.length) | 0]
+        });
+      }
+    }
+
+    function frame() {
+      if (document.hidden) { rAF(frame); return; }
+      ctx.clearRect(0, 0, w, h);
+      const P = pal();
+      for (const p of parts) {
+        p.sway += 0.01;
+        p.x += p.vx + Math.sin(p.sway) * 0.15;
+        p.y += p.vy;
+        if (mouse.active) {
+          const dx = p.x - mouse.x, dy = p.y - mouse.y, d = Math.hypot(dx, dy);
+          if (d < 120 && d > 0.1) { p.x += (dx / d) * 0.5; p.y += (dy / d) * 0.4; }
+        }
+        if (p.y < -12) { p.y = h + 12; p.x = Math.random() * w; p.c = P[(Math.random() * P.length) | 0]; }
+        if (p.x < -12) p.x = w + 12; else if (p.x > w + 12) p.x = -12;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, 6.2832);
+        ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.a})`;
+        ctx.fill();
+      }
+      rAF(frame);
+    }
+
+    window.addEventListener("pointermove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; }, { passive: true });
+    window.addEventListener("pointerleave", () => { mouse.active = false; });
+    let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(resize, 180); }, { passive: true });
+    resize();
+    rAF(frame);
+  })();
+})();

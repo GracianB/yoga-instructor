@@ -91,3 +91,11 @@
     animation: none !important;
   }
 }
+
+
+/* Quiet mode means quiet, including the hero rotation. */
+body.quiet-mode .hero-mandala,
+body.quiet-mode .mandala-rings,
+body.quiet-mode .mandala-orbit-outer {
+  animation-play-state: paused !important;
+}

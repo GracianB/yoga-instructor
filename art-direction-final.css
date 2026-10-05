@@ -545,3 +545,374 @@
     animation: none !important;
   }
 }
+
+
+/* ================================================================
+   ART DIRECTION OMEGA · NO HALF MEASURES
+   Visual QA response: make the hero a true composition and make
+   Vortex feel like a destination, not an embedded thumbnail.
+   ================================================================ */
+
+/* HERO: establish a real two-world field. */
+.hero-stage {
+  grid-template-columns: 38px minmax(0, 1fr) minmax(420px, .95fr) !important;
+  gap: clamp(22px, 3vw, 52px) !important;
+  min-height: min(800px, calc(100svh - var(--header) - 10px)) !important;
+}
+
+.hero-inner {
+  max-width: 760px !important;
+  padding-top: clamp(24px, 3.5vh, 48px) !important;
+  padding-bottom: clamp(38px, 6vh, 82px) !important;
+}
+
+.hero-stage::before {
+  left: 63.2% !important;
+  top: 6% !important;
+  bottom: 6% !important;
+  opacity: .26 !important;
+}
+
+.hero-stage::after {
+  left: 57% !important;
+  right: -10% !important;
+  bottom: 12% !important;
+  opacity: .34 !important;
+}
+
+/* Right side becomes an observatory plate. */
+.mandala-parallax::after {
+  content: "BREATH  /  4·7·8";
+  position: absolute;
+  left: 77%;
+  top: calc(50% + min(20vw, 300px));
+  transform: translateX(-50%);
+  color: color-mix(in srgb, var(--muted) 62%, transparent);
+  font: 800 8px/1 var(--mono);
+  letter-spacing: .22em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.hero-mandala {
+  left: 77% !important;
+  top: 48% !important;
+  width: min(46vw, 660px) !important;
+  height: min(46vw, 660px) !important;
+  opacity: .62 !important;
+}
+
+[data-theme="dark"] .hero-mandala {
+  opacity: .75 !important;
+}
+
+.hero-mandala::selection {
+  background: transparent;
+}
+
+/* Outer visual halo and guide geometry. */
+.mandala-parallax {
+  filter: none !important;
+}
+
+.mandala-parallax::before {
+  left: 77% !important;
+  top: 48% !important;
+  width: min(48vw, 700px) !important;
+  opacity: 1 !important;
+  background:
+    radial-gradient(circle,
+      transparent 0 35%,
+      color-mix(in srgb, var(--sage) 6%, transparent) 36% 48%,
+      transparent 49% 100%) !important;
+}
+
+.mandala-parallax::after {
+  letter-spacing: .24em;
+}
+
+/* Make the geometry read as crafted line-work rather than a faint icon. */
+.hero-mandala .mandala-rings circle:nth-child(1) { opacity: .46 !important; }
+.hero-mandala .mandala-rings circle:nth-child(2) { opacity: .34 !important; }
+.hero-mandala .mandala-rings circle:nth-child(3) { opacity: .48 !important; }
+.hero-mandala .mandala-rings circle:nth-child(4) { opacity: .42 !important; }
+.hero-mandala .mandala-rings circle:nth-child(5) { opacity: .56 !important; }
+.hero-mandala .mandala-rings circle:nth-child(6) { opacity: .42 !important; }
+
+.hero-mandala .mandala-petals {
+  stroke-width: 1.55 !important;
+}
+
+.hero-mandala .mandala-petals-sub {
+  stroke-width: .95 !important;
+  opacity: .56 !important;
+}
+
+.hero-mandala .ring-core-stroke {
+  stroke-width: 1.5 !important;
+}
+
+/* The headline owns the left side. */
+.hero h1 {
+  max-width: 9ch !important;
+  font-size: clamp(60px, 7.5vw, 116px) !important;
+  line-height: .84 !important;
+  letter-spacing: -.074em !important;
+}
+
+.hero h1 .hero-line-a {
+  transform: translateX(-.02em);
+}
+
+.hero h1 .hero-line-b {
+  margin-left: .14em !important;
+}
+
+.hero h1 .hero-line-c {
+  margin-left: .66em !important;
+  font-size: .57em !important;
+}
+
+.hero-lead {
+  max-width: 45ch !important;
+  margin-top: 28px !important;
+}
+
+.hero-actions {
+  margin-top: 28px !important;
+}
+
+.hero-manifesto {
+  max-width: 560px !important;
+  margin-top: 34px !important;
+  padding-top: 4px;
+}
+
+.hero-stats {
+  max-width: 720px !important;
+  margin-top: 20px !important;
+}
+
+/* CAMPO: make it a gallery-like stage. */
+.campo-stage {
+  grid-template-columns: minmax(300px, .58fr) minmax(0, 1.42fr) !important;
+  gap: clamp(18px, 2.2vw, 32px) !important;
+  align-items: stretch !important;
+}
+
+.focus-player {
+  min-height: 600px !important;
+  padding: clamp(26px, 2.5vw, 38px) !important;
+  border-radius: 30px !important;
+}
+
+.focus-player::before {
+  top: 26px;
+  left: 30px;
+  content: "01  ·  SILENCE BETWEEN NOTES";
+  letter-spacing: .17em;
+}
+
+.focus-player::after {
+  top: 13% !important;
+  right: -25% !important;
+  width: 115% !important;
+  border-color: color-mix(in srgb, var(--sage) 14%, transparent) !important;
+  box-shadow:
+    0 0 0 34px color-mix(in srgb, var(--sage) 2.6%, transparent),
+    0 0 0 68px color-mix(in srgb, var(--gold) 2.6%, transparent) !important;
+}
+
+.focus-player .player-play {
+  width: 82px !important;
+  height: 82px !important;
+  min-width: 82px !important;
+  margin-bottom: 34px !important;
+}
+
+.focus-player .player-meta strong {
+  max-width: 8ch;
+  font-size: clamp(32px, 3.2vw, 48px) !important;
+}
+
+.focus-player .player-meta small {
+  max-width: 31ch;
+  font-size: 13px !important;
+  line-height: 1.6 !important;
+}
+
+/* Add a quiet status rail without touching the DOM. */
+.focus-player .player-link.player-vortex {
+  margin-top: 8px;
+  border-top: 0;
+  border: 1px solid color-mix(in srgb, var(--sage) 24%, var(--line));
+  border-radius: 999px;
+  min-height: 42px;
+  padding-inline: 16px;
+  background: color-mix(in srgb, var(--sage) 6%, transparent);
+}
+
+.campo-vortex-full {
+  min-height: 600px !important;
+  padding: 10px !important;
+  border-radius: 32px !important;
+  border-color: color-mix(in srgb, var(--sage) 30%, var(--line)) !important;
+  box-shadow:
+    0 34px 100px color-mix(in srgb, var(--ink) 14%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 9%, transparent) !important;
+}
+
+.campo-vortex-full::before {
+  content: "VÓRTICE  ·  CAMPO VIVO" !important;
+  left: 24px;
+  top: 24px;
+  background: color-mix(in srgb, var(--surface) 84%, transparent) !important;
+}
+
+.campo-vortex-full::after {
+  content: "OPEN  ↗" !important;
+  right: 24px;
+  top: 24px;
+  background: color-mix(in srgb, var(--surface) 78%, transparent) !important;
+}
+
+.campo-vortex-full iframe {
+  min-height: 580px !important;
+  height: 580px !important;
+  border-radius: 24px !important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--sage) 18%, transparent),
+    0 1px 0 color-mix(in srgb, #000 14%, transparent) !important;
+}
+
+/* Give the section a cinematic entry, but keep it compact. */
+.campo .section-head {
+  max-width: 780px !important;
+}
+
+.campo .section-head h2 {
+  font-size: clamp(44px, 6.2vw, 82px) !important;
+  line-height: .9 !important;
+  letter-spacing: -.065em !important;
+}
+
+/* Responsive recalibration. */
+@media (max-width: 1180px) {
+  .hero-stage {
+    grid-template-columns: 34px minmax(0, 1fr) minmax(360px, .86fr) !important;
+    gap: 24px !important;
+  }
+
+  .hero-mandala,
+  .mandala-parallax::before {
+    left: 76% !important;
+  }
+
+  .mandala-parallax::after {
+    left: 76%;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-stage {
+    grid-template-columns: 1fr !important;
+    min-height: 820px !important;
+    gap: 0 !important;
+  }
+
+  .hero-inner {
+    padding: 38px 0 124px !important;
+  }
+
+  .hero-mandala {
+    left: 78% !important;
+    top: 17% !important;
+    width: min(88vw, 500px) !important;
+    height: min(88vw, 500px) !important;
+    opacity: .24 !important;
+  }
+
+  .mandala-parallax::before {
+    left: 78% !important;
+    top: 17% !important;
+    width: min(86vw, 490px) !important;
+  }
+
+  .mandala-parallax::after {
+    display: none;
+  }
+
+  .hero h1 {
+    max-width: 8.2ch !important;
+    font-size: clamp(54px, 14vw, 92px) !important;
+  }
+
+  .hero-lead {
+    max-width: 36ch !important;
+  }
+
+  .campo-stage {
+    grid-template-columns: 1fr !important;
+  }
+
+  .focus-player {
+    min-height: 470px !important;
+  }
+
+  .campo-vortex-full {
+    min-height: 0 !important;
+  }
+
+  .campo-vortex-full iframe {
+    min-height: min(72vh, 620px) !important;
+    height: min(72vh, 620px) !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero {
+    padding-inline: 16px !important;
+  }
+
+  .hero-stage {
+    min-height: 760px !important;
+  }
+
+  .hero-inner {
+    padding-top: 30px !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(50px, 15.5vw, 78px) !important;
+  }
+
+  .hero-mandala {
+    left: 86% !important;
+    top: 13% !important;
+    width: min(98vw, 410px) !important;
+    height: min(98vw, 410px) !important;
+    opacity: .19 !important;
+  }
+
+  .mandala-parallax::before {
+    left: 86% !important;
+    top: 13% !important;
+    width: min(94vw, 395px) !important;
+  }
+
+  .focus-player {
+    min-height: 450px !important;
+    padding: 22px !important;
+  }
+
+  .campo-vortex-full iframe {
+    min-height: 500px !important;
+    height: 500px !important;
+  }
+}
+
+/* Respect the Sanctuary quiet mode. */
+body.quiet-mode .hero-mandala,
+body.quiet-mode .mandala-rings {
+  animation-play-state: paused !important;
+}

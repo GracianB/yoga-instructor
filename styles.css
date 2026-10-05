@@ -2913,3 +2913,72 @@ body {
 .hero-inner {
   max-width: 820px !important;
 }
+
+
+/* ================================================================
+   PHASE 03 · THE BREATH FIELD
+   A mandala that behaves like an instrument: sparse, offset, alive.
+   ================================================================ */
+.mandala-parallax {
+  z-index: 1;
+  pointer-events: none;
+}
+.mandala-parallax::before {
+  content: "";
+  position: absolute;
+  width: min(50vmin, 560px);
+  aspect-ratio: 1;
+  left: 59%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle,
+      color-mix(in srgb,var(--mandala-core) 10%,transparent) 0 10%,
+      transparent 32% 100%);
+  opacity: .75;
+}
+.hero-mandala {
+  width: min(58vmin, 680px) !important;
+  height: min(58vmin, 680px) !important;
+  right: clamp(-96px, -4vw, -22px) !important;
+  top: 50% !important;
+  transform: translateY(-50%) rotate(-7deg) !important;
+  opacity: .42 !important;
+  color: var(--mandala-soft) !important;
+  mix-blend-mode: multiply;
+  overflow: visible;
+}
+.hero-mandala .mandala-rings {
+  stroke: currentColor;
+  opacity: .82;
+}
+.hero-mandala .mandala-petals {
+  opacity: .96 !important;
+}
+.hero-mandala .mandala-orbit-outer {
+  stroke: var(--mandala-accent);
+  opacity: .5;
+}
+.hero-mandala .mandala-sparks {
+  color: var(--mandala-accent);
+}
+.hero-mandala .ring-core-stroke {
+  stroke-width: 1.5;
+}
+[data-theme="dark"] .hero-mandala {
+  opacity: .48 !important;
+  mix-blend-mode: screen;
+}
+[data-theme="dark"] .mandala-parallax::before {
+  opacity: .62;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero[data-breath="cycle"] .hero-mandala {
+    animation: mandalaDrift 19s ease-in-out infinite;
+  }
+  @keyframes mandalaDrift {
+    0%,100% { transform: translateY(-50%) rotate(-7deg) scale(.985); }
+    21%,58% { transform: translateY(-50%) rotate(-5deg) scale(1.008); }
+  }
+}

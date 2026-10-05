@@ -122,7 +122,7 @@ Yoga es la puerta 03. No compite con el deck ni con el lab. Los completa: allí 
 
 | | Español | English |
 | --- | --- | --- |
-| CV | [PDF](./Gracian_Baena_CV_Yoga_ES.pdf) | [PDF](./Gracian_Baena_CV_Yoga_EN.pdf) |
+| CV | [PDF](./assets/CV_Gracian_Baena_Yoga_ES.pdf) | [PDF](./assets/CV_Gracian_Baena_Yoga_EN.pdf) |
 | Carta | [PDF](./Gracian_Baena_Carta_Yoga_ES.pdf) | [PDF](./Gracian_Baena_Cover_Letter_Yoga_EN.pdf) |
 
 </details>

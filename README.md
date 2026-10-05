@@ -20,6 +20,26 @@
 
 Una práctica para volver a donde estás. Sin competir. Sin postureo.
 
+
+### Living Sanctuary · 10 fases
+
+Esta versión trata la web como un pequeño espacio de práctica, no como un portfolio estático.
+
+| Fase | Decisión |
+| --- | --- |
+| 01 | Replantear la home como santuario digital |
+| 02 | Dar al hero una respiración visual propia |
+| 03 | Convertir Ritual en estados, no en navegación decorativa |
+| 04 | Añadir **One Breath**, una micropráctica real |
+| 05 | Hacer que presencia, cursor y scroll modulen el ambiente |
+| 06 | Convertir la música en un órgano visual suave |
+| 07 | Recordar intención y contexto sin perseguir al visitante |
+| 08 | Crear **Quiet Mode** para apagar el ruido |
+| 09 | Blindar accesibilidad, tamaño y sintaxis en CI |
+| 10 | Documentar, publicar y proteger la experiencia |
+
+La regla de diseño es sencilla: **la interfaz puede reaccionar, pero nunca debe exigir atención**.
+
 ### El ritual
 
 La home no empieza pidiendo una clase. Empieza preguntando cómo llegas. El módulo interactivo **Ritual** permite elegir entre aterrizar, mover, afinar o compartir y convierte cada intención en una ruta distinta dentro de la práctica.

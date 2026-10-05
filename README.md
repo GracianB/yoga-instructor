@@ -227,3 +227,5 @@ La portada se rehízo en 10 fases de dirección visual: arquitectura editorial, 
 La idea no es representar yoga con más ornamento. Es hacer que la primera pantalla se comporte como una sala: entra luz, existe silencio, el texto tiene espacio y la geometría acompaña sin pedir protagonismo.
 
 **Regla de diseño:** menos símbolos, más intención.
+
+Visual QA baseline: Quiet Geometry hero · desktop + mobile · ES/EN · light/dark · reduced motion.

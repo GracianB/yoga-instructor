@@ -32,7 +32,7 @@ const required = [
   ["sanctuary script include", index.includes("./sanctuary-experience.js")],
   ["editorial rail", index.includes('class="hero-rail"')],
   ["hero manifesto", index.includes('data-i18n="heroManifesto"')],
-  ["quiet geometry", index.includes("production-visual-1") && css.includes("PRODUCTION VISUAL LOCK")],
+  ["quiet geometry", index.includes("production-visual-2") && css.includes("PRODUCTION VISUAL LOCK")],
   ["hero live fix", index.includes("./hero-live-fix.css?v=hero-live-1") && heroFix.includes(".hero-inner > *") && heroFix.includes("heroLiveMandala")],
   ["visual lock", css.includes("PRODUCTION VISUAL LOCK") && css.includes("ritual.section") && css.includes("campo-vortex-full iframe")],
   ["legacy spectacle absent", !css.includes("PORTADA SPECTACLE")],

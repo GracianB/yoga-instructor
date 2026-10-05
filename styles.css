@@ -3359,3 +3359,50 @@ html.intro-done .zintro {
   }
   .hero-stats { max-width: 100%; }
 }
+
+
+/* ================================================================
+   PHASE 09 · QUIET ENGINEERING
+   Accessibility and performance are part of the visual direction.
+   ================================================================ */
+.hero,
+.hero-stage,
+.hero-atmosphere,
+.hero-mandala {
+  -webkit-tap-highlight-color: transparent;
+}
+.hero-atmosphere {
+  contain: layout paint;
+}
+.hero-mandala {
+  transform-origin: 50% 50%;
+  will-change: transform, opacity;
+}
+.hero-rail {
+  user-select: none;
+}
+.hero a:focus-visible,
+.hero button:focus-visible,
+.site-header a:focus-visible,
+.site-header button:focus-visible {
+  outline: 2px solid var(--sage);
+  outline-offset: 4px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-atmosphere {
+    contain: none;
+  }
+  .hero-mandala {
+    will-change: auto;
+  }
+  .hero h1 .hero-line-b,
+  .hero h1 .hero-line-c,
+  .hero-inner {
+    transform: none !important;
+  }
+}
+@media (max-width: 900px) {
+  .hero-mandala {
+    will-change: opacity;
+  }
+}

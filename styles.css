@@ -4330,3 +4330,217 @@ body[data-practice="share"] .ritual-orb-ring { animation-duration: 5s; }
   .ritual-choice { min-height: 72px; padding-inline: 12px; }
   .choice-copy b { font-size: 21px; }
 }
+
+/* ================================================================
+   LIVING SANCTUARY · VISUAL ENGINE
+   ================================================================ */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(360px circle at var(--presence-x,50%) var(--presence-y,42%),
+    color-mix(in srgb, var(--sage) 8%, transparent), transparent 68%);
+  opacity: .75;
+  transition: opacity .8s ease;
+}
+.hero-stage,
+.ritual-panel,
+.focus-player {
+  position: relative;
+  isolation: isolate;
+}
+.hero-stage::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(520px circle at var(--presence-x,50%) var(--presence-y,42%),
+      color-mix(in srgb, var(--sage) 8%, transparent), transparent 72%),
+    radial-gradient(260px circle at 82% 18%,
+      color-mix(in srgb, var(--gold) 8%, transparent), transparent 74%);
+  opacity: calc(.55 + (var(--scroll-energy, 0) * .18));
+}
+.in-motion .hero-stage::after {
+  opacity: .42;
+}
+.in-motion .hero h1 {
+  letter-spacing: -.038em;
+}
+.sound-active .focus-player {
+  box-shadow:
+    0 14px var(--sound-blur, 20px) color-mix(in srgb, var(--sage) 18%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--sage) 28%, transparent);
+}
+.sound-active .player-play {
+  box-shadow:
+    0 0 var(--sound-blur, 20px) color-mix(in srgb, var(--sage) 52%, transparent);
+}
+.sanctuary-dock {
+  position: fixed;
+  left: 18px;
+  bottom: 18px;
+  z-index: 120;
+  width: min(340px, calc(100vw - 36px));
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: color-mix(in srgb, var(--surface) 88%, transparent);
+  backdrop-filter: blur(24px) saturate(1.1);
+  -webkit-backdrop-filter: blur(24px) saturate(1.1);
+  box-shadow:
+    0 22px 70px color-mix(in srgb, var(--ink) 10%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 8%, transparent);
+  transition: opacity .35s ease, transform .35s var(--ease), background .35s ease;
+}
+.sanctuary-breath {
+  width: 100%;
+  min-height: 70px;
+  padding: 7px 10px;
+  display: grid;
+  grid-template-columns: 54px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  color: var(--ink);
+  text-align: left;
+  border-radius: 18px;
+}
+.sanctuary-breath:hover {
+  background: color-mix(in srgb, var(--sage) 7%, transparent);
+}
+.breath-ring {
+  position: relative;
+  width: 50px;
+  height: 50px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: conic-gradient(var(--sage) var(--breath-pct,0%), color-mix(in srgb,var(--ink) 9%,transparent) 0);
+  transition: background .16s linear;
+}
+.breath-ring::after {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.breath-ring-core {
+  position: relative;
+  z-index: 1;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: var(--sage);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--sage) 44%, transparent);
+}
+[data-breath-phase="inhale"] .breath-ring-core { transform: scale(1.38); }
+[data-breath-phase="hold"] .breath-ring-core { transform: scale(1.12); }
+[data-breath-phase="exhale"] .breath-ring-core { transform: scale(.82); }
+.breath-copy {
+  min-width: 0;
+  display: grid;
+  gap: 4px;
+}
+.breath-kicker {
+  color: var(--muted);
+  font: 800 8px/1 var(--mono);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+}
+.breath-copy strong {
+  font: 600 20px/1 var(--display);
+  letter-spacing: -.015em;
+}
+.breath-time {
+  color: var(--sage);
+  font: 800 10px var(--mono);
+  font-style: normal;
+  letter-spacing: .08em;
+}
+.sanctuary-dock-tools {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 10px 2px;
+  border-top: 1px solid var(--line);
+}
+.sanctuary-section {
+  min-width: 0;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 800 8px var(--mono);
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+.sanctuary-quiet {
+  min-height: 30px;
+  padding: 0 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font: 800 8px var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.sanctuary-quiet:hover,
+.sanctuary-quiet[aria-pressed="true"] {
+  color: var(--ink);
+  border-color: color-mix(in srgb, var(--sage) 32%, transparent);
+  background: color-mix(in srgb, var(--sage) 7%, transparent);
+}
+.quiet-mode body::before {
+  opacity: 0;
+}
+body.quiet-mode .fx,
+body.quiet-mode .spotlight,
+body.quiet-mode .hero-sparks,
+body.quiet-mode .hero-breath-wave,
+body.quiet-mode .mandala-conic-halo,
+body.quiet-mode .scroll-progress {
+  opacity: 0 !important;
+}
+body.quiet-mode .hero-stage::before {
+  opacity: .15;
+}
+body.quiet-mode .hero-orb,
+body.quiet-mode .hero-mandala .mandala-orbit,
+body.quiet-mode .hero-mandala .mandala-orbit-mid,
+body.quiet-mode .hero-mandala .mandala-orbit-outer {
+  animation-play-state: paused !important;
+}
+body.quiet-mode .sanctuary-dock {
+  opacity: .68;
+}
+[data-theme="dark"] .sanctuary-dock {
+  background: color-mix(in srgb, #0b100d 90%, transparent);
+}
+@media (max-width: 640px) {
+  .sanctuary-dock {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    width: auto;
+    border-radius: 20px;
+  }
+  .sanctuary-breath {
+    min-height: 64px;
+  }
+  .breath-ring {
+    width: 46px;
+    height: 46px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  body::before { display: none; }
+  .sound-active .focus-player,
+  .sound-active .player-play { box-shadow: none; }
+  .breath-ring,
+  .breath-ring-core { transition: none; }
+}

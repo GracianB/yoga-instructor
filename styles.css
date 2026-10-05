@@ -3125,3 +3125,32 @@ body {
 [data-theme="dark"] .manifesto-lead {
   color: #edf1e9;
 }
+
+
+/* ================================================================
+   PHASE 06 · PRESENCE, NOT PARALLAX THEATRE
+   Movement is a tiny change of depth, never a carnival ride.
+   ================================================================ */
+.hero-inner {
+  transform: translate3d(var(--copy-x,0px),var(--copy-y,0px),0);
+  transition: transform .7s cubic-bezier(.22,1,.36,1);
+  will-change: transform;
+}
+.hero h1 .hero-line {
+  transition: transform .8s cubic-bezier(.22,1,.36,1), color .4s ease;
+}
+.hero h1 .hero-line-b { transform: translateX(.22em); }
+.hero h1 .hero-line-c { transform: translateX(.02em); }
+.hero:hover h1 .hero-line-b { transform: translateX(.28em); }
+.hero:hover h1 .hero-line-c { transform: translateX(.06em); }
+.hero-actions .btn {
+  transition: transform .35s cubic-bezier(.22,1,.36,1), background .25s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.hero-actions .btn:hover {
+  transform: translateY(-2px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-inner,
+  .hero h1 .hero-line,
+  .hero-actions .btn { transition: none !important; transform: none !important; }
+}

@@ -272,10 +272,14 @@
         const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
         hero.style.setProperty("--px", (x * max).toFixed(2) + "px");
         hero.style.setProperty("--py", (y * max).toFixed(2) + "px");
+        hero.style.setProperty("--copy-x", (x * -4).toFixed(2) + "px");
+        hero.style.setProperty("--copy-y", (y * -2).toFixed(2) + "px");
       };
       const onLeave = () => {
         hero.style.setProperty("--px", "0px");
         hero.style.setProperty("--py", "0px");
+        hero.style.setProperty("--copy-x", "0px");
+        hero.style.setProperty("--copy-y", "0px");
       };
       hero.addEventListener("pointermove", onMove);
       hero.addEventListener("pointerleave", onLeave);

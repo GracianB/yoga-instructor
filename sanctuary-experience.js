@@ -215,7 +215,14 @@
     try {
       const saved = localStorage.getItem(PRACTICE_KEY);
       const choice = saved && document.querySelector(".ritual-choice[data-practice='" + saved + "']");
-      if (choice) choice.click();
+      if (choice) {
+        document.body.dataset.practice = saved;
+        document.querySelectorAll(".ritual-choice").forEach((item) => {
+          const active = item === choice;
+          item.classList.toggle("is-active", active);
+          item.setAttribute("aria-pressed", String(active));
+        });
+      }
     } catch (_) {}
   });
 
@@ -265,6 +272,7 @@
       if (soundRaf) cancelAnimationFrame(soundRaf);
       soundRaf = 0;
       root.style.setProperty("--sound-pulse", "0");
+      root.style.setProperty("--sound-blur", "20px");
     };
     const animateSound = () => {
       if (audio.paused || audio.ended) {
@@ -274,6 +282,7 @@
       const bpm = 62;
       const pulse = (Math.sin((audio.currentTime * bpm / 60) * Math.PI * 2) + 1) / 2;
       root.style.setProperty("--sound-pulse", (pulse * 0.7).toFixed(3));
+      root.style.setProperty("--sound-blur", (20 + pulse * 28).toFixed(1) + "px");
       body.classList.add("sound-active");
       soundRaf = requestAnimationFrame(animateSound);
     };

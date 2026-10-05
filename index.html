@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=zen-max-1">
+  <link rel="stylesheet" href="./styles.css?v=sanctuary-1">
   <script>
     /* zen intro boot — decide before first paint, with failsafe */
     (function () {
@@ -35,8 +35,8 @@
       } catch (e) {}
     })();
   </script>
-  <script src="./i18n.js?v=zen-max-1"></script>
-  <script src="./main.js?v=zen-max-1" defer></script>
+  <script src="./i18n.js?v=sanctuary-1"></script>
+  <script src="./main.js?v=sanctuary-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -104,6 +104,7 @@
     <nav class="nav" id="nav" aria-label="Primary">
       <a href="#sobre" data-i18n="navAbout">Sobre mí</a>
       <a href="#campo" data-i18n="navField">Campo</a>
+      <a href="#ritual" data-i18n="navRitual">Práctica</a>
       <a href="#experiencia" data-i18n="navExp">Experiencia</a>
       <a href="#contacto" data-i18n="navContact">Contacto</a>
     </nav>
@@ -303,6 +304,76 @@
         </div>
       </div>
       <a class="hero-scroll-cue" href="#campo" data-i18n="scrollCue">Scroll · Respira</a>
+    </section>
+
+    <section class="section ritual reveal" id="ritual" aria-labelledby="ritual-title">
+      <div class="ritual-intro">
+        <p class="kicker" data-i18n="ritualKicker">RITUAL · TU PUNTO DE PARTIDA</p>
+        <h2 id="ritual-title" data-i18n-html="ritualH2">No necesitas llegar<br><em>de ninguna manera.</em></h2>
+        <p class="about-lead" data-i18n="ritualLead">Elige cómo llegas hoy. La práctica puede empezar con quietud, movimiento, atención o compañía.</p>
+
+        <div class="ritual-orb-wrap" aria-live="polite">
+          <div class="ritual-orb" aria-hidden="true">
+            <span class="ritual-orb-ring"></span>
+            <span class="ritual-orb-core"></span>
+          </div>
+          <div class="ritual-status">
+            <span class="ritual-status-kicker" data-i18n="ritualStatusKicker">HOY</span>
+            <strong id="ritual-state" data-i18n="ritualStateDefault">Aterrizar</strong>
+            <small id="ritual-state-detail" data-i18n="ritualStateDetail">Baja el ruido. Empieza aquí.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="ritual-panel">
+        <div class="ritual-panel-head">
+          <span class="ritual-panel-index">03</span>
+          <p data-i18n="ritualHint">Tu práctica no empieza en la postura. Empieza en cómo llegas.</p>
+        </div>
+
+        <div class="ritual-choices" role="group" aria-label="Practice intention">
+          <button class="ritual-choice is-active" type="button" data-practice="arrive" data-target="#sobre" aria-pressed="true">
+            <span class="choice-index">01</span>
+            <span class="choice-copy">
+              <b data-i18n="ritual1t">Aterrizar</b>
+              <small data-i18n="ritual1p">Calmar, escuchar, estar.</small>
+            </span>
+            <span class="choice-arrow" aria-hidden="true">↘</span>
+          </button>
+
+          <button class="ritual-choice" type="button" data-practice="move" data-target="#campo" aria-pressed="false">
+            <span class="choice-index">02</span>
+            <span class="choice-copy">
+              <b data-i18n="ritual2t">Mover</b>
+              <small data-i18n="ritual2p">Despertar el cuerpo sin prisa.</small>
+            </span>
+            <span class="choice-arrow" aria-hidden="true">↘</span>
+          </button>
+
+          <button class="ritual-choice" type="button" data-practice="focus" data-target="#filosofia" aria-pressed="false">
+            <span class="choice-index">03</span>
+            <span class="choice-copy">
+              <b data-i18n="ritual3t">Afinar</b>
+              <small data-i18n="ritual3p">Respirar, observar, encontrar centro.</small>
+            </span>
+            <span class="choice-arrow" aria-hidden="true">↘</span>
+          </button>
+
+          <button class="ritual-choice" type="button" data-practice="share" data-target="#contacto" aria-pressed="false">
+            <span class="choice-index">04</span>
+            <span class="choice-copy">
+              <b data-i18n="ritual4t">Compartir</b>
+              <small data-i18n="ritual4p">Llevar la práctica a una sala o equipo.</small>
+            </span>
+            <span class="choice-arrow" aria-hidden="true">↘</span>
+          </button>
+        </div>
+
+        <div class="ritual-foot">
+          <span class="ritual-line" aria-hidden="true"></span>
+          <span data-i18n="ritualFoot">Presencia · Respiración · Movimiento · Atención</span>
+        </div>
+      </div>
     </section>
 
     <section class="section campo reveal" id="campo">

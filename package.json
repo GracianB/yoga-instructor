@@ -1,0 +1,13 @@
+{
+  "name": "yoga-instructor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Gracián Baena — Yoga Instructor portfolio",
+  "scripts": {
+    "check": "node tools/yoga-audit.mjs",
+    "syntax": "node --check main.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

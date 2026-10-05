@@ -20,6 +20,12 @@
 
 Una práctica para volver a donde estás. Sin competir. Sin postureo.
 
+### El ritual
+
+La home no empieza pidiendo una clase. Empieza preguntando cómo llegas. El módulo interactivo **Ritual** permite elegir entre aterrizar, mover, afinar o compartir y convierte cada intención en una ruta distinta dentro de la práctica.
+
+La idea es deliberada: el yoga no se presenta como una galería de posturas, sino como una experiencia de atención. La interfaz cambia de estado sin perder la calma, y el visitante decide cuánto quiere explorar.
+
 `MURCIA · 2019—2026`
 
 <br/>
@@ -116,7 +122,7 @@ Yoga es la puerta 03. No compite con el deck ni con el lab. Los completa: allí 
 
 | | Español | English |
 | --- | --- | --- |
-| CV | [PDF](./Gracian_Baena_CV_Yoga_ES.pdf) | [PDF](./Gracian_Baena_CV_Yoga_EN.pdf) |
+| CV | [PDF](./assets/CV_Gracian_Baena_Yoga_ES.pdf) | [PDF](./assets/CV_Gracian_Baena_Yoga_EN.pdf) |
 | Carta | [PDF](./Gracian_Baena_Carta_Yoga_ES.pdf) | [PDF](./Gracian_Baena_Cover_Letter_Yoga_EN.pdf) |
 
 </details>

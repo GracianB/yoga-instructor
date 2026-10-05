@@ -434,3 +434,66 @@
     rAF(frame);
   })();
 })();
+
+
+/* ================================================================
+   SANCTUARY PASS · ritual interaction
+   ================================================================ */
+(() => {
+  "use strict";
+  const root = document.body;
+  const state = document.getElementById("ritual-state");
+  const detail = document.getElementById("ritual-state-detail");
+  const choices = document.querySelectorAll(".ritual-choice");
+  if (!root || !choices.length) return;
+
+  const copy = {
+    es: {
+      arrive: ["Aterrizar", "Baja el ruido. Empieza aquí."],
+      move: ["Mover", "Despierta el cuerpo. Sin prisa."],
+      focus: ["Afinar", "Respira, observa, encuentra centro."],
+      share: ["Compartir", "Lleva la práctica a una sala o equipo."]
+    },
+    en: {
+      arrive: ["Arrive", "Lower the noise. Begin here."],
+      move: ["Move", "Wake the body. Without hurry."],
+      focus: ["Focus", "Breathe, observe, find centre."],
+      share: ["Share", "Bring practice to a room or a team."]
+    }
+  };
+
+  const apply = (key, scroll) => {
+    const lang = document.documentElement.lang === "en" ? "en" : "es";
+    const pair = copy[lang][key] || copy[lang].arrive;
+    root.dataset.practice = key;
+    choices.forEach((choice) => {
+      const active = choice.dataset.practice === key;
+      choice.classList.toggle("is-active", active);
+      choice.setAttribute("aria-pressed", String(active));
+    });
+    if (state) state.textContent = pair[0];
+    if (detail) detail.textContent = pair[1];
+
+    if (scroll) {
+      const activeChoice = Array.from(choices).find((choice) => choice.dataset.practice === key);
+      const target = activeChoice && activeChoice.dataset.target;
+      const el = target ? document.querySelector(target) : null;
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  };
+
+  choices.forEach((choice) => {
+    choice.addEventListener("click", () => apply(choice.dataset.practice || "arrive", true));
+  });
+
+  document.addEventListener("click", (event) => {
+    if (event.target.closest("[data-set-lang]")) {
+      requestAnimationFrame(() => {
+        const active = Array.from(choices).find((choice) => choice.getAttribute("aria-pressed") === "true");
+        apply((active && active.dataset.practice) || "arrive", false);
+      });
+    }
+  });
+
+  apply("arrive", false);
+})();

@@ -65,7 +65,7 @@ window.YOGA_I18N = {
     fieldH2: "Respirar.<br><em>O entrar al vórtice.</em>",
     fieldP: "La misma presencia, otro medio. Un instrumental lento para practicar — y el campo de partículas si quieres jugar.",
     fieldTrack: "SILENCE BETWEEN NOTES",
-    fieldTrackP: "Instrumental para Vórtice · pulso lento · ~62 BPM",
+    fieldTrackP: "Instrumental para Sanctuary · pulso suave · sin voz · sensación ~62 BPM",
     fieldPlay: "Play",
     fieldPause: "Pause",
     fieldMute: "Silencio",

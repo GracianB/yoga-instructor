@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=sanctuary-1">
+  <link rel="stylesheet" href="./styles.css?v=quiet-geometry-4">
   <script>
     /* zen intro boot — decide before first paint, with failsafe */
     (function () {
@@ -30,13 +30,14 @@
         try { seen = sessionStorage.getItem("gb-yoga-intro-seen") === "1"; } catch (e) {}
         if (!reduce && !seen) {
           document.documentElement.classList.add("intro-on");
-          setTimeout(function () { document.documentElement.classList.add("intro-done"); }, 3200);
+          setTimeout(function () { document.documentElement.classList.add("intro-done"); }, 2150);
         }
       } catch (e) {}
     })();
   </script>
-  <script src="./i18n.js?v=sanctuary-1"></script>
-  <script src="./main.js?v=sanctuary-1" defer></script>
+  <script src="./i18n.js?v=quiet-geometry-4"></script>
+  <script src="./main.js?v=quiet-geometry-4" defer></script>
+  <script src="./sanctuary-experience.js?v=living-2" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -68,18 +69,17 @@
 
   <div class="zintro" id="zintro" aria-hidden="true">
     <div class="zintro-core">
-      <svg class="zintro-mandala" viewBox="0 0 160 160" width="160" height="160" fill="none">
-        <circle class="zi-ring" cx="80" cy="80" r="70" stroke-width="1"/>
-        <circle class="zi-ring zi-ring-2" cx="80" cy="80" r="54" stroke-width="1"/>
-        <circle class="zi-ring zi-ring-3" cx="80" cy="80" r="38" stroke-width="1"/>
-        <g class="zi-petals" stroke-width="1.4">
-          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z"/>
-          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z" transform="rotate(45 80 80)"/>
-          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z" transform="rotate(90 80 80)"/>
-          <path d="M80 26 C98 60 98 60 80 96 C62 60 62 60 80 26Z" transform="rotate(135 80 80)"/>
-        </g>
-        <circle class="zi-core-dot" cx="80" cy="80" r="6"/>
-      </svg>
+      <svg class="zintro-mandala" viewBox="0 0 180 180" width="180" height="180" fill="none" aria-hidden="true">
+  <circle cx="90" cy="90" r="70" stroke="currentColor" stroke-width="1" stroke-dasharray="1 8" opacity=".45"/>
+  <circle cx="90" cy="90" r="52" stroke="currentColor" stroke-width="1" opacity=".34"/>
+  <g stroke="currentColor" stroke-width="1.1" opacity=".7">
+    <ellipse cx="90" cy="90" rx="20" ry="61"/>
+    <ellipse cx="90" cy="90" rx="20" ry="61" transform="rotate(60 90 90)"/>
+    <ellipse cx="90" cy="90" rx="20" ry="61" transform="rotate(120 90 90)"/>
+  </g>
+  <circle cx="90" cy="90" r="14" fill="currentColor" opacity=".12"/>
+  <circle cx="90" cy="90" r="3" fill="currentColor"/>
+</svg>
       <span class="zintro-gb">GB</span>
     </div>
     <p class="zintro-breath"><span data-i18n="introBreath">Inhala… exhala</span></p>
@@ -150,119 +150,53 @@
         </div>
         <div class="mandala-parallax" style="--depth:1.2">
           <div class="mandala-conic-halo" aria-hidden="true"></div>
-          <svg class="hero-mandala" viewBox="0 0 420 420" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <radialGradient id="mandalaGlowDisc" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="var(--petal-a, var(--sage))" stop-opacity="0.42"/>
-                <stop offset="40%" stop-color="var(--petal-b, var(--sage-bright))" stop-opacity="0.2"/>
-                <stop offset="100%" stop-color="var(--sage)" stop-opacity="0"/>
-              </radialGradient>
-              <linearGradient id="lotusGradSage" x1="210" y1="52" x2="210" y2="184" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="var(--petal-a, var(--sage))" stop-opacity="0.88"/>
-                <stop offset="38%" stop-color="var(--sage-bright, var(--sage))" stop-opacity="0.52"/>
-                <stop offset="68%" stop-color="var(--petal-edge, var(--gold))" stop-opacity="0.4"/>
-                <stop offset="100%" stop-color="var(--petal-c, var(--sage))" stop-opacity="0.2"/>
-              </linearGradient>
-              <linearGradient id="lotusGradEarth" x1="210" y1="70" x2="210" y2="170" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="var(--lotus-sub-a, var(--earth))" stop-opacity="0.72"/>
-                <stop offset="48%" stop-color="var(--lotus-sub-b, var(--gold))" stop-opacity="0.45"/>
-                <stop offset="100%" stop-color="var(--lotus-sub-c, var(--clay))" stop-opacity="0.22"/>
-              </linearGradient>
-              <linearGradient id="petalStrokeShine" x1="210" y1="42" x2="210" y2="178" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stop-color="var(--petal-edge, var(--gold))" stop-opacity="1"/>
-                <stop offset="22%" stop-color="var(--neon-mint, var(--sage-bright))" stop-opacity="0.95"/>
-                <stop offset="48%" stop-color="var(--neon-sage, var(--sage))" stop-opacity="0.92"/>
-                <stop offset="72%" stop-color="var(--petal-a, var(--blush))" stop-opacity="0.85"/>
-                <stop offset="100%" stop-color="var(--petal-c, var(--sage))" stop-opacity="0.62"/>
-              </linearGradient>
-              <radialGradient id="coreGrad" cx="50%" cy="50%" r="50%">
-                <stop offset="0%" stop-color="var(--sage-bright)" stop-opacity="0.85"/>
-                <stop offset="40%" stop-color="var(--petal-edge, var(--gold))" stop-opacity="0.42"/>
-                <stop offset="100%" stop-color="var(--petal-a, var(--sage))" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <!-- Soft glow disc behind rings -->
-            <circle class="mandala-glow-disc" cx="210" cy="210" r="198" fill="url(#mandalaGlowDisc)"/>
-            <!-- Soft filled lotus arcs (low opacity) -->
-            <g class="mandala-lotus-fill" fill="url(#lotusGradSage)" stroke="none" opacity="0.92">
-              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z"/>
-              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(60 210 210)"/>
-              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(120 210 210)"/>
-              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(180 210 210)"/>
-              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(240 210 210)"/>
-              <path d="M210 52 C246 118 246 118 210 184 C174 118 174 118 210 52Z" transform="rotate(300 210 210)"/>
-            </g>
-            <g class="mandala-lotus-fill-sub" fill="url(#lotusGradEarth)" stroke="none" opacity="0.78">
-              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(30 210 210)"/>
-              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(90 210 210)"/>
-              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(150 210 210)"/>
-              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(210 210 210)"/>
-              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(270 210 210)"/>
-              <path d="M210 78 C232 130 232 130 210 172 C188 130 188 130 210 78Z" transform="rotate(330 210 210)"/>
-            </g>
-            <g class="mandala-rings">
-              <circle class="ring ring-outermost" cx="210" cy="210" r="204" stroke="currentColor" stroke-width="0.55" opacity="0.42" stroke-dasharray="2 6"/>
-              <circle class="ring ring-e" cx="210" cy="210" r="196" stroke="currentColor" stroke-width="0.7" opacity="0.48"/>
-              <circle class="ring ring-f" cx="210" cy="210" r="182" stroke="currentColor" stroke-width="0.65" opacity="0.4"/>
-              <circle class="ring ring-a" cx="210" cy="210" r="168" stroke="currentColor" stroke-width="0.95" opacity="0.62"/>
-              <circle class="ring ring-g" cx="210" cy="210" r="150" stroke="currentColor" stroke-width="0.55" opacity="0.28" stroke-dasharray="1.5 4"/>
-              <circle class="ring ring-b" cx="210" cy="210" r="132" stroke="currentColor" stroke-width="1.1" opacity="0.7"/>
-              <circle class="ring ring-h" cx="210" cy="210" r="114" stroke="currentColor" stroke-width="0.5" opacity="0.32"/>
-              <circle class="ring ring-c" cx="210" cy="210" r="96" stroke="currentColor" stroke-width="1.25" opacity="0.78"/>
-              <circle class="ring ring-i" cx="210" cy="210" r="76" stroke="currentColor" stroke-width="0.55" opacity="0.36"/>
-              <circle class="ring ring-d" cx="210" cy="210" r="58" stroke="currentColor" stroke-width="1.45" opacity="0.85"/>
-              <circle class="ring ring-inner" cx="210" cy="210" r="36" stroke="currentColor" stroke-width="0.9" opacity="0.55"/>
-              <circle class="ring ring-core" cx="210" cy="210" r="18" fill="url(#coreGrad)" opacity="0.85"/>
-              <circle class="ring ring-core-stroke" cx="210" cy="210" r="18" stroke="currentColor" stroke-width="1.1" fill="none" opacity="0.55"/>
-            </g>
-            <g class="mandala-petals" stroke="url(#petalStrokeShine)" stroke-width="1.85" fill="none" opacity="1">
-              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z"/>
-              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z" transform="rotate(45 210 210)"/>
-              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z" transform="rotate(90 210 210)"/>
-              <path d="M210 42 C240 110 240 110 210 178 C180 110 180 110 210 42Z" transform="rotate(135 210 210)"/>
-            </g>
-            <g class="mandala-petals-sub" stroke="currentColor" stroke-width="1.45" fill="none" opacity="0.88">
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(22.5 210 210)"/>
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(67.5 210 210)"/>
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(112.5 210 210)"/>
-              <path d="M210 42 C238 110 238 110 210 178 C182 110 182 110 210 42Z" transform="rotate(157.5 210 210)"/>
-            </g>
-            <!-- Tiny diamond / spark marks on mid ring -->
-            <g class="mandala-sparks" fill="currentColor" opacity="0.55">
-              <path class="spark-mark" d="M210 54 L213 60 L210 66 L207 60 Z"/>
-              <path class="spark-mark delay" d="M210 54 L213 60 L210 66 L207 60 Z" transform="rotate(90 210 210)"/>
-              <path class="spark-mark delay2" d="M210 54 L213 60 L210 66 L207 60 Z" transform="rotate(180 210 210)"/>
-              <path class="spark-mark delay3" d="M210 54 L213 60 L210 66 L207 60 Z" transform="rotate(270 210 210)"/>
-              <path class="spark-mark gold" d="M366 210 L369 214 L366 218 L363 214 Z" opacity="0.7"/>
-              <path class="spark-mark gold delay" d="M54 210 L57 214 L54 218 L51 214 Z" opacity="0.65"/>
-            </g>
-            <g class="mandala-orbit">
-              <circle class="orbit-dot" cx="210" cy="42" r="3.2" fill="currentColor"/>
-              <circle class="orbit-dot delay" cx="378" cy="210" r="2.6" fill="currentColor" opacity="0.75"/>
-              <circle class="orbit-dot delay2" cx="210" cy="378" r="2.2" fill="currentColor" opacity="0.6"/>
-              <circle class="orbit-dot delay3" cx="42" cy="210" r="2.4" fill="currentColor" opacity="0.65"/>
-              <circle class="orbit-dot gold" cx="329" cy="91" r="1.8" fill="currentColor" opacity="0.55"/>
-              <circle class="orbit-dot clay" cx="91" cy="329" r="1.6" fill="currentColor" opacity="0.5"/>
-            </g>
-            <g class="mandala-orbit-mid">
-              <circle class="orbit-dot-mid" cx="210" cy="78" r="2" fill="currentColor" opacity="0.55"/>
-              <circle class="orbit-dot-mid delay" cx="342" cy="210" r="1.7" fill="currentColor" opacity="0.45"/>
-              <circle class="orbit-dot-mid delay2" cx="210" cy="342" r="1.5" fill="currentColor" opacity="0.4"/>
-              <circle class="orbit-dot-mid delay3" cx="78" cy="210" r="1.6" fill="currentColor" opacity="0.45"/>
-              <circle class="orbit-dot-mid gold" cx="303" cy="117" r="1.3" fill="currentColor" opacity="0.5"/>
-              <circle class="orbit-dot-mid gold delay" cx="117" cy="303" r="1.2" fill="currentColor" opacity="0.45"/>
-            </g>
-            <g class="mandala-orbit-outer">
-              <circle class="orbit-dot-outer" cx="210" cy="14" r="1.9" fill="currentColor" opacity="0.55"/>
-              <circle class="orbit-dot-outer delay" cx="406" cy="210" r="1.7" fill="currentColor" opacity="0.45"/>
-              <circle class="orbit-dot-outer delay2" cx="210" cy="406" r="1.5" fill="currentColor" opacity="0.4"/>
-              <circle class="orbit-dot-outer delay3" cx="14" cy="210" r="1.6" fill="currentColor" opacity="0.45"/>
-              <circle class="orbit-dot-outer gold" cx="349" cy="71" r="1.3" fill="currentColor" opacity="0.5"/>
-              <circle class="orbit-dot-outer clay" cx="71" cy="349" r="1.2" fill="currentColor" opacity="0.42"/>
-              <circle class="orbit-dot-outer gold delay" cx="349" cy="349" r="1.25" fill="currentColor" opacity="0.4"/>
-              <circle class="orbit-dot-outer clay delay2" cx="71" cy="71" r="1.15" fill="currentColor" opacity="0.38"/>
-            </g>
-          </svg>
+          <svg class="hero-mandala" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <defs>
+    <radialGradient id="breathCore" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="var(--mandala-core)" stop-opacity=".9"/>
+      <stop offset="58%" stop-color="var(--mandala-core)" stop-opacity=".22"/>
+      <stop offset="100%" stop-color="var(--mandala-core)" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="breathTrace" x1="60" y1="50" x2="440" y2="450" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="var(--mandala-soft)" stop-opacity=".16"/>
+      <stop offset="45%" stop-color="var(--mandala-accent)" stop-opacity=".72"/>
+      <stop offset="100%" stop-color="var(--mandala-soft)" stop-opacity=".12"/>
+    </linearGradient>
+  </defs>
+
+  <g class="mandala-rings" stroke="currentColor" fill="none">
+    <circle cx="250" cy="250" r="214" stroke-width="1" stroke-dasharray="1 11" opacity=".32"/>
+    <circle cx="250" cy="250" r="182" stroke-width="1" opacity=".26"/>
+    <circle cx="250" cy="250" r="148" stroke-width="1.1" opacity=".34"/>
+    <circle cx="250" cy="250" r="112" stroke-width=".9" stroke-dasharray="2 8" opacity=".28"/>
+    <circle cx="250" cy="250" r="76" stroke-width="1.2" opacity=".36"/>
+  </g>
+
+  <g class="mandala-petals" stroke="url(#breathTrace)" stroke-width="1.35" fill="none">
+    <ellipse cx="250" cy="250" rx="64" ry="188"/>
+    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(30 250 250)"/>
+    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(60 250 250)"/>
+    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(90 250 250)"/>
+    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(120 250 250)"/>
+    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(150 250 250)"/>
+  </g>
+
+  <g class="mandala-orbit-outer" stroke="currentColor" fill="none" opacity=".56">
+    <path d="M92 166 A188 188 0 0 1 348 92" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M408 334 A188 188 0 0 1 152 408" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+
+  <g class="mandala-sparks" fill="currentColor" opacity=".65">
+    <circle cx="250" cy="42" r="2.5"/>
+    <circle cx="458" cy="250" r="2"/>
+    <circle cx="250" cy="458" r="1.8"/>
+    <circle cx="42" cy="250" r="2"/>
+  </g>
+
+  <circle cx="250" cy="250" r="42" fill="url(#breathCore)"/>
+  <circle class="ring-core-stroke" cx="250" cy="250" r="10" stroke="currentColor" stroke-width="1.2" opacity=".75"/>
+  <circle cx="250" cy="250" r="2.5" fill="currentColor"/>
+</svg>
         </div>
         <svg class="hero-breath-wave" viewBox="0 0 640 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <path class="breath-wave-path" d="M0 52 C80 52 80 22 160 22 C240 22 240 68 320 68 C400 68 400 28 480 28 C560 28 560 52 640 52" stroke="currentColor" stroke-width="2.4" fill="none" opacity="0.72"/>
@@ -271,6 +205,11 @@
         <p class="breath-caption"><span class="breath-phase" data-i18n="breathLabel">4 · 7 · 8</span></p>
       </div>
       <div class="hero-stage">
+        <div class="hero-rail" aria-hidden="true">
+          <span>01</span>
+          <i></i>
+          <span>YOGA · MURCIA</span>
+        </div>
         <div class="hero-inner">
           <p class="kicker" data-i18n="heroKicker">INSTRUCTOR DE YOGA CERTIFICADO · MURCIA</p>
           <h1 data-i18n-html="heroTitle">Presencia.<br>Respiración.<br><em>Práctica real.</em></h1>
@@ -282,18 +221,12 @@
             <a class="btn ghost" href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-i18n="heroCta2">CV Yoga</a>
             <a class="btn ghost" href="https://gracianb.github.io/GracianB/" target="_blank" rel="noreferrer" data-i18n="heroCta3">El otro track →</a>
           </div>
-          <div class="hero-presence-strip" aria-label="Yoga presence">
-            <p class="presence-kicker">
-              <span data-i18n="cardLabel">YOGA · PRESENCE</span>
-              <span class="presence-sep" aria-hidden="true">·</span>
-              <span>MURCIA</span>
-            </p>
-            <p class="presence-sub" data-i18n="cardSub">Asana · Pranayama · Mindfulness · Facilitación</p>
-            <ul class="presence-items">
-              <li><span>01</span><b data-i18n="card1">Presencia en sala</b></li>
-              <li><span>02</span><b data-i18n="card2">Adaptación a niveles</b></li>
-              <li><span>03</span><b data-i18n="card3">Bienestar de equipos</b></li>
-            </ul>
+          <div class="hero-manifesto">
+            <span class="manifesto-rule" aria-hidden="true"></span>
+            <div>
+              <p class="manifesto-lead" data-i18n="heroManifesto">Práctica que escucha antes de corregir.</p>
+              <p class="manifesto-tags" data-i18n="heroTags">ASANA · PRANAYAMA · PRESENCIA</p>
+            </div>
           </div>
           <ul class="hero-stats">
             <li><strong>2019</strong><span data-i18n="stat1">Certificación oficial · Madrid</span></li>
@@ -401,7 +334,7 @@
             <button type="button" class="player-mute" id="audio-mute" data-i18n="fieldMute">Mute</button>
             <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" aria-label="Volume">
           </div>
-          <a class="player-link" href="https://suno.com/s/Zq81WeM02AVZnhuC" target="_blank" rel="noreferrer">Suno ↗</a>
+          <a class="player-link" href="https://suno.com/s/PHeOwQjKN3xHHcmM" target="_blank" rel="noreferrer">Suno ↗</a>
           <a class="player-link player-vortex" href="https://vortex-gilt-xi.vercel.app/" target="_blank" rel="noreferrer" data-i18n="fieldOpen">Abrir ↗</a>
           <audio id="focus-audio" src="./audio/sustained-focus.mp3" preload="metadata" loop></audio>
         </div>

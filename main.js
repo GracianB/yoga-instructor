@@ -243,6 +243,7 @@
   const hero = document.querySelector(".hero");
   if (hero) {
     const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
     if (reduce) {
       hero.setAttribute("data-breath", "still");
       document.documentElement.classList.add("reduce-motion");
@@ -265,20 +266,26 @@
       setInterval(tick, 200);
 
       // Subtle pointer parallax → --px / --py on .hero (~±14px)
-      const max = 14;
+      const max = 8;
       const onMove = (e) => {
         const r = hero.getBoundingClientRect();
         const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
         const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
         hero.style.setProperty("--px", (x * max).toFixed(2) + "px");
         hero.style.setProperty("--py", (y * max).toFixed(2) + "px");
+        hero.style.setProperty("--copy-x", (x * -4).toFixed(2) + "px");
+        hero.style.setProperty("--copy-y", (y * -2).toFixed(2) + "px");
       };
       const onLeave = () => {
         hero.style.setProperty("--px", "0px");
         hero.style.setProperty("--py", "0px");
+        hero.style.setProperty("--copy-x", "0px");
+        hero.style.setProperty("--copy-y", "0px");
       };
-      hero.addEventListener("pointermove", onMove);
-      hero.addEventListener("pointerleave", onLeave);
+      if (finePointer) {
+        hero.addEventListener("pointermove", onMove);
+        hero.addEventListener("pointerleave", onLeave);
+      }
     }
   }
 

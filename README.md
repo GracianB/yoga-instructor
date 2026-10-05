@@ -20,6 +20,26 @@
 
 Una práctica para volver a donde estás. Sin competir. Sin postureo.
 
+
+### Living Sanctuary · 10 fases
+
+Esta versión trata la web como un pequeño espacio de práctica, no como un portfolio estático.
+
+| Fase | Decisión |
+| --- | --- |
+| 01 | Replantear la home como santuario digital |
+| 02 | Dar al hero una respiración visual propia |
+| 03 | Convertir Ritual en estados, no en navegación decorativa |
+| 04 | Añadir **One Breath**, una micropráctica real |
+| 05 | Hacer que presencia, cursor y scroll modulen el ambiente |
+| 06 | Convertir la música en un órgano visual suave |
+| 07 | Recordar intención y contexto sin perseguir al visitante |
+| 08 | Crear **Quiet Mode** para apagar el ruido |
+| 09 | Blindar accesibilidad, tamaño y sintaxis en CI |
+| 10 | Documentar, publicar y proteger la experiencia |
+
+La regla de diseño es sencilla: **la interfaz puede reaccionar, pero nunca debe exigir atención**.
+
 ### El ritual
 
 La home no empieza pidiendo una clase. Empieza preguntando cómo llegas. El módulo interactivo **Ritual** permite elegir entre aterrizar, mover, afinar o compartir y convierte cada intención en una ruta distinta dentro de la práctica.
@@ -198,3 +218,14 @@ This is door 03. It does not compete with the [deck](https://gracianb.github.io/
 <sub>Murcia · 2026</sub>
 
 </div>
+
+
+### Art direction 4 · Quiet Geometry
+
+La portada se rehízo en 10 fases de dirección visual: arquitectura editorial, jerarquía tipográfica, geometría de respiración, dos mundos cromáticos, composición asimétrica, profundidad mínima, secuencia de llegada, responsive móvil, accesibilidad/performance y contratos de calidad.
+
+La idea no es representar yoga con más ornamento. Es hacer que la primera pantalla se comporte como una sala: entra luz, existe silencio, el texto tiene espacio y la geometría acompaña sin pedir protagonismo.
+
+**Regla de diseño:** menos símbolos, más intención.
+
+Visual QA baseline: Quiet Geometry hero · desktop + mobile · ES/EN · light/dark · reduced motion.

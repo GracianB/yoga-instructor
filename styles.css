@@ -2982,3 +2982,63 @@ body {
     21%,58% { transform: translateY(-50%) rotate(-5deg) scale(1.008); }
   }
 }
+
+
+/* ================================================================
+   PHASE 04 · TWO TRUE WORLDS
+   Light and dark share the same DNA without being inverted copies.
+   ================================================================ */
+[data-theme="light"] body {
+  background:
+    radial-gradient(900px 520px at 78% 8%, rgba(92,130,105,.11), transparent 72%),
+    radial-gradient(720px 520px at 8% 92%, rgba(173,122,92,.07), transparent 72%),
+    linear-gradient(180deg,#eee9de 0%,#e7e0d2 50%,#eee9de 100%);
+}
+[data-theme="light"] .site-header {
+  background: rgba(238,233,222,.72);
+  box-shadow: 0 1px 0 rgba(31,48,39,.04);
+}
+[data-theme="light"] .btn.primary {
+  background: #214b38;
+  color: #f8f5ed;
+  box-shadow: 0 12px 28px rgba(33,75,56,.18);
+}
+[data-theme="light"] .btn.primary:hover {
+  background: #173d2c;
+}
+[data-theme="light"] .btn.ghost {
+  background: rgba(248,245,237,.36);
+  border-color: rgba(33,75,56,.22);
+  color: #214b38;
+}
+[data-theme="light"] .btn.ghost:hover {
+  background: rgba(79,118,95,.08);
+  border-color: rgba(33,75,56,.36);
+}
+[data-theme="dark"] body {
+  background:
+    radial-gradient(900px 620px at 78% 4%, rgba(128,183,152,.13), transparent 70%),
+    radial-gradient(720px 540px at 6% 90%, rgba(189,125,109,.06), transparent 72%),
+    linear-gradient(180deg,#09130f 0%,#0c1812 52%,#09130f 100%);
+}
+[data-theme="dark"] .site-header {
+  background: rgba(9,19,15,.72);
+  box-shadow: 0 1px 0 rgba(237,241,233,.03);
+}
+[data-theme="dark"] .btn.primary {
+  background: #93c5a6;
+  color: #09130f;
+  box-shadow: 0 14px 34px rgba(93,163,122,.16);
+}
+[data-theme="dark"] .btn.primary:hover {
+  background: #b0d5bb;
+}
+[data-theme="dark"] .btn.ghost {
+  background: rgba(17,29,23,.34);
+  border-color: rgba(166,209,183,.22);
+  color: #dfe9e1;
+}
+[data-theme="dark"] .btn.ghost:hover {
+  background: rgba(128,183,152,.08);
+  border-color: rgba(166,209,183,.38);
+}

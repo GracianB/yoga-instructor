@@ -22,6 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css?v=quiet-geometry-5">
   <link rel="stylesheet" href="./hero-live-fix.css?v=hero-live-1">
+  <link rel="stylesheet" href="./art-direction-final.css?v=art-2">
   <script>
     /* zen intro boot — decide before first paint, with failsafe */
     (function () {
@@ -153,50 +154,66 @@
           <div class="mandala-conic-halo" aria-hidden="true"></div>
           <svg class="hero-mandala" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <radialGradient id="breathCore" cx="50%" cy="50%" r="50%">
+    <radialGradient id="sanctuaryCore" cx="50%" cy="50%" r="50%">
       <stop offset="0%" stop-color="var(--mandala-core)" stop-opacity=".9"/>
-      <stop offset="58%" stop-color="var(--mandala-core)" stop-opacity=".22"/>
+      <stop offset="42%" stop-color="var(--mandala-core)" stop-opacity=".18"/>
       <stop offset="100%" stop-color="var(--mandala-core)" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="breathTrace" x1="60" y1="50" x2="440" y2="450" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="var(--mandala-soft)" stop-opacity=".16"/>
-      <stop offset="45%" stop-color="var(--mandala-accent)" stop-opacity=".72"/>
-      <stop offset="100%" stop-color="var(--mandala-soft)" stop-opacity=".12"/>
+    <linearGradient id="sanctuaryTrace" x1="70" y1="70" x2="430" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="var(--mandala-soft)" stop-opacity=".18"/>
+      <stop offset="48%" stop-color="var(--mandala-accent)" stop-opacity=".78"/>
+      <stop offset="100%" stop-color="var(--mandala-soft)" stop-opacity=".16"/>
     </linearGradient>
   </defs>
 
   <g class="mandala-rings" stroke="currentColor" fill="none">
-    <circle cx="250" cy="250" r="214" stroke-width="1" stroke-dasharray="1 11" opacity=".32"/>
-    <circle cx="250" cy="250" r="182" stroke-width="1" opacity=".26"/>
-    <circle cx="250" cy="250" r="148" stroke-width="1.1" opacity=".34"/>
-    <circle cx="250" cy="250" r="112" stroke-width=".9" stroke-dasharray="2 8" opacity=".28"/>
-    <circle cx="250" cy="250" r="76" stroke-width="1.2" opacity=".36"/>
+    <circle cx="250" cy="250" r="232" stroke-width=".9" stroke-dasharray="1 13" opacity=".34"/>
+    <circle cx="250" cy="250" r="202" stroke-width="1" opacity=".26"/>
+    <circle cx="250" cy="250" r="164" stroke-width="1.1" opacity=".38"/>
+    <circle cx="250" cy="250" r="124" stroke-width=".9" stroke-dasharray="2 9" opacity=".34"/>
+    <circle cx="250" cy="250" r="84" stroke-width="1.2" opacity=".42"/>
+    <circle cx="250" cy="250" r="48" stroke-width="1" opacity=".32"/>
   </g>
 
-  <g class="mandala-petals" stroke="url(#breathTrace)" stroke-width="1.35" fill="none">
-    <ellipse cx="250" cy="250" rx="64" ry="188"/>
-    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(30 250 250)"/>
-    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(60 250 250)"/>
-    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(90 250 250)"/>
-    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(120 250 250)"/>
-    <ellipse cx="250" cy="250" rx="64" ry="188" transform="rotate(150 250 250)"/>
+  <g class="mandala-petals" stroke="url(#sanctuaryTrace)" stroke-width="1.35" fill="none">
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z"/>
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(45 250 250)"/>
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(90 250 250)"/>
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(135 250 250)"/>
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(180 250 250)"/>
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(225 250 250)"/>
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(270 250 250)"/>
+    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(315 250 250)"/>
   </g>
 
-  <g class="mandala-orbit-outer" stroke="currentColor" fill="none" opacity=".56">
-    <path d="M92 166 A188 188 0 0 1 348 92" stroke-width="1.2" stroke-linecap="round"/>
-    <path d="M408 334 A188 188 0 0 1 152 408" stroke-width="1.2" stroke-linecap="round"/>
+  <g class="mandala-petals-sub" stroke="currentColor" stroke-width=".8" fill="none">
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z"/>
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(45 250 250)"/>
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(90 250 250)"/>
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(135 250 250)"/>
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(180 250 250)"/>
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(225 250 250)"/>
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(270 250 250)"/>
+    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(315 250 250)"/>
   </g>
 
-  <g class="mandala-sparks" fill="currentColor" opacity=".65">
-    <circle cx="250" cy="42" r="2.5"/>
-    <circle cx="458" cy="250" r="2"/>
-    <circle cx="250" cy="458" r="1.8"/>
-    <circle cx="42" cy="250" r="2"/>
+  <g class="mandala-orbit-outer" stroke="currentColor" fill="none" stroke-linecap="round">
+    <path d="M88 250 A162 162 0 0 1 250 88" stroke-width="1.4" opacity=".58"/>
+    <path d="M412 250 A162 162 0 0 1 250 412" stroke-width="1.4" opacity=".58"/>
   </g>
 
-  <circle cx="250" cy="250" r="42" fill="url(#breathCore)"/>
-  <circle class="ring-core-stroke" cx="250" cy="250" r="10" stroke="currentColor" stroke-width="1.2" opacity=".75"/>
-  <circle cx="250" cy="250" r="2.5" fill="currentColor"/>
+  <g class="mandala-sparks" fill="currentColor" opacity=".78">
+    <circle cx="250" cy="18" r="2.4"/>
+    <circle cx="482" cy="250" r="2"/>
+    <circle cx="250" cy="482" r="1.7"/>
+    <circle cx="18" cy="250" r="2"/>
+    <circle cx="414" cy="86" r="1.6"/>
+    <circle cx="86" cy="414" r="1.5"/>
+  </g>
+
+  <circle cx="250" cy="250" r="54" fill="url(#sanctuaryCore)"/>
+  <circle class="ring-core-stroke" cx="250" cy="250" r="17" stroke="currentColor" stroke-width="1.2" opacity=".74"/>
+  <circle cx="250" cy="250" r="4" fill="var(--mandala-accent)"/>
 </svg>
         </div>
         <svg class="hero-breath-wave" viewBox="0 0 640 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">

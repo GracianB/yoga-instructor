@@ -3261,3 +3261,101 @@ html.intro-done .zintro {
   html.intro-on .zintro { display: none !important; }
   .zintro-mandala { animation: none !important; }
 }
+
+
+/* ================================================================
+   PHASE 08 · MOBILE COMPOSITION
+   Same art direction, rebuilt for a hand-sized viewport.
+   ================================================================ */
+@media (max-width: 900px) {
+  .hero {
+    padding-inline: 18px !important;
+  }
+  .hero-stage {
+    grid-template-columns: 1fr !important;
+    min-height: 790px;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border-radius: 0 !important;
+  }
+  .hero-rail {
+    display: none;
+  }
+  .hero-inner {
+    grid-column: 1 !important;
+    padding: 46px 0 122px !important;
+    max-width: 100% !important;
+    z-index: 6;
+  }
+  .hero-stage::before {
+    left: auto !important;
+    right: 9% !important;
+    top: 12% !important;
+    bottom: 24% !important;
+  }
+  .hero-stage::after {
+    left: 8% !important;
+    right: -20% !important;
+    bottom: 19% !important;
+  }
+  .hero-mandala {
+    width: min(82vw, 460px) !important;
+    height: min(82vw, 460px) !important;
+    right: -23% !important;
+    top: 4% !important;
+    transform: rotate(-7deg) !important;
+    opacity: .27 !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: .34 !important; }
+  .hero h1 {
+    max-width: 7.7ch !important;
+    font-size: clamp(54px, 15.4vw, 88px) !important;
+  }
+  .hero h1 .hero-line-b { margin-left: .12em; }
+  .hero h1 .hero-line-c {
+    margin-left: .42em !important;
+    font-size: .63em !important;
+  }
+  .hero-lead {
+    max-width: 33ch !important;
+    margin-top: 24px !important;
+  }
+  .hero-manifesto {
+    max-width: 92%;
+    margin-top: 26px;
+  }
+  .hero-stats {
+    grid-template-columns: repeat(2,1fr) !important;
+    max-width: 88%;
+    margin-top: 16px !important;
+  }
+  .hero-stats li {
+    padding-right: 12px !important;
+  }
+  .hero-stats li + li {
+    padding-left: 12px !important;
+  }
+}
+@media (max-width: 560px) {
+  .hero-stage { min-height: 760px; }
+  .hero-inner { padding-top: 34px !important; }
+  .hero h1 { font-size: clamp(50px,16vw,76px) !important; }
+  .hero-lead { font-size: 15px !important; line-height: 1.58 !important; }
+  .hero-actions { align-items: flex-start; }
+  .hero-actions .btn {
+    width: auto !important;
+    min-width: 0;
+  }
+  .hero-actions .btn.primary { padding-inline: 20px; }
+  .hero-mandala {
+    right: -34% !important;
+    top: 2% !important;
+    opacity: .22 !important;
+  }
+  [data-theme="dark"] .hero-mandala { opacity: .29 !important; }
+  .hero-manifesto {
+    max-width: 100%;
+    grid-template-columns: 16px 1fr;
+  }
+  .hero-stats { max-width: 100%; }
+}

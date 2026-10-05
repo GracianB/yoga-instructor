@@ -17,8 +17,8 @@
 
   function syncCvLinks() {
     const href = lang === "en"
-      ? "./Gracian_Baena_CV_Yoga_EN.pdf"
-      : "./Gracian_Baena_CV_Yoga_ES.pdf";
+      ? "./assets/CV_Gracian_Baena_Yoga_EN.pdf"
+      : "./assets/CV_Gracian_Baena_Yoga_ES.pdf";
     const letter = lang === "en"
       ? "./Gracian_Baena_Cover_Letter_Yoga_EN.pdf"
       : "./Gracian_Baena_Carta_Yoga_ES.pdf";

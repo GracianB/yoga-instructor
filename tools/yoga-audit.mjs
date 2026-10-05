@@ -45,7 +45,7 @@ for (const [name, ok] of required) (ok ? pass : fail).push(name);
 
 if (!/src="\.\/main\.js[^"]*"/.test(index)) fail.push("main.js include");
 if (!/src="\.\/sanctuary-experience\.js[^"]*"/.test(index)) fail.push("sanctuary-experience.js include");
-if (!/styles\.css\?v=sanctuary-1/.test(index)) fail.push("sanctuary cache bust");
+if (!/styles\.css\?v=quiet-geometry-4/.test(index)) fail.push("sanctuary cache bust");
 if (/(?:href|src)\s*=\s*["']http:\/\//i.test(index + main + css)) fail.push("insecure http resource URL");
 if ((index.match(/<section\b/g) || []).length !== (index.match(/<\/section>/g) || []).length) fail.push("section balance");
 

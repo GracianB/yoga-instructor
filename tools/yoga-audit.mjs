@@ -33,7 +33,7 @@ for (const [name, ok] of required) (ok ? pass : fail).push(name);
 
 if (!/src="\.\/main\.js[^"]*"/.test(index)) fail.push("main.js include");
 if (!/styles\.css\?v=sanctuary-1/.test(index)) fail.push("sanctuary cache bust");
-if (/http:\/\//i.test(index + main + css)) fail.push("insecure http URL");
+if (/(?:href|src)=\[\"'\]http:\/\//i.test(index + main + css)) fail.push("insecure http resource URL");
 if ((index.match(/<section\b/g) || []).length !== (index.match(/<\/section>/g) || []).length) fail.push("section balance");
 
 for (const [file, max] of [

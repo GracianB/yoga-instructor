@@ -218,3 +218,12 @@ This is door 03. It does not compete with the [deck](https://gracianb.github.io/
 <sub>Murcia · 2026</sub>
 
 </div>
+
+
+### Art direction 4 · Quiet Geometry
+
+La portada se rehízo en 10 fases de dirección visual: arquitectura editorial, jerarquía tipográfica, geometría de respiración, dos mundos cromáticos, composición asimétrica, profundidad mínima, secuencia de llegada, responsive móvil, accesibilidad/performance y contratos de calidad.
+
+La idea no es representar yoga con más ornamento. Es hacer que la primera pantalla se comporte como una sala: entra luz, existe silencio, el texto tiene espacio y la geometría acompaña sin pedir protagonismo.
+
+**Regla de diseño:** menos símbolos, más intención.

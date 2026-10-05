@@ -215,7 +215,7 @@ window.YOGA_I18N = {
     fieldKicker: "FIELD · PULSE",
     fieldH2: "Breathe.<br><em>Or enter the vortex.</em>",
     fieldP: "The same presence, another medium. A slow instrumental for practice — and the particle field if you want to play.",
-    fieldTrack: "SILENCE BETWEEN NOTES"
+    fieldTrack: "SILENCE BETWEEN NOTES",
     fieldTrackP: "Instrumental for Sanctuary · soft pulse · ~62 BPM",
     fieldPlay: "Play",
     fieldPause: "Pause",

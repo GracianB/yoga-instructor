@@ -6656,4 +6656,32 @@ html.intro-done .zintro {
     transition: none;
   }
 }
-\n\n/* ================================================================\n   INSTRUCTOR SESSION CLOCK · #36\n   ================================================================ */\n.flow-session-clock {\n  display: grid;\n  gap: .2rem;\n  justify-items: end;\n  min-width: 5.5rem;\n}\n\n.flow-session-clock span {\n  font: 700 .62rem/1 JetBrains Mono, monospace;\n  letter-spacing: .14em;\n  opacity: .55;\n}\n\n.flow-session-clock strong {\n  font: 600 1.05rem/1 Inter, sans-serif;\n  font-variant-numeric: tabular-nums;\n  letter-spacing: .04em;\n}\n\n@media (max-width: 640px) {\n  .flow-session-clock {\n    justify-items: start;\n  }\n}\n
+
+
+/* ================================================================
+   INSTRUCTOR SESSION CLOCK · #36
+   ================================================================ */
+.flow-session-clock {
+  display: grid;
+  gap: .2rem;
+  justify-items: end;
+  min-width: 5.5rem;
+}
+
+.flow-session-clock span {
+  font: 700 .62rem/1 JetBrains Mono, monospace;
+  letter-spacing: .14em;
+  opacity: .55;
+}
+
+.flow-session-clock strong {
+  font: 600 1.05rem/1 Inter, sans-serif;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .04em;
+}
+
+@media (max-width: 640px) {
+  .flow-session-clock {
+    justify-items: start;
+  }
+}

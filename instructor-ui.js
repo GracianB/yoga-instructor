@@ -13,6 +13,8 @@
   const sessionTime = document.getElementById("flow-session-time");
   const phaseTime = document.getElementById("flow-phase-time");
   const phaseProgress = document.getElementById("flow-phase-progress-bar");
+  const phaseCue = document.getElementById("flow-phase-cue");
+  const phaseTarget = document.getElementById("flow-phase-target");
   const phaseLabel = document.getElementById("flow-phase-label");
   const phaseMeta = document.getElementById("flow-phase-meta");
   const state = document.getElementById("flow-state");
@@ -129,8 +131,10 @@
       const elapsed = phase.snapshot().elapsedSeconds;
       const duration = snapshot.durationSeconds || 0;
       const remaining = Math.max(0, duration - elapsed);
+      if (phaseCue) phaseCue.textContent = snapshot.cue || "";
+      if (phaseTarget) phaseTarget.textContent = formatTime(duration);
       phaseTime.textContent = formatTime(remaining);
-      phaseTime.setAttribute("aria-label", `Tiempo restante de fase: ${formatTime(remaining)}`);
+      phaseTime.setAttribute("aria-label", `Tiempo restante de fase: ${formatTime(remaining)}. Objetivo: ${formatTime(duration)}`);
       if (phaseProgress) phaseProgress.style.transform = `scaleX(${duration ? Math.min(1, elapsed / duration) : 0})`;
     }
   };

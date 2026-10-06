@@ -11,7 +11,7 @@
 
     get elapsed() {
       if (this.startedAt === null) return this.elapsedBeforeStart;
-      return Math.max(0, this.now() - this.startedAt);
+      return Math.max(0, this.elapsedBeforeStart + this.now() - this.startedAt);
     }
 
     snapshot() {

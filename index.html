@@ -153,65 +153,69 @@
           <div class="mandala-conic-halo" aria-hidden="true"></div>
           <svg class="hero-mandala" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <radialGradient id="lotusAura" cx="50%" cy="48%" r="52%">
-      <stop offset="0%" stop-color="var(--mandala-core)" stop-opacity=".22"/>
-      <stop offset="46%" stop-color="var(--mandala-core)" stop-opacity=".06"/>
-      <stop offset="100%" stop-color="var(--mandala-core)" stop-opacity="0"/>
+    <radialGradient id="lotusHalo" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="var(--lotus-color)" stop-opacity=".12"/>
+      <stop offset="48%" stop-color="var(--lotus-color)" stop-opacity=".035"/>
+      <stop offset="100%" stop-color="var(--lotus-color)" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="lotusTrace" x1="130" y1="90" x2="430" y2="470" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="var(--mandala-soft)" stop-opacity=".42"/>
-      <stop offset="52%" stop-color="var(--mandala-accent)" stop-opacity=".82"/>
-      <stop offset="100%" stop-color="var(--mandala-soft)" stop-opacity=".32"/>
+    <linearGradient id="lotusInk" x1="160" y1="110" x2="400" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="var(--lotus-highlight)"/>
+      <stop offset="52%" stop-color="var(--lotus-color)"/>
+      <stop offset="100%" stop-color="var(--lotus-color)" stop-opacity=".64"/>
     </linearGradient>
   </defs>
 
-  <circle cx="280" cy="280" r="250" fill="url(#lotusAura)"/>
-  <g class="lotus-guide" stroke="currentColor" fill="none">
-    <circle cx="280" cy="280" r="238" stroke-width=".8" stroke-dasharray="2 15" opacity=".28"/>
-    <circle cx="280" cy="280" r="206" stroke-width="1" opacity=".25"/>
-    <circle cx="280" cy="280" r="174" stroke-width="1" opacity=".36"/>
-    <circle cx="280" cy="280" r="116" stroke-width=".9" stroke-dasharray="2 10" opacity=".28"/>
+  <circle cx="280" cy="280" r="242" fill="url(#lotusHalo)" class="lotus-halo"/>
+
+  <g class="lotus-guide" stroke="var(--lotus-guide)" fill="none">
+    <circle cx="280" cy="280" r="236" stroke-width=".8" stroke-dasharray="1 16"/>
+    <circle cx="280" cy="280" r="204" stroke-width=".9" opacity=".62"/>
+    <circle cx="280" cy="280" r="171" stroke-width=".9" opacity=".74"/>
+    <circle cx="280" cy="280" r="112" stroke-width=".8" stroke-dasharray="1 11" opacity=".68"/>
   </g>
 
-  <g class="mandala-lotus" stroke="url(#lotusTrace)" stroke-width="1.8" fill="none" stroke-linejoin="round">
-    <path d="M280 70 C250 108 238 156 280 226 C322 156 310 108 280 70 Z"/>
-    <path d="M280 88 C324 126 346 162 326 225 C294 196 281 158 280 88 Z"/>
-    <path d="M280 88 C236 126 214 162 234 225 C266 196 279 158 280 88 Z"/>
-    <path d="M182 150 C222 160 254 184 266 236 C221 230 191 202 182 150 Z"/>
-    <path d="M378 150 C338 160 306 184 294 236 C339 230 369 202 378 150 Z"/>
-    <path d="M148 218 C192 214 230 228 256 270 C207 286 166 268 148 218 Z"/>
-    <path d="M412 218 C368 214 330 228 304 270 C353 286 394 268 412 218 Z"/>
-    <path d="M165 332 C205 296 244 290 280 304 C244 352 207 369 165 332 Z"/>
-    <path d="M395 332 C355 296 316 290 280 304 C316 352 353 369 395 332 Z"/>
-    <path d="M206 394 C232 360 258 344 280 338 C302 344 328 360 354 394 C310 418 250 418 206 394 Z"/>
-    <path d="M218 420 C238 396 258 387 280 384 C302 387 322 396 342 420 C306 446 250 448 218 420 Z"/>
+  <!-- unmistakable lotus blossom -->
+  <g class="lotus-bloom" stroke="url(#lotusInk)" stroke-linejoin="round">
+    <!-- crown -->
+    <path d="M280 96 C246 130 231 171 246 220 C258 207 272 190 280 164 C288 190 302 207 314 220 C329 171 314 130 280 96 Z"
+          fill="var(--lotus-fill)" stroke-width="2.3"/>
+    <!-- inner left/right -->
+    <path d="M280 122 C246 139 226 169 232 211 C254 205 272 188 280 156 C288 188 306 205 328 211 C334 169 314 139 280 122 Z"
+          fill="var(--lotus-fill-soft)" stroke-width="1.8"/>
+    <!-- side petals -->
+    <path d="M244 180 C203 183 173 207 157 244 C196 255 234 239 263 210 C257 197 251 188 244 180 Z"
+          fill="var(--lotus-fill)" stroke-width="2"/>
+    <path d="M316 180 C357 183 387 207 403 244 C364 255 326 239 297 210 C303 197 309 188 316 180 Z"
+          fill="var(--lotus-fill)" stroke-width="2"/>
+    <!-- lower petals -->
+    <path d="M263 210 C226 223 197 252 190 291 C222 302 259 281 280 246 C301 281 338 302 370 291 C363 252 334 223 297 210 C292 224 286 236 280 246 C274 236 268 224 263 210 Z"
+          fill="var(--lotus-fill-soft)" stroke-width="2"/>
+    <path d="M215 298 C231 340 254 369 280 389 C306 369 329 340 345 298 C321 318 299 327 280 327 C261 327 239 318 215 298 Z"
+          fill="var(--lotus-fill)" stroke-width="1.9"/>
+    <!-- base -->
+    <path d="M188 338 C213 365 245 382 280 383 C315 382 347 365 372 338 C347 350 319 356 280 356 C241 356 213 350 188 338 Z"
+          fill="var(--lotus-fill-soft)" stroke-width="1.8"/>
   </g>
 
-  <g class="lotus-inner" stroke="currentColor" fill="none" stroke-width="1">
-    <path d="M280 132 C260 164 260 198 280 230 C300 198 300 164 280 132 Z"/>
-    <path d="M280 154 C306 178 314 208 304 236"/>
-    <path d="M280 154 C254 178 246 208 256 236"/>
-    <path d="M208 206 C230 208 250 221 262 244"/>
-    <path d="M352 206 C330 208 310 221 298 244"/>
+  <g class="lotus-detail" stroke="var(--lotus-highlight)" stroke-width="1" opacity=".72">
+    <path d="M280 150 C270 181 271 211 280 244"/>
+    <path d="M246 216 C257 231 268 244 280 255"/>
+    <path d="M314 216 C303 231 292 244 280 255"/>
+    <path d="M216 300 C238 291 258 287 280 288"/>
+    <path d="M344 300 C322 291 302 287 280 288"/>
   </g>
 
-  <g class="mandala-orbit-outer" stroke="currentColor" fill="none" stroke-linecap="round">
-    <path d="M102 280 A178 178 0 0 1 280 102" stroke-width="1.25" stroke-dasharray="46 18" opacity=".62"/>
-    <path d="M458 280 A178 178 0 0 1 280 458" stroke-width="1.25" stroke-dasharray="46 18" opacity=".62"/>
+  <g class="mandala-orbit-outer" stroke="var(--lotus-guide)" fill="none" stroke-linecap="round" opacity=".72">
+    <path d="M100 280 A180 180 0 0 1 280 100" stroke-width="1.2" stroke-dasharray="44 20"/>
+    <path d="M460 280 A180 180 0 0 1 280 460" stroke-width="1.2" stroke-dasharray="44 20"/>
   </g>
 
-  <g class="mandala-sparks" fill="currentColor">
-    <circle cx="280" cy="34" r="2.3"/>
-    <circle cx="526" cy="280" r="1.8"/>
-    <circle cx="280" cy="526" r="1.6"/>
-    <circle cx="34" cy="280" r="1.8"/>
-    <circle cx="452" cy="108" r="1.5"/>
-    <circle cx="108" cy="452" r="1.5"/>
+  <g class="lotus-sparks" fill="var(--lotus-highlight)" opacity=".9">
+    <circle cx="280" cy="37" r="2"/>
+    <circle cx="523" cy="280" r="1.7"/>
+    <circle cx="280" cy="523" r="1.6"/>
+    <circle cx="37" cy="280" r="1.7"/>
   </g>
-
-  <circle cx="280" cy="280" r="68" fill="url(#lotusAura)"/>
-  <circle class="ring-core-stroke" cx="280" cy="280" r="30" stroke="currentColor" stroke-width="1.6" opacity=".7"/>
-  <circle cx="280" cy="280" r="7" fill="var(--mandala-accent)"/>
 </svg>
         </div>
         <svg class="hero-breath-wave" viewBox="0 0 640 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -265,7 +269,7 @@
     <h2 id="ritual-title" data-i18n-html="ritualH2">No necesitas llegar<br><em>de ninguna manera.</em></h2>
     <p class="about-lead" data-i18n="ritualLead">Elige cómo llegas hoy. La práctica puede empezar con quietud, movimiento, atención o compañía.</p>
 
-    <div class="ritual-arrival">
+    <div class="ritual-arrival" aria-live="polite">
       <div class="ritual-orb" aria-hidden="true">
         <span class="ritual-orb-ring"></span>
         <span class="ritual-orb-core"></span>
@@ -290,37 +294,22 @@
     <div class="ritual-choices" role="group" aria-label="Practice intention">
       <button class="ritual-choice is-active" type="button" data-practice="arrive" data-target="#sobre" aria-pressed="true">
         <span class="choice-index">01</span>
-        <span class="choice-copy">
-          <b data-i18n="ritual1t">Aterrizar</b>
-          <small data-i18n="ritual1p">Calmar, escuchar, estar.</small>
-        </span>
+        <span class="choice-copy"><b data-i18n="ritual1t">Aterrizar</b><small data-i18n="ritual1p">Calmar, escuchar, estar.</small></span>
         <span class="choice-arrow" aria-hidden="true">↗</span>
       </button>
-
       <button class="ritual-choice" type="button" data-practice="move" data-target="#campo" aria-pressed="false">
         <span class="choice-index">02</span>
-        <span class="choice-copy">
-          <b data-i18n="ritual2t">Mover</b>
-          <small data-i18n="ritual2p">Despertar el cuerpo sin prisa.</small>
-        </span>
+        <span class="choice-copy"><b data-i18n="ritual2t">Mover</b><small data-i18n="ritual2p">Despertar el cuerpo sin prisa.</small></span>
         <span class="choice-arrow" aria-hidden="true">↗</span>
       </button>
-
       <button class="ritual-choice" type="button" data-practice="focus" data-target="#filosofia" aria-pressed="false">
         <span class="choice-index">03</span>
-        <span class="choice-copy">
-          <b data-i18n="ritual3t">Afinar</b>
-          <small data-i18n="ritual3p">Respirar, observar, encontrar centro.</small>
-        </span>
+        <span class="choice-copy"><b data-i18n="ritual3t">Afinar</b><small data-i18n="ritual3p">Respirar, observar, encontrar centro.</small></span>
         <span class="choice-arrow" aria-hidden="true">↗</span>
       </button>
-
       <button class="ritual-choice" type="button" data-practice="share" data-target="#contacto" aria-pressed="false">
         <span class="choice-index">04</span>
-        <span class="choice-copy">
-          <b data-i18n="ritual4t">Compartir</b>
-          <small data-i18n="ritual4p">Llevar la práctica a una sala o equipo.</small>
-        </span>
+        <span class="choice-copy"><b data-i18n="ritual4t">Compartir</b><small data-i18n="ritual4p">Llevar la práctica a una sala o equipo.</small></span>
         <span class="choice-arrow" aria-hidden="true">↗</span>
       </button>
     </div>

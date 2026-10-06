@@ -216,9 +216,7 @@
       player?.classList.add("is-audio-error");
       playBtn.setAttribute("aria-label", i18nT().fieldAudioError || "Audio unavailable");
     });
-    audio.addEventListener("canplay", () => {
-      player?.classList.remove("is-audio-error");
-    });
+    audio.addEventListener("canplay", () => player?.classList.remove("is-audio-error"));
     audio.addEventListener("pause", () => {
       player?.classList.remove("is-playing");
       playBtn.setAttribute("aria-label", i18nT().fieldPlay || "Play");

@@ -64,7 +64,11 @@
     const paused = snapshot.status === "paused";
     const idle = snapshot.status === "idle";
 
-    if (sessionTime) {\n      sessionTime.setAttribute("aria-label", lang === "en" ? "Session time" : "Tiempo de sesión");\n    }\n\n    if (progressTrack) {
+    if (sessionTime) {
+      sessionTime.setAttribute("aria-label", lang === "en" ? "Session time" : "Tiempo de sesión");
+    }
+
+    if (progressTrack) {
       progressTrack.setAttribute("role", "progressbar");
       progressTrack.setAttribute("aria-valuemin", "1");
       progressTrack.setAttribute("aria-valuemax", String(snapshot.total));

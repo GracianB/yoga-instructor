@@ -425,3 +425,20 @@ if (fail.length) {
 
 console.log("YOGA QUALITY GATE — PASS");
 for (const item of pass) console.log("PASS", item);
+
+/* ================================================================
+   PHASE CLOCK · #37
+   ================================================================ */
+const phaseClock = read("flow-phase.js");
+const phaseClockTests = read("tests/phase-clock.test.mjs");
+if (
+  phaseClock.includes("class YogaPhaseClock") &&
+  phaseClock.includes("window.YOGA_PHASE") &&
+  phaseClockTests.includes("pause freezes phase time") &&
+  index.includes('id="flow-phase-time"') &&
+  instructorUi.includes("phaseTime")
+) {
+  pass.push("Instructor Phase Clock");
+} else {
+  fail.push("Instructor Phase Clock");
+}

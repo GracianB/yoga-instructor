@@ -66,3 +66,15 @@ test("Session Clock: reset returns to a clean idle state", () => {
   assert.equal(clock.snapshot().elapsedMs, 0);
   assert.equal(clock.snapshot().status, STATUS.IDLE);
 });
+
+test("Hardening #46: session start after pause restarts from zero", () => {
+  let now = 1000;
+  const clock = new YogaSessionClock(() => now);
+  clock.start();
+  now += 5000;
+  clock.pause();
+  now += 5000;
+  clock.start();
+  assert.equal(clock.snapshot().elapsedMs, 0);
+  assert.equal(clock.snapshot().status, "running");
+});

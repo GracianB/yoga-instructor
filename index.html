@@ -300,7 +300,7 @@
           <div class="flow-session-clock" aria-live="off">
             <span data-i18n="flowClock">TIEMPO</span>
             <strong id="flow-session-time" aria-label="Tiempo de sesión">00:00</strong>
-            <small id="flow-phase-time" data-i18n="flowPhaseTime" aria-label="Tiempo de fase">00:00</small>
+            <small id="flow-phase-time" data-i18n="flowPhaseTime" aria-label="Tiempo restante de fase">00:00</small>
           </div>
           <div class="flow-state" id="flow-state" aria-live="polite">IDLE</div>
         </div>
@@ -308,6 +308,8 @@
         <div class="flow-progress" role="progressbar" aria-label="Progreso de la práctica">
           <span id="flow-progress-bar"></span>
         </div>
+
+        <div class="flow-phase-progress" aria-hidden="true"><span id="flow-phase-progress-bar"></span></div>
 
         <div class="flow-controls" role="group" data-i18n-aria-label="flowControlsLabel" aria-label="Controles de práctica">
           <button type="button" class="flow-control ghost" data-flow-action="previous" data-i18n="flowPrevious">Anterior</button>

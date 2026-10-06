@@ -6579,6 +6579,25 @@ html.intro-done .zintro {
   transition: transform .45s var(--ease);
 }
 
+.flow-phase-progress {
+  height: 3px;
+  margin: -12px 0 24px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+#flow-phase-progress-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--gold) 72%, var(--sage));
+  transition: transform .2s linear;
+}
+
 .flow-controls {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));

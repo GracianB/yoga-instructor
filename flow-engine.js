@@ -2,16 +2,16 @@
   "use strict";
 
   const PHASES = Object.freeze([
-    { id: "start", label: "START", order: 0 },
-    { id: "centering", label: "CENTERING", order: 1 },
-    { id: "breath", label: "BREATH", order: 2 },
-    { id: "warmup", label: "WARMUP", order: 3 },
-    { id: "pose-1", label: "POSE", order: 4 },
-    { id: "transition", label: "TRANSITION", order: 5 },
-    { id: "pose-2", label: "POSE", order: 6 },
-    { id: "cooldown", label: "COOLDOWN", order: 7 },
-    { id: "savasana", label: "SAVASANA", order: 8 },
-    { id: "finish", label: "FINISH", order: 9 }
+    { id: "start", label: "START", order: 0, durationSeconds: 30 },
+    { id: "centering", label: "CENTERING", order: 1, durationSeconds: 60 },
+    { id: "breath", label: "BREATH", order: 2, durationSeconds: 90 },
+    { id: "warmup", label: "WARMUP", order: 3, durationSeconds: 120 },
+    { id: "pose-1", label: "POSE", order: 4, durationSeconds: 180 },
+    { id: "transition", label: "TRANSITION", order: 5, durationSeconds: 45 },
+    { id: "pose-2", label: "POSE", order: 6, durationSeconds: 180 },
+    { id: "cooldown", label: "COOLDOWN", order: 7, durationSeconds: 90 },
+    { id: "savasana", label: "SAVASANA", order: 8, durationSeconds: 180 },
+    { id: "finish", label: "FINISH", order: 9, durationSeconds: 30 }
   ]);
 
   const STATUS = Object.freeze({
@@ -43,6 +43,7 @@
         progress: this.index / (this.phases.length - 1),
         phase: this.current.id,
         label: this.current.label,
+        durationSeconds: this.current.durationSeconds,
         status: this.status,
         previous: this.index > 0 ? this.phases[this.index - 1].id : null,
         next: this.index < this.phases.length - 1 ? this.phases[this.index + 1].id : null

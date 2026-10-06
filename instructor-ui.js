@@ -12,6 +12,7 @@
   const phase = phaseApi.create();
   const sessionTime = document.getElementById("flow-session-time");
   const phaseTime = document.getElementById("flow-phase-time");
+  const phaseProgress = document.getElementById("flow-phase-progress-bar");
   const phaseLabel = document.getElementById("flow-phase-label");
   const phaseMeta = document.getElementById("flow-phase-meta");
   const state = document.getElementById("flow-state");
@@ -123,7 +124,15 @@
 
   const renderSession = () => {
     if (sessionTime) sessionTime.textContent = formatTime(session.snapshot().elapsedSeconds);
-    if (phaseTime) phaseTime.textContent = formatTime(phase.snapshot().elapsedSeconds);
+    if (phaseTime) {
+      const snapshot = engine.snapshot();
+      const elapsed = phase.snapshot().elapsedSeconds;
+      const duration = snapshot.durationSeconds || 0;
+      const remaining = Math.max(0, duration - elapsed);
+      phaseTime.textContent = formatTime(remaining);
+      phaseTime.setAttribute("aria-label", `Tiempo restante de fase: ${formatTime(remaining)}`);
+      if (phaseProgress) phaseProgress.style.transform = `scaleX(${duration ? Math.min(1, elapsed / duration) : 0})`;
+    }
   };
 
   let lastPhase = engine.snapshot().phase;
@@ -231,5 +240,9 @@
 
   render(engine.snapshot());
   renderSession();
-  window.setInterval(renderSession, 1000);
+  window.setInterval(() => {
+    renderSession();
+    const snapshot = engine.snapshot();
+    if (snapshot.status === "running" && snapshot.durationSeconds > 0 && phase.snapshot().elapsedSeconds >= snapshot.durationSeconds) engine.next();
+  }, 250);
 })();

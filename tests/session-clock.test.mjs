@@ -1,7 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 
-import { STATUS, YogaSessionClock } from "../flow-session.js";
+import sessionClock from "../flow-session.js";
+
+const { STATUS, YogaSessionClock } = sessionClock;
 
 const createClock = () => {
   let now = 0;

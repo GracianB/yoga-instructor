@@ -6129,3 +6129,248 @@ html.intro-done .zintro {
     grid-template-columns: 1fr !important;
   }
 }
+
+
+/* ================================================================
+   SANCTUARY FINALE · FINAL OPTICAL POLISH
+   Remove all projection cues. The lotus is the object.
+   ================================================================ */
+
+/* No halo, ring, target, sparks or diagnostic caption around the flower. */
+.mandala-parallax::before,
+.mandala-parallax::after {
+  display: none !important;
+}
+
+.mandala-parallax {
+  inset: 0 0 0 64% !important;
+}
+
+.hero-mandala {
+  left: 50% !important;
+  top: 48% !important;
+  width: min(32vw, 450px) !important;
+  height: min(32vw, 450px) !important;
+  filter: drop-shadow(0 18px 44px color-mix(in srgb,var(--lotus-color) 13%,transparent)) !important;
+}
+
+[data-theme="dark"] .hero-mandala {
+  filter:
+    drop-shadow(0 0 18px rgba(255,255,255,.28))
+    drop-shadow(0 18px 46px rgba(255,255,255,.09)) !important;
+}
+
+[data-theme="light"] .hero-mandala .lotus-bloom {
+  stroke: #46a96f !important;
+}
+
+[data-theme="dark"] .hero-mandala .lotus-bloom {
+  stroke: #fbfffc !important;
+}
+
+/* Give the lotus a quiet material presence without turning it into neon. */
+.hero-mandala .lotus-bloom path:nth-child(1),
+.hero-mandala .lotus-bloom path:nth-child(2),
+.hero-mandala .lotus-bloom path:nth-child(6),
+.hero-mandala .lotus-bloom path:nth-child(9) {
+  fill: color-mix(in srgb,var(--lotus-color) 5%,transparent) !important;
+}
+
+[data-theme="dark"] .hero-mandala .lotus-bloom path:nth-child(1),
+[data-theme="dark"] .hero-mandala .lotus-bloom path:nth-child(2),
+[data-theme="dark"] .hero-mandala .lotus-bloom path:nth-child(6),
+[data-theme="dark"] .hero-mandala .lotus-bloom path:nth-child(9) {
+  fill: rgba(255,255,255,.035) !important;
+}
+
+/* ----------------------------
+   RITUAL · designed as the second screen
+   ---------------------------- */
+.ritual.section {
+  min-height: min(820px, calc(100svh - var(--header))) !important;
+  grid-template-columns: minmax(340px,.82fr) minmax(520px,1.18fr) !important;
+  gap: clamp(34px,7vw,108px) !important;
+  padding-top: clamp(110px,15vh,170px) !important;
+  padding-bottom: clamp(110px,15vh,170px) !important;
+}
+
+.ritual-intro {
+  position: relative !important;
+  min-height: 560px !important;
+  justify-content: center !important;
+}
+
+.ritual-intro::after {
+  content: "PRÁCTICA / 01";
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--muted);
+  font: 800 8px/1 var(--mono);
+  letter-spacing: .2em;
+  writing-mode: vertical-rl;
+  opacity: .58;
+}
+
+.ritual-intro h2 {
+  max-width: 7.3ch !important;
+  font-size: clamp(54px,5.5vw,84px) !important;
+  line-height: .86 !important;
+}
+
+.ritual-intro > .about-lead {
+  max-width: 34ch !important;
+}
+
+.ritual-arrival {
+  margin-top: 58px !important;
+}
+
+.ritual-arrival::before {
+  content: "RESPIRACIÓN  /  ESTADO ACTUAL" !important;
+  color: var(--muted) !important;
+}
+
+.ritual-orb {
+  width: 172px !important;
+  height: 172px !important;
+  border: 1px solid color-mix(in srgb,var(--sage) 20%,transparent) !important;
+  background:
+    radial-gradient(circle at 50% 50%,
+      color-mix(in srgb,var(--sage) 9%,transparent) 0 16%,
+      transparent 17% 46%,
+      color-mix(in srgb,var(--sage) 5%,transparent) 47% 63%,
+      transparent 64%) !important;
+}
+
+.ritual-status {
+  max-width: 230px !important;
+}
+
+.ritual-status-kicker {
+  letter-spacing: .22em !important;
+}
+
+.ritual-status strong {
+  font-size: clamp(32px,2.6vw,42px) !important;
+}
+
+.ritual-panel {
+  min-height: 590px !important;
+  padding: clamp(32px,3.4vw,48px) !important;
+  border-radius: 36px !important;
+}
+
+.ritual-panel-head {
+  gap: 28px !important;
+}
+
+.ritual-panel-index {
+  font-size: 10px !important;
+}
+
+.ritual-panel-label {
+  letter-spacing: .2em !important;
+}
+
+.ritual-panel-head p {
+  max-width: 32ch !important;
+  font-size: 14px !important;
+}
+
+.ritual-choice {
+  min-height: 104px !important;
+  padding: 16px 4px !important;
+}
+
+.ritual-choice .choice-copy b {
+  font-size: clamp(24px,2vw,33px) !important;
+}
+
+.ritual-choice .choice-arrow {
+  width: 38px !important;
+  height: 38px !important;
+}
+
+[data-theme="light"] .ritual-panel {
+  background:
+    linear-gradient(145deg,#fffef9,#f4f4ea) !important;
+  box-shadow:
+    0 38px 110px rgba(34,49,39,.09),
+    inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+[data-theme="dark"] .ritual-panel {
+  background:
+    linear-gradient(145deg,#0e1511,#0a100d) !important;
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.36),
+    inset 0 1px 0 rgba(255,255,255,.035) !important;
+}
+
+@media (max-width: 1100px) and (min-width: 901px) {
+  .mandala-parallax {
+    inset: 0 0 0 61% !important;
+  }
+
+  .hero-mandala {
+    left: 50% !important;
+    width: min(33vw,430px) !important;
+    height: min(33vw,430px) !important;
+  }
+
+  .ritual.section {
+    grid-template-columns: minmax(300px,.7fr) minmax(0,1.3fr) !important;
+    gap: 32px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .mandala-parallax {
+    inset: 0 !important;
+  }
+
+  .hero-mandala {
+    left: 74% !important;
+    top: 18% !important;
+    width: min(70vw,370px) !important;
+    height: min(70vw,370px) !important;
+    opacity: .94 !important;
+  }
+
+  .ritual.section {
+    min-height: auto !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  .ritual-intro {
+    min-height: auto !important;
+  }
+
+  .ritual-intro::after {
+    display: none !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-mandala {
+    left: 77% !important;
+    top: 15% !important;
+    width: min(72vw,320px) !important;
+    height: min(72vw,320px) !important;
+  }
+
+  .ritual.section {
+    padding-top: 80px !important;
+    padding-bottom: 88px !important;
+  }
+
+  .ritual-orb {
+    width: 148px !important;
+    height: 148px !important;
+  }
+
+  .ritual-panel {
+    min-height: auto !important;
+  }
+}

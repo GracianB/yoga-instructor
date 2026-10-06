@@ -296,3 +296,18 @@ test("Hardening #60: finished flow can only re-enter through reset or start", ()
   assert.equal(reset.status, STATUS.IDLE);
   assert.equal(reset.phase, "start");
 });
+
+test("Hardening #61: progress is deterministic across all ten phases", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  const progress = [engine.snapshot().progress];
+
+  while (engine.status !== STATUS.FINISHED) {
+    engine.next();
+    progress.push(engine.snapshot().progress);
+  }
+
+  assert.deepEqual(progress, [0, 1/9, 2/9, 3/9, 4/9, 5/9, 6/9, 7/9, 8/9, 1]);
+  assert.equal(progress[0], 0);
+  assert.equal(progress.at(-1), 1);
+});

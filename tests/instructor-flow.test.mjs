@@ -351,3 +351,19 @@ test("Practice timer: UI counts down and advances at the target", () => {
   assert.match(ui, /engine\.next\(\)/);
   assert.match(index, /id="flow-phase-progress-bar"/);
 });
+
+
+test("Practice control layer: snapshots expose a usable phase cue", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  assert.equal(engine.snapshot().cue, "Llegar y preparar la práctica.");
+  engine.next();
+  assert.equal(engine.snapshot().cue, "Encontrar estabilidad y atención.");
+});
+
+test("Practice control layer: UI renders target, remaining and cue", () => {
+  assert.match(index, /id="flow-phase-cue"/);
+  assert.match(index, /id="flow-phase-target"/);
+  assert.match(ui, /snapshot\.cue/);
+  assert.match(ui, /formatTime\(duration\)/);
+});

@@ -82,7 +82,8 @@ test("Hardening: instructor UI exposes keyboard and ARIA contract", () => {
     "aria-keyshortcuts",
     "aria-valuenow",
     "aria-valuetext",
-    "aria-pressed"
+    "aria-pressed",
+    "flow-session-time"
   ]) {
     assert.match(ui, new RegExp(token.replace(/[.*+?^$()|[\]\\]/g, "\\$&")));
   }

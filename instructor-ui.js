@@ -168,7 +168,12 @@
       renderSession();
     },
     next: () => {
-      if (engine.status === "idle") { engine.start(); session.start(); phase.start(); }
+      if (engine.status === "idle") {
+        engine.start();
+        session.start();
+        phase.start();
+        return;
+      }
       engine.next();
     },
     reset: () => { engine.reset(); session.reset(); phase.reset(); renderSession(); }

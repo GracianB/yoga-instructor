@@ -103,3 +103,13 @@ test("Hardening #56: phase elapsed never becomes negative when clock moves backw
   now = 1000;
   assert.equal(clock.snapshot().elapsedMs, 0);
 });
+
+test("Hardening #57: phase reset clears paused state completely", () => {
+  let now = 1000;
+  const clock = new YogaPhaseClock(() => now);
+  clock.start();
+  now += 3000;
+  clock.pause();
+  const reset = clock.reset();
+  assert.deepEqual(reset, { elapsedMs: 0, elapsedSeconds: 0, status: "idle" });
+});

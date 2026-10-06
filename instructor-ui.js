@@ -160,23 +160,23 @@
   };
 
   const actions = {
-    start: () => { engine.start(); session.start(); phase.start(); renderSession(); },
+    start: () => { session.start(); phase.start(); engine.start(); renderSession(); },
     previous: () => engine.previous(),
     pause: () => {
-      if (engine.status === "paused") { engine.resume(); session.resume(); phase.resume(); }
-      else { engine.pause(); session.pause(); phase.pause(); }
+      if (engine.status === "paused") { session.resume(); phase.resume(); engine.resume(); }
+      else { session.pause(); phase.pause(); engine.pause(); }
       renderSession();
     },
     next: () => {
       if (engine.status === "idle") {
-        engine.start();
         session.start();
         phase.start();
+        engine.start();
         return;
       }
       engine.next();
     },
-    reset: () => { engine.reset(); session.reset(); phase.reset(); renderSession(); }
+    reset: () => { session.reset(); phase.reset(); engine.reset(); renderSession(); }
   };
 
   const runAction = (name) => {

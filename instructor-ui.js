@@ -214,9 +214,9 @@
 
   window.addEventListener("yoga:flow", (event) => {
     const snapshot = event.detail;
-    render(snapshot);
     syncPhaseClock(snapshot);
     if (snapshot.status === "finished") session.finish();
+    render(snapshot);
     renderSession();
   });
 

@@ -311,3 +311,22 @@ test("Hardening #61: progress is deterministic across all ten phases", () => {
   assert.equal(progress[0], 0);
   assert.equal(progress.at(-1), 1);
 });
+
+test("Hardening #62: snapshots expose stable navigation invariants", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  const start = engine.snapshot();
+  assert.equal(start.previous, null);
+  assert.equal(start.next, "centering");
+
+  for (let i = 0; i < 8; i += 1) engine.next();
+  const middle = engine.snapshot();
+  assert.equal(middle.phase, "savasana");
+  assert.equal(middle.previous, "cooldown");
+  assert.equal(middle.next, "finish");
+
+  engine.next();
+  const finish = engine.snapshot();
+  assert.equal(finish.previous, "savasana");
+  assert.equal(finish.next, null);
+});

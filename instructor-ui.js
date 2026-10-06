@@ -140,7 +140,10 @@
       lastPhase = snapshot.phase;
     }
 
-    if (snapshot.status === "finished") phase.reset();
+    if (snapshot.status === "finished") {
+      phase.reset();
+      lastPhase = snapshot.phase;
+    }
   };
 
   const render = (snapshot) => {

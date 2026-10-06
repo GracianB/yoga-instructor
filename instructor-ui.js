@@ -10,8 +10,10 @@
   const phaseMeta = document.getElementById("flow-phase-meta");
   const state = document.getElementById("flow-state");
   const progress = document.getElementById("flow-progress-bar");
+  const progressTrack = root.querySelector(".flow-progress");
   const consoleRoot = root.querySelector(".flow-console");
   const pauseButton = root.querySelector('[data-flow-action="pause"]');
+  const actionButtons = [...root.querySelectorAll("[data-flow-action]")];
 
   const labels = {
     es: {
@@ -45,17 +47,78 @@
     en: { idle: "IDLE", running: "PRACTICE", paused: "PAUSED", finished: "FINISHED" }
   };
 
+  const getLang = () => document.documentElement.lang === "en" ? "en" : "es";
+
+  const isTypingContext = (target) => {
+    if (!(target instanceof Element)) return false;
+    return target.matches("input, textarea, select, [contenteditable='true']");
+  };
+
+  const updateAccessibility = (snapshot) => {
+    const lang = getLang();
+    const first = snapshot.index === 0;
+    const last = snapshot.index === snapshot.total - 1;
+    const paused = snapshot.status === "paused";
+    const idle = snapshot.status === "idle";
+
+    if (progressTrack) {
+      progressTrack.setAttribute("role", "progressbar");
+      progressTrack.setAttribute("aria-valuemin", "1");
+      progressTrack.setAttribute("aria-valuemax", String(snapshot.total));
+      progressTrack.setAttribute("aria-valuenow", String(snapshot.index + 1));
+      progressTrack.setAttribute(
+        "aria-valuetext",
+        lang === "en"
+          ? `Phase ${snapshot.index + 1} of ${snapshot.total}: ${snapshot.label}`
+          : `Fase ${snapshot.index + 1} de ${snapshot.total}: ${snapshot.label}`
+      );
+    }
+
+    actionButtons.forEach((button) => {
+      const action = button.dataset.flowAction;
+      const disabled =
+        (action === "previous" && first) ||
+        (action === "next" && last) ||
+        (action === "pause" && (idle || last));
+
+      button.disabled = disabled;
+      button.setAttribute("aria-disabled", String(disabled));
+    });
+
+    if (pauseButton) {
+      const label = paused
+        ? (lang === "en" ? "Resume practice" : "Continuar práctica")
+        : (lang === "en" ? "Pause practice" : "Pausar práctica");
+      pauseButton.setAttribute("aria-label", label);
+      pauseButton.setAttribute("aria-pressed", String(paused));
+      pauseButton.setAttribute("aria-keyshortcuts", "P");
+    }
+
+    const previous = root.querySelector('[data-flow-action="previous"]');
+    const next = root.querySelector('[data-flow-action="next"]');
+    const start = root.querySelector('[data-flow-action="start"]');
+    const reset = root.querySelector('[data-flow-action="reset"]');
+
+    if (previous) previous.setAttribute("aria-keyshortcuts", "ArrowLeft");
+    if (next) next.setAttribute("aria-keyshortcuts", "ArrowRight");
+    if (start) start.setAttribute("aria-keyshortcuts", "S");
+    if (reset) reset.setAttribute("aria-keyshortcuts", "R");
+  };
+
   const render = (snapshot) => {
-    const lang = document.documentElement.lang === "en" ? "en" : "es";
+    const lang = getLang();
     const copy = labels[lang][snapshot.phase] || snapshot.label;
     if (phaseLabel) phaseLabel.textContent = copy;
     if (phaseMeta) phaseMeta.textContent = `${snapshot.index + 1} / ${snapshot.total}`;
     if (state) state.textContent = stateLabels[lang][snapshot.status] || snapshot.status.toUpperCase();
     if (progress) progress.style.transform = `scaleX(${snapshot.progress})`;
     if (consoleRoot) consoleRoot.dataset.flowStatus = snapshot.status;
-    if (pauseButton) pauseButton.textContent = snapshot.status === "paused"
-      ? (lang === "en" ? "Resume" : "Continuar")
-      : (lang === "en" ? "Pause" : "Pausa");
+    if (pauseButton) {
+      pauseButton.textContent = snapshot.status === "paused"
+        ? (lang === "en" ? "Resume" : "Continuar")
+        : (lang === "en" ? "Pause" : "Pausa");
+    }
+    updateAccessibility(snapshot);
   };
 
   const actions = {
@@ -66,14 +129,41 @@
     reset: () => engine.reset()
   };
 
+  const runAction = (name) => {
+    const button = root.querySelector(`[data-flow-action="${name}"]`);
+    if (button && !button.disabled && actions[name]) actions[name]();
+  };
+
   root.addEventListener("click", (event) => {
     const button = event.target.closest("[data-flow-action]");
-    if (!button) return;
+    if (!button || button.disabled) return;
     const action = actions[button.dataset.flowAction];
     if (action) action();
   });
 
+  root.addEventListener("keydown", (event) => {
+    if (event.defaultPrevented || isTypingContext(event.target)) return;
+
+    const key = event.key;
+    const shortcut = key.length === 1 ? key.toLowerCase() : key;
+
+    const shortcuts = {
+      ArrowLeft: "previous",
+      ArrowRight: "next",
+      p: "pause",
+      s: "start",
+      r: "reset"
+    };
+
+    const action = shortcuts[shortcut];
+    if (!action) return;
+
+    event.preventDefault();
+    runAction(action);
+  });
+
   window.addEventListener("yoga:flow", (event) => render(event.detail));
+
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-set-lang]")) {
       requestAnimationFrame(() => render(engine.snapshot()));

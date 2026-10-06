@@ -6685,3 +6685,13 @@ html.intro-done .zintro {
     justify-items: start;
   }
 }
+
+
+/* ================================================================
+   INSTRUCTOR PHASE CLOCK · #37
+   ================================================================ */
+.flow-session-clock small {
+  font: 600 .62rem/1 JetBrains Mono, monospace;
+  letter-spacing: .08em;
+  opacity: .5;
+}

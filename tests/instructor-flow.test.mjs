@@ -279,3 +279,20 @@ test("Hardening #59: previous at first phase is a strict no-op", () => {
   assert.deepEqual(engine.previous(), before);
   assert.deepEqual(engine.history, ["start"]);
 });
+
+test("Hardening #60: finished flow can only re-enter through reset or start", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  while (engine.status !== STATUS.FINISHED) engine.next();
+
+  assert.equal(engine.previous().status, STATUS.FINISHED);
+  assert.equal(engine.next().status, STATUS.FINISHED);
+
+  const restarted = engine.start();
+  assert.equal(restarted.status, STATUS.RUNNING);
+  assert.equal(restarted.phase, "start");
+
+  const reset = engine.reset();
+  assert.equal(reset.status, STATUS.IDLE);
+  assert.equal(reset.phase, "start");
+});

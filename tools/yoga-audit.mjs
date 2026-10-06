@@ -340,7 +340,7 @@ if (
   fail.push("Instructor E2E + Hardening");
 }
 
-const required = [
+\n/* ================================================================\n   SESSION CLOCK · #36\n   ================================================================ */\nconst sessionClock = read("flow-session.js");\nconst sessionClockTests = read("tests/session-clock.test.mjs");\n\nif (\n  sessionClock.includes("class YogaSessionClock") &&\n  sessionClock.includes("elapsedSeconds") &&\n  sessionClock.includes("window.YOGA_SESSION") &&\n  sessionClockTests.includes("pause freezes elapsed time") &&\n  index.includes('id="flow-session-time"') &&\n  instructorUi.includes("formatTime")\n) {\n  pass.push("Instructor Session Clock");\n} else {\n  fail.push("Instructor Session Clock");\n}\n\nconst required = [
   ["doctype", /<!doctype html>/i.test(index)],
   ["language", /<html[^>]+lang="(?:es|en)"/i.test(index)],
   ["canonical", /rel="canonical"/i.test(index)],

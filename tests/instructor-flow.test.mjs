@@ -232,3 +232,7 @@ test("Hardening #50: invalid goTo does not mutate history or position", () => {
   assert.deepEqual(engine.snapshot(), before);
   assert.deepEqual(engine.history, history);
 });
+
+test("Hardening #51: phase label is an accessible live region", () => {
+  assert.match(index, /id="flow-phase-label"[^>]*aria-live="polite"/);
+});

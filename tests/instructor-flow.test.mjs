@@ -62,7 +62,7 @@ test("Hardening: phase clock wiring covers rendered time and transitions", () =>
     "phase.reset()",
     "phase.start()"
   ]) {
-    assert.match(ui, new RegExp(token.replace(/[.*+?^$()|[\]\\]/g, "\\test("E2E reset: returns to a clean idle state", () => {")));
+    assert.match(ui, new RegExp(token.replace(/[.*+?^$()|[\]\\]/g, "\\$&")));
   }
 
   assert.match(index, /id="flow-phase-time"/);

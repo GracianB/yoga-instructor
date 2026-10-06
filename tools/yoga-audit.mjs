@@ -307,6 +307,64 @@ for (const key of [
   }
 }
 
+/* ================================================================
+   INSTRUCTOR UI · #33
+   ================================================================ */
+const instructorUi = read("instructor-ui.js");
+
+if (
+  instructorUi.includes("window.YOGA_FLOW") &&
+  instructorUi.includes("data-flow-action") &&
+  instructorUi.includes("yoga:flow")
+) {
+  pass.push("Instructor UI flow binding");
+} else {
+  fail.push("Instructor UI flow binding");
+}
+
+for (const token of [
+  'id="instructor-flow"',
+  'data-flow-action="start"',
+  'data-flow-action="previous"',
+  'data-flow-action="pause"',
+  'data-flow-action="next"',
+  'data-flow-action="reset"',
+  'flow-phase-label',
+  'flow-progress-bar'
+]) {
+  if (!index.includes(token)) {
+    fail.push(`Instructor UI markup: ${token}`);
+  }
+}
+
+if (
+  index.includes('id="instructor-flow"') &&
+  css.includes(".instructor-flow") &&
+  css.includes(".flow-console")
+) {
+  pass.push("Instructor UI presentation");
+} else {
+  fail.push("Instructor UI presentation");
+}
+
+for (const key of [
+  "flowKicker",
+  "flowH2",
+  "flowLead",
+  "flowCurrent",
+  "flowControlsLabel",
+  "flowPrevious",
+  "flowPause",
+  "flowNext",
+  "flowReset",
+  "flowStart",
+  "flowSequence"
+]) {
+  if (!i18n.includes(key)) {
+    fail.push(`Instructor UI i18n: ${key}`);
+  }
+}
+
 const required = [
   ["doctype", /<!doctype html>/i.test(index)],
   ["language", /<html[^>]+lang="(?:es|en)"/i.test(index)],

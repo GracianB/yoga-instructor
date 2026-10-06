@@ -2,16 +2,16 @@
   "use strict";
 
   const PHASES = Object.freeze([
-    { id: "start", label: "START", order: 0, durationSeconds: 30 },
-    { id: "centering", label: "CENTERING", order: 1, durationSeconds: 60 },
-    { id: "breath", label: "BREATH", order: 2, durationSeconds: 90 },
-    { id: "warmup", label: "WARMUP", order: 3, durationSeconds: 120 },
-    { id: "pose-1", label: "POSE", order: 4, durationSeconds: 180 },
-    { id: "transition", label: "TRANSITION", order: 5, durationSeconds: 45 },
-    { id: "pose-2", label: "POSE", order: 6, durationSeconds: 180 },
-    { id: "cooldown", label: "COOLDOWN", order: 7, durationSeconds: 90 },
-    { id: "savasana", label: "SAVASANA", order: 8, durationSeconds: 180 },
-    { id: "finish", label: "FINISH", order: 9, durationSeconds: 30 }
+    { id: "start", label: "START", order: 0, durationSeconds: 30, cue: "Llegar y preparar la práctica." },
+    { id: "centering", label: "CENTERING", order: 1, durationSeconds: 60, cue: "Encontrar estabilidad y atención." },
+    { id: "breath", label: "BREATH", order: 2, durationSeconds: 90, cue: "Regular la respiración sin forzar." },
+    { id: "warmup", label: "WARMUP", order: 3, durationSeconds: 120, cue: "Movilizar el cuerpo de forma progresiva." },
+    { id: "pose-1", label: "POSE", order: 4, durationSeconds: 180, cue: "Sostener la postura con respiración estable." },
+    { id: "transition", label: "TRANSITION", order: 5, durationSeconds: 45, cue: "Cambiar de forma con control y sin prisa." },
+    { id: "pose-2", label: "POSE", order: 6, durationSeconds: 180, cue: "Integrar fuerza, movilidad y atención." },
+    { id: "cooldown", label: "COOLDOWN", order: 7, durationSeconds: 90, cue: "Reducir intensidad y dejar espacio a la respiración." },
+    { id: "savasana", label: "SAVASANA", order: 8, durationSeconds: 180, cue: "Soltar el esfuerzo y permanecer quieto." },
+    { id: "finish", label: "FINISH", order: 9, durationSeconds: 30, cue: "Cerrar la práctica sin romper la atención." }
   ]);
 
   const STATUS = Object.freeze({
@@ -44,6 +44,7 @@
         phase: this.current.id,
         label: this.current.label,
         durationSeconds: this.current.durationSeconds,
+        cue: this.current.cue,
         status: this.status,
         previous: this.index > 0 ? this.phases[this.index - 1].id : null,
         next: this.index < this.phases.length - 1 ? this.phases[this.index + 1].id : null

@@ -11,7 +11,6 @@ const main = read("main.js");
 const sanctuary = read("sanctuary-experience.js");
 const i18n = read("i18n.js");
 const css = read("styles.css");
-const heroFix = read("hero-live-fix.css");
 const readme = read("README.md");
 
 const required = [
@@ -25,7 +24,7 @@ const required = [
   ["ritual interaction", main.includes("SANCTUARY PASS · ritual interaction")],
   ["ES ritual copy", i18n.includes('navRitual: "Práctica"')],
   ["EN ritual copy", i18n.includes('navRitual: "Practice"')],
-  ["reduced motion", css.includes("prefers-reduced-motion") && heroFix.includes("prefers-reduced-motion")],
+  ["reduced motion", css.includes("prefers-reduced-motion")],
   ["CV ES canonical path", main.includes("./assets/CV_Gracian_Baena_Yoga_ES.pdf")],
   ["CV EN canonical path", main.includes("./assets/CV_Gracian_Baena_Yoga_EN.pdf")],
   ["README ritual docs", readme.includes("### El ritual")],
@@ -33,8 +32,9 @@ const required = [
   ["editorial rail", index.includes('class="hero-rail"')],
   ["hero manifesto", index.includes('data-i18n="heroManifesto"')],
   ["quiet geometry", index.includes("production-visual-3") && css.includes("PRODUCTION VISUAL LOCK")],
-  ["hero live fix", index.includes("./hero-live-fix.css?v=hero-live-1") && heroFix.includes(".hero-inner > *") && heroFix.includes("heroLiveMandala")],
+  ["hero visibility", css.includes(".hero-inner > *") && css.includes("opacity: 1 !important")],
   ["visual lock", css.includes("PRODUCTION VISUAL LOCK") && css.includes("ritual.section") && css.includes("campo-vortex-full iframe")],
+  ["sanctuary finale", css.includes("SANCTUARY FINALE · SIGNATURE LOTUS") && index.includes("lotus-bloom")],
   ["lotus geometry", index.includes("lotus-bloom") && css.includes("SANCTUARY V2.1 · LOTUS IDENTITY + RITUAL EDITORIAL")],
   ["lotus no projection core", !index.includes('<circle cx="280" cy="280" r="7" fill="var(--mandala-accent)"') && css.includes("--lotus-color: #f8fff9")],
   ["lotus light green", css.includes("--lotus-color: #3f9a68") && css.includes("--lotus-highlight: #63bb87")],
@@ -52,7 +52,7 @@ for (const [name, ok] of required) (ok ? pass : fail).push(name);
 
 if (!/src="\.\/main\.js[^"]*"/.test(index)) fail.push("main.js include");
 if (!/src="\.\/sanctuary-experience\.js[^"]*"/.test(index)) fail.push("sanctuary-experience.js include");
-if (!/styles\.css\?v=production-visual-3/.test(index)) fail.push("styles cache bust");
+if (!/styles\.css\?v=sanctuary-finale-1/.test(index)) fail.push("styles cache bust");
 if (!/i18n\.js\?v=quiet-geometry-5/.test(index)) fail.push("i18n cache bust");
 if (!/main\.js\?v=quiet-geometry-5/.test(index)) fail.push("main cache bust");
 if (/(?:href|src)\s*=\s*["']http:\/\//i.test(index + main + css + heroFix)) fail.push("insecure http resource URL");

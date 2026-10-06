@@ -54,6 +54,23 @@ test("E2E phase sync: previous returns to the prior phase", () => {
   assert.equal(returned.status, STATUS.RUNNING);
 });
 
+test("E2E state machine: previous preserves pause state", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  engine.next();
+  engine.pause();
+
+  const returned = engine.previous();
+
+  assert.equal(returned.phase, "start");
+  assert.equal(returned.status, STATUS.PAUSED);
+});
+
+test("Hardening: pause synchronizes both clocks", () => {
+  assert.match(ui, /session\.pause\(\); phase\.pause\(\)/);
+  assert.match(ui, /session\.resume\(\); phase\.resume\(\)/);
+});
+
 test("Hardening: phase clock wiring covers rendered time and transitions", () => {
   for (const token of [
     "window.YOGA_PHASE",

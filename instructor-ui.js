@@ -162,8 +162,8 @@
     start: () => { engine.start(); session.start(); phase.start(); renderSession(); },
     previous: () => engine.previous(),
     pause: () => {
-      if (engine.status === "paused") { engine.resume(); session.resume(); }
-      else { engine.pause(); session.pause(); }
+      if (engine.status === "paused") { engine.resume(); session.resume(); phase.resume(); }
+      else { engine.pause(); session.pause(); phase.pause(); }
       renderSession();
     },
     next: () => {

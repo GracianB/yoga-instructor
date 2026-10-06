@@ -64,7 +64,7 @@
     const paused = snapshot.status === "paused";
     const idle = snapshot.status === "idle";
 
-    if (progressTrack) {
+    if (sessionTime) {\n      sessionTime.setAttribute("aria-label", lang === "en" ? "Session time" : "Tiempo de sesión");\n    }\n\n    if (progressTrack) {
       progressTrack.setAttribute("role", "progressbar");
       progressTrack.setAttribute("aria-valuemin", "1");
       progressTrack.setAttribute("aria-valuemax", String(snapshot.total));
@@ -142,7 +142,11 @@
       else { engine.pause(); session.pause(); }
       renderSession();
     },
-    next: () => {\n      if (engine.status === "idle") { engine.start(); session.start(); }\n      const snapshot = engine.next();\n      if (snapshot.status === "finished") session.finish();\n    },
+    next: () => {
+      if (engine.status === "idle") { engine.start(); session.start(); }
+      const snapshot = engine.next();
+      if (snapshot.status === "finished") session.finish();
+    },
     reset: () => { engine.reset(); session.reset(); renderSession(); }
   };
 

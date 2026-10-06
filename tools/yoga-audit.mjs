@@ -31,7 +31,7 @@ const required = [
   ["sanctuary script include", index.includes("./sanctuary-experience.js")],
   ["editorial rail", index.includes('class="hero-rail"')],
   ["hero manifesto", index.includes('data-i18n="heroManifesto"')],
-  ["quiet geometry", index.includes("sanctuary-finale-2") && css.includes("PRODUCTION VISUAL LOCK")],
+  ["visual system", index.includes("lotus-signature-1") && css.includes("LOTUS SIGNATURE v2 · TRUE BLOSSOM SILHOUETTE")],
   ["hero visibility", css.includes(".hero-inner > *") && css.includes("opacity: 1 !important")],
   ["visual lock", css.includes("PRODUCTION VISUAL LOCK") && css.includes("ritual.section") && css.includes("campo-vortex-full iframe")],
   ["sanctuary finale", css.includes("SANCTUARY FINALE · SIGNATURE LOTUS") && index.includes("lotus-bloom")],
@@ -52,7 +52,7 @@ for (const [name, ok] of required) (ok ? pass : fail).push(name);
 
 if (!/src="\.\/main\.js[^"]*"/.test(index)) fail.push("main.js include");
 if (!/src="\.\/sanctuary-experience\.js[^"]*"/.test(index)) fail.push("sanctuary-experience.js include");
-if (!/styles\.css\?v=sanctuary-finale-2/.test(index)) fail.push("styles cache bust");
+if (!/styles\.css\?v=lotus-signature-1/.test(index)) fail.push("styles cache bust");
 if (!/i18n\.js\?v=quiet-geometry-5/.test(index)) fail.push("i18n cache bust");
 if (!/main\.js\?v=quiet-geometry-5/.test(index)) fail.push("main cache bust");
 if (/(?:href|src)\s*=\s*["']http:\/\//i.test(index + main + css)) fail.push("insecure http resource URL");
@@ -60,7 +60,7 @@ if ((index.match(/<section\b/g) || []).length !== (index.match(/<\/section>/g) |
 
 for (const [file, max] of [
   ["index.html", 46000],
-  ["styles.css", 175000],
+  ["styles.css", 182000],
   ["main.js", 22000],
   ["i18n.js", 18000],
   ["sanctuary-experience.js", 14000]

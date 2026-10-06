@@ -2210,6 +2210,11 @@ body::before {
     0 14px var(--sound-blur, 20px) color-mix(in srgb, var(--sage) 18%, transparent),
     0 0 0 1px color-mix(in srgb, var(--sage) 28%, transparent);
 }
+.focus-player.is-audio-error .player-play {
+  opacity: .72;
+  box-shadow: 0 0 0 2px color-mix(in srgb, #b44 38%, transparent);
+}
+
 .sound-active .player-play {
   box-shadow:
     0 0 var(--sound-blur, 20px) color-mix(in srgb, var(--sage) 52%, transparent);
@@ -6577,6 +6582,25 @@ html.intro-done .zintro {
   border-radius: inherit;
   background: var(--sage);
   transition: transform .45s var(--ease);
+}
+
+.flow-phase-progress {
+  height: 3px;
+  margin: -12px 0 24px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+#flow-phase-progress-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  background: color-mix(in srgb, var(--gold) 72%, var(--sage));
+  transition: transform .2s linear;
 }
 
 .flow-controls {

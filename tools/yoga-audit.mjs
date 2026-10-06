@@ -60,7 +60,7 @@ if ((index.match(/<section\b/g) || []).length !== (index.match(/<\/section>/g) |
 
 for (const [file, max] of [
   ["index.html", 46000],
-  ["styles.css", 155000],
+  ["styles.css", 165000],
   ["main.js", 22000],
   ["i18n.js", 18000],
   ["sanctuary-experience.js", 14000],

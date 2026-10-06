@@ -101,3 +101,11 @@ test("Hardening #47: finishing an idle session is stable and zeroed", () => {
   assert.equal(finished.status, "finished");
   assert.equal(finished.elapsedMs, 0);
 });
+
+test("Hardening #56: session elapsed never becomes negative when clock moves backward", () => {
+  let now = 5000;
+  const clock = new YogaSessionClock(() => now);
+  clock.start();
+  now = 1000;
+  assert.equal(clock.snapshot().elapsedMs, 0);
+});

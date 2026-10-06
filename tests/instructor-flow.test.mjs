@@ -260,3 +260,22 @@ test("Hardening #55: goTo preserves paused state", () => {
 test("Hardening #58: finished phase sync settles terminal phase marker", () => {
   assert.match(ui, /if \(snapshot\.status === "finished"\) \{\s*phase\.reset\(\);\s*lastPhase = snapshot\.phase;\s*\}/);
 });
+
+test("Hardening #59: pause and resume are idempotent outside valid states", () => {
+  const engine = new YogaFlowEngine();
+  assert.equal(engine.pause().status, STATUS.IDLE);
+  assert.equal(engine.resume().status, STATUS.IDLE);
+  engine.start();
+  engine.pause();
+  assert.equal(engine.pause().status, STATUS.PAUSED);
+  engine.resume();
+  assert.equal(engine.resume().status, STATUS.RUNNING);
+});
+
+test("Hardening #59: previous at first phase is a strict no-op", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  const before = engine.snapshot();
+  assert.deepEqual(engine.previous(), before);
+  assert.deepEqual(engine.history, ["start"]);
+});

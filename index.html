@@ -38,6 +38,7 @@
   <script src="./i18n.js?v=quiet-geometry-5"></script>
   <script src="./main.js?v=quiet-geometry-5" defer></script>
   <script src="./flow-engine.js?v=flow-1" defer></script>
+  <script src="./instructor-ui.js?v=ui-1" defer></script>
   <script src="./sanctuary-experience.js?v=living-2" defer></script>
   <script type="application/ld+json">
   {
@@ -279,6 +280,41 @@
     </div>
   </div>
 </section>
+
+    <section class="section instructor-flow reveal" id="instructor-flow" aria-labelledby="instructor-flow-title">
+      <div class="section-head instructor-flow-head">
+        <p class="kicker" data-i18n="flowKicker">INSTRUCTOR FLOW · SESIÓN</p>
+        <h2 id="instructor-flow-title" data-i18n-html="flowH2">Una práctica.<br><em>Un ritmo claro.</em></h2>
+        <p class="about-lead" data-i18n="flowLead">El instructor marca el pulso. La interfaz acompaña sin competir con la práctica.</p>
+      </div>
+
+      <div class="flow-console" data-flow-status="idle">
+        <div class="flow-console-top">
+          <div class="flow-phase">
+            <span class="flow-phase-kicker" data-i18n="flowCurrent">FASE ACTUAL</span>
+            <strong id="flow-phase-label">START</strong>
+            <small id="flow-phase-meta">1 / 10</small>
+          </div>
+          <div class="flow-state" id="flow-state" aria-live="polite">IDLE</div>
+        </div>
+
+        <div class="flow-progress" aria-hidden="true">
+          <span id="flow-progress-bar"></span>
+        </div>
+
+        <div class="flow-controls" role="group" data-i18n-aria-label="flowControlsLabel" aria-label="Controles de práctica">
+          <button type="button" class="flow-control ghost" data-flow-action="previous" data-i18n="flowPrevious">Anterior</button>
+          <button type="button" class="flow-control ghost" data-flow-action="pause" data-i18n="flowPause">Pausa</button>
+          <button type="button" class="flow-control primary" data-flow-action="next" data-i18n="flowNext">Siguiente</button>
+          <button type="button" class="flow-control ghost" data-flow-action="reset" data-i18n="flowReset">Reiniciar</button>
+        </div>
+
+        <div class="flow-console-foot">
+          <button type="button" class="flow-start" data-flow-action="start" data-i18n="flowStart">Empezar práctica</button>
+          <span data-i18n="flowSequence">START · CENTERING · BREATH · WARMUP · POSE · TRANSITION · POSE · COOLDOWN · SAVASANA · FINISH</span>
+        </div>
+      </div>
+    </section>
 
     <section class="section campo reveal" id="campo">
       <div class="section-head">

@@ -72,3 +72,26 @@ test("Hardening #46: phase start after pause restarts from zero", () => {
   assert.equal(clock.snapshot().elapsedMs, 0);
   assert.equal(clock.snapshot().status, "running");
 });
+
+test("Hardening #48: paused phase clock is immutable until resume", () => {
+  let now = 1000;
+  const clock = new YogaPhaseClock(() => now);
+  clock.start();
+  now += 3500;
+  clock.pause();
+  const paused = clock.snapshot().elapsedMs;
+  now += 10000;
+  assert.equal(clock.snapshot().elapsedMs, paused);
+  clock.resume();
+  now += 1500;
+  assert.equal(clock.snapshot().elapsedMs, paused + 1500);
+});
+
+test("Hardening #48: phase reset is a true idle zero state", () => {
+  let now = 1000;
+  const clock = new YogaPhaseClock(() => now);
+  clock.start();
+  now += 2500;
+  clock.reset();
+  assert.deepEqual(clock.snapshot(), { elapsedMs: 0, elapsedSeconds: 0, status: "idle" });
+});

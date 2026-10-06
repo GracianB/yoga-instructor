@@ -107,7 +107,21 @@ test("E2E boundaries: previous and next cannot escape the flow", () => {
 
   assert.equal(engine.snapshot().phase, "finish");
   assert.equal(engine.snapshot().status, STATUS.FINISHED);
+  assert.equal(engine.previous().phase, "finish");
+  assert.equal(engine.previous().status, STATUS.FINISHED);
   assert.equal(engine.next().phase, "finish");
+});
+
+test("Hardening: finish is terminal until reset", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+
+  while (engine.status !== STATUS.FINISHED) engine.next();
+
+  assert.equal(engine.previous().status, STATUS.FINISHED);
+  assert.equal(engine.snapshot().index, PHASES.length - 1);
+  assert.equal(engine.reset().status, STATUS.IDLE);
+  assert.equal(engine.start().status, STATUS.RUNNING);
 });
 
 test("Hardening: invalid goTo is rejected without corrupting state", () => {

@@ -6545,10 +6545,37 @@ html.intro-done .zintro {
   letter-spacing: -.045em;
 }
 
-#flow-phase-meta {
+ #flow-phase-meta {
   color: var(--muted);
   font-variant-numeric: tabular-nums;
 }
+
+#flow-phase-cue {
+  max-width: 560px;
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.flow-session-clock small {
+  display: block;
+}
+
+#flow-phase-target {
+  opacity: .42;
+}
+
+#flow-phase-target::before {
+  content: "OBJETIVO · ";
+}
+
+#flow-phase-time {
+  color: var(--sage);
+  font-size: .78rem;
+  letter-spacing: .06em;
+}
+
 
 .flow-state {
   padding: 9px 13px;

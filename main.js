@@ -200,7 +200,10 @@
     audio.volume = vol ? Number(vol.value) : 0.45;
     playBtn.addEventListener("click", async () => {
       if (audio.paused) {
-        try { await audio.play(); } catch (_) {}
+        try { await audio.play(); } catch (error) {
+          player?.classList.add("is-audio-error");
+          playBtn.setAttribute("aria-label", i18nT().fieldAudioError || "Audio unavailable");
+        }
       } else {
         audio.pause();
       }
@@ -208,6 +211,13 @@
     audio.addEventListener("play", () => {
       player?.classList.add("is-playing");
       playBtn.setAttribute("aria-label", i18nT().fieldPause || "Pause");
+    });
+    audio.addEventListener("error", () => {
+      player?.classList.add("is-audio-error");
+      playBtn.setAttribute("aria-label", i18nT().fieldAudioError || "Audio unavailable");
+    });
+    audio.addEventListener("canplay", () => {
+      player?.classList.remove("is-audio-error");
     });
     audio.addEventListener("pause", () => {
       player?.classList.remove("is-playing");

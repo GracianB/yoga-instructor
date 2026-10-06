@@ -417,12 +417,6 @@ for (const [file, max] of [
   else fail.push(`${file} size ${bytes}B > ${max}B`);
 }
 
-if (fail.length) {
-  console.error("YOGA QUALITY GATE — FAIL");
-  for (const item of fail) console.error("FAIL", item);
-  process.exit(1);
-}
-
 /* ================================================================
    PHASE CLOCK · #37
    ================================================================ */
@@ -436,11 +430,15 @@ if (
   instructorUi.includes("phaseTime")
 ) {
   pass.push("Instructor Phase Clock");
+} else {
+  fail.push("Instructor Phase Clock");
+}
+
+if (fail.length) {
+  console.error("YOGA QUALITY GATE — FAIL");
+  for (const item of fail) console.error("FAIL", item);
+  process.exit(1);
 }
 
 console.log("YOGA QUALITY GATE — PASS");
 for (const item of pass) console.log("PASS", item);
-
- else {
-  fail.push("Instructor Phase Clock");
-}

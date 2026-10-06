@@ -184,3 +184,26 @@ test("Hardening #45: repeated start creates a fresh running session", () => {
   assert.equal(restarted.index, 0);
   assert.deepEqual(engine.history, ["start"]);
 });
+
+test("Hardening #49: history records every accepted phase transition", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  engine.next();
+  engine.next();
+  engine.previous();
+
+  assert.deepEqual(engine.history, ["start", "centering", "breath", "centering"]);
+  assert.equal(engine.snapshot().phase, "centering");
+});
+
+test("Hardening #49: paused next is a no-op without history mutation", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  engine.next();
+  engine.pause();
+  const before = [...engine.history];
+  const snapshot = engine.next();
+
+  assert.deepEqual(engine.history, before);
+  assert.deepEqual(snapshot, engine.snapshot());
+});

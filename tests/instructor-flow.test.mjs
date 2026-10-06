@@ -330,3 +330,24 @@ test("Hardening #62: snapshots expose stable navigation invariants", () => {
   assert.equal(finish.previous, "savasana");
   assert.equal(finish.next, null);
 });
+
+
+test("Practice timer: every phase has a real target duration", () => {
+  assert.deepEqual(PHASES.map((phase) => phase.durationSeconds), [30, 60, 90, 120, 180, 45, 180, 90, 180, 30]);
+  assert.ok(PHASES.every((phase) => Number.isFinite(phase.durationSeconds) && phase.durationSeconds > 0));
+});
+
+test("Practice timer: snapshots expose the current phase target", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  assert.equal(engine.snapshot().durationSeconds, 30);
+  engine.next();
+  assert.equal(engine.snapshot().durationSeconds, 60);
+});
+
+test("Practice timer: UI counts down and advances at the target", () => {
+  assert.match(ui, /remaining = Math\.max\(0, duration - elapsed\)/);
+  assert.match(ui, /phase\.snapshot\(\)\.elapsedSeconds >= snapshot\.durationSeconds/);
+  assert.match(ui, /engine\.next\(\)/);
+  assert.match(index, /id="flow-phase-progress-bar"/);
+});

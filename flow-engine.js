@@ -84,7 +84,7 @@
     }
 
     previous() {
-      if (this.index === 0) return this.snapshot();
+      if (this.index === 0 || this.status === STATUS.FINISHED) return this.snapshot();
       const wasPaused = this.status === STATUS.PAUSED;
       this.index -= 1;
       this.status = wasPaused ? STATUS.PAUSED : STATUS.RUNNING;

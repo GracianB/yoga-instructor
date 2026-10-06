@@ -6492,3 +6492,167 @@ html.intro-done .zintro {
     width: min(80vw, 340px) !important;
   }
 }
+
+
+/* ================================================================
+   INSTRUCTOR UI · #33
+   ================================================================ */
+.instructor-flow {
+  position: relative;
+  isolation: isolate;
+}
+
+.instructor-flow-head {
+  max-width: 760px;
+}
+
+.flow-console {
+  position: relative;
+  margin-top: clamp(32px, 5vw, 64px);
+  padding: clamp(24px, 4vw, 44px);
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background:
+    radial-gradient(480px circle at 12% 0%, color-mix(in srgb, var(--sage) 9%, transparent), transparent 68%),
+    linear-gradient(145deg, color-mix(in srgb, var(--surface) 96%, transparent), color-mix(in srgb, var(--surface2) 92%, transparent));
+  box-shadow:
+    0 30px 90px color-mix(in srgb, var(--ink) 8%, transparent),
+    inset 0 1px 0 color-mix(in srgb, var(--ink) 7%, transparent);
+}
+
+.flow-console-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.flow-phase {
+  display: grid;
+  gap: 7px;
+}
+
+.flow-phase-kicker {
+  font-size: 10px;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+#flow-phase-label {
+  font-size: clamp(32px, 5vw, 64px);
+  line-height: .95;
+  letter-spacing: -.045em;
+}
+
+#flow-phase-meta {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.flow-state {
+  padding: 9px 13px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 10px;
+  letter-spacing: .14em;
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.flow-progress {
+  height: 4px;
+  margin: 30px 0 24px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--ink) 9%, transparent);
+}
+
+#flow-progress-bar {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  border-radius: inherit;
+  background: var(--sage);
+  transition: transform .45s var(--ease);
+}
+
+.flow-controls {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.flow-control,
+.flow-start {
+  min-height: 48px;
+  padding: 12px 16px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  letter-spacing: .03em;
+  cursor: pointer;
+  transition: transform .25s var(--ease), background .25s var(--ease), border-color .25s var(--ease);
+}
+
+.flow-control:hover,
+.flow-start:hover {
+  transform: translateY(-2px);
+}
+
+.flow-control.ghost {
+  background: transparent;
+  color: var(--ink);
+}
+
+.flow-control.primary,
+.flow-start {
+  border-color: color-mix(in srgb, var(--sage) 55%, var(--line));
+  background: var(--sage);
+  color: var(--surface);
+}
+
+.flow-console-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+  color: var(--muted);
+  font-size: 10px;
+  line-height: 1.5;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.flow-start {
+  flex: 0 0 auto;
+}
+
+@media (max-width: 680px) {
+  .flow-console-top,
+  .flow-console-foot {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .flow-controls {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .flow-start {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #flow-progress-bar,
+  .flow-control,
+  .flow-start {
+    transition: none;
+  }
+}

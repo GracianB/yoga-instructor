@@ -5,7 +5,7 @@
   "description": "Gracián Baena — Yoga Instructor portfolio",
   "scripts": {
     "check": "node tools/yoga-audit.mjs",
-    "syntax": "node --check i18n.js && node --check main.js && node --check sanctuary-experience.js"
+    "syntax": "node --check i18n.js && node --check main.js && node --check sanctuary-experience.js && node --check flow-engine.js"
   },
   "engines": {
     "node": ">=20"

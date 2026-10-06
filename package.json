@@ -6,8 +6,9 @@
   "scripts": {
     "check": "node tools/yoga-audit.mjs",
     "syntax": "node --check i18n.js && node --check main.js && node --check sanctuary-experience.js && node --check flow-engine.js && node --check flow-session.js && node --check flow-phase.js && node --check instructor-ui.js && node --check tests/phase-clock.test.mjs && node --check tests/instructor-flow.test.mjs && node --check tests/session-clock.test.mjs",
-    "test:e2e": "node --test tests/instructor-flow.test.mjs tests/session-clock.test.mjs tests/phase-clock.test.mjs tests/quality-100.test.mjs",
-    "test:quality100": "node --test tests/quality-100.test.mjs"
+    "test:e2e": "node --test tests/instructor-flow.test.mjs tests/session-clock.test.mjs tests/phase-clock.test.mjs tests/quality-100.test.mjs tests/quality-200.test.mjs",
+    "test:quality100": "node --test tests/quality-100.test.mjs",
+    "test:quality200": "node --test tests/quality-200.test.mjs"
   },
   "engines": {
     "node": ">=20"

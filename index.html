@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=production-visual-2">
+  <link rel="stylesheet" href="./styles.css?v=production-visual-3">
   <link rel="stylesheet" href="./hero-live-fix.css?v=hero-live-1">
   <script>
     /* zen intro boot — decide before first paint, with failsafe */
@@ -151,68 +151,71 @@
         </div>
         <div class="mandala-parallax" style="--depth:1.2">
           <div class="mandala-conic-halo" aria-hidden="true"></div>
-          <svg class="hero-mandala" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg class="hero-mandala" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
   <defs>
-    <radialGradient id="sanctuaryCore" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="var(--mandala-core)" stop-opacity=".9"/>
-      <stop offset="42%" stop-color="var(--mandala-core)" stop-opacity=".18"/>
-      <stop offset="100%" stop-color="var(--mandala-core)" stop-opacity="0"/>
+    <radialGradient id="lotusHalo" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="var(--lotus-color)" stop-opacity=".12"/>
+      <stop offset="48%" stop-color="var(--lotus-color)" stop-opacity=".035"/>
+      <stop offset="100%" stop-color="var(--lotus-color)" stop-opacity="0"/>
     </radialGradient>
-    <linearGradient id="sanctuaryTrace" x1="70" y1="70" x2="430" y2="430" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="var(--mandala-soft)" stop-opacity=".18"/>
-      <stop offset="48%" stop-color="var(--mandala-accent)" stop-opacity=".78"/>
-      <stop offset="100%" stop-color="var(--mandala-soft)" stop-opacity=".16"/>
+    <linearGradient id="lotusInk" x1="160" y1="110" x2="400" y2="430" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="var(--lotus-highlight)"/>
+      <stop offset="52%" stop-color="var(--lotus-color)"/>
+      <stop offset="100%" stop-color="var(--lotus-color)" stop-opacity=".64"/>
     </linearGradient>
   </defs>
 
-  <g class="mandala-rings" stroke="currentColor" fill="none">
-    <circle cx="250" cy="250" r="232" stroke-width=".9" stroke-dasharray="1 13" opacity=".34"/>
-    <circle cx="250" cy="250" r="202" stroke-width="1" opacity=".26"/>
-    <circle cx="250" cy="250" r="164" stroke-width="1.1" opacity=".38"/>
-    <circle cx="250" cy="250" r="124" stroke-width=".9" stroke-dasharray="2 9" opacity=".34"/>
-    <circle cx="250" cy="250" r="84" stroke-width="1.2" opacity=".42"/>
-    <circle cx="250" cy="250" r="48" stroke-width="1" opacity=".32"/>
+  <circle cx="280" cy="280" r="242" fill="url(#lotusHalo)" class="lotus-halo"/>
+
+  <g class="lotus-guide" stroke="var(--lotus-guide)" fill="none">
+    <circle cx="280" cy="280" r="236" stroke-width=".8" stroke-dasharray="1 16"/>
+    <circle cx="280" cy="280" r="204" stroke-width=".9" opacity=".62"/>
+    <circle cx="280" cy="280" r="171" stroke-width=".9" opacity=".74"/>
+    <circle cx="280" cy="280" r="112" stroke-width=".8" stroke-dasharray="1 11" opacity=".68"/>
   </g>
 
-  <g class="mandala-petals" stroke="url(#sanctuaryTrace)" stroke-width="1.35" fill="none">
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z"/>
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(45 250 250)"/>
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(90 250 250)"/>
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(135 250 250)"/>
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(180 250 250)"/>
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(225 250 250)"/>
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(270 250 250)"/>
-    <path d="M250 48 C284 96 292 150 250 202 C208 150 216 96 250 48 Z" transform="rotate(315 250 250)"/>
+  <!-- unmistakable lotus blossom -->
+  <g class="lotus-bloom" stroke="url(#lotusInk)" stroke-linejoin="round">
+    <!-- crown -->
+    <path d="M280 96 C246 130 231 171 246 220 C258 207 272 190 280 164 C288 190 302 207 314 220 C329 171 314 130 280 96 Z"
+          fill="var(--lotus-fill)" stroke-width="2.3"/>
+    <!-- inner left/right -->
+    <path d="M280 122 C246 139 226 169 232 211 C254 205 272 188 280 156 C288 188 306 205 328 211 C334 169 314 139 280 122 Z"
+          fill="var(--lotus-fill-soft)" stroke-width="1.8"/>
+    <!-- side petals -->
+    <path d="M244 180 C203 183 173 207 157 244 C196 255 234 239 263 210 C257 197 251 188 244 180 Z"
+          fill="var(--lotus-fill)" stroke-width="2"/>
+    <path d="M316 180 C357 183 387 207 403 244 C364 255 326 239 297 210 C303 197 309 188 316 180 Z"
+          fill="var(--lotus-fill)" stroke-width="2"/>
+    <!-- lower petals -->
+    <path d="M263 210 C226 223 197 252 190 291 C222 302 259 281 280 246 C301 281 338 302 370 291 C363 252 334 223 297 210 C292 224 286 236 280 246 C274 236 268 224 263 210 Z"
+          fill="var(--lotus-fill-soft)" stroke-width="2"/>
+    <path d="M215 298 C231 340 254 369 280 389 C306 369 329 340 345 298 C321 318 299 327 280 327 C261 327 239 318 215 298 Z"
+          fill="var(--lotus-fill)" stroke-width="1.9"/>
+    <!-- base -->
+    <path d="M188 338 C213 365 245 382 280 383 C315 382 347 365 372 338 C347 350 319 356 280 356 C241 356 213 350 188 338 Z"
+          fill="var(--lotus-fill-soft)" stroke-width="1.8"/>
   </g>
 
-  <g class="mandala-petals-sub" stroke="currentColor" stroke-width=".8" fill="none">
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z"/>
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(45 250 250)"/>
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(90 250 250)"/>
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(135 250 250)"/>
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(180 250 250)"/>
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(225 250 250)"/>
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(270 250 250)"/>
-    <path d="M250 122 C271 148 273 177 250 202 C227 177 229 148 250 122 Z" transform="rotate(315 250 250)"/>
+  <g class="lotus-detail" stroke="var(--lotus-highlight)" stroke-width="1" opacity=".72">
+    <path d="M280 150 C270 181 271 211 280 244"/>
+    <path d="M246 216 C257 231 268 244 280 255"/>
+    <path d="M314 216 C303 231 292 244 280 255"/>
+    <path d="M216 300 C238 291 258 287 280 288"/>
+    <path d="M344 300 C322 291 302 287 280 288"/>
   </g>
 
-  <g class="mandala-orbit-outer" stroke="currentColor" fill="none" stroke-linecap="round">
-    <path d="M88 250 A162 162 0 0 1 250 88" stroke-width="1.4" opacity=".58"/>
-    <path d="M412 250 A162 162 0 0 1 250 412" stroke-width="1.4" opacity=".58"/>
+  <g class="mandala-orbit-outer" stroke="var(--lotus-guide)" fill="none" stroke-linecap="round" opacity=".72">
+    <path d="M100 280 A180 180 0 0 1 280 100" stroke-width="1.2" stroke-dasharray="44 20"/>
+    <path d="M460 280 A180 180 0 0 1 280 460" stroke-width="1.2" stroke-dasharray="44 20"/>
   </g>
 
-  <g class="mandala-sparks" fill="currentColor" opacity=".78">
-    <circle cx="250" cy="18" r="2.4"/>
-    <circle cx="482" cy="250" r="2"/>
-    <circle cx="250" cy="482" r="1.7"/>
-    <circle cx="18" cy="250" r="2"/>
-    <circle cx="414" cy="86" r="1.6"/>
-    <circle cx="86" cy="414" r="1.5"/>
+  <g class="lotus-sparks" fill="var(--lotus-highlight)" opacity=".9">
+    <circle cx="280" cy="37" r="2"/>
+    <circle cx="523" cy="280" r="1.7"/>
+    <circle cx="280" cy="523" r="1.6"/>
+    <circle cx="37" cy="280" r="1.7"/>
   </g>
-
-  <circle cx="250" cy="250" r="54" fill="url(#sanctuaryCore)"/>
-  <circle class="ring-core-stroke" cx="250" cy="250" r="17" stroke="currentColor" stroke-width="1.2" opacity=".74"/>
-  <circle cx="250" cy="250" r="4" fill="var(--mandala-accent)"/>
 </svg>
         </div>
         <svg class="hero-breath-wave" viewBox="0 0 640 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -257,74 +260,66 @@
     </section>
 
     <section class="section ritual reveal" id="ritual" aria-labelledby="ritual-title">
-      <div class="ritual-intro">
-        <p class="kicker" data-i18n="ritualKicker">RITUAL · TU PUNTO DE PARTIDA</p>
-        <h2 id="ritual-title" data-i18n-html="ritualH2">No necesitas llegar<br><em>de ninguna manera.</em></h2>
-        <p class="about-lead" data-i18n="ritualLead">Elige cómo llegas hoy. La práctica puede empezar con quietud, movimiento, atención o compañía.</p>
+  <div class="ritual-intro">
+    <div class="ritual-intro-top">
+      <span class="section-number">02</span>
+      <p class="kicker" data-i18n="ritualKicker">RITUAL · TU PUNTO DE PARTIDA</p>
+    </div>
 
-        <div class="ritual-orb-wrap" aria-live="polite">
-          <div class="ritual-orb" aria-hidden="true">
-            <span class="ritual-orb-ring"></span>
-            <span class="ritual-orb-core"></span>
-          </div>
-          <div class="ritual-status">
-            <span class="ritual-status-kicker" data-i18n="ritualStatusKicker">HOY</span>
-            <strong id="ritual-state" data-i18n="ritualStateDefault">Aterrizar</strong>
-            <small id="ritual-state-detail" data-i18n="ritualStateDetail">Baja el ruido. Empieza aquí.</small>
-          </div>
-        </div>
+    <h2 id="ritual-title" data-i18n-html="ritualH2">No necesitas llegar<br><em>de ninguna manera.</em></h2>
+    <p class="about-lead" data-i18n="ritualLead">Elige cómo llegas hoy. La práctica puede empezar con quietud, movimiento, atención o compañía.</p>
+
+    <div class="ritual-arrival" aria-live="polite">
+      <div class="ritual-orb" aria-hidden="true">
+        <span class="ritual-orb-ring"></span>
+        <span class="ritual-orb-core"></span>
       </div>
-
-      <div class="ritual-panel">
-        <div class="ritual-panel-head">
-          <span class="ritual-panel-index">03</span>
-          <p data-i18n="ritualHint">Tu práctica no empieza en la postura. Empieza en cómo llegas.</p>
-        </div>
-
-        <div class="ritual-choices" role="group" aria-label="Practice intention">
-          <button class="ritual-choice is-active" type="button" data-practice="arrive" data-target="#sobre" aria-pressed="true">
-            <span class="choice-index">01</span>
-            <span class="choice-copy">
-              <b data-i18n="ritual1t">Aterrizar</b>
-              <small data-i18n="ritual1p">Calmar, escuchar, estar.</small>
-            </span>
-            <span class="choice-arrow" aria-hidden="true">↘</span>
-          </button>
-
-          <button class="ritual-choice" type="button" data-practice="move" data-target="#campo" aria-pressed="false">
-            <span class="choice-index">02</span>
-            <span class="choice-copy">
-              <b data-i18n="ritual2t">Mover</b>
-              <small data-i18n="ritual2p">Despertar el cuerpo sin prisa.</small>
-            </span>
-            <span class="choice-arrow" aria-hidden="true">↘</span>
-          </button>
-
-          <button class="ritual-choice" type="button" data-practice="focus" data-target="#filosofia" aria-pressed="false">
-            <span class="choice-index">03</span>
-            <span class="choice-copy">
-              <b data-i18n="ritual3t">Afinar</b>
-              <small data-i18n="ritual3p">Respirar, observar, encontrar centro.</small>
-            </span>
-            <span class="choice-arrow" aria-hidden="true">↘</span>
-          </button>
-
-          <button class="ritual-choice" type="button" data-practice="share" data-target="#contacto" aria-pressed="false">
-            <span class="choice-index">04</span>
-            <span class="choice-copy">
-              <b data-i18n="ritual4t">Compartir</b>
-              <small data-i18n="ritual4p">Llevar la práctica a una sala o equipo.</small>
-            </span>
-            <span class="choice-arrow" aria-hidden="true">↘</span>
-          </button>
-        </div>
-
-        <div class="ritual-foot">
-          <span class="ritual-line" aria-hidden="true"></span>
-          <span data-i18n="ritualFoot">Presencia · Respiración · Movimiento · Atención</span>
-        </div>
+      <div class="ritual-status">
+        <span class="ritual-status-kicker" data-i18n="ritualStatusKicker">HOY</span>
+        <strong id="ritual-state" data-i18n="ritualStateDefault">Aterrizar</strong>
+        <small id="ritual-state-detail" data-i18n="ritualStateDetail">Baja el ruido. Empieza aquí.</small>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <div class="ritual-panel">
+    <div class="ritual-panel-head">
+      <div>
+        <span class="ritual-panel-index">03</span>
+        <span class="ritual-panel-label">PRACTICE COMPASS</span>
+      </div>
+      <p data-i18n="ritualHint">Tu práctica no empieza en la postura. Empieza en cómo llegas.</p>
+    </div>
+
+    <div class="ritual-choices" role="group" aria-label="Practice intention">
+      <button class="ritual-choice is-active" type="button" data-practice="arrive" data-target="#sobre" aria-pressed="true">
+        <span class="choice-index">01</span>
+        <span class="choice-copy"><b data-i18n="ritual1t">Aterrizar</b><small data-i18n="ritual1p">Calmar, escuchar, estar.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="ritual-choice" type="button" data-practice="move" data-target="#campo" aria-pressed="false">
+        <span class="choice-index">02</span>
+        <span class="choice-copy"><b data-i18n="ritual2t">Mover</b><small data-i18n="ritual2p">Despertar el cuerpo sin prisa.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="ritual-choice" type="button" data-practice="focus" data-target="#filosofia" aria-pressed="false">
+        <span class="choice-index">03</span>
+        <span class="choice-copy"><b data-i18n="ritual3t">Afinar</b><small data-i18n="ritual3p">Respirar, observar, encontrar centro.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="ritual-choice" type="button" data-practice="share" data-target="#contacto" aria-pressed="false">
+        <span class="choice-index">04</span>
+        <span class="choice-copy"><b data-i18n="ritual4t">Compartir</b><small data-i18n="ritual4p">Llevar la práctica a una sala o equipo.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+    </div>
+
+    <div class="ritual-foot">
+      <span class="ritual-line" aria-hidden="true"></span>
+      <span data-i18n="ritualFoot">Presencia · Respiración · Movimiento · Atención</span>
+    </div>
+  </div>
+</section>
 
     <section class="section campo reveal" id="campo">
       <div class="section-head">

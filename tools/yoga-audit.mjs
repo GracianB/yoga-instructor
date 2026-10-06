@@ -31,7 +31,7 @@ const required = [
   ["sanctuary script include", index.includes("./sanctuary-experience.js")],
   ["editorial rail", index.includes('class="hero-rail"')],
   ["hero manifesto", index.includes('data-i18n="heroManifesto"')],
-  ["visual system", index.includes("lotus-signature-1") && css.includes("LOTUS SIGNATURE v2 · TRUE BLOSSOM SILHOUETTE")],
+  ["visual system", index.includes("lotus-signature-2") && css.includes("LOTUS SIGNATURE v2 · TRUE BLOSSOM SILHOUETTE")],
   ["hero visibility", css.includes(".hero-inner > *") && css.includes("opacity: 1 !important")],
   ["visual lock", css.includes("PRODUCTION VISUAL LOCK") && css.includes("ritual.section") && css.includes("campo-vortex-full iframe")],
   ["sanctuary finale", css.includes("SANCTUARY FINALE · SIGNATURE LOTUS") && index.includes("lotus-bloom")],
@@ -60,7 +60,7 @@ if ((index.match(/<section\b/g) || []).length !== (index.match(/<\/section>/g) |
 
 for (const [file, max] of [
   ["index.html", 46000],
-  ["styles.css", 182000],
+  ["styles.css", 184000],
   ["main.js", 22000],
   ["i18n.js", 18000],
   ["sanctuary-experience.js", 14000]

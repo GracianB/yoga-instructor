@@ -207,3 +207,28 @@ test("Hardening #49: paused next is a no-op without history mutation", () => {
   assert.deepEqual(engine.history, before);
   assert.deepEqual(snapshot, engine.snapshot());
 });
+
+test("Hardening #50: goTo lands on requested phase with deterministic status", () => {
+  const engine = new YogaFlowEngine();
+  const mid = engine.goTo("cooldown");
+  assert.equal(mid.phase, "cooldown");
+  assert.equal(mid.index, 7);
+  assert.equal(mid.status, STATUS.RUNNING);
+
+  const finish = engine.goTo("finish");
+  assert.equal(finish.phase, "finish");
+  assert.equal(finish.index, 9);
+  assert.equal(finish.status, STATUS.FINISHED);
+});
+
+test("Hardening #50: invalid goTo does not mutate history or position", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  engine.next();
+  const before = engine.snapshot();
+  const history = [...engine.history];
+
+  assert.throws(() => engine.goTo("not-a-phase"), /Unknown yoga flow phase/);
+  assert.deepEqual(engine.snapshot(), before);
+  assert.deepEqual(engine.history, history);
+});

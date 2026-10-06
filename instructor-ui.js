@@ -130,11 +130,12 @@
 
   const syncPhaseClock = (snapshot) => {
     if (snapshot.phase !== lastPhase) {
+      phase.reset();
       if (snapshot.status === "running") {
-        phase.reset();
         phase.start();
-      } else {
-        phase.reset();
+      } else if (snapshot.status === "paused") {
+        phase.start();
+        phase.pause();
       }
       lastPhase = snapshot.phase;
     }

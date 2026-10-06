@@ -326,6 +326,7 @@ for (const key of [
 
 const e2e = read("tests/instructor-flow.test.mjs");
 const qualityWorkflow = read(".github/workflows/quality.yml");
+const quality100 = read("tests/quality-100.test.mjs");
 
 if (
   e2e.includes("canonical 10-phase sequence") &&
@@ -333,9 +334,10 @@ if (
   e2e.includes("reset: returns to a clean idle state") &&
   e2e.includes("invalid goTo is rejected") &&
   qualityWorkflow.includes("npm run test:e2e") &&
+  quality100.includes('100Q 100: all phase definitions are frozen') &&
   index.includes('<div class="flow-progress" role="progressbar"')
 ) {
-  pass.push("Instructor E2E + Hardening");
+  pass.push("Instructor E2E + Hardening + 100 Quality Contracts");
 } else {
   fail.push("Instructor E2E + Hardening");
 }

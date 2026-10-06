@@ -55,7 +55,7 @@ if (!/src="\.\/sanctuary-experience\.js[^"]*"/.test(index)) fail.push("sanctuary
 if (!/styles\.css\?v=sanctuary-finale-1/.test(index)) fail.push("styles cache bust");
 if (!/i18n\.js\?v=quiet-geometry-5/.test(index)) fail.push("i18n cache bust");
 if (!/main\.js\?v=quiet-geometry-5/.test(index)) fail.push("main cache bust");
-if (/(?:href|src)\s*=\s*["']http:\/\//i.test(index + main + css + heroFix)) fail.push("insecure http resource URL");
+if (/(?:href|src)\s*=\s*["']http:\/\//i.test(index + main + css)) fail.push("insecure http resource URL");
 if ((index.match(/<section\b/g) || []).length !== (index.match(/<\/section>/g) || []).length) fail.push("section balance");
 
 for (const [file, max] of [

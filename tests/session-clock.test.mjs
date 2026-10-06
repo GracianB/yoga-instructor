@@ -109,3 +109,13 @@ test("Hardening #56: session elapsed never becomes negative when clock moves bac
   now = 1000;
   assert.equal(clock.snapshot().elapsedMs, 0);
 });
+
+test("Hardening #57: session reset clears terminal state completely", () => {
+  let now = 1000;
+  const clock = new YogaSessionClock(() => now);
+  clock.start();
+  now += 3000;
+  clock.finish();
+  const reset = clock.reset();
+  assert.deepEqual(reset, { elapsedMs: 0, elapsedSeconds: 0, status: "idle" });
+});

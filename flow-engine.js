@@ -73,9 +73,8 @@
     next() {
       if (this.status === STATUS.IDLE) return this.start();
       if (this.status === STATUS.PAUSED) return this.snapshot();
-      if (this.isLast) {
-        this.status = STATUS.FINISHED;
-        return this.emit();
+      if (this.isLast || this.status === STATUS.FINISHED) {
+        return this.snapshot();
       }
       this.index += 1;
       this.status = this.isLast ? STATUS.FINISHED : STATUS.RUNNING;

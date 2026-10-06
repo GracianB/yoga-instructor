@@ -135,11 +135,15 @@
   };
 
   const actions = {
-    start: () => engine.start(),
+    start: () => { engine.start(); session.start(); renderSession(); },
     previous: () => engine.previous(),
-    pause: () => {\n      if (engine.status === "paused") { engine.resume(); session.resume(); }\n      else { engine.pause(); session.pause(); }\n      renderSession();\n    },
-    next: () => engine.next(),
-    reset: () => engine.reset()
+    pause: () => {
+      if (engine.status === "paused") { engine.resume(); session.resume(); }
+      else { engine.pause(); session.pause(); }
+      renderSession();
+    },
+    next: () => {\n      if (engine.status === "idle") { engine.start(); session.start(); }\n      const snapshot = engine.next();\n      if (snapshot.status === "finished") session.finish();\n    },
+    reset: () => { engine.reset(); session.reset(); renderSession(); }
   };
 
   const runAction = (name) => {
@@ -175,7 +179,11 @@
     runAction(action);
   });
 
-  window.addEventListener("yoga:flow", (event) => {\n    render(event.detail);\n    if (event.detail.status === "finished") session.finish();\n    renderSession();\n  });
+  window.addEventListener("yoga:flow", (event) => {
+    render(event.detail);
+    if (event.detail.status === "finished") session.finish();
+    renderSession();
+  });
 
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-set-lang]")) {
@@ -183,5 +191,7 @@
     }
   });
 
-  render(engine.snapshot());\n  renderSession();\n  window.setInterval(renderSession, 1000);
+  render(engine.snapshot());
+  renderSession();
+  window.setInterval(renderSession, 1000);
 })();

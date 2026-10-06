@@ -256,3 +256,7 @@ test("Hardening #55: goTo preserves paused state", () => {
   assert.equal(moved.phase, "cooldown");
   assert.equal(moved.status, STATUS.PAUSED);
 });
+
+test("Hardening #58: finished phase sync settles terminal phase marker", () => {
+  assert.match(ui, /if \(snapshot\.status === "finished"\) \{\s*phase\.reset\(\);\s*lastPhase = snapshot\.phase;\s*\}/);
+});

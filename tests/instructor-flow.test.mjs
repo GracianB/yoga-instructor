@@ -26,6 +26,13 @@ test("E2E flow: completes the canonical 10-phase sequence", () => {
   assert.equal(engine.snapshot().index, 9);
 });
 
+test("E2E UI contract: next from idle starts at START without skipping", () => {
+  assert.match(
+    ui,
+    /next: \(\) => \{[\s\S]*?if \(engine\.status === "idle"\) \{[\s\S]*?engine\.start\(\);[\s\S]*?session\.start\(\);[\s\S]*?phase\.start\(\);[\s\S]*?return;[\s\S]*?\}[\s\S]*?engine\.next\(\);/
+  );
+});
+
 test("E2E controls: pause freezes progression and resume continues", () => {
   const engine = new YogaFlowEngine();
   engine.start();

@@ -360,6 +360,18 @@ if (
   fail.push("Instructor Session Clock");
 }
 
+const stateMachineContracts = [
+  ["terminal next is a no-op", flowEngine.includes("if (this.isLast || this.status === STATUS.FINISHED) {")],
+  ["paused goTo preservation", flowEngine.includes("const wasPaused = this.status === STATUS.PAUSED;")],
+  ["deterministic progress", e2e.includes("progress is deterministic across all ten phases")],
+  ["snapshot navigation invariants", e2e.includes("snapshots expose stable navigation invariants")]
+];
+
+for (const [name, ok] of stateMachineContracts) {
+  if (ok) pass.push(`State machine: ${name}`);
+  else fail.push(`State machine: ${name}`);
+}
+
 const lifecycleContracts = [
   ["start clock ordering", /start: \(\) => \{ session\.start\(\); phase\.start\(\); engine\.start\(\);/],
   ["pause clock ordering", /session\.pause\(\); phase\.pause\(\); engine\.pause\(\);/],

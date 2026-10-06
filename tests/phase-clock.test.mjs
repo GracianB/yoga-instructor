@@ -48,3 +48,15 @@ test("Phase Clock: reset clears the phase timer", () => {
   assert.equal(clock.snapshot().elapsedMs, 0);
   assert.equal(clock.snapshot().status, "idle");
 });
+
+test("Phase Clock: resume preserves accumulated milliseconds", () => {
+  let now = 0;
+  const clock = new YogaPhaseClock(() => now);
+  clock.start();
+  now += 1_250;
+  clock.pause();
+  now += 9_000;
+  clock.resume();
+  now += 750;
+  assert.equal(clock.snapshot().elapsedMs, 2_000);
+});

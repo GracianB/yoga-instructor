@@ -6377,25 +6377,21 @@ html.intro-done .zintro {
 
 
 /* ================================================================
-   LOTUS SIGNATURE v3 · WIDE BOTANICAL SILHOUETTE
+   LOTUS SIGNATURE v4 · BOTANICAL LOTUS
    ------------------------------------------------
-   The flower itself is the object. No orbit, no target, no portal.
-   Wide frontal lotus proportions, luminous theme treatment.
+   Solid, frontal, unmistakable flower silhouette.
+   No rings, orbit, target, portal or geometric stack.
    ================================================================ */
 
 :root,
 [data-theme="light"] {
   --lotus-color: #46b879;
-  --lotus-highlight: #86d9a4;
-  --lotus-fill: rgba(70,184,121,.045);
-  --lotus-fill-strong: rgba(70,184,121,.08);
+  --lotus-highlight: #7fd49d;
 }
 
 [data-theme="dark"] {
   --lotus-color: #ffffff;
   --lotus-highlight: #ffffff;
-  --lotus-fill: rgba(255,255,255,.035);
-  --lotus-fill-strong: rgba(255,255,255,.065);
 }
 
 .mandala-parallax {
@@ -6412,8 +6408,8 @@ html.intro-done .zintro {
 
 .hero-mandala {
   left: 50% !important;
-  top: 49% !important;
-  width: min(37vw, 535px) !important;
+  top: 50% !important;
+  width: min(38vw, 535px) !important;
   height: auto !important;
   aspect-ratio: 560 / 360 !important;
   transform: translate(-50%,-50%) !important;
@@ -6424,10 +6420,10 @@ html.intro-done .zintro {
 }
 
 [data-theme="dark"] .hero-mandala {
-  color: #fff !important;
+  color: #ffffff !important;
   filter:
-    drop-shadow(0 0 18px rgba(255,255,255,.22))
-    drop-shadow(0 18px 36px rgba(255,255,255,.06)) !important;
+    drop-shadow(0 0 18px rgba(255,255,255,.26))
+    drop-shadow(0 20px 38px rgba(255,255,255,.07)) !important;
 }
 
 [data-theme="light"] .hero-mandala {
@@ -6436,38 +6432,34 @@ html.intro-done .zintro {
 }
 
 .hero-mandala .lotus-bloom {
-  stroke: currentColor !important;
-  stroke-width: 2.7 !important;
-  fill: none !important;
-}
-
-.hero-mandala .lotus-bloom .lotus-petal:nth-child(2),
-.hero-mandala .lotus-bloom .lotus-petal:nth-child(3) {
-  fill: var(--lotus-fill) !important;
-}
-
-.hero-mandala .lotus-bloom .lotus-petal-wide {
-  fill: var(--lotus-fill-strong) !important;
-}
-
-.hero-mandala .lotus-bloom .lotus-bowl,
-.hero-mandala .lotus-bloom .lotus-petal-lower {
-  fill: var(--lotus-fill) !important;
+  fill: currentColor !important;
+  stroke: none !important;
 }
 
 .hero-mandala .lotus-detail {
+  fill: none !important;
   stroke: var(--lotus-highlight) !important;
-  stroke-width: 1.08 !important;
+  stroke-width: 1.35 !important;
+}
+
+[data-theme="dark"] .hero-mandala .lotus-detail {
+  stroke: #ffffff !important;
+  opacity: .24 !important;
+}
+
+[data-theme="light"] .hero-mandala .lotus-detail {
+  stroke: #2f8f5d !important;
+  opacity: .28 !important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .hero[data-breath="cycle"] .hero-mandala {
-    animation: lotusBreathFinale 19s ease-in-out infinite !important;
+    animation: lotusBotanicalBreath 19s ease-in-out infinite !important;
   }
 
-  @keyframes lotusBreathFinale {
-    0%,100% { transform: translate(-50%,-50%) scale(.994); }
-    50% { transform: translate(-50%,-50%) scale(1.012); }
+  @keyframes lotusBotanicalBreath {
+    0%,100% { transform: translate(-50%,-50%) scale(.992); }
+    50% { transform: translate(-50%,-50%) scale(1.008); }
   }
 }
 
@@ -6477,7 +6469,7 @@ html.intro-done .zintro {
   }
 
   .hero-mandala {
-    width: min(37vw, 470px) !important;
+    width: min(39vw, 470px) !important;
   }
 }
 

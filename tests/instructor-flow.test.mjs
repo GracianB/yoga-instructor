@@ -160,3 +160,10 @@ test("Hardening: instructor UI exposes keyboard and ARIA contract", () => {
   assert.match(index, /class="flow-progress" role="progressbar"/);
   assert.doesNotMatch(index, /class="flow-progress"[^>]*aria-hidden="true"/);
 });
+
+test("Hardening #43: lifecycle actions synchronize clocks before engine emits", () => {
+  assert.match(ui, /start: \(\) => \{ session\.start\(\); phase\.start\(\); engine\.start\(\);/);
+  assert.match(ui, /if \(engine\.status === "paused"\) \{ session\.resume\(\); phase\.resume\(\); engine\.resume\(\); \}/);
+  assert.match(ui, /else \{ session\.pause\(\); phase\.pause\(\); engine\.pause\(\); \}/);
+  assert.match(ui, /reset: \(\) => \{ session\.reset\(\); phase\.reset\(\); engine\.reset\(\);/);
+});

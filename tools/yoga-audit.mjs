@@ -31,7 +31,7 @@ const required = [
   ["sanctuary script include", index.includes("./sanctuary-experience.js")],
   ["editorial rail", index.includes('class="hero-rail"')],
   ["hero manifesto", index.includes('data-i18n="heroManifesto"')],
-  ["quiet geometry", index.includes("sanctuary-finale-1") && css.includes("PRODUCTION VISUAL LOCK")],
+  ["quiet geometry", index.includes("sanctuary-finale-2") && css.includes("PRODUCTION VISUAL LOCK")],
   ["hero visibility", css.includes(".hero-inner > *") && css.includes("opacity: 1 !important")],
   ["visual lock", css.includes("PRODUCTION VISUAL LOCK") && css.includes("ritual.section") && css.includes("campo-vortex-full iframe")],
   ["sanctuary finale", css.includes("SANCTUARY FINALE · SIGNATURE LOTUS") && index.includes("lotus-bloom")],

@@ -196,6 +196,59 @@ if (
 ) {
   pass.push(`Instructor Core ${instructorCore.length} keys`);
 }
+/* ================================================================
+   INSTRUCTOR FLOW ENGINE · #32
+   ================================================================ */
+const flowEngine = read("flow-engine.js");
+
+const expectedFlow = [
+  "start",
+  "centering",
+  "breath",
+  "warmup",
+  "pose-1",
+  "transition",
+  "pose-2",
+  "cooldown",
+  "savasana",
+  "finish"
+];
+
+const flowOrder = [...flowEngine.matchAll(/id:\s*"([^"]+)"/g)].map((m) => m[1]);
+
+if (JSON.stringify(flowOrder) !== JSON.stringify(expectedFlow)) {
+  console.error("Flow Engine sequence:", flowOrder.join(" -> "));
+  fail.push("flow engine sequence");
+} else {
+  pass.push("Flow Engine 10-phase sequence");
+}
+
+for (const token of [
+  "class YogaFlowEngine",
+  "next()",
+  "previous()",
+  "pause()",
+  "resume()",
+  "reset()",
+  "goTo(id)",
+  "snapshot()",
+  "yoga:flow",
+  "window.YOGA_FLOW"
+]) {
+  if (!flowEngine.includes(token)) {
+    fail.push(`flow engine contract: ${token}`);
+  }
+}
+
+if (
+  flowEngine.includes("class YogaFlowEngine") &&
+  flowEngine.includes("snapshot()") &&
+  flowEngine.includes("yoga:flow") &&
+  flowEngine.includes("window.YOGA_FLOW")
+) {
+  pass.push("Flow Engine deterministic contract");
+}
+
 const required = [
   ["doctype", /<!doctype html>/i.test(index)],
   ["language", /<html[^>]+lang="(?:es|en)"/i.test(index)],

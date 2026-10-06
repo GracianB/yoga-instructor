@@ -3,12 +3,15 @@
 
   const engineApi = typeof window !== "undefined" ? window.YOGA_FLOW : null;
   const sessionApi = typeof window !== "undefined" ? window.YOGA_SESSION : null;
+  const phaseApi = typeof window !== "undefined" ? window.YOGA_PHASE : null;
   const root = document.getElementById("instructor-flow");
-  if (!engineApi || !sessionApi || !root) return;
+  if (!engineApi || !sessionApi || !phaseApi || !root) return;
 
   const engine = engineApi.create();
   const session = sessionApi.create();
+  const phase = phaseApi.create();
   const sessionTime = document.getElementById("flow-session-time");
+  const phaseTime = document.getElementById("flow-phase-time");
   const phaseLabel = document.getElementById("flow-phase-label");
   const phaseMeta = document.getElementById("flow-phase-meta");
   const state = document.getElementById("flow-state");
@@ -139,7 +142,7 @@
   };
 
   const actions = {
-    start: () => { engine.start(); session.start(); renderSession(); },
+    start: () => { engine.start(); session.start(); phase.start(); renderSession(); },
     previous: () => engine.previous(),
     pause: () => {
       if (engine.status === "paused") { engine.resume(); session.resume(); }
@@ -147,11 +150,11 @@
       renderSession();
     },
     next: () => {
-      if (engine.status === "idle") { engine.start(); session.start(); }
+      if (engine.status === "idle") { engine.start(); session.start(); phase.start(); }
       const snapshot = engine.next();
       if (snapshot.status === "finished") session.finish();
     },
-    reset: () => { engine.reset(); session.reset(); renderSession(); }
+    reset: () => { engine.reset(); session.reset(); phase.reset(); renderSession(); }
   };
 
   const runAction = (name) => {
@@ -189,7 +192,7 @@
 
   window.addEventListener("yoga:flow", (event) => {
     render(event.detail);
-    if (event.detail.status === "finished") session.finish();
+    if (event.detail.status === "finished") { session.finish(); phase.reset(); }
     renderSession();
   });
 

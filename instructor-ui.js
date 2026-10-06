@@ -130,7 +130,7 @@
       const duration = snapshot.durationSeconds || 0;
       const remaining = Math.max(0, duration - elapsed);
       phaseTime.textContent = formatTime(remaining);
-      phaseTime.setAttribute("aria-label", `${duration ? "Tiempo restante de fase" : "Tiempo de fase"}: ${formatTime(remaining)}`);
+      phaseTime.setAttribute("aria-label", `Tiempo restante de fase: ${formatTime(remaining)}`);
       if (phaseProgress) phaseProgress.style.transform = `scaleX(${duration ? Math.min(1, elapsed / duration) : 0})`;
     }
   };
@@ -243,8 +243,6 @@
   window.setInterval(() => {
     renderSession();
     const snapshot = engine.snapshot();
-    if (snapshot.status === "running" && snapshot.durationSeconds > 0 && phase.snapshot().elapsedSeconds >= snapshot.durationSeconds) {
-      engine.next();
-    }
+    if (snapshot.status === "running" && snapshot.durationSeconds > 0 && phase.snapshot().elapsedSeconds >= snapshot.durationSeconds) engine.next();
   }, 250);
 })();

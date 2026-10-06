@@ -340,7 +340,27 @@ if (
   fail.push("Instructor E2E + Hardening");
 }
 
-\n/* ================================================================\n   SESSION CLOCK · #36\n   ================================================================ */\nconst sessionClock = read("flow-session.js");\nconst sessionClockTests = read("tests/session-clock.test.mjs");\n\nif (\n  sessionClock.includes("class YogaSessionClock") &&\n  sessionClock.includes("elapsedSeconds") &&\n  sessionClock.includes("window.YOGA_SESSION") &&\n  sessionClockTests.includes("pause freezes elapsed time") &&\n  index.includes('id="flow-session-time"') &&\n  instructorUi.includes("formatTime")\n) {\n  pass.push("Instructor Session Clock");\n} else {\n  fail.push("Instructor Session Clock");\n}\n\nconst required = [
+
+/* ================================================================
+   SESSION CLOCK · #36
+   ================================================================ */
+const sessionClock = read("flow-session.js");
+const sessionClockTests = read("tests/session-clock.test.mjs");
+
+if (
+  sessionClock.includes("class YogaSessionClock") &&
+  sessionClock.includes("elapsedSeconds") &&
+  sessionClock.includes("window.YOGA_SESSION") &&
+  sessionClockTests.includes("pause freezes elapsed time") &&
+  index.includes('id="flow-session-time"') &&
+  instructorUi.includes("formatTime")
+) {
+  pass.push("Instructor Session Clock");
+} else {
+  fail.push("Instructor Session Clock");
+}
+
+const required = [
   ["doctype", /<!doctype html>/i.test(index)],
   ["language", /<html[^>]+lang="(?:es|en)"/i.test(index)],
   ["canonical", /rel="canonical"/i.test(index)],

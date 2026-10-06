@@ -20,8 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=production-visual-3">
-  <link rel="stylesheet" href="./hero-live-fix.css?v=hero-live-1">
+  <link rel="stylesheet" href="./styles.css?v=sanctuary-finale-2">
   <script>
     /* zen intro boot — decide before first paint, with failsafe */
     (function () {
@@ -152,69 +151,36 @@
         <div class="mandala-parallax" style="--depth:1.2">
           <div class="mandala-conic-halo" aria-hidden="true"></div>
           <svg class="hero-mandala" viewBox="0 0 560 560" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <defs>
-    <radialGradient id="lotusHalo" cx="50%" cy="50%" r="55%">
-      <stop offset="0%" stop-color="var(--lotus-color)" stop-opacity=".12"/>
-      <stop offset="48%" stop-color="var(--lotus-color)" stop-opacity=".035"/>
-      <stop offset="100%" stop-color="var(--lotus-color)" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="lotusInk" x1="160" y1="110" x2="400" y2="430" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="var(--lotus-highlight)"/>
-      <stop offset="52%" stop-color="var(--lotus-color)"/>
-      <stop offset="100%" stop-color="var(--lotus-color)" stop-opacity=".64"/>
-    </linearGradient>
-  </defs>
-
-  <circle cx="280" cy="280" r="242" fill="url(#lotusHalo)" class="lotus-halo"/>
-
-  <g class="lotus-guide" stroke="var(--lotus-guide)" fill="none">
-    <circle cx="280" cy="280" r="236" stroke-width=".8" stroke-dasharray="1 16"/>
-    <circle cx="280" cy="280" r="204" stroke-width=".9" opacity=".62"/>
-    <circle cx="280" cy="280" r="171" stroke-width=".9" opacity=".74"/>
-    <circle cx="280" cy="280" r="112" stroke-width=".8" stroke-dasharray="1 11" opacity=".68"/>
-  </g>
-
-  <!-- unmistakable lotus blossom -->
-  <g class="lotus-bloom" stroke="url(#lotusInk)" stroke-linejoin="round">
+  <g class="lotus-bloom" stroke="var(--lotus-color)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
     <!-- crown -->
-    <path d="M280 96 C246 130 231 171 246 220 C258 207 272 190 280 164 C288 190 302 207 314 220 C329 171 314 130 280 96 Z"
-          fill="var(--lotus-fill)" stroke-width="2.3"/>
-    <!-- inner left/right -->
-    <path d="M280 122 C246 139 226 169 232 211 C254 205 272 188 280 156 C288 188 306 205 328 211 C334 169 314 139 280 122 Z"
-          fill="var(--lotus-fill-soft)" stroke-width="1.8"/>
-    <!-- side petals -->
-    <path d="M244 180 C203 183 173 207 157 244 C196 255 234 239 263 210 C257 197 251 188 244 180 Z"
-          fill="var(--lotus-fill)" stroke-width="2"/>
-    <path d="M316 180 C357 183 387 207 403 244 C364 255 326 239 297 210 C303 197 309 188 316 180 Z"
-          fill="var(--lotus-fill)" stroke-width="2"/>
+    <path d="M280 82 C248 113 238 158 247 205 C263 188 275 166 280 136 C285 166 297 188 313 205 C322 158 312 113 280 82 Z"/>
+    <!-- inner crown -->
+    <path d="M280 112 C258 137 254 169 262 205 C272 190 278 171 280 151 C282 171 288 190 298 205 C306 169 302 137 280 112 Z" opacity=".72"/>
+    <!-- upper side petals -->
+    <path d="M250 176 C214 178 181 199 157 235 C194 244 228 229 257 204 C256 193 253 184 250 176 Z"/>
+    <path d="M310 176 C346 178 379 199 403 235 C366 244 332 229 303 204 C304 193 307 184 310 176 Z"/>
+    <!-- broad side petals -->
+    <path d="M226 215 C187 219 153 243 126 279 C169 287 208 270 251 240 C247 230 237 220 226 215 Z"/>
+    <path d="M334 215 C373 219 407 243 434 279 C391 287 352 270 309 240 C313 230 323 220 334 215 Z"/>
+    <!-- inner bowl -->
+    <path d="M252 225 C238 253 236 282 252 314 C265 304 276 288 280 264 C284 288 295 304 308 314 C324 282 322 253 308 225 C297 237 287 248 280 266 C273 248 263 237 252 225 Z"/>
     <!-- lower petals -->
-    <path d="M263 210 C226 223 197 252 190 291 C222 302 259 281 280 246 C301 281 338 302 370 291 C363 252 334 223 297 210 C292 224 286 236 280 246 C274 236 268 224 263 210 Z"
-          fill="var(--lotus-fill-soft)" stroke-width="2"/>
-    <path d="M215 298 C231 340 254 369 280 389 C306 369 329 340 345 298 C321 318 299 327 280 327 C261 327 239 318 215 298 Z"
-          fill="var(--lotus-fill)" stroke-width="1.9"/>
-    <!-- base -->
-    <path d="M188 338 C213 365 245 382 280 383 C315 382 347 365 372 338 C347 350 319 356 280 356 C241 356 213 350 188 338 Z"
-          fill="var(--lotus-fill-soft)" stroke-width="1.8"/>
+    <path d="M137 314 C177 310 218 319 258 351 C245 380 218 398 185 397 C164 379 148 350 137 314 Z"/>
+    <path d="M423 314 C383 310 342 319 302 351 C315 380 342 398 375 397 C396 379 412 350 423 314 Z"/>
+    <!-- lower center -->
+    <path d="M198 354 C225 347 254 347 280 362 C306 347 335 347 362 354 C343 392 315 421 280 435 C245 421 217 392 198 354 Z"/>
+    <!-- base bowl -->
+    <path d="M152 394 C190 418 232 429 280 430 C328 429 370 418 408 394 C385 432 342 458 280 466 C218 458 175 432 152 394 Z"/>
   </g>
 
-  <g class="lotus-detail" stroke="var(--lotus-highlight)" stroke-width="1" opacity=".72">
-    <path d="M280 150 C270 181 271 211 280 244"/>
-    <path d="M246 216 C257 231 268 244 280 255"/>
-    <path d="M314 216 C303 231 292 244 280 255"/>
-    <path d="M216 300 C238 291 258 287 280 288"/>
-    <path d="M344 300 C322 291 302 287 280 288"/>
-  </g>
-
-  <g class="mandala-orbit-outer" stroke="var(--lotus-guide)" fill="none" stroke-linecap="round" opacity=".72">
-    <path d="M100 280 A180 180 0 0 1 280 100" stroke-width="1.2" stroke-dasharray="44 20"/>
-    <path d="M460 280 A180 180 0 0 1 280 460" stroke-width="1.2" stroke-dasharray="44 20"/>
-  </g>
-
-  <g class="lotus-sparks" fill="var(--lotus-highlight)" opacity=".9">
-    <circle cx="280" cy="37" r="2"/>
-    <circle cx="523" cy="280" r="1.7"/>
-    <circle cx="280" cy="523" r="1.6"/>
-    <circle cx="37" cy="280" r="1.7"/>
+  <g class="lotus-detail" stroke="var(--lotus-highlight)" stroke-width="1" stroke-linecap="round" opacity=".72">
+    <path d="M280 136 C280 184 280 224 280 263"/>
+    <path d="M251 178 C270 188 275 204 280 224"/>
+    <path d="M309 178 C290 188 285 204 280 224"/>
+    <path d="M155 278 C191 269 222 257 252 240"/>
+    <path d="M405 278 C369 269 338 257 308 240"/>
+    <path d="M188 397 C219 378 250 370 280 371"/>
+    <path d="M372 397 C341 378 310 370 280 371"/>
   </g>
 </svg>
         </div>

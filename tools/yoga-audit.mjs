@@ -35,6 +35,8 @@ const required = [
   ["quiet geometry", index.includes("production-visual-2") && css.includes("PRODUCTION VISUAL LOCK")],
   ["hero live fix", index.includes("./hero-live-fix.css?v=hero-live-1") && heroFix.includes(".hero-inner > *") && heroFix.includes("heroLiveMandala")],
   ["visual lock", css.includes("PRODUCTION VISUAL LOCK") && css.includes("ritual.section") && css.includes("campo-vortex-full iframe")],
+  ["lotus geometry", index.includes("mandala-lotus") && css.includes("SANCTUARY ART DIRECTION V2 · LOTUS / EDITORIAL")],
+  ["ritual v2", index.includes("ritual-panel-label") && index.includes("ritual-arrival") && css.includes(".ritual-arrival")],
   ["legacy spectacle absent", !css.includes("PORTADA SPECTACLE")],
   ["neon stack absent", !css.includes("YOGA FINAL — definitive neon mandala")],
   ["sanctuary persistence", sanctuary.includes("localStorage")],
@@ -48,7 +50,7 @@ for (const [name, ok] of required) (ok ? pass : fail).push(name);
 
 if (!/src="\.\/main\.js[^"]*"/.test(index)) fail.push("main.js include");
 if (!/src="\.\/sanctuary-experience\.js[^"]*"/.test(index)) fail.push("sanctuary-experience.js include");
-if (!/styles\.css\?v=production-visual-2/.test(index)) fail.push("styles cache bust");
+if (!/styles\.css\?v=production-visual-3/.test(index)) fail.push("styles cache bust");
 if (!/i18n\.js\?v=quiet-geometry-5/.test(index)) fail.push("i18n cache bust");
 if (!/main\.js\?v=quiet-geometry-5/.test(index)) fail.push("main cache bust");
 if (/(?:href|src)\s*=\s*["']http:\/\//i.test(index + main + css + heroFix)) fail.push("insecure http resource URL");

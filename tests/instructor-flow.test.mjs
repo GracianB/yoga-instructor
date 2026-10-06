@@ -167,3 +167,7 @@ test("Hardening #43: lifecycle actions synchronize clocks before engine emits", 
   assert.match(ui, /else \{ session\.pause\(\); phase\.pause\(\); engine\.pause\(\); \}/);
   assert.match(ui, /reset: \(\) => \{ session\.reset\(\); phase\.reset\(\); engine\.reset\(\);/);
 });
+
+test("Hardening #44: flow events settle clocks before rendering", () => {
+  assert.match(ui, /window\.addEventListener\("yoga:flow",[\s\S]*?syncPhaseClock\(snapshot\);[\s\S]*?if \(snapshot\.status === "finished"\) session\.finish\(\);[\s\S]*?render\(snapshot\);[\s\S]*?renderSession\(\);/);
+});

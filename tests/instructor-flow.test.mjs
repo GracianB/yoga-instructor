@@ -246,3 +246,13 @@ test("Hardening #54: next after finish is a strict no-op", () => {
   assert.deepEqual(engine.next(), before);
   assert.deepEqual(engine.history, history);
 });
+
+test("Hardening #55: goTo preserves paused state", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  engine.next();
+  engine.pause();
+  const moved = engine.goTo("cooldown");
+  assert.equal(moved.phase, "cooldown");
+  assert.equal(moved.status, STATUS.PAUSED);
+});

@@ -95,3 +95,11 @@ test("Hardening #48: phase reset is a true idle zero state", () => {
   clock.reset();
   assert.deepEqual(clock.snapshot(), { elapsedMs: 0, elapsedSeconds: 0, status: "idle" });
 });
+
+test("Hardening #56: phase elapsed never becomes negative when clock moves backward", () => {
+  let now = 5000;
+  const clock = new YogaPhaseClock(() => now);
+  clock.start();
+  now = 1000;
+  assert.equal(clock.snapshot().elapsedMs, 0);
+});

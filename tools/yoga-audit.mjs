@@ -253,6 +253,23 @@ if (
    INSTRUCTOR UI · #33
    ================================================================ */
 const instructorUi = read("instructor-ui.js");
+const instructorControls = [
+  "updateAccessibility",
+  "aria-valuenow",
+  "aria-keyshortcuts",
+  "ArrowLeft",
+  "ArrowRight",
+  "isTypingContext"
+];
+
+if (instructorControls.every((token) => instructorUi.includes(token))) {
+  pass.push("Instructor Controls + Accessibility");
+} else {
+  const missing = instructorControls.filter((token) => !instructorUi.includes(token));
+  fail.push(`Instructor Controls + Accessibility: ${missing.join(", ")}`);
+}
+
+
 
 if (
   instructorUi.includes("window.YOGA_FLOW") &&

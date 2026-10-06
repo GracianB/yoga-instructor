@@ -71,6 +71,11 @@ test("Hardening: pause synchronizes both clocks", () => {
   assert.match(ui, /session\.resume\(\); phase\.resume\(\)/);
 });
 
+test("Hardening: phase clock preserves paused state across phase changes", () => {
+  assert.match(ui, /snapshot\.status === "paused"/);
+  assert.match(ui, /phase\.start\(\);\s*phase\.pause\(\)/);
+});
+
 test("Hardening: phase clock wiring covers rendered time and transitions", () => {
   for (const token of [
     "window.YOGA_PHASE",

@@ -5346,3 +5346,404 @@ html.intro-done .zintro {
     padding-bottom: 96px !important;
   }
 }
+
+
+/* ================================================================
+   SANCTUARY V2.1 · LOTUS IDENTITY + RITUAL EDITORIAL
+   ------------------------------------------------
+   The lotus is the visual signature:
+   dark = luminous white
+   light = vivid natural green
+   no central dot, no "portal" / projection cue
+   ================================================================ */
+
+:root,
+[data-theme="light"] {
+  --lotus-color: #3f9a68;
+  --lotus-highlight: #63bb87;
+  --lotus-guide: rgba(63,154,104,.42);
+  --lotus-fill: rgba(63,154,104,.055);
+  --lotus-fill-soft: rgba(99,187,135,.035);
+}
+
+[data-theme="dark"] {
+  --lotus-color: #f8fff9;
+  --lotus-highlight: #ffffff;
+  --lotus-guide: rgba(248,255,249,.28);
+  --lotus-fill: rgba(248,255,249,.045);
+  --lotus-fill-soft: rgba(255,255,255,.022);
+}
+
+/* HERO / LOTUS */
+.hero-mandala {
+  width: min(36vw, 540px) !important;
+  height: min(36vw, 540px) !important;
+  opacity: 1 !important;
+  filter:
+    drop-shadow(0 20px 60px color-mix(in srgb,var(--lotus-color) 12%,transparent))
+    drop-shadow(0 0 38px color-mix(in srgb,var(--lotus-color) 10%,transparent)) !important;
+}
+
+[data-theme="light"] .hero-mandala {
+  color: var(--lotus-color) !important;
+}
+
+[data-theme="dark"] .hero-mandala {
+  color: var(--lotus-color) !important;
+  opacity: .98 !important;
+  filter:
+    drop-shadow(0 0 24px color-mix(in srgb,var(--lotus-color) 19%,transparent))
+    drop-shadow(0 22px 70px color-mix(in srgb,var(--lotus-color) 12%,transparent)) !important;
+}
+
+.hero-mandala .lotus-halo {
+  opacity: .9 !important;
+}
+
+.hero-mandala .lotus-guide {
+  stroke: var(--lotus-guide) !important;
+  opacity: .68 !important;
+}
+
+.hero-mandala .mandala-lotus,
+.hero-mandala .lotus-bloom {
+  stroke: var(--lotus-color) !important;
+  fill: none !important;
+}
+
+.hero-mandala .lotus-bloom path:nth-child(1),
+.hero-mandala .lotus-bloom path:nth-child(3),
+.hero-mandala .lotus-bloom path:nth-child(4),
+.hero-mandala .lotus-bloom path:nth-child(6) {
+  fill: var(--lotus-fill) !important;
+}
+
+.hero-mandala .lotus-bloom path:nth-child(2),
+.hero-mandala .lotus-bloom path:nth-child(5),
+.hero-mandala .lotus-bloom path:nth-child(7) {
+  fill: var(--lotus-fill-soft) !important;
+}
+
+.hero-mandala .lotus-detail {
+  stroke: var(--lotus-highlight) !important;
+}
+
+.hero-mandala .mandala-orbit-outer {
+  stroke: var(--lotus-guide) !important;
+}
+
+.hero-mandala .lotus-sparks {
+  fill: var(--lotus-highlight) !important;
+}
+
+/* Absolutely no visual "core point". The blossom closes with negative space. */
+.hero-mandala .ring-core-stroke {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero[data-breath="cycle"] .hero-mandala {
+    animation: lotusFloat 19s ease-in-out infinite !important;
+  }
+
+  .hero[data-breath="cycle"] .lotus-guide,
+  .hero[data-breath="cycle"] .mandala-orbit-outer {
+    animation: lotusGuideRotate 42s linear infinite !important;
+    transform-origin: 280px 280px !important;
+  }
+
+  @keyframes lotusFloat {
+    0%,100% { transform: translate(-50%,-50%) scale(.99); }
+    50% { transform: translate(-50%,-50%) scale(1.018); }
+  }
+
+  @keyframes lotusGuideRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+}
+
+/* RITUAL V2 · editorial architecture */
+.ritual.section {
+  width: min(1320px, calc(100vw - 48px)) !important;
+  max-width: 1320px !important;
+  padding: clamp(116px,14vh,174px) 18px clamp(120px,15vh,188px) !important;
+  grid-template-columns: minmax(390px,.68fr) minmax(0,1.32fr) !important;
+  gap: clamp(42px,6.5vw,104px) !important;
+  align-items: center !important;
+}
+
+.ritual.section::before {
+  content: "02  /  ARRIVAL" !important;
+  top: 48px !important;
+  left: 18px !important;
+  opacity: .72 !important;
+}
+
+.ritual-intro {
+  justify-content: center !important;
+}
+
+.ritual-intro-top {
+  margin-bottom: 28px !important;
+}
+
+.ritual-intro-top .section-number {
+  width: 36px !important;
+  height: 22px !important;
+  border-color: color-mix(in srgb,var(--sage) 36%,var(--line)) !important;
+  color: var(--sage) !important;
+}
+
+.ritual-intro h2 {
+  max-width: 8.1ch !important;
+  font-size: clamp(54px,5.55vw,82px) !important;
+  line-height: .87 !important;
+}
+
+.ritual-intro > .about-lead {
+  max-width: 36ch !important;
+  margin-top: 28px !important;
+  font-size: clamp(16px,1.16vw,18px) !important;
+}
+
+.ritual-arrival {
+  position: relative !important;
+  display: grid !important;
+  grid-template-columns: 156px minmax(0,1fr) !important;
+  gap: 24px !important;
+  align-items: center !important;
+  margin-top: 48px !important;
+  min-height: 166px !important;
+}
+
+.ritual-arrival::before {
+  content: "BREATHE";
+  position: absolute;
+  left: 0;
+  top: -16px;
+  color: var(--muted);
+  font: 800 7px/1 var(--mono);
+  letter-spacing: .24em;
+}
+
+.ritual-orb {
+  position: relative !important;
+  width: 156px !important;
+  height: 156px !important;
+  display: grid !important;
+  place-items: center !important;
+  border-radius: 50% !important;
+  background:
+    radial-gradient(circle,
+      color-mix(in srgb,var(--sage) 16%,transparent) 0 18%,
+      transparent 20% 48%,
+      color-mix(in srgb,var(--sage) 5%,transparent) 49% 67%,
+      transparent 68%) !important;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb,var(--sage) 20%,transparent),
+    0 18px 46px color-mix(in srgb,var(--sage) 10%,transparent) !important;
+}
+
+.ritual-orb::before,
+.ritual-orb::after {
+  content: "";
+  position: absolute;
+  inset: 18%;
+  border: 1px solid color-mix(in srgb,var(--sage) 28%,transparent);
+  border-radius: 50%;
+  transform: rotate(22deg) scaleY(.42);
+}
+
+.ritual-orb::after {
+  transform: rotate(-68deg) scaleY(.42);
+  opacity: .58;
+}
+
+.ritual-orb-ring {
+  position: absolute !important;
+  inset: 31% !important;
+  border: 1px solid color-mix(in srgb,var(--lotus-color) 50%,var(--line)) !important;
+  border-radius: 50% !important;
+}
+
+.ritual-orb-core {
+  width: 13px !important;
+  height: 13px !important;
+  border-radius: 50% !important;
+  background: var(--lotus-color) !important;
+  box-shadow: 0 0 0 9px color-mix(in srgb,var(--lotus-color) 8%,transparent),
+              0 0 28px color-mix(in srgb,var(--lotus-color) 18%,transparent) !important;
+}
+
+.ritual-status {
+  max-width: 220px !important;
+  padding: 0 !important;
+}
+
+.ritual-status strong {
+  font-size: clamp(30px,2.7vw,41px) !important;
+  color: var(--ink) !important;
+}
+
+.ritual-status small {
+  max-width: 19ch !important;
+}
+
+.ritual-panel {
+  position: relative !important;
+  min-height: 566px !important;
+  padding: clamp(30px,3.2vw,46px) !important;
+  border-radius: 32px !important;
+  border: 1px solid color-mix(in srgb,var(--sage) 22%,var(--line)) !important;
+  background:
+    radial-gradient(460px 330px at 85% 0%,color-mix(in srgb,var(--sage) 8%,transparent),transparent 72%),
+    linear-gradient(152deg,
+      color-mix(in srgb,var(--surface) 98%,transparent),
+      color-mix(in srgb,var(--surface2) 92%,transparent)) !important;
+  box-shadow:
+    0 32px 90px color-mix(in srgb,var(--ink) 9%,transparent),
+    inset 0 1px 0 color-mix(in srgb,var(--ink) 7%,transparent) !important;
+}
+
+.ritual-panel::before {
+  content: "";
+  position: absolute;
+  right: 28px;
+  top: 28px;
+  width: 84px;
+  height: 84px;
+  border: 1px solid color-mix(in srgb,var(--sage) 18%,transparent);
+  border-radius: 50%;
+  box-shadow: 0 0 0 18px color-mix(in srgb,var(--sage) 2%,transparent);
+  pointer-events: none;
+}
+
+.ritual-panel-head {
+  padding-bottom: 28px !important;
+  border-bottom: 1px solid var(--line) !important;
+}
+
+.ritual-panel-label {
+  color: var(--sage) !important;
+}
+
+.ritual-choices {
+  margin-top: 6px !important;
+}
+
+.ritual-choice {
+  min-height: 101px !important;
+  padding: 16px 4px !important;
+}
+
+.ritual-choice .choice-index {
+  width: 34px !important;
+  height: 34px !important;
+  border-color: var(--line-strong) !important;
+}
+
+.ritual-choice .choice-copy b {
+  font-size: clamp(23px,1.95vw,32px) !important;
+}
+
+.ritual-choice .choice-copy small {
+  font-size: 12px !important;
+}
+
+.ritual-choice .choice-arrow {
+  width: 36px !important;
+  height: 36px !important;
+}
+
+.ritual-foot {
+  margin-top: 28px !important;
+  padding-top: 20px !important;
+}
+
+/* Light theme: use the bright green only as a visual accent, never neon. */
+[data-theme="light"] .ritual-panel {
+  background:
+    radial-gradient(500px 360px at 90% 0%,rgba(63,154,104,.09),transparent 72%),
+    linear-gradient(150deg,#fffef8,#f6f5eb) !important;
+}
+
+[data-theme="light"] .ritual-choice:hover,
+[data-theme="light"] .ritual-choice.is-active {
+  background: linear-gradient(90deg,rgba(63,154,104,.09),transparent 76%) !important;
+}
+
+/* Dark theme: luminous white lotus, sophisticated not fluorescent. */
+[data-theme="dark"] .ritual-panel {
+  border-color: rgba(248,255,249,.18) !important;
+}
+
+[data-theme="dark"] .ritual-panel::before {
+  border-color: rgba(248,255,249,.16) !important;
+}
+
+/* responsive */
+@media (max-width: 1100px) and (min-width: 901px) {
+  .hero-mandala {
+    width: min(34vw,470px) !important;
+    height: min(34vw,470px) !important;
+  }
+
+  .ritual.section {
+    grid-template-columns: minmax(330px,.64fr) minmax(0,1.36fr) !important;
+    gap: 34px !important;
+  }
+}
+
+@media (max-width: 900px) {
+  .ritual.section {
+    grid-template-columns: 1fr !important;
+    gap: 46px !important;
+  }
+
+  .ritual-arrival {
+    grid-template-columns: 140px minmax(0,1fr) !important;
+  }
+
+  .ritual-orb {
+    width: 140px !important;
+    height: 140px !important;
+  }
+
+  .ritual-panel {
+    min-height: auto !important;
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-mandala {
+    width: min(78vw,380px) !important;
+    height: min(78vw,380px) !important;
+    opacity: .9 !important;
+  }
+
+  .ritual.section {
+    padding-top: 82px !important;
+  }
+
+  .ritual-arrival {
+    grid-template-columns: 1fr !important;
+    margin-top: 38px !important;
+  }
+
+  .ritual-orb {
+    width: 148px !important;
+    height: 148px !important;
+  }
+
+  .ritual-panel-head {
+    grid-template-columns: 1fr !important;
+  }
+
+  .ritual-panel::before {
+    width: 64px;
+    height: 64px;
+    right: 20px;
+    top: 20px;
+  }
+}

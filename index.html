@@ -20,7 +20,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=lotus-signature-1">
+  <link rel="stylesheet" href="./styles.css?v=lotus-signature-2">
   <script>
     /* zen intro boot — decide before first paint, with failsafe */
     (function () {
@@ -150,91 +150,93 @@
         </div>
         <div class="mandala-parallax" style="--depth:1.2">
           <div class="mandala-conic-halo" aria-hidden="true"></div>
-          <svg class="hero-mandala" viewBox="0 0 560 420" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <g class="lotus-bloom" stroke="var(--lotus-color)" stroke-linejoin="round" stroke-linecap="round">
-    <!-- central crown -->
-    <path d="M280 52
-             C252 86 236 126 244 174
-             C257 159 270 136 280 106
-             C290 136 303 159 316 174
-             C324 126 308 86 280 52 Z"
-          stroke-width="2.6"/>
-    <!-- two inner petals -->
-    <path d="M280 88
-             C250 113 241 146 250 188
-             C265 178 276 157 280 126
-             C284 157 295 178 310 188
-             C319 146 310 113 280 88 Z"
-          stroke-width="2.05" opacity=".9"/>
-    <!-- left wing -->
-    <path d="M246 154
-             C203 145 161 162 126 206
-             C166 221 212 211 255 181
-             C255 171 251 161 246 154 Z"
-          stroke-width="2.25"/>
-    <!-- right wing -->
-    <path d="M314 154
-             C357 145 399 162 434 206
-             C394 221 348 211 305 181
-             C305 171 309 161 314 154 Z"
-          stroke-width="2.25"/>
-    <!-- left middle petal -->
-    <path d="M231 198
-             C190 188 151 204 113 245
-             C154 260 205 249 252 219
-             C248 210 240 203 231 198 Z"
-          stroke-width="2.35"/>
-    <!-- right middle petal -->
-    <path d="M329 198
-             C370 188 409 204 447 245
-             C406 260 355 249 308 219
-             C312 210 320 203 329 198 Z"
-          stroke-width="2.35"/>
-    <!-- left lower petal -->
-    <path d="M242 235
-             C205 235 170 252 144 286
-             C178 296 219 285 258 256
-             C254 248 249 241 242 235 Z"
-          stroke-width="2.2"/>
-    <!-- right lower petal -->
-    <path d="M318 235
-             C355 235 390 252 416 286
-             C382 296 341 285 302 256
-             C306 248 311 241 318 235 Z"
-          stroke-width="2.2"/>
-    <!-- open bowl -->
-    <path d="M126 282
-             C171 270 222 275 280 312
-             C338 275 389 270 434 282
-             C404 320 352 347 280 354
-             C208 347 156 320 126 282 Z"
-          stroke-width="2.65"/>
-    <!-- bottom petal -->
-    <path d="M181 316
-             C211 300 250 300 280 324
-             C310 300 349 300 379 316
-             C350 348 317 368 280 375
-             C243 368 210 348 181 316 Z"
-          stroke-width="2.35"/>
-    <!-- base -->
-    <path d="M116 344
-             C162 365 215 375 280 376
-             C345 375 398 365 444 344
-             C402 385 344 402 280 404
-             C216 402 158 385 116 344 Z"
-          stroke-width="2.6"/>
+          <svg class="hero-mandala" viewBox="0 0 560 360" fill="none"
+  xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <g class="lotus-bloom" stroke="var(--lotus-color)" stroke-linecap="round" stroke-linejoin="round">
+
+    <!-- Crown -->
+    <path class="lotus-petal lotus-petal-center"
+      d="M280 34
+         C244 68 235 108 244 154
+         C258 140 271 116 280 86
+         C289 116 302 140 316 154
+         C325 108 316 68 280 34 Z"/>
+
+    <!-- Inner left / right -->
+    <path class="lotus-petal"
+      d="M246 75
+         C205 87 181 119 181 154
+         C211 155 239 137 260 109
+         C258 96 252 84 246 75 Z"/>
+    <path class="lotus-petal"
+      d="M314 75
+         C355 87 379 119 379 154
+         C349 155 321 137 300 109
+         C302 96 308 84 314 75 Z"/>
+
+    <!-- Outer left / right -->
+    <path class="lotus-petal lotus-petal-wide"
+      d="M212 120
+         C163 108 119 128 83 170
+         C123 184 171 170 225 140
+         C223 131 218 125 212 120 Z"/>
+    <path class="lotus-petal lotus-petal-wide"
+      d="M348 120
+         C397 108 441 128 477 170
+         C437 184 389 170 335 140
+         C337 131 342 125 348 120 Z"/>
+
+    <!-- Lower left / right -->
+    <path class="lotus-petal"
+      d="M225 154
+         C177 151 137 172 111 207
+         C148 218 190 204 242 174
+         C239 166 233 159 225 154 Z"/>
+    <path class="lotus-petal"
+      d="M335 154
+         C383 151 423 172 449 207
+         C412 218 370 204 318 174
+         C321 166 327 159 335 154 Z"/>
+
+    <!-- Open lower bowl -->
+    <path class="lotus-bowl"
+      d="M82 209
+         C126 190 181 195 224 218
+         C245 229 263 239 280 252
+         C297 239 315 229 336 218
+         C379 195 434 190 478 209
+         C448 250 378 275 280 282
+         C182 275 112 250 82 209 Z"/>
+
+    <!-- Central lower petal -->
+    <path class="lotus-petal lotus-petal-lower"
+      d="M168 236
+         C203 224 245 231 280 258
+         C315 231 357 224 392 236
+         C364 274 326 294 280 300
+         C234 294 196 274 168 236 Z"/>
+
+    <!-- Base -->
+    <path class="lotus-base"
+      d="M116 287
+         C164 309 217 318 280 319
+         C343 318 396 309 444 287
+         C406 326 346 340 280 341
+         C214 340 154 326 116 287 Z"/>
+
   </g>
 
-  <g class="lotus-detail" stroke="var(--lotus-highlight)" stroke-width="1.05" stroke-linecap="round" opacity=".78">
-    <path d="M280 108 C280 161 280 205 280 258"/>
-    <path d="M246 161 C260 173 270 192 280 222"/>
-    <path d="M314 161 C300 173 290 192 280 222"/>
-    <path d="M145 245 C181 237 216 228 252 206"/>
-    <path d="M415 245 C379 237 344 228 308 206"/>
-    <path d="M158 284 C195 281 225 286 258 304"/>
-    <path d="M402 284 C365 281 335 286 302 304"/>
-    <path d="M184 316 C218 320 250 329 280 346"/>
-    <path d="M376 316 C342 320 310 329 280 346"/>
+  <g class="lotus-detail" stroke="var(--lotus-highlight)"
+     stroke-width="1.05" stroke-linecap="round" opacity=".72">
+    <path d="M280 86 C280 135 280 185 280 251"/>
+    <path d="M214 124 C237 130 256 144 270 168"/>
+    <path d="M346 124 C323 130 304 144 290 168"/>
+    <path d="M101 170 C145 169 185 159 222 141"/>
+    <path d="M459 170 C415 169 375 159 338 141"/>
+    <path d="M121 207 C164 205 205 194 242 174"/>
+    <path d="M439 207 C396 205 355 194 318 174"/>
+    <path d="M171 237 C211 246 248 262 280 282"/>
+    <path d="M389 237 C349 246 312 262 280 282"/>
   </g>
 </svg>
         </div>

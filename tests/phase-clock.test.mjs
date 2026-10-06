@@ -60,3 +60,15 @@ test("Phase Clock: resume preserves accumulated milliseconds", () => {
   now += 750;
   assert.equal(clock.snapshot().elapsedMs, 2_000);
 });
+
+test("Hardening #46: phase start after pause restarts from zero", () => {
+  let now = 1000;
+  const clock = new YogaPhaseClock(() => now);
+  clock.start();
+  now += 5000;
+  clock.pause();
+  now += 5000;
+  clock.start();
+  assert.equal(clock.snapshot().elapsedMs, 0);
+  assert.equal(clock.snapshot().status, "running");
+});

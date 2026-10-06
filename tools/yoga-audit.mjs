@@ -52,7 +52,7 @@ for (const [name, ok] of required) (ok ? pass : fail).push(name);
 
 if (!/src="\.\/main\.js[^"]*"/.test(index)) fail.push("main.js include");
 if (!/src="\.\/sanctuary-experience\.js[^"]*"/.test(index)) fail.push("sanctuary-experience.js include");
-if (!/styles\.css\?v=sanctuary-finale-1/.test(index)) fail.push("styles cache bust");
+if (!/styles\.css\?v=sanctuary-finale-2/.test(index)) fail.push("styles cache bust");
 if (!/i18n\.js\?v=quiet-geometry-5/.test(index)) fail.push("i18n cache bust");
 if (!/main\.js\?v=quiet-geometry-5/.test(index)) fail.push("main cache bust");
 if (/(?:href|src)\s*=\s*["']http:\/\//i.test(index + main + css)) fail.push("insecure http resource URL");

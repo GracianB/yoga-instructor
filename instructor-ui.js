@@ -87,7 +87,7 @@
     actionButtons.forEach((button) => {
       const action = button.dataset.flowAction;
       const disabled =
-        (action === "previous" && first) ||
+        (action === "previous" && (first || last)) ||
         (action === "next" && last) ||
         (action === "pause" && (idle || last));
 

@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
-import { PHASES, STATUS, YogaFlowEngine } from "../flow-engine.js";
+import flowEngine from "../flow-engine.js";
+
+const { PHASES, STATUS, YogaFlowEngine } = flowEngine;
 
 const index = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const ui = readFileSync(new URL("../instructor-ui.js", import.meta.url), "utf8");

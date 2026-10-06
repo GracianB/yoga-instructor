@@ -117,8 +117,9 @@
     goTo(id) {
       const nextIndex = this.phases.findIndex((phase) => phase.id === id);
       if (nextIndex < 0) throw new Error(`Unknown yoga flow phase: ${id}`);
+      const wasPaused = this.status === STATUS.PAUSED;
       this.index = nextIndex;
-      this.status = this.isLast ? STATUS.FINISHED : STATUS.RUNNING;
+      this.status = this.isLast ? STATUS.FINISHED : (wasPaused ? STATUS.PAUSED : STATUS.RUNNING);
       this.record();
       return this.emit();
     }

@@ -236,3 +236,13 @@ test("Hardening #50: invalid goTo does not mutate history or position", () => {
 test("Hardening #51: phase label is an accessible live region", () => {
   assert.match(index, /id="flow-phase-label"[^>]*aria-live="polite"/);
 });
+
+test("Hardening #54: next after finish is a strict no-op", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  while (engine.status !== STATUS.FINISHED) engine.next();
+  const before = engine.snapshot();
+  const history = [...engine.history];
+  assert.deepEqual(engine.next(), before);
+  assert.deepEqual(engine.history, history);
+});

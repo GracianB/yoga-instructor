@@ -365,7 +365,7 @@ const lifecycleContracts = [
   ["pause clock ordering", /session\.pause\(\); phase\.pause\(\); engine\.pause\(\);/],
   ["resume clock ordering", /session\.resume\(\); phase\.resume\(\); engine\.resume\(\);/],
   ["reset clock ordering", /reset: \(\) => \{ session\.reset\(\); phase\.reset\(\); engine\.reset\(\);/],
-  ["settled flow rendering", /syncPhaseClock\(snapshot\);[\\s\\S]*?if \(snapshot\.status === "finished"\) session\.finish\(\);[\\s\\S]*?render\(snapshot\);/],
+  ["settled flow rendering", /syncPhaseClock\(snapshot\);[\s\S]*?if \(snapshot\.status === "finished"\) session\.finish\(\);[\s\S]*?render\(snapshot\);/],
   ["phase live region", /id="flow-phase-label"[^>]*aria-live="polite"/]
 ];
 

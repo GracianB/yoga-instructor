@@ -13,6 +13,189 @@ const i18n = read("i18n.js");
 const css = read("styles.css");
 const readme = read("README.md");
 
+const instructorCore = [
+  "title",
+  "metaDescription",
+  "heroKicker",
+  "heroTitle",
+  "heroLead",
+  "heroManifesto",
+  "heroTags",
+  "aboutKicker",
+  "aboutH2",
+  "aboutP",
+  "p1t",
+  "p1p",
+  "p2t",
+  "p2p",
+  "p3t",
+  "p3p",
+  "offerKicker",
+  "offerH2",
+  "o1t",
+  "o1p",
+  "o2t",
+  "o2p",
+  "o3t",
+  "o3p",
+  "pathKicker",
+  "pathH2",
+  "t0t",
+  "t0p",
+  "t1t",
+  "t1p",
+  "t2t",
+  "t2p",
+  "t3t",
+  "t3p",
+  "t4t",
+  "t4p",
+  "expKicker",
+  "expH2",
+  "expNow",
+  "tagActive",
+  "r1title",
+  "r1p",
+  "r2title",
+  "r2p",
+  "r3co",
+  "r3title",
+  "r3p",
+  "eduKicker",
+  "eduH2",
+  "e1t",
+  "e1p",
+  "e2t",
+  "e2p",
+  "e3t",
+  "e3p",
+  "e4t",
+  "e4p",
+  "philoKicker",
+  "philoQ1",
+  "philoQ2",
+  "philoFoot",
+  "tag1",
+  "tag2",
+  "tag3",
+  "tag4",
+  "tag5",
+  "tag6",
+  "tag7",
+  "contactKicker",
+  "contactH2",
+  "contactLead"
+];
+
+const extractI18nObject = (source, lang) => {
+  const start = source.indexOf(`${lang}: {`);
+
+  if (start < 0) {
+    throw new Error(`Unable to locate i18n.${lang}`);
+  }
+
+  const bodyStart = source.indexOf("{", start);
+  let depth = 0;
+  let quote = null;
+  let escaped = false;
+
+  for (let i = bodyStart; i < source.length; i += 1) {
+    const char = source[i];
+
+    if (quote) {
+      if (escaped) {
+        escaped = false;
+      } else if (char === "\\") {
+        escaped = true;
+      } else if (char === quote) {
+        quote = null;
+      }
+      continue;
+    }
+
+    if (char === '"' || char === "'") {
+      quote = char;
+      continue;
+    }
+
+    if (char === "{") {
+      depth += 1;
+    } else if (char === "}") {
+      depth -= 1;
+
+      if (depth === 0) {
+        return source.slice(bodyStart + 1, i);
+      }
+    }
+  }
+
+  throw new Error(`Unable to close i18n.${lang}`);
+};
+
+const extractKeys = (block) => [
+  ...new Set(
+    [...block.matchAll(/(?:^|,)\s*([A-Za-z0-9_]+)\s*:/gm)]
+      .map((match) => match[1])
+  )
+];
+
+const esI18n = extractI18nObject(i18n, "es");
+const enI18n = extractI18nObject(i18n, "en");
+
+const esKeys = extractKeys(esI18n);
+const enKeys = extractKeys(enI18n);
+
+const missingInstructorEs = instructorCore.filter(
+  (key) => !esKeys.includes(key)
+);
+
+const missingInstructorEn = instructorCore.filter(
+  (key) => !enKeys.includes(key)
+);
+
+const htmlBindings = new Set([
+  ...[...index.matchAll(/data-i18n="([^"]+)"/g)].map((m) => m[1]),
+  ...[...index.matchAll(/data-i18n-html="([^"]+)"/g)].map((m) => m[1])
+]);
+
+const missingInstructorBindings = instructorCore.filter(
+  (key) =>
+    key !== "title" &&
+    key !== "metaDescription" &&
+    !htmlBindings.has(key)
+);
+
+if (missingInstructorEs.length) {
+  console.error(
+    "Instructor Core missing ES:",
+    missingInstructorEs.join(", ")
+  );
+  fail.push("instructor core ES");
+}
+
+if (missingInstructorEn.length) {
+  console.error(
+    "Instructor Core missing EN:",
+    missingInstructorEn.join(", ")
+  );
+  fail.push("instructor core EN");
+}
+
+if (missingInstructorBindings.length) {
+  console.error(
+    "Instructor Core missing HTML bindings:",
+    missingInstructorBindings.join(", ")
+  );
+  fail.push("instructor core HTML bindings");
+}
+
+if (
+  missingInstructorEs.length === 0 &&
+  missingInstructorEn.length === 0 &&
+  missingInstructorBindings.length === 0
+) {
+  pass.push(`Instructor Core ${instructorCore.length} keys`);
+}
 const required = [
   ["doctype", /<!doctype html>/i.test(index)],
   ["language", /<html[^>]+lang="(?:es|en)"/i.test(index)],

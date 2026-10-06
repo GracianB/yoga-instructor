@@ -171,3 +171,16 @@ test("Hardening #43: lifecycle actions synchronize clocks before engine emits", 
 test("Hardening #44: flow events settle clocks before rendering", () => {
   assert.match(ui, /window\.addEventListener\("yoga:flow",[\s\S]*?syncPhaseClock\(snapshot\);[\s\S]*?if \(snapshot\.status === "finished"\) session\.finish\(\);[\s\S]*?render\(snapshot\);[\s\S]*?renderSession\(\);/);
 });
+
+test("Hardening #45: repeated start creates a fresh running session", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  engine.next();
+  engine.pause();
+  const restarted = engine.start();
+
+  assert.equal(restarted.phase, "start");
+  assert.equal(restarted.status, STATUS.RUNNING);
+  assert.equal(restarted.index, 0);
+  assert.deepEqual(engine.history, ["start"]);
+});

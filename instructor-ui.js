@@ -2,10 +2,13 @@
   "use strict";
 
   const engineApi = typeof window !== "undefined" ? window.YOGA_FLOW : null;
+  const sessionApi = typeof window !== "undefined" ? window.YOGA_SESSION : null;
   const root = document.getElementById("instructor-flow");
-  if (!engineApi || !root) return;
+  if (!engineApi || !sessionApi || !root) return;
 
   const engine = engineApi.create();
+  const session = sessionApi.create();
+  const sessionTime = document.getElementById("flow-session-time");
   const phaseLabel = document.getElementById("flow-phase-label");
   const phaseMeta = document.getElementById("flow-phase-meta");
   const state = document.getElementById("flow-state");
@@ -61,6 +64,10 @@
     const paused = snapshot.status === "paused";
     const idle = snapshot.status === "idle";
 
+    if (sessionTime) {
+      sessionTime.setAttribute("aria-label", lang === "en" ? "Session time" : "Tiempo de sesión");
+    }
+
     if (progressTrack) {
       progressTrack.setAttribute("role", "progressbar");
       progressTrack.setAttribute("aria-valuemin", "1");
@@ -105,6 +112,16 @@
     if (reset) reset.setAttribute("aria-keyshortcuts", "R");
   };
 
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainder = seconds % 60;
+    return `${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
+  };
+
+  const renderSession = () => {
+    if (sessionTime) sessionTime.textContent = formatTime(session.snapshot().elapsedSeconds);
+  };
+
   const render = (snapshot) => {
     const lang = getLang();
     const copy = labels[lang][snapshot.phase] || snapshot.label;
@@ -122,11 +139,19 @@
   };
 
   const actions = {
-    start: () => engine.start(),
+    start: () => { engine.start(); session.start(); renderSession(); },
     previous: () => engine.previous(),
-    pause: () => engine.status === "paused" ? engine.resume() : engine.pause(),
-    next: () => engine.next(),
-    reset: () => engine.reset()
+    pause: () => {
+      if (engine.status === "paused") { engine.resume(); session.resume(); }
+      else { engine.pause(); session.pause(); }
+      renderSession();
+    },
+    next: () => {
+      if (engine.status === "idle") { engine.start(); session.start(); }
+      const snapshot = engine.next();
+      if (snapshot.status === "finished") session.finish();
+    },
+    reset: () => { engine.reset(); session.reset(); renderSession(); }
   };
 
   const runAction = (name) => {
@@ -162,7 +187,11 @@
     runAction(action);
   });
 
-  window.addEventListener("yoga:flow", (event) => render(event.detail));
+  window.addEventListener("yoga:flow", (event) => {
+    render(event.detail);
+    if (event.detail.status === "finished") session.finish();
+    renderSession();
+  });
 
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-set-lang]")) {
@@ -171,4 +200,6 @@
   });
 
   render(engine.snapshot());
+  renderSession();
+  window.setInterval(renderSession, 1000);
 })();

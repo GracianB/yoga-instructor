@@ -340,6 +340,26 @@ if (
   fail.push("Instructor E2E + Hardening");
 }
 
+
+/* ================================================================
+   SESSION CLOCK · #36
+   ================================================================ */
+const sessionClock = read("flow-session.js");
+const sessionClockTests = read("tests/session-clock.test.mjs");
+
+if (
+  sessionClock.includes("class YogaSessionClock") &&
+  sessionClock.includes("elapsedSeconds") &&
+  sessionClock.includes("window.YOGA_SESSION") &&
+  sessionClockTests.includes("pause freezes elapsed time") &&
+  index.includes('id="flow-session-time"') &&
+  instructorUi.includes("formatTime")
+) {
+  pass.push("Instructor Session Clock");
+} else {
+  fail.push("Instructor Session Clock");
+}
+
 const required = [
   ["doctype", /<!doctype html>/i.test(index)],
   ["language", /<html[^>]+lang="(?:es|en)"/i.test(index)],

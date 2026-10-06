@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { readFileSync } from "node:fs";
 
-import { PHASES, STATUS, YogaFlowEngine } from "../flow-engine.js";
+import flowEngine from "../flow-engine.js";
+
+const { PHASES, STATUS, YogaFlowEngine } = flowEngine;
 
 const index = readFileSync(new URL("../index.html", import.meta.url), "utf8");
 const ui = readFileSync(new URL("../instructor-ui.js", import.meta.url), "utf8");
@@ -82,7 +84,8 @@ test("Hardening: instructor UI exposes keyboard and ARIA contract", () => {
     "aria-keyshortcuts",
     "aria-valuenow",
     "aria-valuetext",
-    "aria-pressed"
+    "aria-pressed",
+    "flow-session-time"
   ]) {
     assert.match(ui, new RegExp(token.replace(/[.*+?^$()|[\]\\]/g, "\\$&")));
   }

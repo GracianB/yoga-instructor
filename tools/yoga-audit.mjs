@@ -324,6 +324,22 @@ for (const key of [
   }
 }
 
+const e2e = read("tests/instructor-flow.test.mjs");
+const qualityWorkflow = read(".github/workflows/quality.yml");
+
+if (
+  e2e.includes("canonical 10-phase sequence") &&
+  e2e.includes("pause freezes progression") &&
+  e2e.includes("reset: returns to a clean idle state") &&
+  e2e.includes("invalid goTo is rejected") &&
+  qualityWorkflow.includes("npm run test:e2e") &&
+  index.includes('<div class="flow-progress" role="progressbar"')
+) {
+  pass.push("Instructor E2E + Hardening");
+} else {
+  fail.push("Instructor E2E + Hardening");
+}
+
 const required = [
   ["doctype", /<!doctype html>/i.test(index)],
   ["language", /<html[^>]+lang="(?:es|en)"/i.test(index)],

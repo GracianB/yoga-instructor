@@ -32,3 +32,5 @@ jobs:
         run: npm run syntax
       - name: Quality
         run: npm run check
+      - name: E2E + Hardening
+        run: npm run test:e2e

@@ -44,6 +44,30 @@ test("E2E controls: pause freezes progression and resume continues", () => {
   assert.equal(engine.snapshot().status, STATUS.RUNNING);
 });
 
+test("E2E phase sync: previous returns to the prior phase", () => {
+  const engine = new YogaFlowEngine();
+  engine.start();
+  engine.next();
+  const returned = engine.previous();
+
+  assert.equal(returned.phase, "start");
+  assert.equal(returned.status, STATUS.RUNNING);
+});
+
+test("Hardening: phase clock wiring covers rendered time and transitions", () => {
+  for (const token of [
+    "window.YOGA_PHASE",
+    "phaseTime",
+    "syncPhaseClock",
+    "phase.reset()",
+    "phase.start()"
+  ]) {
+    assert.match(ui, new RegExp(token.replace(/[.*+?^$()|[\]\\]/g, "\\test("E2E reset: returns to a clean idle state", () => {")));
+  }
+
+  assert.match(index, /id="flow-phase-time"/);
+});
+
 test("E2E reset: returns to a clean idle state", () => {
   const engine = new YogaFlowEngine();
   engine.start();

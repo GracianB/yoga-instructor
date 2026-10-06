@@ -78,3 +78,26 @@ test("Hardening #46: session start after pause restarts from zero", () => {
   assert.equal(clock.snapshot().elapsedMs, 0);
   assert.equal(clock.snapshot().status, "running");
 });
+
+test("Hardening #47: finishing a paused session preserves elapsed time", () => {
+  let now = 1000;
+  const clock = new YogaSessionClock(() => now);
+  clock.start();
+  now += 4000;
+  clock.pause();
+  now += 9000;
+  const before = clock.snapshot().elapsedMs;
+  const finished = clock.finish();
+
+  assert.equal(finished.status, "finished");
+  assert.equal(finished.elapsedMs, before);
+  now += 9000;
+  assert.equal(clock.snapshot().elapsedMs, before);
+});
+
+test("Hardening #47: finishing an idle session is stable and zeroed", () => {
+  const clock = new YogaSessionClock(() => 1000);
+  const finished = clock.finish();
+  assert.equal(finished.status, "finished");
+  assert.equal(finished.elapsedMs, 0);
+});

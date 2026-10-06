@@ -123,6 +123,23 @@
 
   const renderSession = () => {
     if (sessionTime) sessionTime.textContent = formatTime(session.snapshot().elapsedSeconds);
+    if (phaseTime) phaseTime.textContent = formatTime(phase.snapshot().elapsedSeconds);
+  };
+
+  let lastPhase = engine.snapshot().phase;
+
+  const syncPhaseClock = (snapshot) => {
+    if (snapshot.phase !== lastPhase) {
+      if (snapshot.status === "running") {
+        phase.reset();
+        phase.start();
+      } else {
+        phase.reset();
+      }
+      lastPhase = snapshot.phase;
+    }
+
+    if (snapshot.status === "finished") phase.reset();
   };
 
   const render = (snapshot) => {
@@ -151,8 +168,7 @@
     },
     next: () => {
       if (engine.status === "idle") { engine.start(); session.start(); phase.start(); }
-      const snapshot = engine.next();
-      if (snapshot.status === "finished") session.finish();
+      engine.next();
     },
     reset: () => { engine.reset(); session.reset(); phase.reset(); renderSession(); }
   };
@@ -191,8 +207,10 @@
   });
 
   window.addEventListener("yoga:flow", (event) => {
-    render(event.detail);
-    if (event.detail.status === "finished") { session.finish(); phase.reset(); }
+    const snapshot = event.detail;
+    render(snapshot);
+    syncPhaseClock(snapshot);
+    if (snapshot.status === "finished") session.finish();
     renderSession();
   });
 

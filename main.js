@@ -57,6 +57,10 @@
       btn.setAttribute("aria-pressed", String(active));
     });
 
+    document.querySelectorAll("[data-i18n-aria-label]").forEach((el) => {
+      const value = getByPath(t, el.dataset.i18nAriaLabel);
+      if (value != null) el.setAttribute("aria-label", value);
+    });
     syncCvLinks();
     const audio = document.getElementById("focus-audio");
     const playBtn = document.getElementById("audio-play");
@@ -110,7 +114,7 @@
   try {
     const savedTheme = localStorage.getItem(THEME_KEY);
     if (savedTheme === "dark" || savedTheme === "light") theme = savedTheme;
-    else if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) theme = "dark";
+    else if (window.YOGA_RUNTIME.mediaMatches("(prefers-color-scheme: dark)")) theme = "dark";
   } catch (_) {}
 
   const params = new URLSearchParams(location.search);
@@ -137,23 +141,28 @@
 
   const menuToggle = document.querySelector(".menu-toggle");
   const nav = document.querySelector("#nav");
-  menuToggle?.addEventListener("click", () => {
-    const open = !nav?.classList.contains("open");
+  const setMenu = (open, returnFocus = false) => {
     nav?.classList.toggle("open", open);
-    menuToggle.classList.toggle("is-open", open);
-    menuToggle.setAttribute("aria-expanded", String(open));
+    menuToggle?.classList.toggle("is-open", open);
+    menuToggle?.setAttribute("aria-expanded", String(open));
+    if (returnFocus) menuToggle?.focus();
+  };
+  menuToggle?.addEventListener("click", () => setMenu(!nav?.classList.contains("open")));
+  nav?.querySelectorAll("a").forEach((a) => a.addEventListener("click", () => setMenu(false)));
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && nav?.classList.contains("open")) setMenu(false, true);
   });
-  nav?.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => {
-      nav.classList.remove("open");
-      menuToggle?.setAttribute("aria-expanded", "false");
-    });
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".site-header")) setMenu(false);
   });
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 900) setMenu(false);
+  }, { passive: true });
 
   // Scroll reveal
   const reveals = document.querySelectorAll(".reveal");
   const markInView = (el) => el.classList.add("is-in");
-  if (reveals.length && "IntersectionObserver" in window) {
+  if (reveals.length && typeof window.IntersectionObserver === "function") {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -226,10 +235,10 @@
     });
     audio.addEventListener("timeupdate", () => {
       if (curEl) curEl.textContent = fmt(audio.currentTime);
-      if (seek && audio.duration) seek.value = String((audio.currentTime / audio.duration) * 100);
+      if (seek && Number.isFinite(audio.duration) && audio.duration > 0) seek.value = String((audio.currentTime / audio.duration) * 100);
     });
     seek?.addEventListener("input", () => {
-      if (!audio.duration) return;
+      if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
       audio.currentTime = (Number(seek.value) / 100) * audio.duration;
     });
     muteBtn?.addEventListener("click", () => {
@@ -250,29 +259,13 @@
   // Presence hero — 4-7-8 breath phase labels + reduced-motion class
   const hero = document.querySelector(".hero");
   if (hero) {
-    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const finePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+    const reduce = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
+    const finePointer = window.YOGA_RUNTIME.mediaMatches("(hover: hover) and (pointer: fine)");
     if (reduce) {
       hero.setAttribute("data-breath", "still");
       document.documentElement.classList.add("reduce-motion");
     } else {
       hero.setAttribute("data-breath", "cycle");
-      const phaseEl = hero.querySelector(".breath-phase");
-      const labels = { inhale: "4", hold: "7", exhale: "8" };
-      // 19s cycle: inhale 0–4, hold 4–11, exhale 11–19
-      const tick = () => {
-        const t = (performance.now() / 1000) % 19;
-        let phase = "exhale";
-        if (t < 4) phase = "inhale";
-        else if (t < 11) phase = "hold";
-        hero.setAttribute("data-phase", phase);
-        if (phaseEl && !phaseEl.hasAttribute("data-i18n-locked")) {
-          // Keep "4 · 7 · 8" caption; mark active digit via data-phase for CSS
-        }
-      };
-      tick();
-      setInterval(tick, 200);
-
       // Subtle pointer parallax → --px / --py on .hero (~±14px)
       const max = 8;
       const onMove = (e) => {
@@ -303,10 +296,10 @@
    ══════════════════════════════════════════════════════════════ */
 (() => {
   "use strict";
-  const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const fine = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduce = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
+  const fine = window.YOGA_RUNTIME.mediaMatches("(hover: hover) and (pointer: fine)");
   const root = document.documentElement;
-  const rAF = window.requestAnimationFrame || ((f) => setTimeout(f, 16));
+  const rAF = window.YOGA_RUNTIME.frame;
 
   /* —— 1 · breathing intro —— */
   (function intro() {
@@ -372,12 +365,14 @@
       en: { inhale: "Inhale", hold: "Hold", exhale: "Exhale" }
     };
     const tick = () => {
+      if (document.hidden || document.body.classList.contains("quiet-mode")) return;
       const t = (performance.now() / 1000) % 19;
       let phase, left;
       if (t < 4) { phase = "inhale"; left = Math.ceil(4 - t); }
       else if (t < 11) { phase = "hold"; left = Math.ceil(11 - t); }
       else { phase = "exhale"; left = Math.ceil(19 - t); }
       const lang = root.lang === "en" ? "en" : "es";
+      hero.setAttribute("data-phase", phase);
       phaseEl.textContent = words[lang][phase] + " · " + left;
     };
     tick();
@@ -388,7 +383,8 @@
   (function motes() {
     const canvas = document.querySelector(".fx-motes");
     if (!canvas || reduce) return;
-    const ctx = canvas.getContext("2d", { alpha: true });
+    let ctx;
+    try { ctx = canvas.getContext("2d", { alpha: true }); } catch (_) { return; }
     if (!ctx) return;
     const PAL = {
       light: [[47,107,79],[184,146,31],[138,106,61],[201,162,39]],
@@ -420,8 +416,9 @@
       }
     }
 
+    let frameId = 0;
     function frame() {
-      if (document.hidden) { rAF(frame); return; }
+      if (document.hidden || document.body.classList.contains("quiet-mode")) { frameId = 0; return; }
       ctx.clearRect(0, 0, w, h);
       const P = pal();
       for (const p of parts) {
@@ -439,14 +436,19 @@
         ctx.fillStyle = `rgba(${p.c[0]},${p.c[1]},${p.c[2]},${p.a})`;
         ctx.fill();
       }
-      rAF(frame);
+      frameId = rAF(frame);
     }
 
     window.addEventListener("pointermove", (e) => { mouse.x = e.clientX; mouse.y = e.clientY; mouse.active = true; }, { passive: true });
     window.addEventListener("pointerleave", () => { mouse.active = false; });
     let rt; window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(resize, 180); }, { passive: true });
     resize();
-    rAF(frame);
+    const resume = () => {
+      if (!frameId && !document.hidden && !document.body.classList.contains("quiet-mode")) frameId = rAF(frame);
+    };
+    document.addEventListener("visibilitychange", resume);
+    document.addEventListener("yoga:quiet", resume);
+    resume();
   })();
 })();
 
@@ -493,7 +495,7 @@
       const activeChoice = Array.from(choices).find((choice) => choice.dataset.practice === key);
       const target = activeChoice && activeChoice.dataset.target;
       const el = target ? document.querySelector(target) : null;
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (el) el.scrollIntoView({ behavior: window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)") ? "auto" : "smooth", block: "start" });
     }
   };
 
@@ -503,12 +505,13 @@
 
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-set-lang]")) {
-      requestAnimationFrame(() => {
+      window.YOGA_RUNTIME.frame(() => {
         const active = Array.from(choices).find((choice) => choice.getAttribute("aria-pressed") === "true");
         apply((active && active.dataset.practice) || "arrive", false);
       });
     }
   });
 
+  document.addEventListener("yoga:practice", (event) => apply(event.detail, false));
   apply("arrive", false);
 })();

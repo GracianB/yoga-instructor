@@ -1,0 +1,20 @@
+import assert from 'node:assert/strict';
+import { readFileSync, existsSync, statSync } from 'node:fs';
+import postcss from 'postcss';
+const html = readFileSync('index.html', 'utf8');
+for (const file of ['index.html', 'cv.html', '404.html']) {
+  const text = readFileSync(file, 'utf8');
+  for (const match of text.matchAll(/(?:href|src)="(\.\/[^"?#]+)(?:[?#][^"]*)?"/g)) assert.ok(existsSync(match[1]), `${file}: missing ${match[1]}`);
+}
+assert.ok(!html.includes('frame-ancestors'), 'Unsupported meta directive');
+assert.ok(html.includes('Content-Security-Policy'));
+const css = readFileSync('styles.css', 'utf8');
+postcss.parse(css);
+assert.ok(statSync('styles.css').size <= 174000, 'CSS budget');
+assert.ok(statSync('main.js').size <= 22500, 'Main JS budget');
+assert.ok(statSync('audio/sustained-focus.mp3').size <= 4500000, 'Audio budget');
+for (const file of ['main.js', 'instructor-ui.js', 'sanctuary-experience.js']) {
+  const source = readFileSync(file, 'utf8');
+  assert.ok(!/const\s+\w+\s*=\s*(?:window\.)?requestAnimationFrame\b/.test(source), `${file}: unbound animation API`);
+}
+console.log('Release links, CSS syntax and resource budgets passed');

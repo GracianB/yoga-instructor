@@ -8,8 +8,8 @@
 
   const root = document.documentElement;
   const body = document.body;
-  const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  const reduced = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
+  const finePointer = window.YOGA_RUNTIME.mediaMatches("(hover: hover) and (pointer: fine)");
 
   const PRACTICE_KEY = "gb-yoga-practice";
   const QUIET_KEY = "gb-yoga-quiet";
@@ -141,7 +141,7 @@
 
   function stopBreath(completed) {
     breathRunning = false;
-    if (breathRaf) cancelAnimationFrame(breathRaf);
+    if (breathRaf) window.YOGA_RUNTIME.cancel(breathRaf);
     breathRaf = 0;
     renderBreath(completed ? cycleSeconds : 0, completed);
   }
@@ -154,7 +154,7 @@
       return;
     }
     renderBreath(elapsed);
-    breathRaf = requestAnimationFrame(tickBreath);
+    breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
   }
 
   breathButton.addEventListener("click", () => {
@@ -165,12 +165,22 @@
     breathRunning = true;
     breathStarted = performance.now();
     renderBreath(0);
-    breathRaf = requestAnimationFrame(tickBreath);
+    breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && breathRaf) {
+      window.YOGA_RUNTIME.cancel(breathRaf);
+      breathRaf = 0;
+    } else if (breathRunning && !breathRaf) {
+      breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
+    }
   });
 
   function syncDockLanguage() {
     const labels = t();
     dock.setAttribute("aria-label", labels.dockLabel);
+    sectionLabel.textContent = labels.labels[body.dataset.activeSection || "inicio"] || labels.section;
     dock.querySelector(".breath-kicker").textContent = "03 · " + labels.dockLabel;
     quietButton.textContent = body.classList.contains("quiet-mode") ? labels.quietOff : labels.quietOn;
     const phase = body.dataset.breathPhase;
@@ -180,11 +190,12 @@
   }
 
   document.addEventListener("click", (event) => {
-    if (event.target.closest("[data-set-lang]")) requestAnimationFrame(syncDockLanguage);
+    if (event.target.closest("[data-set-lang]")) window.YOGA_RUNTIME.frame(syncDockLanguage);
   });
 
   function applyQuiet(value, persist = true) {
     body.classList.toggle("quiet-mode", value);
+    document.dispatchEvent(new Event("yoga:quiet"));
     quietButton.setAttribute("aria-pressed", String(value));
     quietButton.textContent = value ? t().quietOff : t().quietOn;
     if (persist) {
@@ -211,17 +222,11 @@
     if (choice) rememberPractice();
   });
 
-  requestAnimationFrame(() => {
+  window.YOGA_RUNTIME.frame(() => {
     try {
       const saved = localStorage.getItem(PRACTICE_KEY);
-      const choice = saved && document.querySelector(".ritual-choice[data-practice='" + saved + "']");
-      if (choice) {
-        document.body.dataset.practice = saved;
-        document.querySelectorAll(".ritual-choice").forEach((item) => {
-          const active = item === choice;
-          item.classList.toggle("is-active", active);
-          item.setAttribute("aria-pressed", String(active));
-        });
+      if (["arrive", "move", "focus", "share"].includes(saved)) {
+        document.dispatchEvent(new CustomEvent("yoga:practice", { detail: saved }));
       }
     } catch (_) {}
   });
@@ -245,7 +250,7 @@
   function decayScroll() {
     energy *= 0.86;
     root.style.setProperty("--scroll-energy", Math.min(1, energy).toFixed(3));
-    if (energy > 0.01) decayRaf = requestAnimationFrame(decayScroll);
+    if (energy > 0.01) decayRaf = window.YOGA_RUNTIME.frame(decayScroll);
     else decayRaf = 0;
   }
 
@@ -257,7 +262,7 @@
     energy = Math.min(1.5, (delta / dt) * 9);
     lastScroll = window.scrollY;
     lastTime = now;
-    if (!decayRaf) decayRaf = requestAnimationFrame(decayScroll);
+    if (!decayRaf) decayRaf = window.YOGA_RUNTIME.frame(decayScroll);
     if (delta > 30) body.classList.add("in-motion");
     window.clearTimeout(window.__yogaMotionTimer);
     window.__yogaMotionTimer = window.setTimeout(() => body.classList.remove("in-motion"), 180);
@@ -269,13 +274,13 @@
     let soundRaf = 0;
     const stopSound = () => {
       body.classList.remove("sound-active");
-      if (soundRaf) cancelAnimationFrame(soundRaf);
+      if (soundRaf) window.YOGA_RUNTIME.cancel(soundRaf);
       soundRaf = 0;
       root.style.setProperty("--sound-pulse", "0");
       root.style.setProperty("--sound-blur", "20px");
     };
     const animateSound = () => {
-      if (audio.paused || audio.ended) {
+      if (audio.paused || audio.ended || document.hidden || body.classList.contains("quiet-mode")) {
         stopSound();
         return;
       }
@@ -284,18 +289,23 @@
       root.style.setProperty("--sound-pulse", (pulse * 0.7).toFixed(3));
       root.style.setProperty("--sound-blur", (20 + pulse * 28).toFixed(1) + "px");
       body.classList.add("sound-active");
-      soundRaf = requestAnimationFrame(animateSound);
+      soundRaf = window.YOGA_RUNTIME.frame(animateSound);
     };
     audio.addEventListener("play", () => {
-      if (!soundRaf) soundRaf = requestAnimationFrame(animateSound);
+      if (!soundRaf) soundRaf = window.YOGA_RUNTIME.frame(animateSound);
     });
+    const resumeSound = () => {
+      if (!audio.paused && !document.hidden && !body.classList.contains("quiet-mode") && !soundRaf) soundRaf = window.YOGA_RUNTIME.frame(animateSound);
+    };
+    document.addEventListener("visibilitychange", () => document.hidden ? stopSound() : resumeSound());
+    document.addEventListener("yoga:quiet", () => body.classList.contains("quiet-mode") ? stopSound() : resumeSound());
     audio.addEventListener("pause", stopSound);
     audio.addEventListener("ended", stopSound);
   }
 
   // Phase 07 · wayfinding. The page knows where you are, not who you are.
   const sections = Array.from(document.querySelectorAll("main section[id]"));
-  if ("IntersectionObserver" in window && sections.length) {
+  if (typeof window.IntersectionObserver === "function" && sections.length) {
     const observer = new IntersectionObserver((entries) => {
       const visible = entries
         .filter((entry) => entry.isIntersecting)
@@ -314,7 +324,7 @@
   document.addEventListener("keydown", (event) => {
     if (event.metaKey || event.ctrlKey || event.altKey) return;
     const tag = document.activeElement && document.activeElement.tagName;
-    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || document.activeElement?.isContentEditable || event.repeat) return;
     if (event.key.toLowerCase() === "b") breathButton.click();
     if (event.key.toLowerCase() === "q") quietButton.click();
   });

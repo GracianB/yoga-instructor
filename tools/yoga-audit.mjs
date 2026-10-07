@@ -334,7 +334,7 @@ if (
   e2e.includes("pause freezes progression") &&
   e2e.includes("reset: returns to a clean idle state") &&
   e2e.includes("invalid goTo is rejected") &&
-  qualityWorkflow.includes("npm run test:e2e") &&
+  qualityWorkflow.includes("npm run test:browser") &&
   quality100.includes('100Q 100: all phase definitions are frozen') &&
   quality200.includes('200Q 100: external targets use referrer policy') &&
   index.includes('<div class="flow-progress" role="progressbar"')

@@ -102,7 +102,7 @@ test("200Q 091: font preconnect exists",()=>assert.ok(index.includes('rel="preco
 test("200Q 092: theme control exists",()=>assert.ok(index.includes("data-set-theme")));
 test("200Q 093: language control exists",()=>assert.ok(index.includes("data-set-lang")));
 test("200Q 094: skip link exists",()=>assert.ok(index.includes('class="skip"')));
-test("200Q 095: navigation has aria label",()=>assert.ok(/<nav[^>]+aria-label="Primary"/.test(index)));
+test("200Q 095: navigation has aria label",()=>assert.ok(/<nav[^>]+data-i18n-aria-label="navLabel"/.test(index)));
 test("200Q 096: menu button exposes controls",()=>assert.ok(index.includes('aria-controls="nav"')));
 test("200Q 097: reduced motion CSS exists",()=>assert.ok(css.includes("prefers-reduced-motion")));
 test("200Q 098: no autoplay attribute",()=>assert.ok(!/<audio[^>]+\bautoplay\b/i.test(index)));

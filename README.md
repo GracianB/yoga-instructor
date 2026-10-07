@@ -229,3 +229,19 @@ La idea no es representar yoga con más ornamento. Es hacer que la primera panta
 **Regla de diseño:** menos símbolos, más intención.
 
 Visual QA baseline: Quiet Geometry hero · desktop + mobile · ES/EN · light/dark · reduced motion.
+
+
+## Yoga V5 · verification and maintenance
+
+V5 consolidates the botanical visual identity, browser runtime, ES/EN accessibility, practice state and document links. The release contract and limitations are documented in [RELEASE_V5.md](./RELEASE_V5.md).
+
+```sh
+npm ci
+npm start
+npm run quality
+npx playwright install --with-deps chromium firefox webkit
+npm run test:browser
+npm run build
+```
+
+`test:e2e` is a legacy Node contract suite. `test:browser` opens actual browser engines. Pages deployment requires the complete verification job and a GitHub Actions Pages source.

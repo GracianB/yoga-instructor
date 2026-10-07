@@ -1,5 +1,17 @@
 window.YOGA_I18N = {
   es: {
+    darkLabel: "Tema oscuro",
+    lightLabel: "Tema claro",
+    navLabel: "Navegación principal",
+    languageLabel: "Idioma",
+    themeLabel: "Tema",
+    menuLabel: "Menú",
+    intentionLabel: "Intención de práctica",
+    seekLabel: "Posición del audio",
+    volumeLabel: "Volumen",
+    progressLabel: "Progreso de la práctica",
+    targetLabel: "Duración objetivo",
+
     htmlLang: "es",
     title: "Gracián Baena — Instructor de Yoga",
     metaDescription: "Instructor de yoga certificado · Murcia · yoga corporativo 2019–2026. Portfolio ES/EN.",
@@ -163,6 +175,18 @@ window.YOGA_I18N = {
     cvOpen: "Abrir PDF ↗"
   },
   en: {
+    darkLabel: "Dark theme",
+    lightLabel: "Light theme",
+    navLabel: "Primary navigation",
+    languageLabel: "Language",
+    themeLabel: "Theme",
+    menuLabel: "Menu",
+    intentionLabel: "Practice intention",
+    seekLabel: "Audio position",
+    volumeLabel: "Volume",
+    progressLabel: "Practice progress",
+    targetLabel: "Target duration",
+
     htmlLang: "en",
     title: "Gracián Baena — Yoga Instructor",
     metaDescription: "Certified yoga instructor · Murcia · corporate yoga 2019–2026. ES/EN portfolio.",

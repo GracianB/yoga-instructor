@@ -82,8 +82,8 @@
       progressTrack.setAttribute(
         "aria-valuetext",
         lang === "en"
-          ? `Phase ${snapshot.index + 1} of ${snapshot.total}: ${snapshot.label}`
-          : `Fase ${snapshot.index + 1} de ${snapshot.total}: ${snapshot.label}`
+          ? `Phase ${snapshot.index + 1} of ${snapshot.total}: ${labels[lang][snapshot.phase] || snapshot.label}`
+          : `Fase ${snapshot.index + 1} de ${snapshot.total}: ${labels[lang][snapshot.phase] || snapshot.label}`
       );
     }
 
@@ -131,10 +131,12 @@
       const elapsed = phase.snapshot().elapsedSeconds;
       const duration = snapshot.durationSeconds || 0;
       const remaining = Math.max(0, duration - elapsed);
-      if (phaseCue) phaseCue.textContent = snapshot.cue || "";
+      const lang = getLang();
+      const cues = { start: "Arrive and prepare for practice.", centering: "Find stability and attention.", breath: "Regulate your breathing without forcing.", warmup: "Mobilise your body progressively.", "pose-1": "Hold the pose with steady breathing.", transition: "Transition with control and without rushing.", "pose-2": "Integrate strength, mobility and attention.", cooldown: "Reduce intensity and leave room for breathing.", savasana: "Release effort and remain still.", finish: "Close the practice with attention." };
+      if (phaseCue) phaseCue.textContent = lang === "en" ? cues[snapshot.phase] : snapshot.cue || "";
       if (phaseTarget) phaseTarget.textContent = formatTime(duration);
       phaseTime.textContent = formatTime(remaining);
-      phaseTime.setAttribute("aria-label", `Tiempo restante de fase: ${formatTime(remaining)}. Objetivo: ${formatTime(duration)}`);
+      phaseTime.setAttribute("aria-label", lang === "en" ? `Phase time remaining: ${formatTime(remaining)}. Target: ${formatTime(duration)}` : `Tiempo restante de fase: ${formatTime(remaining)}. Objetivo: ${formatTime(duration)}`);
       if (phaseProgress) phaseProgress.style.transform = `scaleX(${duration ? Math.min(1, elapsed / duration) : 0})`;
     }
   };
@@ -238,7 +240,7 @@
 
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-set-lang]")) {
-      requestAnimationFrame(() => render(engine.snapshot()));
+      window.YOGA_RUNTIME.frame(() => { render(engine.snapshot()); renderSession(); });
     }
   });
 

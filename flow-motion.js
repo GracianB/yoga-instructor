@@ -11,11 +11,11 @@
   });
   const p = {
     rest: pose('174,272 207,273 220,262 221,285 258,263 260,293 290,264 297,298 326,265 326,285 394,272 393,294 460,281 456,304 486,282 480,304', -80),
-    sit: pose('320,147 320,177 302,183 338,183 288,221 354,221 258,263 383,263 308,253 332,253 256,274 383,275 309,292 330,292 295,298 346,298'),
-    prayer: pose('320,147 320,177 302,183 338,183 288,220 352,220 318,209 322,209 308,253 332,253 256,274 383,275 309,292 330,292 295,298 346,298'),
+    sit: pose('320,129 320,165 290,171 350,171 275,220 365,220 253,259 390,259 301,253 339,253 245,276 395,273 301,289 342,289 285,299 355,299'),
+    prayer: pose('320,129 320,165 290,171 350,171 295,211 348,211 315,217 325,217 301,253 339,253 245,276 395,273 301,289 342,289 285,299 355,299'),
     table: pose('233,214 259,215 264,204 268,231 251,258 275,258 224,298 263,298 355,211 355,235 380,277 362,285 420,295 398,301 443,298 418,301', -30),
-    warrior: pose('320,100 320,128 303,137 337,137 227,143 410,143 158,143 478,143 307,215 333,215 244,224 385,251 240,292 446,296 215,299 468,299'),
-    mountain: pose('320,100 320,127 303,135 337,135 291,174 350,174 285,215 355,215 307,216 333,216 305,257 336,258 305,296 337,296 284,301 358,301'),
+    warrior: pose('319,91 319,124 284,136 354,135 220,140 416,140 157,143 481,136 302,222 341,222 240,232 400,267 240,302 452,302 210,303 479,303'),
+    mountain: pose('320,94 320,128 285,140 354,140 280,180 364,183 282,217 367,215 305,222 338,222 306,264 339,265 305,304 340,304 285,307 365,307'),
     child: pose('249,276 279,261 292,245 297,265 249,277 265,286 185,296 210,301 363,240 377,263 325,280 335,287 402,293 414,298 430,299 439,302', -68),
     kneel: pose('318,156 319,184 299,188 339,188 294,228 344,231 280,269 356,270 311,258 336,259 289,288 371,286 297,304 374,302 279,306 402,306'),
     recline: pose('242,222 269,231 276,222 278,245 299,241 310,273 324,259 341,285 333,259 348,275 386,280 405,290 442,291 459,302 458,296 475,303', -46)
@@ -45,7 +45,7 @@
       '<circle class="guide-pollen" cx="160" cy="131" r="3"/><circle class="guide-pollen" cx="483" cy="131" r="2.5"/>' +
     '</g>' +
     '<path class="guide-mat" d="M158 316Q320 299 482 316L502 325Q320 344 138 325Z"/>' +
-    '<g class="guide-articulated" aria-hidden="true">' +
+    '<g class="guide-articulated" transform="translate(320 300) scale(1.07) translate(-320 -300)" aria-hidden="true">' +
       '<path class="guide-character-silhouette" d="M0 0"/>' +
       '<path data-bone="rleg" class="guide-leg"/><path class="guide-leg-lustre" data-detail="rleg"/>' +
       '<path data-bone="rfoot" class="guide-foot"/>' +
@@ -57,22 +57,26 @@
       '<path class="guide-collar" data-detail="collar"/>' +
       '<path data-bone="rarm" class="guide-arm"/><path data-bone="larm" class="guide-arm"/>' +
       '<path class="guide-sleeve" data-detail="rsleeve"/><path class="guide-sleeve" data-detail="lsleeve"/>' +
-      '<ellipse class="guide-hand" data-detail="rhand" rx="7" ry="10"/>' +
-      '<ellipse class="guide-hand" data-detail="lhand" rx="7" ry="10"/>' +
+      '<path class="guide-hand" data-detail="rhand"/>' +
+      '<path class="guide-hand" data-detail="lhand"/>' +
       '<g class="guide-head">' +
-        '<path class="guide-hair-bun" d="M13-16Q31-27 30-10Q29 3 15 0Z"/>' +
+        '<path class="guide-hair-back" d="M-23-4Q-34-28-13-34Q4-40 19-26Q30-12 23 10L13 19Q18-3 8-15Q-10-4-19 9Z"/>' +
         '<path class="guide-ear" d="M-17-1Q-24-7-24 2Q-24 9-17 7Z"/>' +
-        '<ellipse class="guide-skin" rx="18" ry="22"/>' +
+        '<path class="guide-skin" d="M-20-9Q-16-31 1-29Q22-27 23-7L20 16Q12 30 0 31Q-12 27-20 13Z"/>' +
         '<path class="guide-face-shade" d="M13-10Q21 8 7 20Q18 17 18 2Q19-6 13-10Z"/>' +
-        '<path class="guide-hair" d="M-19 0Q-26-22-7-26Q15-32 20-11Q5-19-5-11Q-13-2-19 0Z"/>' +
+        '<path class="guide-hair" d="M-22-6Q-26-35-2-38Q18-38 25-18Q12-25-3-18Q-10-8-22-6Z"/>' +
         '<path class="guide-hair-strand" d="M-13-18Q-19-9-18 0"/>' +
-        '<path class="guide-brow" d="M-12 0Q-8-3-4-1M5-2Q9-4 12-1"/>' +
-        '<path class="guide-eyes" d="M-12 5Q-8 8-4 5M5 5Q9 8 12 4"/>' +
-        '<path class="guide-nose" d="M1 6Q-2 11 2 12"/>' +
-        '<path class="guide-smile" d="M-5 15Q0 19 6 15"/>' +
-        '<ellipse class="guide-blush" cx="-12" cy="12" rx="4" ry="2"/>' +
-        '<ellipse class="guide-blush" cx="12" cy="11" rx="4" ry="2"/>' +
-        '<path class="guide-hair-shine" d="M-15-16Q-9-24 1-23"/>' +
+        '<path class="guide-brow" d="M-13-2Q-10-5-5-3M6-3Q10-5 14-2"/>' +
+        '<path class="guide-eyes" d="M-13 4Q-9 6-5 4M6 4Q11 6 15 3"/>' +
+        '<path class="guide-nose" d="M0 3Q-3 12 3 14"/>' +
+        '<path class="guide-smile" d="M-3 20Q2 22 6 19"/>' +
+        '<path class="guide-beard" d="M-13 19Q-6 30 1 30Q12 26 17 17L11 23Q0 26-10 21Z"/>' +
+        '<path class="guide-hair-shine" d="M-19-20Q-8-35 8-29"/>' +
+        '<path class="guide-forehead-light" d="M-15-11Q-8-19 1-18"/>' +
+      '<g class="guide-profile" aria-hidden="true">' +
+        '<path class="guide-profile-nose" d="M14 0L28 5Q29 7 19 10"/>' +
+        '<path class="guide-profile-lid" d="M10 3Q14 5 17 2"/>' +
+      '</g>' +
       '</g>' +
     '</g>');
   const bones = {};
@@ -146,10 +150,17 @@
     const edge=(from,to,t)=>[lerp(from[0],to[0],t),lerp(from[1],to[1],t)];
     details.rsleeve.setAttribute('d',flatShape(j[3],edge(j[3],j[5],.43),10,7.9));
     details.lsleeve.setAttribute('d',flatShape(j[2],edge(j[2],j[4],.43),10,7.9));
-    details.rhand.setAttribute('cx', f(j[7][0]));
-    details.rhand.setAttribute('cy', f(j[7][1]));
-    details.lhand.setAttribute('cx', f(j[6][0]));
-    details.lhand.setAttribute('cy', f(j[6][1]));
+    // Palms follow the forearm direction; extended fingers replace circular mittens.
+    const hand = (wrist, elbow) => {
+      const dx=wrist[0]-elbow[0], dy=wrist[1]-elbow[1], len=Math.max(1,Math.hypot(dx,dy));
+      const dir=[dx/len,dy/len], side=[-dir[1],dir[0]];
+      const pt=(d,l)=>[wrist[0]+dir[0]*d+side[0]*l,wrist[1]+dir[1]*d+side[1]*l];
+      return 'M'+xy(pt(-4,-5))+'Q'+xy(pt(1,-8))+' '+xy(pt(7,-4))+
+        'L'+xy(pt(14,-3.2))+'Q'+xy(pt(18,-1))+' '+xy(pt(15,1.5))+
+        'L'+xy(pt(7,4.1))+'Q'+xy(pt(2,8))+' '+xy(pt(-4,5))+'Z';
+    };
+    details.rhand.setAttribute('d',hand(j[7],j[5]));
+    details.lhand.setAttribute('d',hand(j[6],j[4]));
     details.collar.setAttribute('d','M'+f(sl[0]+5)+' '+f(sl[1]+2)+
       'Q'+f(j[1][0])+' '+f(j[1][1]+12)+' '+f(sr[0]-5)+' '+f(sr[1]+2));
     const middle=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
@@ -196,6 +207,7 @@
     const prior=phase;
     phase=next.phase;
     snapshot=next;
+    root.dataset.look=(phase==='pose-1'?'left':phase==='pose-2'?'right':'front');
     if(phase!==prior) {
       const target=p[shapes[phase]];
       const bridge=bridges[prior+'>'+phase];
@@ -221,4 +233,5 @@
   root.classList.add('guide-animated');
   root.dataset.motion='still';
   root.dataset.morph='1.000';
+  root.dataset.look='front';
 })();

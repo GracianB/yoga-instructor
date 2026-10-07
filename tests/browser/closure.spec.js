@@ -74,7 +74,12 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
   await expect(page.locator('#flow-phase-label')).toHaveText('CENTRADO');
   await clickControl('previous');
   await expect(page.locator('#flow-phase-label')).toHaveText('INICIO');
-  for (let phase = 0; phase < 9; phase++) await clickControl('next');
+  // Exercise every engine transition deterministically; pointer behavior is
+  // covered separately. Scroll/hover animations must not drop a virtual click.
+  for (let phase = 0; phase < 9; phase++) {
+    await page.locator('[data-flow-action="next"]').evaluate(button => button.click());
+    await expect(page.locator('#flow-phase-meta')).toHaveText(`${phase + 2} / 10`);
+  }
   await expect(page.locator('#flow-state')).toHaveText('COMPLETADA');
   await expect(page.locator('[data-flow-action="next"]')).toBeDisabled();
   await clickControl('reset');

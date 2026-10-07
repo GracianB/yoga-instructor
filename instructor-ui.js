@@ -118,6 +118,10 @@
     if (reset) reset.setAttribute("aria-keyshortcuts", "R");
   };
 
+  let preview = false;
+  const setPreview = value => { preview = value; window.dispatchEvent(new CustomEvent("yoga:preview", { detail: value })); };
+  const durationFor = snapshot => preview ? 5 : (snapshot.durationSeconds || 0);
+
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
     const remainder = seconds % 60;
@@ -129,7 +133,7 @@
     if (phaseTime) {
       const snapshot = engine.snapshot();
       const elapsed = phase.snapshot().elapsedSeconds;
-      const duration = snapshot.durationSeconds || 0;
+      const duration = durationFor(snapshot);
       const remaining = Math.max(0, duration - elapsed);
       const lang = getLang();
       const cues = { start: "Arrive and prepare for practice.", centering: "Find stability and attention.", breath: "Regulate your breathing without forcing.", warmup: "Mobilise your body progressively.", "pose-1": "Hold the pose with steady breathing.", transition: "Transition with control and without rushing.", "pose-2": "Integrate strength, mobility and attention.", cooldown: "Reduce intensity and leave room for breathing.", savasana: "Release effort and remain still.", finish: "Close the practice with attention." };
@@ -178,7 +182,8 @@
   };
 
   const actions = {
-    start: () => { session.start(); phase.start(); engine.start(); renderSession(); },
+    preview: () => { setPreview(true); session.start(); phase.start(); engine.start(); renderSession(); },
+    start: () => { session.start(); phase.start(); engine.start(); setPreview(false); renderSession(); },
     previous: () => engine.previous(),
     pause: () => {
       if (engine.status === "paused") { session.resume(); phase.resume(); engine.resume(); }
@@ -194,7 +199,7 @@
       }
       engine.next();
     },
-    reset: () => { session.reset(); phase.reset(); engine.reset(); renderSession(); }
+    reset: () => { session.reset(); phase.reset(); engine.reset(); setPreview(false); renderSession(); }
   };
 
   const runAction = (name) => {
@@ -249,6 +254,6 @@
   window.setInterval(() => {
     renderSession();
     const snapshot = engine.snapshot();
-    if (snapshot.status === "running" && snapshot.durationSeconds > 0 && phase.snapshot().elapsedSeconds >= snapshot.durationSeconds) engine.next();
+    if (snapshot.status === "running" && snapshot.durationSeconds > 0 && phase.snapshot().elapsedSeconds >= durationFor(snapshot)) engine.next();
   }, 250);
 })();

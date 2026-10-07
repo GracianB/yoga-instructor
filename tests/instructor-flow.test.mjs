@@ -347,7 +347,7 @@ test("Practice timer: snapshots expose the current phase target", () => {
 
 test("Practice timer: UI counts down and advances at the target", () => {
   assert.match(ui, /remaining = Math\.max\(0, duration - elapsed\)/);
-  assert.match(ui, /phase\.snapshot\(\)\.elapsedSeconds >= snapshot\.durationSeconds/);
+  assert.match(ui, /phase\.snapshot\(\)\.elapsedSeconds >= durationFor\(snapshot\)/);
   assert.match(ui, /engine\.next\(\)/);
   assert.match(index, /id="flow-phase-progress-bar"/);
 });

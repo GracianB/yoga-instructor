@@ -399,4 +399,8 @@ test("Premium yoga avatar keeps its original rig and layered character artwork",
   assert.ok(motion.includes('details.rhand.setAttribute'));
   assert.ok(motion.includes('details.collar.setAttribute'));
   assert.ok(motion.includes('details.panel.setAttribute'));
+  assert.ok(motion.includes("bones.rleg.setAttribute('d',limbShape"));
+  assert.ok(motion.includes("bones.rarm.setAttribute('d',limbShape"));
+  assert.ok(motion.includes("bones.torso.setAttribute('d'"));
+  assert.match(css, /\.guide-animated \.guide-leg \{ fill: url\(#yoga-pants\)/);
 });

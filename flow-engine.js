@@ -12,7 +12,7 @@
     { id: "cooldown", label: "COOLDOWN", order: 7, durationSeconds: 90, cue: "Reducir intensidad y dejar espacio a la respiración." },
     { id: "savasana", label: "SAVASANA", order: 8, durationSeconds: 180, cue: "Soltar el esfuerzo y permanecer quieto." },
     { id: "finish", label: "FINISH", order: 9, durationSeconds: 30, cue: "Cerrar la práctica sin romper la atención." }
-  ]);
+  ].map((phase) => Object.freeze(phase)));
 
   const STATUS = Object.freeze({
     IDLE: "idle",

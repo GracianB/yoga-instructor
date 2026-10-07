@@ -1,5 +1,4 @@
 
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap");
 
 :root,
 [data-theme="light"] {
@@ -139,8 +138,6 @@ img, svg, iframe, audio { display: block; max-width: 100%; }
 }
 .skip:focus { transform: none; }
 
-main, .site-header, .site-footer { position: relative; z-index: 1; }
-
 @media (prefers-reduced-motion: no-preference) {
   .reveal {
     opacity: 0; transform: translateY(28px);
@@ -196,10 +193,6 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   letter-spacing: .04em;
   transition: background .2s var(--ease), color .2s, border-color .2s, box-shadow .2s;
 }
-.brand:hover .brand-mark {
-  background: var(--sage); color: var(--accent-ink); border-color: var(--sage);
-  box-shadow: 0 0 28px var(--sage-glow);
-}
 .brand-text { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .brand-text b {
   display: block; font: 800 11px/1.2 var(--mono); letter-spacing: .16em; white-space: nowrap;
@@ -208,7 +201,6 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
   color: var(--sage); font: 700 9px/1.3 var(--mono); letter-spacing: .14em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.header-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 
 .nav {
   display: flex; align-items: center; gap: 2px;
@@ -267,7 +259,6 @@ main, .site-header, .site-footer { position: relative; z-index: 1; }
 .btn.ghost {
   border-color: var(--line); background: transparent; color: var(--ink);
 }
-.btn.ghost:hover { border-color: var(--sage); color: var(--sage); }
 .btn.small { min-height: var(--tap); padding: 0 14px; font-size: 10px; }
 
 .kicker {
@@ -1238,11 +1229,6 @@ html, body { overflow-x: clip; }
   letter-spacing: -0.035em !important;
   margin: clamp(4px, 1vh, 10px) 0 clamp(8px, 1.4vh, 14px) !important;
   max-width: 11ch !important;
-}
-.hero h1 em {
-  color: var(--sage) !important;
-  font-style: italic !important;
-  font-weight: 500 !important;
 }
 .hero-lead {
   margin: 0 0 clamp(12px, 2vh, 20px) !important;
@@ -2638,10 +2624,6 @@ body {
   box-shadow: none !important;
   backdrop-filter: none !important;
 }
-
-.hero-stats li + li { padding-left: 16px !important; }
-
-.hero-stats li:last-child { border-right: 0 !important; }
 
 .hero-stats strong {
   color: var(--sage) !important;
@@ -4403,10 +4385,6 @@ html.intro-done .zintro {
   padding-bottom: 28px !important;
 }
 
-.ritual-panel-index {
-  font-size: 10px !important;
-}
-
 .ritual-choices {
   grid-template-columns: repeat(2,minmax(0,1fr)) !important;
   gap: 14px !important;
@@ -5002,10 +4980,6 @@ html.intro-done .zintro {
   transform: none !important;
 }
 
-.ritual-choice:last-child {
-  border-bottom: 1px solid var(--line) !important;
-}
-
 .ritual-choice:hover,
 .ritual-choice.is-active {
   border-color: var(--line) !important;
@@ -5546,10 +5520,6 @@ html.intro-done .zintro {
   border-bottom: 1px solid var(--line) !important;
 }
 
-.ritual-panel-label {
-  color: var(--sage) !important;
-}
-
 .ritual-choices {
   margin-top: 6px !important;
 }
@@ -6045,15 +6015,6 @@ html.intro-done .zintro {
   .ritual-arrival {
     grid-template-columns: 1fr !important;
   }
-}
-
-
-
-
-
-.mandala-parallax::before,
-.mandala-parallax::after {
-  display: none !important;
 }
 
 .mandala-parallax {
@@ -6647,3 +6608,20 @@ html.intro-done .zintro {
   letter-spacing: .08em;
   opacity: .5;
 }
+
+/* Yoga V5: accessible controls and compact mobile ambience. */
+:focus-visible { outline: 3px solid var(--sage); outline-offset: 5px; }
+[hidden] { display: none !important; }
+section[id] { scroll-margin-top: calc(var(--header) + 20px); }
+@media (max-width: 600px) {
+  .sanctuary-dock { max-width: calc(100vw - 24px); width: 210px; left: 12px; bottom: 12px; }
+  .sanctuary-dock .sanctuary-section { display: none; }
+  .sanctuary-dock .sanctuary-dock-tools { justify-content: flex-end; }
+  body { padding-bottom: 150px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .fx, .spotlight, .zintro { display: none !important; }
+}
+
+[lang="en"] #flow-phase-target::before { content: "TARGET · "; }

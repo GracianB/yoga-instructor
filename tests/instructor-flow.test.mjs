@@ -29,7 +29,7 @@ test("E2E flow: completes the canonical 10-phase sequence", () => {
 test("E2E UI contract: next from idle starts at START without skipping", () => {
   assert.match(
     ui,
-    /next: \(\) => \{[\s\S]*?if \(engine\.status === "idle"\) \{[\s\S]*?engine\.start\(\);[\s\S]*?session\.start\(\);[\s\S]*?phase\.start\(\);[\s\S]*?return;[\s\S]*?\}[\s\S]*?engine\.next\(\);/
+    /next: \(\) => \{[\s\S]*?if \(engine\.status === "idle"\) \{[\s\S]*?session\.start\(\);[\s\S]*?phase\.start\(\);[\s\S]*?engine\.start\(\);[\s\S]*?return;[\s\S]*?\}[\s\S]*?engine\.next\(\);/
   );
 });
 

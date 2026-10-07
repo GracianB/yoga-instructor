@@ -79,7 +79,7 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 
 /* Layered illustrated character. Uses actual rig joints, not a decorative overlay. */
 .guide-animated .guide-scene { --outline: #4a5145; }
-.guide-animated .guide-leg { fill: url(#yoga-pants); stroke: #8b6c7b; stroke-width: .75; stroke-linejoin: round; }
+.guide-animated .guide-leg { fill: url(#yoga-pants); stroke: #455a64; stroke-width: .75; stroke-linejoin: round; }
 .guide-leg-lustre { fill: none; stroke: #efd1d2; stroke-width: 3.2; opacity: .48; stroke-linecap: round; stroke-linejoin: round; }
 .guide-animated .guide-foot, .guide-animated .guide-arm { fill: url(#yoga-skin); stroke: #c38c73; stroke-width: .65; stroke-linejoin: round; }
 .guide-animated .guide-neck { fill: none; stroke: url(#yoga-skin); stroke-width: 13; stroke-linecap: round; }
@@ -138,3 +138,5 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 .flow-guide[data-look="right"] .guide-head .guide-nose,
 .flow-guide[data-look="right"] .guide-head .guide-smile { opacity:0; }
 .flow-guide[data-look="right"] .guide-profile { transform:scaleX(-1); }
+
+.guide-waistline {fill:none;stroke:#d3e4d5;stroke-width:2;opacity:.72;stroke-linecap:round;}

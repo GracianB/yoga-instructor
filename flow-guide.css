@@ -129,14 +129,12 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 .guide-profile-lid { fill:none;stroke:#514943;stroke-width:1.4;stroke-linecap:round; }
 .flow-guide[data-look="left"] .guide-profile,
 .flow-guide[data-look="right"] .guide-profile {opacity:1}
-.flow-guide[data-look="left"] .guide-head .guide-brow,
-.flow-guide[data-look="left"] .guide-head .guide-eyes,
+/* Keep expressive eyes visible even when the head turns to face the knee. */
 .flow-guide[data-look="left"] .guide-head .guide-nose,
-.flow-guide[data-look="left"] .guide-head .guide-smile,
-.flow-guide[data-look="right"] .guide-head .guide-brow,
-.flow-guide[data-look="right"] .guide-head .guide-eyes,
-.flow-guide[data-look="right"] .guide-head .guide-nose,
-.flow-guide[data-look="right"] .guide-head .guide-smile { opacity:0; }
+.flow-guide[data-look="right"] .guide-head .guide-nose {opacity:0;}
 .flow-guide[data-look="left"] .guide-profile { transform:scaleX(-1); }
 
 .guide-waistline {fill:none;stroke:#d3e4d5;stroke-width:2;opacity:.72;stroke-linecap:round;}
+
+.guide-pelvis {fill:url(#yoga-pants);stroke:#415e67;stroke-width:.7;stroke-linejoin:round;}
+.guide-shirt-fold {fill:none;stroke:#d5e8d6;stroke-opacity:.26;stroke-width:1.7;stroke-linecap:round;}

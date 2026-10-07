@@ -370,7 +370,7 @@ test("Practice control layer: UI renders target, remaining and cue", () => {
 
 test("Living yoga guide: articulated skeleton and lifecycle are present", () => {
   const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
-  assert.match(index, /flow-motion\.js\?v=articulated-2/);
+  assert.match(index, /flow-motion\.js\?v=atelier-3/);
   for (const part of ["rleg", "lleg", "rarm", "larm", "torso", "neck", "rfoot", "lfoot"]) {
     assert.ok(motion.includes('data-bone="' + part + '"'));
   }

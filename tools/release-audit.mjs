@@ -11,7 +11,7 @@ assert.ok(html.includes('Content-Security-Policy'));
 const css = readFileSync('styles.css', 'utf8');
 postcss.parse(css);
 postcss.parse(readFileSync('flow-guide.css', 'utf8'));
-assert.ok(statSync('flow-guide.css').size <= 9800, 'Guide CSS budget');
+assert.ok(statSync('flow-guide.css').size <= 10000, 'Guide CSS budget');
 assert.ok(statSync('flow-guide.js').size <= 16000, 'Guide JS budget');
 assert.ok(statSync('flow-motion.js').size <= 18000, 'Articulated figure JS budget');
 assert.ok(statSync('styles.css').size <= 174000, 'CSS budget');

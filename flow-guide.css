@@ -34,7 +34,7 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 .flow-phase-timing { display: grid; gap: 7px; margin-top: 8px; }
 .flow-session-clock .flow-phase-timing small { display: flex; gap: 10px; justify-content: space-between; opacity: 1; line-height: 1.5; }
 .flow-phase-timing b { font: inherit; font-variant-numeric: tabular-nums; }
-#flow-phase-target::before { content: none; }
+[lang] #flow-phase-target::before { content: none; }
 @media (max-width: 600px) {
  .flow-guide { margin-inline: -12px; padding: 16px 10px 18px; }
  .guide-heading { font-size: 8px; letter-spacing: .06em; }

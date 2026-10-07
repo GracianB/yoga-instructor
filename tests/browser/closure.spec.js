@@ -173,10 +173,15 @@ test('living guide follows all ten phases, pauses and restores full practice tim
   await page.clock.setFixedTime(now);
   const errors = await open(page);
   const guide = page.locator('#flow-guide');
+  // This scenario tests the phase-clock protocol. Dispatch from the real control
+  // to avoid Firefox hitting stale screen coordinates during page scroll reflow.
+  // The other browser scenarios cover physical pointer clicks.
   const clickAction = async action => {
     const button = page.locator(`[data-flow-action="${action}"]`);
-    await button.evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'center' }));
-    await button.click();
+    await button.evaluate(el => {
+      el.scrollIntoView({ behavior: 'instant', block: 'center' });
+      el.click();
+    });
   };
   await expect(guide).toHaveAttribute('data-phase','start');
   await clickAction('preview');

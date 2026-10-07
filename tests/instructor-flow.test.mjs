@@ -367,3 +367,18 @@ test("Practice control layer: UI renders target, remaining and cue", () => {
   assert.match(ui, /snapshot\.cue/);
   assert.match(ui, /formatTime\(duration\)/);
 });
+
+test("Living yoga guide: articulated skeleton and lifecycle are present", () => {
+  const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
+  assert.match(index, /flow-motion\.js\?v=articulated-2/);
+  for (const part of ["rleg", "lleg", "rarm", "larm", "torso", "neck", "rfoot", "lfoot"]) {
+    assert.ok(motion.includes('data-bone="' + part + '"'));
+  }
+  assert.match(motion, /function freeze\(\)/);
+  assert.match(motion, /prefers-reduced-motion: reduce/);
+  assert.match(motion, /yoga:quiet/);
+  assert.match(motion, /visibilitychange/);
+  assert.match(motion, /yoga:preview/);
+  assert.match(motion, /yoga:flow/);
+  assert.match(motion, /640-x/);
+});

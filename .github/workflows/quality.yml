@@ -37,3 +37,19 @@ jobs:
         with:
           name: yoga-browser-report
           path: playwright-report/
+
+  public-site:
+    name: Published Pages Contract
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          path: published-baseline
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+      - name: Check deployed main independently of pending PR changes
+        run: node tools/pages-smoke.mjs --root=published-baseline --attempts=12 --interval=5

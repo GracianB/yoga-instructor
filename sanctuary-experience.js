@@ -168,6 +168,15 @@
     breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
   });
 
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden && breathRaf) {
+      window.YOGA_RUNTIME.cancel(breathRaf);
+      breathRaf = 0;
+    } else if (breathRunning && !breathRaf) {
+      breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
+    }
+  });
+
   function syncDockLanguage() {
     const labels = t();
     dock.setAttribute("aria-label", labels.dockLabel);

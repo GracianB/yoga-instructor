@@ -7,6 +7,7 @@ async function open(page, options = {}) {
   await page.route('https://vortex-gilt-xi.vercel.app/**', route => route.fulfill({ contentType: 'text/html', body: '<title>Vortex fixture</title>' }));
   await page.addInitScript(() => { try { sessionStorage.setItem('gb-yoga-intro-seen', '1'); } catch (_) {} });
   const errors = [];
+  page.on('response', response => { if (response.url().startsWith('http://127.0.0.1:4185') && response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (['error', 'warning'].includes(message.type())) errors.push(message.text()); });
   await page.goto(options.url || '/');

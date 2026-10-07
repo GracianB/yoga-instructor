@@ -6614,6 +6614,11 @@ html.intro-done .zintro {
 [hidden] { display: none !important; }
 section[id] { scroll-margin-top: calc(var(--header) + 20px); }
 @media (max-width: 600px) {
+  :root { --header: 112px; }
+  .site-header { --header: 112px; flex-wrap: wrap; padding: 10px 12px; gap: 8px; }
+  .site-header .brand { flex: 1 1 100%; }
+  .header-actions { flex: 1 1 100%; justify-content: space-between; }
+  .header-actions .header-cv { display: none; }
   .sanctuary-dock { max-width: calc(100vw - 24px); width: 210px; left: 12px; bottom: 12px; }
   .sanctuary-dock .sanctuary-section { display: none; }
   .sanctuary-dock .sanctuary-dock-tools { justify-content: flex-end; }

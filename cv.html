@@ -85,8 +85,8 @@
           <p class="role" data-i="role">Instructor de yoga · Murcia</p>
         </div>
         <div class="ctrl">
-          <button type="button" id="es" class="is-on">ES</button>
-          <button type="button" id="en">EN</button>
+          <button type="button" id="es" class="is-on" aria-pressed="true">ES</button>
+          <button type="button" id="en" aria-pressed="false">EN</button>
           <a href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" data-pdf>PDF ↗</a>
         </div>
       </div>
@@ -101,7 +101,7 @@
         <a href="mailto:gracianbaenagonzalez@gmail.com">gracianbaenagonzalez@gmail.com</a>
         · <a href="tel:+34687470725">+34 687 470 725</a>
         · <a href="https://gracianb.github.io/yoga-instructor/">yoga-instructor</a>
-        · no Instagram
+
       </p>
 
       <div class="doors">
@@ -144,6 +144,9 @@
     function apply(lang) {
       const t = T[lang];
       document.documentElement.lang = lang;
+      document.title = lang === "en" ? "Gracián Baena — Yoga CV" : "Gracián Baena — CV Yoga";
+      document.getElementById("es").setAttribute("aria-pressed", String(lang === "es"));
+      document.getElementById("en").setAttribute("aria-pressed", String(lang === "en"));
       document.querySelectorAll("[data-i]").forEach(el => { if (t[el.dataset.i]) el.textContent = t[el.dataset.i]; });
       document.querySelector("[data-pdf]").href = t.pdf;
       document.getElementById("es").classList.toggle("is-on", lang === "es");

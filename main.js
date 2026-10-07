@@ -235,10 +235,10 @@
     });
     audio.addEventListener("timeupdate", () => {
       if (curEl) curEl.textContent = fmt(audio.currentTime);
-      if (seek && audio.duration) seek.value = String((audio.currentTime / audio.duration) * 100);
+      if (seek && Number.isFinite(audio.duration) && audio.duration > 0) seek.value = String((audio.currentTime / audio.duration) * 100);
     });
     seek?.addEventListener("input", () => {
-      if (!audio.duration) return;
+      if (!Number.isFinite(audio.duration) || audio.duration <= 0) return;
       audio.currentTime = (Number(seek.value) / 100) * audio.duration;
     });
     muteBtn?.addEventListener("click", () => {

@@ -186,12 +186,35 @@
     stopFrame();
     root.dataset.motion='still';
   }
+  // Asana-specific movement, not a generic full-body bob.
+  // In each pose the rig carries a different and anatomically restrained gesture.
+  function gesture(base, now) {
+    const b = Math.sin(now / 1850), j = base.j.map(point => [...point]);
+    if (phase === 'warmup') {
+      // Cat/cow: flex the spine while hands and knees stay on the floor.
+      j[0][1] += 8*b; j[1][1] += 5*b;
+      j[8][1] += 3*b; j[9][1] += 3*b;
+      j[2][1] += 2*b; j[3][1] += 2*b;
+    } else if (phase === 'pose-1' || phase === 'pose-2') {
+      // Hold Warrior II: grounded ankles, controlled knee and open chest.
+      j[10][1] += 1.7*b; j[11][1] += 1.7*b;
+      j[2][1] -= 1*b; j[3][1] -= 1*b;
+      j[6][1] -= 1.5*b; j[7][1] -= 1.5*b;
+    } else if (phase === 'centering' || phase === 'breath' || phase === 'finish') {
+      j[0][1] -= 1.6*b; j[1][1] -= 1*b;
+      j[4][1] += 1.3*b; j[5][1] += 1.3*b;
+    } else if (phase === 'start' || phase === 'savasana') {
+      j[2][1] -= 1*b; j[3][1] -= 1*b;
+    }
+    return { j, angle: base.angle };
+  }
   function tick(now) {
     frame=0;
     if(noMotion() || !active()) { freeze(); return; }
     if(move || now-lastDraw>=32) {
-      const current=progress(now);
-      render(current,!move && snapshot.status==='running' ? (Math.sin(now/1400)+1)*0.8 : 0);
+      const current=move ? progress(now) : p[shapes[phase]];
+      const performed=!move && snapshot.status==='running' ? gesture(current, now) : current;
+      render(performed,!move && snapshot.status==='running' ? (Math.sin(now/1600)+1)*.6 : 0);
       root.dataset.motion=move?'transition':(snapshot.status==='running'?'breathing':'still');
       lastDraw=now;
     }

@@ -4762,7 +4762,7 @@ html.intro-done .zintro {
 }
 [data-theme="dark"] {
   --lotus-color: #f8fff9;
-  --lotus-highlight: #ffffff;
+  --lotus-highlight: #c0d6b9;
   --lotus-guide: rgba(248,255,249,.28);
   --lotus-fill: rgba(248,255,249,.045);
   --lotus-fill-soft: rgba(255,255,255,.022);
@@ -4796,47 +4796,6 @@ html.intro-done .zintro {
 .hero-mandala .lotus-bloom {
   stroke: var(--lotus-color) !important;
   fill: none !important;
-}
-.hero-mandala .lotus-bloom path:nth-child(1),
-.hero-mandala .lotus-bloom path:nth-child(3),
-.hero-mandala .lotus-bloom path:nth-child(4),
-.hero-mandala .lotus-bloom path:nth-child(6) {
-  fill: var(--lotus-fill) !important;
-}
-.hero-mandala .lotus-bloom path:nth-child(2),
-.hero-mandala .lotus-bloom path:nth-child(5),
-.hero-mandala .lotus-bloom path:nth-child(7) {
-  fill: var(--lotus-fill-soft) !important;
-}
-.hero-mandala .lotus-detail {
-  stroke: var(--lotus-highlight) !important;
-}
-.hero-mandala .mandala-orbit-outer {
-  stroke: var(--lotus-guide) !important;
-}
-.hero-mandala .lotus-sparks {
-  fill: var(--lotus-highlight) !important;
-}
-.hero-mandala .ring-core-stroke {
-  display: none !important;
-}
-@media (prefers-reduced-motion: no-preference) {
-  .hero[data-breath="cycle"] .hero-mandala {
-    animation: lotusFloat 19s ease-in-out infinite !important;
-  }
-  .hero[data-breath="cycle"] .lotus-guide,
-  .hero[data-breath="cycle"] .mandala-orbit-outer {
-    animation: lotusGuideRotate 42s linear infinite !important;
-    transform-origin: 280px 280px !important;
-  }
-  @keyframes lotusFloat {
-    0%,100% { transform: translate(-50%,-50%) scale(.99); }
-    50% { transform: translate(-50%,-50%) scale(1.018); }
-  }
-  @keyframes lotusGuideRotate {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
-  }
 }
 .ritual.section {
   width: min(1320px, calc(100vw - 48px)) !important;
@@ -5079,7 +5038,7 @@ html.intro-done .zintro {
 }
 [data-theme="dark"] {
   --lotus-color: #fbfffc;
-  --lotus-highlight: #ffffff;
+  --lotus-highlight: #c0d6b9;
 }
 .mandala-parallax {
   inset: 0 0 0 63% !important;
@@ -5590,12 +5549,12 @@ html.intro-done .zintro {
    ================================================================ */
 :root,
 [data-theme="light"] {
-  --lotus-color: #46b879;
-  --lotus-highlight: #7fd49d;
+  --lotus-color: #466e58;
+  --lotus-highlight: #466e58;
 }
 [data-theme="dark"] {
-  --lotus-color: #ffffff;
-  --lotus-highlight: #ffffff;
+  --lotus-color: #c0d6b9;
+  --lotus-highlight: #c0d6b9;
 }
 .mandala-parallax {
   inset: 0 0 0 61.5% !important;
@@ -5620,31 +5579,30 @@ html.intro-done .zintro {
   filter: none !important;
 }
 [data-theme="dark"] .hero-mandala {
-  color: #ffffff !important;
-  filter:
-    drop-shadow(0 0 18px rgba(255,255,255,.26))
-    drop-shadow(0 20px 38px rgba(255,255,255,.07)) !important;
+  color: var(--lotus-color) !important;
+  filter: none !important;
 }
 [data-theme="light"] .hero-mandala {
-  color: #46b879 !important;
-  filter: drop-shadow(0 18px 34px rgba(70,184,121,.10)) !important;
+  color: var(--lotus-color) !important;
+  filter: none !important;
 }
 .hero-mandala .lotus-bloom {
-  fill: currentColor !important;
-  stroke: none !important;
+  fill: url(#lotus-wash) !important;
+  stroke: currentColor !important;
+  stroke-width: 1.8;
 }
 .hero-mandala .lotus-detail {
   fill: none !important;
   stroke: var(--lotus-highlight) !important;
-  stroke-width: 1.35 !important;
+  stroke-width: .85 !important;
 }
 [data-theme="dark"] .hero-mandala .lotus-detail {
-  stroke: #ffffff !important;
-  opacity: .24 !important;
+  stroke: var(--lotus-color) !important;
+  opacity: .48 !important;
 }
 [data-theme="light"] .hero-mandala .lotus-detail {
-  stroke: #2f8f5d !important;
-  opacity: .28 !important;
+  stroke: var(--lotus-color) !important;
+  opacity: .45 !important;
 }
 @media (prefers-reduced-motion: no-preference) {
   .hero[data-breath="cycle"] .hero-mandala {

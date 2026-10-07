@@ -105,3 +105,8 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 [data-theme="dark"] .guide-garden { opacity: .76; }
 @media (max-width: 600px) { .guide-garden { opacity: .55; } }
 @media (prefers-reduced-motion: reduce) { .guide-articulated { transition: none; } }
+
+/* Keep both actions together; move the long sequence below instead of wrapping one button. */
+.flow-console-foot { flex-direction:column; align-items:flex-start; gap:14px; }
+.flow-entry-actions { flex-wrap:nowrap; }
+@media(max-width:600px){.flow-entry-actions{flex-wrap:wrap;}}

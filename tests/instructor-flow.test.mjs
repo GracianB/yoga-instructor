@@ -386,7 +386,7 @@ test("Living yoga guide: articulated skeleton and lifecycle are present", () => 
 test("Premium yoga avatar keeps its original rig and layered character artwork", () => {
   const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
   const css = readFileSync(new URL("../flow-guide.css", import.meta.url), "utf8");
-  const details = ["guide-hair-bun", "guide-eyes", "guide-smile", "guide-blush",
+  const details = ["guide-hair-back", "guide-eyes", "guide-smile", "guide-beard",
     "guide-skin", "guide-sleeve", "guide-leg-lustre", "guide-collar",
     "guide-garden", "guide-mat"];
   for (const part of details) assert.ok(motion.includes(part), part + " missing");

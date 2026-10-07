@@ -86,6 +86,8 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
 test('ritual persistence, breathing, quiet mode and audio controls', async ({ page }) => {
   const errors = await open(page);
   await page.locator('[data-practice="focus"]').click();
+  await expect(page.locator('#ritual-state')).toHaveText('Afinar');
+  expect(await page.evaluate(() => localStorage.getItem('gb-yoga-practice'))).toBe('focus');
   await page.reload();
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
   await page.locator('.sanctuary-breath').click();
@@ -212,5 +214,17 @@ test('living guide follows all ten phases, pauses and restores full practice tim
   await guide.scrollIntoViewIfNeeded();
   await test.info().attach('guide-mobile-dark', { body: await guide.screenshot({ animations: 'disabled' }), contentType: 'image/png' });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(errors).toEqual([]);
+});
+
+test('saved ritual is restored even when animation frames never run', async ({ page }) => {
+  await page.addInitScript(() => {
+    localStorage.setItem('gb-yoga-practice', 'focus');
+    // Browsers can suppress animation callbacks when a tab is hidden.
+    window.requestAnimationFrame = () => 0;
+  });
+  const errors = await open(page);
+  await expect(page.locator('#ritual-state')).toHaveText('Afinar');
+  await expect(page.locator('.ritual-choice[data-practice="focus"]')).toHaveAttribute('aria-pressed', 'true');
   expect(errors).toEqual([]);
 });

@@ -137,6 +137,6 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 .flow-guide[data-look="right"] .guide-head .guide-eyes,
 .flow-guide[data-look="right"] .guide-head .guide-nose,
 .flow-guide[data-look="right"] .guide-head .guide-smile { opacity:0; }
-.flow-guide[data-look="right"] .guide-profile { transform:scaleX(-1); }
+.flow-guide[data-look="left"] .guide-profile { transform:scaleX(-1); }
 
 .guide-waistline {fill:none;stroke:#d3e4d5;stroke-width:2;opacity:.72;stroke-linecap:round;}

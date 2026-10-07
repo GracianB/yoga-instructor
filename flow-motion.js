@@ -28,18 +28,58 @@
     'warmup>pose-1':'mountain', 'pose-2>cooldown':'kneel',
     'cooldown>savasana':'recline', 'savasana>finish':'recline' };
 
+  // Bespoke editorial character: OHANA-level layered drawing, but a calm yoga identity.
+  // All decorations are hand-authored vectors that follow the rig, not static sprites.
   svg.insertAdjacentHTML('beforeend',
+    '<defs>' +
+    '<linearGradient id="yoga-skin" x1="0" y1="0" x2=".83" y2="1"><stop offset="0" stop-color="#fae2c8"/><stop offset=".47" stop-color="#d9a987"/><stop offset="1" stop-color="#bd856f"/></linearGradient>' +
+    '<linearGradient id="yoga-hair" x1="0" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#6d6154"/><stop offset=".48" stop-color="#403d3b"/><stop offset="1" stop-color="#272d2b"/></linearGradient>' +
+    '<linearGradient id="yoga-shirt" x1="0" y1="0" x2="1" y2=".6"><stop offset="0" stop-color="#acc3a7"/><stop offset=".35" stop-color="#789b7c"/><stop offset="1" stop-color="#466a58"/></linearGradient>' +
+    '<linearGradient id="yoga-pants" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9b6bc"/><stop offset=".48" stop-color="#bb8c9d"/><stop offset="1" stop-color="#815d72"/></linearGradient>' +
+    '<linearGradient id="yoga-rug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8cfb6" stop-opacity=".64"/><stop offset="1" stop-color="#719889" stop-opacity=".18"/></linearGradient>' +
+    '</defs>' +
+    '<g class="guide-garden" aria-hidden="true">' +
+      '<path class="guide-branch" d="M100 286Q132 220 182 192M540 280Q514 207 463 185"/>' +
+      '<path class="guide-leaf" d="M119 244Q94 214 104 193Q133 210 119 244ZM142 219Q138 183 161 169Q172 207 142 219ZM159 201Q166 169 187 160Q191 192 159 201Z"/>' +
+      '<path class="guide-leaf" d="M519 240Q540 208 532 190Q501 211 519 240ZM500 216Q494 181 475 168Q468 204 500 216ZM477 197Q469 171 445 161Q446 191 477 197Z"/>' +
+      '<circle class="guide-pollen" cx="160" cy="131" r="3"/><circle class="guide-pollen" cx="483" cy="131" r="2.5"/>' +
+    '</g>' +
+    '<path class="guide-mat" d="M158 316Q320 299 482 316L502 325Q320 344 138 325Z"/>' +
     '<g class="guide-articulated" aria-hidden="true">' +
-    '<path data-bone="rleg" class="guide-leg"/><path data-bone="rfoot" class="guide-foot"/>' +
-    '<path data-bone="lleg" class="guide-leg"/><path data-bone="lfoot" class="guide-foot"/>' +
-    '<path data-bone="torso" class="guide-shirt"/><path data-bone="neck" class="guide-neck"/>' +
-    '<path data-bone="rarm" class="guide-arm"/><path data-bone="larm" class="guide-arm"/>' +
-    '<g class="guide-head"><ellipse class="guide-skin" rx="17" ry="21"/>' +
-    '<path class="guide-hair" d="M-17 1C-23-31 25-31 17 1L11-10Q-3-3-13-10Z"/>' +
-    '<path class="guide-face" d="M-8 4Q-4 7 0 4M6 12Q2 15-2 12"/></g></g>');
+      '<path class="guide-character-silhouette" d="M0 0"/>' +
+      '<path data-bone="rleg" class="guide-leg"/><path class="guide-leg-lustre" data-detail="rleg"/>' +
+      '<path data-bone="rfoot" class="guide-foot"/>' +
+      '<path data-bone="lleg" class="guide-leg"/><path class="guide-leg-lustre" data-detail="lleg"/>' +
+      '<path data-bone="lfoot" class="guide-foot"/>' +
+      '<path data-bone="torso" class="guide-shirt"/>' +
+      '<path class="guide-shirt-panel" data-detail="panel"/>' +
+      '<path data-bone="neck" class="guide-neck"/>' +
+      '<path class="guide-collar" data-detail="collar"/>' +
+      '<path data-bone="rarm" class="guide-arm"/><path data-bone="larm" class="guide-arm"/>' +
+      '<path class="guide-sleeve" data-detail="rsleeve"/><path class="guide-sleeve" data-detail="lsleeve"/>' +
+      '<ellipse class="guide-hand" data-detail="rhand" rx="7" ry="10"/>' +
+      '<ellipse class="guide-hand" data-detail="lhand" rx="7" ry="10"/>' +
+      '<g class="guide-head">' +
+        '<path class="guide-hair-bun" d="M13-16Q31-27 30-10Q29 3 15 0Z"/>' +
+        '<path class="guide-ear" d="M-17-1Q-24-7-24 2Q-24 9-17 7Z"/>' +
+        '<ellipse class="guide-skin" rx="18" ry="22"/>' +
+        '<path class="guide-face-shade" d="M13-10Q21 8 7 20Q18 17 18 2Q19-6 13-10Z"/>' +
+        '<path class="guide-hair" d="M-19 0Q-26-22-7-26Q15-32 20-11Q5-19-5-11Q-13-2-19 0Z"/>' +
+        '<path class="guide-hair-strand" d="M-13-18Q-19-9-18 0"/>' +
+        '<path class="guide-brow" d="M-12 0Q-8-3-4-1M5-2Q9-4 12-1"/>' +
+        '<path class="guide-eyes" d="M-12 5Q-8 8-4 5M5 5Q9 8 12 4"/>' +
+        '<path class="guide-nose" d="M1 6Q-2 11 2 12"/>' +
+        '<path class="guide-smile" d="M-5 15Q0 19 6 15"/>' +
+        '<ellipse class="guide-blush" cx="-12" cy="12" rx="4" ry="2"/>' +
+        '<ellipse class="guide-blush" cx="12" cy="11" rx="4" ry="2"/>' +
+        '<path class="guide-hair-shine" d="M-15-16Q-9-24 1-23"/>' +
+      '</g>' +
+    '</g>');
   const bones = {};
   svg.querySelectorAll('[data-bone]').forEach(el => { bones[el.dataset.bone] = el; });
   const head = svg.querySelector('.guide-head');
+  const details = {};
+  svg.querySelectorAll('[data-detail]').forEach(el => { details[el.dataset.detail] = el; });
   const motion = window.YOGA_RUNTIME;
   let snapshot = { phase: 'start', status:'idle' }, phase = 'start';
   let shape = p.rest, move = null, preview = false, frame = 0, lastDraw = 0;
@@ -70,6 +110,22 @@
     bones.rarm.setAttribute('d',bent(j[3],j[5],j[7]));
     bones.larm.setAttribute('d',bent(j[2],j[4],j[6]));
     head.setAttribute('transform','translate('+f(j[0][0])+' '+f(j[0][1])+') rotate('+f(s.angle)+')');
+
+    // Follow the changing joints: seams, highlights, short sleeves and small hands.
+    details.rleg.setAttribute('d', bent(j[9],j[11],j[13]));
+    details.lleg.setAttribute('d', bent(j[8],j[10],j[12]));
+    const edge=(from,to,t)=>[lerp(from[0],to[0],t),lerp(from[1],to[1],t)];
+    details.rsleeve.setAttribute('d',line(j[3],edge(j[3],j[5],.38)));
+    details.lsleeve.setAttribute('d',line(j[2],edge(j[2],j[4],.38)));
+    details.rhand.setAttribute('cx', f(j[7][0]));
+    details.rhand.setAttribute('cy', f(j[7][1]));
+    details.lhand.setAttribute('cx', f(j[6][0]));
+    details.lhand.setAttribute('cy', f(j[6][1]));
+    details.collar.setAttribute('d','M'+f(sl[0]+5)+' '+f(sl[1]+2)+
+      'Q'+f(j[1][0])+' '+f(j[1][1]+12)+' '+f(sr[0]-5)+' '+f(sr[1]+2));
+    const middle=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
+    details.panel.setAttribute('d',line(middle(sl,sr),middle(hl,hr)));
+
     shape=s;
   }
   function stopFrame() { if(frame) motion.cancel(frame); frame=0; }

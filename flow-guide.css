@@ -46,3 +46,33 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
  .guide-pose { transition: none; }
  .guide-body, .guide-halo { animation: none; }
 }
+
+/* Living silhouette: keep the original illustrated poses as a graceful JS fallback. */
+.flow-guide.guide-animated .guide-pose { display: none; }
+.guide-articulated { filter: drop-shadow(0 4px 6px rgba(55, 88, 64, .065)); }
+.guide-animated .guide-scene { isolation: isolate; }
+.flow-guide { background:
+  radial-gradient(ellipse at 50% 37%, rgba(221, 179, 193, .11), transparent 64%),
+  color-mix(in srgb, var(--bg) 65%, transparent); }
+.guide-animated .guide-shadow { opacity: .12; }
+.flow-preview, .flow-start { transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease; }
+.flow-preview:hover, .flow-preview:focus-visible {
+  border-color: #bf909f;
+  box-shadow: 0 0 0 3px rgba(210, 160, 178, .14);
+}
+.flow-preview:focus-visible, .flow-start:focus-visible {
+  outline: 2px solid #b17b92;
+  outline-offset: 3px;
+}
+.flow-guide[data-status="paused"] { border-color: color-mix(in srgb, var(--line) 70%, #c89bab); }
+.flow-guide figcaption p { max-width: 42ch; margin-inline: auto; }
+@media (max-width: 600px) {
+  .flow-guide.guide-animated .guide-scene { width: 154%; margin: -10px 0 -18px -27%; }
+  .flow-guide .guide-heading { padding-inline: 7px; }
+  .flow-guide figcaption strong { font-size: clamp(23px, 6vw, 29px); }
+  .flow-guide figcaption p { max-width: 33ch; font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .guide-articulated { filter: none; }
+  .flow-preview, .flow-start { transition: none; }
+}

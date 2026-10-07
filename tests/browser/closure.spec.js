@@ -90,6 +90,7 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
   await page.reload();
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
+  await page.locator('#audio-play').evaluate(button => button.scrollIntoView({ behavior: 'instant', block: 'center' }));
   await page.locator('#audio-play').click();
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.paused)).toBe(false);
   await page.locator('#audio-mute').click();

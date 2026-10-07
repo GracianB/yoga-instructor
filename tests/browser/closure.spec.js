@@ -17,10 +17,13 @@ async function open(page, options = {}) {
 
 for (const width of [320, 390, 768, 1440]) {
   test(`navigation, ES/EN, themes and layout at ${width}px`, async ({ page }) => {
+    test.setTimeout(60000);
     await page.setViewportSize({ width, height: 900 });
     const errors = await open(page);
+    await test.info().attach("hero-light", { body: await page.screenshot({ animations: "disabled" }), contentType: "image/png" });
     await page.locator('[data-set-lang="en"]').click();
     await expect(page.locator('h1')).toContainText('Presence');
+    expect(await page.locator('.hero-line').evaluateAll(lines => lines.every(line => line.scrollWidth <= line.clientWidth + 2))).toBe(true);
     await expect(page.locator('#flow-phase-cue')).toHaveText('Arrive and prepare for practice.');
     await expect(page.locator('#audio-vol')).toHaveAttribute('aria-label', 'Volume');
     await expect(page.locator('[data-cv-link]').first()).toHaveAttribute('href', './assets/CV_Gracian_Baena_Yoga_EN.pdf');
@@ -47,7 +50,7 @@ for (const width of [320, 390, 768, 1440]) {
     await page.locator('[data-set-theme="light"]').click();
     await expect(page.locator('h1')).toContainText('Presencia');
     expect(errors).toEqual([]);
-    await page.screenshot({ path: `test-results/${test.info().project.name}-${width}.png`, fullPage: true });
+    await test.info().attach("contact-light", { body: await page.screenshot({ animations: "disabled" }), contentType: "image/png" });
   });
 }
 

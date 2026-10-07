@@ -34,8 +34,8 @@
     '<defs>' +
     '<linearGradient id="yoga-skin" x1="0" y1="0" x2=".83" y2="1"><stop offset="0" stop-color="#fae2c8"/><stop offset=".47" stop-color="#d9a987"/><stop offset="1" stop-color="#bd856f"/></linearGradient>' +
     '<linearGradient id="yoga-hair" x1="0" y1="0" x2=".85" y2="1"><stop offset="0" stop-color="#6d6154"/><stop offset=".48" stop-color="#403d3b"/><stop offset="1" stop-color="#272d2b"/></linearGradient>' +
-    '<linearGradient id="yoga-shirt" x1="0" y1="0" x2="1" y2=".6"><stop offset="0" stop-color="#acc3a7"/><stop offset=".35" stop-color="#789b7c"/><stop offset="1" stop-color="#466a58"/></linearGradient>' +
-    '<linearGradient id="yoga-pants" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d9b6bc"/><stop offset=".48" stop-color="#bb8c9d"/><stop offset="1" stop-color="#815d72"/></linearGradient>' +
+    '<linearGradient id="yoga-shirt" x1="0" y1="0" x2="1" y2=".6"><stop offset="0" stop-color="#bdd4c1"/><stop offset=".35" stop-color="#789d8c"/><stop offset="1" stop-color="#42685e"/></linearGradient>' +
+    '<linearGradient id="yoga-pants" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#899ca8"/><stop offset=".48" stop-color="#5a7680"/><stop offset="1" stop-color="#354d5d"/></linearGradient>' +
     '<linearGradient id="yoga-rug" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#b8cfb6" stop-opacity=".64"/><stop offset="1" stop-color="#719889" stop-opacity=".18"/></linearGradient>' +
     '</defs>' +
     '<g class="guide-garden" aria-hidden="true">' +
@@ -45,14 +45,14 @@
       '<circle class="guide-pollen" cx="160" cy="131" r="3"/><circle class="guide-pollen" cx="483" cy="131" r="2.5"/>' +
     '</g>' +
     '<path class="guide-mat" d="M158 316Q320 299 482 316L502 325Q320 344 138 325Z"/>' +
-    '<g class="guide-articulated" transform="translate(320 300) scale(1.07) translate(-320 -300)" aria-hidden="true">' +
+    '<g class="guide-articulated" transform="translate(320 300) scale(1.15) translate(-320 -300)" aria-hidden="true">' +
       '<path class="guide-character-silhouette" d="M0 0"/>' +
       '<path data-bone="rleg" class="guide-leg"/><path class="guide-leg-lustre" data-detail="rleg"/>' +
       '<path data-bone="rfoot" class="guide-foot"/>' +
       '<path data-bone="lleg" class="guide-leg"/><path class="guide-leg-lustre" data-detail="lleg"/>' +
       '<path data-bone="lfoot" class="guide-foot"/>' +
       '<path data-bone="torso" class="guide-shirt"/>' +
-      '<path class="guide-shirt-panel" data-detail="panel"/>' +
+      '<path class="guide-shirt-panel" data-detail="panel"/><path class="guide-waistline" data-detail="waist"/>' +
       '<path data-bone="neck" class="guide-neck"/>' +
       '<path class="guide-collar" data-detail="collar"/>' +
       '<path data-bone="rarm" class="guide-arm"/><path data-bone="larm" class="guide-arm"/>' +
@@ -165,6 +165,8 @@
       'Q'+f(j[1][0])+' '+f(j[1][1]+12)+' '+f(sr[0]-5)+' '+f(sr[1]+2));
     const middle=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2];
     details.panel.setAttribute('d',line(middle(sl,sr),middle(hl,hr)));
+    details.waist.setAttribute('d','M'+xy([hl[0]-4,hl[1]])+
+      'Q'+xy([(hl[0]+hr[0])/2,(hl[1]+hr[1])/2+5])+' '+xy([hr[0]+4,hr[1]]));
 
     shape=s;
   }

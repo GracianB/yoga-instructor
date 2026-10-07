@@ -95,28 +95,57 @@
   });
   const line = (a,b) => 'M'+f(a[0])+' '+f(a[1])+'L'+f(b[0])+' '+f(b[1]);
   const bent = (a,b,c) => line(a,b)+'L'+f(c[0])+' '+f(c[1]);
+  // Silhouette geometry with gradually changing widths, not jointless thick strokes.
+  const normal = (a,b) => {
+    const dx=b[0]-a[0], dy=b[1]-a[1], len=Math.max(1,Math.hypot(dx,dy));
+    return [-dy/len,dx/len];
+  };
+  const offset=(p,n,w,dir=1)=>[p[0]+n[0]*w*dir,p[1]+n[1]*w*dir];
+  const xy=p=>f(p[0])+' '+f(p[1]);
+  const limbShape=(a,b,c,w1,w2,w3)=>{
+    const na=normal(a,b), nb=normal(a,c), nc=normal(b,c);
+    const al=offset(a,na,w1), ar=offset(a,na,w1,-1);
+    const bl=offset(b,nb,w2), br=offset(b,nb,w2,-1);
+    const cl=offset(c,nc,w3), cr=offset(c,nc,w3,-1);
+    const bend=(p,q,t)=>[lerp(p[0],q[0],t),lerp(p[1],q[1],t)];
+    return 'M'+xy(al)+'L'+xy(bend(al,bl,.72))+'Q'+xy(bl)+' '+xy(bend(bl,cl,.22))+
+      'L'+xy(cl)+'Q'+xy(c)+' '+xy(cr)+'L'+xy(bend(cr,br,.78))+
+      'Q'+xy(br)+' '+xy(bend(br,ar,.28))+'L'+xy(ar)+'Z';
+  };
+  const flatShape=(a,b,wa,wb)=>{
+    const n=normal(a,b);
+    const al=offset(a,n,wa),ar=offset(a,n,wa,-1),
+      bl=offset(b,n,wb),br=offset(b,n,wb,-1);
+    return 'M'+xy(al)+'L'+xy(bl)+'Q'+xy(b)+' '+xy(br)+'L'+xy(ar)+'Z';
+  };
   function render(s, inhale = 0) {
     const j=s.j.map(([x,y],i) => [x,y-(i<4?inhale:i<8?inhale*0.45:0)]);
-    bones.rleg.setAttribute('d',bent(j[9],j[11],j[13]));
-    bones.rfoot.setAttribute('d',line(j[13],j[15]));
-    bones.lleg.setAttribute('d',bent(j[8],j[10],j[12]));
-    bones.lfoot.setAttribute('d',line(j[12],j[14]));
+    bones.rleg.setAttribute('d',limbShape(j[9],j[11],j[13],15,12,9));
+    bones.rfoot.setAttribute('d',flatShape(j[13],j[15],6,7));
+    bones.lleg.setAttribute('d',limbShape(j[8],j[10],j[12],15,12,9));
+    bones.lfoot.setAttribute('d',flatShape(j[12],j[14],6,7));
     const [sl,sr,hl,hr]=[j[2],j[3],j[8],j[9]];
+    // Curved neck, relaxed shoulders, tapered waist and rounded hem.
+    const neck=j[1], midHip=[(hl[0]+hr[0])/2,(hl[1]+hr[1])/2];
     bones.torso.setAttribute('d',
-      'M'+f(sl[0])+' '+f(sl[1])+'Q'+f((sl[0]+sr[0])/2)+' '+f((sl[1]+sr[1])/2-5)+
-      ' '+f(sr[0])+' '+f(sr[1])+'L'+f(hr[0])+' '+f(hr[1])+
-      'Q'+f((hl[0]+hr[0])/2)+' '+f((hl[1]+hr[1])/2+5)+' '+f(hl[0])+' '+f(hl[1])+'Z');
+      'M'+xy([sl[0]-4,sl[1]+1])+
+      'Q'+xy([sl[0]+2,sl[1]-13])+' '+xy([neck[0]-9,neck[1]+8])+
+      'Q'+xy([neck[0],neck[1]+14])+' '+xy([neck[0]+9,neck[1]+8])+
+      'Q'+xy([sr[0]-2,sr[1]-13])+' '+xy([sr[0]+4,sr[1]+1])+
+      'C'+xy([sr[0]+8,sr[1]+29])+' '+xy([hr[0]+10,hr[1]-22])+' '+xy([hr[0]+5,hr[1]+2])+
+      'Q'+xy([midHip[0],midHip[1]+9])+' '+xy([hl[0]-5,hl[1]+2])+
+      'C'+xy([hl[0]-10,hl[1]-22])+' '+xy([sl[0]-8,sl[1]+29])+' '+xy([sl[0]-4,sl[1]+1])+'Z');
     bones.neck.setAttribute('d',line([(sl[0]+sr[0])/2,(sl[1]+sr[1])/2],j[1]));
-    bones.rarm.setAttribute('d',bent(j[3],j[5],j[7]));
-    bones.larm.setAttribute('d',bent(j[2],j[4],j[6]));
+    bones.rarm.setAttribute('d',limbShape(j[3],j[5],j[7],8.5,6.7,4.1));
+    bones.larm.setAttribute('d',limbShape(j[2],j[4],j[6],8.5,6.7,4.1));
     head.setAttribute('transform','translate('+f(j[0][0])+' '+f(j[0][1])+') rotate('+f(s.angle)+')');
 
     // Follow the changing joints: seams, highlights, short sleeves and small hands.
     details.rleg.setAttribute('d', bent(j[9],j[11],j[13]));
     details.lleg.setAttribute('d', bent(j[8],j[10],j[12]));
     const edge=(from,to,t)=>[lerp(from[0],to[0],t),lerp(from[1],to[1],t)];
-    details.rsleeve.setAttribute('d',line(j[3],edge(j[3],j[5],.38)));
-    details.lsleeve.setAttribute('d',line(j[2],edge(j[2],j[4],.38)));
+    details.rsleeve.setAttribute('d',flatShape(j[3],edge(j[3],j[5],.43),10,7.9));
+    details.lsleeve.setAttribute('d',flatShape(j[2],edge(j[2],j[4],.43),10,7.9));
     details.rhand.setAttribute('cx', f(j[7][0]));
     details.rhand.setAttribute('cy', f(j[7][1]));
     details.lhand.setAttribute('cx', f(j[6][0]));

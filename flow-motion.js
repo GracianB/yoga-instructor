@@ -50,9 +50,9 @@
       '<path data-bone="rleg" class="guide-leg"/><path class="guide-leg-lustre" data-detail="rleg"/>' +
       '<path data-bone="rfoot" class="guide-foot"/>' +
       '<path data-bone="lleg" class="guide-leg"/><path class="guide-leg-lustre" data-detail="lleg"/>' +
-      '<path data-bone="lfoot" class="guide-foot"/>' +
+      '<path data-bone="lfoot" class="guide-foot"/><path class="guide-pelvis" data-detail="pelvis"/>' +
       '<path data-bone="torso" class="guide-shirt"/>' +
-      '<path class="guide-shirt-panel" data-detail="panel"/><path class="guide-waistline" data-detail="waist"/>' +
+      '<path class="guide-shirt-panel" data-detail="panel"/><path class="guide-shirt-fold" data-detail="fold"/><path class="guide-waistline" data-detail="waist"/>' +
       '<path data-bone="neck" class="guide-neck"/>' +
       '<path class="guide-collar" data-detail="collar"/>' +
       '<path data-bone="rarm" class="guide-arm"/><path data-bone="larm" class="guide-arm"/>' +
@@ -122,15 +122,31 @@
       bl=offset(b,n,wb),br=offset(b,n,wb,-1);
     return 'M'+xy(al)+'L'+xy(bl)+'Q'+xy(b)+' '+xy(br)+'L'+xy(ar)+'Z';
   };
+  // Barefoot outline with a curved arch and rounded toes; no rectangular shoes.
+  const footShape=(ankle,toe)=>{
+    const n=normal(ankle,toe), d=[toe[0]-ankle[0],toe[1]-ankle[1]];
+    const top=offset(ankle,n,6),bottom=offset(ankle,n,6,-1);
+    const front=offset(toe,n,3),back=offset(toe,n,3,-1);
+    const mid=[ankle[0]+d[0]*.58,ankle[1]+d[1]*.58];
+    return 'M'+xy(top)+'Q'+xy(offset(mid,n,6))+' '+xy(front)+
+      'Q'+xy([toe[0]+d[0]*.07,toe[1]+d[1]*.07])+' '+xy(back)+
+      'Q'+xy(offset(mid,n,1,-1))+' '+xy(bottom)+
+      'Q'+xy(ankle)+' '+xy(top)+'Z';
+  };
   function render(s, inhale = 0) {
     const j=s.j.map(([x,y],i) => [x,y-(i<4?inhale:i<8?inhale*0.45:0)]);
     bones.rleg.setAttribute('d',limbShape(j[9],j[11],j[13],15,12,9));
-    bones.rfoot.setAttribute('d',flatShape(j[13],j[15],6,7));
+    bones.rfoot.setAttribute('d',footShape(j[13],j[15]));
     bones.lleg.setAttribute('d',limbShape(j[8],j[10],j[12],15,12,9));
-    bones.lfoot.setAttribute('d',flatShape(j[12],j[14],6,7));
+    bones.lfoot.setAttribute('d',footShape(j[12],j[14]));
     const [sl,sr,hl,hr]=[j[2],j[3],j[8],j[9]];
     // Curved neck, relaxed shoulders, tapered waist and rounded hem.
     const neck=j[1], midHip=[(hl[0]+hr[0])/2,(hl[1]+hr[1])/2];
+    // An actual connected pelvis prevents the unsettling floating torso.
+    details.pelvis.setAttribute('d','M'+xy([hl[0]-14,hl[1]-7])+
+      'Q'+xy([midHip[0],midHip[1]-13])+' '+xy([hr[0]+14,hr[1]-7])+
+      'L'+xy([hr[0]+13,hr[1]+18])+
+      'Q'+xy([midHip[0],midHip[1]+34])+' '+xy([hl[0]-13,hl[1]+18])+'Z');
     bones.torso.setAttribute('d',
       'M'+xy([sl[0]-4,sl[1]+1])+
       'Q'+xy([sl[0]+2,sl[1]-13])+' '+xy([neck[0]-9,neck[1]+8])+
@@ -167,6 +183,8 @@
     details.panel.setAttribute('d',line(middle(sl,sr),middle(hl,hr)));
     details.waist.setAttribute('d','M'+xy([hl[0]-4,hl[1]])+
       'Q'+xy([(hl[0]+hr[0])/2,(hl[1]+hr[1])/2+5])+' '+xy([hr[0]+4,hr[1]]));
+    details.fold.setAttribute('d','M'+xy([sr[0]-12,sr[1]+21])+
+      'Q'+xy([midHip[0]+9,midHip[1]-38])+' '+xy([hr[0]-6,hr[1]-9]));
 
     shape=s;
   }

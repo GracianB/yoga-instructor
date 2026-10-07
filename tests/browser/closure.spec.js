@@ -228,3 +228,62 @@ test('saved ritual is restored even when animation frames never run', async ({ p
   await expect(page.locator('.ritual-choice[data-practice="focus"]')).toHaveAttribute('aria-pressed', 'true');
   expect(errors).toEqual([]);
 });
+
+test('articulated figure moves joint paths, freezes on pause and respects reduced motion', async ({ page }) => {
+  test.setTimeout(60000);
+  const errors = await open(page);
+  const guide = page.locator('#flow-guide');
+  const arm = guide.locator('[data-bone="larm"]');
+  await expect(guide).toHaveClass(/guide-animated/);
+  await expect(arm).toHaveAttribute('d', /M\d/);
+  await page.locator('[data-flow-action="start"]').click();
+  await page.locator('[data-flow-action="next"]').click();
+  await expect(guide).toHaveAttribute('data-phase', 'centering');
+  await expect(guide).toHaveAttribute('data-motion', 'transition');
+  const first = await arm.getAttribute('d');
+  await page.waitForTimeout(330);
+  const moving = await arm.getAttribute('d');
+  expect(moving).not.toBe(first);
+  await page.locator('[data-flow-action="pause"]').click();
+  await expect(guide).toHaveAttribute('data-motion', 'still');
+  const frozen = await arm.getAttribute('d');
+  await page.waitForTimeout(260);
+  await expect(arm).toHaveAttribute('d', frozen);
+  await page.locator('[data-flow-action="pause"]').click();
+  await page.waitForTimeout(330);
+  expect(await arm.getAttribute('d')).not.toBe(frozen);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await expect(guide).toHaveAttribute('data-motion', 'still');
+  await expect(guide).toHaveAttribute('data-morph', '1.000');
+  await page.locator('[data-flow-action="next"]').click();
+  await expect(guide).toHaveAttribute('data-phase', 'breath');
+  await expect(guide).toHaveAttribute('data-morph', '1.000');
+  await page.locator('[data-flow-action="reset"]').click();
+  await expect(guide).toHaveAttribute('data-motion', 'still');
+  expect(errors).toEqual([]);
+});
+
+test('articulated visual matrix retains anatomy without horizontal overflow', async ({ page }) => {
+  test.setTimeout(60000);
+  const errors = await open(page);
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  for (const width of [320, 390, 768, 1440]) {
+    await page.setViewportSize({ width, height: 900 });
+    for (const theme of ['light', 'dark']) {
+      await page.locator('[data-set-theme="' + theme + '"]').click();
+      await page.locator('[data-flow-action="start"]').click();
+      for (let i = 0; i < 4; i++) await page.locator('[data-flow-action="next"]').click();
+      await expect(page.locator('#flow-guide')).toHaveAttribute('data-phase', 'pose-1');
+      const figure = page.locator('#flow-guide .guide-articulated');
+      expect(await figure.locator('[data-bone]').count()).toBe(8);
+      await page.locator('#flow-guide').scrollIntoViewIfNeeded();
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+      if (width === 320 || width === 1440) {
+        await test.info().attach('articulated-warrior-' + width + '-' + theme,
+          { body: await page.locator('#flow-guide').screenshot({ animations:'disabled' }), contentType:'image/png' });
+      }
+      await page.locator('[data-flow-action="reset"]').click();
+    }
+  }
+  expect(errors).toEqual([]);
+});

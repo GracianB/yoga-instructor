@@ -6630,3 +6630,26 @@ section[id] { scroll-margin-top: calc(var(--header) + 20px); }
 }
 
 [lang="en"] #flow-phase-target::before { content: "TARGET · "; }
+
+/* Keep informational text readable throughout the breathing cycle. */
+.hero .breath-caption,
+.hero[data-phase] .breath-caption,
+body.quiet-mode .sanctuary-dock,
+.flow-session-clock span,
+.flow-session-clock small,
+#flow-phase-target {
+  opacity: 1;
+}
+.flow-session-clock span,
+.flow-session-clock small { color: var(--muted); }
+
+[data-theme="light"] .header-cv,
+[data-theme="light"] .contact-actions .btn.primary {
+  background: #214b38 !important;
+  color: #f8f5ed !important;
+}
+[data-theme="dark"] .header-cv,
+[data-theme="dark"] .contact-actions .btn.primary {
+  background: #93c5a6 !important;
+  color: #09130f !important;
+}

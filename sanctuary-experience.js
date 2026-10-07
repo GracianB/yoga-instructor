@@ -180,6 +180,7 @@
   function syncDockLanguage() {
     const labels = t();
     dock.setAttribute("aria-label", labels.dockLabel);
+    sectionLabel.textContent = labels.labels[body.dataset.activeSection || "inicio"] || labels.section;
     dock.querySelector(".breath-kicker").textContent = "03 · " + labels.dockLabel;
     quietButton.textContent = body.classList.contains("quiet-mode") ? labels.quietOff : labels.quietOn;
     const phase = body.dataset.breathPhase;
@@ -304,7 +305,7 @@
 
   // Phase 07 · wayfinding. The page knows where you are, not who you are.
   const sections = Array.from(document.querySelectorAll("main section[id]"));
-  if ("IntersectionObserver" in window && sections.length) {
+  if (typeof window.IntersectionObserver === "function" && sections.length) {
     const observer = new IntersectionObserver((entries) => {
       const visible = entries
         .filter((entry) => entry.isIntersecting)

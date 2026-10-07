@@ -162,7 +162,7 @@
   // Scroll reveal
   const reveals = document.querySelectorAll(".reveal");
   const markInView = (el) => el.classList.add("is-in");
-  if (reveals.length && "IntersectionObserver" in window) {
+  if (reveals.length && typeof window.IntersectionObserver === "function") {
     const io = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {

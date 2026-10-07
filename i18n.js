@@ -1,5 +1,7 @@
 window.YOGA_I18N = {
   es: {
+    darkLabel: "Tema oscuro",
+    lightLabel: "Tema claro",
     navLabel: "Navegación principal",
     languageLabel: "Idioma",
     themeLabel: "Tema",
@@ -173,6 +175,8 @@ window.YOGA_I18N = {
     cvOpen: "Abrir PDF ↗"
   },
   en: {
+    darkLabel: "Dark theme",
+    lightLabel: "Light theme",
     navLabel: "Primary navigation",
     languageLabel: "Language",
     themeLabel: "Theme",

@@ -4,7 +4,7 @@ const AxeBuilder = require('@axe-core/playwright').default;
 async function open(page, options = {}) {
   // Ambient third-party resources are not necessary for local interaction tests.
   await page.route('https://fonts.googleapis.com/**', route => route.fulfill({ contentType: 'text/css', body: '' }));
-  await page.route('https://vortex-gilt-xi.vercel.app/**', route => route.fulfill({ contentType: 'text/html', body: '<title>Vortex fixture</title>' }));
+  await page.route('https://vortex-gilt-xi.vercel.app/**', route => route.fulfill({ contentType: 'text/html', body: '<!doctype html><html lang="en"><head><title>Vortex fixture</title></head><body></body></html>' }));
   await page.addInitScript(() => { try { sessionStorage.setItem('gb-yoga-intro-seen', '1'); } catch (_) {} });
   const errors = [];
   page.on('response', response => { if (response.url().startsWith('http://127.0.0.1:4185') && response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
@@ -141,7 +141,7 @@ test('reduced motion, accessibility and document links', async ({ page, request 
   await expect(page.locator('.zintro')).toBeHidden();
   for (const theme of ['light', 'dark']) {
     await page.locator(`[data-set-theme="${theme}"]`).click();
-    const result = await new AxeBuilder({ page }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
+    const result = await new AxeBuilder({ page }).options({ preload: false }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     expect(result.violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) }))).toEqual([]);
   }
   for (const path of ['./assets/CV_Gracian_Baena_Yoga_ES.pdf', './assets/CV_Gracian_Baena_Yoga_EN.pdf', './Gracian_Baena_Carta_Yoga_ES.pdf', './Gracian_Baena_Cover_Letter_Yoga_EN.pdf']) {

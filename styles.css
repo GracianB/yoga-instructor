@@ -5922,3 +5922,11 @@ body.quiet-mode .hero .hero-mandala { filter: none !important; }
 @media (prefers-reduced-motion: reduce) {
   .hero-mandala .lotus-rose-tip { transition: none; }
 }
+
+/* Firefox narrow-viewport compositing budget: don't pre-promote the whole page.
+   The browser still promotes actual transforms when animation demands it. */
+@media (max-width: 900px) {
+  .fx-orb, .hero-orb, .orb-parallax, .mandala-parallax,
+  .pillars article, .role, .edu, .cv-card, .campo-audio,
+  .campo-vortex, .hero-inner, .hero-mandala { will-change: auto; }
+}

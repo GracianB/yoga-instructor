@@ -5909,3 +5909,16 @@ body.quiet-mode .sanctuary-dock,
 @media (min-width: 601px) {
   .sanctuary-dock { left: auto; right: 18px; }
 }
+
+/* Rose wash: a gentle highlight, with no extra animation loop. */
+.hero-mandala .lotus-rose-tip { transition: stop-opacity .7s ease; }
+@media (hover: hover) and (pointer: fine) {
+  .hero:hover .hero-mandala {
+    filter: drop-shadow(0 0 14px rgba(214,160,174,.26)) !important;
+  }
+  .hero:hover .lotus-rose-tip { stop-opacity: .65; }
+}
+body.quiet-mode .hero .hero-mandala { filter: none !important; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-mandala .lotus-rose-tip { transition: none; }
+}

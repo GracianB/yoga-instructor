@@ -79,18 +79,14 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 
 /* Layered illustrated character. Uses actual rig joints, not a decorative overlay. */
 .guide-animated .guide-scene { --outline: #4a5145; }
-.guide-animated .guide-leg { stroke: url(#yoga-pants); stroke-width: 25; stroke-linecap: round; stroke-linejoin: round; }
+.guide-animated .guide-leg { fill: url(#yoga-pants); stroke: #8b6c7b; stroke-width: .75; stroke-linejoin: round; }
 .guide-leg-lustre { fill: none; stroke: #efd1d2; stroke-width: 3.2; opacity: .48; stroke-linecap: round; stroke-linejoin: round; }
-.guide-animated .guide-foot, .guide-animated .guide-arm, .guide-animated .guide-neck {
-  stroke: url(#yoga-skin); stroke-linecap: round; stroke-linejoin: round;
-}
-.guide-animated .guide-foot { stroke-width: 10; }
-.guide-animated .guide-arm { stroke-width: 13.5; }
-.guide-animated .guide-neck { stroke-width: 14; }
+.guide-animated .guide-foot, .guide-animated .guide-arm { fill: url(#yoga-skin); stroke: #c38c73; stroke-width: .65; stroke-linejoin: round; }
+.guide-animated .guide-neck { fill: none; stroke: url(#yoga-skin); stroke-width: 13; stroke-linecap: round; }
 .guide-animated .guide-shirt { fill: url(#yoga-shirt); stroke: #4b6d59; stroke-width: 1.1; stroke-linejoin: round; }
 .guide-shirt-panel { fill: none; stroke: #e3f4df; stroke-width: 1.4; opacity: .37; stroke-linecap: round; }
 .guide-collar { fill: none; stroke: #e0e8d4; stroke-width: 4; stroke-linecap: round; opacity: .75; }
-.guide-sleeve { fill: none; stroke: #799d7f; stroke-width: 15; stroke-linecap: round; }
+.guide-sleeve { fill: url(#yoga-shirt); stroke: #58755f; stroke-width: .7; stroke-linejoin: round; }
 .guide-hand, .guide-ear { fill: url(#yoga-skin); stroke: #c38c73; stroke-width: .65; }
 .guide-animated .guide-head .guide-skin { fill: url(#yoga-skin); stroke: #bd927c; stroke-width: .8; }
 .guide-animated .guide-head .guide-hair, .guide-hair-bun { fill: url(#yoga-hair); stroke: #343832; stroke-width: 1.1; }

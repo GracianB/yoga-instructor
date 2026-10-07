@@ -382,3 +382,21 @@ test("Living yoga guide: articulated skeleton and lifecycle are present", () => 
   assert.match(motion, /yoga:flow/);
   assert.match(motion, /640-x/);
 });
+
+test("Premium yoga avatar keeps its original rig and layered character artwork", () => {
+  const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../flow-guide.css", import.meta.url), "utf8");
+  const details = ["guide-hair-bun", "guide-eyes", "guide-smile", "guide-blush",
+    "guide-skin", "guide-sleeve", "guide-leg-lustre", "guide-collar",
+    "guide-garden", "guide-mat"];
+  for (const part of details) assert.ok(motion.includes(part), part + " missing");
+  for (const finish of ["yoga-skin", "yoga-hair", "yoga-shirt", "yoga-pants"]) {
+    assert.ok(motion.includes('id="' + finish + '"'));
+    assert.ok(css.includes('url(#' + finish + ')'));
+  }
+  assert.ok(motion.includes('data-detail'));
+  assert.ok(motion.includes('details.rsleeve.setAttribute'));
+  assert.ok(motion.includes('details.rhand.setAttribute'));
+  assert.ok(motion.includes('details.collar.setAttribute'));
+  assert.ok(motion.includes('details.panel.setAttribute'));
+});

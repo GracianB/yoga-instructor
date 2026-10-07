@@ -367,3 +367,40 @@ test("Practice control layer: UI renders target, remaining and cue", () => {
   assert.match(ui, /snapshot\.cue/);
   assert.match(ui, /formatTime\(duration\)/);
 });
+
+test("Living yoga guide: articulated skeleton and lifecycle are present", () => {
+  const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
+  assert.match(index, /flow-motion\.js\?v=articulated-2/);
+  for (const part of ["rleg", "lleg", "rarm", "larm", "torso", "neck", "rfoot", "lfoot"]) {
+    assert.ok(motion.includes('data-bone="' + part + '"'));
+  }
+  assert.match(motion, /function freeze\(\)/);
+  assert.match(motion, /prefers-reduced-motion: reduce/);
+  assert.match(motion, /yoga:quiet/);
+  assert.match(motion, /visibilitychange/);
+  assert.match(motion, /yoga:preview/);
+  assert.match(motion, /yoga:flow/);
+  assert.match(motion, /640-x/);
+});
+
+test("Premium yoga avatar keeps its original rig and layered character artwork", () => {
+  const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
+  const css = readFileSync(new URL("../flow-guide.css", import.meta.url), "utf8");
+  const details = ["guide-hair-bun", "guide-eyes", "guide-smile", "guide-blush",
+    "guide-skin", "guide-sleeve", "guide-leg-lustre", "guide-collar",
+    "guide-garden", "guide-mat"];
+  for (const part of details) assert.ok(motion.includes(part), part + " missing");
+  for (const finish of ["yoga-skin", "yoga-hair", "yoga-shirt", "yoga-pants"]) {
+    assert.ok(motion.includes('id="' + finish + '"'));
+    assert.ok(css.includes('url(#' + finish + ')'));
+  }
+  assert.ok(motion.includes('data-detail'));
+  assert.ok(motion.includes('details.rsleeve.setAttribute'));
+  assert.ok(motion.includes('details.rhand.setAttribute'));
+  assert.ok(motion.includes('details.collar.setAttribute'));
+  assert.ok(motion.includes('details.panel.setAttribute'));
+  assert.ok(motion.includes("bones.rleg.setAttribute('d',limbShape"));
+  assert.ok(motion.includes("bones.rarm.setAttribute('d',limbShape"));
+  assert.ok(motion.includes("bones.torso.setAttribute('d'"));
+  assert.match(css, /\.guide-animated \.guide-leg \{ fill: url\(#yoga-pants\)/);
+});

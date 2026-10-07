@@ -219,7 +219,13 @@
 
   document.addEventListener("click", (event) => {
     const choice = event.target.closest(".ritual-choice");
-    if (choice) rememberPractice();
+    if (!choice) return;
+    rememberPractice();
+    const key = choice.dataset.practice;
+    if (["arrive", "move", "focus", "share"].includes(key)) {
+      // Keep the visual state and the saved choice in sync across browsers.
+      document.dispatchEvent(new CustomEvent("yoga:practice", { detail: key }));
+    }
   });
 
   // Restore immediately: Firefox may postpone animation frames in background tabs,

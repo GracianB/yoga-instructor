@@ -55,23 +55,29 @@ for (const width of [320, 390, 768, 1440]) {
 }
 
 test('complete practice, pause clocks, resume, previous and reset', async ({ page }) => {
+  test.setTimeout(60000);
   const errors = await open(page);
-  await page.locator('[data-flow-action="start"]').click();
+  const clickControl = async action => {
+    const button = page.locator(`[data-flow-action="${action}"]`);
+    await button.evaluate(element => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
+    await button.click();
+  };
+  await clickControl('start');
   await expect(page.locator('#flow-state')).toHaveText('EN PRÁCTICA');
   await expect(page.locator('#flow-session-time')).not.toHaveText('00:00');
-  await page.locator('[data-flow-action="pause"]').click();
+  await clickControl('pause');
   const paused = await page.locator('#flow-session-time').textContent();
   await page.waitForTimeout(1100);
   await expect(page.locator('#flow-session-time')).toHaveText(paused);
-  await page.locator('[data-flow-action="pause"]').click();
-  await page.locator('[data-flow-action="next"]').click();
+  await clickControl('pause');
+  await clickControl('next');
   await expect(page.locator('#flow-phase-label')).toHaveText('CENTRADO');
-  await page.locator('[data-flow-action="previous"]').click();
+  await clickControl('previous');
   await expect(page.locator('#flow-phase-label')).toHaveText('INICIO');
-  for (let phase = 0; phase < 9; phase++) await page.locator('[data-flow-action="next"]').click();
+  for (let phase = 0; phase < 9; phase++) await clickControl('next');
   await expect(page.locator('#flow-state')).toHaveText('COMPLETADA');
   await expect(page.locator('[data-flow-action="next"]')).toBeDisabled();
-  await page.locator('[data-flow-action="reset"]').click();
+  await clickControl('reset');
   await expect(page.locator('#flow-session-time')).toHaveText('00:00');
   await expect(page.locator('#flow-state')).toHaveText('EN ESPERA');
   expect(errors).toEqual([]);

@@ -49,7 +49,7 @@ for (let attempt = 1; attempt <= attempts; attempt++) {
       }
       if (file.name === 'index.html') {
         const html = Buffer.from(published).toString('utf8');
-        if (!html.includes('flow-motion.js?v=articulated-2')) {
+        if (!html.includes('flow-motion.js?v=atelier-3')) {
           problems.push('index.html: missing versioned articulated module reference');
         }
       }

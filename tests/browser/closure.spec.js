@@ -164,3 +164,53 @@ test('reduced motion, accessibility and document links', async ({ page, request 
   await expect(page.locator('html')).toHaveAttribute('lang','en');
   expect(errors).toEqual([]);
 });
+
+test('living guide follows all ten phases, pauses and restores full practice timing', async ({ page }) => {
+  test.setTimeout(60000);
+  let now = Date.parse('2026-10-07T10:00:00Z');
+  await page.clock.setFixedTime(now);
+  const errors = await open(page);
+  const guide = page.locator('#flow-guide');
+  const clickAction = async action => {
+    const button = page.locator(`[data-flow-action="${action}"]`);
+    await button.evaluate(el => el.scrollIntoView({ behavior: 'instant', block: 'center' }));
+    await button.click();
+  };
+  await expect(guide).toHaveAttribute('data-phase','start');
+  await clickAction('preview');
+  await expect(page.locator('#flow-phase-target')).toHaveText('00:05');
+  await clickAction('pause');
+  now += 10000; await page.clock.setFixedTime(now);
+  await expect(guide).toHaveAttribute('data-status','paused');
+  expect(await guide.locator('.is-current .guide-body').evaluate(el => getComputedStyle(el).animationPlayState)).toBe('paused');
+  await expect(guide).toHaveAttribute('data-phase','start');
+  await clickAction('pause');
+  const phases = ['centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
+  for (const phase of phases) {
+    now += 5000; await page.clock.setFixedTime(now);
+    await expect(guide).toHaveAttribute('data-phase',phase);
+    await expect(guide.locator('.guide-pose.is-current')).toHaveCount(1);
+    if (phase === 'pose-1') {
+      await guide.scrollIntoViewIfNeeded();
+      await test.info().attach('guide-warrior-light', { body: await guide.screenshot({ animations: 'disabled' }), contentType: 'image/png' });
+    }
+  }
+  await expect(guide).toHaveAttribute('data-status','finished');
+  await page.locator('[data-set-lang="en"]').click();
+  await expect(page.locator('#guide-pose-name')).toHaveText('A moment of gratitude');
+  await clickAction('start');
+  await expect(page.locator('#flow-phase-target')).toHaveText('00:30');
+  await clickAction('next');
+  await clickAction('previous');
+  await expect(guide).toHaveAttribute('data-phase','start');
+  await clickAction('reset');
+  await expect(guide).toHaveAttribute('data-status','idle');
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  expect(await guide.locator('.is-current .guide-body').evaluate(el => getComputedStyle(el).animationName)).toBe('none');
+  await page.locator('[data-set-theme="dark"]').click();
+  await page.setViewportSize({ width: 320, height: 900 });
+  await guide.scrollIntoViewIfNeeded();
+  await test.info().attach('guide-mobile-dark', { body: await guide.screenshot({ animations: 'disabled' }), contentType: 'image/png' });
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  expect(errors).toEqual([]);
+});

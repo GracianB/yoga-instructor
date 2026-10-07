@@ -1,0 +1,48 @@
+/* A quiet companion for the existing ten-phase practice. */
+.flow-guide { margin: 0 0 30px; padding: 22px 20px 26px; border: 1px solid var(--line); border-radius: 20px; background: color-mix(in srgb, var(--bg) 65%, transparent); overflow: hidden; }
+.guide-heading { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font: 500 9px/1.6 'JetBrains Mono', monospace; letter-spacing: .12em; }
+.guide-scene { display: block; width: min(100%, 640px); height: auto; margin: -12px auto -8px; overflow: visible; --skin: #cda68e; --cloth: #547360; --trousers: #b58f9a; --hair: #39473b; }
+[data-theme="dark"] .guide-scene { --skin: #d8b29c; --cloth: #8aa58e; --trousers: #c4a1aa; --hair: #3a493f; }
+.guide-skin { fill: var(--skin); }
+.guide-hair { fill: var(--hair); }
+.guide-neck, .guide-arm, .guide-foot { fill: none; stroke: var(--skin); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
+.guide-neck { stroke-width: 15; }
+.guide-leg { fill: none; stroke: var(--trousers); stroke-width: 23; stroke-linecap: round; stroke-linejoin: round; }
+.guide-shirt { fill: var(--cloth); }
+.guide-face { fill: none; stroke: var(--hair); stroke-width: 1.4; stroke-linecap: round; }
+.guide-fold { fill: none; stroke: var(--bg); stroke-opacity: .35; stroke-width: 1.5; }
+.guide-ground { fill: none; stroke: var(--sage); stroke-width: 1; opacity: .25; }
+.guide-shadow { fill: var(--sage); opacity: .09; }
+.guide-pose { opacity: 0; transition: opacity .85s ease; }
+.guide-pose.is-current { opacity: 1; }
+.guide-body { transform-origin: 320px 300px; animation: guide-breathe 8s ease-in-out infinite; }
+.guide-halo { transform-origin: 320px 200px; animation: guide-halo 8s ease-in-out infinite; }
+@keyframes guide-breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.015); } }
+@keyframes guide-halo { 0%,100% { transform: scale(.96); opacity: .6; } 50% { transform: scale(1.04); opacity: 1; } }
+.flow-guide figcaption { text-align: center; min-height: 74px; }
+.flow-guide figcaption strong { display: block; color: var(--ink); font: 500 clamp(23px,3vw,32px)/1.2 'Fraunces', Georgia, serif; letter-spacing: -.02em; }
+.flow-guide figcaption p { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 9px 0 0; }
+.flow-guide:not([data-status="running"]) .guide-body,
+.flow-guide:not([data-status="running"]) .guide-halo,
+.flow-guide[data-hidden="true"] .guide-body,
+.flow-guide[data-hidden="true"] .guide-halo,
+body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state: paused; }
+.flow-guide .guide-pose:not(.is-current) .guide-body { animation-play-state: paused; }
+.flow-preview { padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: 12px; cursor: pointer; }
+.flow-preview:hover { border-color: var(--sage); }
+.flow-entry-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.flow-phase-timing { display: grid; gap: 7px; margin-top: 8px; }
+.flow-session-clock .flow-phase-timing small { display: flex; gap: 10px; justify-content: space-between; opacity: 1; line-height: 1.5; }
+.flow-phase-timing b { font: inherit; font-variant-numeric: tabular-nums; }
+#flow-phase-target::before { content: none; }
+@media (max-width: 600px) {
+ .flow-guide { margin-inline: -12px; padding: 16px 10px 18px; }
+ .guide-heading { font-size: 8px; letter-spacing: .06em; }
+ .guide-scene { margin-block: 8px; }
+ .flow-guide figcaption { min-height: 90px; padding-inline: 8px; }
+ .flow-entry-actions { align-items: stretch; flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+ .guide-pose { transition: none; }
+ .guide-body, .guide-halo { animation: none; }
+}

@@ -22,6 +22,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css?v=lotus-rose-7">
+  <link rel="stylesheet" href="./flow-guide.css?v=guide-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -30,7 +31,8 @@
   <script src="./flow-engine.js?v=flow-1-yoga-5" defer></script>
   <script src="./flow-session.js?v=session-1-yoga-5" defer></script>
   <script src="./flow-phase.js?v=phase-1-yoga-5" defer></script>
-  <script src="./instructor-ui.js?v=ui-1-yoga-5" defer></script>
+  <script src="./instructor-ui.js?v=ui-2-guide" defer></script>
+  <script src="./flow-guide.js?v=guide-1" defer></script>
   <script src="./sanctuary-experience.js?v=living-2-yoga-5" defer></script>
   <script type="application/ld+json">
   {
@@ -284,6 +286,7 @@
       </div>
 
       <div class="flow-console" data-flow-status="idle">
+        <figure class="flow-guide" id="flow-guide"><figcaption>Un gesto a la vez · One gesture at a time</figcaption></figure>
         <div class="flow-console-top">
           <div class="flow-phase">
             <span class="flow-phase-kicker" data-i18n="flowCurrent">FASE ACTUAL</span>
@@ -294,7 +297,7 @@
           <div class="flow-session-clock" aria-live="off">
             <span data-i18n="flowClock">TIEMPO</span>
             <strong id="flow-session-time" aria-label="Tiempo de sesión">00:00</strong>
-            <small id="flow-phase-target" data-i18n-aria-label="targetLabel" aria-label="Duración objetivo">00:30</small><small id="flow-phase-time" data-i18n="flowPhaseTime" aria-label="Tiempo restante de fase">00:30</small>
+            <div class="flow-phase-timing"><small><span data-i18n="guideRemaining">Quedan</span><b id="flow-phase-time" aria-label="Tiempo restante de fase">00:30</b></small><small><span data-i18n="guideTarget">Objetivo</span><b id="flow-phase-target" data-i18n-aria-label="targetLabel" aria-label="Duración objetivo">00:30</b></small></div>
           </div>
           <div class="flow-state" id="flow-state" aria-live="polite">IDLE</div>
         </div>
@@ -313,7 +316,7 @@
         </div>
 
         <div class="flow-console-foot">
-          <button type="button" class="flow-start" data-flow-action="start" data-i18n="flowStart">Empezar práctica</button>
+          <div class="flow-entry-actions"><button type="button" class="flow-start" data-flow-action="start" data-i18n="flowStart">Empezar práctica</button><button type="button" class="flow-preview" data-flow-action="preview" data-i18n="guidePreview">Ver recorrido</button></div>
           <span data-i18n="flowSequence">START · CENTERING · BREATH · WARMUP · POSE · TRANSITION · POSE · COOLDOWN · SAVASANA · FINISH</span>
         </div>
       </div>

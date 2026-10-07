@@ -1,5 +1,6 @@
 window.YOGA_I18N = {
   es: {
+    guideRemaining: "Quedan", guideTarget: "Objetivo", guidePreview: "Ver recorrido",
     darkLabel: "Tema oscuro",
     lightLabel: "Tema claro",
     navLabel: "Navegación principal",
@@ -175,6 +176,7 @@ window.YOGA_I18N = {
     cvOpen: "Abrir PDF ↗"
   },
   en: {
+    guideRemaining: "Remaining", guideTarget: "Target", guidePreview: "Preview sequence",
     darkLabel: "Dark theme",
     lightLabel: "Light theme",
     navLabel: "Primary navigation",

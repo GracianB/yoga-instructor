@@ -222,14 +222,14 @@
     if (choice) rememberPractice();
   });
 
-  window.YOGA_RUNTIME.frame(() => {
-    try {
-      const saved = localStorage.getItem(PRACTICE_KEY);
-      if (["arrive", "move", "focus", "share"].includes(saved)) {
-        document.dispatchEvent(new CustomEvent("yoga:practice", { detail: saved }));
-      }
-    } catch (_) {}
-  });
+  // Restore immediately: Firefox may postpone animation frames in background tabs,
+  // but the ritual listeners are already installed by the preceding deferred script.
+  try {
+    const saved = localStorage.getItem(PRACTICE_KEY);
+    if (["arrive", "move", "focus", "share"].includes(saved)) {
+      document.dispatchEvent(new CustomEvent("yoga:practice", { detail: saved }));
+    }
+  } catch (_) {}
 
   // Phase 05 · presence field.
   if (!reduced && finePointer) {

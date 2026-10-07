@@ -110,3 +110,31 @@ body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state:
 .flow-console-foot { flex-direction:column; align-items:flex-start; gap:14px; }
 .flow-entry-actions { flex-wrap:nowrap; }
 @media(max-width:600px){.flow-entry-actions{flex-wrap:wrap;}}
+
+/* ATELIER V3: human silhouette, quieter face and directional gaze. */
+.guide-animated .guide-scene { --skin: #cda78a; }
+.guide-hair-back { fill:url(#yoga-hair); stroke:#3c3b38; stroke-width:.8; }
+.guide-beard { fill:#69463f; opacity:.23; }
+.guide-forehead-light { fill:none;stroke:#9c8d7b;stroke-width:1.1;opacity:.45;stroke-linecap:round; }
+.guide-animated .guide-hand { fill:url(#yoga-skin);stroke:#b5806c;stroke-width:.55; }
+.guide-animated .guide-head .guide-skin { fill:url(#yoga-skin);stroke:#c28f7b;stroke-width:.65; }
+.guide-animated .guide-head .guide-smile { opacity:.45;stroke-width:1; }
+.guide-animated .guide-head .guide-hair { fill:url(#yoga-hair); }
+.guide-animated .guide-head .guide-blush { opacity:0; }
+.guide-animated .guide-head .guide-ear { fill:#cfaa92; }
+.guide-animated .guide-leg-lustre { stroke-width:1.4;opacity:.15; }
+.guide-animated .guide-shirt-panel { opacity:.13;stroke-width:1; }
+.guide-profile { opacity:0; }
+.guide-profile-nose { fill:url(#yoga-skin);stroke:#b5816e;stroke-width:.7; }
+.guide-profile-lid { fill:none;stroke:#514943;stroke-width:1.4;stroke-linecap:round; }
+.flow-guide[data-look="left"] .guide-profile,
+.flow-guide[data-look="right"] .guide-profile {opacity:1}
+.flow-guide[data-look="left"] .guide-head .guide-brow,
+.flow-guide[data-look="left"] .guide-head .guide-eyes,
+.flow-guide[data-look="left"] .guide-head .guide-nose,
+.flow-guide[data-look="left"] .guide-head .guide-smile,
+.flow-guide[data-look="right"] .guide-head .guide-brow,
+.flow-guide[data-look="right"] .guide-head .guide-eyes,
+.flow-guide[data-look="right"] .guide-head .guide-nose,
+.flow-guide[data-look="right"] .guide-head .guide-smile { opacity:0; }
+.flow-guide[data-look="right"] .guide-profile { transform:scaleX(-1); }

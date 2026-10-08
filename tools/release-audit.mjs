@@ -44,6 +44,8 @@ assert.ok(statSync('yy-dragon-d9.css').size <= 14000, 'D9 dragon motion CSS budg
 assert.ok(statSync('yy-dragon-d12.css').size <= 9000, 'D12 anatomy CSS budget');
 assert.ok(statSync('yy-dragon-d13.css').size <= 8500, 'D13 transition CSS budget');
 assert.ok(statSync('yy-dragon-d14.css').size <= 8500, 'D14 grounded anatomy CSS budget');
+assert.ok(statSync('yy-dragon-d15.css').size <= 8000, 'D15 kinetics CSS budget');
+assert.ok(html.indexOf('yy-dragon-d15.css')>html.indexOf('yy-dragon-d14.css'), 'D15 style must load after D14');
 assert.ok(html.indexOf('yy-dragon-d14.css')>html.indexOf('yy-dragon-d13.css'), 'D14 anatomy must load after D13');
 assert.ok(html.indexOf('yy-dragon-d13.css')>html.indexOf('yy-dragon-d12.css'), 'D13 choreography loads after D12');
 assert.ok(html.indexOf('yy-dragon-d12.css')>html.indexOf('yy-dragon-d11.css'), 'D12 art loads after D11');

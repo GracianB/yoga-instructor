@@ -52,7 +52,7 @@ test("supporting limbs cast only intentional grounded shadows",()=>{
  assert.equal(stanceFor('warmup'),4);
  assert.equal(stanceFor('pose-1'),2);
  assert.equal(stanceFor('pose-2'),1);
- assert.equal(stanceFor('savasana'),0);
+ assert.equal(stanceFor('savasana'),4); // reclining paws now carry four quiet floor contacts
 });
 
 test("dragon anatomy: two closed eyes, paired horns, beard and fin in every pose",()=>{

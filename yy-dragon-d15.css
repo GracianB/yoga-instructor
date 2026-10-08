@@ -1,0 +1,143 @@
+/* D.15 · SILENT KINETICS
+   The eyes remain CLOSED. The performance is in contact, facial musculature
+   and joints, not head bobbing or effects loops. Pure vector, no PNG. */
+
+/* Limbs are sculpted in the same coordinate plane as the torso.
+   Shoulder socket is drawn behind the limb and tucked under the breast;
+   no wandering DOM pivot, no disconnected paw animation. */
+#instructor-flow .yy-guide .yy-d15-limb-unit{
+ pointer-events:none;
+}
+#instructor-flow .yy-guide .yy-d15-socket-flesh{
+ fill:var(--d9-limb);
+ stroke:var(--d9-skin-low);
+ stroke-width:1.55;
+ opacity:.95;
+}
+#instructor-flow .yy-guide .yy-d15-socket-relief{
+ fill:none;stroke:var(--d12-etched);
+ stroke-width:1.35;opacity:.39;stroke-linecap:round;
+}
+#instructor-flow .yy-guide .yy-d15-leg-socket .yy-d15-socket-flesh{
+ opacity:.89;
+}
+#instructor-flow .yy-guide .yy-d15-joint-shell{
+ fill:var(--d9-limb);
+ stroke:var(--d9-skin-low);
+ stroke-width:1.6;opacity:.96;
+}
+#instructor-flow .yy-guide .yy-d15-joint-fold{
+ fill:none;stroke:var(--d12-ventral);stroke-width:1.8;
+ opacity:.48;stroke-linecap:round;
+}
+#instructor-flow .yy-guide .yy-d15-sinew{
+ fill:none;stroke:var(--d12-etched);
+ stroke-width:1.3;stroke-linecap:round;opacity:.22;
+}
+/* Warrior and Tree bear weight through their bent knee; the small crease
+   catches light without introducing a second cartoon joint. */
+#instructor-flow .yy-guide .yy-pose-warrior .yy-d15-leg-joint .yy-d15-joint-fold,
+#instructor-flow .yy-guide .yy-pose-tree .yy-d15-leg-joint .yy-d15-joint-fold{
+ opacity:.63;
+}
+#instructor-flow .yy-guide .yy-pose-table .yy-d15-sinew{
+ opacity:.15;
+}
+
+/* Facial acting stays in the brow and cheeks. Never add a central forehead
+   gem, pupil, eyelash cluster or third eye. */
+#instructor-flow .yy-guide .yy-d15-expression{
+ pointer-events:none;
+}
+#instructor-flow .yy-guide .yy-d15-brow-gesture{
+ fill:none;stroke:var(--d9-eye);stroke-width:1.6;
+ stroke-linecap:round;stroke-linejoin:round;opacity:.28;
+}
+#instructor-flow .yy-guide .yy-d15-cheek-gesture{
+ fill:none;stroke:var(--d12-ventral);
+ stroke-width:1.55;stroke-linecap:round;opacity:.29;
+}
+#instructor-flow .yy-guide .yy-d15-expression-focus .yy-d15-brow-gesture{
+ stroke-width:1.85;opacity:.48;
+}
+#instructor-flow .yy-guide .yy-d15-expression-closed .yy-d15-brow-gesture{
+ opacity:.13;
+}
+#instructor-flow .yy-guide .yy-d15-expression-smile .yy-d15-cheek-gesture{
+ opacity:.48;
+}
+#instructor-flow .yy-guide .yy-d15-expression-soft .yy-d15-brow-gesture{
+ opacity:.23;
+}
+#instructor-flow .yy-guide .yy-d15-expression-open .yy-d15-brow-gesture{
+ opacity:.37;
+}
+/* When the actual 4/7/8 breath reaches exhale, soften the lateral muscles.
+   Transform is on the expression overlay only, NEVER the head or horn. */
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="exhale"]
+ .yy-pose.is-current .yy-d15-cheek-gesture{opacity:.16}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="hold"]
+ .yy-pose.is-current .yy-d15-brow-gesture{opacity:.20}
+
+/* Ground is narrated by pressure, not by dragging feet. SVG coordinates
+   and stance shadows remain entirely unchanged across every frame. */
+#instructor-flow .yy-guide .yy-d15-pressure-mark{
+ fill:var(--d12-ventral);
+ opacity:0;
+ transform:none!important;
+ transition:opacity 490ms cubic-bezier(.2,.65,.3,1);
+ pointer-events:none;
+}
+#instructor-flow .yy-guide .yy-pose.is-current .yy-d15-pressure-mark{
+ opacity:.23;
+}
+#instructor-flow .yy-guide .yy-pose.is-leaving .yy-d15-pressure-mark{
+ opacity:.08;
+}
+#instructor-flow .yy-guide .yy-pose-table.is-current .yy-d15-pressure-mark{
+ opacity:.25;
+}
+#instructor-flow .yy-guide .yy-pose-warrior.is-current .yy-d15-pressure-mark,
+#instructor-flow .yy-guide .yy-pose-tree.is-current .yy-d15-pressure-mark{
+ opacity:.33;
+}
+#instructor-flow .yy-guide .yy-pose-flow.is-current .yy-d15-pressure-mark{
+ opacity:.27;
+}
+#instructor-flow .yy-guide .yy-pose-savasana.is-current .yy-d15-pressure-mark,
+#instructor-flow .yy-guide .yy-pose-rest.is-current .yy-d15-pressure-mark{
+ opacity:.11;
+}
+/* Exactly one sole in Tree; both in Warrior/Flow; four in Cat/Cow.
+   No false floor contact at raised arm tips. */
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-d15-pressure-mark{
+ fill:var(--d12-tail-mid);
+}
+#instructor-flow .yy-guide[data-spirit="yang"] .yy-d15-pressure-mark{
+ fill:var(--d12-tail-mid);
+}
+/* Lower gloss further to let contours and tapered ligaments carry the image. */
+#instructor-flow .yy-guide .yy-paw-gloss{opacity:.06}
+#instructor-flow .yy-guide .yy-toe{opacity:.55}
+#instructor-flow .yy-guide .yy-paw-toes{opacity:.22}
+#instructor-flow .yy-guide .yy-d12-shoulder-arc{opacity:.27}
+#instructor-flow .yy-guide .yy-d14-shoulder-blade{stroke-width:1.7}
+#instructor-flow .yy-guide .yy-d12-cheek-bone{opacity:.12}
+#instructor-flow .yy-guide .yy-d12-unicorn-spiral{stroke-width:2.1}
+
+/* Pause and quiet, tab visibility and OS accessibility. Arrival/release
+   becomes immediate when the user disables motion. */
+#instructor-flow .yy-guide[data-hidden="true"] .yy-d15-pressure-mark,
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-d15-pressure-mark,
+body.quiet-mode #instructor-flow .yy-d15-pressure-mark{
+ transition:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-d15-pressure-mark{transition:none!important}
+ #instructor-flow .yy-guide .yy-d15-expression{animation:none!important}
+}
+@media(max-width:700px){
+ #instructor-flow .yy-guide .yy-d15-joint-fold{stroke-width:2}
+ #instructor-flow .yy-guide .yy-d15-brow-gesture{stroke-width:2}
+ #instructor-flow .yy-guide .yy-d15-socket-relief{stroke-width:1.6}
+}

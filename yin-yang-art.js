@@ -43,9 +43,29 @@
       "Q"+f(finish)+" "+f(b[b.length-1])+
       "L"+b.slice(0,-1).reverse().map(f).join("L")+
       "Q"+f(start)+" "+f(a[0])+"Z";
-    return '<g class="yy-limb-unit">'+
+    // Socket and taper share the authored limb coordinates, so the shoulder/
+    // hip overlaps the torso and cannot become a detached animated badge.
+    const [sx,sy,cx,cy]=first;
+    const angle=fmt(Math.atan2(cy-sy,cx-sx)*180/Math.PI);
+    const major=type==="leg"?34:28,minor=type==="leg"?24:17;
+    const socket='<g class="yy-d15-socket yy-d15-'+type+'-socket" transform="translate('+fmt(sx)+' '+fmt(sy)+') rotate('+angle+')">'+
+      '<ellipse rx="'+major+'" ry="'+minor+'" class="yy-d15-socket-flesh"/>'+
+      path('M'+fmt(major*.2)+' -'+fmt(minor*.79)+'Q'+fmt(major*.76)+' 0 '+fmt(major*.2)+' '+fmt(minor*.79),'yy-d15-socket-relief')+
+      '</g>';
+    // Two-section limbs (bent Warrior II / Tree) get a real knee/elbow fold.
+    // Single-section limbs keep a quiet sinew line and no false hinge.
+    const joint=pieces.length===2?
+      '<g class="yy-d15-joint yy-d15-'+type+'-joint" transform="translate('+fmt(pieces[1][0])+' '+fmt(pieces[1][1])+')">'+
+        '<ellipse rx="'+fmt(radius*.61)+'" ry="'+fmt(radius*.47)+'" class="yy-d15-joint-shell"/>'+
+        path('M-'+fmt(radius*.30)+' -'+fmt(radius*.08)+'Q0 -'+fmt(radius*.32)+' '+fmt(radius*.31)+' -'+fmt(radius*.07),'yy-d15-joint-fold')+
+      '</g>':
+      path('M'+fmt(a[Math.min(10,a.length-1)][0])+' '+fmt(a[Math.min(10,a.length-1)][1])+
+        'Q'+fmt(n[2])+' '+fmt(n[3])+' '+fmt(b[Math.min(10,b.length-1)][0])+' '+fmt(b[Math.min(10,b.length-1)][1]),'yy-d15-sinew');
+    return '<g class="yy-limb-unit yy-d15-limb-unit">'+
+      socket+
       '<path d="'+silhouette+'" class="yy-limb yy-'+type+'" data-limb="'+type+'-'+i+'"/>'+
       '<path d="'+d+'" class="yy-limb-lustre yy-'+type+'-lustre"/>'+
+      joint+
       '</g>';
   };
   const point=(xy,cls)=>{
@@ -107,7 +127,18 @@
         path('M-12 98Q-8 118 0 122M11 98Q8 115 0 122','yy-dragon-beard-line')+
         path('M-18 95Q-18 104-10 110M18 95Q18 104 10 110','yy-d11-beard-engraving')+
         path('M-30 80Q-41 92-38 105M30 80Q41 92 38 105','yy-dragon-beard-wisps')+'</g>'+
-      path('M-53-7Q-36-17-18-9M18-9Q36-17 53-7','yy-sleep-brow')+eyes+
+      path('M-53-7Q-36-17-18-9M18-9Q36-17 53-7','yy-sleep-brow')+
+      // Two closed eyes are immutable. Expression is in the lateral brow/
+      // cheek muscles: focused / receptive / resting, never a third eye.
+      '<g class="yy-d15-expression yy-d15-expression-'+expression+'">'+
+        path(expression==="focus"?'M-56-9Q-40-19-27-11M27-11Q40-19 56-9':
+          expression==="closed"?'M-54-6Q-41-10-27-6M27-6Q41-10 54-6':
+          expression==="smile"?'M-53-5Q-42-13-28-8M28-8Q42-13 53-5':
+          'M-55-8Q-41-16-27-8M27-8Q41-16 55-8','yy-d15-brow-gesture')+
+        path(expression==="smile"?'M-61 29Q-54 35-47 29M47 29Q54 35 61 29':
+          expression==="focus"?'M-60 28Q-54 25-47 29M47 29Q54 25 60 28':
+          'M-59 29Q-53 32-47 29M47 29Q53 32 59 29','yy-d15-cheek-gesture')+
+      '</g>'+eyes+
       path('M-63-11Q-60-21-47-18M47-18Q60-21 63-11','yy-dragon-temple-scales')+
       path('M-57 34Q-53 29-46 30M46 30Q53 29 57 34','yy-dragon-cheek-light')+
       path('M-58 18Q-47 15-41 19M58 18Q47 15 41 19','yy-d11-cheek-engraving')+
@@ -221,13 +252,20 @@
       '</g>';
   };
   const stance=p=>{
-    const grounded=p.kind==="table"?p.hands.concat(p.feet):
-      (p.kind==="warrior"||p.kind==="flow")?p.feet:
+    // Contact narrative is pose-specific. No decorative ground glow is
+    // attached to a raised hand in Warrior, Flow or the Tree.
+    const grounded=p.kind==="table"||p.kind==="rest"||p.kind==="child"||p.kind==="savasana"?
+       p.hands.concat(p.feet):
+      (p.kind==="warrior"||p.kind==="flow"||p.kind==="seat"||
+       p.kind==="breath"||p.kind==="finish")?p.feet:
       p.kind==="tree"?p.feet.slice(0,1):[];
     if(!grounded.length)return "";
-    return '<g class="yy-stance">'+grounded.map(([x,y])=>
+    const pressure=p.kind==="tree"?.92:p.kind==="warrior"?.84:p.kind==="table"?.78:p.kind==="flow"?.68:.46;
+    return '<g class="yy-stance yy-d15-stance" data-contact="'+p.kind+'">'+grounded.map(([x,y])=>
       '<ellipse class="yy-stance-shadow" cx="'+x+'" cy="'+(y+16)+
-      '" rx="26" ry="6"/>').join('')+'</g>';
+      '" rx="26" ry="6"/>'+
+      '<ellipse class="yy-d15-pressure-mark" cx="'+x+'" cy="'+(y+13)+
+      '" rx="'+fmt(21+pressure*4)+'" ry="'+fmt(3+pressure*1.7)+'"/>').join('')+'</g>';
   };
   const drawing=p=>{
     const twoLegs=p.legs.map((d,i)=>limb(d,'leg',i)).join('');

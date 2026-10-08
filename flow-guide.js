@@ -31,7 +31,7 @@
   const adaptViewBox=()=>{
     const mobile=window.YOGA_RUNTIME.mediaMatches("(max-width: 700px)");
     // Crop the illustration's empty margins, never the limbs.
-    artSvg.setAttribute("viewBox",mobile?"145 25 430 390":"0 0 720 460");
+    artSvg.setAttribute("viewBox",mobile?"120 0 480 435":"0 0 720 460");
   };
   window.addEventListener("resize",adaptViewBox,{passive:true});
   adaptViewBox();

@@ -53,3 +53,28 @@
 @media(prefers-reduced-motion:reduce){
   #instructor-flow .yy-eye-unit,#instructor-flow .yy-belly{animation:none!important}
 }
+
+/* 51. Side arrows point sideways, never down. */
+#instructor-flow .flow-theater .flow-rail-button{
+  writing-mode:horizontal-tb!important;
+  text-orientation:mixed!important;
+  transform:none!important;
+  font-size:0!important;
+  min-height:72px;
+  border-radius:18px;
+  background:rgba(18,16,14,.45);
+  border:1px solid rgba(232,210,180,.35);
+  color:#f6efe4;
+}
+#instructor-flow .flow-theater .flow-side-prev .flow-rail-button,
+#instructor-flow .flow-theater .flow-side-next .flow-rail-button{transform:none!important}
+#instructor-flow .flow-theater .flow-side-prev .flow-rail-button::before{
+  content:"←";font-size:28px;line-height:1;color:#f6efe4;
+}
+#instructor-flow .flow-theater .flow-side-next .flow-rail-button::before{
+  content:"→";font-size:28px;line-height:1;color:#f0e2cc;
+}
+#instructor-flow .flow-theater .flow-rail-button:not(:disabled):hover{
+  transform:none!important;background:rgba(240,226,204,.16);border-color:#e7d3b4;
+}
+#instructor-flow .flow-theater .flow-rail-button:disabled{opacity:.28}

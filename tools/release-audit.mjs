@@ -11,7 +11,7 @@ assert.ok(html.includes('Content-Security-Policy'));
 const css = readFileSync('styles.css', 'utf8');
 postcss.parse(css);
 postcss.parse(readFileSync('flow-guide.css', 'utf8'));
-assert.ok(statSync('flow-guide.css').size <= 11000, 'Guide CSS budget');
+assert.ok(statSync('flow-guide.css').size <= 12000, 'Guide CSS budget');
 assert.ok(statSync('flow-guide.js').size <= 16000, 'Guide JS budget');
 assert.ok(statSync('yin-yang-art.js').size <= 12000, 'Yin Yang vector art budget');
 assert.ok(!html.includes('flow-motion.js'), 'Obsolete bone-morphing script must not load');

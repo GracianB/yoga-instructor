@@ -61,7 +61,7 @@ test("dragon anatomy: two closed eyes, paired horns, beard and fin in every pose
  assert.equal(count('yy-dragon-horn yy-horn-'),20);
  assert.equal(count('class="yy-dragon-beard"'),10);
  assert.equal(count('yy-whisker yy-dragon-whisker'),40);
- assert.equal(count('class="yy-dragon-tail-fin"'),10);
+ assert.equal(count('yy-dragon-tail-fin yy-d12-tail-plume'),10);
  assert.doesNotMatch(svg,/yy-crown-mark|yy-eye-core|yy-eye-center|yy-eye-almond|yy-third-eye/);
  assert.equal(count('class="yy-limb yy-arm"'),20);
  assert.equal(count('class="yy-limb yy-leg"'),20);

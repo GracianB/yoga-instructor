@@ -1,0 +1,135 @@
+/* D16 · THE LIVING SANCTUARY
+   Small folded wings are grown from the shoulder coordinate system.
+   Meditation is stillness: never animated flight or decorative overload. */
+#instructor-flow .yy-guide{
+ --d16-wing-hi:#f9d2cd;
+ --d16-wing-mid:#c783a5;
+ --d16-wing-low:#7d829f;
+ --d16-filigree:#fff3e5;
+}
+#instructor-flow .yy-guide[data-spirit="yin"]{
+ --d16-wing-hi:#d8e5ff;
+ --d16-wing-mid:#88afe3;
+ --d16-wing-low:#6878bc;
+ --d16-filigree:#eef9ff;
+}
+#instructor-flow .yy-guide .yy-d16-wing-hi{stop-color:var(--d16-wing-hi)}
+#instructor-flow .yy-guide .yy-d16-wing-mid{stop-color:var(--d16-wing-mid)}
+#instructor-flow .yy-guide .yy-d16-wing-low{stop-color:var(--d16-wing-low)}
+#instructor-flow .yy-guide .yy-d16-wings{
+ pointer-events:none;opacity:.92;
+}
+#instructor-flow .yy-guide .yy-d16-wing-membrane{
+ fill:url(#yy-d16-wing);
+ stroke:var(--d12-tail-line);
+ stroke-width:2.15;stroke-linejoin:round;
+}
+#instructor-flow .yy-guide .yy-d16-wing-vein{
+ fill:none;stroke:var(--d16-filigree);
+ stroke-width:1.75;stroke-linecap:round;opacity:.72;
+}
+#instructor-flow .yy-guide .yy-d16-wing-struts{
+ fill:none;stroke:var(--d16-filigree);
+ stroke-width:1.2;stroke-linecap:round;opacity:.46;
+}
+#instructor-flow .yy-guide .yy-d16-wings[data-fold="rest"]{
+ opacity:.58;
+}
+#instructor-flow .yy-guide .yy-pose-table .yy-d16-wings{
+ opacity:.5;
+}
+#instructor-flow .yy-guide .yy-pose-tree .yy-d16-wings,
+#instructor-flow .yy-guide .yy-pose-warrior .yy-d16-wings{
+ opacity:.83;
+}
+#instructor-flow .yy-guide .yy-d16-body-meridian{
+ pointer-events:none;
+}
+#instructor-flow .yy-guide .yy-d16-meridian-line{
+ fill:none;stroke:var(--d16-filigree);
+ stroke-width:1.6;stroke-linecap:round;
+ opacity:.39;
+}
+#instructor-flow .yy-guide .yy-d16-breath-arch{
+ fill:none;stroke:var(--d12-ventral);
+ stroke-width:1.4;stroke-linecap:round;
+ opacity:.42;
+}
+/* The current existing 4-7-8 clock is the SOLE driver of wing breath
+   expression. It is never an independent flapping timer. */
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="inhale"]
+ .yy-pose.is-current .yy-d16-wing{
+ animation:yy-d16-inhale 4s cubic-bezier(.32,.1,.35,1) both;
+ transform-box:fill-box;transform-origin:14% 92%;
+}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="exhale"]
+ .yy-pose.is-current .yy-d16-wing{
+ animation:yy-d16-exhale 8s cubic-bezier(.32,.1,.35,1) both;
+ transform-box:fill-box;transform-origin:14% 92%;
+}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="hold"]
+ .yy-pose.is-current .yy-d16-wing{
+ opacity:1.0;animation:none!important;
+}
+@keyframes yy-d16-inhale{
+ from{opacity:.71}
+ to{opacity:1}
+}
+@keyframes yy-d16-exhale{
+ from{opacity:1}
+ to{opacity:.71}
+}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="inhale"]
+ .yy-pose.is-current .yy-d16-breath-arch{
+ opacity:.56;
+}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="exhale"]
+ .yy-pose.is-current .yy-d16-breath-arch{
+ opacity:.27;
+}
+/* Pose-to-pose editorial language:
+   arrival: the glow is restrained and the figure remains primary.
+   balance: emphasis on weight, not an impossible bone morph.
+   ground: quiets feathers, whiskers and aura before resting. */
+#instructor-flow .yy-guide .yy-stage[data-passage="ground"] .yy-bloom{
+ opacity:0;
+}
+#instructor-flow .yy-guide .yy-stage[data-passage="balance"] .yy-bloom{
+ filter:none;
+}
+#instructor-flow .yy-guide .yy-stage[data-passage="breath"] .yy-bloom{
+ background:radial-gradient(circle,rgba(237,251,255,.47),rgba(145,208,244,.15) 34%,transparent 70%);
+}
+#instructor-flow .yy-guide[data-motion="transition"]
+ .yy-pose.is-leaving .yy-d16-wings{
+ opacity:.44;
+}
+#instructor-flow .yy-guide .yy-pose.is-leaving .yy-d16-meridian-line{
+ opacity:.19;
+}
+/* No global character motion in resting postures. Keep the ground contract
+   introduced in D14 and the caudal anchor introduced in D13 intact. */
+#instructor-flow .yy-guide .yy-pose:is(.yy-pose-table,.yy-pose-child,.yy-pose-savasana)
+ .yy-d16-wing{
+ animation:none!important;
+}
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-d16-wing{
+ animation-play-state:paused!important;
+}
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-d16-wing,
+body.quiet-mode #instructor-flow .yy-d16-wing,
+#instructor-flow .yy-guide[data-hidden="true"] .yy-d16-wing{
+ animation:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-d16-wing{
+  animation:none!important;transition:none!important;
+ }
+ #instructor-flow .yy-guide .yy-stage[data-passage] .yy-bloom{
+  animation:none!important;
+ }
+}
+@media(max-width:700px){
+ #instructor-flow .yy-guide .yy-d16-wing-vein{stroke-width:2.1}
+ #instructor-flow .yy-guide .yy-d16-meridian-line{stroke-width:2.1}
+}

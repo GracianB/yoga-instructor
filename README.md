@@ -245,3 +245,16 @@ npm run build
 ```
 
 `test:e2e` is a legacy Node contract suite. `test:browser` opens actual browser engines. Pages deployment requires the complete verification job and a GitHub Actions Pages source.
+
+
+## Presence Studio · D.26–D.30 candidate
+
+The three practice paths share one authored SVG dragon and one monotonic studio clock:
+
+- **Movement:** original ten-phase Yin/Yang journey, three additional SVG asanas, adaptable duration, level and rest.
+- **Breathing:** gentle 3-in/5-out, natural 4-in/6-out or **free pace** without prescribed counts or breath retention. The original dragon's meridian light and breath halo follow the real practice clock, then freeze when paused.
+- **Meditation:** optional introductory/focusing/closing cues, or **silent mode** with no changing prompts.
+
+All modes are designed for ES/EN, keyboard and touch, 320px screens, light/dark and reduced-motion. Decorative updates stop in background tabs while the elapsed clock stays monotonic. No automatic voice, network meditation service, scores or behavioural tracking.
+
+**Release status:** this code is a candidate until GitHub Actions, browser testing, merge and GitHub Pages deployment are verified by SHA. See [D.30 acceptance and freeze](./RELEASE_D30.md). The agreed ceiling is D.30; do not silently continue with D.31.

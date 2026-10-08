@@ -601,3 +601,34 @@ test('D5 complete character review: ten poses, two energies, responsive and stil
  }
  expect(errors).toEqual([]);
 });
+
+test('D5 cinematic contact sheet: all 10 poses, Yin and Yang, mobile and desktop',async ({page,browserName})=>{
+ test.skip(browserName!=='chromium','Visual contact sheet is recorded on Chromium; other engines retain the cross-browser suite.');
+ test.setTimeout(180000);
+ const errors=await open(page);
+ const guide=page.locator('#flow-guide');
+ const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+ const phases=['start','centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
+ await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+ for(const width of [390,1440]){
+  await page.setViewportSize({width,height:900});
+  for(const spirit of ['yang','yin']){
+   await act('reset');
+   await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+   await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
+   await expect(guide).toHaveAttribute('data-spirit',spirit);
+   await act('preview');
+   for(let i=0;i<phases.length;i++){
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    if(i)await act('next');
+    await expect(guide).toHaveAttribute('data-phase',phases[i]);
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    await expect(guide.locator('.yy-pose.is-current')).toHaveCount(1);
+    await test.info().attach('d5-'+width+'-'+spirit+'-'+String(i+1).padStart(2,'0')+'-'+phases[i],{
+      body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'
+    });
+   }
+  }
+ }
+ expect(errors).toEqual([]);
+});

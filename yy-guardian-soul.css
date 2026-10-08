@@ -1,0 +1,52 @@
+/* D.5 · Guardian soul: animated expression, not theatrical face distortion. */
+#instructor-flow .yy-pose.is-current .yy-head-motion{will-change:transform}
+#instructor-flow .yy-pose.is-current .yy-ear-inner{
+  fill:color-mix(in srgb,var(--yy-ear) 83%,var(--yy-fur));
+  opacity:.86;
+}
+#instructor-flow .yy-pose.is-current .yy-crest{
+  stroke:var(--yy-outline);stroke-width:2.8;stroke-linejoin:round;
+}
+#instructor-flow .yy-pose.is-current .yy-cheek-shine{opacity:.28}
+#instructor-flow .yy-pose.is-current .yy-eye-sheen{opacity:.36}
+#instructor-flow .yy-pose.is-current .yy-smile{
+  stroke-width:1.8;opacity:.75;
+}
+#instructor-flow .yy-pose.is-current .yy-nose{opacity:.76}
+#instructor-flow .yy-pose.is-current .yy-tail-motion{transform-origin:center}
+#instructor-flow .yy-pose.is-current .yy-gem{
+  filter:drop-shadow(0 0 2px var(--yy-badge));
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-pose.is-current .yy-gem{
+  filter:drop-shadow(0 0 4px var(--yy-magic));
+}
+#instructor-flow .yy-guide[data-spirit="yang"] .yy-pose.is-current .yy-gem{
+  filter:drop-shadow(0 0 4px var(--yy-badge));
+}
+/* Ten authored characters retain their anatomy. Expression depends on purpose. */
+#instructor-flow .yy-pose-rest.is-current .yy-smile,
+#instructor-flow .yy-pose-savasana.is-current .yy-smile{opacity:.37}
+#instructor-flow .yy-pose-warrior.is-current .yy-eye-sheen{opacity:.22}
+#instructor-flow .yy-pose-warrior.is-current .yy-guardian-lid{stroke-width:3.6}
+#instructor-flow .yy-pose-seat.is-current .yy-cheek-shine,
+#instructor-flow .yy-pose-breath.is-current .yy-cheek-shine{opacity:.18}
+#instructor-flow .yy-pose-finish.is-current .yy-cheek-shine{opacity:.55}
+#instructor-flow .yy-guide[data-status="running"][data-asana-state="running"] .yy-pose.is-current .yy-anim-eyes{
+  animation:yy-d5-soft-blink 11s ease-in-out infinite;
+  transform-box:fill-box;transform-origin:center;
+}
+#instructor-flow .yy-guide[data-spirit="yin"][data-status="running"][data-asana-state="running"] .yy-pose.is-current .yy-anim-eyes{
+  animation-duration:14s;
+}
+@keyframes yy-d5-soft-blink{
+  0%,36%,38%,75%,77%,100%{transform:scaleY(1)}
+  37%,76%{transform:scaleY(.16)}
+}
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-anim-eyes,
+#instructor-flow .yy-guide[data-asana-state="transition"] .yy-anim-eyes{animation-play-state:paused!important}
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-anim-eyes,
+#instructor-flow .yy-guide[data-hidden="true"] .yy-anim-eyes,
+body.quiet-mode #instructor-flow .yy-anim-eyes{animation:none!important}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-anim-eyes{animation:none!important}
+}

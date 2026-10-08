@@ -70,3 +70,10 @@ body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .st
 body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-body-meridian{
  opacity:.48!important;transition:none!important
 }
+
+#instructor-flow .studio-breath-phase-detail{
+ display:block;position:relative;z-index:2;margin:10px auto 0;color:#416a58;
+ font:600 12px/1.5 'Inter',sans-serif;letter-spacing:.055em;font-variant-numeric:tabular-nums
+}
+#instructor-flow .studio-breath-phase-detail[hidden]{display:none!important}
+html[data-theme="dark"] #instructor-flow .studio-breath-phase-detail{color:#d4e4d3}

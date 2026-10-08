@@ -197,3 +197,57 @@
 }
 body.quiet-mode .yy-character,body.quiet-mode .yy-bloom,
 .yy-guide[data-hidden="true"] .yy-character{animation-play-state:paused}
+
+/* ART DIRECTION v2: organic manga-anime character instead of a wire puppet */
+.yy-guide{scroll-margin-top:138px}
+.yy-fur.yy-outline{stroke-width:3.7}
+.yy-face-mask{fill:var(--yy-fur);opacity:.42}
+.yy-crest{stroke-width:2.8;stroke-linejoin:round}
+.yy-ear-light{fill:none;stroke:var(--yy-ruff);stroke-width:3;opacity:.8;stroke-linecap:round}
+.yy-cheek-shine{fill:none;stroke:var(--yy-ruff);stroke-width:3;opacity:.46;stroke-linecap:round}
+.yy-temple-mark{fill:none;stroke:var(--yy-badge);stroke-width:3.1;stroke-linecap:round}
+.yy-lashes{stroke:var(--yy-outline);stroke-width:2.7;fill:none;stroke-linecap:round}
+.yy-eye-liner{fill:none;stroke:var(--yy-outline);stroke-width:5.1;stroke-linecap:round}
+.yy-iris{fill:var(--yy-eye);stroke:var(--yy-outline);stroke-width:1.4}
+.yy-pupil{fill:#11284d}
+.yy-guide[data-spirit="yin"] .yy-pupil{fill:#1a1135}
+.yy-eye-tiny{fill:#fff9e5;opacity:.9}
+.yy-mouth-mark{fill:none;stroke:var(--yy-outline);stroke-width:1.7;stroke-linecap:round}
+.yy-crown-shine{fill:#faffff;opacity:.83}
+.yy-chest-fur{fill:var(--yy-ruff);opacity:.75}
+.yy-medallion{fill:var(--yy-outline);stroke:var(--yy-ruff);stroke-width:3.7}
+.yy-necklace{fill:none;stroke:var(--yy-mane);stroke-width:4;stroke-linecap:round}
+.yy-shoulder-shine{opacity:.5}
+.yy-limb {
+  stroke:var(--yy-outline);
+  stroke-width:2.8;
+  fill:url(#yy-fur-grad);
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.yy-leg{stroke-width:2.8}
+.yy-limb-lustre{
+  fill:none;stroke:var(--yy-ruff);stroke-width:3.3;
+  opacity:.27;stroke-linecap:round;stroke-linejoin:round;
+}
+.yy-paw{fill:var(--yy-paw);stroke:var(--yy-ruff);stroke-width:2.8}
+.yy-paw-toes{fill:none;stroke:var(--yy-badge);stroke-width:2.5;stroke-linecap:round;opacity:.75}
+.yy-paw-gloss{fill:none;stroke:var(--yy-ruff);stroke-width:2.4;stroke-linecap:round;opacity:.3}
+.yy-tail-main{fill:url(#yy-mane-grad);stroke-width:3.4}
+.yy-tail-band{fill:none;stroke:var(--yy-ruff);stroke-width:14;stroke-linecap:round;opacity:.74}
+.yy-tail-fur{fill:var(--yy-fur-deep);opacity:.65}
+.yy-tail-glint{fill:none;stroke:#e3fbff;stroke-width:4.5;stroke-linecap:round;opacity:.52}
+.yy-gem{
+  fill:var(--yy-badge);stroke:var(--yy-outline);stroke-width:3.8;
+  filter:drop-shadow(0 1px 3px rgba(46,158,230,.4));
+}
+.yy-guide[data-spirit="yin"] .yy-crest{filter:drop-shadow(0 0 4px rgba(110,79,211,.36))}
+.yy-guide[data-spirit="yang"] .yy-crest{filter:drop-shadow(0 0 4px rgba(68,158,229,.19))}
+.yy-guide .guide-heading{position:relative;z-index:1}
+.yy-stage{min-height:300px}
+.yy-stage:focus-within{outline:2px solid var(--yy-badge);outline-offset:2px}
+@media (max-width:700px){
+ .yy-guide{scroll-margin-top:92px}
+ .yy-stage{min-height:295px}
+}
+@media (max-width:360px){.yy-stage{min-height:270px}}

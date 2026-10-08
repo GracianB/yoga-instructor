@@ -447,7 +447,8 @@ test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async (
   expect(errors).toEqual([]);
 });
 
-test('D2/D3: ten postures in Yin/Yang with non-overlapping rails and green sanctuary', async ({page})=>{
+test('D2/D3: ten postures in Yin/Yang with non-overlapping rails and green sanctuary', async ({page,browserName})=>{
+ test.skip(browserName !== 'chromium', 'Exhaustive matrix on Chromium; cross-browser regression covered by the existing suite.');
  test.setTimeout(150000);
  const errors=await open(page);
  const guide=page.locator('#flow-guide');

@@ -8,7 +8,7 @@ module.exports = defineConfig({
   timeout: 30000,
   retries: 0,
   fullyParallel: true,
-  workers: process.env.CI ? 2 : 4,
+  workers: process.env.CI ? 3 : 4,
   use: {
     baseURL: 'http://127.0.0.1:4185',
     trace: 'retain-on-failure',

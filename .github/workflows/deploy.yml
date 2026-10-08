@@ -51,7 +51,7 @@ jobs:
           pactl load-module module-null-sink sink_name=yoga_test
           pactl set-default-sink yoga_test
       - name: Test shard
-        run: npm run test:browser -- --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2 --workers=2
+        run: npm run test:browser -- --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2 --workers=3
   deploy:
     needs: [node, browser]
     runs-on: ubuntu-latest

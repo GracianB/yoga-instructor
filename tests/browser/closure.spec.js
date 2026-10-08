@@ -563,6 +563,10 @@ test('D4 audio transport click toggles playback, labels and icons',async ({page}
  const errors=await open(page);
  const player=page.locator('#focus-player');
  const button=player.locator('#audio-play');
+ // D29 interaction gate: browser must not accept an early click before the
+ // actual media transport is wired up.
+ await expect(button).toHaveAttribute('data-audio-ready','true');
+ await expect(button).toBeEnabled();
  await expect(player).not.toHaveClass(/is-playing/);
  await button.click();
  await expect(player).toHaveClass(/is-playing/);

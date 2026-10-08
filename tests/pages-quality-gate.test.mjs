@@ -33,9 +33,9 @@ test('All six browser partitions and quality gate remain mandatory, never duplic
   assert.match(quality,/shard: \[1, 2\]/);
   // WebKit 1/2 and 2/2 must both execute, even though one runner installs
   // the exact same browser only once instead of racing a second apt install.
-  assert.match(quality,/exclude:[\\s\\S]*browser: webkit[\\s\\S]*shard: 2/);
-  assert.match(quality,/--project=webkit --shard=1\\/2/);
-  assert.match(quality,/--project=webkit --shard=2\\/2/);
+  assert.match(quality,/exclude:[\s\S]*browser: webkit[\s\S]*shard: 2/);
+  assert.match(quality,/--project=webkit --shard=1\/2/);
+  assert.match(quality,/--project=webkit --shard=2\/2/);
   assert.match(quality,/Test both WebKit partitions/);
   assert.match(quality,/name: Yoga Quality Gate/);
   assert.match(quality,/needs: \[quality, browser\]/);

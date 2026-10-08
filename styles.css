@@ -5948,3 +5948,6 @@ body.quiet-mode .hero .hero-mandala { filter: none !important; }
 .hero-manifesto{position:relative;z-index:2}
 @media(max-width:760px){.hero-mandala{max-width:100%;filter:drop-shadow(0 0 17px rgba(130,192,151,.35))}.hero-inner h1{max-width:100%}}
 @media(prefers-reduced-motion:reduce){.hero-mandala{animation:none}}
+
+/* V10: human signature in header, lotus and practice title own the cover. */
+.brand-text b{font-size:clamp(.69rem,.83vw,.92rem)}

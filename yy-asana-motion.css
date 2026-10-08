@@ -101,10 +101,10 @@
   animation:yy-savasana 10s ease-in-out infinite!important;
 }
 /* Finish: a smile and a tiny breath of gratitude, not a duplicate of centering. */
-.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-finish.is-current .yy-head-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"],[data-asana-state="finished"]) .yy-pose-finish.is-current .yy-head-motion{
   animation:yy-finish-nod 7s ease-in-out infinite;
 }
-.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-finish.is-current .yy-gem{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"],[data-asana-state="finished"]) .yy-pose-finish.is-current .yy-gem{
   animation:yy-gem-light 4s ease-in-out infinite;
 }
 /* Natural blink on OPEN-eyed characters in any awake phase. */
@@ -204,7 +204,7 @@
 .yy-guide[data-asana-state="reduced"] .yy-character *,
 .yy-guide[data-hidden="true"] .yy-character,
 .yy-guide[data-hidden="true"] .yy-character *{
-  animation:none!important;transform:none;
+  animation:none!important;
 }
 @media(prefers-reduced-motion:reduce){
   .yy-guide .yy-character,.yy-guide .yy-character *,

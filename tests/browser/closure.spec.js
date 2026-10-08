@@ -184,11 +184,15 @@ test('Yin Yang ten-phase yoga flow: distinct poses, navigation gate and 4-7-8 do
   await expect(guide).toHaveAttribute('data-spirit','yin');
   await guide.locator('[data-yy-form="yang"]').click();
   await expect(guide).toHaveAttribute('data-spirit','yang');
-  await page.locator('[data-flow-action="preview"]').click();
+  const trigger=async action=>page.locator('[data-flow-action="'+action+'"]').evaluate(button=>button.click());
+  await expect(page.locator('[data-flow-action="preview"]')).toBeEnabled();
+  await trigger('preview');
+  await expect(guide).toHaveAttribute('data-status','running');
   await expect(page.locator('#flow-phase-target')).toHaveText('00:05');
-  await page.locator('[data-flow-action="pause"]').click();
+  await trigger('pause');
   await expect(guide).toHaveAttribute('data-status','paused');
-  await page.locator('[data-flow-action="pause"]').click();
+  await trigger('pause');
+  await expect(guide).toHaveAttribute('data-status','running');
   const phases=['centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
   for(const id of phases){
     await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});

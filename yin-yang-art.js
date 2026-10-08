@@ -3,8 +3,8 @@
   "use strict";
   const poses = [
     {id:"start",name:["Soltar el peso","Let the weight go"],cue:["Apoya el cuerpo y baja el ritmo.","Rest your body and slow down."],kind:"rest",body:[349,315,119,47,-8],head:[222,293,.79,-22,"closed"],arms:["M282 325Q254 348 226 356","M320 336Q290 359 274 368"],legs:["M425 322Q485 329 523 346","M423 300Q487 296 532 317"],hands:[[226,356],[274,368]],feet:[[523,346],[532,317]],tail:[439,291,1,-8]},
-    {id:"centering",name:["Volver al centro","Find your centre"],cue:["Cierra los ojos y encuentra apoyo.","Close your eyes and find your ground."],kind:"seat",body:[360,266,65,87,0],head:[360,145,.87,0,"closed"],arms:["M310 231Q288 282 316 304","M409 231Q432 283 402 304"],legs:["M328 324Q278 354 244 337","M390 324Q441 354 477 337"],hands:[[316,304],[402,304]],feet:[[244,337],[477,337]],tail:[426,290,.65,5]},
-    {id:"breath",name:["Respirar 4 · 7 · 8","Breathe 4 · 7 · 8"],cue:["Inhala cuatro, sostén siete, exhala ocho.","Inhale four, hold seven, exhale eight."],kind:"breath",body:[360,260,67,87,0],head:[361,141,.86,0,"closed"],arms:["M305 227Q266 243 250 282","M414 227Q450 243 470 282"],legs:["M324 321Q282 352 245 335","M394 321Q440 352 476 335"],hands:[[250,282],[470,282]],feet:[[245,335],[476,335]],tail:[433,276,.64,-8]},
+    {id:"centering",name:["Volver al centro","Find your centre"],cue:["Baja la mirada y encuentra apoyo.","Lower your gaze and find your ground."],kind:"seat",body:[360,266,65,87,0],head:[360,145,.87,0,"soft"],arms:["M310 231Q288 282 316 304","M409 231Q432 283 402 304"],legs:["M328 324Q278 354 244 337","M390 324Q441 354 477 337"],hands:[[316,304],[402,304]],feet:[[244,337],[477,337]],tail:[426,290,.65,5]},
+    {id:"breath",name:["Respirar 4 · 7 · 8","Breathe 4 · 7 · 8"],cue:["Inhala cuatro, sostén siete, exhala ocho.","Inhale four, hold seven, exhale eight."],kind:"breath",body:[360,260,67,87,0],head:[361,141,.86,0,"soft"],arms:["M305 227Q266 243 250 282","M414 227Q450 243 470 282"],legs:["M324 321Q282 352 245 335","M394 321Q440 352 476 335"],hands:[[250,282],[470,282]],feet:[[245,335],[476,335]],tail:[433,276,.64,-8]},
     {id:"warmup",name:["Despertar el cuerpo","Wake your body"],cue:["A cuatro apoyos, moviliza suavemente la columna.","On all fours, move your spine gently."],kind:"table",body:[364,267,131,52,-5],head:[223,236,.73,-18,"open"],arms:["M292 283Q270 325 258 367","M329 290Q319 337 316 366"],legs:["M429 279Q455 318 451 368","M461 252Q509 287 505 363"],hands:[[258,367],[316,366]],feet:[[451,368],[505,363]],tail:[461,238,.83,-24]},
     {id:"pose-1",name:["Guerrero II","Warrior II"],cue:["Abre los brazos, afianza tus pies y mira al frente.","Open your arms, ground your feet and look ahead."],kind:"warrior",body:[357,230,62,86,-3],head:[358,123,.79,-13,"focus"],arms:["M309 190Q239 183 155 190","M407 195Q484 184 562 192"],legs:["M322 299Q298 308 272 325Q264 355 253 378","M391 304Q460 311 474 343Q495 360 536 383"],hands:[[155,190],[562,192]],feet:[[253,378],[536,383]],tail:[426,261,.68,10]},
     {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Cambia de postura sin prisa, con una exhalación.","Move into the next pose with a long exhale."],kind:"flow",body:[372,238,67,87,19],head:[338,131,.81,-18,"open"],arms:["M326 189Q269 138 257 95","M415 201Q461 235 504 253"],legs:["M351 304Q291 335 240 378","M415 306Q468 350 520 381"],hands:[[257,95],[504,253]],feet:[[240,378],[520,381]],tail:[437,256,.63,27]},
@@ -63,20 +63,24 @@
   const toTransform=(x,y,s,r)=>'translate('+x+' '+y+') rotate('+r+') scale('+s+')';
   const face=(p)=>{
     const [x,y,s,r,eye]=p.head;
-    const shut=eye==="closed",focus=eye==="focus";
-    // Guardian eyes: two relaxed, dark almond silhouettes. No white sclera,
-    // no concentric "human" pupils or staring specular highlights.
+    const shut=eye==="closed",focus=eye==="focus",soft=eye==="soft";
+    // A living botanical gaze: soft matte almond, visible iris and tiny glint.
+    // No bright white eyeball, rings or oversized cartoon pupils.
+    const almondLeft=soft?'M-60 12Q-38 6-16 12Q-37 22-60 12Z':
+      focus?'M-60 13Q-40 4-17 12Q-35 24-60 13Z':
+            'M-60 12Q-39-2-16 11Q-32 29-60 12Z';
+    const almondRight=soft?'M17 12Q40 6 62 12Q44 22 17 12Z':
+      focus?'M17 12Q39 3 61 11Q45 24 17 12Z':
+            'M17 11Q39-3 62 12Q46 28 17 11Z';
     const eyes=shut?
       path('M-60 13Q-37 28-15 12M16 12Q39 27 61 10','yy-eye-closed')+
       path('M-57 6Q-39 1-21 8M22 7Q39 0 58 5','yy-sleep-brow'):
       '<g class="yy-anim-eyes">'+
-        path(focus?
-          'M-60 13Q-40 4-17 12Q-35 24-60 13Z':
-          'M-60 12Q-39-2-16 11Q-32 29-60 12Z','yy-eye-almond')+
-        path(focus?
-          'M17 12Q39 3 61 11Q45 24 17 12Z':
-          'M17 11Q39-3 62 12Q46 28 17 11Z','yy-eye-almond')+
-        path('M-50 8Q-37 0-23 8M27 7Q40 0 53 8','yy-eye-sheen')+
+        path(almondLeft,'yy-eye-almond')+path(almondRight,'yy-eye-almond')+
+        '<ellipse cx="-38" cy="12" rx="'+(soft?'5.6':'6.4')+'" ry="'+(soft?'5.1':'7.4')+'" class="yy-eye-core"/>'+
+        '<ellipse cx="40" cy="12" rx="'+(soft?'5.6':'6.4')+'" ry="'+(soft?'5.1':'7.4')+'" class="yy-eye-core"/>'+
+        circle(-38,13,3.1,'yy-eye-center')+circle(40,13,3.1,'yy-eye-center')+
+        circle(-35,9,1.5,'yy-eye-glint')+circle(43,9,1.5,'yy-eye-glint')+
         path('M-60 5Q-39-6-17 5M17 4Q39-7 61 4','yy-guardian-lid')+
       '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+

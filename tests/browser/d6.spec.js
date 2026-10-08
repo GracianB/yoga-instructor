@@ -131,11 +131,11 @@ test('D6: real calm eyes and green/blush backdrop in Yin and Yang',async ({page,
     for(const spirit of ['yang','yin']){
       await guide.locator('[data-yy-form="'+spirit+'"]').click();
       await expect(guide).toHaveAttribute('data-spirit',spirit);
-      const eyes=guide.locator('.yy-pose.is-current .yy-eye-core');
+      const eyes=guide.locator('.yy-pose.is-current .yy-eye-closed');
       await expect(eyes).toHaveCount(2);
-      await expect(guide.locator('.yy-pose.is-current .yy-eye-center')).toHaveCount(2);
+      await expect(guide.locator('.yy-pose.is-current .yy-eye-core,.yy-pose.is-current .yy-eye-center')).toHaveCount(0);
       for(const eye of await eyes.all()){await expect(eye).toBeVisible();}
-      colors[spirit]=await eyes.first().evaluate(el=>getComputedStyle(el).fill);
+      colors[spirit]=await eyes.first().evaluate(el=>getComputedStyle(el).stroke);
       const stage=await guide.locator('.yy-stage').evaluate(el=>getComputedStyle(el).backgroundImage);
       expect(stage).toContain('gradient');
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

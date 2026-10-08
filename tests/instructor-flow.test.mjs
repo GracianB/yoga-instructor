@@ -380,7 +380,7 @@ test("Yin Yang art: ten distinct authored phases, exactly two arms and two legs"
 test("Yin Yang presentation: selectable dual palette, no deforming skeleton", () => {
   const guide=readFileSync(new URL("../flow-guide.js",import.meta.url),"utf8");
   const css=readFileSync(new URL("../flow-guide.css",import.meta.url),"utf8");
-  assert.match(index,/yin-yang-art\.js\?v=phase-d1-1/);
+  assert.match(index,/yin-yang-art\.js\?v=phase-d1-2/);
   assert.match(index,/flow-guide\.js\?v=yin-yang-\d+/);
   assert.doesNotMatch(index,/flow-motion\.js/);
   assert.match(guide,/data-yy-form="yang"/);
@@ -467,10 +467,8 @@ test("Phase D1: serene guardian eyes, two almond silhouettes not human staring e
   const art=readFileSync(new URL("../yin-yang-art.js",import.meta.url),"utf8");
   const css=readFileSync(new URL("../yy-premium-stage.css",import.meta.url),"utf8");
   const previous=["yy-eye-white","yy-iris","yy-pupil","yy-spark-eye","yy-eye-tiny","yy-heavy-lid"];
-  assert.match(art,/yy-eye-almond/);
-  assert.match(art,/yy-guardian-lid/);
-  assert.match(art,/yy-eye-sheen/);
-  assert.match(art,/yy-sleep-brow/);
+  for(const marker of ["yy-eye-closed","yy-dragon-horn","yy-dragon-snout","yy-dragon-beard","yy-dragon-whisker","yy-sleep-brow"])assert.ok(art.includes(marker),marker);
+  assert.doesNotMatch(art,/yy-eye-almond|yy-eye-core|yy-eye-center|yy-eye-glint|yy-crown-mark/);
   for(const selector of previous){
     assert.doesNotMatch(art,new RegExp(selector),"Obsolete eye geometry: "+selector);
   }
@@ -478,6 +476,6 @@ test("Phase D1: serene guardian eyes, two almond silhouettes not human staring e
   assert.match(css,/data-spirit="yin"\] \.yy-eye-almond/);
   assert.match(css,/\.yy-eye-closed/);
   assert.match(css,/\.yy-muzzle/);
-  assert.match(index,/yin-yang-art\.js\?v=phase-d1-1/);
+  assert.match(index,/yin-yang-art\.js\?v=phase-d1-2/);
   assert.match(index,/yy-premium-stage\.css\?v=phase-d1-1/);
 });

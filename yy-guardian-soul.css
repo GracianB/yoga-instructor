@@ -130,3 +130,35 @@ body.quiet-mode #instructor-flow .yy-anim-eyes{animation:none!important}
     linear-gradient(150deg,#19342f,#25483e 62%,#102b2b);
   border-color:rgba(153,185,166,.28);
 }
+
+/* D.8 · Original river-dragon anatomy, paired closed eyes and grounded postures. */
+#instructor-flow .yy-guide[data-spirit="yang"]{
+ --yy-dragon-horn:#e5d6b7;--yy-dragon-horn-edge:#987a62;
+ --yy-dragon-beard:#efe9d8;--yy-dragon-muzzle:#f6ecdd;
+ --yy-dragon-fin:#8dab99;--yy-dragon-ink:#315449;
+ --yy-eye-line:#2a5144;--yy-whisker-color:#8eaf9c;
+}
+#instructor-flow .yy-guide[data-spirit="yin"]{
+ --yy-dragon-horn:#b6bcb0;--yy-dragon-horn-edge:#7c938b;
+ --yy-dragon-beard:#bacbc1;--yy-dragon-muzzle:#829e96;
+ --yy-dragon-fin:#648b80;--yy-dragon-ink:#19362f;
+ --yy-eye-line:#e0eee5;--yy-whisker-color:#c0d8ce;
+}
+#instructor-flow .yy-guide .yy-head-shell{fill:var(--yy-fur);stroke:var(--yy-outline);stroke-width:3.4}
+#instructor-flow .yy-guide .yy-dragon-horn{fill:var(--yy-dragon-horn);stroke:var(--yy-dragon-horn-edge);stroke-width:2.7;stroke-linejoin:round}
+#instructor-flow .yy-guide .yy-dragon-horn-ridge{fill:none;stroke:var(--yy-dragon-horn-edge);stroke-width:1.8;stroke-linecap:round;opacity:.58}
+#instructor-flow .yy-guide .yy-dragon-fin{fill:var(--yy-dragon-fin);stroke-width:2.8}
+#instructor-flow .yy-guide .yy-dragon-crest{fill:var(--yy-mane);stroke-width:2.2}
+#instructor-flow .yy-guide .yy-eye-closed{fill:none;stroke:var(--yy-eye-line);stroke-width:4.1;stroke-linecap:round;stroke-linejoin:round;opacity:.96}
+#instructor-flow .yy-guide .yy-sleep-brow{fill:none;stroke:var(--yy-eye-line);stroke-width:2;stroke-linecap:round;opacity:.37}
+#instructor-flow .yy-guide .yy-closed-gaze{animation:none!important}
+#instructor-flow .yy-guide .yy-dragon-snout{fill:var(--yy-dragon-muzzle);stroke:var(--yy-outline);stroke-width:2.6;stroke-linejoin:round}
+#instructor-flow .yy-guide .yy-dragon-snout-light{fill:none;stroke:var(--yy-ruff);stroke-width:2;stroke-linecap:round;opacity:.64}
+#instructor-flow .yy-guide .yy-dragon-nostril{fill:none;stroke:var(--yy-dragon-ink);stroke-width:2.1;stroke-linecap:round;opacity:.8}
+#instructor-flow .yy-guide .yy-dragon-beard{fill:var(--yy-dragon-beard);stroke:var(--yy-outline);stroke-width:2.4;stroke-linejoin:round}
+#instructor-flow .yy-guide .yy-dragon-beard-line{fill:none;stroke:var(--yy-dragon-horn-edge);stroke-width:1.7;stroke-linecap:round;opacity:.55}
+#instructor-flow .yy-guide .yy-dragon-whisker{fill:none;stroke:var(--yy-whisker-color);stroke-width:2.3;stroke-linecap:round;opacity:.88}
+#instructor-flow .yy-guide .yy-dragon-cheek-fins{fill:none;stroke:var(--yy-mane);stroke-width:5.2;stroke-linecap:round;stroke-linejoin:round;opacity:.88}
+#instructor-flow .yy-guide .yy-dragon-temple-scales{fill:none;stroke:var(--yy-mane);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;opacity:.62}
+#instructor-flow .yy-guide .yy-dragon-tail-fin{fill:var(--yy-dragon-fin);stroke:var(--yy-outline);stroke-width:2.8;stroke-linejoin:round}
+#instructor-flow .yy-guide .yy-dragon-tail-spines{fill:none;stroke:var(--yy-dragon-horn);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;opacity:.84}

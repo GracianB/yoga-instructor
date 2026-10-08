@@ -63,66 +63,39 @@
       '</g>';
   };
   const toTransform=(x,y,s,r)=>'translate('+x+' '+y+') rotate('+r+') scale('+s+')';
+  // Ten authored dragon faces, always with exactly two peaceful closed eyes.
   const face=(p)=>{
-    const [x,y,s,r,eye]=p.head;
-    const shut=eye==="closed",focus=eye==="focus",soft=eye==="soft";
-    const almondLeft=soft?'M-60 12Q-38 6-16 12Q-37 22-60 12Z':
-      focus?'M-60 13Q-40 4-17 12Q-35 24-60 13Z':
-            'M-60 12Q-39-2-16 11Q-32 29-60 12Z';
-    const almondRight=soft?'M17 12Q40 6 62 12Q44 22 17 12Z':
-      focus?'M17 12Q39 3 61 11Q45 24 17 12Z':
-            'M17 11Q39-3 62 12Q46 28 17 11Z';
-    const gx = focus ? 2.2 : soft ? -1.2 : 0.4;
-    const gy = focus ? -1.2 : soft ? 1.4 : -0.4;
-    const eyeUnit = (cx, side) => {
-      const id = "yy-clip-"+p.id+"-"+side;
-      return '<g class="yy-eye-unit" transform="translate('+cx+' 8)">'+
-        '<clipPath id="'+id+'"><circle cx="0" cy="0" r="16"/></clipPath>'+
-        '<g clip-path="url(#'+id+')">'+
-          '<circle cx="0" cy="0" r="16" class="yy-eye-almond"/>'+
-          '<circle cx="'+gx+'" cy="'+gy+'" r="13" class="yy-eye-core"/>'+
-          '<circle cx="'+(gx+1)+'" cy="'+(gy+2)+'" r="4.2" class="yy-eye-center"/>'+
-          '<circle cx="'+(gx-5)+'" cy="'+(gy-5)+'" r="3.1" class="yy-eye-glint"/>'+
-          '<path d="M-7 -8Q-2 -11 3 -6" class="yy-eye-sheen"/>'+
-        '</g>'+
-      '</g>';
-    };
-    const eyes = shut
-      ? path('M-40 6Q-26 12-14 6M14 6Q26 12 40 6','yy-eye-closed')+path('M-36 0Q-24-4-14 1M14 1Q24-4 36 0','yy-sleep-brow')
-      : '<g class="yy-anim-eyes">'+eyeUnit(-34,"l")+eyeUnit(36,"r")+
-        '<path d="M-48 -6Q-34 -16-20 -6M20 -6Q34 -16 48 -6" class="yy-guardian-lid"/>'+
-        '</g>';
-    return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
-      path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
-      path('M33-64Q62-114 100-113Q104-60 64-31Z','yy-fur yy-outline')+
-      path('M-57-51Q-82-74-85-99Q-53-87-37-60Z','yy-ear-inner')+
-      path('M51-62Q70-91 87-98Q83-70 61-47Z','yy-ear-inner')+
-      path('M-77-56Q-63-102-38-78L-20-44','yy-ear-light')+
-      path('M45-72Q69-101 85-91','yy-ear-light')+
-      path('M-69-37Q-48-84-6-82Q51-91 79-42Q95-17 80 20Q98 43 70 63L56 56Q42 86 4 88Q-38 94-57 66L-78 72Q-101 53-84 23Q-93-6-69-37Z','yy-fur yy-outline')+
-      path('M-80 28L-108 22Q-92 44-102 53L-81 47Q-86 66-70 70L-51 52','yy-fur-fringe')+
-      path('M78 27L103 24Q92 44 108 54L82 48Q93 66 72 73L52 50','yy-fur-fringe')+
-      path('M-58-31Q-25-66 4-57Q28-69 56-34Q80-19 73-1Q54-9 43 7Q21-6 10-4Q-22-15-42 8Q-57-7-72 4Q-81-14-58-31Z','yy-face-mask')+
-      path('M-61-39Q-27-82-8-67L3-87L19-65Q52-77 76-37Q52-42 29-21L7-35L-17-15L-38-23L-64-9Q-72-26-61-39Z','yy-crest yy-outline')+
-      path('M-58-31Q-45-63-22-56M17-63Q44-65 60-40','yy-mane-light')+
-      path('M-13-64Q1-80 11-64L16-45L1-33L-13-45Z','yy-opposite-lock')+
-      path('M-63 13Q-49-7-29 0Q-11 18-20 48Q-42 70-66 53Z','yy-cheek')+
-      path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
-      path('M-60 42Q-45 51-29 48M35 48Q51 53 65 40','yy-cheek-shine')+
-      '<ellipse cx="-34" cy="28" rx="14" ry="8" class="yy-blush"/>'+
-      '<ellipse cx="36" cy="28" rx="14" ry="8" class="yy-blush"/>'+
-      path('M-46-6Q-34-14-22-6','yy-brow')+
-      path('M24-6Q36-14 48-6','yy-brow')+
+    const [x,y,s,r,expression]=p.head;
+    const eyes='<g class="yy-anim-eyes yy-closed-gaze">'+
+      path('M-51 8Q-35 19-17 8','yy-eye-closed yy-eye-left')+
+      path('M17 8Q35 19 51 8','yy-eye-closed yy-eye-right')+'</g>';
+    return '<g class="yy-head yy-dragon-head" transform="'+toTransform(x,y,s,r)+'">'+
+      path('M-61-50Q-82-82-70-122Q-53-96-37-63Q-43-53-61-50Z','yy-dragon-horn yy-horn-left')+
+      path('M42-63Q58-98 72-121Q82-82 61-49Q45-51 42-63Z','yy-dragon-horn yy-horn-right')+
+      path('M-64-108Q-66-79-50-58M65-107Q70-83 55-58','yy-dragon-horn-ridge')+
+      path('M-58-39Q-90-60-108-110Q-103-58-78-28Z','yy-fur yy-outline yy-dragon-fin')+
+      path('M56-39Q92-65 109-110Q106-58 77-27Z','yy-fur yy-outline yy-dragon-fin')+
+      path('M-77-50Q-94-79-96-94Q-78-69-65-47Z','yy-ear-inner')+
+      path('M76-50Q95-78 97-94Q82-66 66-46Z','yy-ear-inner')+
+      path('M-72-44Q-49-82-7-79Q43-91 76-46Q94-12 80 26Q89 55 62 71Q40 91 0 92Q-45 95-67 68Q-95 55-82 24Q-95-13-72-44Z','yy-fur yy-outline yy-head-shell')+
+      path('M-71-35Q-42-76-17-68L-25-88Q-8-76 5-71Q34-85 68-50Q46-50 31-34Q5-40-23-30L-47-19Z','yy-crest yy-outline yy-dragon-crest')+
+      path('M-65-25Q-44-51-24-48M26-52Q49-54 63-30','yy-mane-light')+
+      path('M-72 12Q-55-10-35-2Q-18 17-28 53Q-53 72-74 48Z','yy-cheek')+
+      path('M37 0Q59-10 75 12Q91 38 70 53Q46 76 27 54Z','yy-cheek')+
+      path('M-77 24L-98 20L-85 40L-97 54L-72 53M77 24L98 20L85 40L97 54L72 53','yy-dragon-cheek-fins')+
+      path('M-53-6Q-36-16-17-7M17-7Q36-16 53-6','yy-sleep-brow')+
       eyes+
-      '<path d="M-28 36Q-22 22 2 22Q26 22 32 38Q34 62 2 70Q-30 62-28 36Z" class="yy-muzzle"/>'+
-      '<path d="M-6 34Q-8 28 0 29Q8 28 6 34Q0 42-6 34Z" class="yy-nose"/>'+
-      '<path d="M-4 33Q-3 36-1 34M2 34Q4 36 5 33" class="yy-nostril"/>'+
-      path(eye==="smile"?'M-10 50Q2 62 16 50':'M-8 50Q2 56 14 50','yy-smile')+
-      path('M6 48L5 56','yy-mouth-mark')+path('M-30 40L-48 36M-30 46L-50 48M30 40L48 36M30 46L50 48','yy-whisker')+
-      path('M-68 11L-75 19L-65 20M65 11L74 19L64 21','yy-face-streak')+
-      path('M-51-2L-44-8L-36 0M43-2L50-8L58 0','yy-temple-mark')+
-      path('M-5-51L7-74L24-51L7-40Z','yy-crown-mark')+
-      path('M6-66L16-52L7-45Z','yy-crown-shine')+
+      path('M-31 55Q-30 83-16 93Q-15 116 0 128Q15 115 17 92Q33 81 31 54Q13 69 0 67Q-14 71-31 55Z','yy-dragon-beard')+
+      path('M-11 79Q-9 105 0 115M10 79Q8 102 1 115','yy-dragon-beard-line')+
+      path('M-38 22Q-25 12-10 18Q0 22 12 18Q27 12 39 24L43 42Q42 67 18 77Q0 86-21 77Q-44 67-44 43Z','yy-dragon-snout yy-outline')+
+      path('M-33 39Q-13 32 0 36Q17 32 34 39','yy-dragon-snout-light')+
+      path('M-15 45Q-12 51-8 45M8 45Q12 51 15 45','yy-nostril yy-dragon-nostril')+
+      path(expression==='smile'?'M-15 59Q0 70 16 59':'M-13 60Q0 65 14 60','yy-smile')+
+      path('M-34 48Q-68 37-98 44','yy-whisker yy-dragon-whisker')+
+      path('M-33 57Q-62 60-89 79','yy-whisker yy-dragon-whisker')+
+      path('M34 48Q68 37 98 44','yy-whisker yy-dragon-whisker')+
+      path('M33 57Q62 60 89 79','yy-whisker yy-dragon-whisker')+
+      path('M-67-15L-58-24L-47-16M47-16L58-24L67-15','yy-dragon-temple-scales')+
       '</g>';
   };
   const torso=p=>{
@@ -165,6 +138,8 @@
       path('M32 3Q70-12 100 20Q114 44 99 70','yy-tail-band')+
       path('M23 79Q57 105 81 92','yy-tail-band')+
       path('M31 14Q57 12 72 27M91 61Q87 77 75 80','yy-tail-glint')+
+      path('M81 107Q113 98 132 73Q142 105 117 126Q98 134 81 107Z','yy-dragon-tail-fin')+
+      path('M32 2L42-14L49 8M58 9L71-12L77 19M91 31L108 20L108 47','yy-dragon-tail-spines')+
       '<path d="M9 78L-3 70L13 91Q40 118 83 110Q48 111 9 78Z" class="yy-tail-fur"/>'+
       '</g>';
   };

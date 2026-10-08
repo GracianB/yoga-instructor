@@ -101,3 +101,15 @@
 #instructor-flow .flow-theater .flow-side-next .flow-rail-button::before{transform:rotate(-45deg);border-color:#f0e2cc}
 .choice-arrow{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:999px;border:1px solid rgba(232,210,180,.4);color:#f0e2cc;font-size:13px}
 a[href*="GracianB"]{text-underline-offset:4px}
+
+/* D.8 jade sanctuary: lotus blush replaces the toy-blue spotlight. */
+#instructor-flow .flow-theater .yy-stage{
+ background:radial-gradient(ellipse 44% 48% at 50% 80%,rgba(217,158,173,.20),transparent 84%),
+ radial-gradient(ellipse 42% 48% at 75% 20%,rgba(141,192,163,.16),transparent 82%),
+ linear-gradient(157deg,#1a3c36,#285145 53%,#183431);
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stage{
+ background:radial-gradient(ellipse 48% 46% at 50% 80%,rgba(179,128,147,.18),transparent 85%),
+ radial-gradient(ellipse 42% 52% at 76% 16%,rgba(145,173,163,.14),transparent 80%),
+ linear-gradient(153deg,#18332f,#234740 54%,#152c2b);
+}

@@ -13,10 +13,10 @@ test('D6 order and explicit start hierarchy',()=>{
   assert.match(ui,/action === "next" && \(idle \|\| last \|\| paused\)/);
   assert.match(ui,/if \(poseLocked \|\| engine.status === "idle"/);
 });
-test('D6 guardian gaze is formed of actual irises and pupils without white eyes',()=>{
-  assert.match(art,/class="yy-eye-core"/);
-  assert.match(art,/yy-eye-center/);
-  assert.match(art,/yy-eye-glint/);
+test('D6 dragon has only calm closed eyes, no forehead gem',()=>{
+  assert.match(art,/yy-eye-closed/);
+  assert.match(art,/yy-closed-gaze/);
+  assert.doesNotMatch(art,/yy-eye-core|yy-eye-center|yy-eye-glint|yy-crown-mark/);
   assert.match(art,/head:\[360,145,\.87,0,"soft"\]/);
   assert.match(art,/head:\[361,141,\.86,0,"soft"\]/);
   assert.doesNotMatch(art,/yy-eye-white/);

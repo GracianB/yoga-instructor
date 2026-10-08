@@ -49,7 +49,10 @@
     const angle=fmt(Math.atan2(cy-sy,cx-sx)*180/Math.PI);
     const major=type==="leg"?34:28,minor=type==="leg"?24:17;
     const socket='<g class="yy-d15-socket yy-d15-'+type+'-socket" transform="translate('+fmt(sx)+' '+fmt(sy)+') rotate('+angle+')">'+
-      '<ellipse rx="'+major+'" ry="'+minor+'" class="yy-d15-socket-flesh"/>'+
+      path('M-'+fmt(major*.94)+' -'+fmt(minor*.44)+
+        'C-'+fmt(major*.50)+' -'+fmt(minor*1.05)+' '+fmt(major*.37)+' -'+fmt(minor*.91)+' '+fmt(major*.86)+' -'+fmt(minor*.36)+
+        'Q'+fmt(major*1.03)+' 0 '+fmt(major*.86)+' '+fmt(minor*.36)+
+        'C'+fmt(major*.37)+' '+fmt(minor*.91)+' -'+fmt(major*.50)+' '+fmt(minor*1.05)+' -'+fmt(major*.94)+' '+fmt(minor*.44)+'Z','yy-d15-socket-flesh yy-d17-root-blend')+
       path('M'+fmt(major*.2)+' -'+fmt(minor*.79)+'Q'+fmt(major*.76)+' 0 '+fmt(major*.2)+' '+fmt(minor*.79),'yy-d15-socket-relief')+
       '</g>';
     // Two-section limbs (bent Warrior II / Tree) get a real knee/elbow fold.
@@ -67,6 +70,21 @@
       '<path d="'+d+'" class="yy-limb-lustre yy-'+type+'-lustre"/>'+
       joint+
       '</g>';
+  };
+  // Blended underarm and pelvic membranes reach inside the torso.
+  const attachments=(p,type)=>{
+    const body=p.body,limbs=type==="arm"?p.arms:p.legs;
+    return '<g class="yy-d17-attachments yy-d17-'+type+'-attachments">'+limbs.map((d)=>{
+      const c=(d.match(/-?\\d+(?:\\.\\d+)?/g)||[]).map(Number);
+      const [sx,sy,cx,cy]=c,dx=cx-sx,dy=cy-sy;
+      const mag=Math.max(1,Math.hypot(dx,dy)),nx=-dy/mag,ny=dx/mag;
+      const wide=type==="arm"?20:27,bx=body[0],by=body[1];
+      const qx=sx+(bx-sx)*.53,qy=sy+(by-sy)*.53;
+      const d2='M'+fmt(sx+nx*wide)+' '+fmt(sy+ny*wide)+
+        'C'+fmt(qx+nx*wide*.7)+' '+fmt(qy+ny*wide*.7)+' '+fmt(qx+nx*wide*.2)+' '+fmt(qy+ny*wide*.2)+' '+fmt(bx)+' '+fmt(by)+
+        'C'+fmt(qx-nx*wide*.2)+' '+fmt(qy-ny*wide*.2)+' '+fmt(qx-nx*wide*.7)+' '+fmt(qy-ny*wide*.7)+' '+fmt(sx-nx*wide)+' '+fmt(sy-ny*wide)+'Z';
+      return path(d2,'yy-d17-attachment yy-d17-'+type+'-attachment');
+    }).join('')+'</g>';
   };
   const point=(xy,cls)=>{
     const [x,y]=xy;
@@ -312,8 +330,8 @@
       circle(p.head[0]+115,p.head[1]-28,2.0,'yy-mote yy-mote-b')+
       circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
       '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
-      '<g class="yy-legs">'+twoLegs+feet+'</g>'+wings(p)+neck(p)+torso(p)+
-      '<g class="yy-arms">'+twoArms+hands+'</g>'+
+      '<g class="yy-legs">'+twoLegs+feet+'</g>'+attachments(p,'leg')+wings(p)+neck(p)+torso(p)+
+      attachments(p,'arm')+'<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';
   };

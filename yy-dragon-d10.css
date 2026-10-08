@@ -1,0 +1,52 @@
+/* D.10 | Breathing dragon: 4·7·8 acting and a truly still pause.
+   Preserve the authored SVG anatomy, closed eyes and D.9 Coral & Sky colours.
+   Local face details only: no overrides of the pose root's transforms. */
+
+/* Four seconds inhaling, seven seconds of absolute stillness, eight exhaling.
+   The muzzle follows the breath panel instead of running a second timer. */
+#instructor-flow .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="inhale"] .yy-pose.is-current .yy-dragon-bridge-layer{
+ transform-box:fill-box;transform-origin:50% 35%;
+ animation:yy-d10-inhale 4s cubic-bezier(.2,.1,.25,1) both;
+}
+#instructor-flow .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="hold"] .yy-pose.is-current .yy-dragon-bridge-layer{
+ animation:none!important;
+ transform:scale(1.012,1.024);
+}
+#instructor-flow .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="exhale"] .yy-pose.is-current .yy-dragon-bridge-layer{
+ transform-box:fill-box;transform-origin:50% 35%;
+ animation:yy-d10-exhale 8s cubic-bezier(.36,0,.33,1) both;
+}
+@keyframes yy-d10-inhale{from{transform:scale(1)}to{transform:scale(1.012,1.024)}}
+@keyframes yy-d10-exhale{from{transform:scale(1.012,1.024)}to{transform:scale(1)}}
+
+/* Expressive restraint: focus is steadier than repose; savasana truly rests. */
+#instructor-flow .yy-guide[data-phase="pose-1"] .yy-pose.is-current .yy-dragon-whisker{animation-duration:12s}
+#instructor-flow .yy-guide[data-phase="savasana"] .yy-pose.is-current :is(
+ .yy-dragon-whisker,.yy-dragon-beard-assembly,.yy-dragon-forelock,
+ .yy-dragon-sidefin,.yy-dragon-bridge-layer,.yy-mote
+){animation:none!important}
+#instructor-flow .yy-guide[data-phase="finish"] .yy-pose.is-current .yy-dragon-forelock{animation-duration:10s}
+
+/* A pause must freeze every living detail, not only cat/cow and eyelids.
+   Never freeze controls, timers, or pose transition orchestration. */
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-pose.is-current *,
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-stage :is(.yy-sky,.yy-energy,.yy-bloom){
+ animation-play-state:paused!important;
+}
+/* During scene changes, stop wandering ornaments but allow pose entry. */
+#instructor-flow .yy-guide[data-asana-state="transition"] .yy-pose.is-current :is(
+ .yy-dragon-whisker,.yy-dragon-beard-assembly,.yy-dragon-forelock,
+ .yy-dragon-sidefin,.yy-dragon-bridge-layer,.yy-mote
+){animation-play-state:paused!important}
+
+/* Honor quiet mode, inactive tab and operating-system reduced motion. */
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-pose.is-current *,
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-stage :is(.yy-sky,.yy-energy,.yy-bloom){
+ animation:none!important;transition:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-pose.is-current *,
+ #instructor-flow .yy-guide .yy-stage :is(.yy-sky,.yy-energy,.yy-bloom){
+  animation:none!important;transition:none!important;
+ }
+}

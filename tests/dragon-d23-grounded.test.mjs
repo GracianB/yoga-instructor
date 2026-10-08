@@ -38,6 +38,6 @@ test("D23: all 10 original postures preserve authored feet and closed eyes",()=>
  assert.ok(poses.every(p=>p.hands.length===2&&p.feet.length===2));
  const markup=context.window.YIN_YANG_ART.markup();
  assert.equal((markup.match(/class="yy-paw-group"/g)||[]).length,40);
- assert.equal((markup.match(/yy-d17-attachment/g)||[]).length,40);
+ assert.equal([...markup.matchAll(/class="([^"]+)"/g)].filter(m=>m[1].split(/\s+/).includes("yy-d17-attachment")).length,40);
  assert.equal((markup.match(/class="yy-eye-closed yy-eye-/g)||[]).length,20);
 });

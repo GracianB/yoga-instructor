@@ -321,9 +321,9 @@
   const stance=p=>{
     // Contact narrative is pose-specific. No decorative ground glow is
     // attached to a raised hand in Warrior, Flow or the Tree.
-    const grounded=p.kind==="table"||p.kind==="rest"||p.kind==="child"||p.kind==="savasana"?
+    const grounded=p.kind==="table"||p.kind==="downward"||p.kind==="rest"||p.kind==="child"||p.kind==="savasana"?
        p.hands.concat(p.feet):
-      (p.kind==="warrior"||p.kind==="flow"||p.kind==="seat"||
+      (p.kind==="warrior"||p.kind==="mountain"||p.kind==="butterfly"||p.kind==="flow"||p.kind==="seat"||
        p.kind==="breath"||p.kind==="finish")?p.feet:
       p.kind==="tree"?p.feet.slice(0,1):[];
     if(!grounded.length)return "";
@@ -371,5 +371,7 @@
     '</g>'+
     '<g class="yy-pose-container">'+poses.map(drawing).join('')+'</g>'+
   '</svg>';
-  window.YIN_YANG_ART=Object.freeze({poses:Object.freeze(poses),markup});
+  // D24: allow *additional* authored vector poses using the same anatomy.
+  // The canonical ten poses and their Flow engine are unchanged.
+  window.YIN_YANG_ART=Object.freeze({poses:Object.freeze(poses),markup,drawPose:drawing});
 })();

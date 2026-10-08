@@ -303,3 +303,26 @@
     radial-gradient(ellipse at 70% 30%, rgba(120,150,170,.28), transparent 46%),
     linear-gradient(180deg, #1b3344 0%, #24384a 58%, #1a2c38 100%);
 }
+
+/* Eyes: never an empty almond. Iris lives in the almond even on older markup. */
+#instructor-flow .yy-eye-almond{fill:#243f36;stroke:#1a2c26;stroke-width:1.2}
+#instructor-flow .yy-eye-core{fill:url(#yy-gaze-grad)}
+#instructor-flow .yy-eye-center{fill:#161311}
+#instructor-flow .yy-guardian-lid{fill:none;stroke:#efe6da;stroke-width:2.4;stroke-linecap:round;opacity:.9}
+#instructor-flow .yy-eye-closed{fill:none;stroke:#243f36;stroke-width:2.6;stroke-linecap:round}
+#instructor-flow .yy-face-mask{fill:#f4efe6}
+#instructor-flow .yy-fur{fill:#f7f1e8}
+/* Finished console is one decision, not four buttons. */
+#instructor-flow .flow-console[data-flow-status="finished"]{
+  display:flex;flex-direction:column;align-items:center;
+}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls{
+  display:flex;justify-content:center;width:100%;margin:18px auto 0;gap:0;
+}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="pause"]{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="reset"]{
+  min-height:52px;min-width:220px;padding:14px 28px;border-radius:999px;
+  border:1px solid #e7d3b4;background:#f0e2cc;color:#2a2118;font-weight:750;letter-spacing:.06em;
+}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-console-foot{margin-top:10px}

@@ -25,8 +25,12 @@
    The new closed organic ribbons flow into the limb and ribcage. */
 #instructor-flow .yy-guide .yy-d15-socket-relief{opacity:.15}
 #instructor-flow .yy-guide .yy-d15-joint-shell{
- stroke-width:1.15;
- opacity:.94;
+ stroke:none!important;
+ opacity:.12;
+}
+#instructor-flow .yy-guide .yy-d15-joint-fold{
+ stroke-width:1.5;
+ opacity:.3;
 }
 #instructor-flow .yy-guide .yy-limb{
  stroke-linejoin:round;

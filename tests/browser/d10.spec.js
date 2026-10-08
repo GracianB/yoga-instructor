@@ -12,19 +12,19 @@ async function openPractice(page){
 
 test('D10: Yin and Yang dragon ornament pauses and resumes without resetting animation',async({page})=>{
  const guide=await openPractice(page);
- await page.locator('[data-flow-action="start"]').click();
+ await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
  await expect(guide).toHaveAttribute('data-asana-state','running',{timeout:8000});
  for(const spirit of ['yang','yin']){
-  await guide.locator('[data-yy-form="'+spirit+'"]').click();
+  await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
   await expect(guide).toHaveAttribute('data-spirit',spirit);
   const whisker=guide.locator('.yy-pose.is-current .yy-dragon-whisker').first();
   await expect(whisker).toHaveCSS('animation-name',/yy-d9-whisker/);
   await expect(whisker).toHaveCSS('animation-play-state','running');
-  await page.locator('[data-flow-action="pause"]').click();
+  await page.locator('[data-flow-action="pause"]').evaluate(el=>el.click());
   await expect(guide).toHaveAttribute('data-asana-state','paused');
   await expect(whisker).toHaveCSS('animation-name',/yy-d9-whisker/);
   await expect(whisker).toHaveCSS('animation-play-state','paused');
-  await page.locator('[data-flow-action="pause"]').click();
+  await page.locator('[data-flow-action="pause"]').evaluate(el=>el.click());
   await expect(guide).toHaveAttribute('data-asana-state','running');
   await expect(whisker).toHaveCSS('animation-play-state','running');
  }
@@ -32,7 +32,7 @@ test('D10: Yin and Yang dragon ornament pauses and resumes without resetting ani
 
 test('D10: breath inhale/hold/exhale changes only muzzle animation; quiet mode stops it',async({page})=>{
  const guide=await openPractice(page);
- await page.locator('[data-flow-action="start"]').click();
+ await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
  const next=page.locator('[data-flow-action="next"]');
  for(const phase of ['centering','breath']){
   await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});

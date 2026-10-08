@@ -538,3 +538,28 @@ test('D4 audio transport click toggles playback, labels and icons',async ({page}
  await expect(button.locator('.ico-pause')).toBeHidden();
  expect(errors).toEqual([]);
 });
+
+test('D5 guardian silhouette: all ten vector poses have tapered intact limbs',async ({page})=>{
+ const errors=await open(page);
+ const guide=page.locator('#flow-guide');
+ await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+ const poses=guide.locator('.yy-pose');
+ await expect(poses).toHaveCount(10);
+ for(const pose of await poses.all()){
+   await expect(pose.locator('[data-limb^="arm-"]')).toHaveCount(2);
+   await expect(pose.locator('[data-limb^="leg-"]')).toHaveCount(2);
+   await expect(pose.locator('.yy-paw-group')).toHaveCount(4);
+   const paths=await pose.locator('[data-limb]').evaluateAll(nodes=>nodes.map(n=>{
+     const d=n.getAttribute('d')||'';
+     const box=n.getBBox();
+     return {d,valid:box.width>0&&box.height>0};
+   }));
+   expect(paths).toHaveLength(4);
+   for(const shape of paths){
+     expect(shape.valid).toBe(true);
+     expect(shape.d).toMatch(/Q/);
+     expect(shape.d.endsWith('Z')).toBe(true);
+   }
+ }
+ expect(errors).toEqual([]);
+});

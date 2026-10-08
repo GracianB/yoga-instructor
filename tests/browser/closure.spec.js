@@ -492,3 +492,22 @@ test('D2/D3: ten postures in Yin/Yang with non-overlapping rails and green sanct
  }
  expect(errors).toEqual([]);
 });
+
+test('D4 audio player shows only the correct Play/Pause icon',async ({page})=>{
+ const errors=await open(page);
+ const player=page.locator('#focus-player');
+ const button=player.locator('#audio-play');
+ const playIcon=button.locator('.ico-play');
+ const pauseIcon=button.locator('.ico-pause');
+ await expect(button).toBeVisible();
+ await expect(playIcon).toBeVisible();
+ await expect(pauseIcon).toBeHidden();
+ await player.evaluate(el=>el.classList.add('is-playing'));
+ await expect(playIcon).toBeHidden();
+ await expect(pauseIcon).toBeVisible();
+ await player.evaluate(el=>el.classList.remove('is-playing'));
+ await expect(playIcon).toBeVisible();
+ await expect(pauseIcon).toBeHidden();
+ await expect(button).toHaveAttribute('type','button');
+ expect(errors).toEqual([]);
+});

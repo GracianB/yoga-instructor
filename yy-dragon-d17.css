@@ -1,0 +1,104 @@
+/* D17 · ORGANIC FINALE
+   A single creature, no elliptical stickers at the axilla or hip.
+   The existing choreography and closed eyes remain authoritative. */
+#instructor-flow .yy-guide .yy-d17-attachment{
+ fill:var(--d9-limb);
+ stroke:none;
+ opacity:.96;
+ stroke-linejoin:round;
+ pointer-events:none;
+}
+#instructor-flow .yy-guide .yy-d17-leg-attachments .yy-d17-attachment{
+ fill:var(--d9-skin-mid);
+ opacity:.92;
+}
+#instructor-flow .yy-guide .yy-d17-arm-attachments .yy-d17-attachment{
+ fill:var(--d9-skin-mid);
+ opacity:.89;
+}
+#instructor-flow .yy-guide .yy-d17-root-blend{
+ fill:var(--d9-limb);
+ stroke:none!important;
+ opacity:1;
+}
+/* The previous highly outlined sockets read like circular stickers.
+   The new closed organic ribbons flow into the limb and ribcage. */
+#instructor-flow .yy-guide .yy-d15-socket-relief{opacity:.15}
+#instructor-flow .yy-guide .yy-d15-joint-shell{
+ stroke-width:1.15;
+ opacity:.94;
+}
+#instructor-flow .yy-guide .yy-limb{
+ stroke-linejoin:round;
+ stroke-linecap:round;
+}
+/* Reclined figure has its OWN long, low torso, integrated throat and quiet
+   abdominal planes. No two intersecting belly ovals or upright jewellery. */
+#instructor-flow .yy-guide .yy-torso:is([data-kind="rest"],[data-kind="savasana"])>.yy-belly{
+ opacity:.065!important;
+}
+#instructor-flow .yy-guide .yy-torso:is([data-kind="rest"],[data-kind="savasana"]) .yy-spine{
+ opacity:.12;
+}
+#instructor-flow .yy-guide .yy-torso:is([data-kind="rest"],[data-kind="savasana"]) .yy-collar,
+#instructor-flow .yy-guide .yy-torso:is([data-kind="rest"],[data-kind="savasana"]) .yy-hip{
+ opacity:.16;
+}
+#instructor-flow .yy-guide .yy-pose:is(.yy-pose-rest,.yy-pose-savasana) .yy-d14-neck-bridge{
+ stroke:none;
+ fill:var(--d9-limb);
+ opacity:.94;
+}
+#instructor-flow .yy-guide .yy-pose:is(.yy-pose-rest,.yy-pose-savasana) .yy-d14-rib-cage{
+ opacity:.48;
+}
+#instructor-flow .yy-guide .yy-pose:is(.yy-pose-rest,.yy-pose-savasana) .yy-d16-wings{
+ opacity:.28;
+}
+#instructor-flow .yy-guide .yy-pose:is(.yy-pose-rest,.yy-pose-savasana) .yy-d12-tail-ridge{
+ opacity:.23;
+}
+/* Nothing floats away from the mat in rest or Savasana. */
+#instructor-flow .yy-guide .yy-pose:is(.yy-pose-rest,.yy-pose-savasana).is-current .yy-character{
+ animation:none!important;
+ transform:none!important;
+}
+/* Flow is now a joyful, energetic, asymmetrical gesture, but not a dance
+   that slides the planted feet or makes the horn orbit across the viewport.
+   The forearms breathe gently from the shoulders; both feet are untouched. */
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose-flow.is-current .yy-arms{
+ transform-box:view-box;
+ transform-origin:365px 200px;
+ animation:yy-d17-flow-gesture 9.6s cubic-bezier(.44,.05,.28,1) infinite;
+}
+@keyframes yy-d17-flow-gesture{
+ 0%,100%{transform:rotate(-.52deg) translateY(0)}
+ 50%{transform:rotate(.82deg) translateY(-.9px)}
+}
+#instructor-flow .yy-guide .yy-pose-flow .yy-d15-expression-smile .yy-d15-cheek-gesture{
+ opacity:.48;
+}
+#instructor-flow .yy-guide .yy-pose-flow .yy-d16-wings{
+ opacity:.88;
+}
+#instructor-flow .yy-guide .yy-pose-flow .yy-d15-pressure-mark{
+ transition:opacity .54s cubic-bezier(.25,.63,.35,1);
+}
+/* Motion contracts: pause is a frozen frame; reduced-motion is still art. */
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-pose-flow.is-current .yy-arms{
+ animation-play-state:paused!important;
+}
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-pose-flow .yy-arms,
+#instructor-flow .yy-guide[data-hidden="true"] .yy-pose-flow .yy-arms,
+body.quiet-mode #instructor-flow .yy-guide .yy-pose-flow .yy-arms{
+ animation:none!important;transform:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-pose-flow .yy-arms{
+  animation:none!important;transform:none!important;transition:none!important;
+ }
+}
+@media(max-width:700px){
+ #instructor-flow .yy-guide .yy-d17-attachment{stroke-width:0}
+}

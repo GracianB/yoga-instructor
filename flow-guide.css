@@ -183,14 +183,14 @@
 @media(max-width:700px){
   .yy-guide{margin-inline:-9px;padding:12px 10px 16px;border-radius:18px}
   .yy-stage{aspect-ratio:5 / 5.5;border-radius:14px}
-  .yy-svg{width:153%;height:100%;margin-left:-26.5%}
+  .yy-svg{width:100%;height:100%;margin-left:0}
   .yy-form-choice button{padding:7px 10px;font-size:9px}
   .yy-breath-panel{width:95px;right:9px;top:9px;padding:8px}
   .yy-breath-panel small{font-size:7px}
   .yy-breath-count{font-size:34px}
   .yy-guide figcaption p{font-size:12px}
 }
-@media(max-width:360px){.yy-stage{aspect-ratio:5 / 6.2}.yy-svg{width:160%;margin-left:-30%}}
+@media(max-width:360px){.yy-stage{aspect-ratio:5 / 6.2}.yy-svg{width:100%;margin-left:0}}
 @media(prefers-reduced-motion:reduce) {
  .yy-pose,.yy-breath-panel,.yy-form-choice button{transition:none!important}
  .yy-character,.yy-bloom,.yy-energy{animation:none!important}

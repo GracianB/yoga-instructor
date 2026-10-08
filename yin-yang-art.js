@@ -2,15 +2,15 @@
 (() => {
   "use strict";
   const poses = [
-    {id:"start",name:["Soltar el peso","Let the weight go"],cue:["Apoya el cuerpo y baja el ritmo.","Rest your body and slow down."],kind:"rest",body:[349,315,119,47,-8],head:[222,293,.79,-22,"closed"],arms:["M282 325Q254 348 226 356","M320 336Q290 359 274 368"],legs:["M425 322Q485 329 523 346","M423 300Q487 296 532 317"],hands:[[226,356],[274,368]],feet:[[523,346],[532,317]],tail:[439,291,1,-8]},
+    {id:"start",name:["Soltar el peso","Let the weight go"],cue:["Apoya el cuerpo y baja el ritmo.","Rest your body and slow down."],kind:"rest",body:[357,320,123,40,-2],head:[222,306,.77,-64,"closed"],arms:["M282 322Q256 342 232 358","M318 333Q296 359 281 364"],legs:["M430 324Q475 335 518 348","M433 309Q486 315 535 334"],hands:[[232,358],[281,364]],feet:[[518,348],[535,334]],tail:[449,297,.79,-13]},
     {id:"centering",name:["Volver al centro","Find your centre"],cue:["Baja la mirada y encuentra apoyo.","Lower your gaze and find your ground."],kind:"seat",body:[360,266,65,87,0],head:[360,145,.87,0,"soft"],arms:["M310 231Q288 282 316 304","M409 231Q432 283 402 304"],legs:["M328 324Q278 354 244 337","M390 324Q441 354 477 337"],hands:[[316,304],[402,304]],feet:[[244,337],[477,337]],tail:[426,290,.65,5]},
     {id:"breath",name:["Respirar 4 · 7 · 8","Breathe 4 · 7 · 8"],cue:["Inhala cuatro, sostén siete, exhala ocho.","Inhale four, hold seven, exhale eight."],kind:"breath",body:[360,260,67,87,0],head:[361,141,.86,0,"soft"],arms:["M305 227Q266 243 250 282","M414 227Q450 243 470 282"],legs:["M324 321Q282 352 245 335","M394 321Q440 352 476 335"],hands:[[250,282],[470,282]],feet:[[245,335],[476,335]],tail:[433,276,.64,-8]},
     {id:"warmup",name:["Despertar el cuerpo","Wake your body"],cue:["A cuatro apoyos, moviliza suavemente la columna.","On all fours, move your spine gently."],kind:"table",body:[364,267,131,52,-5],head:[223,236,.73,-18,"open"],arms:["M292 283Q270 325 258 367","M329 290Q319 337 316 366"],legs:["M429 279Q455 318 451 368","M461 252Q509 287 505 363"],hands:[[258,367],[316,366]],feet:[[451,368],[505,363]],tail:[461,238,.83,-24]},
     {id:"pose-1",name:["Guerrero II","Warrior II"],cue:["Abre los brazos, afianza tus pies y mira al frente.","Open your arms, ground your feet and look ahead."],kind:"warrior",body:[357,230,62,86,-3],head:[358,123,.79,-13,"focus"],arms:["M309 190Q239 183 155 190","M407 195Q484 184 562 192"],legs:["M322 299Q298 308 272 325Q264 355 253 378","M391 304Q460 311 474 343Q495 360 536 383"],hands:[[155,190],[562,192]],feet:[[253,378],[536,383]],tail:[426,261,.68,10]},
-    {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Cambia de postura sin prisa, con una exhalación.","Move into the next pose with a long exhale."],kind:"flow",body:[372,238,67,87,19],head:[338,131,.81,-18,"open"],arms:["M326 189Q269 138 257 95","M415 201Q461 235 504 253"],legs:["M351 304Q291 335 240 378","M415 306Q468 350 520 381"],hands:[[257,95],[504,253]],feet:[[240,378],[520,381]],tail:[437,256,.63,27]},
+    {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Abre el pecho, juega con el ritmo y mantén los pies enraizados.","Open your chest, feel the rhythm and keep both feet grounded."],kind:"flow",body:[365,237,69,86,11],head:[345,125,.80,-9,"smile"],arms:["M318 193Q269 148 237 109","M417 199Q464 150 514 164"],legs:["M349 305Q294 335 240 378","M410 302Q466 346 520 381"],hands:[[237,109],[514,164]],feet:[[240,378],[520,381]],tail:[437,253,.59,16]},
     {id:"pose-2",name:["Árbol del equilibrio","Tree of balance"],cue:["Busca un punto estable y sostén tu equilibrio.","Find a steady point and hold your balance."],kind:"tree",body:[359,223,63,85,0],head:[358,115,.79,0,"focus"],arms:["M311 186Q280 117 333 83","M407 186Q445 118 384 83"],legs:["M343 298Q349 339 353 387","M391 302Q450 310 423 336Q402 342 355 313"],hands:[[333,83],[384,83]],feet:[[353,387],[355,313]],tail:[426,260,.75,-6]},
     {id:"cooldown",name:["Postura del niño","Child's pose"],cue:["Recoge la energía y descansa la frente.","Fold inward and let your forehead rest."],kind:"child",body:[376,304,117,58,8],head:[264,319,.68,-43,"closed"],arms:["M309 333Q242 357 185 366","M340 344Q269 376 214 379"],legs:["M429 320Q446 364 400 369","M447 304Q489 350 454 365"],hands:[[185,366],[214,379]],feet:[[400,369],[454,365]],tail:[452,280,.66,28]},
-    {id:"savasana",name:["Savasana","Savasana"],cue:["Afloja el cuerpo. No hay nada que conseguir.","Release your body. There is nothing to achieve."],kind:"savasana",body:[362,311,128,45,-3],head:[225,294,.79,-72,"closed"],arms:["M288 309Q270 344 253 365","M360 339Q357 369 331 379"],legs:["M438 310Q495 304 546 319","M445 326Q498 342 555 345"],hands:[[253,365],[331,379]],feet:[[546,319],[555,345]],tail:[455,283,.72,-6]},
+    {id:"savasana",name:["Savasana","Savasana"],cue:["Afloja el cuerpo. No hay nada que conseguir.","Release your body. There is nothing to achieve."],kind:"savasana",body:[363,320,132,39,-1],head:[220,304,.76,-70,"closed"],arms:["M282 319Q262 348 243 366","M352 338Q353 365 332 375"],legs:["M439 322Q491 325 539 344","M444 308Q495 316 546 334"],hands:[[243,366],[332,375]],feet:[[539,344],[546,334]],tail:[452,291,.66,-14]},
     {id:"finish",name:["Un instante de gratitud","A moment of gratitude"],cue:["Junta las manos. Llévate esta calma contigo.","Bring your hands together. Carry this calm with you."],kind:"finish",body:[359,263,65,88,0],head:[359,142,.87,0,"smile"],arms:["M309 231Q300 268 346 263","M411 231Q425 268 373 263"],legs:["M323 326Q280 354 243 338","M395 326Q440 354 476 338"],hands:[[346,263],[373,263]],feet:[[243,338],[476,338]],tail:[425,283,.67,10]}
   ];
   const fmt=n=>Number(n).toFixed(1).replace(/\.0$/,"");
@@ -39,9 +39,17 @@
     const f=pt=>fmt(pt[0])+","+fmt(pt[1]);
     const first=pieces[0],last=pieces[pieces.length-1];
     const start=[first[0],first[1]],finish=[last[4],last[5]];
-    const silhouette="M"+f(a[0])+"L"+a.slice(1).map(f).join("L")+
+    // An interpolated outer contour rather than straight lines joining
+    // each sampled joint normal. This rounds knees and the axillary tuck
+    // while preserving every authored endpoint and foot contact.
+    const side=pts=>pts.slice(1).map((point,i)=>{
+      const next=pts[i+2];
+      return next?'Q'+f(point)+' '+f([(point[0]+next[0])/2,(point[1]+next[1])/2]):
+        'L'+f(point);
+    }).join("");
+    const silhouette="M"+f(a[0])+side(a)+
       "Q"+f(finish)+" "+f(b[b.length-1])+
-      "L"+b.slice(0,-1).reverse().map(f).join("L")+
+      side(b.slice().reverse())+
       "Q"+f(start)+" "+f(a[0])+"Z";
     // Socket and taper share the authored limb coordinates, so the shoulder/
     // hip overlaps the torso and cannot become a detached animated badge.
@@ -49,7 +57,10 @@
     const angle=fmt(Math.atan2(cy-sy,cx-sx)*180/Math.PI);
     const major=type==="leg"?34:28,minor=type==="leg"?24:17;
     const socket='<g class="yy-d15-socket yy-d15-'+type+'-socket" transform="translate('+fmt(sx)+' '+fmt(sy)+') rotate('+angle+')">'+
-      '<ellipse rx="'+major+'" ry="'+minor+'" class="yy-d15-socket-flesh"/>'+
+      path('M-'+fmt(major*.94)+' -'+fmt(minor*.44)+
+        'C-'+fmt(major*.50)+' -'+fmt(minor*1.05)+' '+fmt(major*.37)+' -'+fmt(minor*.91)+' '+fmt(major*.86)+' -'+fmt(minor*.36)+
+        'Q'+fmt(major*1.03)+' 0 '+fmt(major*.86)+' '+fmt(minor*.36)+
+        'C'+fmt(major*.37)+' '+fmt(minor*.91)+' -'+fmt(major*.50)+' '+fmt(minor*1.05)+' -'+fmt(major*.94)+' '+fmt(minor*.44)+'Z','yy-d15-socket-flesh yy-d17-root-blend')+
       path('M'+fmt(major*.2)+' -'+fmt(minor*.79)+'Q'+fmt(major*.76)+' 0 '+fmt(major*.2)+' '+fmt(minor*.79),'yy-d15-socket-relief')+
       '</g>';
     // Two-section limbs (bent Warrior II / Tree) get a real knee/elbow fold.
@@ -67,6 +78,21 @@
       '<path d="'+d+'" class="yy-limb-lustre yy-'+type+'-lustre"/>'+
       joint+
       '</g>';
+  };
+  // Blended underarm and pelvic membranes reach inside the torso.
+  const attachments=(p,type)=>{
+    const body=p.body,limbs=type==="arm"?p.arms:p.legs;
+    return '<g class="yy-d17-attachments yy-d17-'+type+'-attachments">'+limbs.map((d)=>{
+      const c=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+      const [sx,sy,cx,cy]=c,dx=cx-sx,dy=cy-sy;
+      const mag=Math.max(1,Math.hypot(dx,dy)),nx=-dy/mag,ny=dx/mag;
+      const wide=type==="arm"?20:27,bx=body[0],by=body[1];
+      const qx=sx+(bx-sx)*.53,qy=sy+(by-sy)*.53;
+      const d2='M'+fmt(sx+nx*wide)+' '+fmt(sy+ny*wide)+
+        'C'+fmt(qx+nx*wide*.7)+' '+fmt(qy+ny*wide*.7)+' '+fmt(qx+nx*wide*.2)+' '+fmt(qy+ny*wide*.2)+' '+fmt(bx)+' '+fmt(by)+
+        'C'+fmt(qx-nx*wide*.2)+' '+fmt(qy-ny*wide*.2)+' '+fmt(qx-nx*wide*.7)+' '+fmt(qy-ny*wide*.7)+' '+fmt(sx-nx*wide)+' '+fmt(sy-ny*wide)+'Z';
+      return path(d2,'yy-d17-attachment yy-d17-'+type+'-attachment');
+    }).join('')+'</g>';
   };
   const point=(xy,cls)=>{
     const [x,y]=xy;
@@ -208,12 +234,19 @@
          'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.86)+' '+fmt(ry*.55)+
          'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.92)+' -'+fmt(ry*.55)+
          'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.86)+' -'+fmt(ry*.57)+'Z'):
+        (horizontal?
+          ('M-'+fmt(rx*.91)+' -'+fmt(ry*.14)+
+           'C-'+fmt(rx*.87)+' -'+fmt(ry*.84)+' -'+fmt(rx*.40)+' -'+fmt(ry*1.01)+' -'+fmt(rx*.05)+' -'+fmt(ry*.86)+
+           'C'+fmt(rx*.39)+' -'+fmt(ry*1.02)+' '+fmt(rx*.85)+' -'+fmt(ry*.66)+' '+fmt(rx*.94)+' -'+fmt(ry*.16)+
+           'C'+fmt(rx*1.01)+' '+fmt(ry*.18)+' '+fmt(rx*.80)+' '+fmt(ry*.65)+' '+fmt(rx*.43)+' '+fmt(ry*.73)+
+           'Q0 '+fmt(ry*.84)+' -'+fmt(rx*.45)+' '+fmt(ry*.68)+
+           'C-'+fmt(rx*.81)+' '+fmt(ry*.59)+' -'+fmt(rx*.98)+' '+fmt(ry*.24)+' -'+fmt(rx*.91)+' -'+fmt(ry*.14)+'Z'):
         ('M-'+fmt(rx*.83)+' -'+fmt(ry*.42)+
          'C-'+fmt(rx*.96)+' -'+fmt(ry*.83)+' -'+fmt(rx*.47)+' -'+fmt(ry*1.13)+' 0 -'+fmt(ry*.98)+
          'C'+fmt(rx*.57)+' -'+fmt(ry*1.13)+' '+fmt(rx*.98)+' -'+fmt(ry*.70)+' '+fmt(rx*.92)+' -'+fmt(ry*.37)+
          'C'+fmt(rx*1.05)+' '+fmt(ry*.01)+' '+fmt(rx*.79)+' '+fmt(ry*.61)+' '+fmt(rx*.43)+' '+fmt(ry*.79)+
          'Q0 '+fmt(ry*.98)+' -'+fmt(rx*.45)+' '+fmt(ry*.79)+
-         'C-'+fmt(rx*.77)+' '+fmt(ry*.54)+' -'+fmt(rx*.98)+' '+fmt(ry*.02)+' -'+fmt(rx*.83)+' -'+fmt(ry*.42)+'Z'))+
+         'C-'+fmt(rx*.77)+' '+fmt(ry*.54)+' -'+fmt(rx*.98)+' '+fmt(ry*.02)+' -'+fmt(rx*.83)+' -'+fmt(ry*.42)+'Z')))+
         '" class="yy-fur yy-outline yy-d12-body-shell"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
       (p.kind==="table"?
         '<path d="M-95 27Q0 42 95 27Q0 56 -95 27Z" class="yy-belly-shade" data-asana-belly="true"/>'+
@@ -312,8 +345,8 @@
       circle(p.head[0]+115,p.head[1]-28,2.0,'yy-mote yy-mote-b')+
       circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
       '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
-      '<g class="yy-legs">'+twoLegs+feet+'</g>'+wings(p)+neck(p)+torso(p)+
-      '<g class="yy-arms">'+twoArms+hands+'</g>'+
+      '<g class="yy-legs">'+twoLegs+feet+'</g>'+attachments(p,'leg')+wings(p)+neck(p)+torso(p)+
+      attachments(p,'arm')+'<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';
   };

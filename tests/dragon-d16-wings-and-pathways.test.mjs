@@ -69,7 +69,7 @@ test('D16: session modes are independent data, only asanas active',()=>{
 });
 test('D16: Pages contains all versioned visual files and future pathway data',()=>{
  assert.match(html,/yy-dragon-d16\.css\?v=d16-1/);
- assert.match(html,/yin-yang-art\.js\?v=phase-d16-1/);
+ assert.match(html,/yin-yang-art\.js\?v=phase-d17-1/);
  assert.match(html,/flow-guide\.js\?v=d16-1/);
  assert.match(bundle,/'yy-dragon-d16\.css'/);
  assert.match(bundle,/'practice-pathways\.js'/);

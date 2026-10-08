@@ -48,7 +48,7 @@ test('D14: whole-body float removed in grounded/supine asanas; Tree rotates arou
 });
 test('D14: latest assets are present in Pages and size-budgeted',()=>{
  assert.match(html,/yy-dragon-d14\.css\?v=d14-1/);
- assert.match(html,/yin-yang-art\.js\?v=phase-d16-1/);
+ assert.match(html,/yin-yang-art\.js\?v=phase-d17-1/);
  assert.match(html,/yy-asana-motion\.js\?v=d14-1/);
  assert.ok(html.indexOf('yy-dragon-d14.css')>html.indexOf('yy-dragon-d13.css'));
  assert.match(bundle,/'yy-dragon-d14\.css'/);

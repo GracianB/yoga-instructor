@@ -39,7 +39,7 @@ test('D15: precise support distribution across all ten yoga poses',()=>{
 test('D15: every authored expression has two CLOSED eyes and no third-eye elements',()=>{
  const svg=scene().markup();
  const kinds={start:'closed',centering:'soft',breath:'soft',warmup:'open','pose-1':'focus',
-  transition:'open','pose-2':'focus',cooldown:'closed',savasana:'closed',finish:'smile'};
+  transition:'smile','pose-2':'focus',cooldown:'closed',savasana:'closed',finish:'smile'};
  for(const [id,kind] of Object.entries(kinds)){
   const p=chunk(svg,id);
   assert.equal(countClass(p,'yy-d15-expression-'+kind),1,id);
@@ -61,7 +61,7 @@ test('D15: pressure is purely optical, tracks crossfade, pauses correctly and re
 });
 test('D15: its version, bundle entry and budget are in SHA-verified Pages release',()=>{
  assert.match(html,/yy-dragon-d15\.css\?v=d15-1/);
- assert.match(html,/yin-yang-art\.js\?v=phase-d16-1/);
+ assert.match(html,/yin-yang-art\.js\?v=phase-d17-1/);
  assert.ok(html.indexOf('yy-dragon-d15.css')>html.indexOf('yy-dragon-d14.css'));
  assert.match(bundle,/'yy-dragon-d15\.css'/);
  assert.match(audit,/yy-dragon-d15\.css'\)\.size <= 8000/);

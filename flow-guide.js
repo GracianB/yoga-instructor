@@ -18,7 +18,7 @@
    '<div class="yy-form-choice" role="group" aria-label="Elige la energía del personaje">'+
    '<button type="button" data-yy-form="yang" aria-pressed="true"><span aria-hidden="true">☼</span> YANG</button>'+
    '<button type="button" data-yy-form="yin" aria-pressed="false"><span aria-hidden="true">☾</span> YIN</button></div></div>'+
-   '<div class="yy-stage"><div class="yy-sky" aria-hidden="true"></div>'+
+   '<div class="yy-stage"><div class="yy-sky" aria-hidden="true"></div><div class="yy-scene-breadcrumb" aria-hidden="true"><strong class="yy-count">01 / 10</strong><span class="yy-current-asana">Soltar el peso</span></div>'+
     '<div class="yy-energy yy-energy-a" aria-hidden="true"></div><div class="yy-energy yy-energy-b" aria-hidden="true"></div>'+
     art.markup()+
     '<div class="yy-bloom" aria-hidden="true"><span>✧</span></div>'+
@@ -38,6 +38,8 @@
     if(!pose)return;
     root.dataset.status=snapshot.status;
     root.dataset.phase=snapshot.phase;
+    root.querySelector(".yy-count").textContent=String(snapshot.index+1).padStart(2,"0")+" / 10";
+    root.querySelector(".yy-current-asana").textContent=titleFor(snapshot.phase);
     title.textContent=pose.name[language()==="en"?1:0];
     text.textContent=pose.cue[language()==="en"?1:0];
     root.querySelector("[data-guide-eyebrow]").textContent=preview?
@@ -87,6 +89,7 @@
   function selectForm(form,manual=true){
     if(form!=="yin"&&form!=="yang")return;
     formManual=manual||formManual;
+    if(manual) { try{localStorage.setItem("yy-yoga-form",form);}catch(_){} }
     root.dataset.spirit=form;
     for(const button of root.querySelectorAll("[data-yy-form]"))
       button.setAttribute("aria-pressed",String(button.dataset.yyForm===form));
@@ -120,7 +123,9 @@
   document.addEventListener("visibilitychange",()=>{root.dataset.hidden=String(document.hidden);});
   const initial=root.querySelector('[data-pose="start"]');
   if(initial)initial.classList.add("is-current");
-  selectForm(document.documentElement.dataset.theme==="dark"?"yin":"yang",false);
+  let preferred;
+  try{preferred=localStorage.getItem("yy-yoga-form");}catch(_){}
+  selectForm(preferred==="yin"||preferred==="yang"?preferred:(document.documentElement.dataset.theme==="dark"?"yin":"yang"),!!preferred);
   showText();
   // Notify UI on next turn, after all deferred modules have installed their listeners.
   window.YOGA_RUNTIME.frame(reveal);

@@ -380,7 +380,7 @@ test("Yin Yang art: ten distinct authored phases, exactly two arms and two legs"
 test("Yin Yang presentation: selectable dual palette, no deforming skeleton", () => {
   const guide=readFileSync(new URL("../flow-guide.js",import.meta.url),"utf8");
   const css=readFileSync(new URL("../flow-guide.css",import.meta.url),"utf8");
-  assert.match(index,/yin-yang-art\.js\?v=phase-d11-1/);
+  assert.match(index,/yin-yang-art\.js\?v=phase-d12-1/);
   assert.match(index,/flow-guide\.js\?v=yin-yang-\d+/);
   assert.doesNotMatch(index,/flow-motion\.js/);
   assert.match(guide,/data-yy-form="yang"/);
@@ -476,6 +476,6 @@ test("Phase D1: serene guardian eyes, two almond silhouettes not human staring e
   assert.match(css,/data-spirit="yin"\] \.yy-eye-almond/);
   assert.match(css,/\.yy-eye-closed/);
   assert.match(css,/\.yy-muzzle/);
-  assert.match(index,/yin-yang-art\.js\?v=phase-d11-1/);
+  assert.match(index,/yin-yang-art\.js\?v=phase-d12-1/);
   assert.match(index,/yy-premium-stage\.css\?v=phase-d1-1/);
 });

@@ -41,6 +41,8 @@ assert.ok(statSync('flow-guide.css').size <= 16000, 'Guide CSS budget');
 assert.ok(statSync('flow-guide.js').size <= 16000, 'Guide JS budget');
 assert.ok(statSync('yin-yang-art.js').size <= 48000, 'Yin Yang vector art budget');
 assert.ok(statSync('yy-dragon-d9.css').size <= 14000, 'D9 dragon motion CSS budget');
+assert.ok(statSync('yy-dragon-d12.css').size <= 9000, 'D12 anatomy CSS budget');
+assert.ok(html.indexOf('yy-dragon-d12.css')>html.indexOf('yy-dragon-d11.css'), 'D12 art loads after D11');
 assert.ok(html.indexOf('yy-dragon-d9.css')>html.indexOf('yy-phase-d7-polish.css'), 'D9 art loads after D7');
 assert.ok(!html.includes('flow-motion.js'), 'Obsolete bone-morphing script must not load');
 assert.match(html, /<script src="\.\/yin-yang-art\.js\?v=phase-d\d+-\d+" defer><\/script>/, 'Versioned Yin Yang art module required');

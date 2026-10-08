@@ -1,0 +1,123 @@
+/* D.12 · LUNAR UNICORN DRAGON
+   Anatomical SVG refinement; no PNG, additional render loop or pose-root tweening.
+   The horn is a single central unicorn spiral, distinct from two subdued side hornlets. */
+#instructor-flow .yy-guide[data-spirit="yang"]{
+ --d12-tail-hi:#ffebef;--d12-tail-mid:#f4b8c9;--d12-tail-low:#cf7e9e;
+ --d12-horn-hi:#fff9f1;--d12-horn-mid:#ded5f6;--d12-horn-low:#9ebce2;
+ --d12-horn-line:#86658c;--d12-tail-line:#98627f;
+ --d12-etched:#fff4ed;--d12-ventral:#ec9caf;
+}
+#instructor-flow .yy-guide[data-spirit="yin"]{
+ --d12-tail-hi:#effaff;--d12-tail-mid:#a7c8ed;--d12-tail-low:#7b91ca;
+ --d12-horn-hi:#fcfdff;--d12-horn-mid:#bfdff8;--d12-horn-low:#e4b9d1;
+ --d12-horn-line:#6875a6;--d12-tail-line:#647bab;
+ --d12-etched:#f5faff;--d12-ventral:#99b2df;
+}
+#instructor-flow .yy-guide .yy-d12-tail-hi{stop-color:var(--d12-tail-hi)}
+#instructor-flow .yy-guide .yy-d12-tail-mid{stop-color:var(--d12-tail-mid)}
+#instructor-flow .yy-guide .yy-d12-tail-low{stop-color:var(--d12-tail-low)}
+#instructor-flow .yy-guide .yy-d12-horn-hi{stop-color:var(--d12-horn-hi)}
+#instructor-flow .yy-guide .yy-d12-horn-mid{stop-color:var(--d12-horn-mid)}
+#instructor-flow .yy-guide .yy-d12-horn-low{stop-color:var(--d12-horn-low)}
+
+/* Tail silhouette belongs to the body palette. The legacy green from
+   --yy-mane and --yy-fur-deep can no longer leak into the caudal section. */
+#instructor-flow .yy-guide .yy-d12-tail-shell{
+ fill:url(#yy-d12-tail)!important;
+ stroke:var(--d12-tail-line)!important;stroke-width:2.7!important;
+ stroke-linejoin:round;stroke-linecap:round;
+}
+#instructor-flow .yy-guide .yy-d12-tail-plume{
+ fill:var(--d12-horn-low)!important;
+ stroke:var(--d12-tail-line)!important;stroke-width:2!important;
+ stroke-linecap:round;stroke-linejoin:round;
+}
+#instructor-flow .yy-guide .yy-d12-tail-ridge,
+#instructor-flow .yy-guide .yy-d12-tail-flow{
+ fill:none;stroke:var(--d12-etched);stroke-width:2.1;
+ opacity:.52;stroke-linecap:round;
+}
+#instructor-flow .yy-guide .yy-d12-tail-flow{stroke-width:1.5;opacity:.36}
+#instructor-flow .yy-guide .yy-d12-tail-plume-veins{
+ fill:none;stroke:var(--d12-etched);stroke-width:1.7;opacity:.8;
+}
+#instructor-flow .yy-guide .yy-d12-tail-spines{
+ fill:none;stroke:var(--d12-horn-low)!important;
+ stroke-width:4.1;stroke-linejoin:round;stroke-linecap:round;opacity:.82;
+}
+/* Only the feather moves; the tail root, ground and original poses stay still. */
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-d12-tail-plume{
+ transform-box:fill-box;transform-origin:20% 65%;
+ animation:yy-d12-tail-tip 10.8s ease-in-out infinite;
+}
+@keyframes yy-d12-tail-tip{
+ 0%,100%{transform:rotate(-.6deg)}
+ 50%{transform:rotate(1.4deg) translateY(-1px)}
+}
+
+/* Adult body: sculpture instead of another ring of bright trinkets. The
+   Cat/Cow dorsal and ventral path geometry is intentionally unchanged. */
+#instructor-flow .yy-guide .yy-d12-body-shell{
+ stroke:var(--d9-ink);stroke-width:2.7;stroke-linejoin:round;
+}
+#instructor-flow .yy-guide .yy-d12-shoulder-arc,
+#instructor-flow .yy-guide .yy-d12-ventral-arc{
+ fill:none;stroke:var(--d12-etched);stroke-width:2.3;
+ opacity:.42;stroke-linecap:round;
+}
+#instructor-flow .yy-guide .yy-d12-ventral-arc{
+ stroke:var(--d12-ventral);stroke-width:2.1;opacity:.42;
+}
+#instructor-flow .yy-guide .yy-torso>.yy-belly{opacity:.14}
+#instructor-flow .yy-guide .yy-dragon-body-scales path{opacity:.28;stroke-width:2}
+#instructor-flow .yy-guide .yy-paw{
+ fill:color-mix(in srgb,var(--d9-limb) 83%,var(--d9-fin))!important;
+ stroke:var(--d9-ink);stroke-width:2.1;
+}
+#instructor-flow .yy-guide .yy-paw-toes{opacity:.27}
+#instructor-flow .yy-guide .yy-pad{opacity:.18}
+#instructor-flow .yy-guide .yy-paw-gloss{opacity:.12}
+
+/* Serene head: narrower cheek planes, small temple contours, eyes CLOSED.
+   No pupils, crown circles, central gem, forehead eye or sticker muzzle. */
+#instructor-flow .yy-guide .yy-d12-temple-relief,
+#instructor-flow .yy-guide .yy-d12-cheek-bone{
+ fill:none;stroke:var(--d12-etched);stroke-linecap:round;stroke-width:1.85;
+ opacity:.38;
+}
+#instructor-flow .yy-guide .yy-d12-cheek-bone{stroke:var(--d9-eye);stroke-width:1.4;opacity:.19}
+#instructor-flow .yy-guide .yy-horn-left,
+#instructor-flow .yy-guide .yy-horn-right{opacity:.76}
+
+/* THE UNICORN SIGNATURE. Central, slender, hand-spiralled.
+   Group is before the cranial shell, so the base grows from the skull. */
+#instructor-flow .yy-guide .yy-d12-unicorn-core{
+ fill:url(#yy-d12-unicorn)!important;
+ stroke:var(--d12-horn-line);stroke-width:2.4;stroke-linejoin:round;
+}
+#instructor-flow .yy-guide .yy-d12-unicorn-spiral{
+ fill:none;stroke:var(--d12-horn-line);stroke-width:2.5;
+ opacity:.62;stroke-linecap:round;
+}
+#instructor-flow .yy-guide .yy-d12-unicorn-glint{
+ fill:none;stroke:var(--d12-horn-hi);stroke-width:2.5;
+ opacity:.92;stroke-linecap:round;
+}
+#instructor-flow .yy-guide .yy-d12-unicorn-root{
+ fill:none;stroke:var(--d12-horn-line);stroke-width:2.1;opacity:.5;
+}
+/* Respect the stillness contract for pause, inactive tabs, Quiet Mode and OS. */
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-pose.is-current .yy-d12-tail-plume{
+ animation-play-state:paused!important;
+}
+#instructor-flow .yy-guide:is([data-asana-state="reduced"],[data-hidden="true"]) .yy-d12-tail-plume,
+body.quiet-mode #instructor-flow .yy-guide .yy-d12-tail-plume{
+ animation:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-d12-tail-plume{animation:none!important;transition:none!important}
+}
+@media(max-width:700px){
+ #instructor-flow .yy-guide .yy-d12-unicorn-spiral{stroke-width:2.9}
+ #instructor-flow .yy-guide .yy-d12-tail-ridge{stroke-width:2.35}
+}

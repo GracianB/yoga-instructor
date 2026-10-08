@@ -51,7 +51,7 @@
   const point=(xy,cls)=>{
     const [x,y]=xy;
     return '<g transform="translate('+x+' '+y+')" class="yy-paw-group">'+
-      '<path d="M-18-3Q-16-15-4-15Q15-18 20-5Q24 11 12 17Q-2 22-15 12Q-22 6-18-3Z" class="'+cls+'"/>'+
+      '<path d="M-17-2Q-16-12-4-14Q12-15 18-5Q21 8 10 14Q-2 17-14 10Q-19 6-17-2Z" class="'+cls+'"/>'+
       '<path d="M-10-8Q-5-14 1-11M3-11Q10-13 13-6" class="yy-paw-toes"/>'+
       '<path d="M-12 5Q-4 12 5 10" class="yy-paw-gloss"/>'+
       '<ellipse cx="-8" cy="-8" rx="3.2" ry="2.4" class="yy-toe"/>'+
@@ -70,22 +70,29 @@
       path('M-50 6Q-35 18-18 6','yy-eye-closed yy-eye-left')+
       path('M18 6Q35 18 50 6','yy-eye-closed yy-eye-right')+'</g>';
     return '<g class="yy-head yy-dragon-head" transform="'+toTransform(x,y,s,r)+'">'+
-      path('M-61-49C-79-66-84-103-70-126C-64-102-48-81-37-64L-43-53Z','yy-dragon-horn yy-horn-left')+
-      path('M43-64C55-84 65-105 73-126C86-102 81-66 62-48L43-53Z','yy-dragon-horn yy-horn-right')+
-      path('M-65-108Q-64-78-49-59M66-109Q67-81 54-59','yy-dragon-horn-ridge')+
+      '<g class="yy-d12-unicorn-horn">'+
+        path('M-20-66C-14-88-11-115-5-137C8-117 13-93 19-66Q0-54-20-66Z','yy-d12-unicorn-core')+
+        path('M-12-83Q0-78 13-83M-9-96Q0-92 10-98M-7-110Q0-108 6-113M-5-122Q0-119 2-124','yy-d12-unicorn-spiral')+
+        path('M-4-131C-2-114 1-91 3-72','yy-d12-unicorn-glint')+
+        path('M-24-65Q0-78 23-65','yy-d12-unicorn-root')+
+      '</g>'+
+      path('M-61-49C-78-68-77-97-67-111C-63-94-48-78-37-64L-43-53Z','yy-dragon-horn yy-horn-left')+
+      path('M43-64C55-81 64-95 70-111C82-98 80-68 62-48L43-53Z','yy-dragon-horn yy-horn-right')+
+      path('M-65-101Q-64-80-49-59M66-101Q67-81 54-59','yy-dragon-horn-ridge')+
       path('M-73-93Q-71-83-66-74M73-93Q71-83 66-74M-62-67L-57-59M62-67L57-59','yy-d11-horn-engraving')+
       path('M-59-43C-79-66-95-88-103-108C-111-78-93-48-76-27Z','yy-dragon-sidefin yy-fin-left')+
       path('M59-43C79-66 95-88 103-108C111-78 93-48 76-27Z','yy-dragon-sidefin yy-fin-right')+
       path('M-77-48Q-90-75-97-92M78-48Q90-75 97-92','yy-dragon-fin-vein')+
-      path('M-72-45C-52-83-17-84 1-80C40-88 71-66 78-45C96-22 91 8 83 29C93 53 76 75 52 79C31 94 15 102 0 102C-15 102-34 94-53 78C-78 73-94 51-83 27C-93 4-91-25-72-45Z','yy-fur yy-outline yy-head-shell')+
+      path('M-71-43C-54-83-19-86 0-82C39-87 67-68 76-43C89-21 86 7 78 29C85 51 73 73 48 79C30 94 13 99 0 101C-13 99-31 93-48 79C-73 73-85 51-78 28C-87 7-85-21-71-43Z','yy-fur yy-outline yy-head-shell')+
       path('M-71-37Q-49-76-19-66L-28-89Q-7-77 4-74Q37-89 72-47Q42-56 28-38Q2-48-23-37L-48-21Z','yy-crest yy-outline yy-dragon-crest')+
       path('M-60-34Q-42-58-24-57M26-60Q52-62 63-36','yy-mane-light')+
+      path('M-65-25Q-58-15-58 0M65-25Q58-15 58 0','yy-d12-temple-relief')+
       path('M-50-37Q-41-52-27-50M24-54Q43-54 53-40','yy-d11-crest-engraving')+
       '<g class="yy-dragon-forelock">'+
         path('M-24-68Q-6-92 8-79Q18-68 27-51Q7-62-13-48Z','yy-dragon-forelock-fill')+
         path('M-13-72Q0-78 10-70','yy-dragon-forelock-sheen')+'</g>'+
-      path('M-75 14C-69 3-52-4-35 2C-15 15-18 42-27 57Q-57 81-78 50Z','yy-cheek yy-dragon-cheek')+
-      path('M75 14C69 3 52-4 35 2C15 15 18 42 27 57Q57 81 78 50Z','yy-cheek yy-dragon-cheek')+
+      path('M-72 12C-63 2-48-2-34 7C-22 17-23 43-34 56Q-57 70-73 49Z','yy-cheek yy-dragon-cheek')+
+      path('M72 12C63 2 48-2 34 7C22 17 23 43 34 56Q57 70 73 49Z','yy-cheek yy-dragon-cheek')+
       path('M-78 27Q-91 20-103 23L-85 42L-97 54L-74 57M78 27Q91 20 103 23L85 42L97 54L74 57','yy-dragon-cheek-fins')+
       '<g class="yy-dragon-bridge-layer">'+
         path('M-27 0C-33 15-43 30-47 44C-54 65-36 81-18 89Q0 99 19 89C37 81 54 65 47 44C43 30 33 15 27 0C17 13 11 17 0 17C-11 17-17 13-27 0Z','yy-dragon-snout yy-dragon-face-plane')+
@@ -104,6 +111,7 @@
       path('M-63-11Q-60-21-47-18M47-18Q60-21 63-11','yy-dragon-temple-scales')+
       path('M-57 34Q-53 29-46 30M46 30Q53 29 57 34','yy-dragon-cheek-light')+
       path('M-58 18Q-47 15-41 19M58 18Q47 15 41 19','yy-d11-cheek-engraving')+
+      path('M-41 0Q-29-5-22 1M41 0Q29-5 22 1','yy-d12-cheek-bone')+
       circle(-57,42,2.8,'yy-dragon-freckle')+circle(-65,46,1.6,'yy-dragon-freckle')+
       circle(57,42,2.8,'yy-dragon-freckle')+circle(65,46,1.6,'yy-dragon-freckle')+
       path('M-34 49Q-72 35-105 43','yy-whisker yy-dragon-whisker yy-whisker-left yy-whisker-high')+
@@ -115,16 +123,29 @@
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
     return '<g class="yy-torso" data-kind="'+p.kind+'" transform="translate('+x+' '+y+') rotate('+r+')">'+
-      '<path d="M-'+fmt(rx*.86)+' -'+fmt(ry*.57)+
-      'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.9)+' '+fmt(ry*.55)+
-      'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.86)+' '+fmt(ry*.55)+
-      'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.92)+' -'+fmt(ry*.55)+
-      'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.86)+' -'+fmt(ry*.57)+'Z" class="yy-fur yy-outline"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
+      '<path d="'+(p.kind==="table"?
+        ('M-'+fmt(rx*.86)+' -'+fmt(ry*.57)+
+         'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.9)+' '+fmt(ry*.55)+
+         'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.86)+' '+fmt(ry*.55)+
+         'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.92)+' -'+fmt(ry*.55)+
+         'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.86)+' -'+fmt(ry*.57)+'Z'):
+        ('M-'+fmt(rx*.83)+' -'+fmt(ry*.42)+
+         'C-'+fmt(rx*.96)+' -'+fmt(ry*.83)+' -'+fmt(rx*.47)+' -'+fmt(ry*1.13)+' 0 -'+fmt(ry*.98)+
+         'C'+fmt(rx*.57)+' -'+fmt(ry*1.13)+' '+fmt(rx*.98)+' -'+fmt(ry*.70)+' '+fmt(rx*.92)+' -'+fmt(ry*.37)+
+         'C'+fmt(rx*1.05)+' '+fmt(ry*.01)+' '+fmt(rx*.79)+' '+fmt(ry*.61)+' '+fmt(rx*.43)+' '+fmt(ry*.79)+
+         'Q0 '+fmt(ry*.98)+' -'+fmt(rx*.45)+' '+fmt(ry*.79)+
+         'C-'+fmt(rx*.77)+' '+fmt(ry*.54)+' -'+fmt(rx*.98)+' '+fmt(ry*.02)+' -'+fmt(rx*.83)+' -'+fmt(ry*.42)+'Z'))+
+        '" class="yy-fur yy-outline yy-d12-body-shell"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
       (p.kind==="table"?
         '<path d="M-95 27Q0 42 95 27Q0 56 -95 27Z" class="yy-belly-shade" data-asana-belly="true"/>'+
         '<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
       '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>')+
       '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.18)+'" rx="'+fmt(rx*.42)+'" ry="'+fmt(ry*.34)+'"/>'+
+      '<g class="yy-d12-body-relief">'+
+        '<path d="M-'+fmt(rx*.62)+' -'+fmt(ry*.23)+'Q-'+fmt(rx*.35)+' -'+fmt(ry*.79)+' 0 -'+fmt(ry*.71)+
+        'Q'+fmt(rx*.32)+' -'+fmt(ry*.78)+' '+fmt(rx*.61)+' -'+fmt(ry*.26)+'" class="yy-d12-shoulder-arc"/>'+
+        '<path d="M-'+fmt(rx*.56)+' '+fmt(ry*.35)+'Q0 '+fmt(ry*.75)+' '+fmt(rx*.56)+' '+fmt(ry*.35)+'" class="yy-d12-ventral-arc"/>'+
+        '</g>'+
       '<g class="yy-dragon-body-scales">'+
       '<path d="M-'+fmt(rx*.74)+' -'+fmt(ry*.04)+'q'+fmt(rx*.08)+' -'+fmt(ry*.18)+' '+fmt(rx*.19)+' -'+fmt(ry*.10)+
       'm-'+fmt(rx*.22)+' '+fmt(ry*.37)+'q'+fmt(rx*.11)+' -'+fmt(ry*.14)+' '+fmt(rx*.20)+' -'+fmt(ry*.06)+
@@ -151,15 +172,16 @@
   };
   const tail=p=>{
     const [x,y,s,r]=p.tail;
-    return '<g transform="'+toTransform(x,y,s,r)+'" class="yy-tail">'+
-      path('M-8 0Q48-35 96-4Q133 25 125 71Q120 106 83 110Q37 113 8 82Q38 96 68 73Q102 45 64 31Q24 17-8 0Z','yy-tail-main yy-outline')+
-      path('M32 3Q70-12 100 20Q114 44 99 70','yy-tail-band')+
-      path('M23 79Q57 105 81 92','yy-tail-band')+
-      path('M31 14Q57 12 72 27M91 61Q87 77 75 80','yy-tail-glint')+
-      path('M81 107Q113 98 132 73Q142 105 117 126Q98 134 81 107Z','yy-dragon-tail-fin')+
-      path('M91 110Q117 112 126 94','yy-dragon-tail-fin-vein')+
-      path('M32 2L42-14L49 8M58 9L71-12L77 19M91 31L108 20L108 47','yy-dragon-tail-spines')+
-      '<path d="M9 78L-3 70L13 91Q40 118 83 110Q48 111 9 78Z" class="yy-tail-fur"/>'+
+    // The flowing plume is longer than D11. Scale only the tail ornament for
+    // reclining and cat/cow shapes so a 480-unit mobile crop never cuts it.
+    const reach=s*(p.kind==="rest"?.78:p.kind==="table"?.75:1);
+    return '<g transform="'+toTransform(x,y,reach,r)+'" class="yy-tail yy-d12-tail">'+
+      path('M-23-13C10-25 58-21 88 0C116 23 124 55 100 78C88 88 74 90 62 82C78 105 113 106 138 79C153 62 154 37 142 17C173 53 165 95 136 117C102 142 55 119 46 90C41 73 52 61 64 62C64 82 80 87 91 70C105 45 88 29 57 25C27 21 2 30-23 15Z','yy-tail-main yy-outline yy-d12-tail-shell')+
+      path('M-10-3C31-11 76-11 100 17C119 40 113 62 94 77','yy-d12-tail-ridge')+
+      path('M53 86Q80 116 112 110M132 91Q151 73 147 49','yy-d12-tail-flow')+
+      path('M126 99C145 88 161 66 162 43C181 72 171 108 151 121C142 115 132 108 126 99Z','yy-dragon-tail-fin yy-d12-tail-plume')+
+      path('M142 108Q162 88 163 64M150 113Q161 103 167 89','yy-dragon-tail-fin-vein yy-d12-tail-plume-veins')+
+      path('M40-10Q46-21 52-22L60 0M79 3Q89-12 98-9L99 19M117 27Q129 13 136 17L126 45','yy-dragon-tail-spines yy-d12-tail-spines')+
       '</g>';
   };
   const stance=p=>{
@@ -193,6 +215,8 @@
       '<linearGradient id="yy-mane-grad" x1="0" y1="0" x2="1" y2="1"><stop class="yy-mane-stop-hi" offset="0"/><stop class="yy-mane-stop-low" offset="1"/></linearGradient>'+
       '<radialGradient id="yy-gaze-grad" cx="40%" cy="35%"><stop offset="0" stop-color="#c9e6cf"/><stop offset=".55" stop-color="#3f6d52"/><stop offset="1" stop-color="#1c3328"/></radialGradient>'+
       '<linearGradient id="yy-d9-skin" x1="12%" y1="5%" x2="88%" y2="100%"><stop offset="0" class="yy-d9-skin-hi"/><stop offset=".49" class="yy-d9-skin-mid"/><stop offset="1" class="yy-d9-skin-low"/></linearGradient>'+
+      '<linearGradient id="yy-d12-tail" x1="5%" y1="5%" x2="90%" y2="90%"><stop offset="0" class="yy-d12-tail-hi"/><stop offset=".52" class="yy-d12-tail-mid"/><stop offset="1" class="yy-d12-tail-low"/></linearGradient>'+
+      '<linearGradient id="yy-d12-unicorn" x1="5%" y1="0%" x2="92%" y2="100%"><stop offset="0" class="yy-d12-horn-hi"/><stop offset=".58" class="yy-d12-horn-mid"/><stop offset="1" class="yy-d12-horn-low"/></linearGradient>'+
       '<linearGradient id="yy-d9-muzzle" x1="15%" y1="0%" x2="78%" y2="100%"><stop offset="0" class="yy-d9-muzzle-hi"/><stop offset="1" class="yy-d9-muzzle-low"/></linearGradient>'+
       '<linearGradient id="yy-lotus" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a8f4ff"/><stop offset="1" stop-color="#778ef4"/></linearGradient>'+
     '</defs>'+

@@ -40,9 +40,11 @@
       "M-98.3 -29.6Q-123.1 -2.6 -102.2 28.6Q0 "+fmt(underside)+" 98.3 28.6Q136.2 0 104.8 -28.6Q0 "+fmt(bend)+" -98.3 -29.6Z");
     if(spine)spine.setAttribute("d","M-105 -24Q0 "+fmt(bend-3)+" 104 -24");
     if(belly)belly.setAttribute("d","M-95 27Q0 "+fmt(underside-14)+" 95 27Q0 "+fmt(underside-1)+" -95 27Z");
-    // Neck and tail follow the spinal flexion, not the other way around.
-    if(head)head.setAttribute("transform","translate(0 "+fmt(curve*10)+") rotate("+fmt(curve*9)+" 223 236)");
-    if(tail)tail.setAttribute("transform","rotate("+fmt(-curve*7)+" 461 238)");
+    // The neck follows the ribcage; the grounded tail NEVER swings from its
+    // own midpoint. At full Cat/Cow excursion the tip moves just a few px.
+    // The four paws and hip attachment remain fixed in the SVG viewBox.
+    if(head)head.setAttribute("transform","translate(0 "+fmt(curve*5.8)+") rotate("+fmt(curve*4.2)+" 223 236)");
+    if(tail)tail.setAttribute("transform","rotate("+fmt(-curve*1.3)+" 461 238)");
     const next=curve>=0?"cat":"cow";
     if(root.dataset.asanaStep!==next){
       root.dataset.asanaStep=next;
@@ -62,7 +64,13 @@
     root.dataset.asanaState=!clock.ready?"transition":
       suspended()?"reduced":
       clock.status==="paused"?"paused":clock.status==="running"?"running":clock.status;
-    if(!active){stop();return;}
+    if(!active){
+      stop();
+      // Returning to idle is a clean neutral pose, not the last sampled bend.
+      // A PAUSE, unlike a RESET, retains precisely the sampled cat/cow frame.
+      if(clock.status==="idle"){head?.removeAttribute("transform");tail?.removeAttribute("transform");}
+      return;
+    }
     if(!clock.frame && !clock.timer){
       clock.last=0;
       clock.frame=rt.frame(frame);

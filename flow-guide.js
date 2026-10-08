@@ -71,6 +71,11 @@
   const renderPose=async(phase,immediate=false)=>{
     const mine=++epoch;
     clearTimeout(settle);
+    // Retire interrupted frames before starting another transition. Only one
+    // asana has is-current, including rapid next/previous and session reset.
+    root.querySelectorAll('.yy-pose.is-leaving,.yy-pose.is-entering').forEach(p=>{
+      p.classList.remove('is-leaving','is-entering');
+    });
     root.dataset.ready="false";
     root.dataset.motion="transition";
     root.dataset.morph="0.000";
@@ -81,18 +86,24 @@
     if(old===next){reveal();return;}
     const instant=immediate||still();
     if(instant){
-      if(old)old.classList.remove("is-current");
+      if(old)old.classList.remove("is-current","is-leaving");
+      next.classList.remove("is-entering","is-leaving");
       next.classList.add("is-current");
       shown=phase;reveal();return;
     }
+    // Overlap the departure and arrival rather than hiding the dragon for
+    // 220ms. Two authored static SVG poses crossfade with a small gravity-led
+    // offset; no limb interpolation, flashes or teleports.
     stage.classList.add("yy-blooming");
-    if(old)old.classList.remove("is-current");
-    await wait(220);
-    if(mine!==epoch)return;
-    next.classList.add("is-current");
+    if(old){old.classList.add("is-leaving");old.classList.remove("is-current");}
+    next.classList.add("is-current","is-entering");
     shown=phase;
-    await wait(400);
+    await wait(34); // establish entry opacity even without requestAnimationFrame
     if(mine!==epoch)return;
+    next.classList.remove("is-entering");
+    await wait(540);
+    if(mine!==epoch)return;
+    old?.classList.remove("is-leaving");
     reveal();
   };
   function selectForm(form,manual=true){

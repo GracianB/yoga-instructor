@@ -30,12 +30,12 @@
   transform:none!important;
 }
 /* Resting dragon and Savasana have no floating entry/exit or stage pulses. */
-#instructor-flow .yy-guide[data-passage="ground"] .yy-pose:is(.yy-pose-rest,.yy-pose-child,.yy-pose-savasana) .yy-character{
+#instructor-flow .yy-guide .yy-stage[data-passage="ground"] .yy-pose:is(.yy-pose-rest,.yy-pose-child,.yy-pose-savasana) .yy-character{
   animation:none!important;
   transform:none!important;
 }
-#instructor-flow .yy-guide[data-passage="ground"] .yy-d17-leg-attachments .yy-d17-attachment,
-#instructor-flow .yy-guide[data-passage="ground"] .yy-d17-arm-attachments .yy-d17-attachment{
+#instructor-flow .yy-guide .yy-stage[data-passage="ground"] .yy-d17-leg-attachments .yy-d17-attachment,
+#instructor-flow .yy-guide .yy-stage[data-passage="ground"] .yy-d17-arm-attachments .yy-d17-attachment{
   transition:none!important;
 }
 /* Keep the SVG from overflowing the 320px scene during a two-pose overlap. */

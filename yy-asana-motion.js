@@ -32,7 +32,8 @@
     clock.last=now;
     // One calm 8.4-second cycle; the cat rounds and the cow dips the spine.
     const angle=(clock.elapsed%8400)/8400*Math.PI*2;
-    const curve=Math.cos(angle);
+    // D23: phase-continuous neutral start; no snapped Cat/Cow skeleton.
+    const curve=Math.sin(angle)*Math.min(1,clock.elapsed/1400);
     // Cat: arched back + tucked abdomen. Cow: dipped back + released belly.
     // Both the DORSAL and VENTRAL surfaces move in opposite directions,
     // while shoulders, hips and the four paws remain grounded.
@@ -70,6 +71,15 @@
     if(clock.timer)clearTimeout(clock.timer);
     clock.frame=0;clock.timer=0;clock.last=0;
   };
+  // Reset hidden Cat/Cow geometry; never reset a frozen pause.
+  const neutralWarmup=()=>{
+    back?.setAttribute("d","M-98.3 -29.6Q-123.1 -2.6 -102.2 28.6Q0 57.0 98.3 28.6Q136.2 0 104.8 -28.6Q0 -58.0 -98.3 -29.6Z");
+    spine?.setAttribute("d","M-105 -24Q0 -61.0 104 -24");
+    belly?.setAttribute("d","M-95 27Q0 43.0 95 27Q0 56.0 -95 27Z");
+    head?.removeAttribute("transform");tail?.removeAttribute("transform");
+    neck?.setAttribute("d","M265 244C277 237 298 239 312 251L315 270C297 261 282 262 267 278Z");
+    throat?.setAttribute("d","M274 253Q294 247 309 258");
+  };
   function settle(){
     const active=clock.status==="running" && clock.phase==="warmup" && clock.ready && !suspended();
     root.dataset.asanaState=!clock.ready?"transition":
@@ -79,10 +89,9 @@
       stop();
       // Returning to idle is a clean neutral pose, not the last sampled bend.
       // A PAUSE, unlike a RESET, retains precisely the sampled cat/cow frame.
-      if(clock.status==="idle"){
-        head?.removeAttribute("transform");tail?.removeAttribute("transform");
-        neck?.setAttribute("d","M265 244C277 237 298 239 312 251L315 270C297 261 282 262 267 278Z");
-        throat?.setAttribute("d","M274 253Q294 247 309 258");
+      if(clock.status==="idle" || clock.phase!=="warmup" || suspended()){
+        neutralWarmup();
+        if(clock.phase!=="warmup" || suspended())clock.elapsed=0;
       }
       return;
     }

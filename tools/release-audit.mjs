@@ -47,6 +47,8 @@ assert.ok(statSync('yy-dragon-d14.css').size <= 8500, 'D14 grounded anatomy CSS 
 assert.ok(statSync('yy-dragon-d15.css').size <= 8000, 'D15 kinetics CSS budget');
 assert.ok(statSync('yy-dragon-d16.css').size <= 7000, 'D16 premium wings CSS budget');
 assert.ok(statSync('yy-dragon-d17.css').size <= 7000, 'D17 organic finale CSS budget');
+assert.ok(statSync('yy-dragon-d23.css').size <= 4400, 'D23 grounded transitions CSS budget');
+assert.ok(html.indexOf('yy-dragon-d23.css')>html.indexOf('yy-studio-finale.css'), 'D23 transition geometry must load after the D22 studio layers');
 assert.ok(html.indexOf('yy-dragon-d17.css')>html.indexOf('yy-dragon-d16.css'), 'D17 organic art must load last');
 assert.ok(statSync('practice-pathways.js').size <= 3500, 'Future practice pathways data budget');
 assert.ok(html.indexOf('yy-dragon-d16.css')>html.indexOf('yy-dragon-d15.css'), 'D16 motion cascade must load last');

@@ -326,3 +326,44 @@
 }
 #instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:none}
 #instructor-flow .flow-console[data-flow-status="finished"] .flow-console-foot{margin-top:10px}
+
+/* Practice console: one instrument, three states. */
+#instructor-flow .flow-console{
+  display:flex;flex-direction:column;align-items:stretch;gap:0;
+}
+#instructor-flow .flow-console-foot,
+#instructor-flow .flow-controls,
+#instructor-flow .flow-entry-actions{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:14px;width:100%;margin-left:auto;margin-right:auto;
+}
+#instructor-flow .flow-controls{margin-top:16px}
+#instructor-flow .flow-control.ghost{
+  min-height:46px;min-width:128px;padding:10px 18px;border-radius:999px;
+  border:1px solid rgba(236,226,210,.28);background:rgba(16,14,12,.4);color:#f6efe4;
+}
+#instructor-flow .flow-start{
+  min-height:54px;padding:14px 30px;border-radius:999px;
+  border:1px solid #e7d3b4;background:#f0e2cc;color:#2a2118;
+}
+#instructor-flow .flow-preview{
+  background:transparent;border:0;color:#d9cbb8;text-decoration:underline;text-underline-offset:5px;
+}
+#instructor-flow .flow-console[data-flow-status="idle"] .flow-controls{display:none}
+#instructor-flow .flow-console[data-flow-status="running"] .flow-entry-actions,
+#instructor-flow .flow-console[data-flow-status="paused"] .flow-entry-actions,
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="pause"]{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] [data-flow-action="reset"]{
+  min-height:52px;min-width:230px;border-radius:999px;border:1px solid #e7d3b4;background:#f0e2cc;color:#2a2118;
+}
+#instructor-flow .yy-eye-almond{fill:#2c4a3e}
+#instructor-flow .yy-eye-core{fill:#6e9a78}
+#instructor-flow .yy-eye-center{fill:#1a1614}
+#instructor-flow .yy-face-mask{fill:#f6f0e6}
+#instructor-flow .yy-fur{fill:#f3eadf}
+#instructor-flow .yy-stage{
+  background:
+    radial-gradient(ellipse at 50% 82%, rgba(214,160,174,.24), transparent 40%),
+    linear-gradient(180deg,#1c3546,#24384a 60%,#182833);
+}

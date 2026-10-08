@@ -81,7 +81,7 @@
           '<circle cx="'+(gx-2.8)+'" cy="'+(gy-2)+'" r="1.1" class="yy-eye-glint"/>'+
           '<path d="M-16 0Q0 6 16 0" class="yy-eye-sheen"/>'+
         '</g>'+
-        '<path d="M-22 1Q-8 -16 2 -11Q14 -16 22 2" class="yy-guardian-lid"/>'+
+        '<path d="M-20 0Q-6 -8 2 -6Q12 -8 20 1" class="yy-guardian-lid"/>'+
       '</g>';
     };
     const eyes = shut

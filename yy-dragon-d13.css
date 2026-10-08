@@ -1,0 +1,141 @@
+/* D.13 | KINETIC SANCTUARY
+   Transitions are choreographed like breath: arrival, weight, release.
+   No morphing limbs, PNG layers, polling loops or full-canvas blur. */
+
+/* Change of asana: continuous soft crossfade, no 220ms vacant scene. */
+#instructor-flow .yy-guide .yy-pose{
+ transform-box:view-box;
+ transform-origin:50% 76%;
+ transform:translate3d(0,7px,0) scale(.994);
+ transition:
+   opacity 510ms cubic-bezier(.37,0,.18,1),
+   transform 620ms cubic-bezier(.22,.61,.36,1),
+   visibility 510ms;
+}
+#instructor-flow .yy-guide .yy-pose.is-current{
+ opacity:1;visibility:visible;
+ transform:translate3d(0,0,0) scale(1);
+}
+#instructor-flow .yy-guide .yy-pose.is-entering{
+ opacity:0;visibility:visible;
+ transform:translate3d(0,7px,0) scale(.994);
+ transition:none!important;
+}
+#instructor-flow .yy-guide .yy-pose.is-leaving{
+ opacity:0;visibility:visible;
+ transform:translate3d(0,-5px,0) scale(.996);
+}
+#instructor-flow .yy-guide[data-motion="transition"] .yy-pose:is(.is-current,.is-leaving){
+ will-change:opacity,transform;
+}
+/* Never animate a character twice: stage ornaments fade independently,
+   while the actual current drawing remains the main subject. */
+#instructor-flow .yy-guide .yy-stage .yy-bloom{
+ opacity:.42;
+}
+#instructor-flow .yy-guide .yy-stage.yy-blooming .yy-bloom{
+ animation:yy-d13-crossfade-glow 590ms ease-out both;
+}
+@keyframes yy-d13-crossfade-glow{
+ 0%{opacity:0;transform:translate(-50%,0) scale(.92)}
+ 38%{opacity:.38;transform:translate(-50%,-2px) scale(1)}
+ 100%{opacity:0;transform:translate(-50%,0) scale(1.035)}
+}
+
+/* Real cat/cow: compact tail branch, small root movement and no competing
+   feather animation. Its contact point never migrates during spinal flexion. */
+#instructor-flow .yy-guide .yy-pose-table .yy-d13-table-tail .yy-d12-tail-plume{
+ animation:none!important;
+}
+#instructor-flow .yy-guide .yy-pose-table .yy-d13-table-tail .yy-d12-tail-flow{
+ opacity:.2;
+}
+#instructor-flow .yy-guide .yy-pose-table .yy-d13-table-tail .yy-d12-tail-spines{
+ opacity:.45;stroke-width:3;
+}
+#instructor-flow .yy-guide .yy-pose-table .yy-d13-table-tail .yy-d12-tail-ridge{
+ opacity:.44;
+}
+#instructor-flow .yy-guide .yy-pose-table .yy-tail-motion{
+ animation:none!important;
+ transform-box:view-box;
+ transform-origin:461px 238px;
+}
+/* Tail tip on the other nine forms: slow local movement, never a whip. */
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose:not(.yy-pose-table):not(.yy-pose-savasana).is-current .yy-d12-tail-plume{
+ animation:yy-d13-tail-feather 14.2s ease-in-out infinite;
+ transform-box:fill-box;transform-origin:20% 68%;
+}
+@keyframes yy-d13-tail-feather{
+ 0%,100%{transform:rotate(-.3deg) translateY(0)}
+ 50%{transform:rotate(.7deg) translateY(-.5px)}
+}
+#instructor-flow .yy-guide .yy-pose-savasana .yy-d12-tail-plume,
+#instructor-flow .yy-guide .yy-pose-child .yy-d12-tail-plume{
+ animation:none!important;
+}
+/* Preserve each pose's rhythm but keep the caudal root close to the hip. */
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose-warrior.is-current .yy-tail-motion{
+ animation:yy-d13-warrior-tail 9s ease-in-out infinite;
+}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose-tree.is-current .yy-tail-motion{
+ animation:yy-d13-tree-tail 10s ease-in-out infinite;
+}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose-flow.is-current .yy-tail-motion{
+ animation:yy-d13-flow-tail 9s ease-in-out infinite;
+}
+@keyframes yy-d13-warrior-tail{0%,100%{transform:rotate(-.4deg)}50%{transform:rotate(.7deg)}}
+@keyframes yy-d13-tree-tail{0%,100%{transform:rotate(-.7deg)}50%{transform:rotate(.9deg)}}
+@keyframes yy-d13-flow-tail{0%,100%{transform:rotate(-.6deg)}50%{transform:rotate(1deg)}}
+
+/* A more composed dragon-unicorn: no shiny plastic paw pads or loud charms.
+   Refine body and the unbroken face, do not displace pose geometry. */
+#instructor-flow .yy-guide .yy-d12-body-shell{stroke-width:2.35}
+#instructor-flow .yy-guide .yy-d12-shoulder-arc{stroke-width:1.9;opacity:.28}
+#instructor-flow .yy-guide .yy-d12-ventral-arc{stroke-width:1.8;opacity:.26}
+#instructor-flow .yy-guide .yy-dragon-body-scales path{opacity:.20}
+#instructor-flow .yy-guide .yy-paw{stroke-width:1.85}
+#instructor-flow .yy-guide .yy-paw-toes{opacity:.23}
+#instructor-flow .yy-guide .yy-paw-gloss{opacity:.07}
+#instructor-flow .yy-guide .yy-d12-cheek-bone{opacity:.15}
+#instructor-flow .yy-guide .yy-horn-left,
+#instructor-flow .yy-guide .yy-horn-right{opacity:.58}
+#instructor-flow .yy-guide .yy-d12-unicorn-core{stroke-width:2.15}
+#instructor-flow .yy-guide .yy-d12-unicorn-spiral{stroke-width:2.1;opacity:.58}
+#instructor-flow .yy-guide .yy-dragon-face-plane{opacity:.94}
+#instructor-flow .yy-guide .yy-d12-tail-ridge{opacity:.37}
+
+/* A paused session keeps the same sampled frame. Transition ornaments freeze
+   while poses crossfade; the crossfade itself isn't a loop. */
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-d12-tail-plume,
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-tail-motion{
+ animation-play-state:paused!important;
+}
+#instructor-flow .yy-guide[data-motion="transition"] .yy-pose.is-leaving .yy-character *,
+#instructor-flow .yy-guide[data-motion="transition"] .yy-pose.is-current .yy-character *{
+ animation-play-state:paused!important;
+}
+/* Accessible stillness remains a first-class mode, not a slower animation. */
+#instructor-flow .yy-guide[data-hidden="true"] .yy-pose,
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-pose,
+body.quiet-mode #instructor-flow .yy-guide .yy-pose{
+ transition:none!important;
+}
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-tail-motion,
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-d12-tail-plume,
+body.quiet-mode #instructor-flow .yy-tail-motion,
+body.quiet-mode #instructor-flow .yy-d12-tail-plume{
+ animation:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-pose{
+   transition:none!important;transform:none!important;
+ }
+ #instructor-flow .yy-guide .yy-tail-motion,
+ #instructor-flow .yy-guide .yy-d12-tail-plume{animation:none!important}
+ #instructor-flow .yy-guide .yy-stage.yy-blooming .yy-bloom{animation:none!important}
+}

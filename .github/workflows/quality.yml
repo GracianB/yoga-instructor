@@ -10,11 +10,12 @@ concurrency:
   cancel-in-progress: true
 permissions:
   contents: read
+
 jobs:
   quality:
-    name: Yoga Quality Gate
+    name: Node tests and release build
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v7
@@ -23,17 +24,52 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run quality
-      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run build
+
+  browser:
+    name: Browser / ${{ matrix.browser }}
+    needs: quality
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    strategy:
+      fail-fast: false
+      max-parallel: 3
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install only this browser
+        run: npx playwright install --with-deps ${{ matrix.browser }}
       - name: Start virtual audio output
         run: |
           sudo apt-get install -y pulseaudio
           pulseaudio --start --exit-idle-time=-1
           pactl load-module module-null-sink sink_name=yoga_test
           pactl set-default-sink yoga_test
-      - run: npm run test:browser
-      - run: npm run build
+      - name: Test ${{ matrix.browser }} with parallel workers
+        run: npm run test:browser -- --project=${{ matrix.browser }}
       - uses: actions/upload-artifact@v6
         if: always()
         with:
-          name: yoga-browser-report
-          path: playwright-report/
+          name: yoga-browser-report-${{ matrix.browser }}
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 7
+
+  gate:
+    name: Yoga Quality Gate
+    runs-on: ubuntu-latest
+    needs: [quality, browser]
+    if: always()
+    steps:
+      - name: Enforce Node build and all three browsers
+        run: |
+          test "${{ needs.quality.result }}" = "success"
+          test "${{ needs.browser.result }}" = "success"

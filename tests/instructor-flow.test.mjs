@@ -26,11 +26,10 @@ test("E2E flow: completes the canonical 10-phase sequence", () => {
   assert.equal(engine.snapshot().index, 9);
 });
 
-test("E2E UI contract: next from idle starts at START without skipping", () => {
-  assert.match(
-    ui,
-    /next: \(\) => \{[\s\S]*?if \(engine\.status === "idle"\) \{[\s\S]*?session\.start\(\);[\s\S]*?phase\.start\(\);[\s\S]*?engine\.start\(\);[\s\S]*?return;[\s\S]*?\}[\s\S]*?engine\.next\(\);/
-  );
+test("D6 UI contract: next cannot start an idle or paused session", () => {
+  assert.match(ui, /action === "next" && \(idle \|\| last \|\| paused\)/);
+  assert.match(ui, /next: \(\) => \{[\s\S]*?engine\.status === "idle" \|\| engine\.status === "paused"/);
+  assert.match(ui, /start: \(\) => \{ session\.start\(\); phase\.start\(\); engine\.start\(\);/);
 });
 
 test("E2E controls: pause freezes progression and resume continues", () => {

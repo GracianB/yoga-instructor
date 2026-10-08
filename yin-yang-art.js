@@ -3,8 +3,8 @@
   "use strict";
   const poses = [
     {id:"start",name:["Soltar el peso","Let the weight go"],cue:["Apoya el cuerpo y baja el ritmo.","Rest your body and slow down."],kind:"rest",body:[349,315,119,47,-8],head:[222,293,.79,-22,"closed"],arms:["M282 325Q254 348 226 356","M320 336Q290 359 274 368"],legs:["M425 322Q485 329 523 346","M423 300Q487 296 532 317"],hands:[[226,356],[274,368]],feet:[[523,346],[532,317]],tail:[439,291,1,-8]},
-    {id:"centering",name:["Volver al centro","Find your centre"],cue:["Cierra los ojos y encuentra apoyo.","Close your eyes and find your ground."],kind:"seat",body:[360,266,65,87,0],head:[360,145,.87,0,"closed"],arms:["M310 231Q288 282 316 304","M409 231Q432 283 402 304"],legs:["M328 324Q278 354 244 337","M390 324Q441 354 477 337"],hands:[[316,304],[402,304]],feet:[[244,337],[477,337]],tail:[426,290,.65,5]},
-    {id:"breath",name:["Respirar 4 · 7 · 8","Breathe 4 · 7 · 8"],cue:["Inhala cuatro, sostén siete, exhala ocho.","Inhale four, hold seven, exhale eight."],kind:"breath",body:[360,260,67,87,0],head:[361,141,.86,0,"closed"],arms:["M305 227Q266 243 250 282","M414 227Q450 243 470 282"],legs:["M324 321Q282 352 245 335","M394 321Q440 352 476 335"],hands:[[250,282],[470,282]],feet:[[245,335],[476,335]],tail:[433,276,.64,-8]},
+    {id:"centering",name:["Volver al centro","Find your centre"],cue:["Baja la mirada y encuentra apoyo.","Lower your gaze and find your ground."],kind:"seat",body:[360,266,65,87,0],head:[360,145,.87,0,"soft"],arms:["M310 231Q288 282 316 304","M409 231Q432 283 402 304"],legs:["M328 324Q278 354 244 337","M390 324Q441 354 477 337"],hands:[[316,304],[402,304]],feet:[[244,337],[477,337]],tail:[426,290,.65,5]},
+    {id:"breath",name:["Respirar 4 · 7 · 8","Breathe 4 · 7 · 8"],cue:["Inhala cuatro, sostén siete, exhala ocho.","Inhale four, hold seven, exhale eight."],kind:"breath",body:[360,260,67,87,0],head:[361,141,.86,0,"soft"],arms:["M305 227Q266 243 250 282","M414 227Q450 243 470 282"],legs:["M324 321Q282 352 245 335","M394 321Q440 352 476 335"],hands:[[250,282],[470,282]],feet:[[245,335],[476,335]],tail:[433,276,.64,-8]},
     {id:"warmup",name:["Despertar el cuerpo","Wake your body"],cue:["A cuatro apoyos, moviliza suavemente la columna.","On all fours, move your spine gently."],kind:"table",body:[364,267,131,52,-5],head:[223,236,.73,-18,"open"],arms:["M292 283Q270 325 258 367","M329 290Q319 337 316 366"],legs:["M429 279Q455 318 451 368","M461 252Q509 287 505 363"],hands:[[258,367],[316,366]],feet:[[451,368],[505,363]],tail:[461,238,.83,-24]},
     {id:"pose-1",name:["Guerrero II","Warrior II"],cue:["Abre los brazos, afianza tus pies y mira al frente.","Open your arms, ground your feet and look ahead."],kind:"warrior",body:[357,230,62,86,-3],head:[358,123,.79,-13,"focus"],arms:["M309 190Q239 183 155 190","M407 195Q484 184 562 192"],legs:["M322 299Q298 308 272 325Q264 355 253 378","M391 304Q460 311 474 343Q495 360 536 383"],hands:[[155,190],[562,192]],feet:[[253,378],[536,383]],tail:[426,261,.68,10]},
     {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Cambia de postura sin prisa, con una exhalación.","Move into the next pose with a long exhale."],kind:"flow",body:[372,238,67,87,19],head:[338,131,.81,-18,"open"],arms:["M326 189Q269 138 257 95","M415 201Q461 235 504 253"],legs:["M351 304Q291 335 240 378","M415 306Q468 350 520 381"],hands:[[257,95],[504,253]],feet:[[240,378],[520,381]],tail:[437,256,.63,27]},
@@ -16,12 +16,8 @@
   const fmt=n=>Number(n).toFixed(1).replace(/\.0$/,"");
   const circle=(x,y,r,cls)=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" class="'+cls+'"/>';
   const path=(d,cls)=>'<path d="'+d+'" class="'+cls+'"/>';
-  // Organic, tapered limb meshes from authored Bézier pose paths.
-  // Exactly two arm meshes + two leg meshes per pose, never generated extra limbs.
   const limb=(d,type,i)=>{
     const n=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
-    // One or two hand-authored quadratic sections. The latter creates an actual
-    // joint without smoothing an anatomical knee into a rubber-hose diagonal.
     if(n.length!==6 && n.length!==10)throw Error("Pose limb must have one or two quadratic sections: "+d);
     const pieces=[n.slice(0,6)];
     if(n.length===10)pieces.push([n[4],n[5],n[6],n[7],n[8],n[9]]);
@@ -58,43 +54,52 @@
       '<path d="M-18-3Q-16-15-4-15Q15-18 20-5Q24 11 12 17Q-2 22-15 12Q-22 6-18-3Z" class="'+cls+'"/>'+
       '<path d="M-10-8Q-5-14 1-11M3-11Q10-13 13-6" class="yy-paw-toes"/>'+
       '<path d="M-12 5Q-4 12 5 10" class="yy-paw-gloss"/>'+
+      '<path d="M-6 2Q0 8 7 2Q4 12 -2 11Q-8 10-6 2Z" class="yy-pad"/>'+
+      '<path d="M-12-9Q-9-14-5-11M2-12Q7-15 10-9" class="yy-toe"/>'+
       '</g>';
   };
   const toTransform=(x,y,s,r)=>'translate('+x+' '+y+') rotate('+r+') scale('+s+')';
   const face=(p)=>{
     const [x,y,s,r,eye]=p.head;
-    const shut=eye==="closed",focus=eye==="focus";
-    // Guardian eyes: two relaxed, dark almond silhouettes. No white sclera,
-    // no concentric "human" pupils or staring specular highlights.
-    const eyes=shut?
-      path('M-60 13Q-37 28-15 12M16 12Q39 27 61 10','yy-eye-closed')+
-      path('M-57 6Q-39 1-21 8M22 7Q39 0 58 5','yy-sleep-brow'):
-      '<g class="yy-anim-eyes">'+
-        path(focus?
-          'M-60 13Q-40 4-17 12Q-35 24-60 13Z':
-          'M-60 12Q-39-2-16 11Q-32 29-60 12Z','yy-eye-almond')+
-        path(focus?
-          'M17 12Q39 3 61 11Q45 24 17 12Z':
-          'M17 11Q39-3 62 12Q46 28 17 11Z','yy-eye-almond')+
-        path('M-50 8Q-37 0-23 8M27 7Q40 0 53 8','yy-eye-sheen')+
-        path('M-60 5Q-39-6-17 5M17 4Q39-7 61 4','yy-guardian-lid')+
+    const shut=eye==="closed",focus=eye==="focus",soft=eye==="soft";
+    const almondLeft=soft?'M-60 12Q-38 6-16 12Q-37 22-60 12Z':
+      focus?'M-60 13Q-40 4-17 12Q-35 24-60 13Z':
+            'M-60 12Q-39-2-16 11Q-32 29-60 12Z';
+    const almondRight=soft?'M17 12Q40 6 62 12Q44 22 17 12Z':
+      focus?'M17 12Q39 3 61 11Q45 24 17 12Z':
+            'M17 11Q39-3 62 12Q46 28 17 11Z';
+    const gx = focus ? 3.4 : soft ? -1.8 : 0.6;
+    const gy = focus ? -0.4 : soft ? 2.2 : 0.8;
+    const eyeUnit = (cx, side) => {
+      const id = "yy-clip-"+p.id+"-"+side;
+      return '<g class="yy-eye-unit" transform="translate('+cx+' 9)">'+
+        '<clipPath id="'+id+'"><path d="M-22 2Q-12-14 0-12Q13-15 22 2Q12 16 0 16Q-13 16-22 2Z"/></clipPath>'+
+        '<g clip-path="url(#'+id+')">'+
+          '<path d="M-22 2Q-12-14 0-12Q13-15 22 2Q12 16 0 16Q-13 16-22 2Z" class="yy-eye-almond"/>'+
+          '<ellipse cx="'+gx+'" cy="'+(1+gy)+'" rx="9.4" ry="10.2" class="yy-eye-core"/>'+
+          '<ellipse cx="'+gx+'" cy="'+(3.2+gy)+'" rx="3.4" ry="5.8" class="yy-eye-center"/>'+
+          '<circle cx="'+(gx-2.8)+'" cy="'+(gy-2)+'" r="1.1" class="yy-eye-glint"/>'+
+          '<path d="M-16 0Q0 6 16 0" class="yy-eye-sheen"/>'+
+        '</g>'+
+        '<path d="M-22 1Q-8 -16 2 -11Q14 -16 22 2" class="yy-guardian-lid"/>'+
       '</g>';
+    };
+    const eyes = shut
+      ? path('M-58 12Q-36 24-16 11M16 11Q38 24 58 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M22 6Q39 0 58 5','yy-sleep-brow')
+      : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(40,"r")+'</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
-      // Strong ear silhouette with contrasting inner pattern.
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
       path('M33-64Q62-114 100-113Q104-60 64-31Z','yy-fur yy-outline')+
       path('M-57-51Q-82-74-85-99Q-53-87-37-60Z','yy-ear-inner')+
       path('M51-62Q70-91 87-98Q83-70 61-47Z','yy-ear-inner')+
       path('M-77-56Q-63-102-38-78L-20-44','yy-ear-light')+
       path('M45-72Q69-101 85-91','yy-ear-light')+
-      // Furred head and sculpted cheeks, not an oval or disconnected discs.
       path('M-69-37Q-48-84-6-82Q51-91 79-42Q95-17 80 20Q98 43 70 63L56 56Q42 86 4 88Q-38 94-57 66L-78 72Q-101 53-84 23Q-93-6-69-37Z','yy-fur yy-outline')+
       path('M-80 28L-108 22Q-92 44-102 53L-81 47Q-86 66-70 70L-51 52','yy-fur-fringe')+
       path('M78 27L103 24Q92 44 108 54L82 48Q93 66 72 73L52 50','yy-fur-fringe')+
       path('M-58-31Q-25-66 4-57Q28-69 56-34Q80-19 73-1Q54-9 43 7Q21-6 10-4Q-22-15-42 8Q-57-7-72 4Q-81-14-58-31Z','yy-face-mask')+
       path('M-61-39Q-27-82-8-67L3-87L19-65Q52-77 76-37Q52-42 29-21L7-35L-17-15L-38-23L-64-9Q-72-26-61-39Z','yy-crest yy-outline')+
       path('M-58-31Q-45-63-22-56M17-63Q44-65 60-40','yy-mane-light')+
-      // A sliver of the other form's energy lives in the forelock.
       path('M-13-64Q1-80 11-64L16-45L1-33L-13-45Z','yy-opposite-lock')+
       path('M-63 13Q-49-7-29 0Q-11 18-20 48Q-42 70-66 53Z','yy-cheek')+
       path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
@@ -113,8 +118,7 @@
   const torso=p=>{
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
-    return '<g class="yy-torso" transform="translate('+x+' '+y+') rotate('+r+')">'+
-      // broad shoulders / taper into hips. The lower centre stays connected to the legs.
+    return '<g class="yy-torso yy-weight" data-kind="'+p.kind+'" transform="translate('+x+' '+y+') rotate('+r+')">'+
       '<path d="M-'+fmt(rx*.75)+' -'+fmt(ry*.57)+
       'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.78)+' '+fmt(ry*.55)+
       'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.75)+' '+fmt(ry*.55)+
@@ -137,6 +141,10 @@
         '<path d="M0 -17L9 -6L0 12Z" class="yy-gem-shine"/>'+
         '<path d="M-30 -24Q-16-39 0-35Q20-39 30-24" class="yy-necklace"/>'+
         '<path d="M-36 6L-44 2M36 6L45 2" class="yy-sigil-lines"/>')+
+      '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.22)+'" rx="'+fmt(rx*.34)+'" ry="'+fmt(ry*.28)+'"/>'+
+      '<path d="M0 -'+fmt(ry*.62)+'Q'+fmt(rx*.08)+' 0 0 '+fmt(ry*.7)+'" class="yy-spine"/>'+
+      '<path d="M-'+fmt(rx*.42)+' -'+fmt(ry*.2)+'Q0 -'+fmt(ry*.34)+' '+fmt(rx*.42)+' -'+fmt(ry*.18)+'" class="yy-collar"/>'+
+      '<path d="M-'+fmt(rx*.5)+' '+fmt(ry*.42)+'Q0 '+fmt(ry*.62)+' '+fmt(rx*.5)+' '+fmt(ry*.4)+'" class="yy-hip"/>'+
       '</g>';
   };
   const tail=p=>{
@@ -149,14 +157,12 @@
       '<path d="M9 78L-3 70L13 91Q40 118 83 110Q48 111 9 78Z" class="yy-tail-fur"/>'+
       '</g>';
   };
-  // Contact shadows are attached only to load-bearing paws, not floating feet.
-  // They make the Cat-Cow, Warrior and Tree poses read as balanced and grounded.
   const stance=p=>{
     const grounded=p.kind==="table"?p.hands.concat(p.feet):
       p.kind==="warrior"?p.feet:
       p.kind==="tree"?p.feet.slice(0,1):[];
     if(!grounded.length)return "";
-    return '<g class="yy-stance" aria-hidden="true">'+grounded.map(([x,y])=>
+    return '<g class="yy-stance">'+grounded.map(([x,y])=>
       '<ellipse class="yy-stance-shadow" cx="'+x+'" cy="'+(y+16)+
       '" rx="26" ry="6"/>').join('')+'</g>';
   };
@@ -165,8 +171,8 @@
     const twoArms=p.arms.map((d,i)=>limb(d,'arm',i)).join('');
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
     const hands=p.hands.map(pos=>point(pos,'yy-paw yy-hand')).join('');
-    return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'" aria-hidden="true">'+
-      stance(p)+'<g class="yy-character"><g class="yy-tail-motion">'+tail(p)+'</g>'+
+    return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'">'+
+      stance(p)+'<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
       '<g class="yy-legs">'+twoLegs+feet+'</g>'+torso(p)+
       '<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
@@ -176,15 +182,17 @@
     '<defs>'+
       '<linearGradient id="yy-fur-grad" x1="0" y1="0" x2=".9" y2="1"><stop class="yy-fur-stop-hi" offset="0"/><stop class="yy-fur-stop-mid" offset=".55"/><stop class="yy-fur-stop-low" offset="1"/></linearGradient>'+
       '<linearGradient id="yy-mane-grad" x1="0" y1="0" x2="1" y2="1"><stop class="yy-mane-stop-hi" offset="0"/><stop class="yy-mane-stop-low" offset="1"/></linearGradient>'+
-      '<radialGradient id="yy-pool"><stop offset="0" stop-color="#6bcbff" stop-opacity=".32"/><stop offset="1" stop-color="#6bcbff" stop-opacity="0"/></radialGradient>'+
+      '<radialGradient id="yy-gaze-grad" cx="40%" cy="35%"><stop offset="0" stop-color="#c9e6cf"/><stop offset=".55" stop-color="#3f6d52"/><stop offset="1" stop-color="#1c3328"/></radialGradient>'+
       '<linearGradient id="yy-lotus" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a8f4ff"/><stop offset="1" stop-color="#778ef4"/></linearGradient>'+
     '</defs>'+
-    '<ellipse cx="360" cy="404" rx="267" ry="43" fill="url(#yy-pool)"/>'+
-    '<path d="M130 397Q232 364 359 392Q495 362 590 397Q466 433 359 410Q248 429 130 397Z" class="yy-lotus"/>'+
-    '<path d="M201 397Q293 347 359 391Q430 347 523 397Q435 423 359 407Q287 424 201 397Z" class="yy-lotus-inner"/>'+
-    '<ellipse cx="360" cy="401" rx="208" ry="10" fill="#102945" opacity=".26"/>'+
+    '<g>'+
+      '<ellipse cx="360" cy="404" rx="280" ry="46" class="yy-grove"/>'+
+      '<path d="M120 392Q168 348 214 390Q250 338 300 388Q338 342 392 390Q430 336 492 388Q530 350 600 394Q500 430 360 412Q220 430 120 392Z" class="yy-petal yy-petal-a"/>'+
+      '<path d="M168 398Q214 360 258 396Q300 354 360 398Q414 352 468 396Q508 366 552 400Q470 424 360 410Q250 424 168 398Z" class="yy-petal yy-petal-b"/>'+
+      '<path d="M250 386Q300 352 360 388Q420 350 470 388Q410 404 360 398Q310 404 250 386Z" class="yy-petal yy-petal-c"/>'+
+      '<path d="M80 360Q110 330 132 362M588 356Q612 328 636 360" class="yy-frond"/>'+
+    '</g>'+
     '<g class="yy-pose-container">'+poses.map(drawing).join('')+'</g>'+
-    '<g class="yy-stars" aria-hidden="true"><path d="M150 135l7 17 18 5-18 6-7 17-6-17-17-6 17-5Z"/><path d="M582 99l5 13 14 5-14 4-5 13-5-13-14-4 14-5Z"/><circle cx="544" cy="222" r="3"/><circle cx="182" cy="240" r="2.5"/></g>'+
   '</svg>';
   window.YIN_YANG_ART=Object.freeze({poses:Object.freeze(poses),markup});
 })();

@@ -90,10 +90,15 @@
 
     actionButtons.forEach((button) => {
       const action = button.dataset.flowAction;
+      // One unmistakable first step: only Start or the optional preview can
+      // create a session. Side arrows never double as a second Start control.
       const disabled =
-        (action === "previous" && (first || last)) ||
-        (action === "next" && last) ||
+        (action === "previous" && (idle || first || last || paused)) ||
+        (action === "next" && (idle || last || paused)) ||
         (action === "pause" && (idle || last)) ||
+        (action === "reset" && idle) ||
+        (action === "start" && !(idle || snapshot.status === "finished")) ||
+        (action === "preview" && !idle) ||
         (poseLocked && ["start", "preview", "previous", "next"].includes(action));
 
       button.disabled = disabled;
@@ -181,10 +186,25 @@
     if (state) state.textContent = stateLabels[lang][snapshot.status] || snapshot.status.toUpperCase();
     if (progress) progress.style.transform = `scaleX(${snapshot.progress})`;
     if (consoleRoot) consoleRoot.dataset.flowStatus = snapshot.status;
+    const startButton = root.querySelector('[data-flow-action="start"]');
+    if (startButton) {
+      startButton.textContent = snapshot.status === "finished"
+        ? (lang === "en" ? "Practice again" : "Repetir práctica")
+        : (lang === "en" ? "Begin practice" : "Empezar práctica");
+    }
     if (pauseButton) {
       pauseButton.textContent = snapshot.status === "paused"
         ? (lang === "en" ? "Resume" : "Continuar")
         : (lang === "en" ? "Pause" : "Pausa");
+    }
+    const resetButton = root.querySelector('[data-flow-action="reset"]');
+    if (resetButton) {
+      const finished = snapshot.status === "finished";
+      const resetLabel = finished
+        ? (lang === "en" ? "Return to start" : "Volver al inicio")
+        : (lang === "en" ? "Reset" : "Reiniciar");
+      resetButton.textContent = resetLabel;
+      resetButton.setAttribute("aria-label", resetLabel);
     }
     updateAccessibility(snapshot);
   };
@@ -199,13 +219,7 @@
       renderSession();
     },
     next: () => {
-      if (poseLocked) return;
-      if (engine.status === "idle") {
-        session.start();
-        phase.start();
-        engine.start();
-        return;
-      }
+      if (poseLocked || engine.status === "idle" || engine.status === "paused") return;
       engine.next();
     },
     reset: () => { session.reset(); phase.reset(); engine.reset(); setPreview(false); renderSession(); }

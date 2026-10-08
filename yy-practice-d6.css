@@ -1,0 +1,269 @@
+/* D.6 | PRACTICE RITUAL
+   The stage is the focus. Starting is one explicit action. During practice,
+   side navigation frames the guide while the central pause is easy to find. */
+#instructor-flow .flow-console{
+  --d6-leaf:#496f60;--d6-blush:#cd9eaa;
+  padding:clamp(11px,2vw,24px);
+  border-radius:clamp(18px,2.4vw,28px);
+  box-shadow:0 24px 80px rgba(24,65,45,.10),inset 0 1px rgba(255,255,255,.26);
+}
+#instructor-flow .flow-console-top{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto auto;
+  align-items:center;gap:clamp(12px,2.4vw,28px);
+  margin-top:clamp(12px,1.9vw,19px);
+}
+#instructor-flow .flow-console-top .flow-phase{min-width:0}
+#instructor-flow .flow-console-top .flow-session-clock{text-align:center}
+#instructor-flow .flow-console-top .flow-state{margin-inline:0;justify-self:end}
+#instructor-flow .flow-theater{
+  grid-template-columns:clamp(40px,5.3vw,62px) minmax(0,1fr) clamp(40px,5.3vw,62px);
+  align-items:center;gap:clamp(4px,1.2vw,12px);
+}
+#instructor-flow .flow-theater .flow-side{
+  display:flex;align-items:center;justify-content:center;min-width:0;
+}
+#instructor-flow .flow-theater .flow-rail-button{
+  display:grid;place-items:center;isolation:isolate;
+  width:100%;min-width:0;min-height:64px;padding:0;
+  border:1px solid color-mix(in srgb,var(--sage) 33%,var(--line));
+  border-radius:clamp(13px,1.8vw,20px);
+  background:color-mix(in srgb,var(--surface) 87%,#c1d7c0);
+  color:var(--ink);font-size:0;letter-spacing:0;
+  box-shadow:0 6px 20px rgba(23,63,43,.07);
+  cursor:pointer;transition:background .2s,border-color .2s,transform .2s,opacity .2s;
+}
+#instructor-flow .flow-theater .flow-side-prev .flow-rail-button::before{
+  content:"←";font-family:inherit;font-size:clamp(20px,2.5vw,29px);font-weight:400;line-height:1;
+}
+#instructor-flow .flow-theater .flow-side-next .flow-rail-button::before{
+  content:"→";font-family:inherit;font-size:clamp(20px,2.5vw,29px);font-weight:400;line-height:1;
+}
+#instructor-flow .flow-theater .flow-rail-button:not(:disabled):hover{
+  background:color-mix(in srgb,var(--sage) 25%,var(--surface));
+  border-color:var(--sage);transform:translateY(-2px);
+}
+#instructor-flow .flow-theater .flow-rail-button:disabled{
+  opacity:.28;cursor:not-allowed;box-shadow:none;
+}
+#instructor-flow .flow-console[data-flow-status="idle"] .flow-theater .flow-rail-button{
+  opacity:.12;pointer-events:none;
+}
+#instructor-flow .flow-controls{
+  display:grid;
+  grid-template-columns:1fr minmax(170px,250px) 1fr;
+  gap:clamp(12px,2.4vw,26px);
+  align-items:center;
+  margin:clamp(18px,2.3vw,27px) auto 0;
+  width:min(100%,720px);max-width:720px;padding:0;
+  border:0;background:transparent;border-radius:0;
+  box-shadow:none;
+}
+#instructor-flow .flow-controls [data-flow-action="pause"]{
+  grid-column:2;justify-self:stretch;
+  min-height:56px;min-width:0;padding:13px 20px;border-radius:999px;
+  font-size:14px;font-weight:700;letter-spacing:.025em;
+  background:var(--sage);border:1px solid var(--sage);
+  color:var(--accent-ink);
+  box-shadow:0 12px 25px rgba(27,79,56,.14);
+}
+#instructor-flow .flow-controls [data-flow-action="pause"]:hover:not(:disabled){
+  background:var(--sage-bright);border-color:var(--sage-bright);
+}
+#instructor-flow .flow-controls [data-flow-action="reset"]{
+  grid-column:3;justify-self:end;flex:none;
+  min-width:0;min-height:44px;padding:8px 15px;
+  border-radius:999px;font-size:12px;font-weight:600;
+  border:1px solid color-mix(in srgb,var(--sage) 22%,var(--line));
+  background:transparent;color:var(--muted);box-shadow:none;
+}
+#instructor-flow .flow-controls [data-flow-action="reset"]:hover:not(:disabled){
+  background:color-mix(in srgb,var(--sage) 11%,var(--surface));color:var(--ink);
+}
+#instructor-flow .flow-console[data-flow-status="paused"] .flow-controls [data-flow-action="pause"]{
+  background:#b8cdbb;border-color:#b8cdbb;color:#203c31;
+}
+#instructor-flow .flow-console-foot{
+  gap:clamp(10px,1.6vw,16px);margin-top:clamp(16px,2vw,22px);
+}
+#instructor-flow .flow-entry-actions{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:clamp(10px,1.6vw,19px);width:100%;margin:0 auto;
+}
+#instructor-flow .flow-entry-actions .flow-start{
+  flex:0 1 auto;min-width:min(100%,242px);min-height:58px;padding:15px 28px;
+  border:1px solid var(--sage);border-radius:999px;
+  font-size:14px;font-weight:750;
+  background:var(--sage);color:var(--accent-ink);
+  box-shadow:0 14px 30px rgba(26,79,52,.18);
+}
+#instructor-flow .flow-entry-actions .flow-start:hover:not(:disabled){
+  background:var(--sage-bright);border-color:var(--sage-bright);
+}
+#instructor-flow .flow-entry-actions .flow-preview{
+  flex:0 1 auto;min-width:0;min-height:46px;padding:10px 15px;
+  border:0;border-radius:12px;background:transparent;
+  color:var(--ink);font-size:12px;font-weight:600;box-shadow:none;
+  text-decoration:underline;text-decoration-color:var(--sage);
+  text-underline-offset:5px;
+}
+#instructor-flow .flow-entry-actions .flow-preview:hover:not(:disabled){
+  background:color-mix(in srgb,var(--sage) 13%,transparent);
+}
+#instructor-flow .flow-console-foot>span{
+  max-width:min(80ch,100%);margin:2px auto 0;
+  font-size:10px;line-height:1.75;letter-spacing:.025em;
+  color:var(--muted);opacity:.66;
+}
+#instructor-flow .flow-console[data-flow-status="idle"] .flow-controls{display:none}
+/* Finished has two legitimate choices: replay now or return to the start.
+   Never hide an enabled Reset button behind display:none. */
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls{
+  display:flex;justify-content:center;
+  width:100%;max-width:360px;margin:12px auto 0;
+}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="pause"]{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="reset"]{
+  display:inline-flex;grid-column:auto;justify-self:center;
+  margin:0 auto;padding:10px 20px;min-height:44px;
+}
+#instructor-flow .flow-console[data-flow-status="running"] .flow-entry-actions,
+#instructor-flow .flow-console[data-flow-status="paused"] .flow-entry-actions{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] [data-flow-action="preview"]{display:none}
+/* Floral forest stage, not a separate neon-themed widget. */
+#instructor-flow .flow-theater .yy-guide{
+  border-color:color-mix(in srgb,var(--sage) 25%,var(--line));
+  background:color-mix(in srgb,var(--surface) 91%,#edd4d7);
+}
+#instructor-flow .flow-theater .yy-stage{
+  background:
+    radial-gradient(ellipse 30% 42% at 25% 28%,rgba(219,155,173,.22),transparent 85%),
+    radial-gradient(ellipse 35% 51% at 81% 77%,rgba(218,175,180,.18),transparent 85%),
+    radial-gradient(ellipse 66% 77% at 49% 43%,rgba(116,172,139,.21),transparent 86%),
+    linear-gradient(150deg,#173d34 0%,#285d4c 49%,#153e35 100%);
+  border-color:rgba(184,202,176,.4);
+  box-shadow:inset 0 0 65px rgba(6,42,32,.18),0 14px 35px rgba(19,65,51,.18);
+}
+#instructor-flow .flow-theater .yy-guide[data-spirit="yin"] .yy-stage{
+  background:
+    radial-gradient(ellipse 35% 45% at 24% 31%,rgba(192,130,151,.21),transparent 85%),
+    radial-gradient(ellipse 47% 62% at 78% 75%,rgba(149,170,151,.15),transparent 85%),
+    linear-gradient(155deg,#122c2c,#21433e 50%,#132b31);
+  border-color:rgba(180,175,169,.33);
+}
+#instructor-flow .flow-theater .yy-svg{
+  filter:drop-shadow(0 10px 9px rgba(5,28,25,.21));
+}
+/* Guardian's actual eyes, not empty slits or blinding white circles. */
+#instructor-flow .yy-guide .yy-eye-almond{
+  fill:#a5bdab;stroke:#536e60;stroke-width:2;opacity:1;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-eye-almond{
+  fill:#97ada6;stroke:#59797b;
+}
+#instructor-flow .yy-guide .yy-eye-core{
+  fill:#386454;stroke:#719484;stroke-width:1.2;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-eye-core{
+  fill:#3c6265;stroke:#819e9c;
+}
+#instructor-flow .yy-guide .yy-eye-center{fill:#192f2b}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-eye-center{fill:#162f33}
+#instructor-flow .yy-guide .yy-eye-glint{fill:#f0eee0;opacity:.47}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-eye-glint{fill:#d1dfd8;opacity:.33}
+#instructor-flow .yy-guide .yy-guardian-lid{
+  stroke:var(--yy-outline);stroke-width:3.6;opacity:.88;
+}
+#instructor-flow .yy-guide .yy-eye-sheen{opacity:.18}
+#instructor-flow .yy-guide[data-phase="centering"] .yy-guardian-lid,
+#instructor-flow .yy-guide[data-phase="breath"] .yy-guardian-lid{stroke-width:4.4}
+@media(max-width:780px){
+  #instructor-flow .flow-console-top{
+    grid-template-columns:minmax(0,1fr) auto;
+    gap:12px;
+  }
+  #instructor-flow .flow-console-top .flow-state{
+    grid-column:1 / -1;justify-self:start;
+  }
+}
+@media(max-width:600px){
+  #instructor-flow .flow-console{padding:clamp(8px,2.7vw,13px)}
+  #instructor-flow .flow-theater{
+    grid-template-columns:35px minmax(0,1fr) 35px;gap:3px;
+  }
+  #instructor-flow .flow-theater .flow-rail-button{
+    min-width:0;width:100%;min-height:64px;border-radius:12px;
+  }
+  #instructor-flow .flow-theater .flow-rail-button::before{font-size:22px}
+  #instructor-flow .flow-console-top{
+    display:grid;grid-template-columns:1fr auto;gap:10px;
+    padding:12px 6px 0;
+  }
+  #instructor-flow .flow-session-clock{justify-self:end}
+  #instructor-flow .flow-controls{
+    display:grid;grid-template-columns:minmax(0,1fr);
+    width:100%;max-width:380px;margin-top:16px;gap:8px;
+    padding:0;background:transparent;border:0;
+  }
+  #instructor-flow .flow-controls [data-flow-action="pause"]{
+    grid-column:1;min-height:54px;justify-self:stretch;width:100%;
+  }
+  #instructor-flow .flow-controls [data-flow-action="reset"]{
+    grid-column:1;justify-self:center;min-height:40px;
+    font-size:11px;border-color:transparent;
+  }
+  #instructor-flow .flow-entry-actions{
+    flex-direction:column;gap:7px;
+  }
+  #instructor-flow .flow-entry-actions .flow-start{
+    flex:none;width:min(100%,340px);min-width:0;
+  }
+  #instructor-flow .flow-entry-actions .flow-preview{flex:none}
+  #instructor-flow .flow-console-foot>span{
+    font-size:9px;line-height:1.6;overflow-wrap:anywhere;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .flow-theater .flow-rail-button,
+  #instructor-flow .flow-controls .flow-control,
+  #instructor-flow .flow-entry-actions button{
+    transition:none!important;transform:none!important;
+  }
+}
+
+.yy-gaze-fill{fill:url(#yy-gaze-grad)}
+.yy-pupil{fill:#1a1612}
+.yy-glint{fill:#f4efe4;opacity:.8}
+.yy-lid{fill:var(--yy-fur,#d7c4b0)}
+.yy-lid-line,.yy-brow{fill:none;stroke:rgba(48,36,28,.45);stroke-width:1.4;stroke-linecap:round}
+.yy-belly{fill:rgba(196,120,132,.16);transform-box:fill-box;transform-origin:center;animation:yy-breath 7.6s ease-in-out infinite}
+.yy-grove{fill:rgba(47,107,79,.18)}
+.yy-petal-a{fill:rgba(214,160,174,.28)}
+.yy-petal-b{fill:rgba(223,184,191,.34)}
+.yy-petal-c{fill:rgba(63,154,104,.22)}
+.yy-frond{fill:none;stroke:rgba(47,107,79,.45);stroke-width:2;stroke-linecap:round}
+@keyframes yy-breath{50%{transform:scaleY(1.08)}}
+
+.yy-eye-core{fill:url(#yy-gaze-grad)}
+.yy-eye-center{fill:#1c1916}
+.yy-eye-almond{fill:#efe6da}
+.yy-eye-glint{fill:#f7f1e8;opacity:.85}
+.yy-eye-sheen{fill:none;stroke:rgba(255,255,255,.35);stroke-width:1.2;stroke-linecap:round}
+.yy-guardian-lid{fill:none;stroke:rgba(62,44,36,.55);stroke-width:1.6;stroke-linecap:round}
+.yy-weight[data-kind="warrior"]{transform-box:fill-box;transform-origin:50% 70%;animation:yy-weight 6s ease-in-out infinite}
+.yy-weight[data-kind="breath"]{transform-box:fill-box;transform-origin:center;animation:yy-breath 7.6s ease-in-out infinite}
+.yy-pose-flow .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 5.4s ease-in-out infinite}
+.yy-pose-warrior .yy-tail-motion{transform-box:fill-box;transform-origin:0 50%;animation:yy-tail 4.8s ease-in-out infinite}
+@keyframes yy-weight{50%{translate:0 -6px;rotate:-1.4deg}}
+@keyframes yy-tail{50%{rotate:7deg}}
+
+.yy-spine{fill:none;stroke:rgba(255,236,214,.28);stroke-width:2.2;stroke-linecap:round}
+.yy-collar,.yy-hip{fill:none;stroke:rgba(90,58,48,.28);stroke-width:1.6;stroke-linecap:round}
+.yy-pad{fill:rgba(214,160,174,.55)}
+.yy-toe{fill:none;stroke:rgba(90,58,48,.4);stroke-width:1.2;stroke-linecap:round}
+.yy-pose-table .yy-spine{animation:yy-spine 4.8s ease-in-out infinite}
+.yy-pose-tree .yy-character{transform-box:fill-box;transform-origin:50% 80%;animation:yy-tree 5.5s ease-in-out infinite}
+.yy-pose-savasana .yy-belly{animation:yy-breath 9.5s ease-in-out infinite}
+.yy-pose-child .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 7s ease-in-out infinite}
+@keyframes yy-spine{50%{translate:0 4px}}
+@keyframes yy-tree{50%{rotate:.8deg}}

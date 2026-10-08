@@ -449,53 +449,57 @@ test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async (
   expect(errors).toEqual([]);
 });
 
-test('D2/D3: ten postures in Yin/Yang with non-overlapping rails and green sanctuary', async ({page,browserName})=>{
- test.skip(browserName !== 'chromium', 'Exhaustive matrix on Chromium; cross-browser regression covered by the existing suite.');
- test.setTimeout(150000);
-  // Manual navigation screenshots must not race the automatic five-second tour.
-  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
- const errors=await open(page);
- const guide=page.locator('#flow-guide');
- const theater=page.locator('.flow-theater');
- const left=theater.locator('[data-flow-action="previous"]');
- const right=theater.locator('[data-flow-action="next"]');
- const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
- const expected=['start','centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
- for(const width of [320,390,768,1440]){
-   await page.setViewportSize({width,height:900});
-   for(const theme of ['light','dark']){
-     await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
-     for(const spirit of ['yin','yang']){
-       await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
-       await expect(guide).toHaveAttribute('data-spirit',spirit);
-       await act('reset');
-       await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
-       await act('preview');
-       for(let i=0;i<expected.length;i++){
-         if(i){await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});await act('next');}
-         await expect(guide).toHaveAttribute('data-phase',expected[i]);
-         await expect(guide.locator('.yy-pose.is-current')).toHaveCount(1);
-       }
-       const bounds=await Promise.all([guide.boundingBox(),left.boundingBox(),right.boundingBox()]);
-       const [g,l,r]=bounds;
-       expect(g&&l&&r).toBeTruthy();
-       expect(l.x+l.width).toBeLessThanOrEqual(g.x+2);
-       expect(r.x).toBeGreaterThanOrEqual(g.x+g.width-2);
-       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-       const bg=await page.locator('#instructor-flow').evaluate(el=>getComputedStyle(el).backgroundImage);
-       expect(bg).toContain('gradient');
-       const stage=await guide.locator('.yy-stage').evaluate(el=>getComputedStyle(el).backgroundImage);
-       expect(stage).toContain('gradient');
-       if(width===390||width===1440){
-         await test.info().attach('d23-'+spirit+'-'+theme+'-'+width,{
-           body:await theater.screenshot({animations:'disabled'}),contentType:'image/png'
-         });
-       }
-     }
-   }
- }
- expect(errors).toEqual([]);
-});
+// Independently schedulable visual audits instead of one 160-transition
+// mega-test. Eight test cases run across Chromium workers in parallel.
+for(const width of [320,390,768,1440]){
+  for(const theme of ['light','dark']){
+    test('D2/D3 layout, 10 poses, Yin/Yang at '+width+'px in '+theme,async ({page,browserName})=>{
+      test.skip(browserName!=='chromium','Exhaustive visual matrix on Chromium; navigation in all engines.');
+      test.setTimeout(100000);
+      // Keep the automatic 5-second preview from racing manual navigation.
+      await page.addInitScript(()=>{const frozen=Date.now();Date.now=()=>frozen;});
+      await page.setViewportSize({width,height:900});
+      const errors=await open(page);
+      const guide=page.locator('#flow-guide');
+      const theater=page.locator('.flow-theater');
+      const left=theater.locator('[data-flow-action="previous"]');
+      const right=theater.locator('[data-flow-action="next"]');
+      const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+      const expected=['start','centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
+      await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
+      for(const spirit of ['yin','yang']){
+        await act('reset');
+        await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+        await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
+        await expect(guide).toHaveAttribute('data-spirit',spirit);
+        await act('preview');
+        for(let i=0;i<expected.length;i++){
+          if(i){
+            await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+            await act('next');
+          }
+          await expect(guide).toHaveAttribute('data-phase',expected[i]);
+          await expect(guide.locator('.yy-pose.is-current')).toHaveCount(1,{timeout:8000});
+        }
+        const [g,l,r]=await Promise.all([guide.boundingBox(),left.boundingBox(),right.boundingBox()]);
+        expect(g&&l&&r).toBeTruthy();
+        expect(l.x+l.width).toBeLessThanOrEqual(g.x+2);
+        expect(r.x).toBeGreaterThanOrEqual(g.x+g.width-2);
+        expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+        const bg=await page.locator('#instructor-flow').evaluate(el=>getComputedStyle(el).backgroundImage);
+        expect(bg).toContain('gradient');
+        const stage=await guide.locator('.yy-stage').evaluate(el=>getComputedStyle(el).backgroundImage);
+        expect(stage).toContain('gradient');
+        if(width===390||width===1440){
+          await test.info().attach('d23-'+spirit+'-'+theme+'-'+width,{
+            body:await theater.screenshot({animations:'disabled'}),contentType:'image/png'
+          });
+        }
+      }
+      expect(errors).toEqual([]);
+    });
+  }
+}
 
 test('D4 audio player shows only the correct Play/Pause icon',async ({page})=>{
  const errors=await open(page);

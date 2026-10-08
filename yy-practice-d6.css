@@ -390,3 +390,12 @@
 #instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:flex!important}
 #instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="pause"]{display:none!important}
 #instructor-flow .flow-console[data-flow-status="finished"] .flow-controls{display:flex!important}
+
+/* Creature gaze: round gem, not a human iris. */
+#instructor-flow .yy-eye-almond{fill:#f3e7cf!important;stroke:none}
+#instructor-flow .yy-eye-core{fill:#7d6bd6!important}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-eye-core{fill:#3f8f9a!important}
+#instructor-flow .yy-eye-center{fill:#241c33!important}
+#instructor-flow .yy-eye-glint{fill:#fff8ea;opacity:.95}
+#instructor-flow .yy-eye-sheen{fill:none;stroke:#fff6df;stroke-width:1.8;stroke-linecap:round;opacity:.8}
+#instructor-flow .yy-guardian-lid{fill:none;stroke:#f6efe4;stroke-width:2.2;stroke-linecap:round;opacity:.55}

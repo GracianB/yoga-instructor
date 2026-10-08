@@ -68,25 +68,25 @@
     const almondRight=soft?'M17 12Q40 6 62 12Q44 22 17 12Z':
       focus?'M17 12Q39 3 61 11Q45 24 17 12Z':
             'M17 11Q39-3 62 12Q46 28 17 11Z';
-    const gx = focus ? 3.4 : soft ? -1.8 : 0.6;
-    const gy = focus ? -0.4 : soft ? 2.2 : 0.8;
+    const gx = focus ? 2.2 : soft ? -1.2 : 0.4;
+    const gy = focus ? -1.2 : soft ? 1.4 : -0.4;
     const eyeUnit = (cx, side) => {
       const id = "yy-clip-"+p.id+"-"+side;
-      return '<g class="yy-eye-unit" transform="translate('+cx+' 9)">'+
-        '<clipPath id="'+id+'"><path d="M-22 2Q-12-14 0-12Q13-15 22 2Q12 16 0 16Q-13 16-22 2Z"/></clipPath>'+
+      return '<g class="yy-eye-unit" transform="translate('+cx+' 6)">'+
+        '<clipPath id="'+id+'"><path d="M-18 2Q-16-16 0-16Q16-16 18 2Q16 18 0 18Q-16 18-18 2Z"/></clipPath>'+
         '<g clip-path="url(#'+id+')">'+
-          '<path d="M-22 2Q-12-14 0-12Q13-15 22 2Q12 16 0 16Q-13 16-22 2Z" class="yy-eye-almond"/>'+
-          '<ellipse cx="'+gx+'" cy="'+(1+gy)+'" rx="9.4" ry="10.2" class="yy-eye-core"/>'+
-          '<ellipse cx="'+gx+'" cy="'+(3.2+gy)+'" rx="3.4" ry="5.8" class="yy-eye-center"/>'+
-          '<circle cx="'+(gx-2.8)+'" cy="'+(gy-2)+'" r="1.1" class="yy-eye-glint"/>'+
-          '<path d="M-16 0Q0 6 16 0" class="yy-eye-sheen"/>'+
+          '<path d="M-18 2Q-16-16 0-16Q16-16 18 2Q16 18 0 18Q-16 18-18 2Z" class="yy-eye-almond"/>'+
+          '<ellipse cx="'+gx+'" cy="'+(gy)+'" rx="11" ry="12" class="yy-eye-core"/>'+
+          '<circle cx="'+(gx+0.4)+'" cy="'+(1.6+gy)+'" r="3.1" class="yy-eye-center"/>'+
+          '<circle cx="'+(gx-4.2)+'" cy="'+(gy-5)+'" r="2.2" class="yy-eye-glint"/>'+
+          '<path d="M-8 -8Q-2 -12 4 -7" class="yy-eye-sheen"/>'+
         '</g>'+
       '</g>';
     };
     const eyes = shut
-      ? path('M-52 10Q-34 16-18 10M18 10Q34 16 52 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M22 6Q39 0 58 5','yy-sleep-brow')
-      : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(40,"r")+
-        '<path d="M-58 8Q-46 0-22 8M22 8Q46 0 58 8" class="yy-guardian-lid"/>'+
+      ? path('M-46 8Q-30 14-16 8M16 8Q30 14 46 8','yy-eye-closed')+path('M-40 2Q-28-2-16 3M16 3Q28-2 40 2','yy-sleep-brow')
+      : '<g class="yy-anim-eyes">'+eyeUnit(-36,"l")+eyeUnit(38,"r")+
+        '<path d="M-52 -2Q-40 -12-22 -2M22 -2Q40 -12 54 -2" class="yy-guardian-lid"/>'+
         '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+

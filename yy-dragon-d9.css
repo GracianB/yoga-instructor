@@ -71,31 +71,31 @@
  linear-gradient(157deg,#263957,#344969 48%,#504261);
 }
 /* Micro-acting is confined to local ornament, never the authored pose roots. */
-#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-whisker{
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-dragon-whisker{
  transform-box:fill-box;transform-origin:12% 55%;animation:yy-d9-whisker 5.8s ease-in-out infinite;
 }
-#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-whisker-right{
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-whisker-right{
  transform-origin:88% 55%;animation-delay:-2.8s;
 }
-#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-whisker-low{
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-whisker-low{
  animation-duration:7.2s;animation-delay:-3.4s;
 }
-#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-beard-assembly{
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-dragon-beard-assembly{
  transform-box:fill-box;transform-origin:50% 12%;animation:yy-d9-beard 8.4s ease-in-out infinite;
 }
-#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-forelock{
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-dragon-forelock{
  transform-box:fill-box;transform-origin:45% 75%;animation:yy-d9-forelock 7s ease-in-out infinite;
 }
-#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-sidefin{
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-dragon-sidefin{
  transform-box:fill-box;transform-origin:50% 83%;animation:yy-d9-fin 9.8s ease-in-out infinite;
 }
-#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-fin-right{animation-delay:-4.9s}
-#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-dragon-bridge-layer{
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-fin-right{animation-delay:-4.9s}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-dragon-bridge-layer{
  transform-box:fill-box;transform-origin:50% 35%;animation:yy-d9-breathe 7.6s ease-in-out infinite;
 }
-#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-mote{animation:yy-d9-mote 8s ease-in-out infinite}
-#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-mote-b{animation-delay:-3s}
-#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-mote-c{animation-delay:-5.5s}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-mote{animation:yy-d9-mote 8s ease-in-out infinite}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-mote-b{animation-delay:-3s}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-mote-c{animation-delay:-5.5s}
 #instructor-flow .yy-guide[data-phase="savasana"] .yy-pose.is-current .yy-dragon-whisker{animation-duration:11s}
 #instructor-flow .yy-guide[data-phase="warmup"] .yy-pose.is-current .yy-dragon-bridge-layer{animation:none}
 @keyframes yy-d9-whisker{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(2.3deg) translateY(-1px)}}

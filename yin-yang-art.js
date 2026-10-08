@@ -172,16 +172,24 @@
   };
   const tail=p=>{
     const [x,y,s,r]=p.tail;
-    // The flowing plume is longer than D11. Scale only the tail ornament for
-    // reclining and cat/cow shapes so a 480-unit mobile crop never cuts it.
-    const reach=s*(p.kind==="rest"?.78:p.kind==="table"?.75:1);
-    return '<g transform="'+toTransform(x,y,reach,r)+'" class="yy-tail yy-d12-tail">'+
-      path('M-23-13C10-25 58-21 88 0C116 23 124 55 100 78C88 88 74 90 62 82C78 105 113 106 138 79C153 62 154 37 142 17C173 53 165 95 136 117C102 142 55 119 46 90C41 73 52 61 64 62C64 82 80 87 91 70C105 45 88 29 57 25C27 21 2 30-23 15Z','yy-tail-main yy-outline yy-d12-tail-shell')+
-      path('M-10-3C31-11 76-11 100 17C119 40 113 62 94 77','yy-d12-tail-ridge')+
-      path('M53 86Q80 116 112 110M132 91Q151 73 147 49','yy-d12-tail-flow')+
-      path('M126 99C145 88 161 66 162 43C181 72 171 108 151 121C142 115 132 108 126 99Z','yy-dragon-tail-fin yy-d12-tail-plume')+
-      path('M142 108Q162 88 163 64M150 113Q161 103 167 89','yy-dragon-tail-fin-vein yy-d12-tail-plume-veins')+
-      path('M40-10Q46-21 52-22L60 0M79 3Q89-12 98-9L99 19M117 27Q129 13 136 17L126 45','yy-dragon-tail-spines yy-d12-tail-spines')+
+    // This is a different anatomical silhouette, not the same large coiled
+    // tail squeezed smaller. Its compact arc follows the grounded cat/cow spine.
+    const table=p.kind==="table";
+    const reach=s*(p.kind==="rest"?.78:table?.82:p.kind==="savasana"?.84:1);
+    return '<g transform="'+toTransform(x,y,reach,r)+'" class="yy-tail yy-d12-tail'+(table?' yy-d13-table-tail':'')+'">'+
+      (table?
+        path('M-24-10C2-25 34-30 58-16C82-2 90 20 76 36C64 49 49 43 42 33C56 38 66 28 64 16C60-1 28-5 5 8Q-12 18-24 10Z','yy-tail-main yy-outline yy-d12-tail-shell')+
+        path('M-12-4Q25-20 54-8Q74 4 74 22','yy-d12-tail-ridge')+
+        path('M47 32Q61 46 73 34','yy-d12-tail-flow')+
+        path('M70 31Q83 25 86 12Q96 29 87 43Q79 44 70 31Z','yy-dragon-tail-fin yy-d12-tail-plume')+
+        path('M77 34Q87 25 87 19','yy-dragon-tail-fin-vein yy-d12-tail-plume-veins')+
+        path('M24-15Q31-23 39-19L40-6M52-8Q61-17 67-10L64 4','yy-dragon-tail-spines yy-d12-tail-spines'):
+        path('M-23-13C10-25 58-21 88 0C116 23 124 55 100 78C88 88 74 90 62 82C78 105 113 106 138 79C153 62 154 37 142 17C173 53 165 95 136 117C102 142 55 119 46 90C41 73 52 61 64 62C64 82 80 87 91 70C105 45 88 29 57 25C27 21 2 30-23 15Z','yy-tail-main yy-outline yy-d12-tail-shell')+
+        path('M-10-3C31-11 76-11 100 17C119 40 113 62 94 77','yy-d12-tail-ridge')+
+        path('M53 86Q80 116 112 110M132 91Q151 73 147 49','yy-d12-tail-flow')+
+        path('M126 99C145 88 161 66 162 43C181 72 171 108 151 121C142 115 132 108 126 99Z','yy-dragon-tail-fin yy-d12-tail-plume')+
+        path('M142 108Q162 88 163 64M150 113Q161 103 167 89','yy-dragon-tail-fin-vein yy-d12-tail-plume-veins')+
+        path('M40-10Q46-21 52-22L60 0M79 3Q89-12 98-9L99 19M117 27Q129 13 136 17L126 45','yy-dragon-tail-spines yy-d12-tail-spines'))+
       '</g>';
   };
   const stance=p=>{

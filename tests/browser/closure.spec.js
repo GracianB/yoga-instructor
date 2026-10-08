@@ -241,6 +241,7 @@ test('Yin Yang visual matrix: desktop/mobile, both energies, reduced motion and 
   const guide=page.locator('#flow-guide');
   for(const width of [320,390,768,1440]){
     await page.setViewportSize({width,height:900});
+    await expect(guide.locator(".yy-svg")).toHaveAttribute("viewBox",width<=700?"145 25 430 390":"0 0 720 460");
     for(const form of ['yin','yang']){
       await guide.locator('[data-yy-form="'+form+'"]').evaluate(button=>button.click());
       await expect(guide).toHaveAttribute('data-spirit',form);

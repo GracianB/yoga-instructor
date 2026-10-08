@@ -162,7 +162,7 @@
       p.kind==="warrior"?p.feet:
       p.kind==="tree"?p.feet.slice(0,1):[];
     if(!grounded.length)return "";
-    return '<g class="yy-stance" aria-hidden="true">'+grounded.map(([x,y])=>
+    return '<g class="yy-stance">'+grounded.map(([x,y])=>
       '<ellipse class="yy-stance-shadow" cx="'+x+'" cy="'+(y+16)+
       '" rx="26" ry="6"/>').join('')+'</g>';
   };
@@ -171,7 +171,7 @@
     const twoArms=p.arms.map((d,i)=>limb(d,'arm',i)).join('');
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
     const hands=p.hands.map(pos=>point(pos,'yy-paw yy-hand')).join('');
-    return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'" aria-hidden="true">'+
+    return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'">'+
       stance(p)+'<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
       '<g class="yy-legs">'+twoLegs+feet+'</g>'+torso(p)+
       '<g class="yy-arms">'+twoArms+hands+'</g>'+
@@ -185,7 +185,7 @@
       '<radialGradient id="yy-gaze-grad" cx="40%" cy="35%"><stop offset="0" stop-color="#c9e6cf"/><stop offset=".55" stop-color="#3f6d52"/><stop offset="1" stop-color="#1c3328"/></radialGradient>'+
       '<linearGradient id="yy-lotus" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a8f4ff"/><stop offset="1" stop-color="#778ef4"/></linearGradient>'+
     '</defs>'+
-    '<g class="yy-forest" aria-hidden="true">'+
+    '<g>'+
       '<ellipse cx="360" cy="404" rx="280" ry="46" class="yy-grove"/>'+
       '<path d="M120 392Q168 348 214 390Q250 338 300 388Q338 342 392 390Q430 336 492 388Q530 350 600 394Q500 430 360 412Q220 430 120 392Z" class="yy-petal yy-petal-a"/>'+
       '<path d="M168 398Q214 360 258 396Q300 354 360 398Q414 352 468 396Q508 366 552 400Q470 424 360 410Q250 424 168 398Z" class="yy-petal yy-petal-b"/>'+
@@ -193,7 +193,7 @@
       '<path d="M80 360Q110 330 132 362M588 356Q612 328 636 360" class="yy-frond"/>'+
     '</g>'+
     '<g class="yy-pose-container">'+poses.map(drawing).join('')+'</g>'+
-    '<g class="yy-stars" aria-hidden="true"><path d="M150 135l7 17 18 5-18 6-7 17-6-17-17-6 17-5Z"/><path d="M582 99l5 13 14 5-14 4-5 13-5-13-14-4 14-5Z"/><circle cx="544" cy="222" r="3"/><circle cx="182" cy="240" r="2.5"/></g>'+
+    '<g class="yy-stars"><path d="M150 135l7 17 18 5-18 6-7 17-6-17-17-6 17-5Z"/><path d="M582 99l5 13 14 5-14 4-5 13-5-13-14-4 14-5Z"/><circle cx="544" cy="222" r="3"/><circle cx="182" cy="240" r="2.5"/></g>'+
   '</svg>';
   window.YIN_YANG_ART=Object.freeze({poses:Object.freeze(poses),markup});
 })();

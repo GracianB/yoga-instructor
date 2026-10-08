@@ -42,3 +42,15 @@ test("Warrior II and Tree have physically authored knee bends, other grounded pa
  assert.deepEqual(Array.from(poses.warmup.feet[0]),[451,368]);
  assert.deepEqual(Array.from(poses.warmup.feet[1]),[505,363]);
 });
+
+test("supporting limbs cast only intentional grounded shadows",()=>{
+ const svg=artwork().markup();
+ const stanceFor=id=>{
+  const region=svg.split('data-pose="'+id+'"')[1]?.split('</g></g>')[0]||"";
+  return (region.match(/class="yy-stance-shadow"/g)||[]).length;
+ };
+ assert.equal(stanceFor('warmup'),4);
+ assert.equal(stanceFor('pose-1'),2);
+ assert.equal(stanceFor('pose-2'),1);
+ assert.equal(stanceFor('savasana'),0);
+});

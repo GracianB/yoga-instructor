@@ -231,7 +231,7 @@
   }
 }
 
-.yy-iris{fill:url(#yy-iris-grad)}
+.yy-gaze-fill{fill:url(#yy-gaze-grad)}
 .yy-pupil{fill:#1a1612}
 .yy-glint{fill:#f4efe4;opacity:.8}
 .yy-lid{fill:var(--yy-fur,#d7c4b0)}
@@ -244,7 +244,7 @@
 .yy-frond{fill:none;stroke:rgba(47,107,79,.45);stroke-width:2;stroke-linecap:round}
 @keyframes yy-breath{50%{transform:scaleY(1.08)}}
 
-.yy-eye-core{fill:url(#yy-iris-grad)}
+.yy-eye-core{fill:url(#yy-gaze-grad)}
 .yy-eye-center{fill:#1c1916}
 .yy-eye-almond{fill:#efe6da}
 .yy-eye-glint{fill:#f7f1e8;opacity:.85}

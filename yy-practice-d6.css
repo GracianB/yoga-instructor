@@ -324,7 +324,7 @@
   min-height:52px;min-width:220px;padding:14px 28px;border-radius:999px;
   border:1px solid #e7d3b4;background:#f0e2cc;color:#2a2118;font-weight:750;letter-spacing:.06em;
 }
-#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:flex}
 #instructor-flow .flow-console[data-flow-status="finished"] .flow-console-foot{margin-top:10px}
 
 /* Practice console: one instrument, three states. */
@@ -352,7 +352,7 @@
 #instructor-flow .flow-console[data-flow-status="idle"] .flow-controls{display:none}
 #instructor-flow .flow-console[data-flow-status="running"] .flow-entry-actions,
 #instructor-flow .flow-console[data-flow-status="paused"] .flow-entry-actions,
-#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:flex}
 #instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="pause"]{display:none}
 #instructor-flow .flow-console[data-flow-status="finished"] [data-flow-action="reset"]{
   min-height:52px;min-width:230px;border-radius:999px;border:1px solid #e7d3b4;background:#f0e2cc;color:#2a2118;
@@ -370,3 +370,10 @@
 
 #instructor-flow .yy-blush{fill:rgba(214,150,150,.28)}
 #instructor-flow .yy-brow{fill:none;stroke:rgba(70,52,42,.35);stroke-width:1.6;stroke-linecap:round}
+
+#instructor-flow .flow-rail-button{min-width:0!important;width:100%;max-width:100%}
+#instructor-flow .flow-theater{min-width:0}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:flex}
+#instructor-flow .flow-console[data-flow-status="finished"] [data-flow-action="start"]{
+  min-height:52px;padding:14px 26px;border-radius:999px;border:1px solid #e7d3b4;background:#f0e2cc;color:#2a2118;
+}

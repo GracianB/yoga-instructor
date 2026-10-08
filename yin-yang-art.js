@@ -81,12 +81,13 @@
           '<circle cx="'+(gx-2.8)+'" cy="'+(gy-2)+'" r="1.1" class="yy-eye-glint"/>'+
           '<path d="M-16 0Q0 6 16 0" class="yy-eye-sheen"/>'+
         '</g>'+
-        '<path d="M-20 0Q-6 -8 2 -6Q12 -8 20 1" class="yy-guardian-lid"/>'+
       '</g>';
     };
     const eyes = shut
       ? path('M-52 10Q-34 16-18 10M18 10Q34 16 52 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M22 6Q39 0 58 5','yy-sleep-brow')
-      : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(40,"r")+'</g>';
+      : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(40,"r")+
+        '<path d="M-58 8Q-46 0-22 8M22 8Q46 0 58 8" class="yy-guardian-lid"/>'+
+        '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
       path('M33-64Q62-114 100-113Q104-60 64-31Z','yy-fur yy-outline')+

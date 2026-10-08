@@ -170,6 +170,34 @@
       path('M'+fmt(hx-22*scale)+' '+fmt(top-18)+'Q'+fmt(hx)+' '+fmt(top-26)+' '+fmt(hx+22*scale)+' '+fmt(top-18)+
         'L'+fmt(x+19)+' '+fmt(base+16)+'Q'+fmt(x)+' '+fmt(base+27)+' '+fmt(x-19)+' '+fmt(base+16)+'Z','yy-d14-neck-bridge')+'</g>';
   };
+  // D16: two restrained shoulder-mounted wings, tucked BEHIND the ribcage.
+  // A full spread during balance practice would fight the anatomy and crowd
+  // the mobile view, so each pose owns a compact, proportional folded form.
+  const wings=p=>{
+    const [x,y,rx,ry,r]=p.body;
+    const grounded=["rest","savasana","child","table"].includes(p.kind);
+    const h=Math.min(ry*1.04,91)*(grounded?.58:.90);
+    const w=Math.min(rx*.72,72)*(grounded?.75:1);
+    const base=-ry*.38,peak=base-h;
+    const membrane='M12 '+fmt(base+9)+
+      'Q'+fmt(w*.31)+' '+fmt(base-h*.66)+' '+fmt(w*.85)+' '+fmt(peak)+
+      'Q'+fmt(w*.94)+' '+fmt(base-h*.62)+' '+fmt(w*.79)+' '+fmt(base-h*.30)+
+      'Q'+fmt(w*.54)+' '+fmt(base-h*.18)+' '+fmt(rx*.24)+' '+fmt(base+ry*.14)+
+      'Q'+fmt(w*.14)+' '+fmt(base+ry*.22)+' 12 '+fmt(base+9)+'Z';
+    const vein='M18 '+fmt(base+5)+
+      'Q'+fmt(w*.58)+' '+fmt(base-h*.5)+' '+fmt(w*.83)+' '+fmt(peak+5);
+    const struts='M'+fmt(w*.36)+' '+fmt(base-h*.30)+
+      'Q'+fmt(w*.60)+' '+fmt(base-h*.29)+' '+fmt(w*.80)+' '+fmt(base-h*.36)+
+      'M'+fmt(w*.55)+' '+fmt(base-h*.53)+
+      'Q'+fmt(w*.72)+' '+fmt(base-h*.55)+' '+fmt(w*.88)+' '+fmt(base-h*.63);
+    return '<g class="yy-d16-wings" data-fold="'+(grounded?'rest':'raised')+
+      '" transform="translate('+x+' '+y+') rotate('+r+')">'+
+      [-1,1].map((dir,i)=>
+        '<g class="yy-d16-wing yy-d16-wing-'+(i?'right':'left')+'" transform="scale('+dir+' 1)">'+
+          path(membrane,'yy-d16-wing-membrane')+
+          path(vein,'yy-d16-wing-vein')+
+          path(struts,'yy-d16-wing-struts')+'</g>').join('')+'</g>';
+  };
   const torso=p=>{
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
@@ -192,6 +220,12 @@
         '<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
       '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>')+
       '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.18)+'" rx="'+fmt(rx*.42)+'" ry="'+fmt(ry*.34)+'"/>'+
+      '<g class="yy-d16-body-meridian">'+
+        '<path d="M0 -'+fmt(ry*.83)+'Q-'+fmt(rx*.08)+' -'+fmt(ry*.27)+' 0 '+fmt(ry*.24)+
+          'Q'+fmt(rx*.08)+' '+fmt(ry*.57)+' 0 '+fmt(ry*.75)+'" class="yy-d16-meridian-line"/>'+
+        '<path d="M-'+fmt(rx*.35)+' -'+fmt(ry*.14)+'Q-'+fmt(rx*.25)+' '+fmt(ry*.14)+' 0 '+fmt(ry*.31)+
+          'Q'+fmt(rx*.25)+' '+fmt(ry*.14)+' '+fmt(rx*.35)+' -'+fmt(ry*.14)+'" class="yy-d16-breath-arch"/>'+
+      '</g>'+
       '<g class="yy-d14-rib-cage">'+
         '<path d="M-'+fmt(rx*.42)+' -'+fmt(ry*.32)+'Q0 -'+fmt(ry*.55)+' '+fmt(rx*.45)+' -'+fmt(ry*.30)+'" class="yy-d14-rib-line"/>'+
         '<path d="M-'+fmt(rx*.26)+' '+fmt(ry*.30)+'Q0 '+fmt(ry*.44)+' '+fmt(rx*.27)+' '+fmt(ry*.29)+'" class="yy-d14-breath-line"/>'+
@@ -278,7 +312,7 @@
       circle(p.head[0]+115,p.head[1]-28,2.0,'yy-mote yy-mote-b')+
       circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
       '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
-      '<g class="yy-legs">'+twoLegs+feet+'</g>'+neck(p)+torso(p)+
+      '<g class="yy-legs">'+twoLegs+feet+'</g>'+wings(p)+neck(p)+torso(p)+
       '<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';
@@ -289,6 +323,7 @@
       '<linearGradient id="yy-mane-grad" x1="0" y1="0" x2="1" y2="1"><stop class="yy-mane-stop-hi" offset="0"/><stop class="yy-mane-stop-low" offset="1"/></linearGradient>'+
       '<radialGradient id="yy-gaze-grad" cx="40%" cy="35%"><stop offset="0" stop-color="#c9e6cf"/><stop offset=".55" stop-color="#3f6d52"/><stop offset="1" stop-color="#1c3328"/></radialGradient>'+
       '<linearGradient id="yy-d9-skin" x1="12%" y1="5%" x2="88%" y2="100%"><stop offset="0" class="yy-d9-skin-hi"/><stop offset=".49" class="yy-d9-skin-mid"/><stop offset="1" class="yy-d9-skin-low"/></linearGradient>'+
+      '<linearGradient id="yy-d16-wing" x1="0" y1="0" x2=".86" y2="1"><stop offset="0" class="yy-d16-wing-hi"/><stop offset=".56" class="yy-d16-wing-mid"/><stop offset="1" class="yy-d16-wing-low"/></linearGradient>'+
       '<linearGradient id="yy-d12-tail" x1="5%" y1="5%" x2="90%" y2="90%"><stop offset="0" class="yy-d12-tail-hi"/><stop offset=".52" class="yy-d12-tail-mid"/><stop offset="1" class="yy-d12-tail-low"/></linearGradient>'+
       '<linearGradient id="yy-d12-unicorn" x1="5%" y1="0%" x2="92%" y2="100%"><stop offset="0" class="yy-d12-horn-hi"/><stop offset=".58" class="yy-d12-horn-mid"/><stop offset="1" class="yy-d12-horn-low"/></linearGradient>'+
       '<linearGradient id="yy-d9-muzzle" x1="15%" y1="0%" x2="78%" y2="100%"><stop offset="0" class="yy-d9-muzzle-hi"/><stop offset="1" class="yy-d9-muzzle-low"/></linearGradient>'+

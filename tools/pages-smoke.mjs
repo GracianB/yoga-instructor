@@ -49,7 +49,7 @@ for (let attempt = 1; attempt <= attempts; attempt++) {
       }
       if (file.name === 'index.html') {
         const html = Buffer.from(published).toString('utf8');
-        if (!html.includes('yin-yang-art.js?v=phase-c-1')) {
+        if (!html.includes('yin-yang-art.js?v=phase-d1-1')) {
           problems.push('index.html: missing new Yin/Yang premium character reference');
         }
       }

@@ -21,7 +21,7 @@
     if(n.length!==6 && n.length!==10)throw Error("Pose limb must have one or two quadratic sections: "+d);
     const pieces=[n.slice(0,6)];
     if(n.length===10)pieces.push([n[4],n[5],n[6],n[7],n[8],n[9]]);
-    const radius=type==="leg"?23:17;
+    const radius=type==="leg"?31:22;
     const a=[],b=[];
     for(let section=0;section<pieces.length;section++){
       const [x0,y0,cx,cy,x1,y1]=pieces[section];
@@ -54,6 +54,10 @@
       '<path d="M-18-3Q-16-15-4-15Q15-18 20-5Q24 11 12 17Q-2 22-15 12Q-22 6-18-3Z" class="'+cls+'"/>'+
       '<path d="M-10-8Q-5-14 1-11M3-11Q10-13 13-6" class="yy-paw-toes"/>'+
       '<path d="M-12 5Q-4 12 5 10" class="yy-paw-gloss"/>'+
+      '<ellipse cx="-8" cy="-8" rx="3.2" ry="2.4" class="yy-toe"/>'+
+      '<ellipse cx="0" cy="-10" rx="3.2" ry="2.4" class="yy-toe"/>'+
+      '<ellipse cx="8" cy="-7" rx="3.2" ry="2.4" class="yy-toe"/>'+
+      '<ellipse cx="1" cy="4" rx="6" ry="4.2" class="yy-pad"/>'+
       '<path d="M-6 2Q0 8 7 2Q4 12 -2 11Q-8 10-6 2Z" class="yy-pad"/>'+
       '<path d="M-12-9Q-9-14-5-11M2-12Q7-15 10-9" class="yy-toe"/>'+
       '</g>';
@@ -125,11 +129,11 @@
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
     return '<g class="yy-torso" data-kind="'+p.kind+'" transform="translate('+x+' '+y+') rotate('+r+')">'+
-      '<path d="M-'+fmt(rx*.75)+' -'+fmt(ry*.57)+
-      'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.78)+' '+fmt(ry*.55)+
-      'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.75)+' '+fmt(ry*.55)+
-      'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.8)+' -'+fmt(ry*.55)+
-      'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.75)+' -'+fmt(ry*.57)+'Z" class="yy-fur yy-outline"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
+      '<path d="M-'+fmt(rx*.86)+' -'+fmt(ry*.57)+
+      'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.9)+' '+fmt(ry*.55)+
+      'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.86)+' '+fmt(ry*.55)+
+      'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.92)+' -'+fmt(ry*.55)+
+      'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.86)+' -'+fmt(ry*.57)+'Z" class="yy-fur yy-outline"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
       (p.kind==="table"?
         '<path d="M-95 27Q0 42 95 27Q0 56 -95 27Z" class="yy-belly-shade" data-asana-belly="true"/>'+
         '<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':

@@ -381,7 +381,7 @@ test("Yin Yang presentation: selectable dual palette, no deforming skeleton", ()
   const guide=readFileSync(new URL("../flow-guide.js",import.meta.url),"utf8");
   const css=readFileSync(new URL("../flow-guide.css",import.meta.url),"utf8");
   assert.match(index,/yin-yang-art\.js\?v=phase-d13-1/);
-  assert.match(index,/flow-guide\.js\?v=yin-yang-\d+/);
+  assert.match(index,/flow-guide\.js\?v=d13-1/);
   assert.doesNotMatch(index,/flow-motion\.js/);
   assert.match(guide,/data-yy-form="yang"/);
   assert.match(guide,/data-yy-form="yin"/);
@@ -408,7 +408,7 @@ test("Phase B: Cat-Cow changes only spine/head/tail; grounded limbs never multip
   const motion=readFileSync(new URL("../yy-asana-motion.js",import.meta.url),"utf8");
   const art=readFileSync(new URL("../yin-yang-art.js",import.meta.url),"utf8");
   const style=readFileSync(new URL("../yy-asana-motion.css",import.meta.url),"utf8");
-  assert.match(index,/yy-asana-motion\.js\?v=phase-c-\d+/);
+  assert.match(index,/yy-asana-motion\.js\?v=d13-1/);
   assert.match(index,/yy-asana-motion\.css\?v=phase-b-1/);
   assert.match(art,/data-asana-back/);
   assert.match(art,/data-asana-spine/);

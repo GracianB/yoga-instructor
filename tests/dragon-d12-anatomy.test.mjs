@@ -13,7 +13,7 @@ const render=()=>{
 test('D12 release: latest assets deployed after D11, uncached and budgeted',()=>{
  assert.ok(html.indexOf('yy-dragon-d12.css')>html.indexOf('yy-dragon-d11.css'));
  assert.match(html,/yy-dragon-d12\.css\?v=d12-1/);
- assert.match(html,/yin-yang-art\.js\?v=phase-d12-1/);
+ assert.match(html,/yin-yang-art\.js\?v=phase-d13-1/);
  assert.match(build,/'yy-dragon-d12\.css'/);
  assert.ok(css.length<9000);
 });
@@ -51,7 +51,7 @@ test('D12: refines anatomical silhouette, preserves living cat/cow and all 40 co
  assert.equal((svg.match(/data-asana-spine="true"/g)||[]).length,1);
  assert.equal((svg.match(/data-asana-belly="true"/g)||[]).length,1);
  assert.ok(!/NaN|Infinity|undefined/.test(svg));
- assert.match(art,/p\.kind==="rest"\?\.78:p\.kind==="table"\?\.75/);
+ assert.match(art,/p\.kind==="rest"\?\.78:table\?\.82/);
 });
 test('D12: animation belongs only to feather, respects pause/quiet/reduced motion',()=>{
  assert.match(css,/yy-d12-tail-tip 10\.8s/);

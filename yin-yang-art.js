@@ -110,9 +110,10 @@
       path('M-46-6Q-34-14-22-6','yy-brow')+
       path('M24-6Q36-14 48-6','yy-brow')+
       eyes+
-      '<path d="M-23 44Q-18 33 3 33Q27 32 32 43Q34 59 9 66Q-21 66-23 44Z" class="yy-muzzle"/>'+
-      '<path d="M-5 40Q-7 34 0 35Q7 34 5 40Q0 48-5 40Z" class="yy-nose"/>'+
-      path(eye==="smile"?'M-9 53Q6 65 21 53':'M-7 54Q7 59 19 53','yy-smile')+
+      '<path d="M-28 36Q-22 22 2 22Q26 22 32 38Q34 62 2 70Q-30 62-28 36Z" class="yy-muzzle"/>'+
+      '<path d="M-6 34Q-8 28 0 29Q8 28 6 34Q0 42-6 34Z" class="yy-nose"/>'+
+      '<path d="M-4 33Q-3 36-1 34M2 34Q4 36 5 33" class="yy-nostril"/>'+
+      path(eye==="smile"?'M-10 50Q2 62 16 50':'M-8 50Q2 56 14 50','yy-smile')+
       path('M6 48L5 56','yy-mouth-mark')+
       path('M-68 11L-75 19L-65 20M65 11L74 19L64 21','yy-face-streak')+
       path('M-51-2L-44-8L-36 0M43-2L50-8L58 0','yy-temple-mark')+
@@ -133,6 +134,7 @@
         '<path d="M-95 27Q0 42 95 27Q0 56 -95 27Z" class="yy-belly-shade" data-asana-belly="true"/>'+
         '<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
       '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>')+
+      '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.18)+'" rx="'+fmt(rx*.42)+'" ry="'+fmt(ry*.34)+'"/>'+
       (horizontal?'':
         '<path d="M-'+fmt(rx*.55)+' -'+fmt(ry*.64)+
           'Q-'+fmt(rx*.66)+' -'+fmt(ry*.24)+' -'+fmt(rx*.34)+' -'+fmt(ry*.14)+

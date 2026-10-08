@@ -91,3 +91,34 @@ test('D6: real calm eyes and green/blush backdrop in Yin and Yang',async ({page,
   }
   expect(errors).toEqual([]);
 });
+
+test('D6: finished state offers visible Return to start and Repeat practice',async ({page,browserName})=>{
+  test.skip(browserName!=='chromium','Visual terminal-state contract in Chromium; core navigation remains cross-browser.');
+  test.setTimeout(35000);
+  // Avoid auto progression racing the manual nine-step navigation.
+  await page.addInitScript(()=>{const now=Date.now();Date.now=()=>now;});
+  const errors=await openPractice(page);
+  const guide=page.locator('#flow-guide');
+  const start=page.locator('[data-flow-action="start"]');
+  const next=page.locator('[data-flow-action="next"]');
+  const reset=page.locator('[data-flow-action="reset"]');
+  await start.click();
+  for(let i=0;i<9;i++){
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    await next.click();
+  }
+  await expect(guide).toHaveAttribute('data-status','finished');
+  await expect(start).toBeVisible();
+  await expect(start).toHaveText('Repetir práctica');
+  await expect(reset).toBeVisible();
+  await expect(reset).toBeEnabled();
+  await expect(reset).toHaveText('Volver al inicio');
+  await expect(page.locator('[data-flow-action="pause"]')).toBeHidden();
+  await reset.click();
+  await expect(guide).toHaveAttribute('data-status','idle');
+  await expect(next).toBeDisabled();
+  await expect(start).toBeVisible();
+  await start.click();
+  await expect(guide).toHaveAttribute('data-status','running');
+  expect(errors).toEqual([]);
+});

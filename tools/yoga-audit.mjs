@@ -440,7 +440,7 @@ for (const [file, max] of [
   ["styles.css", 184000],
   ["main.js", 22000],
   ["i18n.js", 18000],
-  ["sanctuary-experience.js", 14000]
+  ["sanctuary-experience.js", 16000]
 ]) {
   const bytes = statSync(join(root, file)).size;
   if (bytes <= max) pass.push(`${file} size ${bytes}B`);

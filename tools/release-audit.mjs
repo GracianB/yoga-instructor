@@ -13,6 +13,21 @@ postcss.parse(css);
 postcss.parse(readFileSync('flow-guide.css', 'utf8'));
 postcss.parse(readFileSync('yy-asana-motion.css', 'utf8'));
 postcss.parse(readFileSync('yy-premium-stage.css', 'utf8'));
+for (const sheet of [...html.matchAll(/<link[^>]+href="(\.\/[^"?#]+\.css)(?:\?[^"]*)?"/g)].map(match=>match[1])) {
+  assert.ok(existsSync(sheet), 'Stylesheet missing: '+sheet);
+  const root=postcss.parse(readFileSync(sheet,'utf8'),{from:sheet});
+  assert.ok(root.nodes.length>0,'Empty stylesheet: '+sheet);
+}
+for (const file of ['yy-phase-d2-d3.css','yy-phase-d4-polish.css','yy-guardian-soul.css']) {
+  assert.ok(html.includes(file),'Practice finishing layer missing: '+file);
+}
+assert.ok(html.indexOf('yy-premium-stage.css')<html.indexOf('yy-phase-d2-d3.css') &&
+  html.indexOf('yy-phase-d2-d3.css')<html.indexOf('yy-phase-d4-polish.css') &&
+  html.indexOf('yy-phase-d4-polish.css')<html.indexOf('yy-guardian-soul.css'),
+  'Practice CSS cascade must preserve D1 to D5 order');
+assert.ok((html.match(/id="audio-play"/g)||[]).length===1,'Exactly one audio play button');
+assert.ok((html.match(/id="focus-audio"/g)||[]).length===1,'Exactly one audio media element');
+
 assert.ok(statSync('yy-premium-stage.css').size <= 12000, 'Premium theater CSS budget');
 assert.ok(html.includes('yy-premium-stage.css?v=phase-d1-1'), 'Premium theater stylesheet required');
 assert.ok(html.includes('flow-theater'), 'Side-navigation theater is required');

@@ -401,3 +401,48 @@ test('Phase C: compact theater, actual side buttons, 320-1440 layouts and seriou
  await expect(right).toHaveAttribute('aria-label','Next pose');
  expect(errors).toEqual([]);
 });
+
+
+test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async ({page})=>{
+  test.setTimeout(80000);
+  const errors=await open(page);
+  const guide=page.locator('#flow-guide');
+  await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+  const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+  // All ten authored faces use one identical, intentionally non-human eye style.
+  expect(await guide.locator('.yy-eye-white,.yy-pupil,.yy-heavy-lid').count()).toBe(0);
+  for(const width of [390,1440]){
+    await page.setViewportSize({width,height:900});
+    for(const form of ['yin','yang']){
+      await guide.locator('[data-yy-form="'+form+'"]').evaluate(el=>el.click());
+      await expect(guide).toHaveAttribute('data-spirit',form);
+      await expect(guide.locator('.yy-pose.is-current .yy-eye-closed')).toHaveCount(1);
+      await act('preview');
+      for(const phase of ['centering','breath','warmup','pose-1']){
+        await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+        await act('next');
+        await expect(guide).toHaveAttribute('data-phase',phase);
+      }
+      await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+      const face=guide.locator('.yy-pose.is-current .yy-head');
+      await expect(face.locator('.yy-eye-almond')).toHaveCount(2);
+      await expect(face.locator('.yy-guardian-lid')).toHaveCount(1);
+      const eyeStyle=await face.locator('.yy-eye-almond').first().evaluate(el=>{
+        const s=getComputedStyle(el);
+        return {fill:s.fill,stroke:s.stroke,opacity:s.opacity};
+      });
+      expect(eyeStyle.fill).not.toBe('rgb(255, 255, 255)');
+      expect(eyeStyle.opacity).not.toBe('0');
+      if(width===390||width===1440){
+        await guide.evaluate(el=>{el.scrollIntoView({behavior:'instant',block:'start'});scrollBy(0,-120);});
+        await test.info().attach('d1-guardian-'+form+'-'+width,{
+          body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'
+        });
+      }
+      await act('reset');
+      await expect(guide).toHaveAttribute('data-phase','start');
+      await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    }
+  }
+  expect(errors).toEqual([]);
+});

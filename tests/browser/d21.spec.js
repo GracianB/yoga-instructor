@@ -1,0 +1,31 @@
+const {test,expect}=require("@playwright/test");
+test("D21: immersive view isolates the practice and Escape restores document",async({page})=>{
+ await page.goto("/");
+ await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
+ const toggle=page.locator('[data-studio-focus-toggle]');
+ await toggle.click();
+ await expect(page.locator("body")).toHaveClass(/studio-focus/);
+ await expect(page.locator("#instructor-flow")).toHaveAttribute("aria-modal","true");
+ await expect(toggle).toHaveAttribute("aria-pressed","true");
+ await expect(page.locator("#inicio")).toHaveAttribute("inert","");
+ await page.keyboard.press("Escape");
+ await expect(page.locator("body")).not.toHaveClass(/studio-focus/);
+ await expect(toggle).toHaveAttribute("aria-pressed","false");
+ await expect(page.locator("#instructor-flow")).not.toHaveAttribute("aria-modal",/true/);
+ await expect(page.locator("#inicio")).not.toHaveAttribute("inert",/.*/);
+ await expect(toggle).toBeFocused();
+});
+test("D21: guided mode and optional voice survive focus toggling on mobile",async({page})=>{
+ await page.setViewportSize({width:320,height:760});
+ await page.goto("/");
+ await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
+ const focus=page.locator('[data-studio-focus-toggle]');
+ await focus.click();
+ await expect(page.locator("#studio-guided")).toBeVisible();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+ const voice=page.locator('[data-studio-voice-toggle]');
+ await expect(voice).toHaveCount(1);
+ await expect(voice).toHaveAttribute("aria-pressed","false");
+ await focus.click();
+ await expect(page.locator(".studio-companion")).toBeVisible();
+});

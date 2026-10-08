@@ -62,3 +62,44 @@ body.quiet-mode #instructor-flow .yy-anim-eyes{animation:none!important}
 @media(prefers-reduced-motion:reduce){
   #instructor-flow .yy-stance-shadow{transition:none!important}
 }
+
+/* D.5 art direction audit: remove the toy-blue / violet neon stage.
+   The character is mineral, botanical and serene. Two energies, one universe. */
+#instructor-flow .yy-guide[data-spirit="yang"]{
+  --yy-fur:#e9f0e7;--yy-fur-deep:#bacfc1;--yy-outline:#294b40;
+  --yy-mane:#477e6d;--yy-ear:#8ebca9;--yy-eye:#2b5045;
+  --yy-cheek:#d4e1d4;--yy-muzzle:#f6f2e9;--yy-paw:#376957;
+  --yy-badge:#b3cfa6;--yy-magic:#dfd5b5;--yy-ruff:#f3f3e5;
+}
+#instructor-flow .yy-guide[data-spirit="yin"]{
+  --yy-fur:#303c46;--yy-fur-deep:#202e39;--yy-outline:#152730;
+  --yy-mane:#526b6d;--yy-ear:#819d9b;--yy-eye:#b5cabc;
+  --yy-cheek:#425d61;--yy-muzzle:#586a6b;--yy-paw:#203a3f;
+  --yy-badge:#aac4b4;--yy-magic:#cbd0b2;--yy-ruff:#d5ded7;
+}
+#instructor-flow .yy-guide .yy-lotus{
+  fill:#809f89;stroke:#b0c8ae;stroke-width:1.5;opacity:.76;
+}
+#instructor-flow .yy-guide .yy-lotus-inner{
+  fill:#c3d5b9;opacity:.42;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-lotus{
+  fill:#6c8683;stroke:#9dafae;opacity:.65;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-lotus-inner{
+  fill:#a6bbb5;opacity:.30;
+}
+#instructor-flow .yy-guide .yy-stance-shadow{
+  fill:#142f28;opacity:.19;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stance-shadow{
+  fill:#071c1e;opacity:.32;
+}
+/* The illustration leads. No flashing jewels or exaggerated plastic shine. */
+#instructor-flow .yy-guide .yy-gem{filter:none!important}
+#instructor-flow .yy-guide .yy-cheek-shine{opacity:.12}
+#instructor-flow .yy-guide .yy-paw-toes{opacity:.36}
+#instructor-flow .yy-guide .yy-eye-sheen{opacity:.14}
+#instructor-flow .yy-guide .yy-guardian-lid{opacity:.60}
+#instructor-flow .yy-guide .yy-stars{opacity:.30}
+#instructor-flow .yy-guide[data-phase="finish"] .yy-stars{opacity:.56;filter:none}

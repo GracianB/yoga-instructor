@@ -226,12 +226,19 @@
          'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.86)+' '+fmt(ry*.55)+
          'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.92)+' -'+fmt(ry*.55)+
          'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.86)+' -'+fmt(ry*.57)+'Z'):
+        (horizontal?
+          ('M-'+fmt(rx*.91)+' -'+fmt(ry*.14)+
+           'C-'+fmt(rx*.87)+' -'+fmt(ry*.84)+' -'+fmt(rx*.40)+' -'+fmt(ry*1.01)+' -'+fmt(rx*.05)+' -'+fmt(ry*.86)+
+           'C'+fmt(rx*.39)+' -'+fmt(ry*1.02)+' '+fmt(rx*.85)+' -'+fmt(ry*.66)+' '+fmt(rx*.94)+' -'+fmt(ry*.16)+
+           'C'+fmt(rx*1.01)+' '+fmt(ry*.18)+' '+fmt(rx*.80)+' '+fmt(ry*.65)+' '+fmt(rx*.43)+' '+fmt(ry*.73)+
+           'Q0 '+fmt(ry*.84)+' -'+fmt(rx*.45)+' '+fmt(ry*.68)+
+           'C-'+fmt(rx*.81)+' '+fmt(ry*.59)+' -'+fmt(rx*.98)+' '+fmt(ry*.24)+' -'+fmt(rx*.91)+' -'+fmt(ry*.14)+'Z'):
         ('M-'+fmt(rx*.83)+' -'+fmt(ry*.42)+
          'C-'+fmt(rx*.96)+' -'+fmt(ry*.83)+' -'+fmt(rx*.47)+' -'+fmt(ry*1.13)+' 0 -'+fmt(ry*.98)+
          'C'+fmt(rx*.57)+' -'+fmt(ry*1.13)+' '+fmt(rx*.98)+' -'+fmt(ry*.70)+' '+fmt(rx*.92)+' -'+fmt(ry*.37)+
          'C'+fmt(rx*1.05)+' '+fmt(ry*.01)+' '+fmt(rx*.79)+' '+fmt(ry*.61)+' '+fmt(rx*.43)+' '+fmt(ry*.79)+
          'Q0 '+fmt(ry*.98)+' -'+fmt(rx*.45)+' '+fmt(ry*.79)+
-         'C-'+fmt(rx*.77)+' '+fmt(ry*.54)+' -'+fmt(rx*.98)+' '+fmt(ry*.02)+' -'+fmt(rx*.83)+' -'+fmt(ry*.42)+'Z'))+
+         'C-'+fmt(rx*.77)+' '+fmt(ry*.54)+' -'+fmt(rx*.98)+' '+fmt(ry*.02)+' -'+fmt(rx*.83)+' -'+fmt(ry*.42)+'Z')))+
         '" class="yy-fur yy-outline yy-d12-body-shell"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
       (p.kind==="table"?
         '<path d="M-95 27Q0 42 95 27Q0 56 -95 27Z" class="yy-belly-shade" data-asana-belly="true"/>'+

@@ -118,7 +118,7 @@
       '<path d="M-6 34Q-8 28 0 29Q8 28 6 34Q0 42-6 34Z" class="yy-nose"/>'+
       '<path d="M-4 33Q-3 36-1 34M2 34Q4 36 5 33" class="yy-nostril"/>'+
       path(eye==="smile"?'M-10 50Q2 62 16 50':'M-8 50Q2 56 14 50','yy-smile')+
-      path('M6 48L5 56','yy-mouth-mark')+
+      path('M6 48L5 56','yy-mouth-mark')+path('M-30 40L-48 36M-30 46L-50 48M30 40L48 36M30 46L50 48','yy-whisker')+
       path('M-68 11L-75 19L-65 20M65 11L74 19L64 21','yy-face-streak')+
       path('M-51-2L-44-8L-36 0M43-2L50-8L58 0','yy-temple-mark')+
       path('M-5-51L7-74L24-51L7-40Z','yy-crown-mark')+

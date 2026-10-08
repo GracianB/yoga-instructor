@@ -1,0 +1,135 @@
+/* D14 · EMBODIED STILLNESS
+   A dragon-unicorn with weight, joined anatomy and breath instead of a
+   floating mascot. Small SVG details move; contact paws never translate. */
+
+/* The throat belongs to the same surface as the skull and torso. The
+   dynamically flexed table neckline is animated by yy-asana-motion.js. */
+#instructor-flow .yy-guide .yy-d14-neck-bridge{
+  fill:var(--d9-skin-mid,var(--yy-fur));
+  stroke:var(--d9-ink,var(--yy-outline));
+  stroke-width:2.1;stroke-linejoin:round;stroke-linecap:round;
+  opacity:.96;
+}
+#instructor-flow .yy-guide .yy-d14-neck-table{
+  stroke-width:2.25;
+}
+#instructor-flow .yy-guide .yy-d14-throat-line{
+  fill:none;stroke:var(--d12-etched);stroke-width:1.8;
+  stroke-linecap:round;opacity:.42;
+}
+
+/* Scapula follows the torso's authored coordinate system. Its placement
+   doesn't depend on CSS transforms, which can detach SVG shoulder joints. */
+#instructor-flow .yy-guide .yy-d14-scapula{
+  opacity:.53;pointer-events:none;
+}
+#instructor-flow .yy-guide .yy-d14-shoulder-blade{
+  fill:none;stroke:var(--d12-ventral);
+  stroke-linecap:round;stroke-linejoin:round;stroke-width:2;
+}
+#instructor-flow .yy-guide .yy-d14-rib-cage{
+  transform-box:fill-box;
+  transform-origin:50% 45%;
+  pointer-events:none;
+}
+#instructor-flow .yy-guide .yy-d14-rib-line{
+  fill:none;stroke:var(--d12-etched);stroke-width:2.1;
+  stroke-linecap:round;opacity:.36;
+}
+#instructor-flow .yy-guide .yy-d14-breath-line{
+  fill:none;stroke:var(--d12-ventral);stroke-width:1.8;
+  stroke-linecap:round;opacity:.42;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-d14-rib-line{opacity:.48}
+#instructor-flow .yy-guide[data-phase="warmup"] .yy-d14-rib-cage,
+#instructor-flow .yy-guide[data-phase="warmup"] .yy-d14-scapula{
+  animation:none!important;
+}
+
+/* Stop obsolete whole-character rises. 4-7-8 continues in the muzzle,
+   chest engraving and ambient halo, without dragging hands across the mat. */
+#instructor-flow .yy-guide .yy-pose-rest.is-current .yy-character,
+#instructor-flow .yy-guide .yy-pose-seat.is-current .yy-character,
+#instructor-flow .yy-guide .yy-pose-breath.is-current .yy-character,
+#instructor-flow .yy-guide .yy-pose-flow.is-current .yy-character,
+#instructor-flow .yy-guide .yy-pose-child.is-current .yy-character,
+#instructor-flow .yy-guide .yy-pose-savasana.is-current .yy-character{
+  animation:none!important;
+  transform:none!important;
+}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"],[data-asana-state="idle"])
+ .yy-pose.is-current:not(.yy-pose-table) .yy-d14-rib-cage{
+  animation:yy-d14-lungs 9.5s cubic-bezier(.45,.02,.33,1) infinite;
+}
+#instructor-flow .yy-guide[data-phase="savasana"] .yy-pose.is-current .yy-d14-rib-cage{
+  animation-duration:12s;
+}
+@keyframes yy-d14-lungs{
+  0%,100%{transform:scaleY(1);opacity:.61}
+  46%{transform:scaleY(1.014);opacity:.90}
+}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="inhale"] .yy-pose.is-current .yy-d14-rib-cage{
+ animation:yy-d14-inhale 4s ease-out both;
+}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="hold"] .yy-pose.is-current .yy-d14-rib-cage{
+ animation:none!important;transform:scaleY(1.014);opacity:.88;
+}
+#instructor-flow .yy-guide[data-phase="breath"][data-breath-step="exhale"] .yy-pose.is-current .yy-d14-rib-cage{
+ animation:yy-d14-exhale 8s ease-in-out both;
+}
+@keyframes yy-d14-inhale{from{transform:scaleY(1);opacity:.61}to{transform:scaleY(1.014);opacity:.88}}
+@keyframes yy-d14-exhale{from{transform:scaleY(1.014);opacity:.88}to{transform:scaleY(1);opacity:.61}}
+
+/* Tree: pivot the entire anatomy precisely on the sole of the planted foot,
+   not 88% of the mutable bounding box. That foot does not skate on the floor. */
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose-tree.is-current .yy-character{
+ transform-box:view-box;
+ transform-origin:353px 387px;
+ animation:yy-d14-tree-root 11s ease-in-out infinite!important;
+}
+@keyframes yy-d14-tree-root{
+ 0%,100%{transform:rotate(-.24deg)}
+ 50%{transform:rotate(.36deg)}
+}
+/* Shoulder and upper ribs carry the expression, not the anchored feet. */
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose-warrior.is-current .yy-d14-scapula{
+ animation:yy-d14-shoulder-settle 11s ease-in-out infinite;
+}
+#instructor-flow .yy-guide:is([data-asana-state="running"],[data-asana-state="paused"])
+ .yy-pose-flow.is-current .yy-d14-scapula{
+ animation:yy-d14-shoulder-settle 9s ease-in-out infinite;
+}
+@keyframes yy-d14-shoulder-settle{
+ 0%,100%{opacity:.43}
+ 45%{opacity:.73}
+}
+/* Somatic feedback: shadow breath is an optical modulation, never a moving
+   contact point. Warrior, Tree, Flow and Cat/Cow share stable ground anchors. */
+#instructor-flow .yy-guide .yy-pose-warrior .yy-stance-shadow,
+#instructor-flow .yy-guide .yy-pose-tree .yy-stance-shadow,
+#instructor-flow .yy-guide .yy-pose-flow .yy-stance-shadow,
+#instructor-flow .yy-guide .yy-pose-table .yy-stance-shadow{
+ transform:none!important;
+ stroke:var(--d9-ink);stroke-width:.8;stroke-opacity:.08;
+}
+
+/* The neck, waist and floor remain perfectly still when requested. */
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-d14-rib-cage,
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-d14-scapula{
+ animation-play-state:paused!important;
+}
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-d14-rib-cage,
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-d14-scapula,
+body.quiet-mode #instructor-flow .yy-d14-rib-cage,
+body.quiet-mode #instructor-flow .yy-d14-scapula{
+ animation:none!important;transform:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-d14-rib-cage,
+ #instructor-flow .yy-guide .yy-d14-scapula,
+ #instructor-flow .yy-guide .yy-pose-tree.is-current .yy-character{
+  animation:none!important;transform:none!important;transition:none!important;
+ }
+}

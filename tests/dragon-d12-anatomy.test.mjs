@@ -38,7 +38,7 @@ test('D12: organic tapered tail and feather in every pose, no moss-green legacy 
  assert.match(css,/fill:url\(#yy-d12-tail\)!important/);
  assert.match(css,/--d12-tail-hi:#ffebef/);
  assert.match(css,/--d12-tail-hi:#effaff/);
- assert.doesNotMatch(css,/--d12-tail-(?:hi|mid|low):#[0-9a-f]*[^0-9a-f]/i.test('')?'__never__':'--d12-tail-(hi|mid|low):#(?:7dcaa5|8dab99|648b80)/);
+ assert.doesNotMatch(css,/--d12-tail-(?:hi|mid|low):#(?:7dcaa5|8dab99|648b80)/i);
 });
 test('D12: refines anatomical silhouette, preserves living cat/cow and all 40 contacts',()=>{
  const svg=render().markup();

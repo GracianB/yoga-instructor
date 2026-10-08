@@ -61,4 +61,5 @@
  });
  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
  draw();
+ window.dispatchEvent(new CustomEvent("yoga:studio-plan",{detail:{id:selected}}));
 })();

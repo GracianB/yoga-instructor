@@ -133,7 +133,8 @@
 
   let preview = false;
   const setPreview = value => { preview = value; window.dispatchEvent(new CustomEvent("yoga:preview", { detail: value })); };
-  const durationFor = snapshot => preview ? 5 : (snapshot.durationSeconds || 0);
+  const durationFor = snapshot => preview ? 5 :
+    (window.YOGA_STUDIO_PLANS?.duration(snapshot.durationSeconds, root.dataset.studioPace || "balanced") ?? (snapshot.durationSeconds || 0));
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -257,6 +258,8 @@
     event.preventDefault();
     runAction(action);
   });
+
+  window.addEventListener("yoga:studio-plan", () => renderSession());
 
   window.addEventListener("yoga:flow", (event) => {
     const snapshot = event.detail;

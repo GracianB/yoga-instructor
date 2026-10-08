@@ -79,6 +79,7 @@
   const pad = (x) => String(x).padStart(2,"0");
   const format = (seconds) => pad(Math.floor(seconds / 60)) + ":" + pad(seconds % 60);
   const ease = (t) => t * t * (3 - 2 * t);
+  const setText = (element, value) => { if (element.textContent !== value) element.textContent = value; };
 
   const stopTick = () => {
     if (ticker !== null) { clearInterval(ticker); ticker = null; }
@@ -87,11 +88,13 @@
 
   const syncLanguage = () => {
     root.querySelectorAll("[data-studio-copy]").forEach((element) => {
-      element.textContent = copy(element.dataset.studioCopy);
+      setText(element, copy(element.dataset.studioCopy));
     });
     root.querySelector(".studio-modes")?.setAttribute("aria-label",
       language() === "en" ? "Choose practice type" : "Elige el tipo de práctica");
     status.setAttribute("aria-label", copy("liveRegion"));
+    countdown.setAttribute("aria-label", language() === "en" ? "Remaining time" : "Tiempo restante");
+    progress.parentElement?.setAttribute("aria-label", language() === "en" ? "Session progress" : "Progreso de la sesión");
     if (mode !== "asanas") render();
   };
 
@@ -110,7 +113,7 @@
     minutes.forEach((button) => {
       const selected = Number(button.dataset.studioDurationIndex) === durationIndex;
       const value = presets[mode]?.[Number(button.dataset.studioDurationIndex)];
-      button.textContent = value + " min";
+      setText(button, value + " min");
       button.setAttribute("aria-pressed", String(selected));
       button.disabled = clock.snapshot().status === "running" || clock.snapshot().status === "paused";
     });
@@ -137,9 +140,9 @@
         snapshot.progress < .85 ? "meditationFocus" : "meditationEnd";
     }
 
-    heading.textContent = copy(titleKey);
-    cue.textContent = copy(cueKey);
-    status.textContent = copy(snapshot.status);
+    setText(heading, copy(titleKey));
+    setText(cue, copy(cueKey));
+    setText(status, copy(snapshot.status));
     guided.dataset.studioStatus = snapshot.status;
     orb.style.setProperty("--studio-breath-scale",
       isBreathing && snapshot.status !== "idle" && !complete
@@ -148,9 +151,9 @@
     countdown.textContent = format(Math.ceil(snapshot.remainingMs / 1000));
     progress.style.transform = "scaleX(" + snapshot.progress.toFixed(4) + ")";
     progress.parentElement?.setAttribute("aria-valuenow", String(Math.round(snapshot.progress * 100)));
-    root.querySelector("#studio-guided-note").textContent = copy(isBreathing ? "breathNote" : "meditationNote");
-    primary.textContent = copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
-      snapshot.status === "paused" ? "resume" : "again");
+    setText(root.querySelector("#studio-guided-note"), copy(isBreathing ? "breathNote" : "meditationNote"));
+    setText(primary, copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
+      snapshot.status === "paused" ? "resume" : "again"));
     primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
     reset.disabled = waiting;
     syncDurations();

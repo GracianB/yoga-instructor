@@ -7,7 +7,7 @@
     {id:"breath",name:["Respirar 4 · 7 · 8","Breathe 4 · 7 · 8"],cue:["Inhala cuatro, sostén siete, exhala ocho.","Inhale four, hold seven, exhale eight."],kind:"breath",body:[360,260,67,87,0],head:[361,141,.86,0,"soft"],arms:["M305 227Q266 243 250 282","M414 227Q450 243 470 282"],legs:["M324 321Q282 352 245 335","M394 321Q440 352 476 335"],hands:[[250,282],[470,282]],feet:[[245,335],[476,335]],tail:[433,276,.64,-8]},
     {id:"warmup",name:["Despertar el cuerpo","Wake your body"],cue:["A cuatro apoyos, moviliza suavemente la columna.","On all fours, move your spine gently."],kind:"table",body:[364,267,131,52,-5],head:[223,236,.73,-18,"open"],arms:["M292 283Q270 325 258 367","M329 290Q319 337 316 366"],legs:["M429 279Q455 318 451 368","M461 252Q509 287 505 363"],hands:[[258,367],[316,366]],feet:[[451,368],[505,363]],tail:[461,238,.83,-24]},
     {id:"pose-1",name:["Guerrero II","Warrior II"],cue:["Abre los brazos, afianza tus pies y mira al frente.","Open your arms, ground your feet and look ahead."],kind:"warrior",body:[357,230,62,86,-3],head:[358,123,.79,-13,"focus"],arms:["M309 190Q239 183 155 190","M407 195Q484 184 562 192"],legs:["M322 299Q298 308 272 325Q264 355 253 378","M391 304Q460 311 474 343Q495 360 536 383"],hands:[[155,190],[562,192]],feet:[[253,378],[536,383]],tail:[426,261,.68,10]},
-    {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Abre el pecho, juega con el ritmo y mantén los pies enraizados.","Open your chest, feel the rhythm and keep both feet grounded."],kind:"flow",body:[365,237,69,86,11],head:[345,125,.80,-9,"smile"],arms:["M318 193Q273 147 298 99","M417 199Q464 150 514 164"],legs:["M349 305Q294 335 240 378","M410 302Q466 346 520 381"],hands:[[298,99],[514,164]],feet:[[240,378],[520,381]],tail:[437,253,.59,16]},
+    {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Abre el pecho, juega con el ritmo y mantén los pies enraizados.","Open your chest, feel the rhythm and keep both feet grounded."],kind:"flow",body:[365,237,69,86,11],head:[345,125,.80,-9,"smile"],arms:["M318 193Q269 148 237 109","M417 199Q464 150 514 164"],legs:["M349 305Q294 335 240 378","M410 302Q466 346 520 381"],hands:[[237,109],[514,164]],feet:[[240,378],[520,381]],tail:[437,253,.59,16]},
     {id:"pose-2",name:["Árbol del equilibrio","Tree of balance"],cue:["Busca un punto estable y sostén tu equilibrio.","Find a steady point and hold your balance."],kind:"tree",body:[359,223,63,85,0],head:[358,115,.79,0,"focus"],arms:["M311 186Q280 117 333 83","M407 186Q445 118 384 83"],legs:["M343 298Q349 339 353 387","M391 302Q450 310 423 336Q402 342 355 313"],hands:[[333,83],[384,83]],feet:[[353,387],[355,313]],tail:[426,260,.75,-6]},
     {id:"cooldown",name:["Postura del niño","Child's pose"],cue:["Recoge la energía y descansa la frente.","Fold inward and let your forehead rest."],kind:"child",body:[376,304,117,58,8],head:[264,319,.68,-43,"closed"],arms:["M309 333Q242 357 185 366","M340 344Q269 376 214 379"],legs:["M429 320Q446 364 400 369","M447 304Q489 350 454 365"],hands:[[185,366],[214,379]],feet:[[400,369],[454,365]],tail:[452,280,.66,28]},
     {id:"savasana",name:["Savasana","Savasana"],cue:["Afloja el cuerpo. No hay nada que conseguir.","Release your body. There is nothing to achieve."],kind:"savasana",body:[363,320,132,39,-1],head:[220,304,.76,-70,"closed"],arms:["M282 319Q262 348 243 366","M352 338Q353 365 332 375"],legs:["M439 322Q491 325 539 344","M444 308Q495 316 546 334"],hands:[[243,366],[332,375]],feet:[[539,344],[546,334]],tail:[452,291,.66,-14]},
@@ -39,9 +39,17 @@
     const f=pt=>fmt(pt[0])+","+fmt(pt[1]);
     const first=pieces[0],last=pieces[pieces.length-1];
     const start=[first[0],first[1]],finish=[last[4],last[5]];
-    const silhouette="M"+f(a[0])+"L"+a.slice(1).map(f).join("L")+
+    // An interpolated outer contour rather than straight lines joining
+    // each sampled joint normal. This rounds knees and the axillary tuck
+    // while preserving every authored endpoint and foot contact.
+    const side=pts=>pts.slice(1).map((point,i)=>{
+      const next=pts[i+2];
+      return next?'Q'+f(point)+' '+f([(point[0]+next[0])/2,(point[1]+next[1])/2]):
+        'L'+f(point);
+    }).join("");
+    const silhouette="M"+f(a[0])+side(a)+
       "Q"+f(finish)+" "+f(b[b.length-1])+
-      "L"+b.slice(0,-1).reverse().map(f).join("L")+
+      side(b.slice().reverse())+
       "Q"+f(start)+" "+f(a[0])+"Z";
     // Socket and taper share the authored limb coordinates, so the shoulder/
     // hip overlaps the torso and cannot become a detached animated badge.

@@ -381,7 +381,7 @@ test("Yin Yang presentation: selectable dual palette, no deforming skeleton", ()
   const guide=readFileSync(new URL("../flow-guide.js",import.meta.url),"utf8");
   const css=readFileSync(new URL("../flow-guide.css",import.meta.url),"utf8");
   assert.match(index,/yin-yang-art\.js\?v=phase-d16-1/);
-  assert.match(index,/flow-guide\.js\?v=d13-1/);
+  assert.match(index,/flow-guide\.js\?v=d16-1/);
   assert.doesNotMatch(index,/flow-motion\.js/);
   assert.match(guide,/data-yy-form="yang"/);
   assert.match(guide,/data-yy-form="yin"/);

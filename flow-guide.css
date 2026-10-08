@@ -1,140 +1,188 @@
-/* A quiet companion for the existing ten-phase practice. */
-.flow-guide { margin: 0 0 30px; padding: 22px 20px 26px; border: 1px solid var(--line); border-radius: 20px; background: color-mix(in srgb, var(--bg) 65%, transparent); overflow: hidden; }
-.guide-heading { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font: 500 9px/1.6 'JetBrains Mono', monospace; letter-spacing: .12em; }
-.guide-scene { display: block; width: min(100%, 640px); height: auto; margin: -12px auto -8px; overflow: visible; --skin: #cda68e; --cloth: #547360; --trousers: #b58f9a; --hair: #39473b; }
-[data-theme="dark"] .guide-scene { --skin: #d8b29c; --cloth: #8aa58e; --trousers: #c4a1aa; --hair: #3a493f; }
-.guide-skin { fill: var(--skin); }
-.guide-hair { fill: var(--hair); }
-.guide-neck, .guide-arm, .guide-foot { fill: none; stroke: var(--skin); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
-.guide-neck { stroke-width: 15; }
-.guide-leg { fill: none; stroke: var(--trousers); stroke-width: 23; stroke-linecap: round; stroke-linejoin: round; }
-.guide-shirt { fill: var(--cloth); }
-.guide-face { fill: none; stroke: var(--hair); stroke-width: 1.4; stroke-linecap: round; }
-.guide-fold { fill: none; stroke: var(--bg); stroke-opacity: .35; stroke-width: 1.5; }
-.guide-ground { fill: none; stroke: var(--sage); stroke-width: 1; opacity: .25; }
-.guide-shadow { fill: var(--sage); opacity: .09; }
-.guide-pose { opacity: 0; transition: opacity .85s ease; }
-.guide-pose.is-current { opacity: 1; }
-.guide-body { transform-origin: 320px 300px; animation: guide-breathe 8s ease-in-out infinite; }
-.guide-halo { transform-origin: 320px 200px; animation: guide-halo 8s ease-in-out infinite; }
-@keyframes guide-breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.015); } }
-@keyframes guide-halo { 0%,100% { transform: scale(.96); opacity: .6; } 50% { transform: scale(1.04); opacity: 1; } }
-.flow-guide figcaption { text-align: center; min-height: 74px; }
-.flow-guide figcaption strong { display: block; color: var(--ink); font: 500 clamp(23px,3vw,32px)/1.2 'Fraunces', Georgia, serif; letter-spacing: -.02em; }
-.flow-guide figcaption p { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 9px 0 0; }
-.flow-guide:not([data-status="running"]) .guide-body,
-.flow-guide:not([data-status="running"]) .guide-halo,
-.flow-guide[data-hidden="true"] .guide-body,
-.flow-guide[data-hidden="true"] .guide-halo,
-body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state: paused; }
-.flow-guide .guide-pose:not(.is-current) .guide-body { animation-play-state: paused; }
-.flow-preview { padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: 12px; cursor: pointer; }
-.flow-preview:hover { border-color: var(--sage); }
-.flow-entry-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.flow-phase-timing { display: grid; gap: 7px; margin-top: 8px; }
-.flow-session-clock .flow-phase-timing small { display: flex; gap: 10px; justify-content: space-between; opacity: 1; line-height: 1.5; }
-.flow-phase-timing b { font: inherit; font-variant-numeric: tabular-nums; }
-[lang] #flow-phase-target::before { content: none; }
-@media (max-width: 600px) {
- .flow-guide { margin-inline: -12px; padding: 16px 10px 18px; }
- .guide-heading { font-size: 8px; letter-spacing: .06em; }
- .guide-scene { width: 154%; max-width: none; margin: -10px 0 -20px -27%; }
- .flow-guide figcaption { min-height: 90px; padding-inline: 8px; }
- .flow-entry-actions { align-items: stretch; flex-direction: column; }
+/* YIN × YANG · two elemental forms, ten unique cartoons, no bone tweening. */
+.yy-guide {
+  --yy-fur:#f4f8fc; --yy-fur-deep:#c6d8ef; --yy-outline:#284d83;
+  --yy-mane:#285b9e; --yy-ear:#88d4ff; --yy-eye:#267cc9;
+  --yy-cheek:#d6e9ff; --yy-muzzle:#fcf7f1; --yy-paw:#214b86;
+  --yy-badge:#49ceff; --yy-magic:#ffe3a3; --yy-ruff:#eaf5ff;
+  margin:0 0 28px;padding:18px 18px 21px;
+  border:1px solid color-mix(in srgb,var(--line) 50%,#62b7f5);
+  border-radius:24px;background:color-mix(in srgb,var(--bg) 86%,#bfdff1);
+  box-shadow:0 18px 50px rgba(11,45,85,.075);
+  overflow:hidden; isolation:isolate;
 }
-@media (prefers-reduced-motion: reduce) {
- .guide-pose { transition: none; }
- .guide-body, .guide-halo { animation: none; }
+.yy-guide[data-spirit="yin"] {
+  --yy-fur:#252d55; --yy-fur-deep:#151d3b; --yy-outline:#090f31;
+  --yy-mane:#7463d9; --yy-ear:#9e66ed; --yy-eye:#f0c37f;
+  --yy-cheek:#52518f; --yy-muzzle:#3a3b6d; --yy-paw:#10153c;
+  --yy-badge:#ad85fc; --yy-magic:#c6eaff; --yy-ruff:#9da2ed;
 }
-
-/* Living silhouette: keep the original illustrated poses as a graceful JS fallback. */
-.flow-guide.guide-animated .guide-pose { display: none; }
-.guide-articulated { filter: drop-shadow(0 4px 6px rgba(55, 88, 64, .065)); }
-.guide-animated .guide-scene { isolation: isolate; }
-.flow-guide { background:
-  radial-gradient(ellipse at 50% 37%, rgba(221, 179, 193, .11), transparent 64%),
-  color-mix(in srgb, var(--bg) 65%, transparent); }
-.guide-animated .guide-shadow { opacity: .12; }
-.flow-preview, .flow-start { transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease; }
-.flow-preview:hover, .flow-preview:focus-visible {
-  border-color: #bf909f;
-  box-shadow: 0 0 0 3px rgba(210, 160, 178, .14);
+.yy-guide .guide-heading {
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:12px;margin-bottom:15px;
+  font:700 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--muted);
 }
-.flow-preview:focus-visible, .flow-start:focus-visible {
-  outline: 2px solid #b17b92;
-  outline-offset: 3px;
+.yy-form-choice {
+  display:inline-flex;align-items:center;gap:5px;padding:4px;
+  border:1px solid color-mix(in srgb,var(--line) 70%,#68c6ed);
+  border-radius:99px;background:color-mix(in srgb,var(--bg) 92%,#87d2f4);
 }
-.flow-guide[data-status="paused"] { border-color: color-mix(in srgb, var(--line) 70%, #c89bab); }
-.flow-guide figcaption p { max-width: 42ch; margin-inline: auto; }
-@media (max-width: 600px) {
-  .flow-guide.guide-animated .guide-scene { width: 154%; margin: -10px 0 -18px -27%; }
-  .flow-guide .guide-heading { padding-inline: 7px; }
-  .flow-guide figcaption strong { font-size: clamp(23px, 6vw, 29px); }
-  .flow-guide figcaption p { max-width: 33ch; font-size: 12px; }
+.yy-form-choice button {
+  padding:8px 15px;border:0;border-radius:99px;background:transparent;
+  color:var(--muted);font:700 10px/1.2 'JetBrains Mono',monospace;letter-spacing:.07em;
+  cursor:pointer;transition:background .22s,color .22s,box-shadow .22s;
 }
-@media (prefers-reduced-motion: reduce) {
-  .guide-articulated { filter: none; }
-  .flow-preview, .flow-start { transition: none; }
+.yy-form-choice button[aria-pressed="true"]{
+  background:#1c5797;color:#fff;box-shadow:0 2px 12px rgba(21,94,174,.23);
 }
-
-/* Layered illustrated character. Uses actual rig joints, not a decorative overlay. */
-.guide-animated .guide-scene { --outline: #4a5145; }
-.guide-animated .guide-leg { fill: url(#yoga-pants); stroke: #455a64; stroke-width: .75; stroke-linejoin: round; }
-.guide-leg-lustre { fill: none; stroke: #efd1d2; stroke-width: 3.2; opacity: .48; stroke-linecap: round; stroke-linejoin: round; }
-.guide-animated .guide-foot, .guide-animated .guide-arm { fill: url(#yoga-skin); stroke: #c38c73; stroke-width: .65; stroke-linejoin: round; }
-.guide-animated .guide-neck { fill: none; stroke: url(#yoga-skin); stroke-width: 13; stroke-linecap: round; }
-.guide-animated .guide-shirt { fill: url(#yoga-shirt); stroke: #4b6d59; stroke-width: 1.1; stroke-linejoin: round; }
-.guide-shirt-panel { fill: none; stroke: #e3f4df; stroke-width: 1.4; opacity: .37; stroke-linecap: round; }
-.guide-collar { fill: none; stroke: #e0e8d4; stroke-width: 4; stroke-linecap: round; opacity: .75; }
-.guide-sleeve { fill: url(#yoga-shirt); stroke: #58755f; stroke-width: .7; stroke-linejoin: round; }
-.guide-hand, .guide-ear { fill: url(#yoga-skin); stroke: #c38c73; stroke-width: .65; }
-.guide-animated .guide-head .guide-skin { fill: url(#yoga-skin); stroke: #bd927c; stroke-width: .8; }
-.guide-animated .guide-head .guide-hair, .guide-hair-bun { fill: url(#yoga-hair); stroke: #343832; stroke-width: 1.1; }
-.guide-face-shade { fill: #b67f6f; opacity: .13; }
-.guide-hair-strand { stroke: #272e2b; stroke-width: 2.1; stroke-linecap: round; fill: none; }
-.guide-brow, .guide-eyes { stroke: #554b45; stroke-width: 1.6; stroke-linecap: round; fill: none; }
-.guide-nose { fill: none; stroke: #a87765; stroke-width: 1.1; stroke-linecap: round; }
-.guide-smile { stroke: #965f5f; stroke-width: 1.4; stroke-linecap: round; fill: none; }
-.guide-blush { fill: #d98f9e; opacity: .33; }
-.guide-hair-shine { fill: none; stroke: #a69c85; stroke-width: 2.8; opacity: .68; stroke-linecap: round; }
-.guide-mat { fill: url(#yoga-rug); stroke: #8eac91; stroke-width: 1.3; opacity: .7; }
-.guide-branch { fill: none; stroke: #7d9d83; stroke-width: 1.8; opacity: .36; }
-.guide-leaf { fill: #96b9a0; opacity: .28; }
-.guide-pollen { fill: #d7a6b6; opacity: .55; }
-[data-theme="dark"] .guide-mat { opacity: .42; }
-[data-theme="dark"] .guide-garden { opacity: .76; }
-@media (max-width: 600px) { .guide-garden { opacity: .55; } }
-@media (prefers-reduced-motion: reduce) { .guide-articulated { transition: none; } }
-
-/* Keep both actions together; move the long sequence below instead of wrapping one button. */
-.flow-console-foot { flex-direction:column; align-items:flex-start; gap:14px; }
-.flow-entry-actions { flex-wrap:nowrap; }
-@media(max-width:600px){.flow-entry-actions{flex-wrap:wrap;}}
-
-/* ATELIER V3: human silhouette, quieter face and directional gaze. */
-.guide-animated .guide-scene { --skin: #cda78a; }
-.guide-hair-back { fill:url(#yoga-hair); stroke:#3c3b38; stroke-width:.8; }
-.guide-beard { fill:#69463f; opacity:.23; }
-.guide-forehead-light { fill:none;stroke:#9c8d7b;stroke-width:1.1;opacity:.45;stroke-linecap:round; }
-.guide-animated .guide-hand { fill:url(#yoga-skin);stroke:#b5806c;stroke-width:.55; }
-.guide-animated .guide-head .guide-skin { fill:url(#yoga-skin);stroke:#c28f7b;stroke-width:.65; }
-.guide-animated .guide-head .guide-smile { opacity:.45;stroke-width:1; }
-.guide-animated .guide-head .guide-hair { fill:url(#yoga-hair); }
-.guide-animated .guide-head .guide-blush { opacity:0; }
-.guide-animated .guide-head .guide-ear { fill:#cfaa92; }
-.guide-animated .guide-leg-lustre { stroke-width:1.4;opacity:.15; }
-.guide-animated .guide-shirt-panel { opacity:.13;stroke-width:1; }
-.guide-profile { opacity:0; }
-.guide-profile-nose { fill:url(#yoga-skin);stroke:#b5816e;stroke-width:.7; }
-.guide-profile-lid { fill:none;stroke:#514943;stroke-width:1.4;stroke-linecap:round; }
-.flow-guide[data-look="left"] .guide-profile,
-.flow-guide[data-look="right"] .guide-profile {opacity:1}
-/* Keep expressive eyes visible even when the head turns to face the knee. */
-.flow-guide[data-look="left"] .guide-head .guide-nose,
-.flow-guide[data-look="right"] .guide-head .guide-nose {opacity:0;}
-.flow-guide[data-look="left"] .guide-profile { transform:scaleX(-1); }
-
-.guide-waistline {fill:none;stroke:#d3e4d5;stroke-width:2;opacity:.72;stroke-linecap:round;}
-
-.guide-pelvis {fill:url(#yoga-pants);stroke:#415e67;stroke-width:.7;stroke-linejoin:round;}
-.guide-shirt-fold {fill:none;stroke:#d5e8d6;stroke-opacity:.26;stroke-width:1.7;stroke-linecap:round;}
+.yy-guide[data-spirit="yin"] .yy-form-choice button[aria-pressed="true"]{
+  background:#463778;box-shadow:0 2px 12px rgba(100,67,193,.28);
+}
+.yy-form-choice button:focus-visible{outline:2px solid #51caff;outline-offset:2px}
+.yy-stage {
+  position:relative;width:100%;max-width:960px;margin:auto;
+  aspect-ratio:720 / 460;overflow:hidden;isolation:isolate;border-radius:22px;
+  border:1px solid rgba(115,198,242,.25);
+  background:
+    radial-gradient(ellipse 65% 72% at 74% 21%,rgba(255,233,188,.68),transparent 90%),
+    radial-gradient(ellipse 60% 70% at 31% 43%,rgba(91,184,249,.23),transparent 95%),
+    linear-gradient(150deg,#e5f5ff,#9bd4f7 58%,#3b83ae);
+  box-shadow:inset 0 0 90px rgba(255,255,255,.25),0 18px 40px rgba(20,87,139,.13);
+  transition:background .45s ease;
+}
+.yy-guide[data-spirit="yin"] .yy-stage {
+  border-color:rgba(126,111,208,.45);
+  background:
+    radial-gradient(ellipse 53% 60% at 74% 21%,rgba(173,117,239,.45),transparent 90%),
+    radial-gradient(ellipse 65% 70% at 29% 43%,rgba(75,118,241,.22),transparent 95%),
+    linear-gradient(150deg,#0d1536,#28316d 58%,#0a2a53);
+  box-shadow:inset 0 0 90px rgba(30,23,76,.36),0 18px 40px rgba(9,9,45,.24);
+}
+.yy-stage::before {
+  content:"";position:absolute;width:26%;aspect-ratio:1;right:11%;top:10%;
+  background:radial-gradient(circle,#fff2cf 0%,#d5edff 67%,rgba(255,243,203,0) 69%);
+  opacity:.85;border-radius:50%;filter:blur(1px);
+}
+.yy-guide[data-spirit="yin"] .yy-stage::before {
+  background:radial-gradient(circle,#dce9ff 0%,#a5b3f0 67%,rgba(165,179,240,0) 69%);opacity:.75;
+}
+.yy-sky {
+  position:absolute;inset:0;opacity:.66;pointer-events:none;
+  background:
+    radial-gradient(circle at 13% 19%,#eafcff 0 1px,transparent 2px),
+    radial-gradient(circle at 61% 14%,#fff4d0 0 1.5px,transparent 3px),
+    radial-gradient(circle at 82% 39%,#f8fff6 0 1px,transparent 2px),
+    radial-gradient(circle at 41% 26%,#e9fdff 0 1px,transparent 2px),
+    linear-gradient(0deg,rgba(14,83,126,.19),transparent 42%);
+}
+.yy-energy {
+  position:absolute;width:28%;height:30%;bottom:3%;border-radius:50%;pointer-events:none;
+  filter:blur(36px);background:rgba(59,220,255,.19);
+}
+.yy-energy-a{left:5%}.yy-energy-b{right:3%;background:rgba(231,158,241,.16)}
+.yy-svg {
+  position:relative;z-index:2;display:block;width:100%;height:100%;
+  overflow:visible;pointer-events:none;filter:drop-shadow(0 10px 5px rgba(9,37,77,.15));
+}
+.yy-outline {stroke:var(--yy-outline);stroke-width:3.6;stroke-linejoin:round;stroke-linecap:round}
+.yy-fur {fill:var(--yy-fur)}
+.yy-cheek{fill:var(--yy-cheek);opacity:.94}
+.yy-ear-inner{fill:var(--yy-ear)}
+.yy-mane{fill:var(--yy-mane)}
+.yy-hairline{fill:none;stroke:var(--yy-fur-deep);stroke-width:5;stroke-linecap:round;opacity:.84}
+.yy-ruff{fill:none;stroke:var(--yy-ruff);stroke-width:12;stroke-linecap:round}
+.yy-eye-white{fill:#f8fdff;stroke:var(--yy-outline);stroke-width:1.8}
+.yy-iris{fill:var(--yy-eye)}
+.yy-spark-eye{fill:#fff}
+.yy-eye-closed{fill:none;stroke:var(--yy-outline);stroke-width:4.2;stroke-linecap:round}
+.yy-brow{fill:none;stroke:var(--yy-outline);stroke-width:3.6;stroke-linecap:round}
+.yy-muzzle{fill:var(--yy-muzzle)}
+.yy-nose{fill:var(--yy-outline)}
+.yy-smile{fill:none;stroke:var(--yy-outline);stroke-width:2.9;stroke-linecap:round}
+.yy-crown-mark{fill:var(--yy-magic);stroke:var(--yy-outline);stroke-width:1.7}
+.yy-tail-main{fill:var(--yy-mane)}
+.yy-tail-stripe{fill:none;stroke:var(--yy-ruff);stroke-width:12;stroke-linecap:round;opacity:.87}
+.yy-limb{stroke-width:31;stroke-linejoin:round;stroke-linecap:round;stroke:var(--yy-fur)}
+.yy-leg {stroke-width:40}
+.yy-paw{fill:var(--yy-paw);stroke:var(--yy-outline);stroke-width:2.5}
+.yy-foot{rx:17;ry:13}
+.yy-gem{fill:var(--yy-badge);stroke:var(--yy-outline);stroke-width:3}
+.yy-gem-shine{fill:rgba(255,255,255,.75)}
+.yy-lotus{fill:#64c1e4;stroke:#2c7fb4;stroke-width:2}
+.yy-lotus-inner{fill:#b4e8f4;opacity:.88}
+.yy-guide[data-spirit="yin"] .yy-lotus{fill:#574eac;stroke:#a88bff}
+.yy-guide[data-spirit="yin"] .yy-lotus-inner{fill:#a7a4ed}
+.yy-stars {fill:#f8f1d5;opacity:.88}
+.yy-pose{opacity:0;visibility:hidden;transition:opacity 370ms ease-out,visibility 370ms}
+.yy-pose.is-current{opacity:1;visibility:visible}
+.yy-character{transform-origin:360px 360px}
+.yy-guide[data-status="running"][data-motion="still"] .yy-character {animation:yy-breathe 6s ease-in-out infinite}
+.yy-guide[data-status="running"][data-phase="breath"][data-motion="still"] .yy-character {
+  animation:yy-breathe 19s ease-in-out infinite;
+}
+@keyframes yy-breathe{0%,100%{transform:translateY(2px)}45%{transform:translateY(-3px)}}
+.yy-bloom {
+  position:absolute;z-index:3;left:50%;top:49%;width:19%;
+  aspect-ratio:1;translate:-50% -50%;
+  border-radius:50%;pointer-events:none;opacity:0;
+  background:radial-gradient(circle,rgba(249,253,255,.95) 0%,rgba(129,217,255,.5) 30%,transparent 76%);
+}
+.yy-bloom span {position:absolute;inset:0;display:grid;place-items:center;color:#e7fbff;font-size:46px}
+.yy-stage.yy-blooming .yy-bloom {animation:yy-bloom 640ms ease-out both}
+@keyframes yy-bloom{0%,100%{opacity:0;scale:.65}45%{opacity:1;scale:1.4}}
+.yy-watermark {
+  position:absolute;right:17px;bottom:12px;z-index:3;
+  font:700 9px/1.3 'JetBrains Mono',monospace;letter-spacing:.13em;
+  color:rgba(255,255,255,.9);text-shadow:0 2px 5px #0a1c43;
+}
+.yy-watermark span{font-size:18px;color:#b4f1ff}
+.yy-breath-panel {
+ position:absolute;z-index:4;right:16px;top:16px;
+ width:128px;display:flex;align-items:center;flex-direction:column;gap:4px;
+ padding:13px 10px;border:1px solid rgba(161,225,255,.6);border-radius:17px;
+ color:#eafcff;background:rgba(7,30,76,.85);
+ box-shadow:0 9px 30px rgba(4,34,89,.21);
+ opacity:0;pointer-events:none;translate:0 -12px;
+ transition:opacity .3s ease,translate .3s ease;
+}
+.yy-breath-active .yy-breath-panel {opacity:1;translate:0 0}
+.yy-breath-panel small{font:700 8px/1.3 'JetBrains Mono',monospace;letter-spacing:.05em}
+.yy-breath-count{font:700 46px/1 'Fraunces',serif;color:#8ee8ff}
+.yy-breath-label{font:700 10px 'JetBrains Mono',monospace;letter-spacing:.15em}
+.yy-breath-rail{height:4px;width:100%;border-radius:5px;overflow:hidden;background:rgba(199,232,255,.2)}
+.yy-breath-progress{height:100%;width:100%;display:block;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#64dcff,#bc8df2)}
+.yy-breath-active[data-breath="inhale"] .yy-energy-a{animation:yy-inhale 4s ease-in-out both}
+.yy-breath-active[data-breath="hold"] .yy-energy-a{scale:1.3}
+.yy-breath-active[data-breath="exhale"] .yy-energy-a{animation:yy-exhale 8s ease-in-out both}
+@keyframes yy-inhale{from{scale:.65}to{scale:1.3}}
+@keyframes yy-exhale{from{scale:1.3}to{scale:.65}}
+.yy-guide figcaption{text-align:center;padding:15px 8px 1px;min-height:85px}
+.yy-guide figcaption strong{display:block;color:var(--ink);font:600 clamp(22px,3vw,29px)/1.2 'Fraunces',Georgia,serif}
+.yy-guide figcaption p{margin:8px auto 0;max-width:48ch;color:var(--muted);font-size:13px;line-height:1.6}
+.flow-preview {padding:11px 18px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--ink);font:inherit;font-size:12px;cursor:pointer}
+.flow-preview:hover {border-color:var(--sage)}
+.flow-entry-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.flow-console-foot {gap:12px}
+.flow-phase-timing{display:grid;gap:7px;margin-top:8px}
+.flow-session-clock .flow-phase-timing small{display:flex;gap:10px;justify-content:space-between;opacity:1;line-height:1.5}
+.flow-phase-timing b{font:inherit;font-variant-numeric:tabular-nums}
+[data-flow-action][disabled]{opacity:.46;cursor:not-allowed}
+[data-flow-action]:focus-visible{outline:2px solid #47bfe8;outline-offset:3px}
+.sanctuary-dock.yy-dock-active {border-color:rgba(103,196,246,.78)!important;box-shadow:0 0 28px rgba(92,175,244,.18)}
+.sanctuary-dock.yy-dock-active .breath-ring-core {background:#8ad7fa;box-shadow:0 0 16px #58a5f6}
+@media(max-width:700px){
+  .yy-guide{margin-inline:-9px;padding:12px 10px 16px;border-radius:18px}
+  .yy-stage{aspect-ratio:5 / 5.5;border-radius:14px}
+  .yy-svg{width:153%;height:100%;margin-left:-26.5%}
+  .yy-form-choice button{padding:7px 10px;font-size:9px}
+  .yy-breath-panel{width:95px;right:9px;top:9px;padding:8px}
+  .yy-breath-panel small{font-size:7px}
+  .yy-breath-count{font-size:34px}
+  .yy-guide figcaption p{font-size:12px}
+}
+@media(max-width:360px){.yy-stage{aspect-ratio:5 / 6.2}.yy-svg{width:160%;margin-left:-30%}}
+@media(prefers-reduced-motion:reduce) {
+ .yy-pose,.yy-breath-panel,.yy-form-choice button{transition:none!important}
+ .yy-character,.yy-bloom,.yy-energy{animation:none!important}
+}
+body.quiet-mode .yy-character,body.quiet-mode .yy-bloom,
+.yy-guide[data-hidden="true"] .yy-character{animation-play-state:paused}

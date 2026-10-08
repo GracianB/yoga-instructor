@@ -78,3 +78,24 @@
   transform:none!important;background:rgba(240,226,204,.16);border-color:#e7d3b4;
 }
 #instructor-flow .flow-theater .flow-rail-button:disabled{opacity:.28}
+
+/* All arrows: sideways chevrons, never rotated type. */
+#instructor-flow .flow-theater .flow-rail-button,
+#instructor-flow .flow-theater .flow-rail-button:hover,
+#instructor-flow .flow-theater .flow-side-prev .flow-rail-button,
+#instructor-flow .flow-theater .flow-side-next .flow-rail-button{
+  writing-mode:horizontal-tb!important;
+  text-orientation:mixed!important;
+  transform:none!important;
+  font-size:0!important;
+  color:transparent!important;
+}
+#instructor-flow .flow-theater .flow-rail-button::before{
+  display:block;width:14px;height:14px;content:""!important;
+  border-right:2.5px solid #f6efe4;border-bottom:2.5px solid #f6efe4;
+  font-size:0!important;
+}
+#instructor-flow .flow-theater .flow-side-prev .flow-rail-button::before{transform:rotate(135deg)}
+#instructor-flow .flow-theater .flow-side-next .flow-rail-button::before{transform:rotate(-45deg);border-color:#f0e2cc}
+.choice-arrow{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:999px;border:1px solid rgba(232,210,180,.4);color:#f0e2cc;font-size:13px}
+a[href*="GracianB"]{text-underline-offset:4px}

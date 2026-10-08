@@ -184,7 +184,7 @@
   }, true);
 
   root.addEventListener("click", (event) => {
-    const modeButton = event.target.closest("[data-studio-mode]");
+    const modeButton = event.target.closest("button[data-studio-mode]");
     if (modeButton && !modeButton.disabled) { select(modeButton.dataset.studioMode); return; }
     const durationButton = event.target.closest("[data-studio-duration-index]");
     if (durationButton && !durationButton.disabled && mode !== "asanas") {

@@ -9,7 +9,7 @@ const render=()=>{const context={window:{}};runInNewContext(art,context,{timeout
 test('D13 assets: CSS last, art and motion cache-busted, public bundle complete',()=>{
  assert.ok(html.indexOf('yy-dragon-d13.css')>html.indexOf('yy-dragon-d12.css'));
  assert.match(html,/yy-dragon-d13\.css\?v=d13-1/);
- assert.match(html,/yin-yang-art\.js\?v=phase-d13-1/);
+ assert.match(html,/yin-yang-art\.js\?v=phase-d14-1/);
  assert.match(html,/flow-guide\.js\?v=d13-1/);
  assert.match(html,/yy-asana-motion\.js\?v=d13-1/);
  assert.match(build,/'yy-dragon-d13\.css'/);

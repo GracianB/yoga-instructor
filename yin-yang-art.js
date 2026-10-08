@@ -63,40 +63,49 @@
       '</g>';
   };
   const toTransform=(x,y,s,r)=>'translate('+x+' '+y+') rotate('+r+') scale('+s+')';
-  // Ten authored dragon faces, always with exactly two peaceful closed eyes.
-  const face=(p)=>{
+  // D9: flowing muzzle integrated into the skull, never a sticker or forehead eye.
+  const face=p=>{
     const [x,y,s,r,expression]=p.head;
     const eyes='<g class="yy-anim-eyes yy-closed-gaze">'+
-      path('M-51 8Q-35 19-17 8','yy-eye-closed yy-eye-left')+
-      path('M17 8Q35 19 51 8','yy-eye-closed yy-eye-right')+'</g>';
+      path('M-50 6Q-35 18-18 6','yy-eye-closed yy-eye-left')+
+      path('M18 6Q35 18 50 6','yy-eye-closed yy-eye-right')+'</g>';
     return '<g class="yy-head yy-dragon-head" transform="'+toTransform(x,y,s,r)+'">'+
-      path('M-61-50Q-82-82-70-122Q-53-96-37-63Q-43-53-61-50Z','yy-dragon-horn yy-horn-left')+
-      path('M42-63Q58-98 72-121Q82-82 61-49Q45-51 42-63Z','yy-dragon-horn yy-horn-right')+
-      path('M-64-108Q-66-79-50-58M65-107Q70-83 55-58','yy-dragon-horn-ridge')+
-      path('M-58-39Q-90-60-108-110Q-103-58-78-28Z','yy-fur yy-outline yy-dragon-fin')+
-      path('M56-39Q92-65 109-110Q106-58 77-27Z','yy-fur yy-outline yy-dragon-fin')+
-      path('M-77-50Q-94-79-96-94Q-78-69-65-47Z','yy-ear-inner')+
-      path('M76-50Q95-78 97-94Q82-66 66-46Z','yy-ear-inner')+
-      path('M-72-44Q-49-82-7-79Q43-91 76-46Q94-12 80 26Q89 55 62 71Q40 91 0 92Q-45 95-67 68Q-95 55-82 24Q-95-13-72-44Z','yy-fur yy-outline yy-head-shell')+
-      path('M-71-35Q-42-76-17-68L-25-88Q-8-76 5-71Q34-85 68-50Q46-50 31-34Q5-40-23-30L-47-19Z','yy-crest yy-outline yy-dragon-crest')+
-      path('M-65-25Q-44-51-24-48M26-52Q49-54 63-30','yy-mane-light')+
-      path('M-72 12Q-55-10-35-2Q-18 17-28 53Q-53 72-74 48Z','yy-cheek')+
-      path('M37 0Q59-10 75 12Q91 38 70 53Q46 76 27 54Z','yy-cheek')+
-      path('M-77 24L-98 20L-85 40L-97 54L-72 53M77 24L98 20L85 40L97 54L72 53','yy-dragon-cheek-fins')+
-      path('M-53-6Q-36-16-17-7M17-7Q36-16 53-6','yy-sleep-brow')+
-      eyes+
-      path('M-31 55Q-30 83-16 93Q-15 116 0 128Q15 115 17 92Q33 81 31 54Q13 69 0 67Q-14 71-31 55Z','yy-dragon-beard')+
-      path('M-11 79Q-9 105 0 115M10 79Q8 102 1 115','yy-dragon-beard-line')+
-      path('M-38 22Q-25 12-10 18Q0 22 12 18Q27 12 39 24L43 42Q42 67 18 77Q0 86-21 77Q-44 67-44 43Z','yy-dragon-snout yy-outline')+
-      path('M-33 39Q-13 32 0 36Q17 32 34 39','yy-dragon-snout-light')+
-      path('M-15 45Q-12 51-8 45M8 45Q12 51 15 45','yy-nostril yy-dragon-nostril')+
-      path(expression==='smile'?'M-15 59Q0 70 16 59':'M-13 60Q0 65 14 60','yy-smile')+
-      path('M-34 48Q-68 37-98 44','yy-whisker yy-dragon-whisker')+
-      path('M-33 57Q-62 60-89 79','yy-whisker yy-dragon-whisker')+
-      path('M34 48Q68 37 98 44','yy-whisker yy-dragon-whisker')+
-      path('M33 57Q62 60 89 79','yy-whisker yy-dragon-whisker')+
-      path('M-67-15L-58-24L-47-16M47-16L58-24L67-15','yy-dragon-temple-scales')+
-      '</g>';
+      path('M-61-49C-79-66-84-103-70-126C-64-102-48-81-37-64L-43-53Z','yy-dragon-horn yy-horn-left')+
+      path('M43-64C55-84 65-105 73-126C86-102 81-66 62-48L43-53Z','yy-dragon-horn yy-horn-right')+
+      path('M-65-108Q-64-78-49-59M66-109Q67-81 54-59','yy-dragon-horn-ridge')+
+      path('M-59-43C-79-66-95-88-103-108C-111-78-93-48-76-27Z','yy-dragon-sidefin yy-fin-left')+
+      path('M59-43C79-66 95-88 103-108C111-78 93-48 76-27Z','yy-dragon-sidefin yy-fin-right')+
+      path('M-77-48Q-90-75-97-92M78-48Q90-75 97-92','yy-dragon-fin-vein')+
+      path('M-72-45C-52-83-17-84 1-80C40-88 71-66 78-45C96-22 91 8 83 29C93 53 76 75 52 79C31 94 15 102 0 102C-15 102-34 94-53 78C-78 73-94 51-83 27C-93 4-91-25-72-45Z','yy-fur yy-outline yy-head-shell')+
+      path('M-71-37Q-49-76-19-66L-28-89Q-7-77 4-74Q37-89 72-47Q42-56 28-38Q2-48-23-37L-48-21Z','yy-crest yy-outline yy-dragon-crest')+
+      path('M-60-34Q-42-58-24-57M26-60Q52-62 63-36','yy-mane-light')+
+      '<g class="yy-dragon-forelock">'+
+        path('M-24-68Q-6-92 8-79Q18-68 27-51Q7-62-13-48Z','yy-dragon-forelock-fill')+
+        path('M-13-72Q0-78 10-70','yy-dragon-forelock-sheen')+'</g>'+
+      path('M-75 14C-69 3-52-4-35 2C-15 15-18 42-27 57Q-57 81-78 50Z','yy-cheek yy-dragon-cheek')+
+      path('M75 14C69 3 52-4 35 2C15 15 18 42 27 57Q57 81 78 50Z','yy-cheek yy-dragon-cheek')+
+      path('M-78 27Q-91 20-103 23L-85 42L-97 54L-74 57M78 27Q91 20 103 23L85 42L97 54L74 57','yy-dragon-cheek-fins')+
+      '<g class="yy-dragon-bridge-layer">'+
+        path('M-27 0C-33 15-43 30-47 44C-54 65-36 81-18 89Q0 99 19 89C37 81 54 65 47 44C43 30 33 15 27 0C17 13 11 17 0 17C-11 17-17 13-27 0Z','yy-dragon-snout yy-dragon-face-plane')+
+        path('M-27 28Q-43 36-43 56Q-33 77-14 84M27 28Q43 36 43 56Q33 77 14 84','yy-dragon-snout-contour')+
+        path('M-27 47C-22 41-13 41-2 44Q0 46 2 44C13 41 22 41 27 47C33 57 25 67 13 72Q0 77-13 72C-25 67-33 57-27 47Z','yy-dragon-nose-pad')+
+        path('M-14 23C-7 27 7 27 14 23','yy-dragon-snout-light')+
+        path('M-24 54Q-18 49-12 55M12 55Q18 49 24 54','yy-nostril yy-dragon-nostril')+
+        path(expression==='smile'?'M-15 70Q0 83 16 70':'M-13 72Q0 77 14 72','yy-smile yy-dragon-mouth')+
+        path('M-18 77Q0 84 19 77','yy-dragon-lower-lip')+'</g>'+
+      '<g class="yy-dragon-beard-assembly">'+
+        path('M-28 75Q-34 91-18 104Q-12 122 0 128Q13 121 18 104Q34 91 28 75Q14 92 0 91Q-15 92-28 75Z','yy-dragon-beard')+
+        path('M-12 98Q-8 118 0 122M11 98Q8 115 0 122','yy-dragon-beard-line')+
+        path('M-30 80Q-41 92-38 105M30 80Q41 92 38 105','yy-dragon-beard-wisps')+'</g>'+
+      path('M-53-7Q-36-17-18-9M18-9Q36-17 53-7','yy-sleep-brow')+eyes+
+      path('M-63-11Q-60-21-47-18M47-18Q60-21 63-11','yy-dragon-temple-scales')+
+      path('M-57 34Q-53 29-46 30M46 30Q53 29 57 34','yy-dragon-cheek-light')+
+      circle(-57,42,2.8,'yy-dragon-freckle')+circle(-65,46,1.6,'yy-dragon-freckle')+
+      circle(57,42,2.8,'yy-dragon-freckle')+circle(65,46,1.6,'yy-dragon-freckle')+
+      path('M-34 49Q-72 35-105 43','yy-whisker yy-dragon-whisker yy-whisker-left yy-whisker-high')+
+      path('M-34 61Q-66 63-98 84','yy-whisker yy-dragon-whisker yy-whisker-left yy-whisker-low')+
+      path('M34 49Q72 35 105 43','yy-whisker yy-dragon-whisker yy-whisker-right yy-whisker-high')+
+      path('M34 61Q66 63 98 84','yy-whisker yy-dragon-whisker yy-whisker-right yy-whisker-low')+'</g>';
   };
   const torso=p=>{
     const [x,y,rx,ry,r]=p.body;
@@ -112,6 +121,11 @@
         '<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
       '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>')+
       '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.18)+'" rx="'+fmt(rx*.42)+'" ry="'+fmt(ry*.34)+'"/>'+
+      '<g class="yy-dragon-body-scales">'+
+      '<path d="M-'+fmt(rx*.74)+' -'+fmt(ry*.04)+'q'+fmt(rx*.08)+' -'+fmt(ry*.18)+' '+fmt(rx*.19)+' -'+fmt(ry*.10)+
+      'm-'+fmt(rx*.22)+' '+fmt(ry*.37)+'q'+fmt(rx*.11)+' -'+fmt(ry*.14)+' '+fmt(rx*.20)+' -'+fmt(ry*.06)+
+      'M'+fmt(rx*.74)+' -'+fmt(ry*.04)+'q-'+fmt(rx*.08)+' -'+fmt(ry*.18)+' -'+fmt(rx*.19)+' -'+fmt(ry*.10)+
+      'm'+fmt(rx*.22)+' '+fmt(ry*.37)+'q-'+fmt(rx*.11)+' -'+fmt(ry*.14)+' -'+fmt(rx*.20)+' -'+fmt(ry*.06)+'"/>'+'</g>'+
       (horizontal?'':
         '<path d="M-'+fmt(rx*.55)+' -'+fmt(ry*.64)+
           'Q-'+fmt(rx*.66)+' -'+fmt(ry*.24)+' -'+fmt(rx*.34)+' -'+fmt(ry*.14)+
@@ -139,6 +153,7 @@
       path('M23 79Q57 105 81 92','yy-tail-band')+
       path('M31 14Q57 12 72 27M91 61Q87 77 75 80','yy-tail-glint')+
       path('M81 107Q113 98 132 73Q142 105 117 126Q98 134 81 107Z','yy-dragon-tail-fin')+
+      path('M91 110Q117 112 126 94','yy-dragon-tail-fin-vein')+
       path('M32 2L42-14L49 8M58 9L71-12L77 19M91 31L108 20L108 47','yy-dragon-tail-spines')+
       '<path d="M9 78L-3 70L13 91Q40 118 83 110Q48 111 9 78Z" class="yy-tail-fur"/>'+
       '</g>';
@@ -158,7 +173,11 @@
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
     const hands=p.hands.map(pos=>point(pos,'yy-paw yy-hand')).join('');
     return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'">'+
-      stance(p)+'<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
+      stance(p)+'<g class="yy-dragon-motes">'+
+      circle(p.head[0]-114,p.head[1]+5,2.4,'yy-mote yy-mote-a')+
+      circle(p.head[0]+115,p.head[1]-28,2.0,'yy-mote yy-mote-b')+
+      circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
+      '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
       '<g class="yy-legs">'+twoLegs+feet+'</g>'+torso(p)+
       '<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
@@ -169,6 +188,8 @@
       '<linearGradient id="yy-fur-grad" x1="0" y1="0" x2=".9" y2="1"><stop class="yy-fur-stop-hi" offset="0"/><stop class="yy-fur-stop-mid" offset=".55"/><stop class="yy-fur-stop-low" offset="1"/></linearGradient>'+
       '<linearGradient id="yy-mane-grad" x1="0" y1="0" x2="1" y2="1"><stop class="yy-mane-stop-hi" offset="0"/><stop class="yy-mane-stop-low" offset="1"/></linearGradient>'+
       '<radialGradient id="yy-gaze-grad" cx="40%" cy="35%"><stop offset="0" stop-color="#c9e6cf"/><stop offset=".55" stop-color="#3f6d52"/><stop offset="1" stop-color="#1c3328"/></radialGradient>'+
+      '<linearGradient id="yy-d9-skin" x1="12%" y1="5%" x2="88%" y2="100%"><stop offset="0" class="yy-d9-skin-hi"/><stop offset=".49" class="yy-d9-skin-mid"/><stop offset="1" class="yy-d9-skin-low"/></linearGradient>'+
+      '<linearGradient id="yy-d9-muzzle" x1="15%" y1="0%" x2="78%" y2="100%"><stop offset="0" class="yy-d9-muzzle-hi"/><stop offset="1" class="yy-d9-muzzle-low"/></linearGradient>'+
       '<linearGradient id="yy-lotus" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a8f4ff"/><stop offset="1" stop-color="#778ef4"/></linearGradient>'+
     '</defs>'+
     '<g>'+

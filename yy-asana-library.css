@@ -1,0 +1,116 @@
+/* D24 · Asana library: sage, ivory and quiet editorial proportions. */
+#instructor-flow .studio-asana-library{
+  max-width:1120px;margin:24px auto 0;padding:clamp(22px,3.3vw,38px);
+  border-radius:25px;border:1px solid rgba(74,107,76,.23);
+  background:linear-gradient(145deg,rgba(243,247,235,.9),rgba(251,245,234,.89));
+  box-shadow:0 15px 46px rgba(30,71,48,.07);
+  color:#2b5141;
+}
+#instructor-flow .studio-asana-library[hidden]{display:none!important}
+#instructor-flow .studio-library-eyebrow{
+  display:inline-block;color:#66816e;letter-spacing:.15em;
+  font:600 10px/1.5 'JetBrains Mono',monospace;
+}
+#instructor-flow .studio-library-heading h3{
+  font:500 clamp(23px,3vw,34px)/1.18 'Fraunces',serif;
+  margin:10px 0;color:#28513f;
+}
+#instructor-flow .studio-library-lead,#instructor-flow .studio-library-foot{
+  color:#65806d;font:400 13px/1.6 'Inter',sans-serif;max-width:68ch;margin:0;
+}
+#instructor-flow .studio-library-body{
+  display:grid;grid-template-columns:minmax(210px,.77fr) minmax(0,1.7fr);
+  align-items:stretch;gap:21px;margin:22px 0 17px;
+}
+#instructor-flow .studio-library-choices{
+  display:flex;flex-direction:column;gap:10px;justify-content:center;
+}
+#instructor-flow .studio-library-choices button{
+  text-align:left;min-height:57px;padding:13px 17px;border-radius:14px;
+  border:1px solid rgba(59,104,77,.2);background:rgba(255,255,255,.5);
+  color:#325747;cursor:pointer;font:600 13px/1.4 'Inter',sans-serif;
+  transition:background .2s ease,border-color .2s ease;
+}
+#instructor-flow .studio-library-choices button[aria-pressed="true"]{
+  background:#315b48;color:#fffaf2;border-color:#315b48;
+}
+#instructor-flow .studio-library-choices button:focus-visible{
+  outline:3px solid #b68961;outline-offset:3px;
+}
+#instructor-flow .studio-library-display{
+  position:relative;min-width:0;text-align:center;padding:12px 14px 22px;
+  border-radius:19px;border:1px solid rgba(70,108,80,.15);
+  background:radial-gradient(ellipse at 50% 68%,rgba(174,210,177,.29),transparent 70%),
+    linear-gradient(170deg,#e8f0e9,#f6f4e9);
+}
+#instructor-flow .studio-library-stage.yy-guide{
+  position:relative;isolation:isolate;border:0;box-shadow:none;
+  background:none;min-height:0;width:100%;max-width:none;
+  padding:0;margin:0 auto;height:clamp(200px,24vw,292px);
+  pointer-events:none;overflow:hidden;
+}
+#instructor-flow .studio-library-stage .yy-svg{
+  display:block;width:100%;height:100%;overflow:visible;
+  filter:drop-shadow(0 8px 12px rgba(49,89,60,.1));
+}
+#instructor-flow .studio-library-stage .yy-pose{
+  opacity:0;visibility:hidden;transform:none!important;animation:none!important;
+  transition:opacity .4s ease,visibility .4s linear;
+}
+#instructor-flow .studio-library-stage .yy-pose.is-current{
+  opacity:1;visibility:visible;transform:none!important;
+}
+#instructor-flow .studio-library-stage .yy-character,
+#instructor-flow .studio-library-stage .yy-character *{
+  animation:none!important;transition:none!important;
+}
+#instructor-flow .studio-library-name{
+  margin:-7px 0 7px;color:#294c3b;font:500 21px/1.35 'Fraunces',serif;
+}
+#instructor-flow .studio-library-cue,
+#instructor-flow .studio-library-ground{
+  margin:7px auto;max-width:48ch;color:#496958;font:400 12px/1.65 'Inter',sans-serif;
+}
+#instructor-flow .studio-library-ground{font-size:11px;color:#62806a}
+#instructor-flow .studio-library-foot{font-size:11px}
+html[data-theme="dark"] #instructor-flow .studio-asana-library{
+  background:linear-gradient(140deg,#193a32,#28473b);border-color:#537361;
+  color:#e4eddd;
+}
+html[data-theme="dark"] #instructor-flow .studio-library-heading h3,
+html[data-theme="dark"] #instructor-flow .studio-library-name{color:#ecf1e1}
+html[data-theme="dark"] #instructor-flow .studio-library-choices button{
+  background:#28483a;color:#dfebda;border-color:#68866d;
+}
+html[data-theme="dark"] #instructor-flow .studio-library-choices button[aria-pressed="true"]{
+  background:#bed4b9;color:#1d3b2d;border-color:#bed4b9;
+}
+html[data-theme="dark"] #instructor-flow .studio-library-display{
+  background:linear-gradient(155deg,#224039,#1b3935);border-color:#536a5a;
+}
+html[data-theme="dark"] #instructor-flow .studio-library-cue,
+html[data-theme="dark"] #instructor-flow .studio-library-ground,
+html[data-theme="dark"] #instructor-flow .studio-library-lead,
+html[data-theme="dark"] #instructor-flow .studio-library-eyebrow,
+html[data-theme="dark"] #instructor-flow .studio-library-foot{color:#c0d5c4}
+@media(max-width:760px){
+ #instructor-flow .studio-library-body{grid-template-columns:1fr;gap:14px}
+ #instructor-flow .studio-library-choices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+ #instructor-flow .studio-library-choices button{min-height:60px;padding:9px 8px;text-align:center;font-size:11px}
+ #instructor-flow .studio-library-stage.yy-guide{height:clamp(190px,42vw,265px)}
+}
+@media(max-width:420px){
+ #instructor-flow .studio-asana-library{margin-top:14px;padding:16px}
+ #instructor-flow .studio-library-choices{grid-template-columns:1fr}
+ #instructor-flow .studio-library-choices button{min-height:42px;padding:9px 11px;text-align:left}
+ #instructor-flow .studio-library-stage.yy-guide{height:190px}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-library-choices button,
+ #instructor-flow .studio-library-stage .yy-pose{
+  transition:none!important;animation:none!important;
+ }
+}
+body.quiet-mode #instructor-flow .studio-library-stage .yy-pose{
+ transition:none!important;
+}

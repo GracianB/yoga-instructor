@@ -48,6 +48,9 @@ assert.ok(statSync('yy-dragon-d15.css').size <= 8000, 'D15 kinetics CSS budget')
 assert.ok(statSync('yy-dragon-d16.css').size <= 7000, 'D16 premium wings CSS budget');
 assert.ok(statSync('yy-dragon-d17.css').size <= 7000, 'D17 organic finale CSS budget');
 assert.ok(statSync('yy-dragon-d23.css').size <= 4400, 'D23 grounded transitions CSS budget');
+assert.ok(statSync('yy-asana-library.css').size <= 6500, 'D24 asana library CSS budget');
+assert.ok(statSync('asana-library.js').size <= 4700, 'D24 authored asanas budget');
+assert.ok(statSync('studio-asana-library.js').size <= 8100, 'D24 library interaction budget');
 assert.ok(html.indexOf('yy-dragon-d23.css')>html.indexOf('yy-studio-finale.css'), 'D23 transition geometry must load after the D22 studio layers');
 assert.ok(html.indexOf('yy-dragon-d17.css')>html.indexOf('yy-dragon-d16.css'), 'D17 organic art must load last');
 assert.ok(statSync('practice-pathways.js').size <= 3500, 'Future practice pathways data budget');
@@ -58,7 +61,7 @@ assert.ok(html.indexOf('yy-dragon-d13.css')>html.indexOf('yy-dragon-d12.css'), '
 assert.ok(html.indexOf('yy-dragon-d12.css')>html.indexOf('yy-dragon-d11.css'), 'D12 art loads after D11');
 assert.ok(html.indexOf('yy-dragon-d9.css')>html.indexOf('yy-phase-d7-polish.css'), 'D9 art loads after D7');
 assert.ok(!html.includes('flow-motion.js'), 'Obsolete bone-morphing script must not load');
-assert.match(html, /<script src="\.\/yin-yang-art\.js\?v=phase-d\d+-\d+" defer><\/script>/, 'Versioned Yin Yang art module required');
+assert.match(html, /<script src="\.\/yin-yang-art\.js\?v=phase-d\d+-\d+(?:-d\d+-\d+)?" defer><\/script>/, 'Versioned Yin Yang art module required');
 assert.ok(statSync('styles.css').size <= 174000, 'CSS budget');
 assert.ok(statSync('main.js').size <= 22500, 'Main JS budget');
 assert.ok(statSync('audio/sustained-focus.mp3').size <= 4500000, 'Audio budget');

@@ -638,3 +638,22 @@ test('D5 cinematic contact sheet: all 10 poses, Yin and Yang, mobile and desktop
  }
  expect(errors).toEqual([]);
 });
+
+test('quick tour advances automatically while pause prevents unsolicited movement', async ({page,browserName})=>{
+  test.skip(browserName!=='chromium','Time-sensitive real-clock interaction checked once.');
+  test.setTimeout(45000);
+  const errors=await open(page);
+  const guide=page.locator('#flow-guide');
+  const action=a=>page.locator('[data-flow-action="'+a+'"]').click();
+  await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+  await action('preview');
+  await expect(guide).toHaveAttribute('data-phase','centering',{timeout:11000});
+  await action('pause');
+  await expect(guide).toHaveAttribute('data-status','paused');
+  await page.waitForTimeout(5500);
+  await expect(guide).toHaveAttribute('data-phase','centering');
+  await action('pause');
+  await expect(guide).toHaveAttribute('data-status','running');
+  await expect(guide).toHaveAttribute('data-phase','breath',{timeout:11000});
+  expect(errors).toEqual([]);
+});

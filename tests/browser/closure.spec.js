@@ -287,12 +287,19 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   await expect(guide).toHaveAttribute('data-asana-state','running');
   const back=guide.locator('.yy-pose[data-pose="warmup"] [data-asana-back]');
   const spine=guide.locator('.yy-pose[data-pose="warmup"] [data-asana-spine]');
+  const belly=guide.locator('.yy-pose[data-pose="warmup"] [data-asana-belly]');
+  const grounded=await guide.locator('.yy-pose[data-pose="warmup"] .yy-paw-group').evaluateAll(nodes=>nodes.map(n=>n.getAttribute("transform")));
   expect(await guide.locator('.yy-pose[data-pose="warmup"] [data-limb^="arm-"]').count()).toBe(2);
   expect(await guide.locator('.yy-pose[data-pose="warmup"] [data-limb^="leg-"]').count()).toBe(2);
   const initial=await back.getAttribute('d');
   await page.waitForTimeout(650);
   const animated=await back.getAttribute('d');
   expect(animated).not.toBe(initial);
+  const bellyA=await belly.getAttribute('d');
+  await page.waitForTimeout(590);
+  expect(await belly.getAttribute('d')).not.toBe(bellyA);
+  expect(await guide.locator('.yy-pose[data-pose="warmup"] .yy-paw-group')
+    .evaluateAll(nodes=>nodes.map(n=>n.getAttribute("transform")))).toEqual(grounded);
   const spineNow=await spine.getAttribute('d');
   expect(spineNow).toContain('Q0 ');
   await act('pause');
@@ -354,4 +361,43 @@ test('Phase B: each asana has a separate movement recipe and reduced-motion disa
   const animation=await guide.locator('.yy-pose.is-current .yy-character').evaluate(el=>getComputedStyle(el).animationName);
   expect(animation).toBe('none');
   expect(errors).toEqual([]);
+});
+
+
+test('Phase C: compact theater, actual side buttons, 320-1440 layouts and serious dual form', async ({page})=>{
+ test.setTimeout(90000);
+ const errors=await open(page);
+ const theater=page.locator('.flow-theater');
+ const guide=page.locator('#flow-guide');
+ const left=theater.locator('[data-flow-action="previous"]');
+ const right=theater.locator('[data-flow-action="next"]');
+ await expect(theater).toBeVisible();
+ expect(await page.locator('[data-flow-action="previous"]').count()).toBe(1);
+ expect(await page.locator('[data-flow-action="next"]').count()).toBe(1);
+ for(const width of [320,390,768,1440]){
+   await page.setViewportSize({width,height:900});
+   for(const variant of ['yang','yin']){
+     await guide.locator('[data-yy-form="'+variant+'"]').evaluate(el=>el.click());
+     await expect(guide).toHaveAttribute('data-spirit',variant);
+     const g=await guide.boundingBox(),l=await left.boundingBox(),r=await right.boundingBox();
+     expect(g && l && r).toBeTruthy();
+     expect(l.x+l.width/2).toBeLessThan(g.x+Math.min(g.width/3,60));
+     expect(r.x+r.width/2).toBeGreaterThan(g.x+g.width-Math.min(g.width/3,60));
+     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+     const stage=await page.locator('.yy-stage').boundingBox();
+     expect(stage.height).toBeLessThanOrEqual(width<=700?321:366);
+     if(width===320||width===1440){
+       await theater.evaluate(el=>{el.scrollIntoView({behavior:'instant',block:'start'});scrollBy(0,-125);});
+       await test.info().attach('phase-c-'+variant+'-'+width,{
+         body:await theater.screenshot({animations:'disabled'}),contentType:'image/png'
+       });
+     }
+   }
+ }
+ await expect(left).toHaveAttribute('aria-label','Postura anterior');
+ await expect(right).toHaveAttribute('aria-label','Postura siguiente');
+ await page.locator('[data-set-lang="en"]').evaluate(el=>el.click());
+ await expect(left).toHaveAttribute('aria-label','Previous pose');
+ await expect(right).toHaveAttribute('aria-label','Next pose');
+ expect(errors).toEqual([]);
 });

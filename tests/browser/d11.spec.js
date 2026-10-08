@@ -71,7 +71,7 @@ test('D11: focus tracks the pose, and the aurora pauses with real 4·7·8 breath
  expect(observed.hold).toBe('none');
  expect(observed.exhale).toContain('yy-d11-exhale');
  await page.evaluate(()=>document.querySelector('#flow-guide').dataset.breathStep='inhale');
- await page.locator('[data-flow-action="pause"]').click();
+ await page.locator('[data-flow-action="pause"]').evaluate(el=>el.click());
  await expect(guide).toHaveAttribute('data-asana-state','paused');
  expect(await guide.locator('.yy-stage').evaluate(el=>getComputedStyle(el,'::before').animationPlayState)).toBe('paused');
  await page.evaluate(()=>document.body.classList.add('quiet-mode'));

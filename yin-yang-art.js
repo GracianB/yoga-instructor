@@ -119,6 +119,26 @@
       path('M34 49Q72 35 105 43','yy-whisker yy-dragon-whisker yy-whisker-right yy-whisker-high')+
       path('M34 61Q66 63 98 84','yy-whisker yy-dragon-whisker yy-whisker-right yy-whisker-low')+'</g>';
   };
+  // Connection between the skull and shoulder. It lives behind the chest and
+  // head and is never an independent floating sticker.
+  const neck=p=>{
+    const [x,y,rx,ry]=p.body,[hx,hy,scale]=p.head;
+    if(p.kind==="table"){
+      return '<g class="yy-d14-neck-assembly">'+
+        path('M265 244C277 237 298 239 312 251L315 270C297 261 282 262 267 278Z','yy-d14-neck-bridge yy-d14-neck-table')+
+        path('M274 253Q294 247 309 258','yy-d14-throat-line')+'</g>';
+    }
+    if(ry<60){
+      const x0=hx+57*scale,y0=hy+12*scale,x1=x-rx*.57,y1=y-ry*.1;
+      return '<g class="yy-d14-neck-assembly">'+
+        path('M'+fmt(x0)+' '+fmt(y0-15)+'Q'+fmt((x0+x1)/2)+' '+fmt(y1-23)+' '+fmt(x1+9)+' '+fmt(y1-12)+
+          'L'+fmt(x1+9)+' '+fmt(y1+16)+'Q'+fmt((x0+x1)/2)+' '+fmt(y1+15)+' '+fmt(x0)+' '+fmt(y0+17)+'Z','yy-d14-neck-bridge')+'</g>';
+    }
+    const top=hy+74*scale,base=y-ry*.46;
+    return '<g class="yy-d14-neck-assembly">'+
+      path('M'+fmt(hx-22*scale)+' '+fmt(top-18)+'Q'+fmt(hx)+' '+fmt(top-26)+' '+fmt(hx+22*scale)+' '+fmt(top-18)+
+        'L'+fmt(x+19)+' '+fmt(base+16)+'Q'+fmt(x)+' '+fmt(base+27)+' '+fmt(x-19)+' '+fmt(base+16)+'Z','yy-d14-neck-bridge')+'</g>';
+  };
   const torso=p=>{
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
@@ -141,11 +161,19 @@
         '<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
       '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>')+
       '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.18)+'" rx="'+fmt(rx*.42)+'" ry="'+fmt(ry*.34)+'"/>'+
+      '<g class="yy-d14-rib-cage">'+
+        '<path d="M-'+fmt(rx*.42)+' -'+fmt(ry*.32)+'Q0 -'+fmt(ry*.55)+' '+fmt(rx*.45)+' -'+fmt(ry*.30)+'" class="yy-d14-rib-line"/>'+
+        '<path d="M-'+fmt(rx*.26)+' '+fmt(ry*.30)+'Q0 '+fmt(ry*.44)+' '+fmt(rx*.27)+' '+fmt(ry*.29)+'" class="yy-d14-breath-line"/>'+
+      '</g>'+
       '<g class="yy-d12-body-relief">'+
         '<path d="M-'+fmt(rx*.62)+' -'+fmt(ry*.23)+'Q-'+fmt(rx*.35)+' -'+fmt(ry*.79)+' 0 -'+fmt(ry*.71)+
         'Q'+fmt(rx*.32)+' -'+fmt(ry*.78)+' '+fmt(rx*.61)+' -'+fmt(ry*.26)+'" class="yy-d12-shoulder-arc"/>'+
         '<path d="M-'+fmt(rx*.56)+' '+fmt(ry*.35)+'Q0 '+fmt(ry*.75)+' '+fmt(rx*.56)+' '+fmt(ry*.35)+'" class="yy-d12-ventral-arc"/>'+
         '</g>'+
+      '<g class="yy-d14-scapula">'+
+        '<path d="M-'+fmt(rx*.72)+' -'+fmt(ry*.14)+'Q-'+fmt(rx*.54)+' -'+fmt(ry*.52)+' -'+fmt(rx*.33)+' -'+fmt(ry*.56)+
+          'M'+fmt(rx*.72)+' -'+fmt(ry*.14)+'Q'+fmt(rx*.54)+' -'+fmt(ry*.52)+' '+fmt(rx*.33)+' -'+fmt(ry*.56)+'" class="yy-d14-shoulder-blade"/>'+
+      '</g>'+
       '<g class="yy-dragon-body-scales">'+
       '<path d="M-'+fmt(rx*.74)+' -'+fmt(ry*.04)+'q'+fmt(rx*.08)+' -'+fmt(ry*.18)+' '+fmt(rx*.19)+' -'+fmt(ry*.10)+
       'm-'+fmt(rx*.22)+' '+fmt(ry*.37)+'q'+fmt(rx*.11)+' -'+fmt(ry*.14)+' '+fmt(rx*.20)+' -'+fmt(ry*.06)+
@@ -194,7 +222,7 @@
   };
   const stance=p=>{
     const grounded=p.kind==="table"?p.hands.concat(p.feet):
-      p.kind==="warrior"?p.feet:
+      (p.kind==="warrior"||p.kind==="flow")?p.feet:
       p.kind==="tree"?p.feet.slice(0,1):[];
     if(!grounded.length)return "";
     return '<g class="yy-stance">'+grounded.map(([x,y])=>
@@ -212,7 +240,7 @@
       circle(p.head[0]+115,p.head[1]-28,2.0,'yy-mote yy-mote-b')+
       circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
       '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
-      '<g class="yy-legs">'+twoLegs+feet+'</g>'+torso(p)+
+      '<g class="yy-legs">'+twoLegs+feet+'</g>'+neck(p)+torso(p)+
       '<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';

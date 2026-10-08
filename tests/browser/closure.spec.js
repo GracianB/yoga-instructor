@@ -528,10 +528,12 @@ test('D4 audio transport click toggles playback, labels and icons',async ({page}
  await expect(player).not.toHaveClass(/is-playing/);
  await button.click();
  await expect(player).toHaveClass(/is-playing/);
+ await expect(button).toHaveAttribute('aria-pressed','true');
  await expect(button.locator('.ico-play')).toBeHidden();
  await expect(button.locator('.ico-pause')).toBeVisible();
  await button.click();
  await expect(player).not.toHaveClass(/is-playing/);
+ await expect(button).toHaveAttribute('aria-pressed','false');
  await expect(button.locator('.ico-play')).toBeVisible();
  await expect(button.locator('.ico-pause')).toBeHidden();
  expect(errors).toEqual([]);

@@ -67,3 +67,16 @@ test("dragon anatomy: two closed eyes, paired horns, beard and fin in every pose
  assert.equal(count('class="yy-limb yy-leg"'),20);
  assert.equal(count('class="yy-paw-group"'),40);
 });
+
+test("D9 sculpted muzzle is integrated and both eyes stay closed across the practice",()=>{
+ const svg=artwork().markup(),count=s=>svg.split(s).length-1;
+ assert.equal(count('yy-dragon-face-plane'),10);
+ assert.equal(count('yy-dragon-nose-pad'),10);
+ assert.equal(count('yy-dragon-bridge-layer'),10);
+ assert.equal(count('yy-dragon-body-scales'),10);
+ assert.equal(count('yy-dragon-freckle'),40);
+ assert.equal(count('yy-dragon-motes'),10);
+ assert.equal(count('yy-eye-closed yy-eye-'),20);
+ assert.equal(count('class="yy-paw-group"'),40);
+ assert.doesNotMatch(svg,/yy-crown-mark|yy-eye-core|yy-eye-center|yy-eye-almond/);
+});

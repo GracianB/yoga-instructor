@@ -1,0 +1,118 @@
+/* D9 Atelier: rose-coral and sky-blue dragons, facial sculpture and quiet motion. */
+#instructor-flow .yy-guide[data-spirit="yang"]{
+ --d9-skin-hi:#fff0ee;--d9-skin-mid:#f9cad1;--d9-skin-low:#df9dae;
+ --d9-muzzle-hi:#fff0ed;--d9-muzzle-low:#eeb6c0;
+ --d9-horn:#abcaf0;--d9-horn-tip:#e1edff;--d9-crest:#91b1de;
+ --d9-ink:#845674;--d9-eye:#965d7c;--d9-cheek:#ec9eb4;
+ --d9-beard:#f7becb;--d9-fin:#a9c3e9;--d9-limb:#f6c7ce;
+ --d9-whisker:#b2c9ee;--d9-mote:#ffe5eb;
+}
+#instructor-flow .yy-guide[data-spirit="yin"]{
+ --d9-skin-hi:#eff8ff;--d9-skin-mid:#b9d9f7;--d9-skin-low:#87addb;
+ --d9-muzzle-hi:#f8eff5;--d9-muzzle-low:#c6c9e8;
+ --d9-horn:#f0b2c1;--d9-horn-tip:#ffe8eb;--d9-crest:#df9bb6;
+ --d9-ink:#5c628f;--d9-eye:#616a9b;--d9-cheek:#dca7cb;
+ --d9-beard:#d6d0f0;--d9-fin:#e4abc9;--d9-limb:#c4d8f5;
+ --d9-whisker:#e9b9d2;--d9-mote:#bbd9ff;
+}
+#instructor-flow .yy-guide .yy-d9-skin-hi{stop-color:var(--d9-skin-hi)}
+#instructor-flow .yy-guide .yy-d9-skin-mid{stop-color:var(--d9-skin-mid)}
+#instructor-flow .yy-guide .yy-d9-skin-low{stop-color:var(--d9-skin-low)}
+#instructor-flow .yy-guide .yy-d9-muzzle-hi{stop-color:var(--d9-muzzle-hi)}
+#instructor-flow .yy-guide .yy-d9-muzzle-low{stop-color:var(--d9-muzzle-low)}
+#instructor-flow .yy-guide .yy-fur,
+#instructor-flow .yy-guide .yy-head-shell{fill:url(#yy-d9-skin);stroke:var(--d9-ink)}
+#instructor-flow .yy-guide .yy-limb{fill:var(--d9-limb);stroke:var(--d9-skin-low)}
+#instructor-flow .yy-guide .yy-paw{fill:var(--d9-fin);stroke:var(--d9-ink)}
+#instructor-flow .yy-guide .yy-dragon-horn{fill:var(--d9-horn);stroke:var(--d9-ink);stroke-width:2.5}
+#instructor-flow .yy-guide .yy-dragon-horn-ridge{stroke:var(--d9-horn-tip);stroke-width:2.2;opacity:.75}
+#instructor-flow .yy-guide .yy-dragon-sidefin{fill:var(--d9-fin);stroke:var(--d9-ink);stroke-width:2.7}
+#instructor-flow .yy-guide .yy-dragon-fin-vein{fill:none;stroke:var(--d9-horn-tip);stroke-width:2.2;opacity:.62}
+#instructor-flow .yy-guide .yy-dragon-crest,
+#instructor-flow .yy-guide .yy-dragon-forelock-fill{fill:var(--d9-crest)}
+#instructor-flow .yy-guide .yy-dragon-forelock-sheen{fill:none;stroke:var(--d9-horn-tip);stroke-width:2.5;stroke-linecap:round;opacity:.8}
+#instructor-flow .yy-guide .yy-dragon-cheek{fill:var(--d9-cheek);opacity:.33}
+#instructor-flow .yy-guide .yy-dragon-cheek-fins{stroke:var(--d9-fin);stroke-width:5.3;opacity:.86}
+/* Unbroken bridge and muzzle. No separate black outlined sticker. */
+#instructor-flow .yy-guide .yy-dragon-face-plane{fill:url(#yy-d9-muzzle);stroke:none;stroke-width:0;opacity:.96}
+#instructor-flow .yy-guide .yy-dragon-snout-contour{fill:none;stroke:var(--d9-ink);stroke-width:1.7;stroke-linecap:round;opacity:.24}
+#instructor-flow .yy-guide .yy-dragon-nose-pad{fill:var(--d9-muzzle-hi);opacity:.42}
+#instructor-flow .yy-guide .yy-dragon-snout-light{fill:none;stroke:var(--d9-muzzle-hi);stroke-width:2.2;opacity:.82}
+#instructor-flow .yy-guide .yy-dragon-nostril{fill:none;stroke:var(--d9-ink);stroke-width:2.3;opacity:.71}
+#instructor-flow .yy-guide .yy-dragon-mouth,
+#instructor-flow .yy-guide .yy-dragon-lower-lip{fill:none;stroke:var(--d9-ink);stroke-linecap:round;stroke-width:1.9;opacity:.65}
+#instructor-flow .yy-guide .yy-dragon-lower-lip{stroke:var(--d9-muzzle-hi);stroke-width:2;opacity:.7}
+#instructor-flow .yy-guide .yy-dragon-beard{fill:var(--d9-beard);stroke:var(--d9-ink);stroke-width:2.3}
+#instructor-flow .yy-guide .yy-dragon-beard-line,
+#instructor-flow .yy-guide .yy-dragon-beard-wisps{fill:none;stroke:var(--d9-ink);stroke-width:1.5;stroke-linecap:round;opacity:.46}
+#instructor-flow .yy-guide .yy-eye-closed{fill:none;stroke:var(--d9-eye);stroke-width:4.1;stroke-linecap:round;opacity:1}
+#instructor-flow .yy-guide .yy-sleep-brow{fill:none;stroke:var(--d9-eye);opacity:.38;stroke-width:1.8}
+#instructor-flow .yy-guide .yy-closed-gaze{animation:none!important}
+#instructor-flow .yy-guide .yy-dragon-whisker{fill:none;stroke:var(--d9-whisker);stroke-width:2.3;stroke-linecap:round;opacity:.94}
+#instructor-flow .yy-guide .yy-dragon-temple-scales,
+#instructor-flow .yy-guide .yy-dragon-cheek-light{fill:none;stroke:var(--d9-horn-tip);stroke-width:2;opacity:.72}
+#instructor-flow .yy-guide .yy-dragon-freckle{fill:var(--d9-horn-tip);opacity:.85}
+#instructor-flow .yy-guide .yy-dragon-body-scales path{fill:none;stroke:var(--d9-crest);stroke-width:3;stroke-linecap:round;opacity:.55}
+#instructor-flow .yy-guide .yy-dragon-tail-fin{fill:var(--d9-fin);stroke:var(--d9-ink)}
+#instructor-flow .yy-guide .yy-dragon-tail-fin-vein{fill:none;stroke:var(--d9-horn-tip);stroke-width:2.1;stroke-linecap:round;opacity:.75}
+#instructor-flow .yy-guide .yy-dragon-tail-spines{stroke:var(--d9-horn-tip);opacity:.8}
+#instructor-flow .yy-guide .yy-belly{fill:var(--d9-beard);opacity:.34}
+#instructor-flow .yy-guide .yy-petal-a{fill:rgba(247,174,193,.21)}
+#instructor-flow .yy-guide .yy-petal-b{fill:rgba(166,200,249,.19)}
+#instructor-flow .yy-guide .yy-mote{fill:var(--d9-mote);opacity:0;pointer-events:none}
+#instructor-flow .yy-guide[data-spirit="yang"] .yy-stage{
+ background:radial-gradient(ellipse 45% 48% at 50% 75%,rgba(245,176,201,.26),transparent 82%),
+ radial-gradient(ellipse 37% 40% at 79% 16%,rgba(135,178,241,.17),transparent 88%),
+ linear-gradient(158deg,#493b62,#564968 46%,#2b4566);
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stage{
+ background:radial-gradient(ellipse 48% 44% at 50% 76%,rgba(177,202,251,.27),transparent 82%),
+ radial-gradient(ellipse 42% 37% at 77% 19%,rgba(252,169,196,.19),transparent 85%),
+ linear-gradient(157deg,#263957,#344969 48%,#504261);
+}
+/* Micro-acting is confined to local ornament, never the authored pose roots. */
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-whisker{
+ transform-box:fill-box;transform-origin:12% 55%;animation:yy-d9-whisker 5.8s ease-in-out infinite;
+}
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-whisker-right{
+ transform-origin:88% 55%;animation-delay:-2.8s;
+}
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-whisker-low{
+ animation-duration:7.2s;animation-delay:-3.4s;
+}
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-beard-assembly{
+ transform-box:fill-box;transform-origin:50% 12%;animation:yy-d9-beard 8.4s ease-in-out infinite;
+}
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-forelock{
+ transform-box:fill-box;transform-origin:45% 75%;animation:yy-d9-forelock 7s ease-in-out infinite;
+}
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-dragon-sidefin{
+ transform-box:fill-box;transform-origin:50% 83%;animation:yy-d9-fin 9.8s ease-in-out infinite;
+}
+#instructor-flow .yy-guide:is([data-asana-state="idle"],[data-asana-state="running"]) .yy-pose.is-current .yy-fin-right{animation-delay:-4.9s}
+#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-dragon-bridge-layer{
+ transform-box:fill-box;transform-origin:50% 35%;animation:yy-d9-breathe 7.6s ease-in-out infinite;
+}
+#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-mote{animation:yy-d9-mote 8s ease-in-out infinite}
+#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-mote-b{animation-delay:-3s}
+#instructor-flow .yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-mote-c{animation-delay:-5.5s}
+#instructor-flow .yy-guide[data-phase="savasana"] .yy-pose.is-current .yy-dragon-whisker{animation-duration:11s}
+#instructor-flow .yy-guide[data-phase="warmup"] .yy-pose.is-current .yy-dragon-bridge-layer{animation:none}
+@keyframes yy-d9-whisker{0%,100%{transform:rotate(-1deg) translateY(0)}50%{transform:rotate(2.3deg) translateY(-1px)}}
+@keyframes yy-d9-beard{0%,100%{transform:rotate(-.8deg)}50%{transform:rotate(1.4deg) translateY(1px)}}
+@keyframes yy-d9-forelock{0%,100%{transform:rotate(-1.3deg)}55%{transform:rotate(2deg)}}
+@keyframes yy-d9-fin{0%,100%{transform:rotate(-1.2deg)}48%{transform:rotate(2deg)}}
+@keyframes yy-d9-breathe{0%,100%{transform:scale(1)}44%{transform:scale(1.012,1.024)}}
+@keyframes yy-d9-mote{0%,100%{opacity:0;transform:translateY(7px) scale(.8)}38%{opacity:.62}75%{opacity:.14;transform:translateY(-13px) scale(1.1)}}
+#instructor-flow .yy-guide:is([data-asana-state="paused"],[data-asana-state="transition"]) .yy-mote{animation-play-state:paused!important}
+#instructor-flow .yy-guide:is([data-hidden="true"],[data-asana-state="reduced"]) .yy-mote,
+body.quiet-mode #instructor-flow .yy-mote{animation:none!important;opacity:0!important}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-dragon-whisker,
+ #instructor-flow .yy-guide .yy-dragon-beard-assembly,
+ #instructor-flow .yy-guide .yy-dragon-forelock,
+ #instructor-flow .yy-guide .yy-dragon-sidefin,
+ #instructor-flow .yy-guide .yy-dragon-bridge-layer,
+ #instructor-flow .yy-guide .yy-mote{animation:none!important}
+ #instructor-flow .yy-guide .yy-mote{opacity:0!important}
+}

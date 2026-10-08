@@ -18,11 +18,14 @@ if (!Number.isInteger(attempts) || attempts < 1 || attempts > 40) throw Error('I
 if (!(waitSeconds >= 0 && waitSeconds <= 20)) throw Error('Invalid interval');
 if (base.protocol !== 'https:') throw Error('HTTPS required');
 
-const files = ['index.html', 'yin-yang-art.js', 'flow-guide.js', 'flow-guide.css', 'yy-asana-motion.js', 'yy-asana-motion.css', 'yy-premium-stage.css', 'styles.css', 'favicon.svg'];
+const files = ['index.html', 'yin-yang-art.js', 'yy-dragon-d9.css', 'yy-guardian-soul.css', 'flow-guide.js', 'flow-guide.css', 'yy-asana-motion.js', 'yy-asana-motion.css', 'yy-premium-stage.css', 'styles.css', 'favicon.svg'];
 const expected = await Promise.all(files.map(async name => {
   const data = await readFile(resolve(root, name));
   return { name, digest: createHash('sha256').update(data).digest('hex') };
 }));
+const expectedIndex = await readFile(resolve(root,'index.html'),'utf8');
+const expectedArtRef = expectedIndex.match(/yin-yang-art\.js\?v=[^"']+/)?.[0];
+if (!expectedArtRef) throw Error('No versioned Yin/Yang art reference in release HTML');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const digest = data => createHash('sha256').update(data).digest('hex');
 const readPublished = async (name, attempt) => {
@@ -49,8 +52,8 @@ for (let attempt = 1; attempt <= attempts; attempt++) {
       }
       if (file.name === 'index.html') {
         const html = Buffer.from(published).toString('utf8');
-        if (!html.includes('yin-yang-art.js?v=phase-d1-1')) {
-          problems.push('index.html: missing new Yin/Yang premium character reference');
+        if (!html.includes(expectedArtRef)) {
+          problems.push('index.html: missing expected art reference '+expectedArtRef);
         }
       }
     } catch (error) {

@@ -434,7 +434,7 @@ test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async (
     for(const form of ['yin','yang']){
       await guide.locator('[data-yy-form="'+form+'"]').evaluate(el=>el.click());
       await expect(guide).toHaveAttribute('data-spirit',form);
-      await expect(guide.locator('.yy-pose.is-current .yy-eye-closed')).toHaveCount(1);
+      await expect(guide.locator('.yy-pose.is-current .yy-eye-closed')).toHaveCount(2);
       await act('preview');
       for(const phase of ['centering','breath','warmup','pose-1']){
         await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
@@ -443,13 +443,17 @@ test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async (
       }
       await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
       const face=guide.locator('.yy-pose.is-current .yy-head');
-      await expect(face.locator('.yy-eye-almond')).toHaveCount(2);
-      await expect(face.locator('.yy-guardian-lid')).toHaveCount(1);
-      const eyeStyle=await face.locator('.yy-eye-almond').first().evaluate(el=>{
+      await expect(face.locator('.yy-eye-closed')).toHaveCount(2);
+      await expect(face.locator('.yy-dragon-horn')).toHaveCount(2);
+      await expect(face.locator('.yy-dragon-beard')).toHaveCount(1);
+      await expect(face.locator('.yy-dragon-whisker')).toHaveCount(4);
+      await expect(face.locator('.yy-crown-mark,.yy-eye-core,.yy-eye-center')).toHaveCount(0);
+      const eyeStyle=await face.locator('.yy-eye-closed').first().evaluate(el=>{
         const s=getComputedStyle(el);
-        return {fill:s.fill,stroke:s.stroke,opacity:s.opacity};
+        return {stroke:s.stroke,opacity:s.opacity};
       });
-      expect(eyeStyle.fill).not.toBe('rgb(255, 255, 255)');
+      expect(eyeStyle.stroke).not.toBe('none');
+      expect(eyeStyle.stroke).not.toBe('rgba(0, 0, 0, 0)');
       expect(eyeStyle.opacity).not.toBe('0');
       if(width===390||width===1440){
         await guide.evaluate(el=>{el.scrollIntoView({behavior:'instant',block:'start'});scrollBy(0,-120);});

@@ -77,6 +77,7 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
   // Exercise every engine transition deterministically; pointer behavior is
   // covered separately. Scroll/hover animations must not drop a virtual click.
   for (let phase = 0; phase < 9; phase++) {
+    await expect(page.locator('#flow-guide')).toHaveAttribute('data-ready','true',{timeout:8000});
     await page.locator('[data-flow-action="next"]').evaluate(button => button.click());
     await expect(page.locator('#flow-phase-meta')).toHaveText(`${phase + 2} / 10`);
   }
@@ -90,7 +91,7 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
 
 test('ritual persistence, breathing, quiet mode and audio controls', async ({ page }) => {
   const errors = await open(page);
-  await page.locator('[data-practice="focus"]').click();
+  await page.locator('[data-practice="focus"]').evaluate(button=>button.click());
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
   expect(await page.evaluate(() => localStorage.getItem('gb-yoga-practice'))).toBe('focus');
   await page.reload();

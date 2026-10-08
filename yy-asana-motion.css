@@ -16,7 +16,7 @@
   letter-spacing:.13em;white-space:nowrap;
   opacity:0;pointer-events:none;transition:opacity .28s;
 }
-.yy-guide[data-phase="warmup"][data-asana-state="running"] .yy-asana-step,
+.yy-guide[data-phase="warmup"]:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-asana-step,
 .yy-guide[data-phase="warmup"][data-asana-state="paused"] .yy-asana-step{
   opacity:1;
 }
@@ -27,31 +27,31 @@
 .yy-guide[data-asana-state="idle"] .yy-pose-rest.is-current .yy-character{
   animation:yy-rest 9s ease-in-out infinite!important;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-rest.is-current .yy-character{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-rest.is-current .yy-character{
   animation:yy-rest 7s ease-in-out infinite!important;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-rest.is-current .yy-tail-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-rest.is-current .yy-tail-motion{
   animation:yy-tail-slow 7s ease-in-out infinite;
 }
 /* Arrive and center: gentle attention, not the same motion as lying down. */
-.yy-guide[data-asana-state="running"] .yy-pose-seat.is-current .yy-character{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-seat.is-current .yy-character{
   animation:yy-seated 7s ease-in-out infinite!important;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-seat.is-current .yy-head-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-seat.is-current .yy-head-motion{
   animation:yy-head-attend 7s ease-in-out infinite;
 }
 /* Breath: match the separate 4-7-8 phase labels emitted by existing dock */
-.yy-guide[data-phase="breath"][data-asana-state="running"][data-breath-step="inhale"] .yy-pose-breath.is-current .yy-character{
+.yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="inhale"] .yy-pose-breath.is-current .yy-character{
   animation:yy-breath-in 4s ease-in-out both!important;
 }
-.yy-guide[data-phase="breath"][data-asana-state="running"][data-breath-step="hold"] .yy-pose-breath.is-current .yy-character{
+.yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="hold"] .yy-pose-breath.is-current .yy-character{
   transform:translateY(-3px) scale(1.013);
   animation:none!important;
 }
-.yy-guide[data-phase="breath"][data-asana-state="running"][data-breath-step="exhale"] .yy-pose-breath.is-current .yy-character{
+.yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="exhale"] .yy-pose-breath.is-current .yy-character{
   animation:yy-breath-out 8s ease-in-out both!important;
 }
-.yy-guide[data-phase="breath"][data-asana-state="running"] .yy-pose-breath.is-current .yy-tail-motion{
+.yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-breath.is-current .yy-tail-motion{
   animation:yy-tail-slow 9.5s ease-in-out infinite;
 }
 /* Cat/cow is controlled by yy-asana-motion.js: spine, neck and tail deform safely,
@@ -61,54 +61,54 @@
 .yy-guide[data-phase="warmup"] .yy-pose-table.is-current .yy-tail-motion{
   animation:none!important;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-table.is-current .yy-stars{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-table.is-current .yy-stars{
   animation:yy-stars-slow 8s ease-in-out infinite;
 }
 /* Warrior II: grounded legs, long hold, expressive gaze and guarded tail. */
-.yy-guide[data-asana-state="running"] .yy-pose-warrior.is-current .yy-head-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-warrior.is-current .yy-head-motion{
   animation:yy-warrior-focus 8s ease-in-out infinite;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-warrior.is-current .yy-tail-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-warrior.is-current .yy-tail-motion{
   animation:yy-warrior-tail 8s ease-in-out infinite;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-warrior.is-current .yy-arms{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-warrior.is-current .yy-arms{
   animation:yy-arms-strength 8s ease-in-out infinite;
 }
 /* Flow: controlled extension, quiet return; no bent-limb interpolation. */
-.yy-guide[data-asana-state="running"] .yy-pose-flow.is-current .yy-character{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-flow.is-current .yy-character{
   animation:yy-flow-rise 7s ease-in-out infinite!important;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-flow.is-current .yy-tail-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-flow.is-current .yy-tail-motion{
   animation:yy-flow-tail 7s ease-in-out infinite;
 }
 /* Tree: tiny sway about the planted foot; keep at most 0.8 degrees. */
-.yy-guide[data-asana-state="running"] .yy-pose-tree.is-current .yy-character{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-tree.is-current .yy-character{
   animation:yy-tree-sway 9s ease-in-out infinite!important;
   transform-origin:50% 88%;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-tree.is-current .yy-tail-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-tree.is-current .yy-tail-motion{
   animation:yy-tree-tail 9s ease-in-out infinite;
 }
 /* Return to calm: lower the head, settle and soften. */
-.yy-guide[data-asana-state="running"] .yy-pose-child.is-current .yy-head-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-child.is-current .yy-head-motion{
   animation:yy-head-bow 8s ease-in-out infinite;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-child.is-current .yy-character{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-child.is-current .yy-character{
   animation:yy-child-rest 8s ease-in-out infinite!important;
 }
 /* Savasana: quietest of all, nothing bounces. */
-.yy-guide[data-asana-state="running"] .yy-pose-savasana.is-current .yy-character{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-savasana.is-current .yy-character{
   animation:yy-savasana 10s ease-in-out infinite!important;
 }
 /* Finish: a smile and a tiny breath of gratitude, not a duplicate of centering. */
-.yy-guide[data-asana-state="running"] .yy-pose-finish.is-current .yy-head-motion{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-finish.is-current .yy-head-motion{
   animation:yy-finish-nod 7s ease-in-out infinite;
 }
-.yy-guide[data-asana-state="running"] .yy-pose-finish.is-current .yy-gem{
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-finish.is-current .yy-gem{
   animation:yy-gem-light 4s ease-in-out infinite;
 }
 /* Natural blink on OPEN-eyed characters in any awake phase. */
-.yy-guide[data-asana-state="running"] .yy-pose.is-current .yy-anim-eyes,
+.yy-guide:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose.is-current .yy-anim-eyes,
 .yy-guide[data-asana-state="idle"] .yy-pose.is-current .yy-anim-eyes{
   transform-box:fill-box;transform-origin:50% 50%;
   animation:yy-blink 6.6s linear infinite;

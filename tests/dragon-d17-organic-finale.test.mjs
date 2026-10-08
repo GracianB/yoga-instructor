@@ -57,5 +57,5 @@ test('D17 release keeps mode foundation and versioned files with budget',()=>{
 test('D17 instructor controls resync when first pose-ready event precedes UI listeners',()=>{
  const ui=read('instructor-ui.js');
  assert.match(ui,/poseLocked=!guideReady \|\| guideReady\.dataset\.ready!=="true"/);
- assert.match(html,/instructor-ui\.js\?v=d20-1/);
+ assert.match(html,/instructor-ui\.js\?v=d20-1-d25-1/);
 });

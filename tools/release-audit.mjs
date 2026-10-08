@@ -51,6 +51,9 @@ assert.ok(statSync('yy-dragon-d23.css').size <= 4400, 'D23 grounded transitions 
 assert.ok(statSync('yy-asana-library.css').size <= 6500, 'D24 asana library CSS budget');
 assert.ok(statSync('asana-library.js').size <= 4700, 'D24 authored asanas budget');
 assert.ok(statSync('studio-asana-library.js').size <= 8100, 'D24 library interaction budget');
+assert.ok(statSync('session-design.js').size <= 6000, 'D25 ten-phase session adaptation budget');
+assert.ok(statSync('session-design-ui.js').size <= 7000, 'D25 options UI budget');
+assert.ok(statSync('yy-session-design.css').size <= 4500, 'D25 adaptable practice CSS budget');
 assert.ok(html.indexOf('yy-dragon-d23.css')>html.indexOf('yy-studio-finale.css'), 'D23 transition geometry must load after the D22 studio layers');
 assert.ok(html.indexOf('yy-dragon-d17.css')>html.indexOf('yy-dragon-d16.css'), 'D17 organic art must load last');
 assert.ok(statSync('practice-pathways.js').size <= 3500, 'Future practice pathways data budget');

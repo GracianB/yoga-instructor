@@ -133,8 +133,26 @@
 
   let preview = false;
   const setPreview = value => { preview = value; window.dispatchEvent(new CustomEvent("yoga:preview", { detail: value })); };
-  const durationFor = snapshot => preview ? 5 :
-    (window.YOGA_STUDIO_PLANS?.duration(snapshot.durationSeconds, root.dataset.studioPace || "balanced") ?? (snapshot.durationSeconds || 0));
+  // D25: one deterministic schedule, shared with the original phase clock.
+  // The five-second quick tour and D20 default pacing remain unchanged.
+  let planKey = "", plannedDurations = null;
+  const designSettings = () => ({
+    level: root.dataset.sessionLevel || "steady",
+    length: root.dataset.sessionLength || "auto",
+    recovery: root.dataset.sessionRecovery === "true",
+    pace: root.dataset.studioPace || "balanced"
+  });
+  const durationFor = snapshot => {
+    if (preview) return 5;
+    const designer = window.YOGA_SESSION_DESIGN;
+    if (!designer) return window.YOGA_STUDIO_PLANS?.duration(snapshot.durationSeconds,root.dataset.studioPace||"balanced") ?? (snapshot.durationSeconds||0);
+    const options = designSettings(), key = [options.level,options.length,options.recovery,options.pace].join(":");
+    if (key !== planKey) {
+      plannedDurations = designer.build(window.YOGA_FLOW.PHASES,options).durations;
+      planKey = key;
+    }
+    return plannedDurations?.[snapshot.phase] ?? snapshot.durationSeconds;
+  };
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -151,7 +169,10 @@
       const remaining = Math.max(0, duration - elapsed);
       const lang = getLang();
       const cues = { start: "Arrive and prepare for practice.", centering: "Find stability and attention.", breath: "Regulate your breathing without forcing.", warmup: "Mobilise your body progressively.", "pose-1": "Hold the pose with steady breathing.", transition: "Transition with control and without rushing.", "pose-2": "Integrate strength, mobility and attention.", cooldown: "Reduce intensity and leave room for breathing.", savasana: "Release effort and remain still.", finish: "Close the practice with attention." };
-      if (phaseCue) phaseCue.textContent = lang === "en" ? cues[snapshot.phase] : snapshot.cue || "";
+      if (phaseCue) {
+        const adapted = window.YOGA_SESSION_DESIGN?.cue(snapshot.phase,lang,designSettings());
+        phaseCue.textContent = adapted || (lang === "en" ? cues[snapshot.phase] : snapshot.cue || "");
+      }
       if (phaseTarget) phaseTarget.textContent = formatTime(duration);
       phaseTime.textContent = formatTime(remaining);
       phaseTime.setAttribute("aria-label", lang === "en" ? `Phase time remaining: ${formatTime(remaining)}. Target: ${formatTime(duration)}` : `Tiempo restante de fase: ${formatTime(remaining)}. Objetivo: ${formatTime(duration)}`);
@@ -260,6 +281,7 @@
   });
 
   window.addEventListener("yoga:studio-plan", () => renderSession());
+  window.addEventListener("yoga:session-design", () => renderSession());
 
   window.addEventListener("yoga:flow", (event) => {
     const snapshot = event.detail;

@@ -1,0 +1,74 @@
+/* D.2 · Calm session controls. The side rails stay in the theater. */
+#instructor-flow .flow-console{position:relative;isolation:isolate;overflow:visible}
+#instructor-flow .flow-controls{
+  display:flex;flex-wrap:wrap;align-items:center;justify-content:center;
+  gap:clamp(10px,2vw,18px);margin:15px auto 0;max-width:430px;
+  padding:12px;border-radius:999px;
+  background:color-mix(in srgb,var(--surface) 83%,transparent);
+  border:1px solid color-mix(in srgb,var(--sage) 23%,var(--line));
+}
+#instructor-flow .flow-controls .flow-control{
+  flex:1 1 130px;min-height:44px;border-radius:999px;font-size:12px;
+  font-weight:600;letter-spacing:.015em;
+}
+#instructor-flow .flow-console-foot{display:flex;flex-direction:column;align-items:center;text-align:center;gap:13px}
+#instructor-flow .flow-entry-actions{display:flex;justify-content:center;gap:12px;width:100%}
+#instructor-flow .flow-start,#instructor-flow .flow-preview{
+  min-height:44px;padding:12px 20px;border-radius:999px;font-size:12px;
+}
+#instructor-flow .flow-console-foot>span{max-width:62ch;line-height:1.65;opacity:.6}
+#instructor-flow .flow-rail-button:focus-visible,
+#instructor-flow [data-flow-action]:focus-visible{outline:3px solid var(--sage-bright);outline-offset:3px}
+@media(max-width:700px){
+  #instructor-flow .flow-controls{width:100%;max-width:none;padding:8px;border-radius:16px}
+  #instructor-flow .flow-controls .flow-control{flex:1 1 0;min-width:0;min-height:44px}
+  #instructor-flow .flow-entry-actions{flex-wrap:wrap}
+  #instructor-flow .flow-entry-actions>*{flex:1 1 160px;min-width:0}
+  #instructor-flow .flow-theater .flow-side-prev{left:0}
+  #instructor-flow .flow-theater .flow-side-next{right:0}
+  #instructor-flow .flow-theater .flow-rail-button{min-height:44px;min-width:40px}
+}
+/* D.3 · Botanical emerald sanctuary, across the whole practice section. */
+#instructor-flow{
+  position:relative;isolation:isolate;
+  background:
+    radial-gradient(ellipse 44% 46% at 87% 18%,rgba(149,199,144,.16),transparent 76%),
+    radial-gradient(ellipse 54% 58% at 4% 78%,rgba(55,133,95,.17),transparent 79%),
+    linear-gradient(155deg,#e8efe3 0%,#dce8d9 48%,#e9eee3 100%);
+}
+#instructor-flow::before{
+  content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;
+  opacity:.42;background:
+    repeating-radial-gradient(ellipse at 15% 85%,transparent 0 38px,rgba(56,111,77,.075) 39px 40px,transparent 41px 80px);
+  mask-image:linear-gradient(to bottom,transparent 0%,black 22%,black 82%,transparent);
+}
+[data-theme="dark"] #instructor-flow{
+  background:
+    radial-gradient(ellipse 55% 52% at 83% 15%,rgba(45,116,84,.19),transparent 75%),
+    radial-gradient(ellipse 57% 48% at 8% 77%,rgba(30,103,76,.21),transparent 80%),
+    linear-gradient(155deg,#091b17,#102820 52%,#0b201a);
+}
+[data-theme="dark"] #instructor-flow::before{opacity:.26}
+#instructor-flow .flow-console{
+  border-color:color-mix(in srgb,var(--sage) 28%,var(--line));
+  background:color-mix(in srgb,var(--surface) 92%,#a4c6a8);
+  box-shadow:0 24px 65px rgba(20,72,49,.10),inset 0 1px rgba(255,255,255,.1);
+}
+#instructor-flow .flow-theater .yy-stage{
+  background:
+    radial-gradient(ellipse 34% 57% at 72% 28%,rgba(190,235,189,.21),transparent 78%),
+    radial-gradient(ellipse 68% 70% at 22% 87%,rgba(80,161,124,.23),transparent 80%),
+    linear-gradient(145deg,#113b30,#275747 52%,#12372e);
+  border-color:rgba(150,214,173,.28);
+}
+#instructor-flow .flow-theater .yy-guide[data-spirit="yin"] .yy-stage{
+  background:
+    radial-gradient(ellipse at 69% 26%,rgba(152,201,178,.14),transparent 65%),
+    linear-gradient(145deg,#0a211d,#183c34 50%,#0a2924);
+}
+#instructor-flow .flow-side-next .flow-rail-button{background:#245b45;border-color:#4b9875;color:#f3fff6}
+#instructor-flow .flow-theater .yy-form-choice button[aria-pressed=true]{background:#2e7556}
+#instructor-flow .flow-theater .yy-guide[data-spirit="yin"] .yy-form-choice button[aria-pressed=true]{background:#285849}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .flow-controls .flow-control,#instructor-flow .flow-rail-button{transition:none!important}
+}

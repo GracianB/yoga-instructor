@@ -6,9 +6,9 @@
     {id:"centering",name:["Volver al centro","Find your centre"],cue:["Cierra los ojos y encuentra apoyo.","Close your eyes and find your ground."],kind:"seat",body:[360,266,65,87,0],head:[360,145,.87,0,"closed"],arms:["M310 231Q288 282 316 304","M409 231Q432 283 402 304"],legs:["M328 324Q278 354 244 337","M390 324Q441 354 477 337"],hands:[[315,301],[404,301]],feet:[[244,337],[477,337]],tail:[426,290,.65,5]},
     {id:"breath",name:["Respirar 4 · 7 · 8","Breathe 4 · 7 · 8"],cue:["Inhala cuatro, sostén siete, exhala ocho.","Inhale four, hold seven, exhale eight."],kind:"breath",body:[360,260,67,87,0],head:[361,141,.86,0,"closed"],arms:["M305 227Q266 243 250 282","M414 227Q450 243 470 282"],legs:["M324 321Q282 352 245 335","M394 321Q440 352 476 335"],hands:[[250,282],[470,282]],feet:[[245,335],[476,335]],tail:[433,276,.64,-8]},
     {id:"warmup",name:["Despertar el cuerpo","Wake your body"],cue:["A cuatro apoyos, moviliza suavemente la columna.","On all fours, move your spine gently."],kind:"table",body:[364,267,131,52,-5],head:[223,236,.73,-18,"open"],arms:["M292 283Q270 325 258 367","M329 290Q319 337 316 366"],legs:["M429 279Q455 318 451 368","M461 252Q509 287 505 363"],hands:[[258,367],[316,366]],feet:[[451,368],[505,363]],tail:[461,238,.83,-24]},
-    {id:"pose-1",name:["Guerrero II","Warrior II"],cue:["Abre los brazos, afianza tus pies y mira al frente.","Open your arms, ground your feet and look ahead."],kind:"warrior",body:[357,230,62,86,-3],head:[358,123,.79,-13,"focus"],arms:["M309 190Q239 183 155 190","M407 195Q484 184 562 192"],legs:["M322 299Q275 324 253 378","M391 304Q467 331 536 383"],hands:[[155,190],[562,192]],feet:[[253,378],[536,383]],tail:[426,261,.68,10]},
+    {id:"pose-1",name:["Guerrero II","Warrior II"],cue:["Abre los brazos, afianza tus pies y mira al frente.","Open your arms, ground your feet and look ahead."],kind:"warrior",body:[357,230,62,86,-3],head:[358,123,.79,-13,"focus"],arms:["M309 190Q239 183 155 190","M407 195Q484 184 562 192"],legs:["M322 299Q298 308 272 325Q264 355 253 378","M391 304Q460 311 474 343Q495 360 536 383"],hands:[[155,190],[562,192]],feet:[[253,378],[536,383]],tail:[426,261,.68,10]},
     {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Cambia de postura sin prisa, con una exhalación.","Move into the next pose with a long exhale."],kind:"flow",body:[372,238,67,87,19],head:[338,131,.81,-18,"open"],arms:["M326 189Q269 138 257 95","M415 201Q461 235 504 253"],legs:["M351 304Q291 335 240 378","M415 306Q468 350 520 381"],hands:[[257,95],[504,253]],feet:[[240,378],[520,381]],tail:[437,256,.63,27]},
-    {id:"pose-2",name:["Árbol del equilibrio","Tree of balance"],cue:["Busca un punto estable y sostén tu equilibrio.","Find a steady point and hold your balance."],kind:"tree",body:[359,223,63,85,0],head:[358,115,.79,0,"focus"],arms:["M311 186Q280 117 333 83","M407 186Q445 118 384 83"],legs:["M343 298Q350 351 353 387","M391 302Q452 310 386 322"],hands:[[333,83],[384,83]],feet:[[353,387],[386,322]],tail:[426,260,.75,-6]},
+    {id:"pose-2",name:["Árbol del equilibrio","Tree of balance"],cue:["Busca un punto estable y sostén tu equilibrio.","Find a steady point and hold your balance."],kind:"tree",body:[359,223,63,85,0],head:[358,115,.79,0,"focus"],arms:["M311 186Q280 117 333 83","M407 186Q445 118 384 83"],legs:["M343 298Q349 339 353 387","M391 302Q450 310 423 336Q402 342 355 313"],hands:[[333,83],[384,83]],feet:[[353,387],[355,313]],tail:[426,260,.75,-6]},
     {id:"cooldown",name:["Postura del niño","Child's pose"],cue:["Recoge la energía y descansa la frente.","Fold inward and let your forehead rest."],kind:"child",body:[376,304,117,58,8],head:[264,319,.68,-43,"closed"],arms:["M309 333Q242 357 185 366","M340 344Q269 376 214 379"],legs:["M429 320Q446 364 400 369","M447 304Q489 350 454 365"],hands:[[185,366],[214,379]],feet:[[400,369],[454,365]],tail:[452,280,.66,28]},
     {id:"savasana",name:["Savasana","Savasana"],cue:["Afloja el cuerpo. No hay nada que conseguir.","Release your body. There is nothing to achieve."],kind:"savasana",body:[362,311,128,45,-3],head:[225,294,.79,-72,"closed"],arms:["M288 309Q270 344 253 365","M360 339Q357 369 331 379"],legs:["M438 310Q495 304 546 319","M445 326Q498 342 555 345"],hands:[[253,365],[331,379]],feet:[[546,319],[555,345]],tail:[455,283,.72,-6]},
     {id:"finish",name:["Un instante de gratitud","A moment of gratitude"],cue:["Junta las manos. Llévate esta calma contigo.","Bring your hands together. Carry this calm with you."],kind:"finish",body:[359,263,65,88,0],head:[359,142,.87,0,"smile"],arms:["M309 231Q300 268 346 263","M411 231Q425 268 373 263"],legs:["M323 326Q280 354 243 338","M395 326Q440 354 476 338"],hands:[[346,263],[373,263]],feet:[[243,338],[476,338]],tail:[425,283,.67,10]}
@@ -20,26 +20,31 @@
   // Exactly two arm meshes + two leg meshes per pose, never generated extra limbs.
   const limb=(d,type,i)=>{
     const n=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
-    if(n.length!==6)throw Error("Pose limb must be quadratic Bézier: "+d);
-    const [x0,y0,cx,cy,x1,y1]=n;
+    // One or two hand-authored quadratic sections. The latter creates an actual
+    // joint without smoothing an anatomical knee into a rubber-hose diagonal.
+    if(n.length!==6 && n.length!==10)throw Error("Pose limb must have one or two quadratic sections: "+d);
+    const pieces=[n.slice(0,6)];
+    if(n.length===10)pieces.push([n[4],n[5],n[6],n[7],n[8],n[9]]);
     const radius=type==="leg"?23:17;
     const a=[],b=[];
-    for(let j=0;j<=16;j++){
-      const t=j/16,u=1-t;
-      const x=u*u*x0+2*u*t*cx+t*t*x1,y=u*u*y0+2*u*t*cy+t*t*y1;
-      let dx=2*u*(cx-x0)+2*t*(x1-cx),dy=2*u*(cy-y0)+2*t*(y1-cy);
-      const mag=Math.max(.001,Math.hypot(dx,dy));dx/=(mag);dy/=(mag);
-      // Anatomical taper: broad at the shoulder/hip, lean at the wrist/ankle.
-      // A subtle muscle belly avoids a constant-width rubber-hose silhouette.
-      const w=radius*(1.09-.29*t+.095*Math.sin(t*Math.PI));
-      a.push([x-dy*w,y+dx*w]);
-      b.push([x+dy*w,y-dx*w]);
+    for(let section=0;section<pieces.length;section++){
+      const [x0,y0,cx,cy,x1,y1]=pieces[section];
+      for(let j=0;j<=16;j++){
+        if(section && !j)continue;
+        const t=j/16,u=1-t;
+        const x=u*u*x0+2*u*t*cx+t*t*x1,y=u*u*y0+2*u*t*cy+t*t*y1;
+        let dx=2*u*(cx-x0)+2*t*(x1-cx),dy=2*u*(cy-y0)+2*t*(y1-cy);
+        const mag=Math.max(.001,Math.hypot(dx,dy));dx/=mag;dy/=mag;
+        const progress=(section+t)/pieces.length;
+        const w=radius*(1.09-.29*progress+.095*Math.sin(progress*Math.PI));
+        a.push([x-dy*w,y+dx*w]);b.push([x+dy*w,y-dx*w]);
+      }
     }
     const f=pt=>fmt(pt[0])+","+fmt(pt[1]);
-    // Rounded end caps meet the paw meshes naturally. No disconnected joints.
-    const start=[x0,y0],end=[x1,y1];
+    const first=pieces[0],last=pieces[pieces.length-1];
+    const start=[first[0],first[1]],finish=[last[4],last[5]];
     const silhouette="M"+f(a[0])+"L"+a.slice(1).map(f).join("L")+
-      "Q"+f(end)+" "+f(b[b.length-1])+
+      "Q"+f(finish)+" "+f(b[b.length-1])+
       "L"+b.slice(0,-1).reverse().map(f).join("L")+
       "Q"+f(start)+" "+f(a[0])+"Z";
     return '<g class="yy-limb-unit">'+

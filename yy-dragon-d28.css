@@ -1,0 +1,51 @@
+/* D.28 | Breathing is a change of light, not a flying character. */
+#instructor-flow .studio-guided{
+ --studio-d28-wing-vein:.44;--studio-d28-tail-light:.25;
+ --studio-d28-horn:.38;--studio-d28-halo:.2
+}
+#instructor-flow .studio-guided-stage::after{
+ content:"";position:absolute;inset:15% 8% 10%;z-index:-1;
+ border-radius:50%;pointer-events:none;
+ background:radial-gradient(ellipse at 50% 32%,rgba(233,211,178,.18),transparent 59%);
+ opacity:var(--studio-d28-halo,.2);
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-wing-vein{
+ opacity:var(--studio-d28-wing-vein,.44)
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d12-tail-ridge{
+ opacity:var(--studio-d28-tail-light,.25)
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-meridian-line{
+ opacity:var(--studio-d28-horn,.38)
+}
+/* Existing 200ms clock updates are interpolated by the browser;
+   no second rAF or per-frame geometry recalculation. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d14-rib-cage{
+ transition:transform .21s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion
+:is(.yy-d16-wing-vein,.yy-d12-tail-ridge,.yy-d16-meridian-line){
+ transition:opacity .21s linear
+}
+#instructor-flow .studio-guided[data-studio-active="breath"][data-studio-status="paused"]
+ .studio-companion :is(.yy-d14-rib-cage,.yy-d16-wing-vein,.yy-d12-tail-ridge,.yy-d16-meridian-line){
+ transition:none!important
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion .yy-character{
+ animation:none!important;transform:none!important
+}
+@media(max-width:380px){
+ #instructor-flow .studio-guided-stage::after{inset:20% 0 15%}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided-stage::after{opacity:.14!important}
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion
+ :is(.yy-d14-rib-cage,.yy-d16-wing-vein,.yy-d12-tail-ridge,.yy-d16-meridian-line){
+ transition:none!important
+ }
+}
+body.quiet-mode #instructor-flow .studio-guided-stage::after{opacity:.14!important}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion
+ :is(.yy-d14-rib-cage,.yy-d16-wing-vein,.yy-d12-tail-ridge,.yy-d16-meridian-line){
+ transition:none!important
+}

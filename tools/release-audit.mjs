@@ -58,6 +58,14 @@ assert.ok(statSync('studio-breath-engine.js').size <= 2800, 'D26 pure breath mod
 assert.ok(statSync('yy-studio-breath-d26.css').size <= 4500, 'D26 breath visuals budget');
 assert.ok(statSync('studio-meditation-d27.js').size <= 1800, 'D27 meditation model budget');
 assert.ok(statSync('yy-studio-meditation-d27.css').size <= 3500, 'D27 meditation visuals budget');
+assert.ok(statSync('studio-anatomy-d28.js').size <= 1800, 'D28 pure rig budget');
+assert.ok(statSync('yy-dragon-d28.css').size <= 3100, 'D28 performance-safe dragon finish');
+assert.ok(statSync('yy-studio-d29.css').size <= 4000, 'D29 immersive style budget');
+assert.ok(html.indexOf('studio-anatomy-d28.js') < html.indexOf('practice-studio.js'), 'D28 pure module must load before controller');
+for (const file of ['studio-anatomy-d28.js','yy-dragon-d28.css','yy-studio-d29.css']) {
+ assert.ok(html.includes(file), 'D28/29 resource must have a versioned HTML link: '+file);
+}
+assert.match(readFileSync('practice-studio.js','utf8'),/setImmersive\(false\)/, 'D29 focus must safely reset on mode change');
 assert.ok(html.indexOf('studio-meditation-d27.js') < html.indexOf('practice-studio.js'), 'D27 cues must load before practice controller');
 assert.ok(html.indexOf('studio-breath-engine.js') < html.indexOf('practice-studio.js'), 'D26 model must load before practice controller');
 assert.ok(html.indexOf('yy-dragon-d23.css')>html.indexOf('yy-studio-finale.css'), 'D23 transition geometry must load after the D22 studio layers');

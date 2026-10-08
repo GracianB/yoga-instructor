@@ -119,7 +119,10 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.paused)).toBe(false);
   await page.locator('#audio-mute').click();
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.muted)).toBe(true);
-  await page.locator('#audio-play').click();
+  // Pointer playback was exercised above. In WebKit a second Playwright
+  // click may wait forever for RAF stability while the live audio visualizer
+  // redraws: the native button click still verifies the production handler.
+  await page.locator('#audio-play').evaluate(button=>button.click());
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.paused)).toBe(true);
   expect(errors).toEqual([]);
 });

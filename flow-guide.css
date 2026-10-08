@@ -84,11 +84,22 @@
   overflow:visible;pointer-events:none;filter:drop-shadow(0 10px 5px rgba(9,37,77,.15));
 }
 .yy-outline {stroke:var(--yy-outline);stroke-width:3.6;stroke-linejoin:round;stroke-linecap:round}
-.yy-fur {fill:var(--yy-fur)}
+.yy-fur {fill:url(#yy-fur-grad)}
+.yy-fur-stop-hi{stop-color:var(--yy-ruff)}
+.yy-fur-stop-mid{stop-color:var(--yy-fur)}
+.yy-fur-stop-low{stop-color:var(--yy-fur-deep)}
+.yy-mane-stop-hi{stop-color:var(--yy-ear)}
+.yy-mane-stop-low{stop-color:var(--yy-mane)}
 .yy-cheek{fill:var(--yy-cheek);opacity:.94}
 .yy-ear-inner{fill:var(--yy-ear)}
-.yy-mane{fill:var(--yy-mane)}
+.yy-mane,.yy-crest{fill:url(#yy-mane-grad)}
 .yy-hairline{fill:none;stroke:var(--yy-fur-deep);stroke-width:5;stroke-linecap:round;opacity:.84}
+.yy-mane-light{fill:none;stroke:var(--yy-ruff);stroke-width:5;stroke-linecap:round;opacity:.63}
+.yy-face-streak{fill:none;stroke:var(--yy-ear);stroke-width:4;stroke-linecap:round;opacity:.8}
+.yy-fur-fringe{fill:none;stroke:var(--yy-fur-deep);stroke-width:7;stroke-linecap:round}
+.yy-shoulder-shine{fill:none;stroke:var(--yy-ruff);stroke-width:5;stroke-linecap:round;opacity:.57}
+.yy-toe-shine{fill:none;stroke:var(--yy-ear);stroke-width:2.6;stroke-linecap:round;opacity:.88}
+.yy-sigil-lines{fill:none;stroke:var(--yy-badge);stroke-width:2.7;stroke-linecap:round}
 .yy-ruff{fill:none;stroke:var(--yy-ruff);stroke-width:12;stroke-linecap:round}
 .yy-eye-white{fill:#f8fdff;stroke:var(--yy-outline);stroke-width:1.8}
 .yy-iris{fill:var(--yy-eye)}

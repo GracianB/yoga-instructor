@@ -18,26 +18,40 @@
   const countdown = root.querySelector("#studio-guided-countdown");
   const progress = root.querySelector("#studio-guided-progress");
   const orb = root.querySelector(".studio-breath-orb");
-  if (!dragon || !guided || !primary || !reset || !status || !heading || !cue || !countdown || !progress || !orb) return;
+  const Breath = window.YOGA_BREATH_D26;
+  const Meditation = window.YOGA_MEDITATION_D27;
+  const meditationChoices = root.querySelector(".studio-meditation-choices");
+  const meditationButtons = [...root.querySelectorAll("button[data-meditation-style]")];
+  const breathButtons = [...root.querySelectorAll("[data-breath-pattern]")];
+  const breathChoices = root.querySelector(".studio-breath-patterns");
+  if (!dragon || !guided || !primary || !reset || !status || !heading || !cue || !countdown || !progress || !orb || !Breath || !breathChoices || breathButtons.length !== 3 || !Meditation || !meditationChoices || meditationButtons.length !== 2) return;
 
   const dict = {
     es: {
       overline: "TU ESPACIO · TRES CAMINOS", entranceTitle: "¿Qué necesita tu cuerpo hoy?",
       entranceLead: "Elige una práctica. Sin prisa, sin tener que demostrar nada.",
       asanas: "Movimiento", asanasDetail: "10 fases · dragón Yin / Yang",
-      breath: "Respiración", breathDetail: "Un ritmo suave · 4 / 6",
+      breath: "Respiración", breathDetail: "Ritmos suaves · a tu medida",
       meditation: "Meditación", meditationDetail: "Silencio y atención",
       minutes: "DURACIÓN", ready: "PREPARADO", idle: "PREPARADO", running: "EN PRÁCTICA",
       paused: "EN PAUSA", finished: "COMPLETADA",
       begin: "Empezar", pause: "Pausar", resume: "Continuar",
       again: "Repetir", reset: "Reiniciar", 
       inhale: "Inhala suavemente", exhale: "Exhala sin esfuerzo",
+      patternLabel: "RITMO", softPattern: "Suave · 3/5", naturalPattern: "Natural · 4/6", freePattern: "Libre",
+      breathFree: "Respira a tu ritmo", breathFreeCue: "Sin cuenta ni cadencia. El dragón descansa contigo.",
+      breathSoftCue: "Inspira 3, espira 5. Es orientativo: no fuerces ni retengas el aire.",
       breathReady: "Encuentra tu propia respiración",
       breathCue: "Inspirar 4 segundos, espirar 6. Sin retenciones ni obligación de seguir el ritmo.",
       meditationReady: "Un momento solo para estar aquí",
       meditationCue: "Siéntate con comodidad. Observa la respiración y vuelve a ella cuando te distraigas.",
       meditationBegin: "Llega a este momento", meditationFocus: "Observa sin juzgar",
       meditationEnd: "Deja espacio al silencio",
+      meditationStyleLabel: "GUÍA", meditationGuided: "Acompañada", meditationSilent: "En silencio",
+      meditationFree: "Aquí y ahora", meditationFreeCue: "Practica a tu manera. Sin mensajes ni cambios de ritmo.",
+      meditationBeginCue: "Busca una postura cómoda. Deja que el cuerpo llegue.",
+      meditationFocusCue: "Observa los pensamientos. Vuelve con suavidad al presente.",
+      meditationEndCue: "Percibe el espacio y abre la mirada cuando lo necesites.",
       finishedTitle: "La práctica termina. La calma continúa.",
       finishedCue: "Puedes quedarte unos instantes, sin hacer nada más.",
       breathNote: "Un ritmo orientativo, no una prueba. Si notas incomodidad o mareo, vuelve a respirar de forma natural.",
@@ -48,19 +62,27 @@
       overline: "YOUR SPACE · THREE PATHS", entranceTitle: "What does your body need today?",
       entranceLead: "Choose a practice. No hurry, nothing to prove.",
       asanas: "Movement", asanasDetail: "10 phases · Yin / Yang dragon",
-      breath: "Breathing", breathDetail: "Gentle rhythm · 4 / 6",
+      breath: "Breathing", breathDetail: "Gentle rhythms · your way",
       meditation: "Meditation", meditationDetail: "Silence and attention",
       minutes: "DURATION", ready: "READY", idle: "READY", running: "PRACTISING",
       paused: "PAUSED", finished: "COMPLETE",
       begin: "Begin", pause: "Pause", resume: "Resume",
       again: "Practice again", reset: "Reset",
       inhale: "Breathe in gently", exhale: "Breathe out easily",
+      patternLabel: "PACE", softPattern: "Gentle · 3/5", naturalPattern: "Natural · 4/6", freePattern: "Free",
+      breathFree: "Breathe in your own time", breathFreeCue: "No counting, no imposed pace. Rest with the dragon.",
+      breathSoftCue: "Breathe in for 3, out for 5. Optional guidance: never strain or hold.",
       breathReady: "Find your natural breath",
       breathCue: "Breathe in for 4 seconds, out for 6. No breath holding and no pressure to follow the pace.",
       meditationReady: "A moment just to be here",
       meditationCue: "Sit comfortably. Notice your breathing and gently return whenever your mind wanders.",
       meditationBegin: "Arrive in this moment", meditationFocus: "Observe without judgement",
       meditationEnd: "Make room for silence",
+      meditationStyleLabel: "GUIDANCE", meditationGuided: "Guided", meditationSilent: "Silent",
+      meditationFree: "Here and now", meditationFreeCue: "Practise your way. No changing messages or imposed rhythm.",
+      meditationBeginCue: "Settle into a comfortable position. Let your body arrive.",
+      meditationFocusCue: "Notice thoughts. Return gently to the present.",
+      meditationEndCue: "Sense the space. Open your gaze whenever you're ready.",
       finishedTitle: "The practice ends. The calm stays.",
       finishedCue: "You can remain here for a few moments, with nothing more to do.",
       breathNote: "This rhythm is a suggestion, not a test. If you feel discomfort or dizziness, return to natural breathing.",
@@ -72,17 +94,33 @@
   const clock = new Clock(() => performance.now());
   let mode = "asanas";
   let durationIndex = 1;
+  let breathPattern = "natural";
+  let meditationStyle = "guided";
   let asanaBusy = false;
   let ticker = null;
   const language = () => document.documentElement.lang === "en" ? "en" : "es";
   const copy = (key) => dict[language()][key] || key;
   const pad = (x) => String(x).padStart(2,"0");
   const format = (seconds) => pad(Math.floor(seconds / 60)) + ":" + pad(seconds % 60);
-  const ease = (t) => t * t * (3 - 2 * t);
-  const setText = (element, value) => { if (element.textContent !== value) element.textContent = value; };
+  const setText = (element, value) => { if (element && element.textContent !== value) element.textContent = value; };
+  // Status changes must not force an expensive SVG pose update on every tick.
+  const setData = (element, key, value) => {
+    if (element.dataset[key] !== value) element.dataset[key] = value;
+  };
+  const setVar = (element, key, value) => {
+    if (element.style.getPropertyValue(key) !== value) element.style.setProperty(key, value);
+  };
 
   const stopTick = () => {
     if (ticker !== null) { clearInterval(ticker); ticker = null; }
+  };
+  const tick = () => {
+    if (document.hidden) { stopTick(); return; }
+    render();
+  };
+  const startTick = () => {
+    stopTick();
+    if (!document.hidden) ticker = setInterval(tick, 200);
   };
   const configuredDuration = () => presets[mode]?.[durationIndex] || 5;
 
@@ -92,6 +130,8 @@
     });
     root.querySelector(".studio-modes")?.setAttribute("aria-label",
       language() === "en" ? "Choose practice type" : "Elige el tipo de práctica");
+    breathChoices.setAttribute("aria-label", language() === "en" ? "Breathing pace" : "Ritmo de respiración");
+    meditationChoices.setAttribute("aria-label", language() === "en" ? "Meditation style" : "Tipo de meditación");
     status.setAttribute("aria-label", copy("liveRegion"));
     countdown.setAttribute("aria-label", language() === "en" ? "Remaining time" : "Tiempo restante");
     progress.parentElement?.setAttribute("aria-label", language() === "en" ? "Session progress" : "Progreso de la sesión");
@@ -107,6 +147,26 @@
       button.classList.toggle("is-selected", selected);
       button.disabled = locked && !selected;
     });
+  };
+
+  const syncBreathButtons = () => {
+    breathChoices.hidden = mode !== "breath";
+    const busy = ["running", "paused"].includes(clock.snapshot().status);
+    breathButtons.forEach(button => {
+      button.setAttribute("aria-pressed", String(button.dataset.breathPattern === breathPattern));
+      button.disabled = busy;
+    });
+    guided.dataset.breathPattern = breathPattern;
+  };
+
+  const syncMeditationButtons = () => {
+    meditationChoices.hidden = mode !== "meditation";
+    const busy = ["running", "paused"].includes(clock.snapshot().status);
+    meditationButtons.forEach(button => {
+      button.disabled = busy;
+      button.setAttribute("aria-pressed", String(button.dataset.meditationStyle === meditationStyle));
+    });
+    guided.dataset.meditationStyle = meditationStyle;
   };
 
   const syncDurations = () => {
@@ -126,7 +186,7 @@
     const complete = snapshot.status === "finished";
     const waiting = snapshot.status === "idle";
     const elapsed = snapshot.elapsedMs;
-    const cycle = (elapsed % 10000) / 1000;
+    const breathing = Breath.frame(elapsed, breathPattern);
     let titleKey = isBreathing ? "breathReady" : "meditationReady";
     let cueKey = isBreathing ? "breathCue" : "meditationCue";
 
@@ -134,29 +194,40 @@
       titleKey = "finishedTitle";
       cueKey = "finishedCue";
     } else if (!waiting && isBreathing) {
-      titleKey = cycle < 4 ? "inhale" : "exhale";
+      titleKey = breathing.phase === "free" ? "breathFree" : breathing.phase;
+      cueKey = breathPattern === "soft" ? "breathSoftCue" : breathPattern === "free" ? "breathFreeCue" : "breathCue";
     } else if (!waiting) {
-      titleKey = snapshot.progress < .15 ? "meditationBegin" :
-        snapshot.progress < .85 ? "meditationFocus" : "meditationEnd";
+      const guidance = Meditation.cue(snapshot.progress, meditationStyle);
+      titleKey = guidance.title;
+      cueKey = guidance.cue;
     }
 
     setText(heading, copy(titleKey));
     setText(cue, copy(cueKey));
     setText(status, copy(snapshot.status));
-    guided.dataset.studioStatus = snapshot.status;
-    orb.style.setProperty("--studio-breath-scale",
-      isBreathing && snapshot.status !== "idle" && !complete
-        ? String(cycle < 4 ? .87 + .20 * ease(cycle / 4) : 1.07 - .20 * ease((cycle - 4) / 6))
-        : "1");
-    countdown.textContent = format(Math.ceil(snapshot.remainingMs / 1000));
-    progress.style.transform = "scaleX(" + snapshot.progress.toFixed(4) + ")";
-    progress.parentElement?.setAttribute("aria-valuenow", String(Math.round(snapshot.progress * 100)));
+    setData(guided, "studioStatus", snapshot.status);
+    setData(guided, "breathPhase", isBreathing && !waiting && !complete ? breathing.phase : "rest");
+    const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
+    // One monotonic clock controls both the words and the guardian's light.
+    setVar(orb, "--studio-breath-scale", activeBreath ? breathing.scale.toFixed(4) : "1");
+    setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
+    setVar(guided, "--studio-rib-expansion", activeBreath ? (1 + 0.018 * breathing.expansion).toFixed(4) : "1");
+    setVar(guided, "--studio-breath-opacity", activeBreath ? (0.30 + 0.44 * breathing.expansion).toFixed(4) : ".45");
+    setVar(guided, "--studio-wing-opacity", activeBreath ? (0.80 + 0.15 * breathing.expansion).toFixed(4) : ".86");
+    setText(countdown, format(Math.ceil(snapshot.remainingMs / 1000)));
+    const ratio = "scaleX(" + snapshot.progress.toFixed(4) + ")";
+    if (progress.style.transform !== ratio) progress.style.transform = ratio;
+    const amount = String(Math.round(snapshot.progress * 100));
+    if (progress.parentElement?.getAttribute("aria-valuenow") !== amount)
+      progress.parentElement?.setAttribute("aria-valuenow", amount);
     setText(root.querySelector("#studio-guided-note"), copy(isBreathing ? "breathNote" : "meditationNote"));
     setText(primary, copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
       snapshot.status === "paused" ? "resume" : "again"));
     primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
     reset.disabled = waiting;
     syncDurations();
+    syncBreathButtons();
+    syncMeditationButtons();
     lockChoices();
     if (complete) stopTick();
   };
@@ -168,11 +239,14 @@
     stopTick();
     mode = next;
     root.dataset.studioMode = mode;
+    guided.dataset.studioActive = mode;
     durationIndex = 1;
     dragon.hidden = mode !== "asanas";
     guided.hidden = mode === "asanas";
     if (mode !== "asanas") clock.reset(configuredDuration());
     lockChoices();
+    syncBreathButtons();
+    syncMeditationButtons();
     if (mode !== "asanas") render();
   };
 
@@ -186,6 +260,20 @@
   root.addEventListener("click", (event) => {
     const modeButton = event.target.closest("button[data-studio-mode]");
     if (modeButton && !modeButton.disabled) { select(modeButton.dataset.studioMode); return; }
+    const breathButton = event.target.closest("button[data-breath-pattern]");
+    if (breathButton && !breathButton.disabled && mode === "breath" &&
+        Breath.PATTERNS[breathButton.dataset.breathPattern]) {
+      breathPattern = breathButton.dataset.breathPattern;
+      render();
+      return;
+    }
+    const meditationButton = event.target.closest("button[data-meditation-style]");
+    if (meditationButton && !meditationButton.disabled && mode === "meditation" &&
+        Meditation.STYLES.includes(meditationButton.dataset.meditationStyle)) {
+      meditationStyle = meditationButton.dataset.meditationStyle;
+      render();
+      return;
+    }
     const durationButton = event.target.closest("[data-studio-duration-index]");
     if (durationButton && !durationButton.disabled && mode !== "asanas") {
       durationIndex = Number(durationButton.dataset.studioDurationIndex);
@@ -207,11 +295,11 @@
       stopTick();
     } else if (current === "paused") {
       clock.resume();
-      ticker = setInterval(render, 200);
+      startTick();
     } else {
       clock.start(configuredDuration());
       stopTick();
-      ticker = setInterval(render, 200);
+      startTick();
     }
     render();
   });
@@ -222,12 +310,21 @@
   });
   const langObserver = new MutationObserver(syncLanguage);
   langObserver.observe(document.documentElement, {attributes:true,attributeFilter:["lang"]});
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopTick();
+    else if (mode !== "asanas") {
+      if (clock.snapshot().status === "running") startTick();
+      render();
+    }
+  });
   window.addEventListener("pagehide", stopTick);
   window.addEventListener("pageshow", () => {
     if (mode !== "asanas" && clock.snapshot().status === "running" && ticker === null)
-      ticker = setInterval(render, 200);
+      startTick();
     if (mode !== "asanas") render();
   });
   syncLanguage();
+  syncBreathButtons();
+  syncMeditationButtons();
   lockChoices();
 })();

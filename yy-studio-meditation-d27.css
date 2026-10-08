@@ -1,0 +1,45 @@
+/* D.27: meditative invitation, no extra animation or accumulating cues. */
+#instructor-flow .studio-meditation-choices{
+ display:flex;gap:8px;align-items:center;flex-wrap:wrap;
+ padding:0 clamp(16px,4vw,42px) 18px;
+ background:rgba(250,248,239,.64)
+}
+#instructor-flow .studio-meditation-choices[hidden]{display:none!important}
+#instructor-flow .studio-meditation-choices span{
+ font:600 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;
+ color:#627d6f;margin-right:10px
+}
+#instructor-flow .studio-meditation-choices button{
+ border:1px solid rgba(65,111,89,.26);border-radius:24px;
+ padding:9px 14px;background:rgba(255,255,255,.66);
+ color:#36594b;font:600 12px/1.4 'Inter',sans-serif;cursor:pointer
+}
+#instructor-flow .studio-meditation-choices button[aria-pressed="true"]{
+ background:#245448;color:#fff;border-color:#245448
+}
+#instructor-flow .studio-meditation-choices button:disabled{opacity:.55;cursor:default}
+#instructor-flow .studio-meditation-choices button:focus-visible{
+ outline:3px solid #bd9369;outline-offset:3px
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .studio-breath-orb{
+ opacity:.12;transition:none!important;transform:translateX(-50%)!important
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .studio-companion .yy-character{
+ animation:none!important;transform:none!important
+}
+html[data-theme="dark"] #instructor-flow .studio-meditation-choices{background:#1a302c}
+html[data-theme="dark"] #instructor-flow .studio-meditation-choices span{color:#bed2bf}
+html[data-theme="dark"] #instructor-flow .studio-meditation-choices button{
+ background:#29463e;color:#e7f0e5;border-color:#688576
+}
+html[data-theme="dark"] #instructor-flow .studio-meditation-choices button[aria-pressed="true"]{
+ background:#d0dabb;color:#18382d
+}
+@media(max-width:380px){
+ #instructor-flow .studio-meditation-choices button{padding:9px 10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion .yy-character{
+ animation:none!important;transform:none!important
+ }
+}

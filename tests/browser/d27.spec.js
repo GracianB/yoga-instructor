@@ -1,0 +1,34 @@
+const {test,expect}=require("@playwright/test");
+test("D27: guided meditation vs silent, same clock and pause",async({page})=>{
+ await page.goto("/");
+ await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
+ await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
+ const guide=page.locator("#studio-guided");
+ const options=guide.locator(".studio-meditation-choices");
+ await expect(options).toBeVisible();
+ await options.locator('[data-meditation-style="silent"]').evaluate(el=>el.click());
+ await expect(guide).toHaveAttribute("data-meditation-style","silent");
+ await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
+ await expect(guide).toHaveAttribute("data-studio-status","running");
+ await expect(guide.locator("#studio-guided-title")).toHaveText("Aquí y ahora");
+ await expect(options.locator('[data-meditation-style="guided"]')).toBeDisabled();
+ await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
+ await expect(guide).toHaveAttribute("data-studio-status","paused");
+ await expect(guide.locator("#studio-guided-title")).toHaveText("Aquí y ahora");
+ await page.locator('[data-studio-action="reset"]').evaluate(el=>el.click());
+ await options.locator('[data-meditation-style="guided"]').evaluate(el=>el.click());
+ await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
+ await expect(guide.locator("#studio-guided-title")).toHaveText("Llega a este momento");
+});
+test("D27: hide meditation choices in breathing; responsive and EN",async({page})=>{
+ await page.setViewportSize({width:320,height:760});
+ await page.emulateMedia({reducedMotion:"reduce"});
+ await page.goto("/");
+ await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
+ const group=page.locator(".studio-meditation-choices");
+ await page.locator('[data-set-lang="en"]').evaluate(el=>el.click());
+ await expect(group.locator('[data-meditation-style="silent"]')).toHaveText("Silent");
+ await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
+ await expect(group).toBeHidden();
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+});

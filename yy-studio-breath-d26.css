@@ -1,0 +1,72 @@
+/* D.26: breath-led visual geometry. Animates light rather than planted limbs. */
+#instructor-flow .studio-breath-patterns{
+ display:flex;align-items:center;flex-wrap:wrap;gap:7px;padding:0 clamp(16px,4vw,42px) 18px;
+ background:rgba(250,248,239,.64)
+}
+#instructor-flow .studio-breath-patterns[hidden]{display:none!important}
+#instructor-flow .studio-breath-patterns .studio-pattern-label{
+ font:600 10px/1.4 'JetBrains Mono',monospace;letter-spacing:.12em;
+ color:#627d6f;margin-right:10px
+}
+#instructor-flow .studio-breath-patterns button{
+ border:1px solid rgba(65,111,89,.26);border-radius:24px;padding:9px 14px;
+ background:rgba(255,255,255,.66);color:#36594b;font:600 12px/1.4 'Inter',sans-serif;
+ cursor:pointer;transition:background-color .2s,border-color .2s
+}
+#instructor-flow .studio-breath-patterns button[aria-pressed="true"]{
+ background:#245448;color:#fff;border-color:#245448
+}
+#instructor-flow .studio-breath-patterns button:disabled{opacity:.55;cursor:default}
+#instructor-flow .studio-breath-patterns button:focus-visible{
+ outline:3px solid #bd9369;outline-offset:3px
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-character{
+ animation:none!important;transform:none!important
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-breath-arch,
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-body-meridian{
+ opacity:var(--studio-breath-opacity, .45);
+ transition:none;will-change:opacity
+}
+/* The upper rib-line alone expands: hands, legs, hips, head and silhouette
+   retain their authored SVG coordinates and mat contact. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d14-rib-cage{
+ transform-box:fill-box;transform-origin:center center;
+ transform:scale(var(--studio-rib-expansion, 1));
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-wings{
+ opacity:var(--studio-wing-opacity, .86)
+}
+#instructor-flow .studio-guided[data-studio-active="breath"][data-breath-pattern="free"] .studio-breath-orb{
+ opacity:.15!important;transform:translateX(-50%) scale(1)!important
+}
+html[data-theme="dark"] #instructor-flow .studio-breath-patterns{background:#1a302c}
+html[data-theme="dark"] #instructor-flow .studio-breath-patterns .studio-pattern-label{color:#bed2bf}
+html[data-theme="dark"] #instructor-flow .studio-breath-patterns button{
+ color:#e7f0e5;background:#29463e;border-color:#688576
+}
+html[data-theme="dark"] #instructor-flow .studio-breath-patterns button[aria-pressed="true"]{
+ background:#d0dabb;color:#18382d
+}
+@media(max-width:380px){
+ #instructor-flow .studio-breath-patterns{gap:6px}
+ #instructor-flow .studio-breath-patterns button{padding:9px 10px}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d14-rib-cage{transform:none!important}
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-orb{
+ transform:translateX(-50%)!important;transition:none!important
+ }
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-breath-arch,
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-body-meridian{
+ opacity:.48!important;transition:none!important;will-change:auto
+ }
+}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d14-rib-cage{transform:none!important}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-orb{
+ transform:translateX(-50%)!important;transition:none!important
+}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-breath-arch,
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion .yy-d16-body-meridian{
+ opacity:.48!important;transition:none!important
+}

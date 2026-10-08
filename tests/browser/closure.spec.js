@@ -563,3 +563,41 @@ test('D5 guardian silhouette: all ten vector poses have tapered intact limbs',as
  }
  expect(errors).toEqual([]);
 });
+
+test('D5 complete character review: ten poses, two energies, responsive and stillness',async ({page,browserName})=>{
+ test.skip(browserName!=='chromium','The exhaustive matrix runs once; cross-browser checks remain in Phase C.');
+ test.setTimeout(120000);
+ const errors=await open(page);
+ const guide=page.locator('#flow-guide');
+ await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+ for(const width of [320,390,768,1440]){
+   await page.setViewportSize({width,height:900});
+   for(const spirit of ['yang','yin']){
+     await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
+     await expect(guide).toHaveAttribute('data-spirit',spirit);
+     const checks=await guide.locator('.yy-pose').evaluateAll(poses=>poses.map(p=>{
+       const limbs=[...p.querySelectorAll('[data-limb]')];
+       const paws=[...p.querySelectorAll('.yy-paw-group')];
+       return {phase:p.dataset.pose,limbs:limbs.length,paws:paws.length,
+         meshes:limbs.every(l=>{const box=l.getBBox();return box.width>2&&box.height>2})};
+     }));
+     expect(checks).toHaveLength(10);
+     for(const pose of checks){expect(pose.limbs).toBe(4);expect(pose.paws).toBe(4);expect(pose.meshes).toBe(true);}
+     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+     const rail=await page.locator('.flow-theater [data-flow-action="next"]').boundingBox();
+     expect(rail && rail.width>=34).toBeTruthy();
+     if(width===390||width===1440){
+       await test.info().attach('d5-guardian-'+spirit+'-'+width,{
+         body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'
+       });
+     }
+   }
+ }
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const blinking=await guide.locator('.yy-pose.is-current .yy-anim-eyes').count();
+ if(blinking){
+   const name=await guide.locator('.yy-pose.is-current .yy-anim-eyes').evaluate(el=>getComputedStyle(el).animationName);
+   expect(name).toBe('none');
+ }
+ expect(errors).toEqual([]);
+});

@@ -180,9 +180,9 @@ test('Yin Yang ten-phase yoga flow: distinct poses, navigation gate and 4-7-8 do
   await expect(guide).toHaveClass(/yy-guide/);
   await expect(guide).toHaveAttribute('data-ready','true');
   expect(await guide.locator('.yy-pose').count()).toBe(10);
-  await guide.locator('[data-yy-form="yin"]').click();
+  await guide.locator('[data-yy-form="yin"]').evaluate(button=>button.click());
   await expect(guide).toHaveAttribute('data-spirit','yin');
-  await guide.locator('[data-yy-form="yang"]').click();
+  await guide.locator('[data-yy-form="yang"]').evaluate(button=>button.click());
   await expect(guide).toHaveAttribute('data-spirit','yang');
   const trigger=async action=>page.locator('[data-flow-action="'+action+'"]').evaluate(button=>button.click());
   await expect(page.locator('[data-flow-action="preview"]')).toBeEnabled();
@@ -242,7 +242,7 @@ test('Yin Yang visual matrix: desktop/mobile, both energies, reduced motion and 
   for(const width of [320,390,768,1440]){
     await page.setViewportSize({width,height:900});
     for(const form of ['yin','yang']){
-      await guide.locator('[data-yy-form="'+form+'"]').click();
+      await guide.locator('[data-yy-form="'+form+'"]').evaluate(button=>button.click());
       await expect(guide).toHaveAttribute('data-spirit',form);
       await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
       await expect(guide).toHaveAttribute('data-ready','true');

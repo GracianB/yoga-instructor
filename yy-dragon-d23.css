@@ -1,0 +1,65 @@
+/* D23 · Planted transitions. 
+   Ten independently authored SVG silhouettes stay physically true. 
+   Between postures only pigment changes: never slide four paws in a painted pose. */
+#instructor-flow .yy-guide .yy-pose{
+  transform:none;
+  transform-origin:unset;
+  transition:opacity 580ms cubic-bezier(.3,.06,.24,1),visibility 580ms linear;
+}
+#instructor-flow .yy-guide .yy-pose.is-current{
+  transform:none;
+}
+#instructor-flow .yy-guide .yy-pose.is-entering{
+  opacity:0;
+  visibility:visible;
+  transform:none;
+  transition:none!important;
+}
+#instructor-flow .yy-guide .yy-pose.is-leaving{
+  opacity:0;
+  visibility:visible;
+  transform:none;
+}
+#instructor-flow .yy-guide[data-motion="transition"] .yy-pose:is(.is-current,.is-leaving){
+  will-change:opacity;
+}
+/* The stance shadows belong to each authored set of paws, not the theatre.
+   Never translate a planted foot, widen the torso or tween skeletal joints. */
+#instructor-flow .yy-guide[data-motion="transition"] .yy-pose .yy-stance-shadow{
+  animation:none!important;
+  transform:none!important;
+}
+/* Resting dragon and Savasana have no floating entry/exit or stage pulses. */
+#instructor-flow .yy-guide[data-passage="ground"] .yy-pose:is(.yy-pose-rest,.yy-pose-child,.yy-pose-savasana) .yy-character{
+  animation:none!important;
+  transform:none!important;
+}
+#instructor-flow .yy-guide[data-passage="ground"] .yy-d17-leg-attachments .yy-d17-attachment,
+#instructor-flow .yy-guide[data-passage="ground"] .yy-d17-arm-attachments .yy-d17-attachment{
+  transition:none!important;
+}
+/* Keep the SVG from overflowing the 320px scene during a two-pose overlap. */
+#instructor-flow .yy-guide .yy-svg{
+  overflow:visible;
+}
+#instructor-flow .yy-guide[data-motion="transition"] .yy-stage{
+  isolation:isolate;
+}
+#instructor-flow .yy-guide[data-motion="transition"] .yy-stage .yy-sky{
+  pointer-events:none;
+}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .yy-guide .yy-pose,
+  #instructor-flow .yy-guide .yy-pose.is-entering,
+  #instructor-flow .yy-guide .yy-pose.is-leaving{
+    transition:none!important;
+    transform:none!important;
+    will-change:auto!important;
+  }
+}
+body.quiet-mode #instructor-flow .yy-guide .yy-pose,
+#instructor-flow .yy-guide[data-hidden="true"] .yy-pose,
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-pose{
+  transition:none!important;
+  will-change:auto!important;
+}

@@ -108,6 +108,8 @@
   let breathRunning = false;
   let breathStarted = 0;
   let breathRaf = 0;
+  let guidedBreath = false;
+  let guidedPausedAt = 0;
   const cycle = [
     { name: "inhale", seconds: 4 },
     { name: "hold", seconds: 7 },
@@ -136,7 +138,15 @@
     body.dataset.breathPhase = finished ? "complete" : phase;
     breathPhase.textContent = finished ? t().complete : breathText(phase);
     breathTime.textContent = finished ? "0s" : Math.max(0, Math.ceil(cycleSeconds - safe)) + "s";
-    breathButton.setAttribute("aria-pressed", String(breathRunning));
+    breathButton.setAttribute("aria-pressed", String(breathRunning && !guidedPausedAt));
+    if (guidedBreath) {
+      const duration = phase === "inhale" ? 4 : phase === "hold" ? 7 : 8;
+      const progress = finished ? 1 : Math.max(0, Math.min(1, cursor / duration));
+      window.dispatchEvent(new CustomEvent("yoga:breath", { detail: {
+        phase: finished ? "idle" : phase,
+        remaining: finished ? 0 : Math.max(1, Math.ceil(duration - cursor)), progress
+      }}));
+    }
   }
 
   function stopBreath(completed) {
@@ -147,17 +157,20 @@
   }
 
   function tickBreath(now) {
-    if (!breathRunning) return;
-    const elapsed = (now - breathStarted) / 1000;
+    if (!breathRunning || guidedPausedAt) return;
+    let elapsed = (now - breathStarted) / 1000;
     if (elapsed >= cycleSeconds) {
-      stopBreath(true);
-      return;
+      if (!guidedBreath) { stopBreath(true); return; }
+      // One existing 4-7-8 clock loops through the entire breath phase.
+      breathStarted = now - ((elapsed % cycleSeconds) * 1000);
+      elapsed = elapsed % cycleSeconds;
     }
     renderBreath(elapsed);
     breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
   }
 
   breathButton.addEventListener("click", () => {
+    if (guidedBreath) return; // Instructor Flow owns the dock during phase 03.
     if (breathRunning) {
       stopBreath(false);
       return;
@@ -168,11 +181,46 @@
     breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
   });
 
+  window.addEventListener("yoga:flow", event => {
+    const state = event.detail;
+    const inBreath = state.phase === "breath" && (state.status === "running" || state.status === "paused");
+    if (!inBreath) {
+      if (guidedBreath) {
+        guidedBreath = false; guidedPausedAt = 0;
+        stopBreath(false);
+        dock.classList.remove("zenicorn-breath-synced");
+        window.dispatchEvent(new CustomEvent("yoga:breath",{detail:{phase:"idle",remaining:0,progress:0}}));
+      }
+      return;
+    }
+    if (!guidedBreath) {
+      if (breathRunning) stopBreath(false);
+      guidedBreath = true;
+      breathRunning = true;
+      guidedPausedAt = 0;
+      breathStarted = performance.now();
+      dock.classList.add("zenicorn-breath-synced");
+      renderBreath(0);
+      breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
+    }
+    if (state.status === "paused" && !guidedPausedAt) {
+      guidedPausedAt = performance.now();
+      if (breathRaf) window.YOGA_RUNTIME.cancel(breathRaf);
+      breathRaf = 0;
+    } else if (state.status === "running" && guidedPausedAt) {
+      breathStarted += performance.now() - guidedPausedAt;
+      guidedPausedAt = 0;
+      breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
+    }
+    breathButton.setAttribute("aria-pressed",String(state.status === "running"));
+  });
+
   document.addEventListener("visibilitychange", () => {
     if (document.hidden && breathRaf) {
       window.YOGA_RUNTIME.cancel(breathRaf);
       breathRaf = 0;
-    } else if (breathRunning && !breathRaf) {
+    } else if (breathRunning && !guidedPausedAt && !breathRaf) {
+      if (guidedBreath) breathStarted = performance.now() - ((performance.now()-breathStarted) % (cycleSeconds*1000));
       breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
     }
   });

@@ -2,7 +2,7 @@ const {test,expect}=require("@playwright/test");
 test("D18: three modes are actionable and dragon remains intact",async({page})=>{
   await page.goto("/");
   await expect(page.locator('#flow-guide')).toHaveAttribute("data-ready","true",{timeout:12000});
-  const modes=page.locator("[data-studio-mode]");
+  const modes=page.locator("button[data-studio-mode]");
   await expect(modes).toHaveCount(3);
   await expect(page.locator(".flow-console")).toBeVisible();
   await modes.nth(1).click();

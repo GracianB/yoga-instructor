@@ -32,8 +32,9 @@ test('D12: one central unicorn horn with four spiral engravings for all ten pose
 });
 test('D12: organic tapered tail and feather in every pose, no moss-green legacy tail',()=>{
  const svg=render().markup();
+ const classLists=[...svg.matchAll(/class="([^"]+)"/g)].map(m=>m[1].split(/\s+/));
  for(const name of ['yy-d12-tail-shell','yy-d12-tail-ridge','yy-d12-tail-flow','yy-d12-tail-plume','yy-d12-tail-spines'])
-  assert.equal((svg.match(new RegExp('class="[^"]*'+name+'[^"]*"','g'))||[]).length,10,name);
+  assert.equal(classLists.filter(tokens=>tokens.includes(name)).length,10,name);
  assert.doesNotMatch(svg,/class="yy-tail-fur"|class="yy-tail-band"/);
  assert.match(css,/fill:url\(#yy-d12-tail\)!important/);
  assert.match(css,/--d12-tail-hi:#ffebef/);

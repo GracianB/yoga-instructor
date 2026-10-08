@@ -52,22 +52,20 @@
   const face=(p)=>{
     const [x,y,s,r,eye]=p.head;
     const shut=eye==="closed",focus=eye==="focus";
+    // Guardian eyes: two relaxed, dark almond silhouettes. No white sclera,
+    // no concentric "human" pupils or staring specular highlights.
     const eyes=shut?
-      path('M-54 17Q-39 32-20 16M20 16Q39 31 56 14','yy-eye-closed')+
-      path('M-52 18l-7-5M55 16l7-5','yy-lashes'):
+      path('M-60 13Q-37 28-15 12M16 12Q39 27 61 10','yy-eye-closed')+
+      path('M-57 6Q-39 1-21 8M22 7Q39 0 58 5','yy-sleep-brow'):
       '<g class="yy-anim-eyes">'+
-        '<path d="M-61 13Q-57-11-37-13Q-17-15-13 12Q-15 35-36 35Q-59 36-61 13Z" class="yy-eye-white"/>'+
-        '<path d="M13 12Q15-13 38-13Q60-11 63 13Q61 36 37 35Q17 33 13 12Z" class="yy-eye-white"/>'+
-        '<ellipse cx="-36" cy="15" rx="12" ry="'+(focus?12:15)+'" class="yy-iris"/>'+
-        '<ellipse cx="37" cy="14" rx="12" ry="'+(focus?12:15)+'" class="yy-iris"/>'+
-        '<ellipse cx="-35" cy="20" rx="6" ry="10" class="yy-pupil"/>'+
-        '<ellipse cx="39" cy="19" rx="6" ry="10" class="yy-pupil"/>'+
-        '<ellipse cx="-42" cy="10" rx="3.5" ry="4.2" class="yy-spark-eye"/>'+
-        '<ellipse cx="31" cy="10" rx="3.5" ry="4.2" class="yy-spark-eye"/>'+
-        circle(-28,25,1.8,'yy-eye-tiny')+circle(46,24,1.8,'yy-eye-tiny')+
-        path('M-60 1Q-42-12-16-2M14-2Q37-12 62 1','yy-eye-liner')+
-        path('M-61 3Q-35-7-13 6M12 6Q38-7 63 3','yy-heavy-lid')+
-        path('M-64 4L-72 0M61 4L71 0','yy-lashes')+
+        path(focus?
+          'M-60 13Q-40 4-17 12Q-35 24-60 13Z':
+          'M-60 12Q-39-2-16 11Q-32 29-60 12Z','yy-eye-almond')+
+        path(focus?
+          'M17 12Q39 3 61 11Q45 24 17 12Z':
+          'M17 11Q39-3 62 12Q46 28 17 11Z','yy-eye-almond')+
+        path('M-50 8Q-37 0-23 8M27 7Q40 0 53 8','yy-eye-sheen')+
+        path('M-60 5Q-39-6-17 5M17 4Q39-7 61 4','yy-guardian-lid')+
       '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
       // Strong ear silhouette with contrasting inner pattern.
@@ -88,11 +86,11 @@
       path('M-13-64Q1-80 11-64L16-45L1-33L-13-45Z','yy-opposite-lock')+
       path('M-63 13Q-49-7-29 0Q-11 18-20 48Q-42 70-66 53Z','yy-cheek')+
       path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
-      path('M-63 42Q-44 58-27 52M31 52Q54 60 69 41','yy-cheek-shine')+
+      path('M-60 42Q-45 51-29 48M35 48Q51 53 65 40','yy-cheek-shine')+
       eyes+
-      '<ellipse cx="5" cy="50" rx="27" ry="17" class="yy-muzzle"/>'+
-      '<path d="M-3 40Q5 34 14 40L7 49Z" class="yy-nose"/>'+
-      path(eye==="smile"?'M-12 54Q5 76 24 53':'M-10 56Q6 64 23 54','yy-smile')+
+      '<path d="M-23 44Q-18 33 3 33Q27 32 32 43Q34 59 9 66Q-21 66-23 44Z" class="yy-muzzle"/>'+
+      '<path d="M0 42Q6 38 13 42Q11 49 6 49Q0 47 0 42Z" class="yy-nose"/>'+
+      path(eye==="smile"?'M-9 53Q6 65 21 53':'M-7 54Q7 59 19 53','yy-smile')+
       path('M6 48L5 56','yy-mouth-mark')+
       path('M-68 11L-75 19L-65 20M65 11L74 19L64 21','yy-face-streak')+
       path('M-51-2L-44-8L-36 0M43-2L50-8L58 0','yy-temple-mark')+

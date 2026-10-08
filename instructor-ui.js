@@ -197,6 +197,15 @@
         ? (lang === "en" ? "Resume" : "Continuar")
         : (lang === "en" ? "Pause" : "Pausa");
     }
+    const resetButton = root.querySelector('[data-flow-action="reset"]');
+    if (resetButton) {
+      const finished = snapshot.status === "finished";
+      const resetLabel = finished
+        ? (lang === "en" ? "Return to start" : "Volver al inicio")
+        : (lang === "en" ? "Reset" : "Reiniciar");
+      resetButton.textContent = resetLabel;
+      resetButton.setAttribute("aria-label", resetLabel);
+    }
     updateAccessibility(snapshot);
   };
 

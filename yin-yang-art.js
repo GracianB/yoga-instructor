@@ -17,7 +17,8 @@
   const circle=(x,y,r,cls)=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" class="'+cls+'"/>';
   const path=(d,cls)=>'<path d="'+d+'" class="'+cls+'"/>';
   const limb=(d,type,i)=>'<path d="'+d+'" class="yy-limb yy-'+type+'" data-limb="'+type+'-'+i+'" fill="none"/>';
-  const point=(xy,cls)=>'<ellipse cx="'+xy[0]+'" cy="'+xy[1]+'" rx="13" ry="11" class="'+cls+'"/>';
+  const point=(xy,cls)=>'<g><ellipse cx="'+xy[0]+'" cy="'+xy[1]+'" rx="15" ry="13" class="'+cls+'"/>'+
+      '<path d="M'+(xy[0]-8)+' '+(xy[1]-3)+'q4-4 8-1m3-1q4-4 8 0" class="yy-toe-shine"/></g>';
   const toTransform=(x,y,s,r)=>'translate('+x+' '+y+') rotate('+r+') scale('+s+')';
   const face=(p)=>{
     const [x,y,s,r,eye]=p.head;
@@ -30,6 +31,9 @@
       path('M55-42Q76-88 78-65L64-27Z','yy-ear-inner')+
       path('M-76-20Q-93-58-66-77Q-39-80-17-56Q18-91 68-55Q91-26 79 30Q70 75 25 86Q-27 94-65 55Q-89 32-76-20Z','yy-fur yy-outline')+
       path('M-75-13Q-56-59-31-57L-15-34Q9-74 42-48Q59-39 77-14Q42-23 17-13Q-16-22-48 3Z','yy-mane yy-outline')+
+      path('M-68 27Q-94 26-83 53L-61 48M66 25Q93 27 82 55L58 46','yy-fur-fringe')+
+      path('M-61-20Q-30-72-12-47L5-69L24-42Q51-61 70-22L43-29L20-13L-7-24L-37-7Z','yy-crest yy-outline')+
+      path('M-40-42Q-22-58-10-39M24-42Q41-54 54-34','yy-mane-light')+
       path('M-63 10Q-49-8-28-3Q-13 9-11 34Q-31 58-57 43Z','yy-cheek')+
       path('M19 29Q29-3 48-2Q68-6 73 22Q72 54 43 62Z','yy-cheek')+
       (shut?
@@ -44,6 +48,7 @@
       path('M-4 42Q5 36 14 42L6 51Z','yy-nose')+
       path(eye==="smile"?'M-10 55Q5 69 22 54':'M-7 55Q7 61 18 53','yy-smile')+
       path('M-70-16Q-58-51-36-50M16-59Q54-59 73-24','yy-hairline')+
+      path('M-57 30Q-45 27-38 32M45 34Q53 28 63 30','yy-face-streak')+
       '<path d="M-2-57L12-78L22-50Z" class="yy-crown-mark"/>'+
       '</g>';
   };
@@ -51,9 +56,11 @@
     const [x,y,rx,ry,r]=p.body;
     return '<g class="yy-torso" transform="translate('+x+' '+y+') rotate('+r+')">'+
       '<ellipse rx="'+rx+'" ry="'+ry+'" class="yy-fur yy-outline"/>'+
+      '<path d="M-'+fmt(rx*.52)+' -'+fmt(ry*.7)+'Q0 -'+fmt(ry*.83)+' '+fmt(rx*.45)+' -'+fmt(ry*.72)+'" class="yy-shoulder-shine"/>'+
       path('M-'+fmt(rx*.43)+' -'+fmt(ry*.65)+'Q0 -'+fmt(ry*.96)+' '+fmt(rx*.42)+' -'+fmt(ry*.65),'yy-ruff')+
       (p.kind==="rest"||p.kind==="savasana"||p.kind==="child"?'':
-        '<path d="M0 -21L20 1L0 22L-20 1Z" class="yy-gem"/><path d="M0 -14L10 1L0 13Z" class="yy-gem-shine"/>')+
+        '<path d="M0 -21L20 1L0 22L-20 1Z" class="yy-gem"/><path d="M0 -14L10 1L0 13Z" class="yy-gem-shine"/>'+
+        '<path d="M-23 -7L-40 -20M22 -7L39 -20" class="yy-sigil-lines"/>')+
       '</g>';
   };
   const tail=p=>{
@@ -76,6 +83,8 @@
   };
   const markup=()=>'<svg class="yy-svg" viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Yin Yang yoga character">'+
     '<defs>'+
+      '<linearGradient id="yy-fur-grad" x1="0" y1="0" x2=".9" y2="1"><stop class="yy-fur-stop-hi" offset="0"/><stop class="yy-fur-stop-mid" offset=".55"/><stop class="yy-fur-stop-low" offset="1"/></linearGradient>'+
+      '<linearGradient id="yy-mane-grad" x1="0" y1="0" x2="1" y2="1"><stop class="yy-mane-stop-hi" offset="0"/><stop class="yy-mane-stop-low" offset="1"/></linearGradient>'+
       '<radialGradient id="yy-pool"><stop offset="0" stop-color="#6bcbff" stop-opacity=".32"/><stop offset="1" stop-color="#6bcbff" stop-opacity="0"/></radialGradient>'+
       '<linearGradient id="yy-lotus" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a8f4ff"/><stop offset="1" stop-color="#778ef4"/></linearGradient>'+
     '</defs>'+

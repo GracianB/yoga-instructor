@@ -63,6 +63,7 @@ test('D13: 320px cat/cow caudal silhouette is contained and anchored during moti
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('D13: both energies keep horn/closed eyes through all ten poses',async({page})=>{
+ test.setTimeout(90000); // 20 full crossfades in Firefox under parallel CI
  const guide=await open(page);
  await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
  const next=page.locator('[data-flow-action="next"]');

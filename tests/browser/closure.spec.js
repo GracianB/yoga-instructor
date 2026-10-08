@@ -205,8 +205,13 @@ test('Yin Yang ten-phase yoga flow: distinct poses, navigation gate and 4-7-8 do
       await expect(page.locator('.sanctuary-dock')).toHaveClass(/yy-dock-active/);
       await expect(guide.locator('.yy-breath-panel')).toHaveAttribute('aria-hidden','false');
     }
-    if(['breath','pose-1','pose-2','savasana'].includes(id))
+    if(['breath','pose-1','pose-2','savasana'].includes(id)){
+      await guide.evaluate(el=>{
+        el.scrollIntoView({block:'start',behavior:'instant'});
+        window.scrollBy({top:-128,behavior:'instant'});
+      });
       await test.info().attach('yin-yang-'+id,{body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'});
+    }
   }
   await expect(guide).toHaveAttribute('data-status','finished');
   await page.locator('[data-set-lang="en"]').click();
@@ -249,8 +254,13 @@ test('Yin Yang visual matrix: desktop/mobile, both energies, reduced motion and 
       expect(await guide.locator('.yy-pose[data-pose="pose-1"] [data-limb^="leg-"]').count()).toBe(2);
       expect(await guide.locator('.yy-pose[data-pose="pose-1"] [data-limb^="arm-"]').count()).toBe(2);
       expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
-      if(width===320||width===1440)
+      if(width===320||width===1440){
+        await guide.evaluate(el=>{
+          el.scrollIntoView({block:'start',behavior:'instant'});
+          window.scrollBy({top:-128,behavior:'instant'});
+        });
         await test.info().attach('yin-yang-'+form+'-'+width,{body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'});
+      }
       await page.locator('[data-flow-action="reset"]').evaluate(el=>el.click());
       await expect(guide).toHaveAttribute('data-ready','true');
     }

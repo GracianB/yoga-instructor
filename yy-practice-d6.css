@@ -367,3 +367,6 @@
     radial-gradient(ellipse at 50% 82%, rgba(214,160,174,.24), transparent 40%),
     linear-gradient(180deg,#1c3546,#24384a 60%,#182833);
 }
+
+#instructor-flow .yy-blush{fill:rgba(214,150,150,.28)}
+#instructor-flow .yy-brow{fill:none;stroke:rgba(70,52,42,.35);stroke-width:1.6;stroke-linecap:round}

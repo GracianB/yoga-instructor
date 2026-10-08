@@ -85,7 +85,7 @@
       '</g>';
     };
     const eyes = shut
-      ? path('M-58 12Q-36 24-16 11M16 11Q38 24 58 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M22 6Q39 0 58 5','yy-sleep-brow')
+      ? path('M-52 10Q-34 16-18 10M18 10Q34 16 52 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M22 6Q39 0 58 5','yy-sleep-brow')
       : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(40,"r")+'</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
@@ -104,6 +104,10 @@
       path('M-63 13Q-49-7-29 0Q-11 18-20 48Q-42 70-66 53Z','yy-cheek')+
       path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
       path('M-60 42Q-45 51-29 48M35 48Q51 53 65 40','yy-cheek-shine')+
+      '<ellipse cx="-34" cy="28" rx="14" ry="8" class="yy-blush"/>'+
+      '<ellipse cx="36" cy="28" rx="14" ry="8" class="yy-blush"/>'+
+      path('M-46-6Q-34-14-22-6','yy-brow')+
+      path('M24-6Q36-14 48-6','yy-brow')+
       eyes+
       '<path d="M-23 44Q-18 33 3 33Q27 32 32 43Q34 59 9 66Q-21 66-23 44Z" class="yy-muzzle"/>'+
       '<path d="M0 42Q6 38 13 42Q11 49 6 49Q0 47 0 42Z" class="yy-nose"/>'+

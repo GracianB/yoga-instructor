@@ -232,5 +232,4 @@
 .yy-petal-b{fill:rgba(223,184,191,.34)}
 .yy-petal-c{fill:rgba(63,154,104,.22)}
 .yy-frond{fill:none;stroke:rgba(47,107,79,.45);stroke-width:2;stroke-linecap:round}
-@keyframes yy-breath{50
 @keyframes yy-breath{50%{transform:scaleY(1.08)}}

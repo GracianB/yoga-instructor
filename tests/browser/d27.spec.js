@@ -6,8 +6,13 @@ test("D27: guided meditation vs silent, same clock and pause",async({page})=>{
  const guide=page.locator("#studio-guided");
  const options=guide.locator(".studio-meditation-choices");
  await expect(options).toBeVisible();
+ const focus=guide.locator(".studio-meditation-focus");
+ await expect(focus).toBeVisible();
+ await focus.locator('[data-meditation-focus="body"]').evaluate(el=>el.click());
+ await expect(focus.locator('[data-meditation-focus="body"]')).toHaveAttribute("aria-pressed","true");
  await options.locator('[data-meditation-style="silent"]').evaluate(el=>el.click());
  await expect(guide).toHaveAttribute("data-meditation-style","silent");
+ await expect(focus).toBeHidden();
  await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
  await expect(guide).toHaveAttribute("data-studio-status","running");
  await expect(guide.locator("#studio-guided-title")).toHaveText("Aquí y ahora");
@@ -17,8 +22,12 @@ test("D27: guided meditation vs silent, same clock and pause",async({page})=>{
  await expect(guide.locator("#studio-guided-title")).toHaveText("Aquí y ahora");
  await page.locator('[data-studio-action="reset"]').evaluate(el=>el.click());
  await options.locator('[data-meditation-style="guided"]').evaluate(el=>el.click());
+ await expect(focus).toBeVisible();
  await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
  await expect(guide.locator("#studio-guided-title")).toHaveText("Llega a este momento");
+ await expect(guide.locator(".studio-companion .yy-character").first()).toHaveCSS("animation-name","none");
+ expect(await page.evaluate(()=>window.YOGA_MEDITATION_D27.cue(.5,"guided","body").cue))
+  .toBe("meditationBodyCue");
 });
 test("D27: hide meditation choices in breathing; responsive and EN",async({page})=>{
  await page.setViewportSize({width:320,height:760});
@@ -28,6 +37,7 @@ test("D27: hide meditation choices in breathing; responsive and EN",async({page}
  const group=page.locator(".studio-meditation-choices");
  await page.locator('[data-set-lang="en"]').evaluate(el=>el.click());
  await expect(group.locator('[data-meditation-style="silent"]')).toHaveText("Silent");
+ await expect(page.locator('.studio-meditation-focus [data-meditation-focus="space"]')).toHaveText("Surroundings");
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  await expect(group).toBeHidden();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);

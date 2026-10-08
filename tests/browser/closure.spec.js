@@ -202,6 +202,9 @@ test('living guide follows all ten phases, pauses and restores full practice tim
     now += 5000; await page.clock.setFixedTime(now);
     await expect(guide).toHaveAttribute('data-phase',phase);
     await expect(guide.locator('.guide-pose.is-current')).toHaveCount(1);
+    // A phase title changes at transition start; capture anatomy only after
+    // the illustrated rig has reached the new pose, not at an intermediate frame.
+    await expect(guide).toHaveAttribute('data-morph', '1.000', { timeout: 7000 });
     if (['centering','warmup','pose-1','pose-2','cooldown','savasana','finish'].includes(phase)) {
       await guide.scrollIntoViewIfNeeded();
       await test.info().attach('asana-' + phase + '-desktop',

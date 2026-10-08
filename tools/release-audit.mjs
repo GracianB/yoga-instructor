@@ -13,7 +13,12 @@ postcss.parse(css);
 postcss.parse(readFileSync('flow-guide.css', 'utf8'));
 assert.ok(statSync('flow-guide.css').size <= 10000, 'Guide CSS budget');
 assert.ok(statSync('flow-guide.js').size <= 16000, 'Guide JS budget');
-assert.ok(statSync('flow-motion.js').size <= 18000, 'Articulated figure JS budget');
+assert.ok(!html.includes('flow-motion.js'), 'Obsolete skeletal rig must not load');
+for (const name of ['01-inicio','02-centrado','03-respiracion','04-calentamiento','05-guerrero','06-transicion','07-arbol','08-calma','09-savasana','10-cierre']) {
+  const file = `assets/zenicorn/poses/${name}.svg`;
+  assert.ok(existsSync(file), `Missing Zenicorn pose: ${file}`);
+  assert.ok(statSync(file).size <= 18000, `Pose size budget: ${file}`);
+}
 assert.ok(statSync('styles.css').size <= 174000, 'CSS budget');
 assert.ok(statSync('main.js').size <= 22500, 'Main JS budget');
 assert.ok(statSync('audio/sustained-focus.mp3').size <= 4500000, 'Audio budget');

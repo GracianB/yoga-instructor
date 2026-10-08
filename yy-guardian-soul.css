@@ -103,3 +103,30 @@ body.quiet-mode #instructor-flow .yy-anim-eyes{animation:none!important}
 #instructor-flow .yy-guide .yy-guardian-lid{opacity:.60}
 #instructor-flow .yy-guide .yy-stars{opacity:.30}
 #instructor-flow .yy-guide[data-phase="finish"] .yy-stars{opacity:.56;filter:none}
+
+/* Mature character silhouettes: fewer cartoon edge highlights, clearer volume. */
+#instructor-flow .yy-guide .yy-tail-band{
+  stroke-width:6;opacity:.32;
+}
+#instructor-flow .yy-guide .yy-tail-glint{
+  stroke:var(--yy-ruff);stroke-width:2;opacity:.22;
+}
+#instructor-flow .yy-guide .yy-temple-mark{
+  stroke-width:1.7;opacity:.30;
+}
+#instructor-flow .yy-guide .yy-ear-light{
+  stroke-width:1.8;opacity:.34;
+}
+#instructor-flow .yy-guide .yy-fur-fringe{
+  stroke-width:4;opacity:.58;
+}
+#instructor-flow .yy-guide .yy-crown-shine{opacity:.34}
+#instructor-flow .yy-guide .yy-limb-lustre{opacity:.19;stroke-width:2.2}
+#instructor-flow .yy-guide .yy-paw-gloss{opacity:.12}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stage{
+  background:
+    radial-gradient(ellipse 48% 62% at 50% 51%,rgba(140,177,158,.24),transparent 82%),
+    radial-gradient(ellipse 45% 54% at 73% 23%,rgba(198,213,188,.10),transparent 83%),
+    linear-gradient(150deg,#19342f,#25483e 62%,#102b2b);
+  border-color:rgba(153,185,166,.28);
+}

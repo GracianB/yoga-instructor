@@ -23,6 +23,7 @@
   const consoleRoot = root.querySelector(".flow-console");
   const pauseButton = root.querySelector('[data-flow-action="pause"]');
   const actionButtons = [...root.querySelectorAll("[data-flow-action]")];
+  let poseLocked = true; // prevents leaving a pose before its crossfade settles
 
   const labels = {
     es: {
@@ -92,7 +93,8 @@
       const disabled =
         (action === "previous" && (first || last)) ||
         (action === "next" && last) ||
-        (action === "pause" && (idle || last));
+        (action === "pause" && (idle || last)) ||
+        (poseLocked && ["start", "preview", "previous", "next"].includes(action));
 
       button.disabled = disabled;
       button.setAttribute("aria-disabled", String(disabled));
@@ -191,6 +193,7 @@
       renderSession();
     },
     next: () => {
+      if (poseLocked) return;
       if (engine.status === "idle") {
         session.start();
         phase.start();
@@ -243,6 +246,15 @@
     renderSession();
   });
 
+  window.addEventListener("yoga:pose-changing", () => {
+    poseLocked = true;
+    updateAccessibility(engine.snapshot());
+  });
+  window.addEventListener("yoga:pose-ready", () => {
+    poseLocked = false;
+    updateAccessibility(engine.snapshot());
+  });
+
   document.addEventListener("click", (event) => {
     if (event.target.closest("[data-set-lang]")) {
       window.YOGA_RUNTIME.frame(() => { render(engine.snapshot()); renderSession(); });
@@ -254,6 +266,6 @@
   window.setInterval(() => {
     renderSession();
     const snapshot = engine.snapshot();
-    if (snapshot.status === "running" && snapshot.durationSeconds > 0 && phase.snapshot().elapsedSeconds >= durationFor(snapshot)) engine.next();
+    if (!poseLocked && snapshot.status === "running" && snapshot.durationSeconds > 0 && phase.snapshot().elapsedSeconds >= durationFor(snapshot)) engine.next();
   }, 250);
 })();

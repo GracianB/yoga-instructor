@@ -1,0 +1,44 @@
+/* D22 gentle finale: editorial, composed, no confetti or scorekeeping. */
+#instructor-flow .studio-finale{
+ max-width:1120px;margin:24px auto 0;padding:clamp(24px,5vw,52px);
+ border-radius:28px;border:1px solid rgba(65,112,79,.24);
+ background:radial-gradient(ellipse at 82% 13%,rgba(234,218,178,.36),transparent 49%),
+   linear-gradient(145deg,#eaf0e6,#f8f4e9);color:#294d3f;
+ box-shadow:0 20px 56px rgba(27,77,48,.08)
+}
+#instructor-flow .studio-finale[hidden],#instructor-flow .studio-last-practice[hidden]{display:none!important}
+#instructor-flow .studio-finale-kicker{
+ font:600 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.16em;
+ color:#617966
+}
+#instructor-flow .studio-finale-title{
+ font:500 clamp(28px,4vw,44px)/1.18 'Fraunces',serif;color:#1e4438;margin:13px 0
+}
+#instructor-flow .studio-finale-lead,#instructor-flow .studio-finale-detail{
+ max-width:620px;font:400 14px/1.75 'Inter',sans-serif;color:#506f5e;margin:8px 0
+}
+#instructor-flow .studio-finale-detail{font-weight:600}
+#instructor-flow .studio-finale-return{
+ margin-top:20px;border:1px solid #315c49;border-radius:100px;
+ background:#315c49;color:#f8f4e9;padding:13px 23px;cursor:pointer;
+ font:600 12px 'Inter',sans-serif
+}
+#instructor-flow .studio-finale-return:focus-visible{outline:3px solid #b78b5d;outline-offset:4px}
+#instructor-flow .studio-last-practice{
+ margin:15px 0 0;color:#6a8370;
+ font:500 11px/1.6 'Inter',sans-serif
+}
+html[data-theme="dark"] #instructor-flow .studio-finale{
+ background:linear-gradient(135deg,#183d34,#294a42);color:#e6f0e3
+}
+html[data-theme="dark"] #instructor-flow .studio-finale-title{color:#f0eede}
+html[data-theme="dark"] #instructor-flow .studio-finale-kicker,
+html[data-theme="dark"] #instructor-flow .studio-finale-lead,
+html[data-theme="dark"] #instructor-flow .studio-finale-detail{color:#ccdbcc}
+html[data-theme="dark"] #instructor-flow .studio-finale-return{background:#c4d7be;color:#204338}
+html[data-theme="dark"] #instructor-flow .studio-last-practice{color:#b7cbb9}
+@media(max-width:600px){
+ #instructor-flow .studio-finale{border-radius:21px;margin-top:14px}
+ #instructor-flow .studio-finale-return{width:100%}
+}
+@media(prefers-reduced-motion:reduce){#instructor-flow .studio-finale{scroll-behavior:auto}}

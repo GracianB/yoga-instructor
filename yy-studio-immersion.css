@@ -1,0 +1,33 @@
+/* D21: quiet room overlays the document only after explicit user action. */
+#instructor-flow .studio-immersive-tools{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:9px;margin:-2px 0 18px}
+#instructor-flow .studio-immersive-tools button{
+ border:1px solid rgba(51,95,71,.27);background:rgba(249,250,241,.48);
+ color:#345e4c;border-radius:99px;padding:10px 17px;
+ font:600 11px/1.25 'Inter',sans-serif;cursor:pointer
+}
+#instructor-flow .studio-immersive-tools button[aria-pressed="true"]{
+ background:#285446;border-color:#285446;color:#fff
+}
+#instructor-flow .studio-immersive-tools button:disabled{opacity:.45;cursor:default}
+#instructor-flow .studio-immersive-tools button:focus-visible{outline:3px solid #b98f63;outline-offset:3px}
+body.studio-focus{overflow:hidden!important}
+body.studio-focus #instructor-flow{
+ position:fixed!important;inset:0!important;overflow-y:auto!important;overflow-x:hidden!important;
+ width:100vw!important;height:100vh!important;height:100dvh!important;z-index:99999!important;
+ box-sizing:border-box!important;margin:0!important;padding:clamp(16px,3vw,42px)!important;
+ max-width:none!important;border-radius:0!important;
+ background:var(--bg,#f5f4eb)!important;opacity:1!important;visibility:visible!important;
+ transform:none!important;transition:none!important;overscroll-behavior:contain;
+}
+body.studio-focus #instructor-flow>.section-head{display:none}
+body.studio-focus #instructor-flow .studio-entrance{max-width:1120px;margin:0 auto 22px}
+body.studio-focus #instructor-flow .flow-console,
+body.studio-focus #instructor-flow .studio-guided{max-width:1120px;margin-left:auto;margin-right:auto}
+html[data-theme="dark"] #instructor-flow .studio-immersive-tools button{background:#244236;border-color:#617e68;color:#e6ede1}
+html[data-theme="dark"] #instructor-flow .studio-immersive-tools button[aria-pressed="true"]{background:#c5d7bd;color:#17372e}
+@media(max-width:600px){
+ #instructor-flow .studio-immersive-tools{justify-content:stretch}
+ #instructor-flow .studio-immersive-tools button{flex:1;padding:11px 7px}
+ body.studio-focus #instructor-flow{padding:12px!important}
+}
+@media(prefers-reduced-motion:reduce){body.studio-focus #instructor-flow{scroll-behavior:auto}}

@@ -16,6 +16,8 @@ test("D26: dragon breath and orb follow one clock; pause holds exact frame",asyn
  await page.waitForTimeout(500);
  await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
  await expect(panel).toHaveAttribute("data-studio-status","paused");
+ const phaseFrozen=await panel.locator("#studio-breath-phase-detail").textContent();
+ await expect(panel.locator("#studio-breath-phase-detail")).toContainText(" s");
  const frame=await panel.evaluate(el=>({
   scale:el.querySelector(".studio-breath-orb").style.getPropertyValue("--studio-breath-scale"),
   glow:el.style.getPropertyValue("--studio-breath-glow")
@@ -26,12 +28,15 @@ test("D26: dragon breath and orb follow one clock; pause holds exact frame",asyn
   glow:el.style.getPropertyValue("--studio-breath-glow")
  }));
  expect(frozen).toEqual(frame);
+ await expect(panel.locator("#studio-breath-phase-detail")).toHaveText(phaseFrozen);
  await page.locator('[data-studio-action="reset"]').evaluate(el=>el.click());
  await choices.locator('[data-breath-pattern="free"]').evaluate(el=>el.click());
  await expect(panel).toHaveAttribute("data-breath-pattern","free");
  await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
  await expect(panel).toHaveAttribute("data-breath-phase","free");
  await expect(panel.locator("#studio-guided-title")).toContainText("Respira a tu ritmo");
+ await expect(panel.locator("#studio-breath-phase-detail")).toHaveText("Sin cuenta");
+ await expect(panel.locator("#studio-guided-note")).toContainText("Sin ritmo impuesto");
  await page.locator('[data-studio-action="reset"]').evaluate(el=>el.click());
 });
 test("D26: controls translate, hide outside breathing, remain accessible at 320px",async({page})=>{

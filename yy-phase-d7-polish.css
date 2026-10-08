@@ -21,8 +21,10 @@
 #instructor-flow .yy-guardian-lid{stroke:#5c463c;stroke-width:2;fill:none;stroke-linecap:round}
 #instructor-flow .yy-eye-unit{transform-box:fill-box;transform-origin:center;animation:yy-blink 7.2s ease-in-out infinite}
 @keyframes yy-blink{0%,92%,100%{transform:scaleY(1)}96%{transform:scaleY(.12)}}
-#instructor-flow .yy-pose-breath.is-current .yy-character,
-#instructor-flow .yy-pose-breath.is-current .yy-torso{animation:none!important;transform:none!important}
+#instructor-flow .yy-pose-breath.is-current .yy-character{animation:none!important;transform:none!important}
+/* Keep the SVG torso's authored translate/rotate: CSS transform:none would
+   override its transform attribute and detach the body from the head. */
+#instructor-flow .yy-pose-breath.is-current .yy-torso{animation:none!important}
 #instructor-flow .yy-pose-breath .yy-belly{transform-box:fill-box;transform-origin:center;animation:yy-belly-only 7.6s ease-in-out infinite}
 #instructor-flow .flow-theater .yy-stage{
   background:

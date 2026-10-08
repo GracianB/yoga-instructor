@@ -136,6 +136,8 @@
   try{preferred=localStorage.getItem("yy-yoga-form");}catch(_){}
   selectForm(preferred==="yin"||preferred==="yang"?preferred:(document.documentElement.dataset.theme==="dark"?"yin":"yang"),!!preferred);
   showText();
-  // Notify UI on next turn, after all deferred modules have installed their listeners.
-  window.YOGA_RUNTIME.frame(reveal);
+  // Initial artwork is already present. Unlock controls synchronously so
+  // WebKit/background tabs cannot strand the guide waiting for an animation frame.
+  // The motion module reads data-ready when it initializes after this script.
+  reveal();
 })();

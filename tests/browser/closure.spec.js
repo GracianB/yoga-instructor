@@ -332,7 +332,8 @@ test('Phase B: each asana has a separate movement recipe and reduced-motion disa
   const samples=[
     ['start','.yy-character'],
     ['centering','.yy-character'],
-    ['breath','.yy-character'],
+    // Breathing is deliberately local: the belly moves, not the whole body.
+    ['breath','.yy-belly'],
     ['warmup','.yy-head-motion'],
     ['pose-1','.yy-head-motion'],
     ['transition','.yy-character'],
@@ -355,6 +356,11 @@ test('Phase B: each asana has a separate movement recipe and reduced-motion disa
       const animation=await guide.locator('.yy-pose.is-current '+samples[i][1]).first()
         .evaluate(el=>getComputedStyle(el).animationName);
       expect(animation).not.toBe('none');
+      if(samples[i][0]==='breath'){
+        const bodyAnimation=await guide.locator('.yy-pose-breath.is-current .yy-character')
+          .evaluate(el=>getComputedStyle(el).animationName);
+        expect(bodyAnimation,'the breath must not bob the whole character').toBe('none');
+      }
     }
   }
   await page.emulateMedia({reducedMotion:'reduce'});

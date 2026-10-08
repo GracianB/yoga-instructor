@@ -193,7 +193,6 @@
       '<path d="M80 360Q110 330 132 362M588 356Q612 328 636 360" class="yy-frond"/>'+
     '</g>'+
     '<g class="yy-pose-container">'+poses.map(drawing).join('')+'</g>'+
-    '<g class="yy-stars"><path d="M150 135l7 17 18 5-18 6-7 17-6-17-17-6 17-5Z"/><path d="M582 99l5 13 14 5-14 4-5 13-5-13-14-4 14-5Z"/><circle cx="544" cy="222" r="3"/><circle cx="182" cy="240" r="2.5"/></g>'+
   '</svg>';
   window.YIN_YANG_ART=Object.freeze({poses:Object.freeze(poses),markup});
 })();

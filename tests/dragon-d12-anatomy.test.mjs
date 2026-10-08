@@ -13,7 +13,7 @@ const render=()=>{
 test('D12 release: latest assets deployed after D11, uncached and budgeted',()=>{
  assert.ok(html.indexOf('yy-dragon-d12.css')>html.indexOf('yy-dragon-d11.css'));
  assert.match(html,/yy-dragon-d12\.css\?v=d12-1/);
- assert.match(html,/yin-yang-art\.js\?v=phase-d15-1/);
+ assert.match(html,/yin-yang-art\.js\?v=phase-d16-1/);
  assert.match(build,/'yy-dragon-d12\.css'/);
  assert.ok(css.length<9000);
 });

@@ -281,6 +281,11 @@
     }
   });
 
+  // Guide and controls are two deferred modules. The first pose-ready event
+  // can occur before this listener is registered: resynchronise once from
+  // the actual DOM state so Next is never stranded disabled after Start.
+  const guideReady=document.getElementById("flow-guide");
+  poseLocked=!guideReady || guideReady.dataset.ready!=="true";
   render(engine.snapshot());
   renderSession();
   window.setInterval(() => {

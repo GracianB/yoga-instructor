@@ -27,5 +27,27 @@ test("D27: no independent animation clock; full build includes mode",()=>{
  }
  assert.doesNotMatch(read("studio-meditation-d27.js"),/setInterval\(|setTimeout\(|requestAnimationFrame\(/);
  assert.match(read("yy-studio-meditation-d27.css"),/prefers-reduced-motion/);
- assert.match(read("practice-studio.js"),/Meditation\.cue\(snapshot\.progress, meditationStyle\)/);
+ assert.match(read("practice-studio.js"),/Meditation\.cue\(snapshot\.progress, meditationStyle, meditationFocus\)/);
+});
+
+test("D27: breath, body and surroundings use distinct quiet focus cues",()=>{
+ const {FOCUSES}=require("../studio-meditation-d27.js");
+ assert.deepEqual(FOCUSES,["breath","body","space"]);
+ assert.equal(cue(.5,"guided","breath").cue,"meditationFocusCue");
+ assert.equal(cue(.5,"guided","body").cue,"meditationBodyCue");
+ assert.equal(cue(.5,"guided","space").cue,"meditationSpaceCue");
+ assert.equal(cue(.05,"guided","body").cue,"meditationBeginCue");
+ assert.equal(cue(.95,"guided","space").cue,"meditationEndCue");
+ assert.equal(cue(.5,"guided","unknown").cue,"meditationFocusCue");
+ assert.equal(cue(.5,"silent","body").cue,"meditationFreeCue");
+});
+test("D27: selected attention is UI-only; silent mode keeps the figure grounded",()=>{
+ const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
+ const js=read("practice-studio.js"),html=read("index.html"),css=read("yy-studio-meditation-d27.css");
+ assert.match(js,/syncFocusButtons/);
+ assert.match(js,/Meditation\.FOCUSES\.includes/);
+ assert.match(html,/data-meditation-focus="body"/);
+ assert.match(html,/data-meditation-focus="space"/);
+ assert.match(css,/data-studio-active="meditation"/);
+ assert.match(css,/animation:none!important;transform:none!important/);
 });

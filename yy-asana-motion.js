@@ -10,6 +10,8 @@
   const belly=root.querySelector('[data-asana-belly]');
   const warmup=root.querySelector('.yy-pose[data-pose="warmup"]');
   const head=warmup?.querySelector(".yy-head-motion");
+  const neck=warmup?.querySelector(".yy-d14-neck-table");
+  const throat=warmup?.querySelector(".yy-d14-throat-line");
   const tail=warmup?.querySelector(".yy-tail-motion");
   const label=root.querySelector(".yy-asana-step");
   const fmt=n=>n.toFixed(1);
@@ -44,6 +46,15 @@
     // own midpoint. At full Cat/Cow excursion the tip moves just a few px.
     // The four paws and hip attachment remain fixed in the SVG viewBox.
     if(head)head.setAttribute("transform","translate(0 "+fmt(curve*5.8)+") rotate("+fmt(curve*4.2)+" 223 236)");
+    // D14: the throat shares the EXACT neck phase of the head, while the
+    // shoulder end of the ribbon stays welded to the planted torso.
+    // No second RAF or easing clock and no translation of contact paws.
+    if(neck)neck.setAttribute("d",
+      "M265 "+fmt(244+curve*5.8)+"C277 "+fmt(237+curve*3.8)+
+      " 298 239 312 251L315 270C297 261 282 "+fmt(262+curve*2.9)+
+      " 267 "+fmt(278+curve*5.8)+"Z");
+    if(throat)throat.setAttribute("d",
+      "M274 "+fmt(253+curve*4.1)+"Q294 "+fmt(247+curve*1.8)+" 309 258");
     if(tail)tail.setAttribute("transform","rotate("+fmt(-curve*1.3)+" 461 238)");
     const next=curve>=0?"cat":"cow";
     if(root.dataset.asanaStep!==next){
@@ -68,7 +79,11 @@
       stop();
       // Returning to idle is a clean neutral pose, not the last sampled bend.
       // A PAUSE, unlike a RESET, retains precisely the sampled cat/cow frame.
-      if(clock.status==="idle"){head?.removeAttribute("transform");tail?.removeAttribute("transform");}
+      if(clock.status==="idle"){
+        head?.removeAttribute("transform");tail?.removeAttribute("transform");
+        neck?.setAttribute("d","M265 244C277 237 298 239 312 251L315 270C297 261 282 262 267 278Z");
+        throat?.setAttribute("d","M274 253Q294 247 309 258");
+      }
       return;
     }
     if(!clock.frame && !clock.timer){

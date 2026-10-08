@@ -50,3 +50,15 @@ body.quiet-mode #instructor-flow .yy-anim-eyes{animation:none!important}
 @media(prefers-reduced-motion:reduce){
  #instructor-flow .yy-anim-eyes{animation:none!important}
 }
+
+/* Believable weight: only contact paws cast a fine shadow on the mat. */
+#instructor-flow .yy-stance-shadow{
+  fill:#092b1e;opacity:.23;pointer-events:none;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stance-shadow{
+  fill:#03171b;opacity:.36;
+}
+#instructor-flow .yy-guide[data-phase="warmup"] .yy-stance-shadow{opacity:.3}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .yy-stance-shadow{transition:none!important}
+}

@@ -408,7 +408,7 @@ test("Phase B: Cat-Cow changes only spine/head/tail; grounded limbs never multip
   const motion=readFileSync(new URL("../yy-asana-motion.js",import.meta.url),"utf8");
   const art=readFileSync(new URL("../yin-yang-art.js",import.meta.url),"utf8");
   const style=readFileSync(new URL("../yy-asana-motion.css",import.meta.url),"utf8");
-  assert.match(index,/yy-asana-motion\.js\?v=d13-1/);
+  assert.match(index,/yy-asana-motion\.js\?v=d14-1/);
   assert.match(index,/yy-asana-motion\.css\?v=phase-b-1/);
   assert.match(art,/data-asana-back/);
   assert.match(art,/data-asana-spine/);

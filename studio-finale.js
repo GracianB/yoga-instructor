@@ -110,7 +110,7 @@
   hide();
   const active=root.querySelector('button[data-studio-mode="'+mode+'"]');
   active?.focus();
-  entrance.scrollIntoView({block:"nearest",behavior:"instant"});
+  entrance.scrollIntoView({block:"nearest",behavior:"auto"});
  });
  window.addEventListener("yoga:preview",({detail})=>{preview=Boolean(detail);});
  window.addEventListener("yoga:flow",({detail})=>{

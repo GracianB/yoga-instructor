@@ -172,7 +172,10 @@
   };
   const tail=p=>{
     const [x,y,s,r]=p.tail;
-    return '<g transform="'+toTransform(x,y,s,r)+'" class="yy-tail yy-d12-tail">'+
+    // The flowing plume is longer than D11. Scale only the tail ornament for
+    // reclining and cat/cow shapes so a 480-unit mobile crop never cuts it.
+    const reach=s*(p.kind==="rest"?.78:p.kind==="table"?.75:1);
+    return '<g transform="'+toTransform(x,y,reach,r)+'" class="yy-tail yy-d12-tail">'+
       path('M-23-13C10-25 58-21 88 0C116 23 124 55 100 78C88 88 74 90 62 82C78 105 113 106 138 79C153 62 154 37 142 17C173 53 165 95 136 117C102 142 55 119 46 90C41 73 52 61 64 62C64 82 80 87 91 70C105 45 88 29 57 25C27 21 2 30-23 15Z','yy-tail-main yy-outline yy-d12-tail-shell')+
       path('M-10-3C31-11 76-11 100 17C119 40 113 62 94 77','yy-d12-tail-ridge')+
       path('M53 86Q80 116 112 110M132 91Q151 73 147 49','yy-d12-tail-flow')+

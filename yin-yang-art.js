@@ -81,6 +81,7 @@
         '<ellipse cx="40" cy="12" rx="'+(soft?'5.6':'6.4')+'" ry="'+(soft?'5.1':'7.4')+'" class="yy-eye-core"/>'+
         circle(-38,13,3.1,'yy-eye-center')+circle(40,13,3.1,'yy-eye-center')+
         circle(-35,9,1.5,'yy-eye-glint')+circle(43,9,1.5,'yy-eye-glint')+
+        path('M-50 5Q-39 2-27 6M30 6Q41 2 53 5','yy-eye-sheen')+
         path('M-60 5Q-39-6-17 5M17 4Q39-7 61 4','yy-guardian-lid')+
       '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+

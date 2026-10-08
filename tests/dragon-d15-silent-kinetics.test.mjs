@@ -39,7 +39,7 @@ test('D15: precise support distribution across all ten yoga poses',()=>{
 test('D15: every authored expression has two CLOSED eyes and no third-eye elements',()=>{
  const svg=scene().markup();
  const kinds={start:'closed',centering:'soft',breath:'soft',warmup:'open','pose-1':'focus',
-  transition:'open','pose-2':'focus',cooldown:'closed',savasana:'closed',finish:'smile'};
+  transition:'smile','pose-2':'focus',cooldown:'closed',savasana:'closed',finish:'smile'};
  for(const [id,kind] of Object.entries(kinds)){
   const p=chunk(svg,id);
   assert.equal(countClass(p,'yy-d15-expression-'+kind),1,id);

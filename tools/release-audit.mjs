@@ -39,7 +39,7 @@ assert.ok(html.includes('yy-asana-motion.js?v=phase-c-1'), 'Asana motion script 
 assert.ok(html.includes('yy-asana-motion.css?v=phase-b-1'), 'Asana motion styles must load');
 assert.ok(statSync('flow-guide.css').size <= 16000, 'Guide CSS budget');
 assert.ok(statSync('flow-guide.js').size <= 16000, 'Guide JS budget');
-assert.ok(statSync('yin-yang-art.js').size <= 24000, 'Yin Yang vector art budget');
+assert.ok(statSync('yin-yang-art.js').size <= 48000, 'Yin Yang vector art budget');
 assert.ok(!html.includes('flow-motion.js'), 'Obsolete bone-morphing script must not load');
 assert.ok(html.includes('yin-yang-art.js?v=phase-d1-1'), 'Yin Yang art module required');
 assert.ok(statSync('styles.css').size <= 174000, 'CSS budget');

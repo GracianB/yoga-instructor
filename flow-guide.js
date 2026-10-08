@@ -60,6 +60,15 @@
     breathPanel.setAttribute("aria-hidden",String(!active));
     if(!active)stage.dataset.breath="idle";
   };
+  // The passage is an editorial choice, never a new animation clock.
+  // Later experiences (asana, pranayama, meditation) can use this vocabulary.
+  const passageFor=id=>{
+    const kind=byId[id]?.kind;
+    if(["table","rest","savasana","child"].includes(kind))return "ground";
+    if(kind==="breath")return "breath";
+    if(["tree","warrior","flow"].includes(kind))return "balance";
+    return "presence";
+  };
   const signal=(type,ok)=>window.dispatchEvent(new CustomEvent(type,{detail:{phase:snapshot.phase,ok}}));
   const reveal=()=>{
     root.dataset.ready="true";
@@ -79,6 +88,7 @@
     root.dataset.ready="false";
     root.dataset.motion="transition";
     root.dataset.morph="0.000";
+    stage.dataset.passage=passageFor(phase);
     signal("yoga:pose-changing",false);
     const old=current();
     const next=root.querySelector('.yy-pose[data-pose="'+phase+'"]');

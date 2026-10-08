@@ -75,7 +75,7 @@
   const attachments=(p,type)=>{
     const body=p.body,limbs=type==="arm"?p.arms:p.legs;
     return '<g class="yy-d17-attachments yy-d17-'+type+'-attachments">'+limbs.map((d)=>{
-      const c=(d.match(/-?\\d+(?:\\.\\d+)?/g)||[]).map(Number);
+      const c=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
       const [sx,sy,cx,cy]=c,dx=cx-sx,dy=cy-sy;
       const mag=Math.max(1,Math.hypot(dx,dy)),nx=-dy/mag,ny=dx/mag;
       const wide=type==="arm"?20:27,bx=body[0],by=body[1];

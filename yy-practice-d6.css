@@ -382,3 +382,11 @@
 #instructor-flow .flow-theater .flow-rail-button{
   box-sizing:border-box;min-width:0!important;width:100%;max-width:100%;padding-inline:2px;
 }
+
+/* Last word: running hides the start cluster. Finished shows both actions. */
+#instructor-flow .flow-console[data-flow-status="running"] .flow-entry-actions,
+#instructor-flow .flow-console[data-flow-status="paused"] .flow-entry-actions{display:none!important}
+#instructor-flow .flow-console[data-flow-status="idle"] .flow-controls{display:none!important}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-entry-actions{display:flex!important}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="pause"]{display:none!important}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls{display:flex!important}

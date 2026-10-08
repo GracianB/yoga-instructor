@@ -83,6 +83,8 @@
       path('M-58-31Q-25-66 4-57Q28-69 56-34Q80-19 73-1Q54-9 43 7Q21-6 10-4Q-22-15-42 8Q-57-7-72 4Q-81-14-58-31Z','yy-face-mask')+
       path('M-61-39Q-27-82-8-67L3-87L19-65Q52-77 76-37Q52-42 29-21L7-35L-17-15L-38-23L-64-9Q-72-26-61-39Z','yy-crest yy-outline')+
       path('M-58-31Q-45-63-22-56M17-63Q44-65 60-40','yy-mane-light')+
+      // A sliver of the other form's energy lives in the forelock.
+      path('M-13-64Q1-80 11-64L16-45L1-33L-13-45Z','yy-opposite-lock')+
       path('M-63 13Q-49-7-29 0Q-11 18-20 48Q-42 70-66 53Z','yy-cheek')+
       path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
       path('M-63 42Q-44 58-27 52M31 52Q54 60 69 41','yy-cheek-shine')+

@@ -260,7 +260,7 @@
 .yy-pad{fill:rgba(214,160,174,.55)}
 .yy-toe{fill:none;stroke:rgba(90,58,48,.4);stroke-width:1.2;stroke-linecap:round}
 .yy-pose-table .yy-spine{animation:yy-spine 4.8s ease-in-out infinite}
-.yy-pose-tree .yy-character{transform-box:fill-box;transform-origin:50% 80%;animation:yy-tree 5.5s ease-in-out infinite}
+.yy-pose-tree .yy-character{animation:none}
 .yy-pose-savasana .yy-belly{animation:yy-breath 9.5s ease-in-out infinite}
 .yy-pose-child .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 7s ease-in-out infinite}
 @keyframes yy-spine{50%{translate:0 4px}}
@@ -401,3 +401,12 @@
 #instructor-flow .yy-nose{fill:#c98490}
 #instructor-flow .yy-muzzle{fill:#f7f1e8}
 #instructor-flow .yy-torso{animation:none!important}
+
+#instructor-flow .yy-pose-breath.is-current .yy-character{animation:none!important;transform:none!important}
+#instructor-flow .yy-pose-breath .yy-belly{transform-box:fill-box;transform-origin:center;animation:yy-belly-only 7.6s ease-in-out infinite}
+@keyframes yy-belly-only{50%{transform:scale(1.05,1.1)}}
+#instructor-flow .yy-eye-almond{fill:#f4efe4}
+#instructor-flow .yy-eye-core{fill:#5c8f78}
+#instructor-flow .yy-eye-center{fill:#1b1614}
+#instructor-flow .yy-eye-glint{fill:#fff;opacity:.95}
+#instructor-flow .yy-nose{fill:#c98484}

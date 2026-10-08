@@ -45,7 +45,7 @@
   animation:yy-breath-in 4s ease-in-out both!important;
 }
 .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="hold"] .yy-pose-breath.is-current .yy-character{
-  transform:translateY(-3px) scale(1.013);
+  transform:translateY(-1px) scale(1.004);
   animation:none!important;
 }
 .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="exhale"] .yy-pose-breath.is-current .yy-character{
@@ -135,10 +135,10 @@
 }
 @keyframes yy-breath-in {
   from{transform:translateY(1px) scale(1)}
-  to{transform:translateY(-4px) scale(1.013)}
+  to{transform:translateY(-1px) scale(1.004)}
 }
 @keyframes yy-breath-out {
-  from{transform:translateY(-4px) scale(1.013)}
+  from{transform:translateY(-1px) scale(1.004)}
   to{transform:translateY(1px) scale(1)}
 }
 @keyframes yy-warrior-focus{

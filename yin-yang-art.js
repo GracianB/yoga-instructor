@@ -72,21 +72,21 @@
     const gy = focus ? -1.2 : soft ? 1.4 : -0.4;
     const eyeUnit = (cx, side) => {
       const id = "yy-clip-"+p.id+"-"+side;
-      return '<g class="yy-eye-unit" transform="translate('+cx+' 6)">'+
-        '<clipPath id="'+id+'"><path d="M-18 2Q-16-16 0-16Q16-16 18 2Q16 18 0 18Q-16 18-18 2Z"/></clipPath>'+
+      return '<g class="yy-eye-unit" transform="translate('+cx+' 8)">'+
+        '<clipPath id="'+id+'"><circle cx="0" cy="0" r="16"/></clipPath>'+
         '<g clip-path="url(#'+id+')">'+
-          '<path d="M-18 2Q-16-16 0-16Q16-16 18 2Q16 18 0 18Q-16 18-18 2Z" class="yy-eye-almond"/>'+
-          '<ellipse cx="'+gx+'" cy="'+(gy)+'" rx="11" ry="12" class="yy-eye-core"/>'+
-          '<circle cx="'+(gx+0.4)+'" cy="'+(1.6+gy)+'" r="3.1" class="yy-eye-center"/>'+
-          '<circle cx="'+(gx-4.2)+'" cy="'+(gy-5)+'" r="2.2" class="yy-eye-glint"/>'+
-          '<path d="M-8 -8Q-2 -12 4 -7" class="yy-eye-sheen"/>'+
+          '<circle cx="0" cy="0" r="16" class="yy-eye-almond"/>'+
+          '<circle cx="'+gx+'" cy="'+gy+'" r="13" class="yy-eye-core"/>'+
+          '<circle cx="'+(gx+1)+'" cy="'+(gy+2)+'" r="4.2" class="yy-eye-center"/>'+
+          '<circle cx="'+(gx-5)+'" cy="'+(gy-5)+'" r="3.1" class="yy-eye-glint"/>'+
+          '<path d="M-7 -8Q-2 -11 3 -6" class="yy-eye-sheen"/>'+
         '</g>'+
       '</g>';
     };
     const eyes = shut
-      ? path('M-46 8Q-30 14-16 8M16 8Q30 14 46 8','yy-eye-closed')+path('M-40 2Q-28-2-16 3M16 3Q28-2 40 2','yy-sleep-brow')
-      : '<g class="yy-anim-eyes">'+eyeUnit(-36,"l")+eyeUnit(38,"r")+
-        '<path d="M-52 -2Q-40 -12-22 -2M22 -2Q40 -12 54 -2" class="yy-guardian-lid"/>'+
+      ? path('M-40 6Q-26 12-14 6M14 6Q26 12 40 6','yy-eye-closed')+path('M-36 0Q-24-4-14 1M14 1Q24-4 36 0','yy-sleep-brow')
+      : '<g class="yy-anim-eyes">'+eyeUnit(-34,"l")+eyeUnit(36,"r")+
+        '<path d="M-48 -6Q-34 -16-20 -6M20 -6Q34 -16 48 -6" class="yy-guardian-lid"/>'+
         '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
@@ -111,7 +111,7 @@
       path('M24-6Q36-14 48-6','yy-brow')+
       eyes+
       '<path d="M-23 44Q-18 33 3 33Q27 32 32 43Q34 59 9 66Q-21 66-23 44Z" class="yy-muzzle"/>'+
-      '<path d="M-7 46Q-8 38 0 40Q8 38 7 46Q4 54 0 52Q-4 54-7 46Z" class="yy-nose"/>'+
+      '<path d="M-5 40Q-7 34 0 35Q7 34 5 40Q0 48-5 40Z" class="yy-nose"/>'+
       path(eye==="smile"?'M-9 53Q6 65 21 53':'M-7 54Q7 59 19 53','yy-smile')+
       path('M6 48L5 56','yy-mouth-mark')+
       path('M-68 11L-75 19L-65 20M65 11L74 19L64 21','yy-face-streak')+

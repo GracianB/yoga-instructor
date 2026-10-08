@@ -47,6 +47,8 @@
   <link rel="stylesheet" href="./yy-dragon-d23.css?v=d23-1">
   <link rel="stylesheet" href="./yy-asana-library.css?v=d24-1">
   <link rel="stylesheet" href="./yy-session-design.css?v=d25-1">
+  <link rel="stylesheet" href="./yy-studio-breath-d26.css?v=d26-1">
+  <link rel="stylesheet" href="./yy-studio-meditation-d27.css?v=d27-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -59,7 +61,9 @@
   <script src="./session-design.js?v=d25-1" defer></script>
   <script src="./instructor-ui.js?v=d20-1-d25-1" defer></script>
   <script src="./studio-clock.js?v=d18-1" defer></script>
-  <script src="./practice-studio.js?v=d18-1" defer></script>
+  <script src="./studio-breath-engine.js?v=d26-1" defer></script>
+  <script src="./studio-meditation-d27.js?v=d27-1" defer></script>
+  <script src="./practice-studio.js?v=d18-1-d26-1" defer></script>
   <script src="./yin-yang-art.js?v=phase-d17-1-d24-1" defer></script>
   <script src="./flow-guide.js?v=d16-1" defer></script>
   <script src="./yy-asana-motion.js?v=d14-1-d23-1" defer></script>
@@ -397,10 +401,28 @@
             <div class="studio-breath-orb" aria-hidden="true"><span class="studio-orb-mark">✧</span></div>
             <h3 class="studio-guided-title" id="studio-guided-title">Encuentra tu propia respiración</h3>
             <p class="studio-guided-cue" id="studio-guided-cue">Inspirar 4 segundos, espirar 6.</p>
+            <p class="studio-breath-phase-detail" id="studio-breath-phase-detail" aria-live="off" hidden></p>
             <p class="studio-guided-countdown" id="studio-guided-countdown" aria-label="Tiempo restante">05:00</p>
             <div class="studio-guided-progress" role="progressbar" aria-label="Progreso de la sesión" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
               <span id="studio-guided-progress"></span>
             </div>
+          </div>
+          <div class="studio-breath-patterns" role="group" aria-label="Ritmo de respiración" hidden>
+            <span class="studio-pattern-label" data-studio-copy="patternLabel">RITMO</span>
+            <button type="button" data-breath-pattern="soft" data-studio-copy="softPattern" aria-pressed="false">Suave · 3/5</button>
+            <button type="button" data-breath-pattern="natural" data-studio-copy="naturalPattern" aria-pressed="true">Natural · 4/6</button>
+            <button type="button" data-breath-pattern="free" data-studio-copy="freePattern" aria-pressed="false">Libre</button>
+          </div>
+          <div class="studio-meditation-choices" role="group" aria-label="Tipo de meditación" hidden>
+            <span data-studio-copy="meditationStyleLabel">GUÍA</span>
+            <button type="button" data-meditation-style="guided" data-studio-copy="meditationGuided" aria-pressed="true">Acompañada</button>
+            <button type="button" data-meditation-style="silent" data-studio-copy="meditationSilent" aria-pressed="false">En silencio</button>
+          </div>
+          <div class="studio-meditation-focus" role="group" aria-label="Punto de atención" hidden>
+            <span data-studio-copy="meditationFocusLabel">ENFOQUE</span>
+            <button type="button" data-meditation-focus="breath" data-studio-copy="focusBreath" aria-pressed="true">Respiración</button>
+            <button type="button" data-meditation-focus="body" data-studio-copy="focusBody" aria-pressed="false">Cuerpo</button>
+            <button type="button" data-meditation-focus="space" data-studio-copy="focusSpace" aria-pressed="false">Entorno</button>
           </div>
           <div class="studio-guided-controls">
             <div class="studio-duration" role="group" aria-label="Duración de la práctica">

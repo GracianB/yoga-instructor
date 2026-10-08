@@ -9,9 +9,13 @@ test('Pages publication requires a successful main push Quality workflow',()=>{
   assert.match(deploy,/workflow_run:/);
   assert.match(deploy,/workflows: \[Yoga Quality\]/);
   assert.match(deploy,/types: \[completed\]/);
-  for(const value of ["workflow_run.conclusion == 'success'","workflow_run.event == 'push'","workflow_run.head_branch == 'main'","workflow_run.head_repository.full_name == github.repository"]){
+  // workflow_run can omit head_repository metadata. The actual protection is
+  // a successful main push AND equality with the live repository main SHA.
+  for(const value of ["workflow_run.conclusion == 'success'","workflow_run.event == 'push'","workflow_run.head_branch == 'main'"]){
     assert.ok(deploy.includes(value),value);
   }
+  assert.match(deploy,/test "\$\(git rev-parse HEAD\)" = "\$VERIFIED_SHA"/);
+  assert.match(deploy,/git ls-remote https:\/\/github\.com\/\$\{\{ github\.repository \}\}\.git refs\/heads\/main/);
   assert.doesNotMatch(deploy,/workflow_dispatch:/);
 });
 

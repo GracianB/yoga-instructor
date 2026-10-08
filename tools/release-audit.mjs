@@ -54,6 +54,12 @@ assert.ok(statSync('studio-asana-library.js').size <= 8100, 'D24 library interac
 assert.ok(statSync('session-design.js').size <= 6000, 'D25 ten-phase session adaptation budget');
 assert.ok(statSync('session-design-ui.js').size <= 7000, 'D25 options UI budget');
 assert.ok(statSync('yy-session-design.css').size <= 4500, 'D25 adaptable practice CSS budget');
+assert.ok(statSync('studio-breath-engine.js').size <= 2800, 'D26 pure breath model budget');
+assert.ok(statSync('yy-studio-breath-d26.css').size <= 4500, 'D26 breath visuals budget');
+assert.ok(statSync('studio-meditation-d27.js').size <= 1800, 'D27 meditation model budget');
+assert.ok(statSync('yy-studio-meditation-d27.css').size <= 3500, 'D27 meditation visuals budget');
+assert.ok(html.indexOf('studio-meditation-d27.js') < html.indexOf('practice-studio.js'), 'D27 cues must load before practice controller');
+assert.ok(html.indexOf('studio-breath-engine.js') < html.indexOf('practice-studio.js'), 'D26 model must load before practice controller');
 assert.ok(html.indexOf('yy-dragon-d23.css')>html.indexOf('yy-studio-finale.css'), 'D23 transition geometry must load after the D22 studio layers');
 assert.ok(html.indexOf('yy-dragon-d17.css')>html.indexOf('yy-dragon-d16.css'), 'D17 organic art must load last');
 assert.ok(statSync('practice-pathways.js').size <= 3500, 'Future practice pathways data budget');

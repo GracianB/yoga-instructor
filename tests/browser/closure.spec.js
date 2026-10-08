@@ -59,9 +59,12 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
   const errors = await open(page);
   const clickControl = async action => {
     const button = page.locator(`[data-flow-action="${action}"]`);
-    await button.evaluate(element => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
+    // Playwright scrolls and waits for a stable, enabled target itself.
+    // Manual scroll races the section's intersection/reveal transition.
+    await expect(button).toBeEnabled();
     await button.click();
   };
+  await expect(page.locator('#flow-guide')).toHaveAttribute('data-ready','true');
   await clickControl('start');
   await expect(page.locator('#flow-state')).toHaveText('EN PRÁCTICA');
   await expect(page.locator('#flow-session-time')).not.toHaveText('00:00');

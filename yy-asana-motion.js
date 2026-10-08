@@ -18,10 +18,14 @@
   const suspended=()=>document.hidden || document.body.classList.contains("quiet-mode") || motionReduced();
   const frame=(now)=>{
     if(clock.timer){clearTimeout(clock.timer);clock.timer=0;}
+    // The timer is a fallback for dropped animation frames, not a second loop.
+    if(clock.frame)rt.cancel(clock.frame);
     clock.frame=0;
     if(clock.phase!=="warmup" || clock.status!=="running" || !clock.ready || suspended())return;
-    const raw=clock.last ? now-clock.last : 32;
-    const delta=Math.max(32,Math.min(80,raw));
+    // RAF and the timeout fallback both use the same monotonic clock.
+    // Never force a 32ms step on a 60Hz frame (that doubles the motion speed).
+    const raw=clock.last ? now-clock.last : 0;
+    const delta=Math.max(0,Math.min(160,raw));
     clock.elapsed+=delta;
     clock.last=now;
     // One calm 8.4-second cycle; the cat rounds and the cow dips the spine.
@@ -45,11 +49,13 @@
       if(label)label.textContent=next==="cat"?(document.documentElement.lang==="en"?"CAT · EXHALE":"GATO · EXHALA"):
         (document.documentElement.lang==="en"?"COW · INHALE":"VACA · INHALA");
     }
-    clock.frame=rt.frame(frame);clock.timer=setTimeout(()=>frame(rt.now?rt.now():Date.now()),140);
+    clock.frame=rt.frame(frame);
+    clock.timer=setTimeout(()=>frame(performance.now()),140);
   };
   const stop=()=>{
     if(clock.frame)rt.cancel(clock.frame);
-    clock.frame=0;clock.last=0;
+    if(clock.timer)clearTimeout(clock.timer);
+    clock.frame=0;clock.timer=0;clock.last=0;
   };
   function settle(){
     const active=clock.status==="running" && clock.phase==="warmup" && clock.ready && !suspended();
@@ -57,7 +63,11 @@
       suspended()?"reduced":
       clock.status==="paused"?"paused":clock.status==="running"?"running":clock.status;
     if(!active){stop();return;}
-    if(!clock.frame){clock.last=0;clock.frame=rt.frame(frame);clock.timer=setTimeout(()=>frame(rt.now?rt.now():Date.now()),140);}
+    if(!clock.frame && !clock.timer){
+      clock.last=0;
+      clock.frame=rt.frame(frame);
+      clock.timer=setTimeout(()=>frame(performance.now()),140);
+    }
   }
   window.addEventListener("yoga:pose-changing",()=>{
     clock.ready=false;

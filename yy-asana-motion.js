@@ -7,6 +7,7 @@
   const rt=window.YOGA_RUNTIME;
   const spine=root.querySelector('[data-asana-spine]');
   const back=root.querySelector('[data-asana-back]');
+  const belly=root.querySelector('[data-asana-belly]');
   const warmup=root.querySelector('.yy-pose[data-pose="warmup"]');
   const head=warmup?.querySelector(".yy-head-motion");
   const tail=warmup?.querySelector(".yy-tail-motion");
@@ -24,9 +25,15 @@
     // One calm 8.4-second cycle; the cat rounds and the cow dips the spine.
     const angle=(clock.elapsed%8400)/8400*Math.PI*2;
     const curve=Math.cos(angle);
-    const bend=-60-39*curve;
-    if(back)back.setAttribute("d","M-98.3 -29.6Q-123.1 -2.6 -102.2 28.6Q0 59.8 98.3 28.6Q136.2 0 104.8 -28.6Q0 "+fmt(bend)+" -98.3 -29.6Z");
+    // Cat: arched back + tucked abdomen. Cow: dipped back + released belly.
+    // Both the DORSAL and VENTRAL surfaces move in opposite directions,
+    // while shoulders, hips and the four paws remain grounded.
+    const bend=-58-33*curve;
+    const underside=57-21*curve;
+    if(back)back.setAttribute("d",
+      "M-98.3 -29.6Q-123.1 -2.6 -102.2 28.6Q0 "+fmt(underside)+" 98.3 28.6Q136.2 0 104.8 -28.6Q0 "+fmt(bend)+" -98.3 -29.6Z");
     if(spine)spine.setAttribute("d","M-105 -24Q0 "+fmt(bend-3)+" 104 -24");
+    if(belly)belly.setAttribute("d","M-95 27Q0 "+fmt(underside-14)+" 95 27Q0 "+fmt(underside-1)+" -95 27Z");
     // Neck and tail follow the spinal flexion, not the other way around.
     if(head)head.setAttribute("transform","translate(0 "+fmt(curve*10)+") rotate("+fmt(curve*9)+" 223 236)");
     if(tail)tail.setAttribute("transform","rotate("+fmt(-curve*7)+" 461 238)");

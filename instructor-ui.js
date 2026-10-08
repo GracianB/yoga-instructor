@@ -114,8 +114,14 @@
     const start = root.querySelector('[data-flow-action="start"]');
     const reset = root.querySelector('[data-flow-action="reset"]');
 
-    if (previous) previous.setAttribute("aria-keyshortcuts", "ArrowLeft");
-    if (next) next.setAttribute("aria-keyshortcuts", "ArrowRight");
+    if (previous) {
+      previous.setAttribute("aria-keyshortcuts", "ArrowLeft");
+      previous.setAttribute("aria-label",lang==="en"?"Previous pose":"Postura anterior");
+    }
+    if (next) {
+      next.setAttribute("aria-keyshortcuts", "ArrowRight");
+      next.setAttribute("aria-label",lang==="en"?"Next pose":"Postura siguiente");
+    }
     if (start) start.setAttribute("aria-keyshortcuts", "S");
     if (reset) reset.setAttribute("aria-keyshortcuts", "R");
   };

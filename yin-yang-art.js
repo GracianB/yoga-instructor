@@ -58,14 +58,15 @@
       '<g class="yy-anim-eyes">'+
         '<path d="M-61 13Q-57-11-37-13Q-17-15-13 12Q-15 35-36 35Q-59 36-61 13Z" class="yy-eye-white"/>'+
         '<path d="M13 12Q15-13 38-13Q60-11 63 13Q61 36 37 35Q17 33 13 12Z" class="yy-eye-white"/>'+
-        '<ellipse cx="-36" cy="15" rx="17" ry="'+(focus?18:20)+'" class="yy-iris"/>'+
-        '<ellipse cx="37" cy="14" rx="17" ry="'+(focus?18:20)+'" class="yy-iris"/>'+
-        '<ellipse cx="-35" cy="20" rx="9" ry="13" class="yy-pupil"/>'+
-        '<ellipse cx="39" cy="19" rx="9" ry="13" class="yy-pupil"/>'+
-        '<ellipse cx="-42" cy="7" rx="6" ry="8" class="yy-spark-eye"/>'+
-        '<ellipse cx="31" cy="6" rx="6" ry="8" class="yy-spark-eye"/>'+
-        circle(-28,25,2.7,'yy-eye-tiny')+circle(46,24,2.7,'yy-eye-tiny')+
-        path('M-60 1Q-42-18-16-2M14-2Q37-18 62 1','yy-eye-liner')+
+        '<ellipse cx="-36" cy="15" rx="12" ry="'+(focus?12:15)+'" class="yy-iris"/>'+
+        '<ellipse cx="37" cy="14" rx="12" ry="'+(focus?12:15)+'" class="yy-iris"/>'+
+        '<ellipse cx="-35" cy="20" rx="6" ry="10" class="yy-pupil"/>'+
+        '<ellipse cx="39" cy="19" rx="6" ry="10" class="yy-pupil"/>'+
+        '<ellipse cx="-42" cy="10" rx="3.5" ry="4.2" class="yy-spark-eye"/>'+
+        '<ellipse cx="31" cy="10" rx="3.5" ry="4.2" class="yy-spark-eye"/>'+
+        circle(-28,25,1.8,'yy-eye-tiny')+circle(46,24,1.8,'yy-eye-tiny')+
+        path('M-60 1Q-42-12-16-2M14-2Q37-12 62 1','yy-eye-liner')+
+        path('M-61 3Q-35-7-13 6M12 6Q38-7 63 3','yy-heavy-lid')+
         path('M-64 4L-72 0M61 4L71 0','yy-lashes')+
       '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
@@ -89,7 +90,7 @@
       path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
       path('M-63 42Q-44 58-27 52M31 52Q54 60 69 41','yy-cheek-shine')+
       eyes+
-      '<ellipse cx="5" cy="50" rx="31" ry="22" class="yy-muzzle"/>'+
+      '<ellipse cx="5" cy="50" rx="27" ry="17" class="yy-muzzle"/>'+
       '<path d="M-3 40Q5 34 14 40L7 49Z" class="yy-nose"/>'+
       path(eye==="smile"?'M-12 54Q5 76 24 53':'M-10 56Q6 64 23 54','yy-smile')+
       path('M6 48L5 56','yy-mouth-mark')+
@@ -109,7 +110,9 @@
       'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.75)+' '+fmt(ry*.55)+
       'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.8)+' -'+fmt(ry*.55)+
       'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.75)+' -'+fmt(ry*.57)+'Z" class="yy-fur yy-outline"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
-      (p.kind==="table"?'<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
+      (p.kind==="table"?
+        '<path d="M-95 27Q0 42 95 27Q0 56 -95 27Z" class="yy-belly-shade" data-asana-belly="true"/>'+
+        '<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
       '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>')+
       (horizontal?'':
         '<path d="M-'+fmt(rx*.55)+' -'+fmt(ry*.64)+

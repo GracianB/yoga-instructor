@@ -177,7 +177,7 @@
     const [x,y,rx,ry,r]=p.body;
     const grounded=["rest","savasana","child","table"].includes(p.kind);
     const h=Math.min(ry*1.04,91)*(grounded?.58:.90);
-    const w=Math.min(rx*.72,72)*(grounded?.75:1);
+    const w=Math.min(rx*1.8,126)*(grounded?.56:1);
     const base=-ry*.38,peak=base-h;
     const membrane='M12 '+fmt(base+9)+
       'Q'+fmt(w*.31)+' '+fmt(base-h*.66)+' '+fmt(w*.85)+' '+fmt(peak)+

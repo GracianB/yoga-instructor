@@ -1,0 +1,116 @@
+/* D.4 · Sanctuary master polish: one visual hierarchy, calm interaction, no JS. */
+#instructor-flow{
+  overflow:clip;
+  padding-block:clamp(54px,7vw,106px);
+}
+#instructor-flow .section-head{
+  position:relative;z-index:1;
+  max-width:760px;margin-inline:auto;text-align:center;
+}
+#instructor-flow .section-head .kicker{
+  letter-spacing:.22em;color:var(--sage);font-weight:700;
+}
+#instructor-flow .section-head h2{
+  max-width:18ch;margin-inline:auto;
+  text-wrap:balance;
+}
+#instructor-flow .section-head .about-lead{
+  max-width:59ch;margin-inline:auto;text-wrap:pretty;
+}
+#instructor-flow .flow-console{
+  z-index:1;
+  max-width:1050px;
+  padding:clamp(12px,2.1vw,24px);
+  border-radius:clamp(16px,2.2vw,26px);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+#instructor-flow .flow-theater{
+  gap:clamp(4px,1.2vw,13px);
+}
+#instructor-flow .flow-theater .flow-guide{
+  min-width:0;
+  padding:clamp(7px,1.5vw,16px);
+  border-radius:18px;
+}
+#instructor-flow .flow-theater .yy-stage{
+  position:relative;
+  overflow:hidden;
+  border-radius:clamp(12px,1.7vw,20px);
+  isolation:isolate;
+  box-shadow:inset 0 0 64px rgba(7,46,30,.17),0 13px 38px rgba(7,42,29,.13);
+}
+#instructor-flow .flow-theater .yy-stage::after{
+  content:"";position:absolute;z-index:0;inset:0;pointer-events:none;
+  border-radius:inherit;
+  background:
+    radial-gradient(ellipse 45% 25% at 50% 94%,rgba(182,232,167,.16),transparent),
+    linear-gradient(180deg,rgba(218,247,220,.07),transparent 34%,rgba(4,31,23,.12));
+}
+#instructor-flow .flow-theater .yy-guide[data-spirit="yin"] .yy-stage::after{
+  background:
+    radial-gradient(ellipse 42% 28% at 52% 94%,rgba(116,180,157,.12),transparent),
+    linear-gradient(180deg,rgba(128,187,188,.035),transparent 42%,rgba(0,12,19,.23));
+}
+#instructor-flow .flow-rail-button.flow-control{
+  min-width:0;touch-action:manipulation;
+  border-radius:15px;
+  transition:background .2s ease,border-color .2s ease,box-shadow .2s ease;
+}
+#instructor-flow .flow-rail-button:hover:not(:disabled){
+  background:color-mix(in srgb,var(--sage) 22%,var(--surface));
+}
+#instructor-flow .flow-side-next .flow-rail-button:hover:not(:disabled){
+  background:#326e53;
+}
+#instructor-flow .flow-controls{
+  width:min(100%,470px);
+  max-width:470px;
+  margin:15px auto 0;
+  box-shadow:inset 0 1px rgba(255,255,255,.06);
+}
+#instructor-flow .flow-controls .flow-control,
+#instructor-flow .flow-entry-actions button{
+  transition:background-color .18s ease,color .18s ease,border-color .18s ease,box-shadow .18s ease;
+  touch-action:manipulation;
+}
+#instructor-flow .flow-entry-actions .flow-start{
+  background:var(--sage);color:var(--accent-ink);
+  border:1px solid var(--sage);
+  font-weight:700;
+}
+#instructor-flow .flow-entry-actions .flow-start:hover:not(:disabled){
+  background:var(--sage-bright);border-color:var(--sage-bright);
+}
+#instructor-flow .flow-console-top{
+  padding:clamp(9px,1.6vw,18px) clamp(3px,1vw,10px) 0;
+}
+#instructor-flow .flow-session-clock strong,
+#instructor-flow #flow-phase-label{font-variant-numeric:tabular-nums}
+#instructor-flow .flow-progress,
+#instructor-flow .flow-phase-progress{
+  overflow:hidden;border-radius:999px;
+}
+#instructor-flow :is(.flow-rail-button,.flow-control,.flow-start,.flow-preview,.yy-form-choice button):focus-visible{
+  outline:3px solid var(--sage-bright);outline-offset:3px;
+}
+@media(max-width:700px){
+  #instructor-flow{padding-block:50px 65px}
+  #instructor-flow .flow-theater{grid-template-columns:40px minmax(0,1fr) 40px;gap:4px}
+  #instructor-flow .flow-theater .flow-guide{padding:5px;min-width:0}
+  #instructor-flow .flow-theater .yy-stage{aspect-ratio:1.23;min-height:0;max-height:330px}
+  #instructor-flow .flow-theater .flow-rail-button{font-size:8px;line-height:1.3;border-radius:12px}
+  #instructor-flow .flow-controls{width:100%;max-width:none;margin-top:13px}
+  #instructor-flow .flow-console-top{padding-inline:1px}
+  #instructor-flow .flow-console-foot>span{max-width:44ch}
+}
+@media(max-width:380px){
+  #instructor-flow .flow-theater{grid-template-columns:35px minmax(0,1fr) 35px;gap:2px}
+  #instructor-flow .flow-theater .yy-stage{aspect-ratio:1.1}
+  #instructor-flow .flow-theater .flow-rail-button{font-size:7.4px}
+}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .flow-rail-button,
+  #instructor-flow .flow-controls .flow-control,
+  #instructor-flow .flow-entry-actions button{transition:none!important}
+}

@@ -49,6 +49,8 @@
   <link rel="stylesheet" href="./yy-session-design.css?v=d25-1">
   <link rel="stylesheet" href="./yy-studio-breath-d26.css?v=d26-1">
   <link rel="stylesheet" href="./yy-studio-meditation-d27.css?v=d27-1">
+  <link rel="stylesheet" href="./yy-dragon-d28.css?v=d28-1">
+  <link rel="stylesheet" href="./yy-studio-d29.css?v=d29-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -63,7 +65,8 @@
   <script src="./studio-clock.js?v=d18-1" defer></script>
   <script src="./studio-breath-engine.js?v=d26-1" defer></script>
   <script src="./studio-meditation-d27.js?v=d27-1" defer></script>
-  <script src="./practice-studio.js?v=d18-1-d26-1" defer></script>
+  <script src="./studio-anatomy-d28.js?v=d28-1" defer></script>
+  <script src="./practice-studio.js?v=d29-1" defer></script>
   <script src="./yin-yang-art.js?v=phase-d17-1-d24-1" defer></script>
   <script src="./flow-guide.js?v=d16-1" defer></script>
   <script src="./yy-asana-motion.js?v=d14-1-d23-1" defer></script>
@@ -396,7 +399,10 @@
           <div class="studio-guided-stage">
             <div class="studio-guided-top">
               <span class="studio-session-label" data-studio-copy="overline">TU ESPACIO · TRES CAMINOS</span>
-              <span class="studio-live-state" id="studio-live-state" aria-live="polite">PREPARADO</span>
+              <div class="studio-top-actions">
+                <span class="studio-live-state" id="studio-live-state" aria-live="polite">PREPARADO</span>
+                <button type="button" class="studio-immersion-toggle" data-studio-action="immersion" aria-pressed="false" data-studio-copy="enterImmersion" aria-label="Activar vista de concentración">Concentración</button>
+              </div>
             </div>
             <div class="studio-breath-orb" aria-hidden="true"><span class="studio-orb-mark">✧</span></div>
             <h3 class="studio-guided-title" id="studio-guided-title">Encuentra tu propia respiración</h3>

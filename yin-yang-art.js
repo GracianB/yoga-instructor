@@ -16,58 +16,121 @@
   const fmt=n=>Number(n).toFixed(1).replace(/\.0$/,"");
   const circle=(x,y,r,cls)=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" class="'+cls+'"/>';
   const path=(d,cls)=>'<path d="'+d+'" class="'+cls+'"/>';
-  const limb=(d,type,i)=>'<path d="'+d+'" class="yy-limb yy-'+type+'" data-limb="'+type+'-'+i+'" fill="none"/>';
-  const point=(xy,cls)=>'<g><ellipse cx="'+xy[0]+'" cy="'+xy[1]+'" rx="15" ry="13" class="'+cls+'"/>'+
-      '<path d="M'+(xy[0]-8)+' '+(xy[1]-3)+'q4-4 8-1m3-1q4-4 8 0" class="yy-toe-shine"/></g>';
+  // Organic, tapered limb meshes from authored Bézier pose paths.
+  // Exactly two arm meshes + two leg meshes per pose, never generated extra limbs.
+  const limb=(d,type,i)=>{
+    const n=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+    if(n.length!==6)throw Error("Pose limb must be quadratic Bézier: "+d);
+    const [x0,y0,cx,cy,x1,y1]=n;
+    const radius=type==="leg"?23:17;
+    const a=[],b=[];
+    for(let j=0;j<=16;j++){
+      const t=j/16,u=1-t;
+      const x=u*u*x0+2*u*t*cx+t*t*x1,y=u*u*y0+2*u*t*cy+t*t*y1;
+      let dx=2*u*(cx-x0)+2*t*(x1-cx),dy=2*u*(cy-y0)+2*t*(y1-cy);
+      const mag=Math.max(.001,Math.hypot(dx,dy));dx/=(mag);dy/=(mag);
+      const w=radius*(1.17-.32*t+.048*Math.sin(t*Math.PI));
+      a.push([x-dy*w,y+dx*w]);
+      b.push([x+dy*w,y-dx*w]);
+    }
+    const f=pt=>fmt(pt[0])+","+fmt(pt[1]);
+    const silhouette="M"+a.map(f).join("L")+"L"+b.reverse().map(f).join("L")+"Z";
+    return '<g class="yy-limb-unit">'+
+      '<path d="'+silhouette+'" class="yy-limb yy-'+type+'" data-limb="'+type+'-'+i+'"/>'+
+      '<path d="'+d+'" class="yy-limb-lustre yy-'+type+'-lustre"/>'+
+      '</g>';
+  };
+  const point=(xy,cls)=>{
+    const [x,y]=xy;
+    return '<g transform="translate('+x+' '+y+')" class="yy-paw-group">'+
+      '<path d="M-18-3Q-16-15-4-15Q15-18 20-5Q24 11 12 17Q-2 22-15 12Q-22 6-18-3Z" class="'+cls+'"/>'+
+      '<path d="M-10-8Q-5-14 1-11M3-11Q10-13 13-6" class="yy-paw-toes"/>'+
+      '<path d="M-12 5Q-4 12 5 10" class="yy-paw-gloss"/>'+
+      '</g>';
+  };
   const toTransform=(x,y,s,r)=>'translate('+x+' '+y+') rotate('+r+') scale('+s+')';
   const face=(p)=>{
     const [x,y,s,r,eye]=p.head;
-    const shut=eye==="closed";
-    const focused=eye==="focus";
+    const shut=eye==="closed",focus=eye==="focus";
+    const eyes=shut?
+      path('M-54 17Q-39 32-20 16M20 16Q39 31 56 14','yy-eye-closed')+
+      path('M-52 18l-7-5M55 16l7-5','yy-lashes'):
+      '<g class="yy-anim-eyes">'+
+        '<path d="M-61 13Q-57-11-37-13Q-17-15-13 12Q-15 35-36 35Q-59 36-61 13Z" class="yy-eye-white"/>'+
+        '<path d="M13 12Q15-13 38-13Q60-11 63 13Q61 36 37 35Q17 33 13 12Z" class="yy-eye-white"/>'+
+        '<ellipse cx="-36" cy="15" rx="17" ry="'+(focus?18:20)+'" class="yy-iris"/>'+
+        '<ellipse cx="37" cy="14" rx="17" ry="'+(focus?18:20)+'" class="yy-iris"/>'+
+        '<ellipse cx="-35" cy="20" rx="9" ry="13" class="yy-pupil"/>'+
+        '<ellipse cx="39" cy="19" rx="9" ry="13" class="yy-pupil"/>'+
+        '<ellipse cx="-42" cy="7" rx="6" ry="8" class="yy-spark-eye"/>'+
+        '<ellipse cx="31" cy="6" rx="6" ry="8" class="yy-spark-eye"/>'+
+        circle(-28,25,2.7,'yy-eye-tiny')+circle(46,24,2.7,'yy-eye-tiny')+
+        path('M-60 1Q-42-18-16-2M14-2Q37-18 62 1','yy-eye-liner')+
+        path('M-64 4L-72 0M61 4L71 0','yy-lashes')+
+      '</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
-      path('M-66-22Q-94-99-39-76L-29-42Z','yy-fur yy-outline')+
-      path('M43-44Q78-111 90-61L62-11Z','yy-fur yy-outline')+
-      path('M-61-34Q-77-82-49-68L-41-31Z','yy-ear-inner')+
-      path('M55-42Q76-88 78-65L64-27Z','yy-ear-inner')+
-      path('M-76-20Q-93-58-66-77Q-39-80-17-56Q18-91 68-55Q91-26 79 30Q70 75 25 86Q-27 94-65 55Q-89 32-76-20Z','yy-fur yy-outline')+
-      path('M-75-13Q-56-59-31-57L-15-34Q9-74 42-48Q59-39 77-14Q42-23 17-13Q-16-22-48 3Z','yy-mane yy-outline')+
-      path('M-68 27Q-94 26-83 53L-61 48M66 25Q93 27 82 55L58 46','yy-fur-fringe')+
-      path('M-61-20Q-30-72-12-47L5-69L24-42Q51-61 70-22L43-29L20-13L-7-24L-37-7Z','yy-crest yy-outline')+
-      path('M-40-42Q-22-58-10-39M24-42Q41-54 54-34','yy-mane-light')+
-      path('M-63 10Q-49-8-28-3Q-13 9-11 34Q-31 58-57 43Z','yy-cheek')+
-      path('M19 29Q29-3 48-2Q68-6 73 22Q72 54 43 62Z','yy-cheek')+
-      (shut?
-        path('M-50 17Q-35 32-18 17M21 17Q39 30 53 12','yy-eye-closed') :
-        '<ellipse cx="-36" cy="16" rx="17" ry="'+(focused?15:20)+'" class="yy-eye-white"/>'+
-        '<ellipse cx="37" cy="15" rx="17" ry="'+(focused?15:20)+'" class="yy-eye-white"/>'+
-        '<ellipse cx="-34" cy="17" rx="12" ry="'+(focused?11:15)+'" class="yy-iris"/>'+
-        '<ellipse cx="39" cy="15" rx="12" ry="'+(focused?11:15)+'" class="yy-iris"/>'+
-        circle(-40,10,4,'yy-spark-eye')+circle(34,8,4,'yy-spark-eye')+
-        path('M-57 1Q-41-9-22 0M19-1Q37-12 55-2','yy-brow'))+
-      '<ellipse cx="5" cy="48" rx="28" ry="21" class="yy-muzzle"/>'+
-      path('M-4 42Q5 36 14 42L6 51Z','yy-nose')+
-      path(eye==="smile"?'M-10 55Q5 69 22 54':'M-7 55Q7 61 18 53','yy-smile')+
-      path('M-70-16Q-58-51-36-50M16-59Q54-59 73-24','yy-hairline')+
-      path('M-57 30Q-45 27-38 32M45 34Q53 28 63 30','yy-face-streak')+
-      '<path d="M-2-57L12-78L22-50Z" class="yy-crown-mark"/>'+
+      // Strong ear silhouette with contrasting inner pattern.
+      path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
+      path('M33-64Q62-114 100-113Q104-60 64-31Z','yy-fur yy-outline')+
+      path('M-57-51Q-82-74-85-99Q-53-87-37-60Z','yy-ear-inner')+
+      path('M51-62Q70-91 87-98Q83-70 61-47Z','yy-ear-inner')+
+      path('M-77-56Q-63-102-38-78L-20-44','yy-ear-light')+
+      path('M45-72Q69-101 85-91','yy-ear-light')+
+      // Furred head and sculpted cheeks, not an oval or disconnected discs.
+      path('M-69-37Q-48-84-6-82Q51-91 79-42Q95-17 80 20Q98 43 70 63L56 56Q42 86 4 88Q-38 94-57 66L-78 72Q-101 53-84 23Q-93-6-69-37Z','yy-fur yy-outline')+
+      path('M-80 28L-108 22Q-92 44-102 53L-81 47Q-86 66-70 70L-51 52','yy-fur-fringe')+
+      path('M78 27L103 24Q92 44 108 54L82 48Q93 66 72 73L52 50','yy-fur-fringe')+
+      path('M-58-31Q-25-66 4-57Q28-69 56-34Q80-19 73-1Q54-9 43 7Q21-6 10-4Q-22-15-42 8Q-57-7-72 4Q-81-14-58-31Z','yy-face-mask')+
+      path('M-61-39Q-27-82-8-67L3-87L19-65Q52-77 76-37Q52-42 29-21L7-35L-17-15L-38-23L-64-9Q-72-26-61-39Z','yy-crest yy-outline')+
+      path('M-58-31Q-45-63-22-56M17-63Q44-65 60-40','yy-mane-light')+
+      path('M-63 13Q-49-7-29 0Q-11 18-20 48Q-42 70-66 53Z','yy-cheek')+
+      path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
+      path('M-63 42Q-44 58-27 52M31 52Q54 60 69 41','yy-cheek-shine')+
+      eyes+
+      '<ellipse cx="5" cy="50" rx="31" ry="22" class="yy-muzzle"/>'+
+      '<path d="M-3 40Q5 34 14 40L7 49Z" class="yy-nose"/>'+
+      path(eye==="smile"?'M-12 54Q5 76 24 53':'M-10 56Q6 64 23 54','yy-smile')+
+      path('M6 48L5 56','yy-mouth-mark')+
+      path('M-68 11L-75 19L-65 20M65 11L74 19L64 21','yy-face-streak')+
+      path('M-51-2L-44-8L-36 0M43-2L50-8L58 0','yy-temple-mark')+
+      path('M-5-51L7-74L24-51L7-40Z','yy-crown-mark')+
+      path('M6-66L16-52L7-45Z','yy-crown-shine')+
       '</g>';
   };
   const torso=p=>{
     const [x,y,rx,ry,r]=p.body;
+    const horizontal=ry<60;
     return '<g class="yy-torso" transform="translate('+x+' '+y+') rotate('+r+')">'+
-      '<ellipse rx="'+rx+'" ry="'+ry+'" class="yy-fur yy-outline"/>'+
-      '<path d="M-'+fmt(rx*.52)+' -'+fmt(ry*.7)+'Q0 -'+fmt(ry*.83)+' '+fmt(rx*.45)+' -'+fmt(ry*.72)+'" class="yy-shoulder-shine"/>'+
-      path('M-'+fmt(rx*.43)+' -'+fmt(ry*.65)+'Q0 -'+fmt(ry*.96)+' '+fmt(rx*.42)+' -'+fmt(ry*.65),'yy-ruff')+
-      (p.kind==="rest"||p.kind==="savasana"||p.kind==="child"?'':
-        '<path d="M0 -21L20 1L0 22L-20 1Z" class="yy-gem"/><path d="M0 -14L10 1L0 13Z" class="yy-gem-shine"/>'+
-        '<path d="M-23 -7L-40 -20M22 -7L39 -20" class="yy-sigil-lines"/>')+
+      // broad shoulders / taper into hips. The lower centre stays connected to the legs.
+      '<path d="M-'+fmt(rx*.75)+' -'+fmt(ry*.57)+
+      'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.78)+' '+fmt(ry*.55)+
+      'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.75)+' '+fmt(ry*.55)+
+      'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.8)+' -'+fmt(ry*.55)+
+      'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.75)+' -'+fmt(ry*.57)+'Z" class="yy-fur yy-outline"/>'+
+      '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>'+
+      (horizontal?'':
+        '<path d="M-'+fmt(rx*.55)+' -'+fmt(ry*.64)+
+          'Q-'+fmt(rx*.66)+' -'+fmt(ry*.24)+' -'+fmt(rx*.34)+' -'+fmt(ry*.14)+
+          'L-'+fmt(rx*.14)+' -'+fmt(ry*.35)+'Q0 -'+fmt(ry*.13)+
+          ' '+fmt(rx*.14)+' -'+fmt(ry*.35)+'L'+fmt(rx*.34)+' -'+fmt(ry*.14)+
+          'Q'+fmt(rx*.65)+' -'+fmt(ry*.24)+' '+fmt(rx*.55)+' -'+fmt(ry*.64)+
+          'Z" class="yy-chest-fur"/>')+
+      (p.kind==="rest"||p.kind==="savasana"||p.kind==="child"?'': 
+        '<path d="M-24 -12Q-30-31 0-37Q29-29 24-11L0 28Z" class="yy-medallion"/>'+
+        '<path d="M0 -23L16 -5L0 17L-16 -5Z" class="yy-gem"/>'+
+        '<path d="M0 -17L9 -6L0 12Z" class="yy-gem-shine"/>'+
+        '<path d="M-30 -24Q-16-39 0-35Q20-39 30-24" class="yy-necklace"/>'+
+        '<path d="M-36 6L-44 2M36 6L45 2" class="yy-sigil-lines"/>')+
       '</g>';
   };
   const tail=p=>{
     const [x,y,s,r]=p.tail;
     return '<g transform="'+toTransform(x,y,s,r)+'" class="yy-tail">'+
-      path('M-11 2Q33-28 87 15Q123 57 77 94Q37 113 12 82Q51 87 69 55Q81 30 43 24Z','yy-tail-main yy-outline')+
-      path('M38 0Q75 6 89 38M47 83Q70 82 77 62','yy-tail-stripe')+
+      path('M-8 0Q48-35 96-4Q133 25 125 71Q120 106 83 110Q37 113 8 82Q38 96 68 73Q102 45 64 31Q24 17-8 0Z','yy-tail-main yy-outline')+
+      path('M32 3Q70-12 100 20Q114 44 99 70','yy-tail-band')+
+      path('M23 79Q57 105 81 92','yy-tail-band')+
+      path('M31 14Q57 12 72 27M91 61Q87 77 75 80','yy-tail-glint')+
+      '<path d="M9 78L-3 70L13 91Q40 118 83 110Q48 111 9 78Z" class="yy-tail-fur"/>'+
       '</g>';
   };
   const drawing=p=>{

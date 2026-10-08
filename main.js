@@ -67,6 +67,7 @@
     const muteBtn = document.getElementById("audio-mute");
     if (playBtn && audio) {
       playBtn.setAttribute("aria-label", audio.paused ? (t.fieldPlay || "Play") : (t.fieldPause || "Pause"));
+      playBtn.setAttribute("aria-pressed", String(!audio.paused));
     }
     if (muteBtn && audio) {
       muteBtn.textContent = audio.muted ? (t.fieldUnmute || "Audio") : (t.fieldMute || "Mute");
@@ -220,6 +221,7 @@
     audio.addEventListener("play", () => {
       player?.classList.add("is-playing");
       playBtn.setAttribute("aria-label", i18nT().fieldPause || "Pause");
+      playBtn.setAttribute("aria-pressed", "true");
     });
     audio.addEventListener("error", () => {
       player?.classList.add("is-audio-error");
@@ -229,6 +231,7 @@
     audio.addEventListener("pause", () => {
       player?.classList.remove("is-playing");
       playBtn.setAttribute("aria-label", i18nT().fieldPlay || "Play");
+      playBtn.setAttribute("aria-pressed", "false");
     });
     audio.addEventListener("loadedmetadata", () => {
       if (durEl) durEl.textContent = fmt(audio.duration);

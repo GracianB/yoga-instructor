@@ -492,3 +492,49 @@ test('D2/D3: ten postures in Yin/Yang with non-overlapping rails and green sanct
  }
  expect(errors).toEqual([]);
 });
+
+test('D4 audio player shows only the correct Play/Pause icon',async ({page})=>{
+ const errors=await open(page);
+ const player=page.locator('#focus-player');
+ const button=player.locator('#audio-play');
+ const playIcon=button.locator('.ico-play');
+ const pauseIcon=button.locator('.ico-pause');
+ await expect(button).toBeVisible();
+ await expect(playIcon).toBeVisible();
+ await expect(pauseIcon).toBeHidden();
+ await player.evaluate(el=>el.classList.add('is-playing'));
+ await expect(playIcon).toBeHidden();
+ await expect(pauseIcon).toBeVisible();
+ await player.evaluate(el=>el.classList.remove('is-playing'));
+ await expect(playIcon).toBeVisible();
+ await expect(pauseIcon).toBeHidden();
+ await expect(button).toHaveAttribute('type','button');
+ expect(errors).toEqual([]);
+});
+
+test('D4 audio transport click toggles playback, labels and icons',async ({page})=>{
+ await page.addInitScript(()=>{
+   Object.defineProperty(HTMLMediaElement.prototype,'paused',{configurable:true,get(){return !this.__yogaPlaying;}});
+   HTMLMediaElement.prototype.play=function(){
+     this.__yogaPlaying=true;this.dispatchEvent(new Event('play'));return Promise.resolve();
+   };
+   HTMLMediaElement.prototype.pause=function(){
+     this.__yogaPlaying=false;this.dispatchEvent(new Event('pause'));
+   };
+ });
+ const errors=await open(page);
+ const player=page.locator('#focus-player');
+ const button=player.locator('#audio-play');
+ await expect(player).not.toHaveClass(/is-playing/);
+ await button.click();
+ await expect(player).toHaveClass(/is-playing/);
+ await expect(button).toHaveAttribute('aria-pressed','true');
+ await expect(button.locator('.ico-play')).toBeHidden();
+ await expect(button.locator('.ico-pause')).toBeVisible();
+ await button.click();
+ await expect(player).not.toHaveClass(/is-playing/);
+ await expect(button).toHaveAttribute('aria-pressed','false');
+ await expect(button.locator('.ico-play')).toBeVisible();
+ await expect(button.locator('.ico-pause')).toBeHidden();
+ expect(errors).toEqual([]);
+});

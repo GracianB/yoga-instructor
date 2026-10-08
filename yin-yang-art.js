@@ -73,12 +73,14 @@
       path('M-61-49C-79-66-84-103-70-126C-64-102-48-81-37-64L-43-53Z','yy-dragon-horn yy-horn-left')+
       path('M43-64C55-84 65-105 73-126C86-102 81-66 62-48L43-53Z','yy-dragon-horn yy-horn-right')+
       path('M-65-108Q-64-78-49-59M66-109Q67-81 54-59','yy-dragon-horn-ridge')+
+      path('M-73-93Q-71-83-66-74M73-93Q71-83 66-74M-62-67L-57-59M62-67L57-59','yy-d11-horn-engraving')+
       path('M-59-43C-79-66-95-88-103-108C-111-78-93-48-76-27Z','yy-dragon-sidefin yy-fin-left')+
       path('M59-43C79-66 95-88 103-108C111-78 93-48 76-27Z','yy-dragon-sidefin yy-fin-right')+
       path('M-77-48Q-90-75-97-92M78-48Q90-75 97-92','yy-dragon-fin-vein')+
       path('M-72-45C-52-83-17-84 1-80C40-88 71-66 78-45C96-22 91 8 83 29C93 53 76 75 52 79C31 94 15 102 0 102C-15 102-34 94-53 78C-78 73-94 51-83 27C-93 4-91-25-72-45Z','yy-fur yy-outline yy-head-shell')+
       path('M-71-37Q-49-76-19-66L-28-89Q-7-77 4-74Q37-89 72-47Q42-56 28-38Q2-48-23-37L-48-21Z','yy-crest yy-outline yy-dragon-crest')+
       path('M-60-34Q-42-58-24-57M26-60Q52-62 63-36','yy-mane-light')+
+      path('M-50-37Q-41-52-27-50M24-54Q43-54 53-40','yy-d11-crest-engraving')+
       '<g class="yy-dragon-forelock">'+
         path('M-24-68Q-6-92 8-79Q18-68 27-51Q7-62-13-48Z','yy-dragon-forelock-fill')+
         path('M-13-72Q0-78 10-70','yy-dragon-forelock-sheen')+'</g>'+
@@ -96,10 +98,12 @@
       '<g class="yy-dragon-beard-assembly">'+
         path('M-28 75Q-34 91-18 104Q-12 122 0 128Q13 121 18 104Q34 91 28 75Q14 92 0 91Q-15 92-28 75Z','yy-dragon-beard')+
         path('M-12 98Q-8 118 0 122M11 98Q8 115 0 122','yy-dragon-beard-line')+
+        path('M-18 95Q-18 104-10 110M18 95Q18 104 10 110','yy-d11-beard-engraving')+
         path('M-30 80Q-41 92-38 105M30 80Q41 92 38 105','yy-dragon-beard-wisps')+'</g>'+
       path('M-53-7Q-36-17-18-9M18-9Q36-17 53-7','yy-sleep-brow')+eyes+
       path('M-63-11Q-60-21-47-18M47-18Q60-21 63-11','yy-dragon-temple-scales')+
       path('M-57 34Q-53 29-46 30M46 30Q53 29 57 34','yy-dragon-cheek-light')+
+      path('M-58 18Q-47 15-41 19M58 18Q47 15 41 19','yy-d11-cheek-engraving')+
       circle(-57,42,2.8,'yy-dragon-freckle')+circle(-65,46,1.6,'yy-dragon-freckle')+
       circle(57,42,2.8,'yy-dragon-freckle')+circle(65,46,1.6,'yy-dragon-freckle')+
       path('M-34 49Q-72 35-105 43','yy-whisker yy-dragon-whisker yy-whisker-left yy-whisker-high')+

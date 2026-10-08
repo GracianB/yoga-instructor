@@ -272,3 +272,6 @@ body.quiet-mode .yy-character,body.quiet-mode .yy-bloom,
  .yy-scene-breadcrumb strong{font-size:9px}
  .yy-scene-breadcrumb span{font-size:9px}
 }
+
+/* Keep the practice below the fixed navigation on in-page section jumps. */
+#instructor-flow{scroll-margin-top:124px}

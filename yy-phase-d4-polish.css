@@ -114,3 +114,32 @@
   #instructor-flow .flow-controls .flow-control,
   #instructor-flow .flow-entry-actions button{transition:none!important}
 }
+
+/* D.4 · Audio transport: exactly one visible state icon. */
+#focus-player .player-play{
+  display:grid!important;place-items:center!important;
+  padding:0!important;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+#focus-player .player-play svg{
+  display:block;width:clamp(25px,3vw,33px);height:clamp(25px,3vw,33px);
+  flex:none;pointer-events:none;
+}
+#focus-player .player-play .ico-pause{display:none}
+#focus-player.is-playing .player-play .ico-play{display:none}
+#focus-player.is-playing .player-play .ico-pause{display:block}
+#focus-player .player-play:focus-visible{
+  outline:3px solid var(--sage-bright)!important;outline-offset:5px!important;
+}
+#focus-player .player-play:hover:not(:disabled){
+  background:var(--sage-bright)!important;
+  box-shadow:0 14px 34px var(--sage-glow)!important;
+}
+#focus-player .player-play:active:not(:disabled){scale:.97}
+#focus-player.is-audio-error .player-play{opacity:.75}
+@media(max-width:700px){
+  #focus-player .player-play{width:68px!important;height:68px!important;min-width:68px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  #focus-player .player-play{transition:none!important}
+}

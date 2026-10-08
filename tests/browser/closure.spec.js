@@ -340,16 +340,16 @@ test('Phase B: each asana has a separate movement recipe and reduced-motion disa
   await expect(guide).toHaveAttribute('data-ready','true');
   await act('preview');
   const samples=[
-    ['start','.yy-character'],
-    ['centering','.yy-character'],
+    ['start','.yy-d14-rib-cage'],
+    ['centering','.yy-d14-rib-cage'],
     // Breathing is deliberately local: the belly moves, not the whole body.
     ['breath','.yy-belly'],
     ['warmup','.yy-head-motion'],
     ['pose-1','.yy-head-motion'],
-    ['transition','.yy-character'],
+    ['transition','.yy-d14-rib-cage'],
     ['pose-2','.yy-character'],
     ['cooldown','.yy-head-motion'],
-    ['savasana','.yy-character'],
+    ['savasana','.yy-d14-rib-cage'],
     ['finish','.yy-head-motion']
   ];
   for(let i=0;i<samples.length;i++){
@@ -366,6 +366,13 @@ test('Phase B: each asana has a separate movement recipe and reduced-motion disa
       const animation=await guide.locator('.yy-pose.is-current '+samples[i][1]).first()
         .evaluate(el=>getComputedStyle(el).animationName);
       expect(animation).not.toBe('none');
+      // D14: the anatomy may breathe but grounded/supine figures must not
+      // translate as a whole and disconnect their contact paws.
+      if(['start','centering','transition','savasana'].includes(samples[i][0])){
+        const figure=await guide.locator('.yy-pose.is-current .yy-character')
+          .evaluate(el=>getComputedStyle(el).animationName);
+        expect(figure,'whole-body floating is forbidden in grounded poses').toBe('none');
+      }
       if(samples[i][0]==='breath'){
         const bodyAnimation=await guide.locator('.yy-pose-breath.is-current .yy-character')
           .evaluate(el=>getComputedStyle(el).animationName);

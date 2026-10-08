@@ -111,7 +111,7 @@
       path('M24-6Q36-14 48-6','yy-brow')+
       eyes+
       '<path d="M-23 44Q-18 33 3 33Q27 32 32 43Q34 59 9 66Q-21 66-23 44Z" class="yy-muzzle"/>'+
-      '<path d="M0 42Q6 38 13 42Q11 49 6 49Q0 47 0 42Z" class="yy-nose"/>'+
+      '<path d="M-7 46Q-8 38 0 40Q8 38 7 46Q4 54 0 52Q-4 54-7 46Z" class="yy-nose"/>'+
       path(eye==="smile"?'M-9 53Q6 65 21 53':'M-7 54Q7 59 19 53','yy-smile')+
       path('M6 48L5 56','yy-mouth-mark')+
       path('M-68 11L-75 19L-65 20M65 11L74 19L64 21','yy-face-streak')+
@@ -123,7 +123,7 @@
   const torso=p=>{
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
-    return '<g class="yy-torso yy-weight" data-kind="'+p.kind+'" transform="translate('+x+' '+y+') rotate('+r+')">'+
+    return '<g class="yy-torso" data-kind="'+p.kind+'" transform="translate('+x+' '+y+') rotate('+r+')">'+
       '<path d="M-'+fmt(rx*.75)+' -'+fmt(ry*.57)+
       'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.78)+' '+fmt(ry*.55)+
       'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.75)+' '+fmt(ry*.55)+

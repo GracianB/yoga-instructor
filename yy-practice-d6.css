@@ -236,7 +236,7 @@
 .yy-glint{fill:#f4efe4;opacity:.8}
 .yy-lid{fill:var(--yy-fur,#d7c4b0)}
 .yy-lid-line,.yy-brow{fill:none;stroke:rgba(48,36,28,.45);stroke-width:1.4;stroke-linecap:round}
-.yy-belly{fill:rgba(196,120,132,.16);transform-box:fill-box;transform-origin:center;animation:yy-breath 7.6s ease-in-out infinite}
+.yy-belly{fill:rgba(214,160,174,.22);transform-box:fill-box;transform-origin:50% 80%;animation:yy-breath 7.6s ease-in-out infinite}
 .yy-grove{fill:rgba(47,107,79,.18)}
 .yy-petal-a{fill:rgba(214,160,174,.28)}
 .yy-petal-b{fill:rgba(223,184,191,.34)}
@@ -250,8 +250,6 @@
 .yy-eye-glint{fill:#f7f1e8;opacity:.85}
 .yy-eye-sheen{fill:none;stroke:rgba(255,255,255,.35);stroke-width:1.2;stroke-linecap:round}
 .yy-guardian-lid{fill:none;stroke:rgba(62,44,36,.55);stroke-width:1.6;stroke-linecap:round}
-.yy-weight[data-kind="warrior"]{transform-box:fill-box;transform-origin:50% 70%;animation:yy-weight 6s ease-in-out infinite}
-.yy-weight[data-kind="breath"]{transform-box:fill-box;transform-origin:center;animation:yy-breath 7.6s ease-in-out infinite}
 .yy-pose-flow .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 5.4s ease-in-out infinite}
 .yy-pose-warrior .yy-tail-motion{transform-box:fill-box;transform-origin:0 50%;animation:yy-tail 4.8s ease-in-out infinite}
 @keyframes yy-weight{50%{translate:0 -6px;rotate:-1.4deg}}
@@ -399,3 +397,7 @@
 #instructor-flow .yy-eye-glint{fill:#fff8ea;opacity:.95}
 #instructor-flow .yy-eye-sheen{fill:none;stroke:#fff6df;stroke-width:1.8;stroke-linecap:round;opacity:.8}
 #instructor-flow .yy-guardian-lid{fill:none;stroke:#f6efe4;stroke-width:2.2;stroke-linecap:round;opacity:.55}
+
+#instructor-flow .yy-nose{fill:#c98490}
+#instructor-flow .yy-muzzle{fill:#f7f1e8}
+#instructor-flow .yy-torso{animation:none!important}

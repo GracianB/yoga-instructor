@@ -188,3 +188,12 @@ body.quiet-mode .zenicorn-orbit,
  .zenicorn-petals i,.zenicorn-orbit,.zenicorn-bloom::before{animation:none!important}
  .zenicorn-pose {transform:none!important}
 }
+
+/* Existing dock becomes the synchronized 4-7-8 companion during phase 03. */
+.sanctuary-dock.zenicorn-breath-synced{
+ border-color:rgba(76,194,247,.6);
+ box-shadow:0 0 0 1px rgba(71,181,242,.23),0 12px 44px rgba(28,105,183,.24);
+}
+.sanctuary-dock.zenicorn-breath-synced .breath-ring-core{
+ background:#78d8f7;box-shadow:0 0 20px rgba(85,206,255,.58);
+}

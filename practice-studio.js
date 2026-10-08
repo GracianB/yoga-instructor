@@ -173,6 +173,13 @@
     if (mode !== "asanas") render();
   };
 
+  // The original Flow listens for keyboard shortcuts on this same section.
+  // Never let an invisible asana session start while a guided mode is active.
+  root.addEventListener("keydown", (event) => {
+    if (mode !== "asanas" && ["s","S","r","R","p","P","ArrowLeft","ArrowRight"].includes(event.key))
+      event.stopImmediatePropagation();
+  }, true);
+
   root.addEventListener("click", (event) => {
     const modeButton = event.target.closest("[data-studio-mode]");
     if (modeButton && !modeButton.disabled) { select(modeButton.dataset.studioMode); return; }

@@ -20,6 +20,8 @@
   const orb = root.querySelector(".studio-breath-orb");
   const Breath = window.YOGA_BREATH_D26;
   const Meditation = window.YOGA_MEDITATION_D27;
+  const Sculpt = window.YOGA_ANATOMY_D28;
+  const immersionButton = root.querySelector('[data-studio-action="immersion"]');
   const meditationChoices = root.querySelector(".studio-meditation-choices");
   const meditationFocusChoices = root.querySelector(".studio-meditation-focus");
   const meditationFocusButtons = [...root.querySelectorAll("button[data-meditation-focus]")];
@@ -27,7 +29,7 @@
   const meditationButtons = [...root.querySelectorAll("button[data-meditation-style]")];
   const breathButtons = [...root.querySelectorAll("[data-breath-pattern]")];
   const breathChoices = root.querySelector(".studio-breath-patterns");
-  if (!dragon || !guided || !primary || !reset || !status || !heading || !cue || !countdown || !progress || !orb || !Breath || !breathChoices || breathButtons.length !== 3 || !Meditation || !meditationChoices || meditationButtons.length !== 2 || !meditationFocusChoices || meditationFocusButtons.length !== 3 || !breathPhaseDetail) return;
+  if (!dragon || !guided || !primary || !reset || !status || !heading || !cue || !countdown || !progress || !orb || !Breath || !breathChoices || breathButtons.length !== 3 || !Meditation || !Sculpt || !immersionButton || !meditationChoices || meditationButtons.length !== 2 || !meditationFocusChoices || meditationFocusButtons.length !== 3 || !breathPhaseDetail) return;
 
   const dict = {
     es: {
@@ -64,6 +66,8 @@
       finishedCue: "Puedes quedarte unos instantes, sin hacer nada más.",
       breathNote: "Un ritmo orientativo, no una prueba. Si notas incomodidad o mareo, vuelve a respirar de forma natural.",
       meditationNote: "Puedes mantener los ojos cerrados o la mirada suave. La quietud no exige ninguna postura perfecta.",
+      enterImmersion: "Concentración", exitImmersion: "Mostrar opciones",
+      immersionA11yOn: "Activar vista de concentración", immersionA11yOff: "Mostrar todas las opciones",
       liveRegion: "Estado de la práctica"
     },
     en: {
@@ -100,6 +104,8 @@
       finishedCue: "You can remain here for a few moments, with nothing more to do.",
       breathNote: "This rhythm is a suggestion, not a test. If you feel discomfort or dizziness, return to natural breathing.",
       meditationNote: "Close your eyes or soften your gaze. Stillness does not require a perfect posture.",
+      enterImmersion: "Focus view", exitImmersion: "Show options",
+      immersionA11yOn: "Enable focus view", immersionA11yOff: "Show all practice options",
       liveRegion: "Practice status"
     }
   };
@@ -110,6 +116,7 @@
   let breathPattern = "natural";
   let meditationStyle = "guided";
   let meditationFocus = "breath";
+  let immersive = false;
   let asanaBusy = false;
   let ticker = null;
   const language = () => document.documentElement.lang === "en" ? "en" : "es";
@@ -137,6 +144,13 @@
     if (!document.hidden) ticker = setInterval(tick, 200);
   };
   const configuredDuration = () => presets[mode]?.[durationIndex] || 5;
+  const setImmersive = (value) => {
+    immersive = Boolean(value) && mode !== "asanas";
+    setData(guided, "studioImmersion", String(immersive));
+    immersionButton.setAttribute("aria-pressed", String(immersive));
+    setText(immersionButton, copy(immersive ? "exitImmersion" : "enterImmersion"));
+    immersionButton.setAttribute("aria-label", copy(immersive ? "immersionA11yOff" : "immersionA11yOn"));
+  };
 
   const syncLanguage = () => {
     root.querySelectorAll("[data-studio-copy]").forEach((element) => {
@@ -150,6 +164,7 @@
     status.setAttribute("aria-label", copy("liveRegion"));
     countdown.setAttribute("aria-label", language() === "en" ? "Remaining time" : "Tiempo restante");
     progress.parentElement?.setAttribute("aria-label", language() === "en" ? "Session progress" : "Progreso de la sesión");
+    setImmersive(immersive);
     if (mode !== "asanas") render();
   };
 
@@ -211,6 +226,8 @@
     const waiting = snapshot.status === "idle";
     const elapsed = snapshot.elapsedMs;
     const breathing = Breath.frame(elapsed, breathPattern);
+    const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
+    const shape = Sculpt.sculpt(breathing, activeBreath);
     let titleKey = isBreathing ? "breathReady" : "meditationReady";
     let cueKey = isBreathing ? "breathCue" : "meditationCue";
 
@@ -243,13 +260,16 @@
     setText(status, copy(snapshot.status));
     setData(guided, "studioStatus", snapshot.status);
     setData(guided, "breathPhase", isBreathing && !waiting && !complete ? breathing.phase : "rest");
-    const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
     // One monotonic clock controls both the words and the guardian's light.
     setVar(orb, "--studio-breath-scale", activeBreath ? breathing.scale.toFixed(4) : "1");
     setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
-    setVar(guided, "--studio-rib-expansion", activeBreath ? (1 + 0.018 * breathing.expansion).toFixed(4) : "1");
-    setVar(guided, "--studio-breath-opacity", activeBreath ? (0.30 + 0.44 * breathing.expansion).toFixed(4) : ".45");
-    setVar(guided, "--studio-wing-opacity", activeBreath ? (0.80 + 0.15 * breathing.expansion).toFixed(4) : ".86");
+    setVar(guided, "--studio-rib-expansion", shape.rib);
+    setVar(guided, "--studio-d28-wing-vein", shape.wingVein);
+    setVar(guided, "--studio-d28-tail-light", shape.tailLight);
+    setVar(guided, "--studio-d28-horn", shape.horn);
+    setVar(guided, "--studio-d28-halo", shape.halo);
+    setVar(guided, "--studio-breath-opacity", shape.arch);
+    setVar(guided, "--studio-wing-opacity", shape.wing);
     setText(countdown, format(Math.ceil(snapshot.remainingMs / 1000)));
     const ratio = "scaleX(" + snapshot.progress.toFixed(4) + ")";
     if (progress.style.transform !== ratio) progress.style.transform = ratio;
@@ -261,6 +281,7 @@
     setText(primary, copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
       snapshot.status === "paused" ? "resume" : "again"));
     primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
+    setImmersive(immersive);
     reset.disabled = waiting;
     syncDurations();
     syncBreathButtons();
@@ -276,6 +297,7 @@
         ["running","paused"].includes(clock.snapshot().status))) return;
     stopTick();
     mode = next;
+    setImmersive(false);
     root.dataset.studioMode = mode;
     guided.dataset.studioActive = mode;
     durationIndex = 1;
@@ -292,6 +314,11 @@
   // The original Flow listens for keyboard shortcuts on this same section.
   // Never let an invisible asana session start while a guided mode is active.
   root.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && immersive && mode !== "asanas") {
+      event.preventDefault();
+      setImmersive(false);
+      immersionButton.focus();
+    }
     if (mode !== "asanas" && ["s","S","r","R","p","P","ArrowLeft","ArrowRight"].includes(event.key))
       event.stopImmediatePropagation();
   }, true);
@@ -330,6 +357,10 @@
     }
     const action = event.target.closest("[data-studio-action]");
     if (!action || action.disabled || mode === "asanas") return;
+    if (action.dataset.studioAction === "immersion") {
+      setImmersive(!immersive);
+      return;
+    }
     if (action.dataset.studioAction === "reset") {
       stopTick();
       clock.reset(configuredDuration());
@@ -374,5 +405,6 @@
   syncBreathButtons();
   syncMeditationButtons();
   syncFocusButtons();
+  setImmersive(false);
   lockChoices();
 })();

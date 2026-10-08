@@ -213,7 +213,9 @@ border-radius: var(--r); overflow: hidden;
 .seg-btn {
 min-width: var(--tap); min-height: var(--tap); padding: 0 12px;
 color: var(--muted); font: 800 11px var(--mono);
-transition: background .15s, color .15s;
+/* Switch foreground and background together: intermediate theme colors can
+   fail WCAG contrast in Firefox while the 150ms transition is running. */
+transition: none;
 }
 .seg-btn:hover { color: var(--ink); }
 .seg-btn.is-active, .seg-btn[aria-pressed="true"] {

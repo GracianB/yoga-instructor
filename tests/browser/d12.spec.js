@@ -47,7 +47,7 @@ test('D12: ornamental plume freezes under pause and respects quiet/reduced motio
  await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
  await expect(guide).toHaveAttribute('data-asana-state','running');
  const plume=guide.locator('.yy-pose.is-current .yy-d12-tail-plume');
- await expect(plume).toHaveCSS('animation-name','yy-d12-tail-tip');
+ await expect(plume).toHaveCSS('animation-name','yy-d13-tail-feather');
  await page.locator('[data-flow-action="pause"]').evaluate(el=>el.click());
  await expect(guide).toHaveAttribute('data-asana-state','paused');
  await expect(plume).toHaveCSS('animation-play-state','paused');

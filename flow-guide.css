@@ -251,3 +251,24 @@ body.quiet-mode .yy-character,body.quiet-mode .yy-bloom,
  .yy-stage{min-height:295px}
 }
 @media (max-width:360px){.yy-stage{min-height:270px}}
+
+/* One contrasting lock makes Yin and Yang halves of the same spirit. */
+.yy-opposite-lock{fill:#3d3278;stroke:#e9c5ee;stroke-width:2.2;stroke-linejoin:round}
+.yy-guide[data-spirit="yin"] .yy-opposite-lock{fill:#e6f8fc;stroke:#87d9e9}
+.yy-scene-breadcrumb{
+ position:absolute;z-index:4;top:17px;left:19px;
+ display:flex;flex-direction:column;gap:4px;pointer-events:none;
+ color:#153b71;text-shadow:0 1px 9px rgba(240,252,255,.53);
+}
+.yy-scene-breadcrumb strong{font:800 11px/1.1 'JetBrains Mono',monospace;letter-spacing:.16em}
+.yy-scene-breadcrumb span{font:600 11px/1.2 'Inter',sans-serif}
+.yy-guide[data-spirit="yin"] .yy-scene-breadcrumb{color:#dceeff;text-shadow:0 1px 9px rgba(0,8,34,.7)}
+.yy-guide[data-phase="breath"] .yy-stage .yy-energy-a{filter:blur(28px);opacity:.9}
+.yy-guide[data-phase="pose-1"] .yy-energy-b,.yy-guide[data-phase="pose-2"] .yy-energy-b{filter:blur(20px);opacity:.78}
+.yy-guide[data-phase="savasana"] .yy-stars{opacity:.42}
+.yy-guide[data-phase="finish"] .yy-stars{filter:drop-shadow(0 0 5px #defcff);opacity:1}
+@media(max-width:700px){
+ .yy-scene-breadcrumb{top:10px;left:10px}
+ .yy-scene-breadcrumb strong{font-size:9px}
+ .yy-scene-breadcrumb span{font-size:9px}
+}

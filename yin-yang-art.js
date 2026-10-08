@@ -58,6 +58,8 @@
       '<path d="M-18-3Q-16-15-4-15Q15-18 20-5Q24 11 12 17Q-2 22-15 12Q-22 6-18-3Z" class="'+cls+'"/>'+
       '<path d="M-10-8Q-5-14 1-11M3-11Q10-13 13-6" class="yy-paw-toes"/>'+
       '<path d="M-12 5Q-4 12 5 10" class="yy-paw-gloss"/>'+
+      '<path d="M-6 2Q0 8 7 2Q4 12 -2 11Q-8 10-6 2Z" class="yy-pad"/>'+
+      '<path d="M-12-9Q-9-14-5-11M2-12Q7-15 10-9" class="yy-toe"/>'+
       '</g>';
   };
   const toTransform=(x,y,s,r)=>'translate('+x+' '+y+') rotate('+r+') scale('+s+')';
@@ -150,6 +152,9 @@
         '<path d="M-30 -24Q-16-39 0-35Q20-39 30-24" class="yy-necklace"/>'+
         '<path d="M-36 6L-44 2M36 6L45 2" class="yy-sigil-lines"/>')+
       '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.22)+'" rx="'+fmt(rx*.34)+'" ry="'+fmt(ry*.28)+'"/>'+
+      '<path d="M0 -'+fmt(ry*.62)+'Q'+fmt(rx*.08)+' 0 0 '+fmt(ry*.7)+'" class="yy-spine"/>'+
+      '<path d="M-'+fmt(rx*.42)+' -'+fmt(ry*.2)+'Q0 -'+fmt(ry*.34)+' '+fmt(rx*.42)+' -'+fmt(ry*.18)+'" class="yy-collar"/>'+
+      '<path d="M-'+fmt(rx*.5)+' '+fmt(ry*.42)+'Q0 '+fmt(ry*.62)+' '+fmt(rx*.5)+' '+fmt(ry*.4)+'" class="yy-hip"/>'+
       '</g>';
   };
   const tail=p=>{

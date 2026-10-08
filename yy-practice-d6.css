@@ -246,3 +246,14 @@
 .yy-pose-warrior .yy-tail-motion{transform-box:fill-box;transform-origin:0 50%;animation:yy-tail 4.8s ease-in-out infinite}
 @keyframes yy-weight{50%{translate:0 -6px;rotate:-1.4deg}}
 @keyframes yy-tail{50%{rotate:7deg}}
+
+.yy-spine{fill:none;stroke:rgba(255,236,214,.28);stroke-width:2.2;stroke-linecap:round}
+.yy-collar,.yy-hip{fill:none;stroke:rgba(90,58,48,.28);stroke-width:1.6;stroke-linecap:round}
+.yy-pad{fill:rgba(214,160,174,.55)}
+.yy-toe{fill:none;stroke:rgba(90,58,48,.4);stroke-width:1.2;stroke-linecap:round}
+.yy-pose-table .yy-spine{animation:yy-spine 4.8s ease-in-out infinite}
+.yy-pose-tree .yy-character{transform-box:fill-box;transform-origin:50% 80%;animation:yy-tree 5.5s ease-in-out infinite}
+.yy-pose-savasana .yy-belly{animation:yy-breath 9.5s ease-in-out infinite}
+.yy-pose-child .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 7s ease-in-out infinite}
+@keyframes yy-spine{50%{translate:0 4px}}
+@keyframes yy-tree{50%{rotate:.8deg}}

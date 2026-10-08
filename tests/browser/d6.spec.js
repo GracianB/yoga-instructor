@@ -12,6 +12,64 @@ async function openPractice(page){
   return errors;
 }
 
+
+test('D6: initial guide unlocks even when animation frames are stalled',async ({page})=>{
+  await page.route('https://fonts.googleapis.com/**',r=>r.fulfill({contentType:'text/css',body:''}));
+  await page.route('https://vortex-gilt-xi.vercel.app/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html><html></html>'}));
+  await page.addInitScript(()=>{
+    try{sessionStorage.setItem('gb-yoga-intro-seen','1');}catch(_){}
+    // Reproduce headless WebKit starving requestAnimationFrame on page load.
+    window.requestAnimationFrame=()=>1;
+  });
+  const errors=[];
+  page.on('pageerror',e=>errors.push(e.message));
+  await page.goto('/');
+  const guide=page.locator('#flow-guide');
+  await expect(guide).toHaveAttribute('data-ready','true',{timeout:2000});
+  await expect(guide).toHaveAttribute('data-asana-state','idle');
+  const start=page.locator('[data-flow-action="start"]');
+  await expect(start).toBeEnabled();
+  await expect(page.locator('[data-flow-action="next"]')).toBeDisabled();
+  // Virtual click avoids Playwright's pointer-stability check, which also uses RAF.
+  await start.evaluate(el=>el.click());
+  await expect(guide).toHaveAttribute('data-status','running');
+  expect(errors).toEqual([]);
+});
+
+test('D7: belly-only breathing preserves the authored torso position',async ({page})=>{
+  const errors=await openPractice(page);
+  const guide=page.locator('#flow-guide');
+  const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+  await act('start');
+  for(const phase of ['centering','breath']){
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    await act('next');
+    await expect(guide).toHaveAttribute('data-phase',phase);
+  }
+  await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+  const pose=guide.locator('.yy-pose-breath.is-current');
+  await expect(pose).toBeVisible();
+  const metrics=await pose.evaluate(el=>{
+    const center=node=>{
+      const r=node.getBoundingClientRect();
+      return {x:r.x+r.width/2,y:r.y+r.height/2};
+    };
+    const torso=el.querySelector('.yy-torso');
+    const head=el.querySelector('.yy-head');
+    return {
+      offsetX:Math.abs(center(torso).x-center(head).x),
+      svgWidth:el.closest('svg').getBoundingClientRect().width,
+      bodyAnimation:getComputedStyle(el.querySelector('.yy-character')).animationName,
+      bellyAnimation:getComputedStyle(el.querySelector('.yy-belly')).animationName
+    };
+  });
+  expect(metrics.svgWidth).toBeGreaterThan(0);
+  expect(metrics.offsetX,'the torso must remain aligned beneath the head').toBeLessThan(metrics.svgWidth*.12);
+  expect(metrics.bodyAnimation,'the entire body must remain grounded').toBe('none');
+  expect(metrics.bellyAnimation,'the belly alone must breathe').not.toBe('none');
+  expect(errors).toEqual([]);
+});
+
 test('D6: one-click start, no idle Next, separated pause/reset and clean reset',async ({page})=>{
   test.setTimeout(80000);
   const errors=await openPractice(page);

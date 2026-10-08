@@ -175,6 +175,8 @@ test('reduced motion, accessibility and document links', async ({ page, request 
 
 test('Yin Yang ten-phase yoga flow: distinct poses, navigation gate and 4-7-8 dock', async ({ page }) => {
   test.setTimeout(90000);
+  // Manual navigation screenshots must not race the automatic five-second tour.
+  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
   const errors=await open(page);
   const guide=page.locator('#flow-guide');
   await expect(guide).toHaveClass(/yy-guide/);
@@ -450,6 +452,8 @@ test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async (
 test('D2/D3: ten postures in Yin/Yang with non-overlapping rails and green sanctuary', async ({page,browserName})=>{
  test.skip(browserName !== 'chromium', 'Exhaustive matrix on Chromium; cross-browser regression covered by the existing suite.');
  test.setTimeout(150000);
+  // Manual navigation screenshots must not race the automatic five-second tour.
+  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
  const errors=await open(page);
  const guide=page.locator('#flow-guide');
  const theater=page.locator('.flow-theater');
@@ -605,6 +609,8 @@ test('D5 complete character review: ten poses, two energies, responsive and stil
 test('D5 cinematic contact sheet: all 10 poses, Yin and Yang, mobile and desktop',async ({page,browserName})=>{
  test.skip(browserName!=='chromium','Visual contact sheet is recorded on Chromium; other engines retain the cross-browser suite.');
  test.setTimeout(180000);
+  // Manual navigation screenshots must not race the automatic five-second tour.
+  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
  const errors=await open(page);
  const guide=page.locator('#flow-guide');
  const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());

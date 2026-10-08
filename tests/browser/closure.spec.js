@@ -268,3 +268,90 @@ test('Yin Yang visual matrix: desktop/mobile, both energies, reduced motion and 
   }
   expect(errors).toEqual([]);
 });
+
+
+test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pause', async ({page})=>{
+  test.setTimeout(60000);
+  const errors=await open(page);
+  const guide=page.locator('#flow-guide');
+  const act=async action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+  await expect(guide).toHaveAttribute('data-ready','true');
+  await act('preview');
+  await expect(guide).toHaveAttribute('data-status','running');
+  for(const phase of ['centering','breath','warmup']){
+    await expect(guide).toHaveAttribute('data-ready','true');
+    await act('next');
+    await expect(guide).toHaveAttribute('data-phase',phase);
+  }
+  await expect(guide).toHaveAttribute('data-ready','true');
+  await expect(guide).toHaveAttribute('data-asana-state','running');
+  const back=guide.locator('.yy-pose[data-pose="warmup"] [data-asana-back]');
+  const spine=guide.locator('.yy-pose[data-pose="warmup"] [data-asana-spine]');
+  expect(await guide.locator('.yy-pose[data-pose="warmup"] [data-limb^="arm-"]').count()).toBe(2);
+  expect(await guide.locator('.yy-pose[data-pose="warmup"] [data-limb^="leg-"]').count()).toBe(2);
+  const initial=await back.getAttribute('d');
+  await page.waitForTimeout(650);
+  const animated=await back.getAttribute('d');
+  expect(animated).not.toBe(initial);
+  const spineNow=await spine.getAttribute('d');
+  expect(spineNow).toContain('Q0 ');
+  await act('pause');
+  await expect(guide).toHaveAttribute('data-asana-state','paused');
+  const frozen=await back.getAttribute('d');
+  await page.waitForTimeout(450);
+  expect(await back.getAttribute('d')).toBe(frozen);
+  await act('pause');
+  await expect(guide).toHaveAttribute('data-asana-state','running');
+  await page.waitForTimeout(600);
+  expect(await back.getAttribute('d')).not.toBe(frozen);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect(guide).toHaveAttribute('data-asana-state','reduced');
+  const reduced=await back.getAttribute('d');
+  await page.waitForTimeout(420);
+  expect(await back.getAttribute('d')).toBe(reduced);
+  await page.locator('[data-flow-action="reset"]').evaluate(el=>el.click());
+  await expect(guide).toHaveAttribute('data-phase','start');
+  expect(errors).toEqual([]);
+});
+
+test('Phase B: each asana has a separate movement recipe and reduced-motion disables it', async ({page})=>{
+  const errors=await open(page);
+  const guide=page.locator('#flow-guide');
+  const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+  await expect(guide).toHaveAttribute('data-ready','true');
+  await act('preview');
+  const samples=[
+    ['start','.yy-character'],
+    ['centering','.yy-character'],
+    ['breath','.yy-character'],
+    ['warmup','.yy-head-motion'],
+    ['pose-1','.yy-head-motion'],
+    ['transition','.yy-character'],
+    ['pose-2','.yy-character'],
+    ['cooldown','.yy-head-motion'],
+    ['savasana','.yy-character'],
+    ['finish','.yy-head-motion']
+  ];
+  for(let i=0;i<samples.length;i++){
+    if(i){
+      await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+      await act('next');
+    }
+    await expect(guide).toHaveAttribute('data-phase',samples[i][0]);
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    if(samples[i][0]==='warmup'){
+      await expect(guide).toHaveAttribute('data-asana-state','running');
+      await expect(guide.locator('.yy-asana-step')).toBeVisible();
+    }else{
+      const animation=await guide.locator('.yy-pose.is-current '+samples[i][1]).first()
+        .evaluate(el=>getComputedStyle(el).animationName);
+      expect(animation).not.toBe('none');
+    }
+  }
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.locator('[data-flow-action="reset"]').evaluate(el=>el.click());
+  await expect(guide).toHaveAttribute('data-asana-state','reduced');
+  const animation=await guide.locator('.yy-pose.is-current .yy-character').evaluate(el=>getComputedStyle(el).animationName);
+  expect(animation).toBe('none');
+  expect(errors).toEqual([]);
+});

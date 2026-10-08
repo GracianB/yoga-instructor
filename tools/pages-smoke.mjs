@@ -18,7 +18,7 @@ if (!Number.isInteger(attempts) || attempts < 1 || attempts > 40) throw Error('I
 if (!(waitSeconds >= 0 && waitSeconds <= 20)) throw Error('Invalid interval');
 if (base.protocol !== 'https:') throw Error('HTTPS required');
 
-const files = ['index.html', 'flow-motion.js', 'flow-guide.css', 'styles.css', 'favicon.svg'];
+const files = ['index.html', 'yin-yang-art.js', 'flow-guide.js', 'flow-guide.css', 'styles.css', 'favicon.svg'];
 const expected = await Promise.all(files.map(async name => {
   const data = await readFile(resolve(root, name));
   return { name, digest: createHash('sha256').update(data).digest('hex') };
@@ -49,7 +49,7 @@ for (let attempt = 1; attempt <= attempts; attempt++) {
       }
       if (file.name === 'index.html') {
         const html = Buffer.from(published).toString('utf8');
-        if (!html.includes('flow-motion.js?v=atelier-3')) {
+        if (!html.includes('yin-yang-art.js?v=yin-yang-1')) {
           problems.push('index.html: missing versioned articulated module reference');
         }
       }

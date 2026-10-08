@@ -1,66 +1,140 @@
+/* Yin / Yang yoga guide. Finished static drawings transition by fade, never limb interpolation. */
 (() => {
-  'use strict';
-  const mount = document.getElementById('flow-guide');
-  if (!mount || !window.YOGA_FLOW) return;
-  const head = (x, y, angle = 0) => `<g transform="translate(${x} ${y}) rotate(${angle})"><path class="guide-neck" d="M-2 15L0 31"/><ellipse class="guide-skin" rx="17" ry="21"/><path class="guide-hair" d="M-17 1C-23-31 25-31 17 1L11-10Q-3-3-13-10Z"/><path class="guide-face" d="M-8 4Q-4 7 0 4M6 12Q2 15-2 12"/></g>`;
-  const limb = (d, type = 'arm') => `<path class="guide-${type}" d="${d}"/>`;
-  const shirt = d => `<path class="guide-shirt" d="${d}"/>`;
-  const seated = prayer => `${limb('M310 259Q267 246 250 276Q278 294 350 281','leg')}${limb('M332 259Q374 249 387 277Q351 299 284 286','leg')}${shirt('M299 178Q320 169 341 178L345 252Q320 264 295 252Z')}${prayer ? limb('M300 188Q286 221 311 228L320 210') + limb('M340 188Q354 221 330 228L320 210') : limb('M300 188Q291 220 270 254L258 260') + limb('M340 188Q349 220 369 254L380 260')}${head(320,146)}<path class="guide-fold" d="M307 244Q322 251 334 244"/>`;
-  const resting = `${limb('M330 275Q393 270 463 285','leg')}${limb('M328 284Q390 287 452 299','leg')}${shirt('M207 255Q268 248 337 268L334 290Q267 289 210 285Z')}${limb('M223 265Q247 291 298 296')}${head(181,270,-82)}${limb('M456 285L478 279','foot')}${limb('M448 299L470 299','foot')}`;
-  const warrior = `${limb('M320 217L249 225L239 297','leg')}${limb('M328 219L441 298','leg')}${limb('M240 299L213 299','foot')}${limb('M440 299L462 299','foot')}${shirt('M298 135Q320 128 342 135L338 216Q320 230 298 216Z')}${limb('M299 144L222 149L156 145')}${limb('M341 144L411 148L476 142')}${head(320,104)}<path class="guide-fold" d="M307 207Q320 215 332 207"/>`;
-  const mountain = `${limb('M310 214L306 299','leg')}${limb('M330 214L336 299','leg')}${limb('M304 300L286 300','foot')}${limb('M335 300L353 300','foot')}${shirt('M299 129Q320 122 341 129L338 216Q320 226 300 216Z')}${limb('M299 138Q287 173 285 210')}${limb('M341 138Q353 173 355 210')}${head(320,97)}`;
-  const table = `${limb('M357 226L380 280L428 289','leg')}${limb('M346 228L357 294L406 299','leg')}${shirt('M253 205Q304 187 357 213L354 239Q303 223 253 232Z')}${limb('M261 219L247 292L226 299')}${limb('M279 224L278 291L259 299')}${head(232,213,-30)}`;
-  const child = `${limb('M364 253L324 282L404 293','leg')}${shirt('M361 231Q315 220 273 258L288 278Q323 268 376 272Z')}${limb('M283 259Q242 278 204 289L183 289')}${head(255,275,-70)}`;
-  const phases = [
-    ['start', resting, 'Rest on the earth', 'Lie down. Let the earth hold what feels heavy.'],
-    ['centering', seated(false), 'Find your centre', 'Sit comfortably. Let the shoulders soften.'],
-    ['breath', seated(false), 'Listen to your breath', 'Inhale gently. Exhale a little more slowly.'],
-    ['warmup', table, 'Awaken the body', 'On hands and knees, gently wake up the spine.'],
-    ['pose-1', warrior, 'Warrior II · left side', 'Left knee over ankle, arms wide. Rooted and open.'],
-    ['transition', mountain, 'Return to standing', 'Straighten the legs. Notice the space between movements.'],
-    ['pose-2', `<g transform="translate(640 0) scale(-1 1)">${warrior}</g>`, 'Warrior II · right side', 'Right knee over ankle. The same courage, the other side.'],
-    ['cooldown', child, 'Child’s pose', 'Sit back toward the heels; rest your forehead if comfortable.'],
-    ['savasana', resting, 'Savasana · rest', 'Lie down. Unclench your jaw. Nothing to prove.'],
-    ['finish', seated(true), 'A moment of gratitude', 'Bring your palms together. Take this calm with you.']
-  ];
-  const spanish = [
-    ['Soltar el peso','Recuéstate y deja que el suelo sostenga lo que pesa.'],['Volver al centro','Siéntate cómodamente. Permite que los hombros se ablanden.'],
-    ['Escuchar la respiración','Inhala suave. Exhala un poco más despacio.'],['Despertar el cuerpo','A cuatro apoyos, despierta la columna con suavidad.'],
-    ['Guerrero II · lado izquierdo','Rodilla izquierda sobre el tobillo, brazos abiertos. Aquí estás.'],['Volver de pie','Estira las piernas. Siente el espacio entre movimientos.'],
-    ['Guerrero II · lado derecho','Rodilla derecha sobre el tobillo. El mismo valor, al otro lado.'],['Postura del niño','Acerca la cadera a los talones; apoya la frente si estás cómodo.'],
-    ['Savasana · descanso','Túmbate. Afloja la mandíbula. No hay nada que demostrar.'],['Un instante de gratitud','Junta las manos, respira y llévate esta calma contigo.']
-  ];
-  mount.innerHTML = `<div class="guide-heading"><span data-guide-eyebrow></span><span class="guide-mode"></span></div>
-    <svg class="guide-scene" viewBox="0 0 640 360" role="img" aria-labelledby="guide-svg-title">
-    <title id="guide-svg-title"></title><defs><radialGradient id="guide-halo"><stop stop-color="#dbb5bd" stop-opacity=".3"/><stop offset="1" stop-color="#dbb5bd" stop-opacity="0"/></radialGradient></defs>
-    <ellipse class="guide-halo" cx="320" cy="193" rx="183" ry="157" fill="url(#guide-halo)"/>
-    <path class="guide-ground" d="M93 309Q320 293 547 309M134 320Q320 308 506 320"/>
-    <ellipse class="guide-shadow" cx="320" cy="300" rx="153" ry="8"/>
-    ${phases.map(([id, drawing]) => `<g class="guide-pose" data-pose="${id}" aria-hidden="true"><g class="guide-body">${drawing}</g></g>`).join('')}
-    </svg><figcaption><strong id="guide-pose-name"></strong><p id="guide-pose-message"></p></figcaption>`;
-  let snapshot = window.YOGA_FLOW.create().snapshot();
-  let demo = false;
-  const render = () => {
-    const lang = document.documentElement.lang === 'en' ? 'en' : 'es';
-    const index = phases.findIndex(item => item[0] === snapshot.phase);
-    if (index < 0) return;
-    const name = lang === 'en' ? phases[index][2] : spanish[index][0];
-    const message = lang === 'en' ? phases[index][3] : spanish[index][1];
-    mount.dataset.status = snapshot.status;
-    mount.dataset.phase = snapshot.phase;
-    mount.dataset.hidden = String(document.hidden);
-    mount.querySelectorAll('[data-pose]').forEach(pose => pose.classList.toggle('is-current', pose.dataset.pose === snapshot.phase));
-    mount.querySelector('#guide-svg-title').textContent = name;
-    mount.querySelector('#guide-pose-name').textContent = name;
-    mount.querySelector('#guide-pose-message').textContent = message;
-    mount.querySelector('[data-guide-eyebrow]').textContent = lang === 'en' ? 'ONE GESTURE AT A TIME' : 'UN GESTO A LA VEZ';
-    mount.querySelector('.guide-mode').textContent = demo ? (lang === 'en' ? 'QUICK PREVIEW' : 'VISTA RÁPIDA') : (lang === 'en' ? 'AT YOUR OWN PACE' : 'A TU RITMO');
+  "use strict";
+  const root=document.getElementById("flow-guide"),art=window.YIN_YANG_ART;
+  if(!root||!art||!window.YOGA_FLOW)return;
+  const phases=art.poses;
+  const byId=Object.fromEntries(phases.map(p=>[p.id,p]));
+  let snapshot=window.YOGA_FLOW.create().snapshot();
+  let preview=false,epoch=0,settle=null,formManual=false;
+  let shown="start";
+  const language=()=>document.documentElement.lang==="en"?"en":"es";
+  const still=()=>window.YOGA_RUNTIME?.mediaMatches?.("(prefers-reduced-motion: reduce)") ||
+    document.body.classList.contains("quiet-mode") || document.hidden;
+  const wait=ms=>new Promise(done=>{settle=setTimeout(done,ms);});
+  root.classList.add("yy-guide");
+  root.innerHTML=
+   '<div class="guide-heading"><span data-guide-eyebrow>YIN · YANG YOGA</span>'+
+   '<div class="yy-form-choice" role="group" aria-label="Elige la energía del personaje">'+
+   '<button type="button" data-yy-form="yang" aria-pressed="true"><span aria-hidden="true">☼</span> YANG</button>'+
+   '<button type="button" data-yy-form="yin" aria-pressed="false"><span aria-hidden="true">☾</span> YIN</button></div></div>'+
+   '<div class="yy-stage"><div class="yy-sky" aria-hidden="true"></div><div class="yy-scene-breadcrumb" aria-hidden="true"><strong class="yy-count">01 / 10</strong><span class="yy-current-asana">Soltar el peso</span></div>'+
+    '<div class="yy-energy yy-energy-a" aria-hidden="true"></div><div class="yy-energy yy-energy-b" aria-hidden="true"></div>'+
+    art.markup()+
+    '<div class="yy-bloom" aria-hidden="true"><span>✧</span></div>'+
+    '<div class="yy-breath-panel" aria-live="off" aria-hidden="true"><small>RESPIRACIÓN · 4 / 7 / 8</small>'+
+    '<strong class="yy-breath-count">4</strong><span class="yy-breath-label">INHALA</span>'+
+    '<div class="yy-breath-rail"><i class="yy-breath-progress"></i></div></div>'+
+    '<div class="yy-watermark" aria-hidden="true">YIN <span>☯</span> YANG</div>'+
+   '</div><figcaption><strong id="guide-pose-name"></strong><p id="guide-pose-message"></p></figcaption>';
+  const artSvg=root.querySelector(".yy-svg");
+  const adaptViewBox=()=>{
+    const mobile=window.YOGA_RUNTIME.mediaMatches("(max-width: 700px)");
+    // Crop the illustration's empty margins, never the limbs.
+    artSvg.setAttribute("viewBox",mobile?"120 0 480 435":"0 0 720 460");
   };
-  window.addEventListener('yoga:flow', event => { snapshot = event.detail; render(); });
-  window.addEventListener('yoga:preview', event => { demo = event.detail; render(); });
-  document.addEventListener('visibilitychange', render);
-  document.addEventListener('click', event => {
-    if (event.target.closest('[data-set-lang]')) window.YOGA_RUNTIME.frame(render);
+  window.addEventListener("resize",adaptViewBox,{passive:true});
+  adaptViewBox();
+  const current=()=>root.querySelector('.yy-pose.is-current');
+  const stage=root.querySelector(".yy-stage");
+  const title=root.querySelector("#guide-pose-name");
+  const text=root.querySelector("#guide-pose-message");
+  const breathPanel=root.querySelector(".yy-breath-panel");
+  const titleFor=phase=>byId[phase]?.name[language()==="en"?1:0]||"";
+  const showText=()=>{
+    const pose=byId[snapshot.phase];
+    if(!pose)return;
+    root.dataset.status=snapshot.status;
+    root.dataset.phase=snapshot.phase;
+    root.querySelector(".yy-count").textContent=String(snapshot.index+1).padStart(2,"0")+" / 10";
+    root.querySelector(".yy-current-asana").textContent=titleFor(snapshot.phase);
+    title.textContent=pose.name[language()==="en"?1:0];
+    text.textContent=pose.cue[language()==="en"?1:0];
+    root.querySelector("[data-guide-eyebrow]").textContent=preview?
+      (language()==="en"?"QUICK TOUR · TEN POSES":"RECORRIDO · DIEZ POSTURAS"):
+      (language()==="en"?"TWO ENERGIES · ONE PRACTICE":"DOS ENERGÍAS · UNA PRÁCTICA");
+    root.querySelector(".yy-svg").setAttribute("aria-label",titleFor(snapshot.phase));
+    const active=snapshot.phase==="breath" && (snapshot.status==="running"||snapshot.status==="paused");
+    stage.classList.toggle("yy-breath-active",active);
+    breathPanel.setAttribute("aria-hidden",String(!active));
+    if(!active)stage.dataset.breath="idle";
+  };
+  const signal=(type,ok)=>window.dispatchEvent(new CustomEvent(type,{detail:{phase:snapshot.phase,ok}}));
+  const reveal=()=>{
+    root.dataset.ready="true";
+    root.dataset.motion="still";
+    root.dataset.morph="1.000";
+    stage.classList.remove("yy-blooming");
+    signal("yoga:pose-ready",true);
+  };
+  const renderPose=async(phase,immediate=false)=>{
+    const mine=++epoch;
+    clearTimeout(settle);
+    root.dataset.ready="false";
+    root.dataset.motion="transition";
+    root.dataset.morph="0.000";
+    signal("yoga:pose-changing",false);
+    const old=current();
+    const next=root.querySelector('.yy-pose[data-pose="'+phase+'"]');
+    if(!next){root.dataset.ready="error";return;}
+    if(old===next){reveal();return;}
+    const instant=immediate||still();
+    if(instant){
+      if(old)old.classList.remove("is-current");
+      next.classList.add("is-current");
+      shown=phase;reveal();return;
+    }
+    stage.classList.add("yy-blooming");
+    if(old)old.classList.remove("is-current");
+    await wait(220);
+    if(mine!==epoch)return;
+    next.classList.add("is-current");
+    shown=phase;
+    await wait(400);
+    if(mine!==epoch)return;
+    reveal();
+  };
+  function selectForm(form,manual=true){
+    if(form!=="yin"&&form!=="yang")return;
+    formManual=manual||formManual;
+    if(manual) { try{localStorage.setItem("yy-yoga-form",form);}catch(_){} }
+    root.dataset.spirit=form;
+    for(const button of root.querySelectorAll("[data-yy-form]"))
+      button.setAttribute("aria-pressed",String(button.dataset.yyForm===form));
+    stage.setAttribute("aria-label",(form==="yin"?"Yin":"Yang")+" · "+titleFor(snapshot.phase));
+  }
+  root.addEventListener("click",event=>{
+    const button=event.target.closest("[data-yy-form]");
+    if(button)selectForm(button.dataset.yyForm);
   });
-  render();
+  window.addEventListener("yoga:flow",event=>{
+    const old=snapshot.phase;
+    snapshot=event.detail;
+    showText();
+    if(old!==snapshot.phase || root.dataset.ready==="error")renderPose(snapshot.phase);
+  });
+  window.addEventListener("yoga:preview",event=>{preview=!!event.detail;showText();});
+  window.addEventListener("yoga:breath",event=>{
+    const data=event.detail||{};
+    if(snapshot.phase!=="breath")return;
+    const labels={es:{inhale:"INHALA",hold:"SOSTÉN",exhale:"EXHALA"},en:{inhale:"INHALE",hold:"HOLD",exhale:"EXHALE"}};
+    stage.dataset.breath=data.phase||"idle";
+    root.querySelector(".yy-breath-count").textContent=String(data.remaining??4);
+    root.querySelector(".yy-breath-label").textContent=labels[language()][data.phase]||"";
+    root.querySelector(".yy-breath-progress").style.transform="scaleX("+Math.max(0,Math.min(1,Number(data.progress)||0))+")";
+  });
+  document.addEventListener("click",event=>{
+    if(event.target.closest("[data-set-lang]"))window.YOGA_RUNTIME.frame(showText);
+    if(event.target.closest("[data-set-theme]")&&!formManual)
+      window.YOGA_RUNTIME.frame(()=>selectForm(document.documentElement.dataset.theme==="dark"?"yin":"yang",false));
+  });
+  document.addEventListener("visibilitychange",()=>{root.dataset.hidden=String(document.hidden);});
+  const initial=root.querySelector('[data-pose="start"]');
+  if(initial)initial.classList.add("is-current");
+  let preferred;
+  try{preferred=localStorage.getItem("yy-yoga-form");}catch(_){}
+  selectForm(preferred==="yin"||preferred==="yang"?preferred:(document.documentElement.dataset.theme==="dark"?"yin":"yang"),!!preferred);
+  showText();
+  // Notify UI on next turn, after all deferred modules have installed their listeners.
+  window.YOGA_RUNTIME.frame(reveal);
 })();

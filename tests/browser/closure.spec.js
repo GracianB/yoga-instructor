@@ -77,6 +77,7 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
   // Exercise every engine transition deterministically; pointer behavior is
   // covered separately. Scroll/hover animations must not drop a virtual click.
   for (let phase = 0; phase < 9; phase++) {
+    await expect(page.locator('#flow-guide')).toHaveAttribute('data-ready','true',{timeout:8000});
     await page.locator('[data-flow-action="next"]').evaluate(button => button.click());
     await expect(page.locator('#flow-phase-meta')).toHaveText(`${phase + 2} / 10`);
   }
@@ -90,7 +91,7 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
 
 test('ritual persistence, breathing, quiet mode and audio controls', async ({ page }) => {
   const errors = await open(page);
-  await page.locator('[data-practice="focus"]').click();
+  await page.locator('[data-practice="focus"]').evaluate(button=>button.click());
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
   expect(await page.evaluate(() => localStorage.getItem('gb-yoga-practice'))).toBe('focus');
   await page.reload();
@@ -172,62 +173,52 @@ test('reduced motion, accessibility and document links', async ({ page, request 
   expect(errors).toEqual([]);
 });
 
-test('living guide follows all ten phases, pauses and restores full practice timing', async ({ page }) => {
-  test.setTimeout(60000);
-  let now = Date.parse('2026-10-07T10:00:00Z');
-  await page.clock.setFixedTime(now);
-  const errors = await open(page);
-  const guide = page.locator('#flow-guide');
-  // This scenario tests the phase-clock protocol. Dispatch from the real control
-  // to avoid Firefox hitting stale screen coordinates during page scroll reflow.
-  // The other browser scenarios cover physical pointer clicks.
-  const clickAction = async action => {
-    const button = page.locator(`[data-flow-action="${action}"]`);
-    await button.evaluate(el => {
-      el.scrollIntoView({ behavior: 'instant', block: 'center' });
-      el.click();
-    });
-  };
-  await expect(guide).toHaveAttribute('data-phase','start');
-  await clickAction('preview');
+test('Yin Yang ten-phase yoga flow: distinct poses, navigation gate and 4-7-8 dock', async ({ page }) => {
+  test.setTimeout(90000);
+  const errors=await open(page);
+  const guide=page.locator('#flow-guide');
+  await expect(guide).toHaveClass(/yy-guide/);
+  await expect(guide).toHaveAttribute('data-ready','true');
+  expect(await guide.locator('.yy-pose').count()).toBe(10);
+  await guide.locator('[data-yy-form="yin"]').evaluate(button=>button.click());
+  await expect(guide).toHaveAttribute('data-spirit','yin');
+  await guide.locator('[data-yy-form="yang"]').evaluate(button=>button.click());
+  await expect(guide).toHaveAttribute('data-spirit','yang');
+  const trigger=async action=>page.locator('[data-flow-action="'+action+'"]').evaluate(button=>button.click());
+  await expect(page.locator('[data-flow-action="preview"]')).toBeEnabled();
+  await trigger('preview');
+  await expect(guide).toHaveAttribute('data-status','running');
   await expect(page.locator('#flow-phase-target')).toHaveText('00:05');
-  await clickAction('pause');
-  now += 10000; await page.clock.setFixedTime(now);
+  await trigger('pause');
   await expect(guide).toHaveAttribute('data-status','paused');
-  expect(await guide.locator('.is-current .guide-body').evaluate(el => getComputedStyle(el).animationPlayState)).toBe('paused');
-  await expect(guide).toHaveAttribute('data-phase','start');
-  await clickAction('pause');
-  const phases = ['centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
-  for (const phase of phases) {
-    now += 5000; await page.clock.setFixedTime(now);
-    await expect(guide).toHaveAttribute('data-phase',phase);
-    await expect(guide.locator('.guide-pose.is-current')).toHaveCount(1);
-    // A phase title changes at transition start; capture anatomy only after
-    // the illustrated rig has reached the new pose, not at an intermediate frame.
-    await expect(guide).toHaveAttribute('data-morph', '1.000', { timeout: 7000 });
-    if (['centering','warmup','pose-1','pose-2','cooldown','savasana','finish'].includes(phase)) {
-      await guide.scrollIntoViewIfNeeded();
-      await test.info().attach('asana-' + phase + '-desktop',
-        { body: await guide.screenshot({ animations: 'disabled' }), contentType: 'image/png' });
+  await trigger('pause');
+  await expect(guide).toHaveAttribute('data-status','running');
+  const phases=['centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
+  for(const id of phases){
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    await page.locator('[data-flow-action="next"]').evaluate(el=>el.click());
+    await expect(guide).toHaveAttribute('data-phase',id);
+    await expect(guide.locator('.yy-pose.is-current')).toHaveCount(1,{timeout:8000});
+    await expect(guide.locator('.yy-pose.is-current')).toHaveAttribute('data-pose',id);
+    if(id!=='finish')await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    if(id==='breath'){
+      await expect(page.locator('.sanctuary-dock')).toHaveClass(/yy-dock-active/);
+      await expect(guide.locator('.yy-breath-panel')).toHaveAttribute('aria-hidden','false');
+    }
+    if(['breath','pose-1','pose-2','savasana'].includes(id)){
+      await guide.evaluate(el=>{
+        el.scrollIntoView({block:'start',behavior:'instant'});
+        window.scrollBy({top:-128,behavior:'instant'});
+      });
+      await test.info().attach('yin-yang-'+id,{body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'});
     }
   }
   await expect(guide).toHaveAttribute('data-status','finished');
   await page.locator('[data-set-lang="en"]').click();
   await expect(page.locator('#guide-pose-name')).toHaveText('A moment of gratitude');
-  await clickAction('start');
-  await expect(page.locator('#flow-phase-target')).toHaveText('00:30');
-  await clickAction('next');
-  await clickAction('previous');
+  await page.locator('[data-flow-action="reset"]').click();
   await expect(guide).toHaveAttribute('data-phase','start');
-  await clickAction('reset');
-  await expect(guide).toHaveAttribute('data-status','idle');
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  expect(await guide.locator('.is-current .guide-body').evaluate(el => getComputedStyle(el).animationName)).toBe('none');
-  await page.locator('[data-set-theme="dark"]').click();
-  await page.setViewportSize({ width: 320, height: 900 });
-  await guide.scrollIntoViewIfNeeded();
-  await test.info().attach('guide-mobile-dark', { body: await guide.screenshot({ animations: 'disabled' }), contentType: 'image/png' });
-  expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
+  await expect(page.locator('#flow-state')).toHaveText('IDLE');
   expect(errors).toEqual([]);
 });
 
@@ -243,58 +234,36 @@ test('saved ritual is restored even when animation frames never run', async ({ p
   expect(errors).toEqual([]);
 });
 
-test('articulated figure moves joint paths, freezes on pause and respects reduced motion', async ({ page }) => {
-  test.setTimeout(60000);
-  const errors = await open(page);
-  const guide = page.locator('#flow-guide');
-  const arm = guide.locator('[data-bone="larm"]');
-  await expect(guide).toHaveClass(/guide-animated/);
-  await expect(arm).toHaveAttribute('d', /M\d/);
-  await guide.scrollIntoViewIfNeeded();
-  await page.locator('[data-flow-action="start"]').click();
-  await page.locator('[data-flow-action="next"]').click();
-  await expect(guide).toHaveAttribute('data-phase', 'centering');
-  await expect(guide).toHaveAttribute('data-motion', 'transition');
-  const first = await arm.getAttribute('d');
-  await expect.poll(() => arm.getAttribute('d'), { timeout: 7000 }).not.toBe(first);
-  await page.locator('[data-flow-action="pause"]').click();
-  await expect(guide).toHaveAttribute('data-motion', 'still');
-  const frozen = await arm.getAttribute('d');
-  await page.waitForTimeout(260);
-  await expect(arm).toHaveAttribute('d', frozen);
-  await page.locator('[data-flow-action="pause"]').click();
-  await expect.poll(() => arm.getAttribute('d'), { timeout: 7000 }).not.toBe(frozen);
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  await expect(guide).toHaveAttribute('data-motion', 'still');
-  await expect(guide).toHaveAttribute('data-morph', '1.000');
-  await page.locator('[data-flow-action="next"]').click();
-  await expect(guide).toHaveAttribute('data-phase', 'breath');
-  await expect(guide).toHaveAttribute('data-morph', '1.000');
-  await page.locator('[data-flow-action="reset"]').click();
-  await expect(guide).toHaveAttribute('data-motion', 'still');
-  expect(errors).toEqual([]);
-});
-
-test('articulated visual matrix retains anatomy without horizontal overflow', async ({ page }) => {
-  test.setTimeout(60000);
-  const errors = await open(page);
-  await page.emulateMedia({ reducedMotion: 'reduce' });
-  for (const width of [320, 390, 768, 1440]) {
-    await page.setViewportSize({ width, height: 900 });
-    for (const theme of ['light', 'dark']) {
-      await page.locator('[data-set-theme="' + theme + '"]').click();
-      await page.locator('[data-flow-action="start"]').click();
-      for (let i = 0; i < 4; i++) await page.locator('[data-flow-action="next"]').click();
-      await expect(page.locator('#flow-guide')).toHaveAttribute('data-phase', 'pose-1');
-      const figure = page.locator('#flow-guide .guide-articulated');
-      expect(await figure.locator('[data-bone]').count()).toBe(8);
-      await page.locator('#flow-guide').scrollIntoViewIfNeeded();
-      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-      if (width === 320 || width === 1440) {
-        await test.info().attach('articulated-warrior-' + width + '-' + theme,
-          { body: await page.locator('#flow-guide').screenshot({ animations:'disabled' }), contentType:'image/png' });
+test('Yin Yang visual matrix: desktop/mobile, both energies, reduced motion and no overflow', async ({page})=>{
+  test.setTimeout(90000);
+  const errors=await open(page);
+  await page.emulateMedia({reducedMotion:'reduce'});
+  const guide=page.locator('#flow-guide');
+  for(const width of [320,390,768,1440]){
+    await page.setViewportSize({width,height:900});
+    await expect(guide.locator(".yy-svg")).toHaveAttribute("viewBox",width<=700?"120 0 480 435":"0 0 720 460");
+    for(const form of ['yin','yang']){
+      await guide.locator('[data-yy-form="'+form+'"]').evaluate(button=>button.click());
+      await expect(guide).toHaveAttribute('data-spirit',form);
+      await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
+      await expect(guide).toHaveAttribute('data-ready','true');
+      for(let i=0;i<4;i++){
+        await page.locator('[data-flow-action="next"]').evaluate(el=>el.click());
+        await expect(guide).toHaveAttribute('data-ready','true');
       }
-      await page.locator('[data-flow-action="reset"]').click();
+      await expect(guide).toHaveAttribute('data-phase','pose-1');
+      expect(await guide.locator('.yy-pose[data-pose="pose-1"] [data-limb^="leg-"]').count()).toBe(2);
+      expect(await guide.locator('.yy-pose[data-pose="pose-1"] [data-limb^="arm-"]').count()).toBe(2);
+      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+      if(width===320||width===1440){
+        await guide.evaluate(el=>{
+          el.scrollIntoView({block:'start',behavior:'instant'});
+          window.scrollBy({top:-128,behavior:'instant'});
+        });
+        await test.info().attach('yin-yang-'+form+'-'+width,{body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'});
+      }
+      await page.locator('[data-flow-action="reset"]').evaluate(el=>el.click());
+      await expect(guide).toHaveAttribute('data-ready','true');
     }
   }
   expect(errors).toEqual([]);

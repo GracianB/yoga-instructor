@@ -370,7 +370,7 @@ test("Practice control layer: UI renders target, remaining and cue", () => {
 
 test("Living yoga guide: articulated skeleton and lifecycle are present", () => {
   const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
-  assert.match(index, /flow-motion\.js\?v=articulated-2/);
+  assert.match(index, /flow-motion\.js\?v=atelier-3/);
   for (const part of ["rleg", "lleg", "rarm", "larm", "torso", "neck", "rfoot", "lfoot"]) {
     assert.ok(motion.includes('data-bone="' + part + '"'));
   }
@@ -386,7 +386,7 @@ test("Living yoga guide: articulated skeleton and lifecycle are present", () => 
 test("Premium yoga avatar keeps its original rig and layered character artwork", () => {
   const motion = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
   const css = readFileSync(new URL("../flow-guide.css", import.meta.url), "utf8");
-  const details = ["guide-hair-bun", "guide-eyes", "guide-smile", "guide-blush",
+  const details = ["guide-hair-back", "guide-eyes", "guide-smile", "guide-beard",
     "guide-skin", "guide-sleeve", "guide-leg-lustre", "guide-collar",
     "guide-garden", "guide-mat"];
   for (const part of details) assert.ok(motion.includes(part), part + " missing");
@@ -399,8 +399,25 @@ test("Premium yoga avatar keeps its original rig and layered character artwork",
   assert.ok(motion.includes('details.rhand.setAttribute'));
   assert.ok(motion.includes('details.collar.setAttribute'));
   assert.ok(motion.includes('details.panel.setAttribute'));
+  assert.ok(motion.includes('details.waist.setAttribute'));
+  assert.ok(motion.includes('details.pelvis.setAttribute'));
+  assert.ok(motion.includes('footShape'));
   assert.ok(motion.includes("bones.rleg.setAttribute('d',limbShape"));
   assert.ok(motion.includes("bones.rarm.setAttribute('d',limbShape"));
   assert.ok(motion.includes("bones.torso.setAttribute('d'"));
   assert.match(css, /\.guide-animated \.guide-leg \{ fill: url\(#yoga-pants\)/);
+});
+
+test("Illustrated Warrior II has human arm span and a grounded front knee", () => {
+  const art = readFileSync(new URL("../flow-motion.js", import.meta.url), "utf8");
+  const match = art.match(/warrior: pose\('([^']+)'\)/);
+  assert.ok(match, "Warrior II rig missing");
+  const j = match[1].split(" ").map(point => point.split(",").map(Number));
+  assert.equal(j.length, 16);
+  const span = j[7][0] - j[6][0];
+  const height = j[12][1] - j[0][1];
+  assert.ok(span / height < 1.25, "Arms must be proportionate to body height");
+  assert.ok(Math.abs(j[10][0] - j[12][0]) <= 5, "Front knee must track the ankle");
+  assert.ok(j[13][0] > j[9][0] + 80, "Rear leg should extend");
+  assert.match(art, /function gesture\(base, now\)/, "Pose-specific movements required");
 });

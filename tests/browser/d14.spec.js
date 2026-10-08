@@ -21,6 +21,7 @@ async function advance(page,root,to){
  await expect(root).toHaveAttribute('data-ready','true',{timeout:8000});
 }
 test('D14: all ten phases include connected neck, ribcage, scapula and central horn',async({page})=>{
+ test.setTimeout(90000); // 20 full transitions across Yin/Yang, six-browser CI workers
  const root=await open(page);
  await page.locator('[data-flow-action="start"]').evaluate(e=>e.click());
  const all=['start','centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];

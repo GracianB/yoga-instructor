@@ -17,9 +17,11 @@
   const motionReduced=()=>rt.mediaMatches("(prefers-reduced-motion: reduce)");
   const suspended=()=>document.hidden || document.body.classList.contains("quiet-mode") || motionReduced();
   const frame=(now)=>{
+    if(clock.timer){clearTimeout(clock.timer);clock.timer=0;}
     clock.frame=0;
     if(clock.phase!=="warmup" || clock.status!=="running" || !clock.ready || suspended())return;
-    const delta=clock.last ? Math.max(0,Math.min(80,now-clock.last)) : 0;
+    const raw=clock.last ? now-clock.last : 32;
+    const delta=Math.max(32,Math.min(80,raw));
     clock.elapsed+=delta;
     clock.last=now;
     // One calm 8.4-second cycle; the cat rounds and the cow dips the spine.
@@ -43,7 +45,7 @@
       if(label)label.textContent=next==="cat"?(document.documentElement.lang==="en"?"CAT · EXHALE":"GATO · EXHALA"):
         (document.documentElement.lang==="en"?"COW · INHALE":"VACA · INHALA");
     }
-    clock.frame=rt.frame(frame);
+    clock.frame=rt.frame(frame);clock.timer=setTimeout(()=>frame(rt.now?rt.now():Date.now()),140);
   };
   const stop=()=>{
     if(clock.frame)rt.cancel(clock.frame);
@@ -55,7 +57,7 @@
       suspended()?"reduced":
       clock.status==="paused"?"paused":clock.status==="running"?"running":clock.status;
     if(!active){stop();return;}
-    if(!clock.frame){clock.last=0;clock.frame=rt.frame(frame);}
+    if(!clock.frame){clock.last=0;clock.frame=rt.frame(frame);clock.timer=setTimeout(()=>frame(rt.now?rt.now():Date.now()),140);}
   }
   window.addEventListener("yoga:pose-changing",()=>{
     clock.ready=false;

@@ -27,6 +27,14 @@
     '<div class="yy-breath-rail"><i class="yy-breath-progress"></i></div></div>'+
     '<div class="yy-watermark" aria-hidden="true">YIN <span>☯</span> YANG</div>'+
    '</div><figcaption><strong id="guide-pose-name"></strong><p id="guide-pose-message"></p></figcaption>';
+  const artSvg=root.querySelector(".yy-svg");
+  const adaptViewBox=()=>{
+    const mobile=window.YOGA_RUNTIME.mediaMatches("(max-width: 700px)");
+    // Crop the illustration's empty margins, never the limbs.
+    artSvg.setAttribute("viewBox",mobile?"145 25 430 390":"0 0 720 460");
+  };
+  window.addEventListener("resize",adaptViewBox,{passive:true});
+  adaptViewBox();
   const current=()=>root.querySelector('.yy-pose.is-current');
   const stage=root.querySelector(".yy-stage");
   const title=root.querySelector("#guide-pose-name");

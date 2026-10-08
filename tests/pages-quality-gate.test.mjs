@@ -27,10 +27,16 @@ test('Pages builds and verifies the exact SHA accepted by browser quality',()=>{
   assert.match(deploy,/tools\/pages-smoke.mjs --attempts=30 --interval=5/);
 });
 
-test('Six real browser shards and quality gate remain mandatory, never duplicated by Pages',()=>{
+test('All six browser partitions and quality gate remain mandatory, never duplicated by Pages',()=>{
   assert.match(quality,/browser:\s*\n/);
   assert.match(quality,/browser: \[chromium, firefox, webkit\]/);
   assert.match(quality,/shard: \[1, 2\]/);
+  // WebKit 1/2 and 2/2 must both execute, even though one runner installs
+  // the exact same browser only once instead of racing a second apt install.
+  assert.match(quality,/exclude:[\\s\\S]*browser: webkit[\\s\\S]*shard: 2/);
+  assert.match(quality,/--project=webkit --shard=1\\/2/);
+  assert.match(quality,/--project=webkit --shard=2\\/2/);
+  assert.match(quality,/Test both WebKit partitions/);
   assert.match(quality,/name: Yoga Quality Gate/);
   assert.match(quality,/needs: \[quality, browser\]/);
   assert.match(quality,/needs.browser.result/);

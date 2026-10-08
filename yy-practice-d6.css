@@ -267,3 +267,39 @@
 .yy-pose-child .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 7s ease-in-out infinite}
 @keyframes yy-spine{50%{translate:0 4px}}
 @keyframes yy-tree{50%{rotate:.8deg}}
+
+/* Dock: one bar, not a left cluster. Stone, not the guardian's sage. */
+#instructor-flow .flow-console-foot{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:14px;margin-top:18px;
+}
+#instructor-flow .flow-controls{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;
+  gap:12px;width:auto;max-width:none;margin:8px auto 0;
+  grid-template-columns:none;background:transparent;border:0;padding:0;
+}
+#instructor-flow .flow-controls .flow-control{
+  min-height:44px;min-width:132px;padding:10px 18px;border-radius:999px;
+  border:1px solid rgba(232,220,206,.28);
+  background:rgba(18,16,14,.35);color:#f3eadf;font-size:12px;letter-spacing:.08em;
+  box-shadow:none;
+}
+#instructor-flow .flow-entry-actions{
+  display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:18px;
+  width:100%;margin:0 auto;
+}
+#instructor-flow .flow-entry-actions .flow-start{
+  min-height:52px;padding:14px 28px;border-radius:999px;
+  border:1px solid #e7d3b4;background:#f0e2cc;color:#2a2118;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+}
+#instructor-flow .flow-entry-actions .flow-preview{
+  background:transparent;color:#d9cbb8;border:0;text-decoration:underline;
+  text-decoration-color:rgba(232,210,180,.45);box-shadow:none;
+}
+#instructor-flow .flow-theater .yy-stage{
+  background:
+    radial-gradient(ellipse at 50% 78%, rgba(214,160,174,.22), transparent 42%),
+    radial-gradient(ellipse at 70% 30%, rgba(120,150,170,.28), transparent 46%),
+    linear-gradient(180deg, #1b3344 0%, #24384a 58%, #1a2c38 100%);
+}

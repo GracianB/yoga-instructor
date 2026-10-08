@@ -401,6 +401,7 @@
             <div class="studio-breath-orb" aria-hidden="true"><span class="studio-orb-mark">✧</span></div>
             <h3 class="studio-guided-title" id="studio-guided-title">Encuentra tu propia respiración</h3>
             <p class="studio-guided-cue" id="studio-guided-cue">Inspirar 4 segundos, espirar 6.</p>
+            <p class="studio-breath-phase-detail" id="studio-breath-phase-detail" aria-live="off" hidden></p>
             <p class="studio-guided-countdown" id="studio-guided-countdown" aria-label="Tiempo restante">05:00</p>
             <div class="studio-guided-progress" role="progressbar" aria-label="Progreso de la sesión" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
               <span id="studio-guided-progress"></span>
@@ -416,6 +417,12 @@
             <span data-studio-copy="meditationStyleLabel">GUÍA</span>
             <button type="button" data-meditation-style="guided" data-studio-copy="meditationGuided" aria-pressed="true">Acompañada</button>
             <button type="button" data-meditation-style="silent" data-studio-copy="meditationSilent" aria-pressed="false">En silencio</button>
+          </div>
+          <div class="studio-meditation-focus" role="group" aria-label="Punto de atención" hidden>
+            <span data-studio-copy="meditationFocusLabel">ENFOQUE</span>
+            <button type="button" data-meditation-focus="breath" data-studio-copy="focusBreath" aria-pressed="true">Respiración</button>
+            <button type="button" data-meditation-focus="body" data-studio-copy="focusBody" aria-pressed="false">Cuerpo</button>
+            <button type="button" data-meditation-focus="space" data-studio-copy="focusSpace" aria-pressed="false">Entorno</button>
           </div>
           <div class="studio-guided-controls">
             <div class="studio-duration" role="group" aria-label="Duración de la práctica">

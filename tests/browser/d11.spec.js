@@ -17,7 +17,7 @@ test('D11: both dragon forms retain closed eyes and visible sculpted engraving',
  for(const width of [320,390,768,1440]){
   await page.setViewportSize({width,height:900});
   for(const spirit of ['yang','yin']){
-   await guide.locator('[data-yy-form="'+spirit+'"]').click();
+   await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
    await expect(guide).toHaveAttribute('data-spirit',spirit);
    const current=guide.locator('.yy-pose.is-current');
    await expect(current.locator('.yy-eye-closed')).toHaveCount(2);

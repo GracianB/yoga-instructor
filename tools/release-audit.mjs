@@ -34,7 +34,7 @@ assert.ok(html.includes('flow-theater'), 'Side-navigation theater is required');
 assert.ok((html.match(/data-flow-action="previous"/g)||[]).length === 1, 'Exactly one previous control');
 assert.ok((html.match(/data-flow-action="next"/g)||[]).length === 1, 'Exactly one next control');
 assert.ok(statSync('yy-asana-motion.css').size <= 12000, 'Asana motion CSS budget');
-assert.ok(statSync('yy-asana-motion.js').size <= 6000, 'Asana motion JS budget');
+assert.ok(statSync('yy-asana-motion.js').size <= 7000, 'Asana motion JS budget, includes D14 living neckline');
 assert.ok(html.includes('yy-asana-motion.js?v=d14-1'), 'Asana motion script must load');
 assert.ok(html.includes('yy-asana-motion.css?v=phase-b-1'), 'Asana motion styles must load');
 assert.ok(statSync('flow-guide.css').size <= 16000, 'Guide CSS budget');

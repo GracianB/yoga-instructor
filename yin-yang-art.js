@@ -29,12 +29,19 @@
       const x=u*u*x0+2*u*t*cx+t*t*x1,y=u*u*y0+2*u*t*cy+t*t*y1;
       let dx=2*u*(cx-x0)+2*t*(x1-cx),dy=2*u*(cy-y0)+2*t*(y1-cy);
       const mag=Math.max(.001,Math.hypot(dx,dy));dx/=(mag);dy/=(mag);
-      const w=radius*(1.17-.32*t+.048*Math.sin(t*Math.PI));
+      // Anatomical taper: broad at the shoulder/hip, lean at the wrist/ankle.
+      // A subtle muscle belly avoids a constant-width rubber-hose silhouette.
+      const w=radius*(1.09-.29*t+.095*Math.sin(t*Math.PI));
       a.push([x-dy*w,y+dx*w]);
       b.push([x+dy*w,y-dx*w]);
     }
     const f=pt=>fmt(pt[0])+","+fmt(pt[1]);
-    const silhouette="M"+a.map(f).join("L")+"L"+b.reverse().map(f).join("L")+"Z";
+    // Rounded end caps meet the paw meshes naturally. No disconnected joints.
+    const start=[x0,y0],end=[x1,y1];
+    const silhouette="M"+f(a[0])+"L"+a.slice(1).map(f).join("L")+
+      "Q"+f(end)+" "+f(b[b.length-1])+
+      "L"+b.slice(0,-1).reverse().map(f).join("L")+
+      "Q"+f(start)+" "+f(a[0])+"Z";
     return '<g class="yy-limb-unit">'+
       '<path d="'+silhouette+'" class="yy-limb yy-'+type+'" data-limb="'+type+'-'+i+'"/>'+
       '<path d="'+d+'" class="yy-limb-lustre yy-'+type+'-lustre"/>'+

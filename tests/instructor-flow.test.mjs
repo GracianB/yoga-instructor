@@ -409,18 +409,21 @@ test("Phase B: Cat-Cow changes only spine/head/tail; grounded limbs never multip
   const motion=readFileSync(new URL("../yy-asana-motion.js",import.meta.url),"utf8");
   const art=readFileSync(new URL("../yin-yang-art.js",import.meta.url),"utf8");
   const style=readFileSync(new URL("../yy-asana-motion.css",import.meta.url),"utf8");
-  assert.match(index,/yy-asana-motion\.js\?v=phase-b-1/);
+  assert.match(index,/yy-asana-motion\.js\?v=phase-c-1/);
   assert.match(index,/yy-asana-motion\.css\?v=phase-b-1/);
   assert.match(art,/data-asana-back/);
   assert.match(art,/data-asana-spine/);
   assert.match(motion,/8400/);
-  assert.match(motion,/bend=-60-39\*curve/);
+  assert.match(motion,/bend=-58-33\*curve/);
+  assert.match(motion,/underside=57-21\*curve/);
+  assert.match(art,/data-asana-belly/);
   assert.match(motion,/setAttribute\("d"/);
   assert.match(motion,/rotate\(/);
   assert.match(motion,/clock\.status!=="running"/);
   assert.match(motion,/prefers-reduced-motion/);
   assert.match(motion,/visibilitychange/);
   assert.match(motion,/MutationObserver/);
+  assert.match(motion,/const belly=root\.querySelector/);
   assert.match(style,/data-asana-state="paused"/);
   assert.match(style,/data-asana-state="reduced"/);
 });
@@ -439,4 +442,23 @@ test("Phase B: distinct authored rhythms for the ten phases, not a generic whole
   assert.match(style,/yy-blink/);
   assert.match(style,/animation-play-state:paused!important/);
   assert.match(style,/@media\(prefers-reduced-motion:reduce\)/);
+});
+
+
+test("Phase C: adult mystical colors, side controls and full Cat-Cow abdomen",()=>{
+ const stage=readFileSync(new URL("../yy-premium-stage.css",import.meta.url),"utf8");
+ const motion=readFileSync(new URL("../yy-asana-motion.js",import.meta.url),"utf8");
+ const art=readFileSync(new URL("../yin-yang-art.js",import.meta.url),"utf8");
+ assert.match(index,/class="flow-theater"/);
+ assert.match(index,/class="flow-side flow-side-prev"/);
+ assert.match(index,/class="flow-side flow-side-next"/);
+ assert.equal((index.match(/data-flow-action="previous"/g)||[]).length,1);
+ assert.equal((index.match(/data-flow-action="next"/g)||[]).length,1);
+ assert.match(index,/yy-premium-stage\.css\?v=phase-c-1/);
+ assert.match(stage,/grid-template-columns:clamp\(44px/);
+ assert.match(stage,/max-height:365px/);
+ assert.match(stage,/\.yy-heavy-lid/);
+ assert.match(art,/data-asana-belly/);
+ assert.match(motion,/underside=57-21\*curve/);
+ assert.match(motion,/belly\.setAttribute\("d"/);
 });

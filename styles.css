@@ -5930,3 +5930,9 @@ body.quiet-mode .hero .hero-mandala { filter: none !important; }
   .pillars article, .role, .edu, .cv-card, .campo-audio,
   .campo-vortex, .hero-inner, .hero-mandala { will-change: auto; }
 }
+
+
+/* Universe-family signature: keep Yoga's existing title, lotus artwork and native palette. */
+.hero-mandala{filter:drop-shadow(0 0 13px rgba(131,194,149,.27)) drop-shadow(0 0 32px rgba(125,173,129,.13))}
+.hero .lotus-bloom{transform-box:fill-box;transform-origin:center}
+@media(prefers-reduced-motion:reduce){.hero-mandala,.hero .lotus-bloom{animation:none}}

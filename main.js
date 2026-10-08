@@ -256,6 +256,11 @@
       }
     });
     paintMute();
+    // An unbound button during initial hydration can silently swallow an early
+    // pointer event, especially when a busy browser scrolls into view first.
+    // Enable only after play/pause/error handlers are installed.
+    playBtn.dataset.audioReady = "true";
+    playBtn.disabled = false;
   }
 
 

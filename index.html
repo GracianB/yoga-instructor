@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="./styles.css?v=lotus-rose-7">
   <link rel="stylesheet" href="./flow-guide.css?v=yin-yang-1">
   <link rel="stylesheet" href="./yy-asana-motion.css?v=phase-b-1">
+  <link rel="stylesheet" href="./yy-premium-stage.css?v=phase-c-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -33,9 +34,9 @@
   <script src="./flow-session.js?v=session-1-yoga-5" defer></script>
   <script src="./flow-phase.js?v=phase-1-yoga-5" defer></script>
   <script src="./instructor-ui.js?v=yin-yang-1" defer></script>
-  <script src="./yin-yang-art.js?v=yin-yang-1" defer></script>
+  <script src="./yin-yang-art.js?v=phase-c-1" defer></script>
   <script src="./flow-guide.js?v=yin-yang-1" defer></script>
-  <script src="./yy-asana-motion.js?v=phase-b-1" defer></script>
+  <script src="./yy-asana-motion.js?v=phase-c-1" defer></script>
   <script src="./sanctuary-experience.js?v=yin-yang-1" defer></script>
   <script type="application/ld+json">
   {
@@ -289,7 +290,11 @@
       </div>
 
       <div class="flow-console" data-flow-status="idle">
-        <figure class="flow-guide" id="flow-guide"><figcaption>Un gesto a la vez · One gesture at a time</figcaption></figure>
+        <div class="flow-theater" role="group" aria-label="Navegación de posturas">
+          <div class="flow-side flow-side-prev"><button type="button" class="flow-control ghost flow-rail-button" data-flow-action="previous" data-i18n="flowPrevious" aria-label="Anterior">Anterior</button></div>
+          <figure class="flow-guide" id="flow-guide"><figcaption>Un gesto a la vez · One gesture at a time</figcaption></figure>
+          <div class="flow-side flow-side-next"><button type="button" class="flow-control primary flow-rail-button" data-flow-action="next" data-i18n="flowNext" aria-label="Siguiente">Siguiente</button></div>
+        </div>
         <div class="flow-console-top">
           <div class="flow-phase">
             <span class="flow-phase-kicker" data-i18n="flowCurrent">FASE ACTUAL</span>
@@ -312,9 +317,7 @@
         <div class="flow-phase-progress" aria-hidden="true"><span id="flow-phase-progress-bar"></span></div>
 
         <div class="flow-controls" role="group" data-i18n-aria-label="flowControlsLabel" aria-label="Controles de práctica">
-          <button type="button" class="flow-control ghost" data-flow-action="previous" data-i18n="flowPrevious">Anterior</button>
           <button type="button" class="flow-control ghost" data-flow-action="pause" data-i18n="flowPause">Pausa</button>
-          <button type="button" class="flow-control primary" data-flow-action="next" data-i18n="flowNext">Siguiente</button>
           <button type="button" class="flow-control ghost" data-flow-action="reset" data-i18n="flowReset">Reiniciar</button>
         </div>
 

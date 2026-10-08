@@ -39,7 +39,7 @@
 }
 .flow-side-prev .flow-rail-button{writing-mode:vertical-rl;transform:rotate(180deg)}
 .flow-side-prev .flow-rail-button:hover{transform:rotate(180deg)}
-.flow-side-next .flow-rail-button{background:color-mix(in srgb,#366783 70%,var(--surface));color:#f1fcff}
+.flow-side-next .flow-rail-button{background:#15394d;border-color:#47798a;color:#f5fcff}
 .flow-side-next .flow-rail-button:hover{transform:none}
 .flow-rail-button:hover:not(:disabled){
   border-color:#6ab2bb;

@@ -1,140 +1,190 @@
-/* A quiet companion for the existing ten-phase practice. */
-.flow-guide { margin: 0 0 30px; padding: 22px 20px 26px; border: 1px solid var(--line); border-radius: 20px; background: color-mix(in srgb, var(--bg) 65%, transparent); overflow: hidden; }
-.guide-heading { display: flex; justify-content: space-between; gap: 12px; color: var(--muted); font: 500 9px/1.6 'JetBrains Mono', monospace; letter-spacing: .12em; }
-.guide-scene { display: block; width: min(100%, 640px); height: auto; margin: -12px auto -8px; overflow: visible; --skin: #cda68e; --cloth: #547360; --trousers: #b58f9a; --hair: #39473b; }
-[data-theme="dark"] .guide-scene { --skin: #d8b29c; --cloth: #8aa58e; --trousers: #c4a1aa; --hair: #3a493f; }
-.guide-skin { fill: var(--skin); }
-.guide-hair { fill: var(--hair); }
-.guide-neck, .guide-arm, .guide-foot { fill: none; stroke: var(--skin); stroke-width: 12; stroke-linecap: round; stroke-linejoin: round; }
-.guide-neck { stroke-width: 15; }
-.guide-leg { fill: none; stroke: var(--trousers); stroke-width: 23; stroke-linecap: round; stroke-linejoin: round; }
-.guide-shirt { fill: var(--cloth); }
-.guide-face { fill: none; stroke: var(--hair); stroke-width: 1.4; stroke-linecap: round; }
-.guide-fold { fill: none; stroke: var(--bg); stroke-opacity: .35; stroke-width: 1.5; }
-.guide-ground { fill: none; stroke: var(--sage); stroke-width: 1; opacity: .25; }
-.guide-shadow { fill: var(--sage); opacity: .09; }
-.guide-pose { opacity: 0; transition: opacity .85s ease; }
-.guide-pose.is-current { opacity: 1; }
-.guide-body { transform-origin: 320px 300px; animation: guide-breathe 8s ease-in-out infinite; }
-.guide-halo { transform-origin: 320px 200px; animation: guide-halo 8s ease-in-out infinite; }
-@keyframes guide-breathe { 0%,100% { transform: scaleY(1); } 50% { transform: scaleY(1.015); } }
-@keyframes guide-halo { 0%,100% { transform: scale(.96); opacity: .6; } 50% { transform: scale(1.04); opacity: 1; } }
-.flow-guide figcaption { text-align: center; min-height: 74px; }
-.flow-guide figcaption strong { display: block; color: var(--ink); font: 500 clamp(23px,3vw,32px)/1.2 'Fraunces', Georgia, serif; letter-spacing: -.02em; }
-.flow-guide figcaption p { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 9px 0 0; }
-.flow-guide:not([data-status="running"]) .guide-body,
-.flow-guide:not([data-status="running"]) .guide-halo,
-.flow-guide[data-hidden="true"] .guide-body,
-.flow-guide[data-hidden="true"] .guide-halo,
-body.quiet-mode .guide-body, body.quiet-mode .guide-halo { animation-play-state: paused; }
-.flow-guide .guide-pose:not(.is-current) .guide-body { animation-play-state: paused; }
-.flow-preview { padding: 11px 18px; border: 1px solid var(--line); border-radius: 999px; background: transparent; color: var(--ink); font: inherit; font-size: 12px; cursor: pointer; }
-.flow-preview:hover { border-color: var(--sage); }
-.flow-entry-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.flow-phase-timing { display: grid; gap: 7px; margin-top: 8px; }
-.flow-session-clock .flow-phase-timing small { display: flex; gap: 10px; justify-content: space-between; opacity: 1; line-height: 1.5; }
-.flow-phase-timing b { font: inherit; font-variant-numeric: tabular-nums; }
-[lang] #flow-phase-target::before { content: none; }
-@media (max-width: 600px) {
- .flow-guide { margin-inline: -12px; padding: 16px 10px 18px; }
- .guide-heading { font-size: 8px; letter-spacing: .06em; }
- .guide-scene { width: 154%; max-width: none; margin: -10px 0 -20px -27%; }
- .flow-guide figcaption { min-height: 90px; padding-inline: 8px; }
- .flow-entry-actions { align-items: stretch; flex-direction: column; }
+/* ZENICORN · YOGA FLOW · blue-first fantasy art direction, accessible by design */
+.flow-guide {
+  margin: 0 0 30px;
+  padding: 19px 19px 21px;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1px solid color-mix(in srgb, #7fcaf8 32%, var(--line));
+  border-radius: 23px;
+  background: color-mix(in srgb, var(--bg) 86%, #d4f0ff 14%);
+  box-shadow: inset 0 1px rgba(255,255,255,.08), 0 24px 65px rgba(7,33,55,.07);
 }
-@media (prefers-reduced-motion: reduce) {
- .guide-pose { transition: none; }
- .guide-body, .guide-halo { animation: none; }
+.guide-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  gap:12px;
+  padding: 0 3px 14px;
+  font: 700 9px/1.5 'JetBrains Mono',monospace;
+  letter-spacing:.16em;
+  color: color-mix(in srgb, var(--ink) 60%, #3db8e6);
 }
-
-/* Living silhouette: keep the original illustrated poses as a graceful JS fallback. */
-.flow-guide.guide-animated .guide-pose { display: none; }
-.guide-articulated { filter: drop-shadow(0 4px 6px rgba(55, 88, 64, .065)); }
-.guide-animated .guide-scene { isolation: isolate; }
-.flow-guide { background:
-  radial-gradient(ellipse at 50% 37%, rgba(221, 179, 193, .11), transparent 64%),
-  color-mix(in srgb, var(--bg) 65%, transparent); }
-.guide-animated .guide-shadow { opacity: .12; }
-.flow-preview, .flow-start { transition: background-color .25s ease, border-color .25s ease, box-shadow .25s ease; }
-.flow-preview:hover, .flow-preview:focus-visible {
-  border-color: #bf909f;
-  box-shadow: 0 0 0 3px rgba(210, 160, 178, .14);
+.guide-heading .guide-mode {color:#48a8d4;}
+.zenicorn-world {
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  width:100%;
+  max-width:940px;
+  margin:0 auto;
+  aspect-ratio:16 / 10;
+  border:1px solid rgba(122,217,249,.3);
+  border-radius:19px;
+  background:
+    radial-gradient(ellipse 48% 50% at 76% 38%,rgba(248,151,199,.44),transparent 87%),
+    radial-gradient(ellipse 80% 70% at 52% 55%,rgba(62,163,255,.37),transparent 80%),
+    linear-gradient(155deg,#07142f 2%,#162e64 36%,#384b8f 69%,#124b70 100%);
+  box-shadow:0 12px 32px rgba(3,26,55,.2),inset 0 0 80px rgba(9,20,48,.45);
 }
-.flow-preview:focus-visible, .flow-start:focus-visible {
-  outline: 2px solid #b17b92;
-  outline-offset: 3px;
+.zenicorn-world::before {
+  content:"";
+  position:absolute;inset:0;
+  background:repeating-linear-gradient(110deg,transparent 0 18%,rgba(135,221,255,.025) 20%,transparent 24%);
+  pointer-events:none;
 }
-.flow-guide[data-status="paused"] { border-color: color-mix(in srgb, var(--line) 70%, #c89bab); }
-.flow-guide figcaption p { max-width: 42ch; margin-inline: auto; }
-@media (max-width: 600px) {
-  .flow-guide.guide-animated .guide-scene { width: 154%; margin: -10px 0 -18px -27%; }
-  .flow-guide .guide-heading { padding-inline: 7px; }
-  .flow-guide figcaption strong { font-size: clamp(23px, 6vw, 29px); }
-  .flow-guide figcaption p { max-width: 33ch; font-size: 12px; }
+.zenicorn-world::after {
+  content:"";
+  position:absolute;inset:0;
+  pointer-events:none;
+  background:linear-gradient(0deg,rgba(4,18,38,.45),transparent 24%),radial-gradient(ellipse 55% 44% at 47% 30%,rgba(247,177,240,.17),transparent);
 }
-@media (prefers-reduced-motion: reduce) {
-  .guide-articulated { filter: none; }
-  .flow-preview, .flow-start { transition: none; }
+.zenicorn-sky {
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 14% 21%,#d9f8ff 0 1px,transparent 2px),
+    radial-gradient(circle at 85% 18%,#ffffff 0 1px,transparent 2px),
+    radial-gradient(circle at 36% 13%,#f9c0f0 0 1.4px,transparent 2.5px),
+    radial-gradient(circle at 63% 27%,#c5eaff 0 1.2px,transparent 2px),
+    radial-gradient(circle at 79% 45%,#e6c7ff 0 1px,transparent 2px);
+  opacity:.9;
 }
-
-/* Layered illustrated character. Uses actual rig joints, not a decorative overlay. */
-.guide-animated .guide-scene { --outline: #4a5145; }
-.guide-animated .guide-leg { fill: url(#yoga-pants); stroke: #455a64; stroke-width: .75; stroke-linejoin: round; }
-.guide-leg-lustre { fill: none; stroke: #efd1d2; stroke-width: 3.2; opacity: .48; stroke-linecap: round; stroke-linejoin: round; }
-.guide-animated .guide-foot, .guide-animated .guide-arm { fill: url(#yoga-skin); stroke: #c38c73; stroke-width: .65; stroke-linejoin: round; }
-.guide-animated .guide-neck { fill: none; stroke: url(#yoga-skin); stroke-width: 13; stroke-linecap: round; }
-.guide-animated .guide-shirt { fill: url(#yoga-shirt); stroke: #4b6d59; stroke-width: 1.1; stroke-linejoin: round; }
-.guide-shirt-panel { fill: none; stroke: #e3f4df; stroke-width: 1.4; opacity: .37; stroke-linecap: round; }
-.guide-collar { fill: none; stroke: #e0e8d4; stroke-width: 4; stroke-linecap: round; opacity: .75; }
-.guide-sleeve { fill: url(#yoga-shirt); stroke: #58755f; stroke-width: .7; stroke-linejoin: round; }
-.guide-hand, .guide-ear { fill: url(#yoga-skin); stroke: #c38c73; stroke-width: .65; }
-.guide-animated .guide-head .guide-skin { fill: url(#yoga-skin); stroke: #bd927c; stroke-width: .8; }
-.guide-animated .guide-head .guide-hair, .guide-hair-bun { fill: url(#yoga-hair); stroke: #343832; stroke-width: 1.1; }
-.guide-face-shade { fill: #b67f6f; opacity: .13; }
-.guide-hair-strand { stroke: #272e2b; stroke-width: 2.1; stroke-linecap: round; fill: none; }
-.guide-brow, .guide-eyes { stroke: #554b45; stroke-width: 1.6; stroke-linecap: round; fill: none; }
-.guide-nose { fill: none; stroke: #a87765; stroke-width: 1.1; stroke-linecap: round; }
-.guide-smile { stroke: #965f5f; stroke-width: 1.4; stroke-linecap: round; fill: none; }
-.guide-blush { fill: #d98f9e; opacity: .33; }
-.guide-hair-shine { fill: none; stroke: #a69c85; stroke-width: 2.8; opacity: .68; stroke-linecap: round; }
-.guide-mat { fill: url(#yoga-rug); stroke: #8eac91; stroke-width: 1.3; opacity: .7; }
-.guide-branch { fill: none; stroke: #7d9d83; stroke-width: 1.8; opacity: .36; }
-.guide-leaf { fill: #96b9a0; opacity: .28; }
-.guide-pollen { fill: #d7a6b6; opacity: .55; }
-[data-theme="dark"] .guide-mat { opacity: .42; }
-[data-theme="dark"] .guide-garden { opacity: .76; }
-@media (max-width: 600px) { .guide-garden { opacity: .55; } }
-@media (prefers-reduced-motion: reduce) { .guide-articulated { transition: none; } }
-
-/* Keep both actions together; move the long sequence below instead of wrapping one button. */
-.flow-console-foot { flex-direction:column; align-items:flex-start; gap:14px; }
-.flow-entry-actions { flex-wrap:nowrap; }
-@media(max-width:600px){.flow-entry-actions{flex-wrap:wrap;}}
-
-/* ATELIER V3: human silhouette, quieter face and directional gaze. */
-.guide-animated .guide-scene { --skin: #cda78a; }
-.guide-hair-back { fill:url(#yoga-hair); stroke:#3c3b38; stroke-width:.8; }
-.guide-beard { fill:#69463f; opacity:.23; }
-.guide-forehead-light { fill:none;stroke:#9c8d7b;stroke-width:1.1;opacity:.45;stroke-linecap:round; }
-.guide-animated .guide-hand { fill:url(#yoga-skin);stroke:#b5806c;stroke-width:.55; }
-.guide-animated .guide-head .guide-skin { fill:url(#yoga-skin);stroke:#c28f7b;stroke-width:.65; }
-.guide-animated .guide-head .guide-smile { opacity:.45;stroke-width:1; }
-.guide-animated .guide-head .guide-hair { fill:url(#yoga-hair); }
-.guide-animated .guide-head .guide-blush { opacity:0; }
-.guide-animated .guide-head .guide-ear { fill:#cfaa92; }
-.guide-animated .guide-leg-lustre { stroke-width:1.4;opacity:.15; }
-.guide-animated .guide-shirt-panel { opacity:.13;stroke-width:1; }
-.guide-profile { opacity:0; }
-.guide-profile-nose { fill:url(#yoga-skin);stroke:#b5816e;stroke-width:.7; }
-.guide-profile-lid { fill:none;stroke:#514943;stroke-width:1.4;stroke-linecap:round; }
-.flow-guide[data-look="left"] .guide-profile,
-.flow-guide[data-look="right"] .guide-profile {opacity:1}
-/* Keep expressive eyes visible even when the head turns to face the knee. */
-.flow-guide[data-look="left"] .guide-head .guide-nose,
-.flow-guide[data-look="right"] .guide-head .guide-nose {opacity:0;}
-.flow-guide[data-look="left"] .guide-profile { transform:scaleX(-1); }
-
-.guide-waistline {fill:none;stroke:#d3e4d5;stroke-width:2;opacity:.72;stroke-linecap:round;}
-
-.guide-pelvis {fill:url(#yoga-pants);stroke:#415e67;stroke-width:.7;stroke-linejoin:round;}
-.guide-shirt-fold {fill:none;stroke:#d5e8d6;stroke-opacity:.26;stroke-width:1.7;stroke-linecap:round;}
+.zenicorn-mountain {position:absolute;bottom:17%;width:72%;height:55%;opacity:.58}
+.zenicorn-mountain-a {
+ left:-9%;
+ background:linear-gradient(155deg,#37669a,#0a2851);
+ clip-path:polygon(0 100%,0 60%,11% 68%,27% 11%,45% 51%,61% 22%,76% 58%,100% 43%,100% 100%);
+}
+.zenicorn-mountain-b {
+ right:-12%;
+ background:linear-gradient(125deg,#514991,#101f51);
+ clip-path:polygon(0 100%,0 55%,12% 63%,29% 18%,47% 65%,64% 26%,83% 41%,100% 9%,100% 100%);
+}
+.zenicorn-water {
+ position:absolute;left:-10%;right:-10%;bottom:-18%;height:47%;
+ background:
+   repeating-linear-gradient(178deg,transparent 0 12px,rgba(110,225,255,.15) 13px,transparent 15px),
+   linear-gradient(180deg,rgba(51,127,199,.17),rgba(6,27,65,.7));
+ border-radius:50% 50% 0 0;
+ transform:perspective(260px) rotateX(39deg);
+}
+.zenicorn-orbit {
+ position:absolute;top:11%;left:22%;width:56%;height:69%;
+ border-radius:50%;
+ border:1px solid rgba(134,228,255,.13);
+ box-shadow:0 0 0 16px rgba(116,209,255,.025),0 0 75px rgba(77,191,255,.15),inset 0 0 65px rgba(243,138,216,.13);
+}
+.zenicorn-lotus-flare {
+ position:absolute;left:50%;bottom:12%;width:51%;height:17%;
+ transform:translateX(-50%);
+ border-radius:50%;
+ background:radial-gradient(ellipse,rgba(93,228,249,.52),rgba(245,123,209,.14) 55%,transparent 75%);
+ filter:blur(9px);
+}
+.zenicorn-pose {
+ position:absolute;
+ z-index:2;inset:0;
+ display:block;
+ width:100%;height:100%;
+ object-fit:contain;
+ opacity:0;
+ transform:translate3d(0,6px,0) scale(1.08);
+ transition:opacity 380ms ease-out,transform 570ms cubic-bezier(.2,.65,.3,1);
+ will-change:opacity;
+ pointer-events:none;
+}
+.zenicorn-pose.is-visible {opacity:1;transform:translate3d(0,0,0) scale(1.12);}
+.zenicorn-world-signature {
+ position:absolute;z-index:4;bottom:12px;right:16px;
+ color:rgba(226,248,255,.73);
+ letter-spacing:.2em;
+ font:700 8px/1 'JetBrains Mono',monospace;
+ text-shadow:0 1px 4px #041630;
+}
+.zenicorn-world-signature span {color:#fba7dc;font-size:13px}
+.zenicorn-petals i {
+ position:absolute;z-index:3;display:block;
+ width:9px;height:17px;
+ background:linear-gradient(150deg,#f6a4d9,#93e5f5);
+ border-radius:90% 0 75% 20%;opacity:.65;
+ transform:rotate(22deg);
+ animation:zenicorn-petal 11s linear infinite;
+}
+.zenicorn-petals i:nth-child(1){left:11%;top:76%;animation-delay:-2s}
+.zenicorn-petals i:nth-child(2){left:81%;top:67%;animation-delay:-4.5s}
+.zenicorn-petals i:nth-child(3){left:28%;top:32%;animation-delay:-8s}
+.zenicorn-petals i:nth-child(4){left:73%;top:22%;animation-delay:-6s}
+.zenicorn-petals i:nth-child(5){left:60%;top:75%;animation-delay:-1s}
+@keyframes zenicorn-petal{
+ 0%{translate:0 14px;rotate:0deg;opacity:0}
+ 20%{opacity:.65}80%{opacity:.48}
+ 100%{translate:24px -72px;rotate:100deg;opacity:0}
+}
+.zenicorn-bloom::before {animation:zenicorn-bloom 570ms ease-out both}
+@keyframes zenicorn-bloom {
+ 0%,100%{filter:none}
+ 48%{filter:brightness(1.38) saturate(1.12)}
+}
+.zenicorn-breath-ritual {
+ position:absolute;z-index:5;left:20px;bottom:17px;
+ display:flex;flex-direction:column;align-items:center;
+ width:128px;padding:13px 13px 12px;gap:2px;
+ border:1px solid rgba(137,225,255,.46);
+ border-radius:19px;
+ color:#ebfbff;
+ background:linear-gradient(150deg,rgba(8,31,79,.96),rgba(34,31,98,.85));
+ box-shadow:0 0 45px rgba(70,181,255,.22);
+ opacity:0;translate:0 10px;
+ pointer-events:none;
+ transition:opacity 300ms ease,translate 300ms ease;
+}
+.zenicorn-breath-active .zenicorn-breath-ritual {opacity:1;translate:0 0}
+.zenicorn-breath-title {font:700 8px/1.5 'JetBrains Mono',monospace;letter-spacing:.05em;color:#a8ddf8;text-align:center}
+.zenicorn-breath-number {font:700 clamp(35px,6vw,54px)/1 'Fraunces',serif;color:#a5eaff;text-shadow:0 0 22px rgba(75,184,255,.5)}
+.zenicorn-breath-word {font:700 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.15em;color:#fbd1ec}
+.zenicorn-breath-track {width:100%;height:3px;margin-top:5px;overflow:hidden;border-radius:20px;background:rgba(192,222,255,.2)}
+.zenicorn-breath-fill {display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#55d8ff,#f08ecf)}
+.zenicorn-world[data-breath="inhale"] .zenicorn-orbit {animation:zenicorn-inhale 4s ease-in forwards}
+.zenicorn-world[data-breath="hold"] .zenicorn-orbit {box-shadow:0 0 0 35px rgba(85,213,255,.06),0 0 100px rgba(80,185,255,.27)}
+.zenicorn-world[data-breath="exhale"] .zenicorn-orbit {animation:zenicorn-exhale 8s ease-out forwards}
+@keyframes zenicorn-inhale {from{scale:.85;opacity:.45}to{scale:1.04;opacity:1}}
+@keyframes zenicorn-exhale {from{scale:1.04;opacity:1}to{scale:.85;opacity:.45}}
+.zenicorn-flow figcaption{text-align:center;min-height:94px;padding:16px 8px 0}
+.zenicorn-flow figcaption strong{display:block;font:600 clamp(22px,3vw,31px)/1.2 'Fraunces',Georgia,serif;letter-spacing:-.015em;color:var(--ink)}
+.zenicorn-flow figcaption p{max-width:49ch;margin:8px auto 0;font-size:13px;line-height:1.6;color:var(--muted)}
+.flow-console-foot {flex-direction:column;align-items:flex-start;gap:14px}
+.flow-entry-actions {flex-wrap:nowrap}
+.flow-preview,.flow-start{transition:background-color .22s,border-color .22s,box-shadow .22s}
+.flow-preview:focus-visible,.flow-start:focus-visible{outline:2px solid #4bb5e7;outline-offset:3px}
+.flow-control[disabled],.flow-start[disabled],.flow-preview[disabled]{opacity:.44;cursor:not-allowed}
+body.quiet-mode .zenicorn-petals i,
+body.quiet-mode .zenicorn-orbit,
+.zenicorn-flow[data-hidden="true"] .zenicorn-petals i{animation-play-state:paused}
+@media(max-width:700px) {
+ .flow-guide {margin-inline:-10px;padding:13px 10px 18px;border-radius:17px}
+ .guide-heading{font-size:8px;letter-spacing:.09em}
+ .zenicorn-world{aspect-ratio:1 / 1.06;border-radius:14px}
+ .zenicorn-pose {width:146%;height:100%;left:-23%}
+ .zenicorn-pose.is-visible{transform:translate3d(0,0,0) scale(1.06)}
+ .zenicorn-breath-ritual{left:9px;bottom:10px;width:99px;padding:9px 7px}
+ .zenicorn-breath-title{font-size:7px}
+ .zenicorn-world-signature{right:10px;bottom:10px;font-size:7px}
+ .zenicorn-flow figcaption{padding-top:13px}
+ .zenicorn-flow figcaption p{font-size:12px}
+ .flow-entry-actions{flex-wrap:wrap}
+}
+@media(max-width:375px) {.zenicorn-breath-ritual{width:88px}.zenicorn-pose{width:158%;left:-29%}}
+@media(prefers-reduced-motion:reduce) {
+ .zenicorn-pose,.zenicorn-breath-ritual,.flow-preview,.flow-start{transition:none!important}
+ .zenicorn-petals i,.zenicorn-orbit,.zenicorn-bloom::before{animation:none!important}
+ .zenicorn-pose {transform:none!important}
+}

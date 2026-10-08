@@ -58,6 +58,9 @@ test("D23: Cat/Cow holds the ground, freezes in pause and returns to neutral whe
  const c=await capture();
  await page.waitForTimeout(260);
  expect((await capture()).spine).toBe(c.spine);
+ // Navigation is intentionally disabled while paused by the original flow.
+ await page.locator('[data-flow-action="pause"]').evaluate(el=>el.click());
+ await expect(root).toHaveAttribute("data-asana-state","running");
  await next(page,root,"pose-1");
  await expect.poll(()=>root.locator('.yy-pose[data-pose="warmup"] [data-asana-spine]').getAttribute("d")).toBe("M-105 -24Q0 -61.0 104 -24");
  const neutral=await root.locator('.yy-pose[data-pose="warmup"] .yy-head-motion').getAttribute("transform");

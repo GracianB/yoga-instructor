@@ -16,12 +16,8 @@
   const fmt=n=>Number(n).toFixed(1).replace(/\.0$/,"");
   const circle=(x,y,r,cls)=>'<circle cx="'+x+'" cy="'+y+'" r="'+r+'" class="'+cls+'"/>';
   const path=(d,cls)=>'<path d="'+d+'" class="'+cls+'"/>';
-  // Organic, tapered limb meshes from authored Bézier pose paths.
-  // Exactly two arm meshes + two leg meshes per pose, never generated extra limbs.
   const limb=(d,type,i)=>{
     const n=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
-    // One or two hand-authored quadratic sections. The latter creates an actual
-    // joint without smoothing an anatomical knee into a rubber-hose diagonal.
     if(n.length!==6 && n.length!==10)throw Error("Pose limb must have one or two quadratic sections: "+d);
     const pieces=[n.slice(0,6)];
     if(n.length===10)pieces.push([n[4],n[5],n[6],n[7],n[8],n[9]]);
@@ -66,8 +62,6 @@
   const face=(p)=>{
     const [x,y,s,r,eye]=p.head;
     const shut=eye==="closed",focus=eye==="focus",soft=eye==="soft";
-    // A living botanical gaze: soft matte almond, visible iris and tiny glint.
-    // No bright white eyeball, rings or oversized cartoon pupils.
     const almondLeft=soft?'M-60 12Q-38 6-16 12Q-37 22-60 12Z':
       focus?'M-60 13Q-40 4-17 12Q-35 24-60 13Z':
             'M-60 12Q-39-2-16 11Q-32 29-60 12Z';
@@ -94,21 +88,18 @@
       ? path('M-58 12Q-36 24-16 11M16 11Q38 24 58 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M22 6Q39 0 58 5','yy-sleep-brow')
       : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(40,"r")+'</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
-      // Strong ear silhouette with contrasting inner pattern.
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
       path('M33-64Q62-114 100-113Q104-60 64-31Z','yy-fur yy-outline')+
       path('M-57-51Q-82-74-85-99Q-53-87-37-60Z','yy-ear-inner')+
       path('M51-62Q70-91 87-98Q83-70 61-47Z','yy-ear-inner')+
       path('M-77-56Q-63-102-38-78L-20-44','yy-ear-light')+
       path('M45-72Q69-101 85-91','yy-ear-light')+
-      // Furred head and sculpted cheeks, not an oval or disconnected discs.
       path('M-69-37Q-48-84-6-82Q51-91 79-42Q95-17 80 20Q98 43 70 63L56 56Q42 86 4 88Q-38 94-57 66L-78 72Q-101 53-84 23Q-93-6-69-37Z','yy-fur yy-outline')+
       path('M-80 28L-108 22Q-92 44-102 53L-81 47Q-86 66-70 70L-51 52','yy-fur-fringe')+
       path('M78 27L103 24Q92 44 108 54L82 48Q93 66 72 73L52 50','yy-fur-fringe')+
       path('M-58-31Q-25-66 4-57Q28-69 56-34Q80-19 73-1Q54-9 43 7Q21-6 10-4Q-22-15-42 8Q-57-7-72 4Q-81-14-58-31Z','yy-face-mask')+
       path('M-61-39Q-27-82-8-67L3-87L19-65Q52-77 76-37Q52-42 29-21L7-35L-17-15L-38-23L-64-9Q-72-26-61-39Z','yy-crest yy-outline')+
       path('M-58-31Q-45-63-22-56M17-63Q44-65 60-40','yy-mane-light')+
-      // A sliver of the other form's energy lives in the forelock.
       path('M-13-64Q1-80 11-64L16-45L1-33L-13-45Z','yy-opposite-lock')+
       path('M-63 13Q-49-7-29 0Q-11 18-20 48Q-42 70-66 53Z','yy-cheek')+
       path('M27 15Q48-9 68 6Q84 26 64 56Q36 73 17 50Z','yy-cheek')+
@@ -128,7 +119,6 @@
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
     return '<g class="yy-torso yy-weight" data-kind="'+p.kind+'" transform="translate('+x+' '+y+') rotate('+r+')">'+
-      // broad shoulders / taper into hips. The lower centre stays connected to the legs.
       '<path d="M-'+fmt(rx*.75)+' -'+fmt(ry*.57)+
       'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.78)+' '+fmt(ry*.55)+
       'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.75)+' '+fmt(ry*.55)+
@@ -167,8 +157,6 @@
       '<path d="M9 78L-3 70L13 91Q40 118 83 110Q48 111 9 78Z" class="yy-tail-fur"/>'+
       '</g>';
   };
-  // Contact shadows are attached only to load-bearing paws, not floating feet.
-  // They make the Cat-Cow, Warrior and Tree poses read as balanced and grounded.
   const stance=p=>{
     const grounded=p.kind==="table"?p.hands.concat(p.feet):
       p.kind==="warrior"?p.feet:

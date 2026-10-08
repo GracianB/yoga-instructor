@@ -381,7 +381,7 @@ test("Yin Yang art: ten distinct authored phases, exactly two arms and two legs"
 test("Yin Yang presentation: selectable dual palette, no deforming skeleton", () => {
   const guide=readFileSync(new URL("../flow-guide.js",import.meta.url),"utf8");
   const css=readFileSync(new URL("../flow-guide.css",import.meta.url),"utf8");
-  assert.match(index,/yin-yang-art\.js\?v=phase-c-1/);
+  assert.match(index,/yin-yang-art\.js\?v=phase-d1-1/);
   assert.match(index,/flow-guide\.js\?v=yin-yang-1/);
   assert.doesNotMatch(index,/flow-motion\.js/);
   assert.match(guide,/data-yy-form="yang"/);
@@ -454,11 +454,31 @@ test("Phase C: adult mystical colors, side controls and full Cat-Cow abdomen",()
  assert.match(index,/class="flow-side flow-side-next"/);
  assert.equal((index.match(/data-flow-action="previous"/g)||[]).length,1);
  assert.equal((index.match(/data-flow-action="next"/g)||[]).length,1);
- assert.match(index,/yy-premium-stage\.css\?v=phase-c-1/);
+ assert.match(index,/yy-premium-stage\.css\?v=phase-d1-1/);
  assert.match(stage,/grid-template-columns:clamp\(44px/);
  assert.match(stage,/max-height:365px/);
- assert.match(stage,/\.yy-heavy-lid/);
+ assert.match(stage,/\.yy-guardian-lid/);
  assert.match(art,/data-asana-belly/);
  assert.match(motion,/underside=57-21\*curve/);
  assert.match(motion,/belly\.setAttribute\("d"/);
+});
+
+
+test("Phase D1: serene guardian eyes, two almond silhouettes not human staring eyes",()=>{
+  const art=readFileSync(new URL("../yin-yang-art.js",import.meta.url),"utf8");
+  const css=readFileSync(new URL("../yy-premium-stage.css",import.meta.url),"utf8");
+  const previous=["yy-eye-white","yy-iris","yy-pupil","yy-spark-eye","yy-eye-tiny","yy-heavy-lid"];
+  assert.match(art,/yy-eye-almond/);
+  assert.match(art,/yy-guardian-lid/);
+  assert.match(art,/yy-eye-sheen/);
+  assert.match(art,/yy-sleep-brow/);
+  for(const selector of previous){
+    assert.doesNotMatch(art,new RegExp(selector),"Obsolete eye geometry: "+selector);
+  }
+  assert.match(css,/D\.1 · SERENE GUARDIAN FACE/);
+  assert.match(css,/data-spirit="yin"\] \.yy-eye-almond/);
+  assert.match(css,/\.yy-eye-closed/);
+  assert.match(css,/\.yy-muzzle/);
+  assert.match(index,/yin-yang-art\.js\?v=phase-d1-1/);
+  assert.match(index,/yy-premium-stage\.css\?v=phase-d1-1/);
 });

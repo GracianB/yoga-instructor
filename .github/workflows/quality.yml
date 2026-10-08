@@ -27,15 +27,16 @@ jobs:
       - run: npm run build
 
   browser:
-    name: Browser / ${{ matrix.browser }}
+    name: Browser / ${{ matrix.browser }} shard ${{ matrix.shard }}
     needs: quality
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 20
     strategy:
       fail-fast: false
-      max-parallel: 3
+      max-parallel: 6
       matrix:
         browser: [chromium, firefox, webkit]
+        shard: [1, 2]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v7
@@ -51,12 +52,12 @@ jobs:
           pulseaudio --start --exit-idle-time=-1
           pactl load-module module-null-sink sink_name=yoga_test
           pactl set-default-sink yoga_test
-      - name: Test ${{ matrix.browser }} with parallel workers
-        run: npm run test:browser -- --project=${{ matrix.browser }}
+      - name: Test shard
+        run: npm run test:browser -- --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2 --workers=2
       - uses: actions/upload-artifact@v6
         if: always()
         with:
-          name: yoga-browser-report-${{ matrix.browser }}
+          name: yoga-browser-report-${{ matrix.browser }}-${{ matrix.shard }}
           path: |
             playwright-report/
             test-results/
@@ -69,7 +70,7 @@ jobs:
     needs: [quality, browser]
     if: always()
     steps:
-      - name: Enforce Node build and all three browsers
+      - name: Enforce Node build and all browser shards
         run: |
           test "${{ needs.quality.result }}" = "success"
           test "${{ needs.browser.result }}" = "success"

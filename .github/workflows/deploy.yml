@@ -9,10 +9,10 @@ concurrency:
   group: yoga-pages
   cancel-in-progress: true
 jobs:
-  verify:
-    name: Verify release
+  node:
+    name: Node release check
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v7
@@ -21,20 +21,39 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run quality
-      - run: npx playwright install --with-deps chromium firefox webkit
+      - run: npm run build
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+  browser:
+    name: Deploy browser / ${{ matrix.browser }} ${{ matrix.shard }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix:
+        browser: [chromium, firefox, webkit]
+        shard: [1, 2]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Install only this browser
+        run: npx playwright install --with-deps ${{ matrix.browser }}
       - name: Start virtual audio output
         run: |
           sudo apt-get install -y pulseaudio
           pulseaudio --start --exit-idle-time=-1
           pactl load-module module-null-sink sink_name=yoga_test
           pactl set-default-sink yoga_test
-      - run: npm run test:browser
-      - run: npm run build
-      - uses: actions/upload-pages-artifact@v4
-        with:
-          path: dist
+      - name: Test shard
+        run: npm run test:browser -- --project=${{ matrix.browser }} --shard=${{ matrix.shard }}/2 --workers=2
   deploy:
-    needs: verify
+    needs: [node, browser]
     runs-on: ubuntu-latest
     permissions:
       contents: read

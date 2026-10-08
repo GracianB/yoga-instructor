@@ -72,18 +72,26 @@
     const almondRight=soft?'M17 12Q40 6 62 12Q44 22 17 12Z':
       focus?'M17 12Q39 3 61 11Q45 24 17 12Z':
             'M17 11Q39-3 62 12Q46 28 17 11Z';
-    const eyes=shut?
-      path('M-60 13Q-37 28-15 12M16 12Q39 27 61 10','yy-eye-closed')+
-      path('M-57 6Q-39 1-21 8M22 7Q39 0 58 5','yy-sleep-brow'):
-      '<g class="yy-anim-eyes">'+
-        path(almondLeft,'yy-eye-almond')+path(almondRight,'yy-eye-almond')+
-        '<ellipse cx="-38" cy="12" rx="'+(soft?'5.6':'6.4')+'" ry="'+(soft?'5.1':'7.4')+'" class="yy-eye-core"/>'+
-        '<ellipse cx="40" cy="12" rx="'+(soft?'5.6':'6.4')+'" ry="'+(soft?'5.1':'7.4')+'" class="yy-eye-core"/>'+
-        circle(-38,13,3.1,'yy-eye-center')+circle(40,13,3.1,'yy-eye-center')+
-        circle(-35,9,1.5,'yy-eye-glint')+circle(43,9,1.5,'yy-eye-glint')+
-        path('M-50 5Q-39 2-27 6M30 6Q41 2 53 5','yy-eye-sheen')+
-        path('M-60 5Q-39-6-17 5M17 4Q39-7 61 4','yy-guardian-lid')+
+    const gx = focus ? 3.2 : soft ? -1.6 : 0.4;
+    const gy = focus ? -0.6 : soft ? 2.4 : 0.8;
+    const lid = shut ? 18 : soft ? 7 : focus ? 1 : 3;
+    const eyeUnit = (cx, side) => {
+      const id = "yy-clip-"+p.id+"-"+side;
+      return '<g class="yy-eye-unit" transform="translate('+cx+' 8)">'+
+        '<clipPath id="'+id+'"><path d="M-20 3Q-11-13 0-11Q12-14 21 2Q11 15 0 15Q-12 15-20 3Z"/></clipPath>'+
+        '<g clip-path="url(#'+id+')">'+
+          '<ellipse cx="'+gx+'" cy="'+(2+gy)+'" rx="10.5" ry="11.5" class="yy-iris"/>'+
+          '<ellipse cx="'+gx+'" cy="'+(4+gy)+'" rx="3.6" ry="6.4" class="yy-pupil"/>'+
+          '<circle cx="'+(gx-3.2)+'" cy="'+(gy-1.4)+'" r="1.15" class="yy-glint"/>'+
+          '<path d="M-24 -16Q0 '+(-18+lid)+' 24 -14L24 22L-24 22Z" class="yy-lid"/>'+
+        '</g>'+
+        '<path d="M-20 3Q-8-15 0-12Q11-16 21 2" class="yy-lid-line"/>'+
+        '<path d="M-16 -1Q-6-8 2-2" class="yy-brow"/>'+
       '</g>';
+    };
+    const eyes = shut
+      ? path('M-58 12Q-36 24-16 11M16 11Q38 24 58 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M20 6Q38 0 54 5','yy-sleep-brow')
+      : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(38,"r")+'</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
       // Strong ear silhouette with contrasting inner pattern.
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
@@ -142,6 +150,7 @@
         '<path d="M0 -17L9 -6L0 12Z" class="yy-gem-shine"/>'+
         '<path d="M-30 -24Q-16-39 0-35Q20-39 30-24" class="yy-necklace"/>'+
         '<path d="M-36 6L-44 2M36 6L45 2" class="yy-sigil-lines"/>')+
+      '<ellipse class="yy-belly" cx="0" cy="'+fmt(ry*.22)+'" rx="'+fmt(rx*.34)+'" ry="'+fmt(ry*.28)+'"/>'+
       '</g>';
   };
   const tail=p=>{
@@ -181,13 +190,16 @@
     '<defs>'+
       '<linearGradient id="yy-fur-grad" x1="0" y1="0" x2=".9" y2="1"><stop class="yy-fur-stop-hi" offset="0"/><stop class="yy-fur-stop-mid" offset=".55"/><stop class="yy-fur-stop-low" offset="1"/></linearGradient>'+
       '<linearGradient id="yy-mane-grad" x1="0" y1="0" x2="1" y2="1"><stop class="yy-mane-stop-hi" offset="0"/><stop class="yy-mane-stop-low" offset="1"/></linearGradient>'+
-      '<radialGradient id="yy-pool"><stop offset="0" stop-color="#6bcbff" stop-opacity=".32"/><stop offset="1" stop-color="#6bcbff" stop-opacity="0"/></radialGradient>'+
+      '<radialGradient id="yy-iris-grad" cx="40%" cy="35%"><stop offset="0" stop-color="#c9e6cf"/><stop offset=".55" stop-color="#3f6d52"/><stop offset="1" stop-color="#1c3328"/></radialGradient>'+
       '<linearGradient id="yy-lotus" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#a8f4ff"/><stop offset="1" stop-color="#778ef4"/></linearGradient>'+
     '</defs>'+
-    '<ellipse cx="360" cy="404" rx="267" ry="43" fill="url(#yy-pool)"/>'+
-    '<path d="M130 397Q232 364 359 392Q495 362 590 397Q466 433 359 410Q248 429 130 397Z" class="yy-lotus"/>'+
-    '<path d="M201 397Q293 347 359 391Q430 347 523 397Q435 423 359 407Q287 424 201 397Z" class="yy-lotus-inner"/>'+
-    '<ellipse cx="360" cy="401" rx="208" ry="10" fill="#102945" opacity=".26"/>'+
+    '<g class="yy-forest" aria-hidden="true">'+
+      '<ellipse cx="360" cy="404" rx="280" ry="46" class="yy-grove"/>'+
+      '<path d="M120 392Q168 348 214 390Q250 338 300 388Q338 342 392 390Q430 336 492 388Q530 350 600 394Q500 430 360 412Q220 430 120 392Z" class="yy-petal yy-petal-a"/>'+
+      '<path d="M168 398Q214 360 258 396Q300 354 360 398Q414 352 468 396Q508 366 552 400Q470 424 360 410Q250 424 168 398Z" class="yy-petal yy-petal-b"/>'+
+      '<path d="M250 386Q300 352 360 388Q420 350 470 388Q410 404 360 398Q310 404 250 386Z" class="yy-petal yy-petal-c"/>'+
+      '<path d="M80 360Q110 330 132 362M588 356Q612 328 636 360" class="yy-frond"/>'+
+    '</g>'+
     '<g class="yy-pose-container">'+poses.map(drawing).join('')+'</g>'+
     '<g class="yy-stars" aria-hidden="true"><path d="M150 135l7 17 18 5-18 6-7 17-6-17-17-6 17-5Z"/><path d="M582 99l5 13 14 5-14 4-5 13-5-13-14-4 14-5Z"/><circle cx="544" cy="222" r="3"/><circle cx="182" cy="240" r="2.5"/></g>'+
   '</svg>';

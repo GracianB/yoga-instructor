@@ -220,3 +220,16 @@
     transition:none!important;transform:none!important;
   }
 }
+
+.yy-iris{fill:url(#yy-iris-grad)}
+.yy-pupil{fill:#1a1612}
+.yy-glint{fill:#f4efe4;opacity:.8}
+.yy-lid{fill:var(--yy-fur,#d7c4b0)}
+.yy-lid-line,.yy-brow{fill:none;stroke:rgba(48,36,28,.45);stroke-width:1.4;stroke-linecap:round}
+.yy-belly{fill:rgba(196,120,132,.16);transform-box:fill-box;transform-origin:center;animation:yy-breath 7.6s ease-in-out infinite}
+.yy-grove{fill:rgba(47,107,79,.18)}
+.yy-petal-a{fill:rgba(214,160,174,.28)}
+.yy-petal-b{fill:rgba(223,184,191,.34)}
+.yy-petal-c{fill:rgba(63,154,104,.22)}
+.yy-frond{fill:none;stroke:rgba(47,107,79,.45);stroke-width:2;stroke-linecap:round}
+@keyframes yy-breath{50

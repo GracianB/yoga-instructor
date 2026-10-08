@@ -72,26 +72,25 @@
     const almondRight=soft?'M17 12Q40 6 62 12Q44 22 17 12Z':
       focus?'M17 12Q39 3 61 11Q45 24 17 12Z':
             'M17 11Q39-3 62 12Q46 28 17 11Z';
-    const gx = focus ? 3.2 : soft ? -1.6 : 0.4;
-    const gy = focus ? -0.6 : soft ? 2.4 : 0.8;
-    const lid = shut ? 18 : soft ? 7 : focus ? 1 : 3;
+    const gx = focus ? 3.4 : soft ? -1.8 : 0.6;
+    const gy = focus ? -0.4 : soft ? 2.2 : 0.8;
     const eyeUnit = (cx, side) => {
       const id = "yy-clip-"+p.id+"-"+side;
-      return '<g class="yy-eye-unit" transform="translate('+cx+' 8)">'+
-        '<clipPath id="'+id+'"><path d="M-20 3Q-11-13 0-11Q12-14 21 2Q11 15 0 15Q-12 15-20 3Z"/></clipPath>'+
+      return '<g class="yy-eye-unit" transform="translate('+cx+' 9)">'+
+        '<clipPath id="'+id+'"><path d="M-22 2Q-12-14 0-12Q13-15 22 2Q12 16 0 16Q-13 16-22 2Z"/></clipPath>'+
         '<g clip-path="url(#'+id+')">'+
-          '<ellipse cx="'+gx+'" cy="'+(2+gy)+'" rx="10.5" ry="11.5" class="yy-iris"/>'+
-          '<ellipse cx="'+gx+'" cy="'+(4+gy)+'" rx="3.6" ry="6.4" class="yy-pupil"/>'+
-          '<circle cx="'+(gx-3.2)+'" cy="'+(gy-1.4)+'" r="1.15" class="yy-glint"/>'+
-          '<path d="M-24 -16Q0 '+(-18+lid)+' 24 -14L24 22L-24 22Z" class="yy-lid"/>'+
+          '<path d="M-22 2Q-12-14 0-12Q13-15 22 2Q12 16 0 16Q-13 16-22 2Z" class="yy-eye-almond"/>'+
+          '<ellipse cx="'+gx+'" cy="'+(1+gy)+'" rx="9.4" ry="10.2" class="yy-eye-core"/>'+
+          '<ellipse cx="'+gx+'" cy="'+(3.2+gy)+'" rx="3.4" ry="5.8" class="yy-eye-center"/>'+
+          '<circle cx="'+(gx-2.8)+'" cy="'+(gy-2)+'" r="1.1" class="yy-eye-glint"/>'+
+          '<path d="M-16 0Q0 6 16 0" class="yy-eye-sheen"/>'+
         '</g>'+
-        '<path d="M-20 3Q-8-15 0-12Q11-16 21 2" class="yy-lid-line"/>'+
-        '<path d="M-16 -1Q-6-8 2-2" class="yy-brow"/>'+
+        '<path d="M-22 1Q-8 -16 2 -11Q14 -16 22 2" class="yy-guardian-lid"/>'+
       '</g>';
     };
     const eyes = shut
-      ? path('M-58 12Q-36 24-16 11M16 11Q38 24 58 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M20 6Q38 0 54 5','yy-sleep-brow')
-      : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(38,"r")+'</g>';
+      ? path('M-58 12Q-36 24-16 11M16 11Q38 24 58 10','yy-eye-closed')+path('M-54 4Q-36 0-20 7M22 6Q39 0 58 5','yy-sleep-brow')
+      : '<g class="yy-anim-eyes">'+eyeUnit(-38,"l")+eyeUnit(40,"r")+'</g>';
     return '<g class="yy-head" transform="'+toTransform(x,y,s,r)+'">'+
       // Strong ear silhouette with contrasting inner pattern.
       path('M-54-35Q-96-55-100-116Q-49-108-20-63Z','yy-fur yy-outline')+
@@ -126,7 +125,7 @@
   const torso=p=>{
     const [x,y,rx,ry,r]=p.body;
     const horizontal=ry<60;
-    return '<g class="yy-torso" transform="translate('+x+' '+y+') rotate('+r+')">'+
+    return '<g class="yy-torso yy-weight" data-kind="'+p.kind+'" transform="translate('+x+' '+y+') rotate('+r+')">'+
       // broad shoulders / taper into hips. The lower centre stays connected to the legs.
       '<path d="M-'+fmt(rx*.75)+' -'+fmt(ry*.57)+
       'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.78)+' '+fmt(ry*.55)+
@@ -180,7 +179,7 @@
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
     const hands=p.hands.map(pos=>point(pos,'yy-paw yy-hand')).join('');
     return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'" aria-hidden="true">'+
-      stance(p)+'<g class="yy-character"><g class="yy-tail-motion">'+tail(p)+'</g>'+
+      stance(p)+'<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
       '<g class="yy-legs">'+twoLegs+feet+'</g>'+torso(p)+
       '<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+

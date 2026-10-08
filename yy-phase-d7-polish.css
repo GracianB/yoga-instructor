@@ -99,3 +99,15 @@
 #instructor-flow .flow-theater .flow-side-next .flow-rail-button::before{transform:rotate(-45deg);border-color:#f0e2cc}
 .choice-arrow{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:999px;border:1px solid rgba(232,210,180,.4);color:#f0e2cc;font-size:13px}
 a[href*="GracianB"]{text-underline-offset:4px}
+
+/* Grounded breath: the figure never translates or scales. The belly alone expands.
+   A barely perceptible opacity rhythm keeps an actual animation on the pose,
+   while reduced-motion disables it through data-asana-state="reduced". */
+@keyframes yy-d7-grounded-presence{
+  0%,100%{opacity:1}
+  50%{opacity:.99}
+}
+#instructor-flow .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"]) .yy-pose-breath.is-current .yy-character{
+  animation:yy-d7-grounded-presence 7.6s ease-in-out infinite!important;
+  transform:none!important;
+}

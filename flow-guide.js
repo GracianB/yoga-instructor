@@ -136,6 +136,11 @@
   try{preferred=localStorage.getItem("yy-yoga-form");}catch(_){}
   selectForm(preferred==="yin"||preferred==="yang"?preferred:(document.documentElement.dataset.theme==="dark"?"yin":"yang"),!!preferred);
   showText();
-  // Notify UI on next turn, after all deferred modules have installed their listeners.
-  window.YOGA_RUNTIME.frame(reveal);
+  // Initial readiness must not depend on an animation frame: headless WebKit can
+  // defer requestAnimationFrame for background tabs. A task lets subsequent
+  // deferred scripts subscribe before we emit yoga:pose-ready.
+  const initialEpoch=epoch;
+  window.setTimeout(()=>{
+    if(epoch===initialEpoch && root.dataset.ready!=="true")reveal();
+  },0);
 })();

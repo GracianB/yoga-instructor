@@ -355,6 +355,14 @@ test('Phase B: each asana has a separate movement recipe and reduced-motion disa
       const animation=await guide.locator('.yy-pose.is-current '+samples[i][1]).first()
         .evaluate(el=>getComputedStyle(el).animationName);
       expect(animation).not.toBe('none');
+      if(samples[i][0]==='breath'){
+        // The breathing pose must remain planted: only the belly expands.
+        const pose=guide.locator('.yy-pose.is-current');
+        const bodyTransform=await pose.locator('.yy-character').evaluate(el=>getComputedStyle(el).transform);
+        const bellyAnimation=await pose.locator('.yy-belly').first().evaluate(el=>getComputedStyle(el).animationName);
+        expect(bodyTransform).toBe('none');
+        expect(bellyAnimation).not.toBe('none');
+      }
     }
   }
   await page.emulateMedia({reducedMotion:'reduce'});

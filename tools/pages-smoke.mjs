@@ -18,7 +18,7 @@ if (!Number.isInteger(attempts) || attempts < 1 || attempts > 40) throw Error('I
 if (!(waitSeconds >= 0 && waitSeconds <= 20)) throw Error('Invalid interval');
 if (base.protocol !== 'https:') throw Error('HTTPS required');
 
-const files = ['index.html', 'yin-yang-art.js', 'flow-guide.js', 'flow-guide.css', 'styles.css', 'favicon.svg'];
+const files = ['index.html', 'yin-yang-art.js', 'flow-guide.js', 'flow-guide.css', 'yy-asana-motion.js', 'yy-asana-motion.css', 'styles.css', 'favicon.svg'];
 const expected = await Promise.all(files.map(async name => {
   const data = await readFile(resolve(root, name));
   return { name, digest: createHash('sha256').update(data).digest('hex') };

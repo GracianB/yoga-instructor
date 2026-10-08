@@ -108,8 +108,9 @@
       'Q-'+fmt(rx*.94)+' -'+fmt(ry*.05)+' -'+fmt(rx*.78)+' '+fmt(ry*.55)+
       'Q0 '+fmt(ry*1.15)+' '+fmt(rx*.75)+' '+fmt(ry*.55)+
       'Q'+fmt(rx*1.04)+' 0 '+fmt(rx*.8)+' -'+fmt(ry*.55)+
-      'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.75)+' -'+fmt(ry*.57)+'Z" class="yy-fur yy-outline"/>'+
-      '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>'+
+      'Q0 -'+fmt(ry*1.1)+' -'+fmt(rx*.75)+' -'+fmt(ry*.57)+'Z" class="yy-fur yy-outline"'+(p.kind==="table"?' data-asana-back="true"':'')+'/>'+
+      (p.kind==="table"?'<path d="M-105 -24Q0 -58 104 -24" class="yy-back-highlight" data-asana-spine="true"/>':
+      '<path d="M-'+fmt(rx*.71)+' -'+fmt(ry*.34)+'Q0 -'+fmt(ry*.78)+' '+fmt(rx*.67)+' -'+fmt(ry*.25)+'" class="yy-shoulder-shine"/>')+
       (horizontal?'':
         '<path d="M-'+fmt(rx*.55)+' -'+fmt(ry*.64)+
           'Q-'+fmt(rx*.66)+' -'+fmt(ry*.24)+' -'+fmt(rx*.34)+' -'+fmt(ry*.14)+
@@ -141,9 +142,10 @@
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
     const hands=p.hands.map(pos=>point(pos,'yy-paw yy-hand')).join('');
     return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'" aria-hidden="true">'+
-      '<g class="yy-character">'+tail(p)+
+      '<g class="yy-character"><g class="yy-tail-motion">'+tail(p)+'</g>'+
       '<g class="yy-legs">'+twoLegs+feet+'</g>'+torso(p)+
-      '<g class="yy-arms">'+twoArms+hands+'</g>'+face(p)+
+      '<g class="yy-arms">'+twoArms+hands+'</g>'+
+      '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';
   };
   const markup=()=>'<svg class="yy-svg" viewBox="0 0 720 460" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Yin Yang yoga character">'+

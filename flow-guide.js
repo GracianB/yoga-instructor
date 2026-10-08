@@ -21,6 +21,7 @@
    '<div class="yy-stage"><div class="yy-sky" aria-hidden="true"></div><div class="yy-scene-breadcrumb" aria-hidden="true"><strong class="yy-count">01 / 10</strong><span class="yy-current-asana">Soltar el peso</span></div>'+
     '<div class="yy-energy yy-energy-a" aria-hidden="true"></div><div class="yy-energy yy-energy-b" aria-hidden="true"></div>'+
     art.markup()+
+    '<div class="yy-asana-step" aria-hidden="true">GATO · EXHALA</div>'+
     '<div class="yy-bloom" aria-hidden="true"><span>✧</span></div>'+
     '<div class="yy-breath-panel" aria-live="off" aria-hidden="true"><small>RESPIRACIÓN · 4 / 7 / 8</small>'+
     '<strong class="yy-breath-count">4</strong><span class="yy-breath-label">INHALA</span>'+

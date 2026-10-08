@@ -403,3 +403,40 @@ test("Yin Yang breath: existing 4-7-8 dock sends guide ticks and respects pause"
   assert.match(dock,/breathStarted \+= performance\.now\(\) - guidedPausedAt/);
   assert.match(guide,/window\.addEventListener\("yoga:breath"/);
 });
+
+
+test("Phase B: Cat-Cow changes only spine/head/tail; grounded limbs never multiply", () => {
+  const motion=readFileSync(new URL("../yy-asana-motion.js",import.meta.url),"utf8");
+  const art=readFileSync(new URL("../yin-yang-art.js",import.meta.url),"utf8");
+  const style=readFileSync(new URL("../yy-asana-motion.css",import.meta.url),"utf8");
+  assert.match(index,/yy-asana-motion\.js\?v=phase-b-1/);
+  assert.match(index,/yy-asana-motion\.css\?v=phase-b-1/);
+  assert.match(art,/data-asana-back/);
+  assert.match(art,/data-asana-spine/);
+  assert.match(motion,/8400/);
+  assert.match(motion,/bend=-60-39\*curve/);
+  assert.match(motion,/setAttribute\("d"/);
+  assert.match(motion,/rotate\(/);
+  assert.match(motion,/clock\.status!=="running"/);
+  assert.match(motion,/prefers-reduced-motion/);
+  assert.match(motion,/visibilitychange/);
+  assert.match(motion,/MutationObserver/);
+  assert.match(style,/data-asana-state="paused"/);
+  assert.match(style,/data-asana-state="reduced"/);
+});
+
+test("Phase B: distinct authored rhythms for the ten phases, not a generic whole-body bob", () => {
+  const style=readFileSync(new URL("../yy-asana-motion.css",import.meta.url),"utf8");
+  for(const [kind,animation] of [
+    ["rest","yy-rest"],["seat","yy-seated"],["breath","yy-breath-in"],
+    ["warrior","yy-warrior-focus"],["flow","yy-flow-rise"],["tree","yy-tree-sway"],
+    ["child","yy-head-bow"],["savasana","yy-savasana"],["finish","yy-finish-nod"]
+  ]) {
+    assert.match(style,new RegExp("yy-pose-"+kind));
+    assert.ok(style.includes("@keyframes "+animation),animation+" missing");
+  }
+  assert.ok(style.includes("yy-pose-table"));
+  assert.match(style,/yy-blink/);
+  assert.match(style,/animation-play-state:paused!important/);
+  assert.match(style,/@media\(prefers-reduced-motion:reduce\)/);
+});

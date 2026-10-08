@@ -115,8 +115,18 @@
   font-size:10px;line-height:1.75;letter-spacing:.025em;
   color:var(--muted);opacity:.66;
 }
-#instructor-flow .flow-console[data-flow-status="idle"] .flow-controls,
-#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls{display:none}
+#instructor-flow .flow-console[data-flow-status="idle"] .flow-controls{display:none}
+/* Finished has two legitimate choices: replay now or return to the start.
+   Never hide an enabled Reset button behind display:none. */
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls{
+  display:flex;justify-content:center;
+  width:100%;max-width:360px;margin:12px auto 0;
+}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="pause"]{display:none}
+#instructor-flow .flow-console[data-flow-status="finished"] .flow-controls [data-flow-action="reset"]{
+  display:inline-flex;grid-column:auto;justify-self:center;
+  margin:0 auto;padding:10px 20px;min-height:44px;
+}
 #instructor-flow .flow-console[data-flow-status="running"] .flow-entry-actions,
 #instructor-flow .flow-console[data-flow-status="paused"] .flow-entry-actions{display:none}
 #instructor-flow .flow-console[data-flow-status="finished"] [data-flow-action="preview"]{display:none}

@@ -9,7 +9,7 @@ const html=read('index.html'),build=read('tools/build.mjs'),
 test('D11 ships after D10, busts art cache, and passes Pages stylesheet manifest',()=>{
  assert.ok(html.indexOf('yy-dragon-d11.css')>html.indexOf('yy-dragon-d10.css'));
  assert.match(html,/yy-dragon-d11\.css\?v=d11-1/);
- assert.match(html,/yin-yang-art\.js\?v=phase-d15-1/);
+ assert.match(html,/yin-yang-art\.js\?v=phase-d16-1/);
  assert.match(build,/'yy-dragon-d11\.css'/);
  assert.match(pages,/expectedIndex\.matchAll/);
  assert.match(pages,/\.\.\.declaredStylesheets/);

@@ -149,13 +149,24 @@
       '<path d="M9 78L-3 70L13 91Q40 118 83 110Q48 111 9 78Z" class="yy-tail-fur"/>'+
       '</g>';
   };
+  // Contact shadows are attached only to load-bearing paws, not floating feet.
+  // They make the Cat-Cow, Warrior and Tree poses read as balanced and grounded.
+  const stance=p=>{
+    const grounded=p.kind==="table"?p.hands.concat(p.feet):
+      p.kind==="warrior"?p.feet:
+      p.kind==="tree"?p.feet.slice(0,1):[];
+    if(!grounded.length)return "";
+    return '<g class="yy-stance" aria-hidden="true">'+grounded.map(([x,y])=>
+      '<ellipse class="yy-stance-shadow" cx="'+x+'" cy="'+(y+16)+
+      '" rx="26" ry="6"/>').join('')+'</g>';
+  };
   const drawing=p=>{
     const twoLegs=p.legs.map((d,i)=>limb(d,'leg',i)).join('');
     const twoArms=p.arms.map((d,i)=>limb(d,'arm',i)).join('');
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
     const hands=p.hands.map(pos=>point(pos,'yy-paw yy-hand')).join('');
     return '<g data-pose="'+p.id+'" class="yy-pose yy-pose-'+p.kind+'" aria-hidden="true">'+
-      '<g class="yy-character"><g class="yy-tail-motion">'+tail(p)+'</g>'+
+      stance(p)+'<g class="yy-character"><g class="yy-tail-motion">'+tail(p)+'</g>'+
       '<g class="yy-legs">'+twoLegs+feet+'</g>'+torso(p)+
       '<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+

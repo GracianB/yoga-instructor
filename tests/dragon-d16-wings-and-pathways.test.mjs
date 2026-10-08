@@ -30,7 +30,12 @@ test('D16: wings and anatomical meridian rendered for each of ten poses',()=>{
 });
 test('D16: wing geometry folds in grounded phases',()=>{
  const view=svg();
- const get=id=>view.split('data-pose="'+id+'"')[1]?.split('</g></g>')[0]||'';
+ const get=id=>{
+  const offset=view.indexOf('<g data-pose="'+id+'"');
+  if(offset<0)return '';
+  const next=view.indexOf('<g data-pose="',offset+13);
+  return view.slice(offset,next<0?undefined:next);
+ };
  for(const id of ['start','warmup','cooldown','savasana'])
    assert.match(get(id),/data-fold="rest"/,id);
  for(const id of ['centering','breath','pose-1','transition','pose-2','finish'])

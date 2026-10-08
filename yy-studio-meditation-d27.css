@@ -43,3 +43,9 @@ html[data-theme="dark"] #instructor-flow .studio-meditation-choices button[aria-
  animation:none!important;transform:none!important
  }
 }
+
+#instructor-flow .studio-meditation-choices[hidden]{display:none!important}
+/* Guided meditation never lifts the planted SVG figure. */
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion .yy-character{
+ animation:none!important;transform:none!important
+}

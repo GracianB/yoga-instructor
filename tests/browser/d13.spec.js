@@ -78,6 +78,7 @@ test('D13: both energies keep horn/closed eyes through all ten poses',async({pag
   }
   if(spirit==='yang'){
     await page.locator('[data-flow-action="reset"]').evaluate(el=>el.click());
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
     await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
   }
  }

@@ -106,6 +106,9 @@
 .flow-theater .yy-eye-white{fill:#d9e4e7}
 .flow-theater .yy-guide[data-spirit="yin"] .yy-eye-white{fill:#bdc7d0}
 .flow-theater .yy-iris{filter:none}
+.flow-theater .yy-heavy-lid{fill:none;stroke:var(--yy-outline);stroke-width:3.8;stroke-linecap:round;opacity:.84}
+.flow-theater .yy-belly-shade{fill:var(--yy-fur-deep);opacity:.31;stroke:none}
+.flow-theater .yy-back-highlight{stroke-width:5;stroke:var(--yy-ruff);opacity:.38}
 .flow-theater .yy-face-streak{opacity:.46}
 .flow-theater .yy-cheek{opacity:.54}
 .flow-theater .yy-opposite-lock{fill:#405d6c;stroke:#86aeb5;opacity:.81}

@@ -162,6 +162,9 @@ test('reduced motion, accessibility and document links', async ({ page, request 
   await expect(page.locator('.zintro')).toBeHidden();
   for (const theme of ['light', 'dark']) {
     await page.locator(`[data-set-theme="${theme}"]`).click();
+    // A transition between two individually accessible palettes can pass
+    // through an inaccessible intermediate foreground/background combination.
+    await expect(page.locator('button[data-set-lang="es"]')).toHaveCSS('transition-duration','0s');
     const result = await new AxeBuilder({ page }).options({ preload: false }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     expect(result.violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) }))).toEqual([]);
   }

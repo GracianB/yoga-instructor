@@ -175,6 +175,8 @@ test('reduced motion, accessibility and document links', async ({ page, request 
 
 test('Yin Yang ten-phase yoga flow: distinct poses, navigation gate and 4-7-8 dock', async ({ page }) => {
   test.setTimeout(90000);
+  // Manual navigation screenshots must not race the automatic five-second tour.
+  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
   const errors=await open(page);
   const guide=page.locator('#flow-guide');
   await expect(guide).toHaveClass(/yy-guide/);
@@ -450,6 +452,8 @@ test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async (
 test('D2/D3: ten postures in Yin/Yang with non-overlapping rails and green sanctuary', async ({page,browserName})=>{
  test.skip(browserName !== 'chromium', 'Exhaustive matrix on Chromium; cross-browser regression covered by the existing suite.');
  test.setTimeout(150000);
+  // Manual navigation screenshots must not race the automatic five-second tour.
+  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
  const errors=await open(page);
  const guide=page.locator('#flow-guide');
  const theater=page.locator('.flow-theater');
@@ -537,4 +541,119 @@ test('D4 audio transport click toggles playback, labels and icons',async ({page}
  await expect(button.locator('.ico-play')).toBeVisible();
  await expect(button.locator('.ico-pause')).toBeHidden();
  expect(errors).toEqual([]);
+});
+
+test('D5 guardian silhouette: all ten vector poses have tapered intact limbs',async ({page})=>{
+ const errors=await open(page);
+ const guide=page.locator('#flow-guide');
+ await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+ const poses=guide.locator('.yy-pose');
+ await expect(poses).toHaveCount(10);
+ for(const pose of await poses.all()){
+   await expect(pose.locator('[data-limb^="arm-"]')).toHaveCount(2);
+   await expect(pose.locator('[data-limb^="leg-"]')).toHaveCount(2);
+   await expect(pose.locator('.yy-paw-group')).toHaveCount(4);
+   const paths=await pose.locator('[data-limb]').evaluateAll(nodes=>nodes.map(n=>{
+     const d=n.getAttribute('d')||'';
+     const box=n.getBBox();
+     return {d,valid:box.width>0&&box.height>0};
+   }));
+   expect(paths).toHaveLength(4);
+   for(const shape of paths){
+     expect(shape.valid).toBe(true);
+     expect(shape.d).toMatch(/Q/);
+     expect(shape.d.endsWith('Z')).toBe(true);
+   }
+ }
+ expect(errors).toEqual([]);
+});
+
+test('D5 complete character review: ten poses, two energies, responsive and stillness',async ({page,browserName})=>{
+ test.skip(browserName!=='chromium','The exhaustive matrix runs once; cross-browser checks remain in Phase C.');
+ test.setTimeout(120000);
+ const errors=await open(page);
+ const guide=page.locator('#flow-guide');
+ await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+ for(const width of [320,390,768,1440]){
+   await page.setViewportSize({width,height:900});
+   for(const spirit of ['yang','yin']){
+     await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
+     await expect(guide).toHaveAttribute('data-spirit',spirit);
+     const checks=await guide.locator('.yy-pose').evaluateAll(poses=>poses.map(p=>{
+       const limbs=[...p.querySelectorAll('[data-limb]')];
+       const paws=[...p.querySelectorAll('.yy-paw-group')];
+       return {phase:p.dataset.pose,limbs:limbs.length,paws:paws.length,
+         meshes:limbs.every(l=>{const box=l.getBBox();return box.width>2&&box.height>2})};
+     }));
+     expect(checks).toHaveLength(10);
+     for(const pose of checks){expect(pose.limbs).toBe(4);expect(pose.paws).toBe(4);expect(pose.meshes).toBe(true);}
+     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+     const rail=await page.locator('.flow-theater [data-flow-action="next"]').boundingBox();
+     expect(rail && rail.width>=34).toBeTruthy();
+     if(width===390||width===1440){
+       await test.info().attach('d5-guardian-'+spirit+'-'+width,{
+         body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'
+       });
+     }
+   }
+ }
+ await page.emulateMedia({reducedMotion:'reduce'});
+ const blinking=await guide.locator('.yy-pose.is-current .yy-anim-eyes').count();
+ if(blinking){
+   const name=await guide.locator('.yy-pose.is-current .yy-anim-eyes').evaluate(el=>getComputedStyle(el).animationName);
+   expect(name).toBe('none');
+ }
+ expect(errors).toEqual([]);
+});
+
+test('D5 cinematic contact sheet: all 10 poses, Yin and Yang, mobile and desktop',async ({page,browserName})=>{
+ test.skip(browserName!=='chromium','Visual contact sheet is recorded on Chromium; other engines retain the cross-browser suite.');
+ test.setTimeout(180000);
+  // Manual navigation screenshots must not race the automatic five-second tour.
+  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
+ const errors=await open(page);
+ const guide=page.locator('#flow-guide');
+ const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+ const phases=['start','centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
+ await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+ for(const width of [390,1440]){
+  await page.setViewportSize({width,height:900});
+  for(const spirit of ['yang','yin']){
+   await act('reset');
+   await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+   await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
+   await expect(guide).toHaveAttribute('data-spirit',spirit);
+   await act('preview');
+   for(let i=0;i<phases.length;i++){
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    if(i)await act('next');
+    await expect(guide).toHaveAttribute('data-phase',phases[i]);
+    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+    await expect(guide.locator('.yy-pose.is-current')).toHaveCount(1);
+    await test.info().attach('d5-'+width+'-'+spirit+'-'+String(i+1).padStart(2,'0')+'-'+phases[i],{
+      body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'
+    });
+   }
+  }
+ }
+ expect(errors).toEqual([]);
+});
+
+test('quick tour advances automatically while pause prevents unsolicited movement', async ({page,browserName})=>{
+  test.skip(browserName!=='chromium','Time-sensitive real-clock interaction checked once.');
+  test.setTimeout(45000);
+  const errors=await open(page);
+  const guide=page.locator('#flow-guide');
+  const action=a=>page.locator('[data-flow-action="'+a+'"]').click();
+  await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
+  await action('preview');
+  await expect(guide).toHaveAttribute('data-phase','centering',{timeout:11000});
+  await action('pause');
+  await expect(guide).toHaveAttribute('data-status','paused');
+  await page.waitForTimeout(5500);
+  await expect(guide).toHaveAttribute('data-phase','centering');
+  await action('pause');
+  await expect(guide).toHaveAttribute('data-status','running');
+  await expect(guide).toHaveAttribute('data-phase','breath',{timeout:11000});
+  expect(errors).toEqual([]);
 });

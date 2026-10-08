@@ -1,0 +1,132 @@
+/* D.5 · Guardian soul: animated expression, not theatrical face distortion. */
+#instructor-flow .yy-pose.is-current .yy-head-motion{will-change:transform}
+#instructor-flow .yy-pose.is-current .yy-ear-inner{
+  fill:color-mix(in srgb,var(--yy-ear) 83%,var(--yy-fur));
+  opacity:.86;
+}
+#instructor-flow .yy-pose.is-current .yy-crest{
+  stroke:var(--yy-outline);stroke-width:2.8;stroke-linejoin:round;
+}
+#instructor-flow .yy-pose.is-current .yy-cheek-shine{opacity:.28}
+#instructor-flow .yy-pose.is-current .yy-eye-sheen{opacity:.36}
+#instructor-flow .yy-pose.is-current .yy-smile{
+  stroke-width:1.8;opacity:.75;
+}
+#instructor-flow .yy-pose.is-current .yy-nose{opacity:.76}
+#instructor-flow .yy-pose.is-current .yy-tail-motion{transform-origin:center}
+#instructor-flow .yy-pose.is-current .yy-gem{
+  filter:drop-shadow(0 0 2px var(--yy-badge));
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-pose.is-current .yy-gem{
+  filter:drop-shadow(0 0 4px var(--yy-magic));
+}
+#instructor-flow .yy-guide[data-spirit="yang"] .yy-pose.is-current .yy-gem{
+  filter:drop-shadow(0 0 4px var(--yy-badge));
+}
+/* Ten authored characters retain their anatomy. Expression depends on purpose. */
+#instructor-flow .yy-pose-rest.is-current .yy-smile,
+#instructor-flow .yy-pose-savasana.is-current .yy-smile{opacity:.37}
+#instructor-flow .yy-pose-warrior.is-current .yy-eye-sheen{opacity:.22}
+#instructor-flow .yy-pose-warrior.is-current .yy-guardian-lid{stroke-width:3.6}
+#instructor-flow .yy-pose-seat.is-current .yy-cheek-shine,
+#instructor-flow .yy-pose-breath.is-current .yy-cheek-shine{opacity:.18}
+#instructor-flow .yy-pose-finish.is-current .yy-cheek-shine{opacity:.55}
+#instructor-flow .yy-guide[data-status="running"][data-asana-state="running"] .yy-pose.is-current .yy-anim-eyes{
+  animation:yy-d5-soft-blink 11s ease-in-out infinite;
+  transform-box:fill-box;transform-origin:center;
+}
+#instructor-flow .yy-guide[data-spirit="yin"][data-status="running"][data-asana-state="running"] .yy-pose.is-current .yy-anim-eyes{
+  animation-duration:14s;
+}
+@keyframes yy-d5-soft-blink{
+  0%,36%,38%,75%,77%,100%{transform:scaleY(1)}
+  37%,76%{transform:scaleY(.16)}
+}
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-anim-eyes,
+#instructor-flow .yy-guide[data-asana-state="transition"] .yy-anim-eyes{animation-play-state:paused!important}
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-anim-eyes,
+#instructor-flow .yy-guide[data-hidden="true"] .yy-anim-eyes,
+body.quiet-mode #instructor-flow .yy-anim-eyes{animation:none!important}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-anim-eyes{animation:none!important}
+}
+
+/* Believable weight: only contact paws cast a fine shadow on the mat. */
+#instructor-flow .yy-stance-shadow{
+  fill:#092b1e;opacity:.23;pointer-events:none;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stance-shadow{
+  fill:#03171b;opacity:.36;
+}
+#instructor-flow .yy-guide[data-phase="warmup"] .yy-stance-shadow{opacity:.3}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .yy-stance-shadow{transition:none!important}
+}
+
+/* D.5 art direction audit: remove the toy-blue / violet neon stage.
+   The character is mineral, botanical and serene. Two energies, one universe. */
+#instructor-flow .yy-guide[data-spirit="yang"]{
+  --yy-fur:#e9f0e7;--yy-fur-deep:#bacfc1;--yy-outline:#294b40;
+  --yy-mane:#477e6d;--yy-ear:#8ebca9;--yy-eye:#2b5045;
+  --yy-cheek:#d4e1d4;--yy-muzzle:#f6f2e9;--yy-paw:#376957;
+  --yy-badge:#b3cfa6;--yy-magic:#dfd5b5;--yy-ruff:#f3f3e5;
+}
+#instructor-flow .yy-guide[data-spirit="yin"]{
+  --yy-fur:#303c46;--yy-fur-deep:#202e39;--yy-outline:#152730;
+  --yy-mane:#526b6d;--yy-ear:#819d9b;--yy-eye:#b5cabc;
+  --yy-cheek:#425d61;--yy-muzzle:#586a6b;--yy-paw:#203a3f;
+  --yy-badge:#aac4b4;--yy-magic:#cbd0b2;--yy-ruff:#d5ded7;
+}
+#instructor-flow .yy-guide .yy-lotus{
+  fill:#809f89;stroke:#b0c8ae;stroke-width:1.5;opacity:.76;
+}
+#instructor-flow .yy-guide .yy-lotus-inner{
+  fill:#c3d5b9;opacity:.42;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-lotus{
+  fill:#6c8683;stroke:#9dafae;opacity:.65;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-lotus-inner{
+  fill:#a6bbb5;opacity:.30;
+}
+#instructor-flow .yy-guide .yy-stance-shadow{
+  fill:#142f28;opacity:.19;
+}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stance-shadow{
+  fill:#071c1e;opacity:.32;
+}
+/* The illustration leads. No flashing jewels or exaggerated plastic shine. */
+#instructor-flow .yy-guide .yy-gem{filter:none!important}
+#instructor-flow .yy-guide .yy-cheek-shine{opacity:.12}
+#instructor-flow .yy-guide .yy-paw-toes{opacity:.36}
+#instructor-flow .yy-guide .yy-eye-sheen{opacity:.14}
+#instructor-flow .yy-guide .yy-guardian-lid{opacity:.60}
+#instructor-flow .yy-guide .yy-stars{opacity:.30}
+#instructor-flow .yy-guide[data-phase="finish"] .yy-stars{opacity:.56;filter:none}
+
+/* Mature character silhouettes: fewer cartoon edge highlights, clearer volume. */
+#instructor-flow .yy-guide .yy-tail-band{
+  stroke-width:6;opacity:.32;
+}
+#instructor-flow .yy-guide .yy-tail-glint{
+  stroke:var(--yy-ruff);stroke-width:2;opacity:.22;
+}
+#instructor-flow .yy-guide .yy-temple-mark{
+  stroke-width:1.7;opacity:.30;
+}
+#instructor-flow .yy-guide .yy-ear-light{
+  stroke-width:1.8;opacity:.34;
+}
+#instructor-flow .yy-guide .yy-fur-fringe{
+  stroke-width:4;opacity:.58;
+}
+#instructor-flow .yy-guide .yy-crown-shine{opacity:.34}
+#instructor-flow .yy-guide .yy-limb-lustre{opacity:.19;stroke-width:2.2}
+#instructor-flow .yy-guide .yy-paw-gloss{opacity:.12}
+#instructor-flow .yy-guide[data-spirit="yin"] .yy-stage{
+  background:
+    radial-gradient(ellipse 48% 62% at 50% 51%,rgba(140,177,158,.24),transparent 82%),
+    radial-gradient(ellipse 45% 54% at 73% 23%,rgba(198,213,188,.10),transparent 83%),
+    linear-gradient(150deg,#19342f,#25483e 62%,#102b2b);
+  border-color:rgba(153,185,166,.28);
+}

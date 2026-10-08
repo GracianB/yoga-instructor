@@ -27,7 +27,7 @@
       asanas: "Movimiento", asanasDetail: "10 fases · dragón Yin / Yang",
       breath: "Respiración", breathDetail: "Un ritmo suave · 4 / 6",
       meditation: "Meditación", meditationDetail: "Silencio y atención",
-      minutes: "DURACIÓN", ready: "PREPARADO", running: "EN PRÁCTICA",
+      minutes: "DURACIÓN", ready: "PREPARADO", idle: "PREPARADO", running: "EN PRÁCTICA",
       paused: "EN PAUSA", finished: "COMPLETADA",
       begin: "Empezar", pause: "Pausar", resume: "Continuar",
       again: "Repetir", reset: "Reiniciar", 
@@ -50,7 +50,7 @@
       asanas: "Movement", asanasDetail: "10 phases · Yin / Yang dragon",
       breath: "Breathing", breathDetail: "Gentle rhythm · 4 / 6",
       meditation: "Meditation", meditationDetail: "Silence and attention",
-      minutes: "DURATION", ready: "READY", running: "PRACTISING",
+      minutes: "DURATION", ready: "READY", idle: "READY", running: "PRACTISING",
       paused: "PAUSED", finished: "COMPLETE",
       begin: "Begin", pause: "Pause", resume: "Resume",
       again: "Practice again", reset: "Reset",
@@ -147,6 +147,7 @@
         : "1");
     countdown.textContent = format(Math.ceil(snapshot.remainingMs / 1000));
     progress.style.transform = "scaleX(" + snapshot.progress.toFixed(4) + ")";
+    progress.parentElement?.setAttribute("aria-valuenow", String(Math.round(snapshot.progress * 100)));
     root.querySelector("#studio-guided-note").textContent = copy(isBreathing ? "breathNote" : "meditationNote");
     primary.textContent = copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
       snapshot.status === "paused" ? "resume" : "again");
@@ -212,6 +213,11 @@
   const langObserver = new MutationObserver(syncLanguage);
   langObserver.observe(document.documentElement, {attributes:true,attributeFilter:["lang"]});
   window.addEventListener("pagehide", stopTick);
+  window.addEventListener("pageshow", () => {
+    if (mode !== "asanas" && clock.snapshot().status === "running" && ticker === null)
+      ticker = setInterval(render, 200);
+    if (mode !== "asanas") render();
+  });
   syncLanguage();
   lockChoices();
 })();

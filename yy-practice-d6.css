@@ -230,3 +230,40 @@
     transition:none!important;transform:none!important;
   }
 }
+
+.yy-iris{fill:url(#yy-iris-grad)}
+.yy-pupil{fill:#1a1612}
+.yy-glint{fill:#f4efe4;opacity:.8}
+.yy-lid{fill:var(--yy-fur,#d7c4b0)}
+.yy-lid-line,.yy-brow{fill:none;stroke:rgba(48,36,28,.45);stroke-width:1.4;stroke-linecap:round}
+.yy-belly{fill:rgba(196,120,132,.16);transform-box:fill-box;transform-origin:center;animation:yy-breath 7.6s ease-in-out infinite}
+.yy-grove{fill:rgba(47,107,79,.18)}
+.yy-petal-a{fill:rgba(214,160,174,.28)}
+.yy-petal-b{fill:rgba(223,184,191,.34)}
+.yy-petal-c{fill:rgba(63,154,104,.22)}
+.yy-frond{fill:none;stroke:rgba(47,107,79,.45);stroke-width:2;stroke-linecap:round}
+@keyframes yy-breath{50%{transform:scaleY(1.08)}}
+
+.yy-eye-core{fill:url(#yy-iris-grad)}
+.yy-eye-center{fill:#1c1916}
+.yy-eye-almond{fill:#efe6da}
+.yy-eye-glint{fill:#f7f1e8;opacity:.85}
+.yy-eye-sheen{fill:none;stroke:rgba(255,255,255,.35);stroke-width:1.2;stroke-linecap:round}
+.yy-guardian-lid{fill:none;stroke:rgba(62,44,36,.55);stroke-width:1.6;stroke-linecap:round}
+.yy-weight[data-kind="warrior"]{transform-box:fill-box;transform-origin:50% 70%;animation:yy-weight 6s ease-in-out infinite}
+.yy-weight[data-kind="breath"]{transform-box:fill-box;transform-origin:center;animation:yy-breath 7.6s ease-in-out infinite}
+.yy-pose-flow .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 5.4s ease-in-out infinite}
+.yy-pose-warrior .yy-tail-motion{transform-box:fill-box;transform-origin:0 50%;animation:yy-tail 4.8s ease-in-out infinite}
+@keyframes yy-weight{50%{translate:0 -6px;rotate:-1.4deg}}
+@keyframes yy-tail{50%{rotate:7deg}}
+
+.yy-spine{fill:none;stroke:rgba(255,236,214,.28);stroke-width:2.2;stroke-linecap:round}
+.yy-collar,.yy-hip{fill:none;stroke:rgba(90,58,48,.28);stroke-width:1.6;stroke-linecap:round}
+.yy-pad{fill:rgba(214,160,174,.55)}
+.yy-toe{fill:none;stroke:rgba(90,58,48,.4);stroke-width:1.2;stroke-linecap:round}
+.yy-pose-table .yy-spine{animation:yy-spine 4.8s ease-in-out infinite}
+.yy-pose-tree .yy-character{transform-box:fill-box;transform-origin:50% 80%;animation:yy-tree 5.5s ease-in-out infinite}
+.yy-pose-savasana .yy-belly{animation:yy-breath 9.5s ease-in-out infinite}
+.yy-pose-child .yy-tail-motion{transform-box:fill-box;transform-origin:0 40%;animation:yy-tail 7s ease-in-out infinite}
+@keyframes yy-spine{50%{translate:0 4px}}
+@keyframes yy-tree{50%{rotate:.8deg}}

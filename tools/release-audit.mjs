@@ -35,7 +35,7 @@ assert.ok((html.match(/data-flow-action="previous"/g)||[]).length === 1, 'Exactl
 assert.ok((html.match(/data-flow-action="next"/g)||[]).length === 1, 'Exactly one next control');
 assert.ok(statSync('yy-asana-motion.css').size <= 12000, 'Asana motion CSS budget');
 assert.ok(statSync('yy-asana-motion.js').size <= 6000, 'Asana motion JS budget');
-assert.ok(html.includes('yy-asana-motion.js?v=phase-c-1'), 'Asana motion script must load');
+assert.ok(html.includes('yy-asana-motion.js?v=phase-c-2'), 'Asana motion script must load');
 assert.ok(html.includes('yy-asana-motion.css?v=phase-b-1'), 'Asana motion styles must load');
 assert.ok(statSync('flow-guide.css').size <= 16000, 'Guide CSS budget');
 assert.ok(statSync('flow-guide.js').size <= 16000, 'Guide JS budget');

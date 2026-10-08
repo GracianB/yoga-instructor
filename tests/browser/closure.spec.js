@@ -59,9 +59,12 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
   const errors = await open(page);
   const clickControl = async action => {
     const button = page.locator(`[data-flow-action="${action}"]`);
-    await button.evaluate(element => element.scrollIntoView({ behavior: 'instant', block: 'center' }));
+    // Playwright scrolls and waits for a stable, enabled target itself.
+    // Manual scroll races the section's intersection/reveal transition.
+    await expect(button).toBeEnabled();
     await button.click();
   };
+  await expect(page.locator('#flow-guide')).toHaveAttribute('data-ready','true');
   await clickControl('start');
   await expect(page.locator('#flow-state')).toHaveText('EN PRÁCTICA');
   await expect(page.locator('#flow-session-time')).not.toHaveText('00:00');
@@ -159,6 +162,9 @@ test('reduced motion, accessibility and document links', async ({ page, request 
   await expect(page.locator('.zintro')).toBeHidden();
   for (const theme of ['light', 'dark']) {
     await page.locator(`[data-set-theme="${theme}"]`).click();
+    // A transition between two individually accessible palettes can pass
+    // through an inaccessible intermediate foreground/background combination.
+    await expect(page.locator('button[data-set-lang="es"]')).toHaveCSS('transition-duration','0s');
     const result = await new AxeBuilder({ page }).options({ preload: false }).withTags(['wcag2a','wcag2aa','wcag21aa']).analyze();
     expect(result.violations.map(v => ({ id: v.id, nodes: v.nodes.map(n => n.target) }))).toEqual([]);
   }

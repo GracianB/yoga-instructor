@@ -1,0 +1,155 @@
+/* D18 · PRESENCE STUDIO. Separate experience layer; D17 dragon is untouched. */
+#instructor-flow{
+  --studio-moss:#173c35;--studio-sage:#7eab91;--studio-cream:#f6f1e7;--studio-gold:#bd9369;
+  --studio-ink:#213b36;--studio-edge:rgba(62,100,82,.22);
+}
+#instructor-flow .instructor-flow-head{max-width:760px;margin-bottom:28px}
+#instructor-flow .instructor-flow-head .about-lead{max-width:620px}
+#instructor-flow .studio-entrance{
+  padding:clamp(18px,3.5vw,36px); margin:0 0 22px; border:1px solid var(--studio-edge);
+  border-radius:30px;
+  background:linear-gradient(130deg,rgba(252,247,234,.96),rgba(218,235,221,.58));
+  box-shadow:0 16px 48px rgba(38,77,58,.055);
+  color:var(--studio-ink);
+}
+#instructor-flow .studio-intro{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:22px;flex-wrap:wrap}
+#instructor-flow .studio-overline{display:block;color:#627d6f;font:600 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.2em;text-transform:uppercase}
+#instructor-flow .studio-intro h3{
+  color:#21453b;font:500 clamp(24px,3vw,36px)/1.2 'Fraunces',serif;
+  margin:7px 0 0;letter-spacing:-.035em
+}
+#instructor-flow .studio-intro p{max-width:285px;margin:0;color:#637970;font:400 13px/1.7 'Inter',sans-serif}
+#instructor-flow .studio-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#instructor-flow .studio-mode{
+  display:flex;align-items:center;gap:15px;min-width:0;text-align:left;
+  padding:18px 17px;min-height:94px;border:1px solid rgba(42,87,68,.18);
+  border-radius:19px;background:rgba(255,255,255,.65);color:#385348;
+  cursor:pointer;transition:background .25s,border-color .25s,transform .25s,box-shadow .25s;
+}
+#instructor-flow .studio-mode:not(:disabled):hover{transform:translateY(-2px);background:#fff}
+#instructor-flow .studio-mode[aria-pressed="true"]{
+  background:#1e4b40;color:#f7f3e8;border-color:#1e4b40;
+  box-shadow:0 9px 22px rgba(29,81,64,.16)
+}
+#instructor-flow .studio-mode:focus-visible,#instructor-flow .studio-guided button:focus-visible{
+  outline:3px solid #b47f45;outline-offset:3px
+}
+#instructor-flow .studio-mode:disabled{cursor:not-allowed;opacity:.47;transform:none}
+#instructor-flow .studio-number{align-self:flex-start;padding-top:3px;opacity:.75;font:600 10px 'JetBrains Mono',monospace}
+#instructor-flow .studio-mode-copy{display:flex;flex-direction:column;gap:7px;min-width:0;flex:1}
+#instructor-flow .studio-mode-copy strong{font:500 clamp(16px,1.8vw,22px)/1.2 'Fraunces',serif}
+#instructor-flow .studio-mode-copy small{font:500 11px/1.5 'Inter',sans-serif;opacity:.78}
+#instructor-flow .studio-symbol{font-size:24px;line-height:1;opacity:.75}
+#instructor-flow .studio-guided[hidden],#instructor-flow .flow-console[hidden]{display:none!important}
+#instructor-flow .flow-console{
+  border:1px solid var(--studio-edge);border-radius:28px;
+  box-shadow:0 24px 64px rgba(24,73,51,.065);
+}
+#instructor-flow .studio-guided{
+  position:relative;overflow:hidden;border-radius:30px;border:1px solid rgba(88,129,101,.24);
+  background:linear-gradient(145deg,#ecf3e9 0%,#fcf7ec 45%,#e5ede3 100%);
+  color:#25493e;box-shadow:0 18px 60px rgba(31,77,59,.09);
+}
+#instructor-flow .studio-guided-stage{isolation:isolate;position:relative;padding:26px clamp(20px,4vw,48px) 42px;text-align:center;min-height:410px}
+#instructor-flow .studio-guided-stage::before{
+  content:"";z-index:-1;position:absolute;inset:-30% 0 0;
+  background:radial-gradient(circle at 50% 53%,rgba(151,187,154,.19),transparent 44%);
+  pointer-events:none;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-stage{
+ background:radial-gradient(ellipse at 50% 30%,rgba(208,210,191,.4),transparent 70%);
+}
+#instructor-flow .studio-guided-top{display:flex;justify-content:space-between;align-items:center;gap:15px;flex-wrap:wrap}
+#instructor-flow .studio-guided-top .studio-session-label{
+ color:#6e8778;font:600 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.15em;text-transform:uppercase
+}
+#instructor-flow .studio-guided-top .studio-live-state{
+ border:1px solid rgba(79,116,86,.26);background:rgba(255,255,255,.48);
+ color:#5b7b6a;border-radius:90px;padding:7px 12px;
+ font:600 10px/1 'JetBrains Mono',monospace;letter-spacing:.08em
+}
+#instructor-flow .studio-breath-orb{
+ position:relative;display:grid;place-items:center;width:min(39vw,210px);aspect-ratio:1;
+ border-radius:50%;margin:26px auto 20px;
+ background:radial-gradient(circle at 36% 27%,#ffffffaa,transparent 46%),linear-gradient(148deg,#c3d8c1,#88b6a6 60%,#4c8075);
+ border:1px solid rgba(255,255,255,.65);
+ box-shadow:0 18px 60px rgba(62,121,98,.23),inset 0 0 34px #ffffff6b;
+ transform:scale(var(--studio-breath-scale,1));transition:transform .22s linear,background .4s;
+}
+#instructor-flow .studio-breath-orb::before,#instructor-flow .studio-breath-orb::after{
+ content:"";position:absolute;inset:-17px;border:1px solid rgba(78,122,99,.27);border-radius:50%;pointer-events:none
+}
+#instructor-flow .studio-breath-orb::after{inset:-34px;border-color:rgba(78,122,99,.12)}
+#instructor-flow .studio-orb-mark{font:400 60px/1 'Fraunces',serif;color:#edf4e7;text-shadow:0 3px 16px #507b64}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-breath-orb{
+ background:radial-gradient(circle at 30% 25%,#fff7d9,transparent 50%),linear-gradient(135deg,#9caa9d,#708f80 70%,#466d63)
+}
+#instructor-flow .studio-guided-title{font:500 clamp(25px,4vw,40px)/1.18 'Fraunces',serif;color:#255448;margin:8px 0 4px}
+#instructor-flow .studio-guided-cue{max-width:500px;margin:0 auto;color:#688173;font:400 14px/1.7 'Inter',sans-serif}
+#instructor-flow .studio-guided-countdown{margin:22px 0 5px;font:500 clamp(42px,7vw,70px)/1 'Fraunces',serif;letter-spacing:-.035em;font-variant-numeric:tabular-nums}
+#instructor-flow .studio-guided-progress{height:4px;background:rgba(68,120,85,.16);border-radius:8px;overflow:hidden;max-width:470px;margin:16px auto}
+#instructor-flow .studio-guided-progress span{display:block;width:100%;height:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#a4bba0,#426f63)}
+#instructor-flow .studio-guided-controls{
+  padding:20px clamp(16px,4vw,42px) 27px;background:rgba(250,248,239,.64);
+  border-top:1px solid rgba(67,113,87,.15);display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap
+}
+#instructor-flow .studio-duration{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+#instructor-flow .studio-duration-label{color:#668070;font:600 10px 'JetBrains Mono',monospace;letter-spacing:.12em;margin-right:8px}
+#instructor-flow .studio-duration button{
+  border:1px solid rgba(56,100,76,.22);color:#36594b;background:rgba(255,255,255,.76);
+  padding:10px 13px;border-radius:50px;cursor:pointer;font:600 12px 'Inter',sans-serif
+}
+#instructor-flow .studio-duration button[aria-pressed="true"]{background:#345f51;color:#fff;border-color:#345f51}
+#instructor-flow .studio-duration button:disabled{opacity:.4;cursor:default}
+#instructor-flow .studio-action-buttons{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+#instructor-flow .studio-action-buttons button{
+ border:1px solid rgba(59,99,82,.24);background:transparent;color:#315848;
+ padding:13px 19px;border-radius:50px;cursor:pointer;font:600 12px 'Inter',sans-serif
+}
+#instructor-flow .studio-action-buttons .studio-primary{background:#245448;border-color:#245448;color:#fff}
+#instructor-flow .studio-action-buttons button:disabled{opacity:.4;cursor:default}
+#instructor-flow .studio-guided-note{font:400 12px/1.65 'Inter',sans-serif;color:#688073;margin:12px clamp(20px,4vw,42px) 19px}
+html[data-theme="dark"] #instructor-flow .studio-entrance,body.dark #instructor-flow .studio-entrance{
+ background:linear-gradient(135deg,#17382f,#203e39);border-color:#4a6b59;color:#eaf0e8
+}
+html[data-theme="dark"] #instructor-flow .studio-intro h3{color:#ebf1e4}
+html[data-theme="dark"] #instructor-flow .studio-intro p,
+html[data-theme="dark"] #instructor-flow .studio-overline{color:#a5bdb0}
+html[data-theme="dark"] #instructor-flow .studio-mode{background:#234238;color:#e4eee5;border-color:#4b6a5e}
+html[data-theme="dark"] #instructor-flow .studio-mode[aria-pressed="true"]{background:#aec8a7;color:#203d33;border-color:#aec8a7}
+html[data-theme="dark"] #instructor-flow .studio-guided{background:linear-gradient(140deg,#172e2e,#1d3635 56%,#273c33);color:#e3ecdf}
+html[data-theme="dark"] #instructor-flow .studio-guided-title{color:#f4f1df}
+html[data-theme="dark"] #instructor-flow .studio-guided-cue,html[data-theme="dark"] #instructor-flow .studio-guided-note{color:#c1d2c6}
+html[data-theme="dark"] #instructor-flow .studio-guided-controls{background:#1a302c}
+html[data-theme="dark"] #instructor-flow .studio-duration-label{color:#bed2bf}
+html[data-theme="dark"] #instructor-flow .studio-duration button{background:#29463e;color:#e7f0e5;border-color:#688576}
+html[data-theme="dark"] #instructor-flow .studio-duration button[aria-pressed="true"]{background:#d0dabb;color:#18382d}
+html[data-theme="dark"] #instructor-flow .studio-action-buttons button{color:#e5eedd;border-color:#739083}
+html[data-theme="dark"] #instructor-flow .studio-action-buttons .studio-primary{background:#acc8a7;color:#18392e}
+@media(max-width:800px){
+ #instructor-flow .studio-modes{gap:8px}
+ #instructor-flow .studio-mode{padding:15px 12px;gap:9px}
+ #instructor-flow .studio-symbol{font-size:19px}
+ #instructor-flow .studio-mode-copy strong{font-size:16px}
+}
+@media(max-width:600px){
+ #instructor-flow .studio-entrance{padding:17px;border-radius:22px}
+ #instructor-flow .studio-intro{display:block}
+ #instructor-flow .studio-intro p{margin-top:10px}
+ #instructor-flow .studio-modes{grid-template-columns:1fr;gap:8px}
+ #instructor-flow .studio-mode{min-height:64px;padding:11px 16px;gap:13px;border-radius:15px}
+ #instructor-flow .studio-mode-copy{gap:2px}
+ #instructor-flow .studio-mode-copy strong{font-size:18px}
+ #instructor-flow .studio-mode-copy small{font-size:11px}
+ #instructor-flow .studio-symbol{margin-left:auto}
+ #instructor-flow .studio-guided-stage{min-height:390px;padding:20px 18px 28px}
+ #instructor-flow .studio-breath-orb{width:155px}
+ #instructor-flow .studio-guided-controls{padding:20px;justify-content:center}
+ #instructor-flow .studio-duration{justify-content:center}
+ #instructor-flow .studio-duration-label{flex-basis:100%;text-align:center;margin:0 0 3px}
+ #instructor-flow .studio-action-buttons{width:100%;justify-content:center}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-mode,#instructor-flow .studio-breath-orb{transition:none!important}
+ #instructor-flow .studio-mode:not(:disabled):hover{transform:none}
+}

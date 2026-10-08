@@ -39,6 +39,7 @@
   <link rel="stylesheet" href="./yy-dragon-d15.css?v=d15-1">
   <link rel="stylesheet" href="./yy-dragon-d16.css?v=d16-1">
   <link rel="stylesheet" href="./yy-dragon-d17.css?v=d17-1">
+  <link rel="stylesheet" href="./yy-practice-studio.css?v=d18-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -48,6 +49,8 @@
   <script src="./flow-session.js?v=session-1-yoga-5" defer></script>
   <script src="./flow-phase.js?v=phase-1-yoga-5" defer></script>
   <script src="./instructor-ui.js?v=d17-1" defer></script>
+  <script src="./studio-clock.js?v=d18-1" defer></script>
+  <script src="./practice-studio.js?v=d18-1" defer></script>
   <script src="./yin-yang-art.js?v=phase-d17-1" defer></script>
   <script src="./flow-guide.js?v=d16-1" defer></script>
   <script src="./yy-asana-motion.js?v=d14-1" defer></script>
@@ -304,6 +307,33 @@
         <p class="about-lead" data-i18n="flowLead">El instructor marca el pulso. La interfaz acompaña sin competir con la práctica.</p>
       </div>
 
+      <div class="studio-entrance" aria-label="Sala de práctica">
+        <div class="studio-intro">
+          <div>
+            <span class="studio-overline" data-studio-copy="overline">TU ESPACIO · TRES CAMINOS</span>
+            <h3 data-studio-copy="entranceTitle">¿Qué necesita tu cuerpo hoy?</h3>
+          </div>
+          <p data-studio-copy="entranceLead">Elige una práctica. Sin prisa, sin tener que demostrar nada.</p>
+        </div>
+        <div class="studio-modes" role="group" aria-label="Elige el tipo de práctica">
+          <button class="studio-mode is-selected" type="button" data-studio-mode="asanas" aria-pressed="true">
+            <span class="studio-number" aria-hidden="true">01</span>
+            <span class="studio-mode-copy"><strong data-studio-copy="asanas">Movimiento</strong><small data-studio-copy="asanasDetail">10 fases · dragón Yin / Yang</small></span>
+            <span class="studio-symbol" aria-hidden="true">✺</span>
+          </button>
+          <button class="studio-mode" type="button" data-studio-mode="breath" aria-pressed="false">
+            <span class="studio-number" aria-hidden="true">02</span>
+            <span class="studio-mode-copy"><strong data-studio-copy="breath">Respiración</strong><small data-studio-copy="breathDetail">Un ritmo suave · 4 / 6</small></span>
+            <span class="studio-symbol" aria-hidden="true">◌</span>
+          </button>
+          <button class="studio-mode" type="button" data-studio-mode="meditation" aria-pressed="false">
+            <span class="studio-number" aria-hidden="true">03</span>
+            <span class="studio-mode-copy"><strong data-studio-copy="meditation">Meditación</strong><small data-studio-copy="meditationDetail">Silencio y atención</small></span>
+            <span class="studio-symbol" aria-hidden="true">✧</span>
+          </button>
+        </div>
+      </div>
+
       <div class="flow-console" data-flow-status="idle">
         <div class="flow-theater" role="group" aria-label="Navegación de posturas">
           <div class="flow-side flow-side-prev"><button type="button" class="flow-control ghost flow-rail-button" data-flow-action="previous" data-i18n="flowPrevious" aria-label="Anterior">Anterior</button></div>
@@ -341,6 +371,35 @@
           <span data-i18n="flowSequence">START · CENTERING · BREATH · WARMUP · POSE · TRANSITION · POSE · COOLDOWN · SAVASANA · FINISH</span>
         </div>
       </div>
+
+        <section class="studio-guided" id="studio-guided" data-studio-active="breath" data-studio-status="idle" aria-labelledby="studio-guided-title" hidden>
+          <div class="studio-guided-stage">
+            <div class="studio-guided-top">
+              <span class="studio-session-label" data-studio-copy="overline">TU ESPACIO · TRES CAMINOS</span>
+              <span class="studio-live-state" id="studio-live-state" aria-live="polite">PREPARADO</span>
+            </div>
+            <div class="studio-breath-orb" aria-hidden="true"><span class="studio-orb-mark">✧</span></div>
+            <h3 class="studio-guided-title" id="studio-guided-title">Encuentra tu propia respiración</h3>
+            <p class="studio-guided-cue" id="studio-guided-cue">Inspirar 4 segundos, espirar 6.</p>
+            <p class="studio-guided-countdown" id="studio-guided-countdown" aria-label="Tiempo restante">05:00</p>
+            <div class="studio-guided-progress" role="progressbar" aria-label="Progreso de la sesión" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span id="studio-guided-progress"></span>
+            </div>
+          </div>
+          <div class="studio-guided-controls">
+            <div class="studio-duration" role="group" aria-label="Duración de la práctica">
+              <span class="studio-duration-label" data-studio-copy="minutes">DURACIÓN</span>
+              <button type="button" data-studio-duration-index="0" aria-pressed="false">3 min</button>
+              <button type="button" data-studio-duration-index="1" aria-pressed="true">5 min</button>
+              <button type="button" data-studio-duration-index="2" aria-pressed="false">8 min</button>
+            </div>
+            <div class="studio-action-buttons">
+              <button type="button" class="studio-primary" data-studio-action="primary">Empezar</button>
+              <button type="button" data-studio-action="reset" disabled>Reiniciar</button>
+            </div>
+          </div>
+          <p class="studio-guided-note" id="studio-guided-note">Un ritmo orientativo, no una prueba. Puedes volver a la respiración natural en cualquier momento.</p>
+        </section>
     </section>
 
     <section class="section campo reveal" id="campo">

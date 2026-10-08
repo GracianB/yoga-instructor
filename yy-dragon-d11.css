@@ -1,0 +1,114 @@
+/* D.11 · Quiet Aurora. Fine-line lunar geometry and grounded stage lighting.
+   A visual atmosphere, never a second animated mascot or a childish spotlight.
+   The asanas, eye state, pose transforms and navigation remain untouched. */
+#instructor-flow .yy-guide{
+ --d11-focus-x:50%;--d11-focus-y:32%;
+ --d11-halo:rgba(255,233,231,.30);
+ --d11-halo-soft:rgba(244,176,198,.12);
+ --d11-floor:rgba(254,174,198,.21);
+ --d11-etch:#fff0eb;
+}
+#instructor-flow .yy-guide[data-spirit="yin"]{
+ --d11-halo:rgba(215,236,255,.31);
+ --d11-halo-soft:rgba(156,192,245,.13);
+ --d11-floor:rgba(141,192,248,.22);
+ --d11-etch:#eff8ff;
+}
+/* The guardian's head is not at the same height in all ten asanas.
+   Follow the authored coordinates, without touching the actual SVG geometry. */
+#instructor-flow .yy-guide[data-phase="start"]{--d11-focus-x:31%;--d11-focus-y:64%}
+#instructor-flow .yy-guide[data-phase="centering"]{--d11-focus-x:50%;--d11-focus-y:32%}
+#instructor-flow .yy-guide[data-phase="breath"]{--d11-focus-x:50%;--d11-focus-y:31%}
+#instructor-flow .yy-guide[data-phase="warmup"]{--d11-focus-x:31%;--d11-focus-y:51%}
+#instructor-flow .yy-guide[data-phase="pose-1"]{--d11-focus-x:50%;--d11-focus-y:27%}
+#instructor-flow .yy-guide[data-phase="transition"]{--d11-focus-x:47%;--d11-focus-y:28%}
+#instructor-flow .yy-guide[data-phase="pose-2"]{--d11-focus-x:50%;--d11-focus-y:25%}
+#instructor-flow .yy-guide[data-phase="cooldown"]{--d11-focus-x:37%;--d11-focus-y:69%}
+#instructor-flow .yy-guide[data-phase="savasana"]{--d11-focus-x:31%;--d11-focus-y:64%}
+#instructor-flow .yy-guide[data-phase="finish"]{--d11-focus-x:50%;--d11-focus-y:31%}
+
+/* Two gossamer concentric arcs, replacing the old filled circular spotlight.
+   Only opacity and transform animate, never expensive SVG filters. */
+#instructor-flow .yy-guide .yy-stage::before{
+ content:"";position:absolute;z-index:1;pointer-events:none;
+ width:clamp(108px,32%,280px);height:auto;aspect-ratio:1;
+ left:var(--d11-focus-x);top:var(--d11-focus-y);right:auto;
+ border:0;border-radius:50%;filter:none;box-shadow:none;
+ opacity:.7;
+ background:
+  radial-gradient(circle,transparent 57%,var(--d11-halo) 57.7%,transparent 59%),
+  radial-gradient(circle,transparent 72%,var(--d11-halo-soft) 72.8%,transparent 74%);
+ transform:translate(-50%,-50%);
+ transition:left .44s ease,top .44s ease,opacity .44s ease;
+}
+#instructor-flow .yy-guide .yy-stage::after{
+ content:"";position:absolute;z-index:1;pointer-events:none;
+ left:15%;right:15%;bottom:4%;height:14%;border-radius:50%;
+ opacity:.8;
+ background:radial-gradient(ellipse at center,var(--d11-floor),transparent 70%);
+}
+#instructor-flow .yy-guide[data-phase="savasana"] .yy-stage::before,
+#instructor-flow .yy-guide[data-phase="cooldown"] .yy-stage::before{opacity:.3}
+#instructor-flow .yy-guide[data-phase="pose-1"] .yy-stage::before{opacity:.43}
+#instructor-flow .yy-guide[data-phase="finish"] .yy-stage::before{opacity:.9}
+
+/* A real 4-7-8 aura: four-second expansion, seven-second hold, eight-second
+   release. Only active during the breath phase; pause preserves the timeline. */
+#instructor-flow .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="inhale"] .yy-stage::before{
+ animation:yy-d11-inhale 4s ease-in-out both;
+}
+#instructor-flow .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="hold"] .yy-stage::before{
+ animation:none;transform:translate(-50%,-50%) scale(1.055);
+}
+#instructor-flow .yy-guide[data-phase="breath"]:is([data-asana-state="running"],[data-asana-state="paused"])[data-breath-step="exhale"] .yy-stage::before{
+ animation:yy-d11-exhale 8s ease-in-out both;
+}
+@keyframes yy-d11-inhale{
+ from{transform:translate(-50%,-50%) scale(.97)}
+ to{transform:translate(-50%,-50%) scale(1.055)}
+}
+@keyframes yy-d11-exhale{
+ from{transform:translate(-50%,-50%) scale(1.055)}
+ to{transform:translate(-50%,-50%) scale(.97)}
+}
+#instructor-flow .yy-guide[data-asana-state="paused"] .yy-stage::before{
+ animation-play-state:paused!important;transition:none!important;
+}
+/* Micro-engraving suggests age and organic sculpture without reopening eyes. */
+#instructor-flow .yy-guide .yy-d11-horn-engraving{
+ fill:none;stroke:var(--d11-etch);stroke-width:1.35;
+ stroke-linecap:round;stroke-linejoin:round;opacity:.63;
+}
+#instructor-flow .yy-guide .yy-d11-crest-engraving{
+ fill:none;stroke:var(--d11-etch);stroke-width:1.5;
+ stroke-linecap:round;opacity:.53;
+}
+#instructor-flow .yy-guide .yy-d11-cheek-engraving{
+ fill:none;stroke:var(--d11-etch);stroke-width:1.25;
+ stroke-linecap:round;opacity:.38;
+}
+#instructor-flow .yy-guide .yy-d11-beard-engraving{
+ fill:none;stroke:var(--d11-etch);stroke-width:1.3;
+ stroke-linecap:round;opacity:.55;
+}
+/* No large blurred layers, idle rendering loops or nonessential motion. */
+#instructor-flow .yy-guide[data-asana-state="reduced"] .yy-stage::before,
+#instructor-flow .yy-guide[data-hidden="true"] .yy-stage::before,
+body.quiet-mode #instructor-flow .yy-guide .yy-stage::before{
+ animation:none!important;transition:none!important;
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .yy-guide .yy-stage::before{
+  animation:none!important;transition:none!important;
+ }
+}
+@media(max-width:700px){
+ /* The mobile SVG is cropped from x=120 to x=600: compensate for that crop. */
+ #instructor-flow .yy-guide[data-phase="start"],
+ #instructor-flow .yy-guide[data-phase="savasana"],
+ #instructor-flow .yy-guide[data-phase="warmup"]{--d11-focus-x:21%}
+ #instructor-flow .yy-guide[data-phase="cooldown"]{--d11-focus-x:30%}
+ #instructor-flow .yy-guide[data-phase="transition"]{--d11-focus-x:45%}
+ #instructor-flow .yy-guide .yy-stage::before{width:35%;min-width:104px}
+ #instructor-flow .yy-guide .yy-stage::after{height:10%;bottom:6%}
+}

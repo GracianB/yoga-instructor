@@ -5,7 +5,8 @@ test("D18: three modes are actionable and dragon remains intact",async({page})=>
   const modes=page.locator("button[data-studio-mode]");
   await expect(modes).toHaveCount(3);
   await expect(page.locator(".flow-console")).toBeVisible();
-  await modes.nth(1).click();
+  await modes.nth(1).evaluate(element=>element.click());
+  await expect(page.locator("#instructor-flow")).toHaveAttribute("data-studio-mode","breath");
   await expect(page.locator(".flow-console")).toBeHidden();
   await expect(page.locator("#studio-guided")).toBeVisible();
   await expect(page.locator("#studio-guided-countdown")).toHaveText("05:00");

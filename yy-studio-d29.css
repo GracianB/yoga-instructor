@@ -1,0 +1,73 @@
+/* D.29 | The quiet stage: an intentional focus switch, no modal or lock-in.
+ * Primary pause/resume and reset remain in the DOM and keyboard reachable. */
+#instructor-flow .studio-top-actions{
+ display:flex;align-items:center;justify-content:flex-end;gap:12px;flex-wrap:wrap
+}
+#instructor-flow .studio-immersion-toggle{
+ border:1px solid rgba(70,110,85,.30);border-radius:999px;
+ padding:9px 13px;background:rgba(255,255,255,.58);color:#35584c;
+ font:600 11px/1.25 'Inter',sans-serif;cursor:pointer;
+ transition:background-color .18s,border-color .18s
+}
+#instructor-flow .studio-immersion-toggle[aria-pressed="true"]{
+ background:#245448;color:#fff;border-color:#245448
+}
+#instructor-flow .studio-immersion-toggle:focus-visible{
+ outline:3px solid #bb8856;outline-offset:3px
+}
+#instructor-flow .studio-guided[data-studio-immersion="true"]{
+ border-color:rgba(105,145,114,.37);
+ background:linear-gradient(150deg,#eef2e8,#faf6ec 58%,#e4eee4)
+}
+#instructor-flow .studio-guided[data-studio-immersion="true"] .studio-guided-stage{
+ min-height:clamp(440px,48vw,625px);
+ display:flex;flex-direction:column;align-items:center;
+ justify-content:center;padding-top:74px;padding-bottom:42px
+}
+#instructor-flow .studio-guided[data-studio-immersion="true"] .studio-guided-top{
+ position:absolute;left:clamp(20px,4vw,48px);right:clamp(20px,4vw,48px);top:25px
+}
+#instructor-flow .studio-guided[data-studio-immersion="true"] :is(
+ .studio-breath-patterns,.studio-meditation-choices,.studio-meditation-focus,
+ .studio-duration,.studio-guided-note){display:none!important}
+#instructor-flow .studio-guided[data-studio-immersion="true"] .studio-guided-controls{
+ justify-content:center;padding:16px clamp(16px,4vw,42px) 25px
+}
+#instructor-flow .studio-guided[data-studio-immersion="true"] .studio-companion.yy-guide{
+ height:clamp(240px,28vw,335px);margin-top:10px
+}
+#instructor-flow .studio-guided[data-studio-immersion="true"] .studio-breath-orb{
+ top:clamp(130px,16vw,195px)
+}
+#instructor-flow .studio-guided[data-studio-immersion="true"] .studio-guided-title{
+ margin-top:6px
+}
+html[data-theme="dark"] #instructor-flow .studio-immersion-toggle{
+ background:#29463e;color:#e7f0e5;border-color:#698978
+}
+html[data-theme="dark"] #instructor-flow .studio-immersion-toggle[aria-pressed="true"]{
+ background:#d0dabb;color:#18382d;border-color:#d0dabb
+}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-immersion="true"]{
+ background:linear-gradient(150deg,#182f2d,#203d38 65%,#273c33)
+}
+@media(max-width:600px){
+ #instructor-flow .studio-top-actions{gap:8px}
+ #instructor-flow .studio-guided[data-studio-immersion="true"] .studio-guided-stage{
+  min-height:485px;padding-top:78px
+ }
+ #instructor-flow .studio-guided[data-studio-immersion="true"] .studio-companion.yy-guide{
+  height:220px
+ }
+ #instructor-flow .studio-guided[data-studio-immersion="true"] .studio-breath-orb{top:130px}
+}
+@media(max-width:380px){
+ #instructor-flow .studio-immersion-toggle{padding:8px 10px;font-size:10px}
+ #instructor-flow .studio-guided[data-studio-immersion="true"] .studio-guided-stage{
+  min-height:470px
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-immersion-toggle{transition:none!important}
+}
+body.quiet-mode #instructor-flow .studio-immersion-toggle{transition:none!important}

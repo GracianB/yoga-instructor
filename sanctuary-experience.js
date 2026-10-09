@@ -1,8 +1,4 @@
-/* ================================================================
-   YOGA SANCTUARY · LIVING EXPERIENCE
-   Phase 03–08: ritual state, one breath, presence, sound, memory,
-   quiet mode and ambient wayfinding.
-   ================================================================ */
+// Sanctuary controls, memory and ambient wayfinding.
 (() => {
   "use strict";
 
@@ -128,7 +124,7 @@
     let cursor = safe;
     let phase = "exhale";
     for (const item of cycle) {
-      if (cursor <= item.seconds) {
+      if (cursor < item.seconds) {
         phase = item.name;
         break;
       }
@@ -140,25 +136,25 @@
     breathPhase.textContent = finished ? t().complete : breathText(phase);
     breathTime.textContent = finished ? "0s" : Math.max(0, Math.ceil(cycleSeconds - safe)) + "s";
     breathButton.setAttribute("aria-pressed", String(breathRunning && !guidedPausedAt));
-    if (guidedBreath) {
-      const duration = phase === "inhale" ? 4 : phase === "hold" ? 7 : 8;
-      window.dispatchEvent(new CustomEvent("yoga:breath", {detail:{
-        phase:finished?"idle":phase,
-        remaining:finished?0:Math.max(1,Math.ceil(duration-cursor)),
-        progress:finished?1:Math.min(1,Math.max(0,cursor/duration))
+    const duration = phase === "inhale" ? 4 : phase === "hold" ? 7 : 8;
+    window.dispatchEvent(new CustomEvent("yoga:breath", {detail:{
+        active:breathRunning,
+        phase:breathRunning?phase:"idle",
+        remaining:breathRunning?Math.max(1,Math.ceil(duration-cursor)):0,
+        progress:breathRunning?Math.min(1,Math.max(0,cursor/duration)):0
       }}));
-    }
   }
 
   function stopBreath(completed) {
     breathRunning = false;
     if (breathRaf) window.YOGA_RUNTIME.cancel(breathRaf);
     breathRaf = 0;
+    guidedHiddenAt = 0;
     renderBreath(completed ? cycleSeconds : 0, completed);
   }
 
   function tickBreath(now) {
-    if (!breathRunning || guidedPausedAt || guidedHiddenAt) return;
+    if (!breathRunning || guidedPausedAt || guidedHiddenAt || document.hidden) return;
     const elapsed = (now - breathStarted) / 1000;
     if (elapsed >= cycleSeconds && !guidedBreath) {
       stopBreath(true);
@@ -176,6 +172,7 @@
     }
     breathRunning = true;
     breathStarted = performance.now();
+    guidedHiddenAt = document.hidden ? breathStarted : 0;
     renderBreath(0);
     breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
   });
@@ -188,7 +185,6 @@
         guidedPausedAt = guidedHiddenAt = 0;
         stopBreath(false);
         dock.classList.remove("yy-dock-active");
-        window.dispatchEvent(new CustomEvent("yoga:breath", {detail:{phase:"idle",remaining:0,progress:0}}));
       }
       return;
     }
@@ -197,24 +193,30 @@
       guidedBreath = breathRunning = true;
       guidedPausedAt = guidedHiddenAt = 0;
       breathStarted = performance.now();
+      guidedHiddenAt = document.hidden ? breathStarted : 0;
       dock.classList.add("yy-dock-active");
       renderBreath(0);
       breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
     }
     if (state.status === "paused" && !guidedPausedAt) {
       guidedPausedAt = performance.now();
+      if (guidedHiddenAt) {
+        breathStarted += guidedPausedAt - guidedHiddenAt;
+        guidedHiddenAt = 0;
+      }
       if (breathRaf) window.YOGA_RUNTIME.cancel(breathRaf);
       breathRaf = 0;
     } else if (state.status === "running" && guidedPausedAt) {
       breathStarted += performance.now() - guidedPausedAt;
       guidedPausedAt = 0;
+      if (document.hidden) guidedHiddenAt = performance.now();
       if (!guidedHiddenAt) breathRaf = window.YOGA_RUNTIME.frame(tickBreath);
     }
     breathButton.setAttribute("aria-pressed",String(state.status === "running"));
   });
 
   document.addEventListener("visibilitychange", () => {
-    if (guidedBreath) {
+    if (breathRunning && !guidedPausedAt) {
       if (document.hidden && !guidedHiddenAt) guidedHiddenAt=performance.now();
       else if (!document.hidden && guidedHiddenAt) {
         breathStarted += performance.now()-guidedHiddenAt;

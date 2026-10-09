@@ -21,7 +21,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=lotus-rose-12">
+  <link rel="stylesheet" href="./styles.css?v=lotus-botanical-13">
   <link rel="stylesheet" href="./flow-guide.css?v=yin-yang-1">
   <link rel="stylesheet" href="./yy-asana-motion.css?v=phase-b-1">
   <link rel="stylesheet" href="./yy-premium-stage.css?v=phase-d1-1">
@@ -55,7 +55,7 @@
   <script src="./boot.js?v=yoga-5"></script>
 
   <script src="./i18n.js?v=quiet-geometry-5-yoga-5-guide-1"></script>
-  <script src="./main.js?v=quiet-geometry-5-yoga-5" defer></script>
+  <script src="./main.js?v=quiet-geometry-5-yoga-5-lotus-13" defer></script>
   <script src="./flow-engine.js?v=flow-1-yoga-5" defer></script>
   <script src="./flow-session.js?v=session-1-yoga-5" defer></script>
   <script src="./flow-phase.js?v=phase-1-yoga-5" defer></script>
@@ -77,7 +77,7 @@
   <script src="./asana-library.js?v=d24-1" defer></script>
   <script src="./studio-asana-library.js?v=d24-1" defer></script>
   <script src="./session-design-ui.js?v=d25-1" defer></script>
-  <script src="./sanctuary-experience.js?v=yin-yang-1" defer></script>
+  <script src="./sanctuary-experience.js?v=yin-yang-1-lotus-13" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -191,32 +191,91 @@
         </div>
         <div class="mandala-parallax" style="--depth:1.2">
           <div class="mandala-conic-halo" aria-hidden="true"></div>
-          <svg class="hero-mandala" viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <svg class="hero-mandala" viewBox="0 0 560 400" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
   <defs>
-    <linearGradient id="lotus-wash" x1="0" y1="0" x2="0" y2="1">
-      <stop class="lotus-rose-tip" offset="0" stop-color="#d6a0ae" stop-opacity=".42"/>
-      <stop offset=".52" stop-color="#dfb8bf" stop-opacity=".18"/>
-      <stop offset="1" stop-color="currentColor" stop-opacity=".12"/>
+    <linearGradient id="lotus-back-wash" x1="0" y1="70" x2="0" y2="324" gradientUnits="userSpaceOnUse">
+      <stop class="lotus-stop-rose" offset="0"/>
+      <stop class="lotus-stop-paper" offset=".38"/>
+      <stop class="lotus-stop-sage" offset="1"/>
+    </linearGradient>
+    <linearGradient id="lotus-side-wash" x1="0" y1="142" x2="0" y2="327" gradientUnits="userSpaceOnUse">
+      <stop class="lotus-stop-blush" offset="0"/>
+      <stop class="lotus-stop-paper" offset=".46"/>
+      <stop class="lotus-stop-shadow" offset="1"/>
+    </linearGradient>
+    <linearGradient id="lotus-wash" x1=".22" y1="0" x2=".74" y2="1">
+      <stop class="lotus-stop-rose" offset="0"/>
+      <stop class="lotus-stop-light" offset=".3"/>
+      <stop class="lotus-stop-paper" offset=".65"/>
+      <stop class="lotus-stop-sage" offset="1"/>
+    </linearGradient>
+    <linearGradient id="lotus-front-wash" x1="0" y1="0" x2="0" y2="1">
+      <stop class="lotus-stop-light" offset="0"/>
+      <stop class="lotus-stop-blush" offset=".48"/>
+      <stop class="lotus-stop-sage" offset="1"/>
+    </linearGradient>
+    <linearGradient id="lotus-leaf-wash" x1="0" y1="0" x2="0" y2="1">
+      <stop class="lotus-stop-sage" offset="0"/>
+      <stop class="lotus-stop-leaf" offset="1"/>
+    </linearGradient>
+    <linearGradient id="lotus-edge" x1="0" y1="0" x2="0" y2="1">
+      <stop class="lotus-stop-rose-edge" offset="0"/>
+      <stop class="lotus-stop-leaf" offset="1" stop-opacity=".6"/>
     </linearGradient>
   </defs>
-  <g class="lotus-bloom" stroke-linejoin="round" stroke-linecap="round">
-    <path class="lotus-petal" d="M280 280C226 269 158 202 152 91C225 105 271 169 280 280Z"/>
-    <path class="lotus-petal" d="M280 280C334 269 402 202 408 91C335 105 289 169 280 280Z"/>
-    <path class="lotus-petal" d="M280 284C194 297 105 249 63 158C156 148 246 207 280 284Z"/>
-    <path class="lotus-petal" d="M280 284C366 297 455 249 497 158C404 148 314 207 280 284Z"/>
-    <path class="lotus-petal" d="M280 285C192 324 101 307 38 248C128 216 221 237 280 285Z"/>
-    <path class="lotus-petal" d="M280 285C368 324 459 307 522 248C432 216 339 237 280 285Z"/>
-    <path class="lotus-petal lotus-petal-center" d="M280 282C230 243 223 151 280 38C337 151 330 243 280 282Z"/>
-    <path class="lotus-petal" d="M280 282C218 268 186 210 194 145C246 159 276 213 280 282Z"/>
-    <path class="lotus-petal" d="M280 282C342 268 374 210 366 145C314 159 284 213 280 282Z"/>
-    <path class="lotus-petal" d="M280 285C210 293 161 270 128 231C188 211 249 237 280 285Z"/>
-    <path class="lotus-petal" d="M280 285C350 293 399 270 432 231C372 211 311 237 280 285Z"/>
+  <g class="lotus-water" fill="none" stroke="currentColor" stroke-linecap="round">
+    <path d="M135 365C203 377 356 377 425 365M195 384C240 389 319 389 365 384"/>
+    <path d="M71 350C92 356 116 359 147 360M413 360C444 359 468 356 489 350"/>
   </g>
-  <g class="lotus-detail" fill="none" stroke="currentColor" stroke-linecap="round">
-    <path d="M280 81C271 151 272 216 280 258M174 119C197 174 224 218 254 249M386 119C363 174 336 218 306 249"/>
-    <path d="M93 177C157 193 206 230 246 262M467 177C403 193 354 230 314 262M73 256C137 257 191 270 226 283M487 256C423 257 369 270 334 283"/>
-    <path d="M212 171C225 192 242 219 259 245M348 171C335 192 318 219 301 245M157 237C190 242 221 260 248 275M403 237C370 242 339 260 312 275"/>
-    <path d="M174 319C235 330 325 330 386 319M222 338C258 342 302 342 338 338"/>
+  <g class="lotus-bloom" stroke-linejoin="round" stroke-linecap="round">
+    <g class="lotus-layer lotus-layer-back">
+      <g class="lotus-wing lotus-wing-left">
+        <path class="lotus-petal lotus-petal-back" d="M260 309C202 283 161 192 173 78C219 105 266 192 277 292Z"/>
+        <path class="lotus-petal lotus-petal-back" d="M240 312C159 300 103 243 86 142C159 151 223 219 259 293Z"/>
+        <path class="lotus-petal lotus-petal-side" d="M235 318C148 341 75 308 34 238C115 218 202 251 255 302Z"/>
+        <path class="lotus-vein" d="M179 99C187 184 219 245 255 286M102 157C127 225 179 269 231 294M51 246C112 256 170 288 218 307"/>
+        <path class="lotus-glint" d="M169 111C166 163 178 208 193 237M94 163C104 198 121 224 143 246M55 267C71 288 94 305 116 312"/>
+      </g>
+      <g class="lotus-wing lotus-wing-right">
+        <path class="lotus-petal lotus-petal-back" d="M300 309C358 283 399 192 387 78C341 105 294 192 283 292Z"/>
+        <path class="lotus-petal lotus-petal-back" d="M320 312C401 300 457 243 474 142C401 151 337 219 301 293Z"/>
+        <path class="lotus-petal lotus-petal-side" d="M325 318C412 341 485 308 526 238C445 218 358 251 305 302Z"/>
+        <path class="lotus-vein" d="M381 99C373 184 341 245 305 286M458 157C433 225 381 269 329 294M509 246C448 256 390 288 342 307"/>
+        <path class="lotus-glint" d="M391 111C394 163 382 208 367 237M466 163C456 198 439 224 417 246M505 267C489 288 466 305 444 312"/>
+      </g>
+    </g>
+    <g class="lotus-layer lotus-layer-heart">
+      <path class="lotus-petal lotus-petal-center" d="M280 38C251 74 224 125 227 174C230 232 252 278 280 307C308 278 330 232 333 174C336 125 309 74 280 38Z"/>
+      <path class="lotus-vein" d="M280 64C274 141 275 221 280 280M267 85C250 145 252 207 265 244M293 85C310 145 308 207 295 244"/>
+      <path class="lotus-glint" d="M272 59C242 105 231 143 236 185"/>
+      <g class="lotus-wing lotus-wing-left">
+        <path class="lotus-petal lotus-petal-inner" d="M263 321C195 300 168 232 182 163C231 179 271 243 278 308Z"/>
+        <path class="lotus-vein" d="M188 177C204 229 229 276 257 302M190 207C193 245 215 282 240 299"/>
+        <path class="lotus-glint" d="M183 184C178 219 185 251 200 273"/>
+      </g>
+      <g class="lotus-wing lotus-wing-right">
+        <path class="lotus-petal lotus-petal-inner" d="M297 321C365 300 392 232 378 163C329 179 289 243 282 308Z"/>
+        <path class="lotus-vein" d="M372 177C356 229 331 276 303 302M370 207C367 245 345 282 320 299"/>
+        <path class="lotus-glint" d="M377 184C382 219 375 251 360 273"/>
+      </g>
+    </g>
+    <g class="lotus-layer lotus-layer-front">
+      <g class="lotus-wing lotus-wing-left">
+        <path class="lotus-petal lotus-petal-front" d="M277 320C213 353 147 325 111 267C169 245 237 261 277 320Z"/>
+        <path class="lotus-vein" d="M127 272C178 281 225 303 257 319M142 290C167 315 201 327 234 327"/>
+        <path class="lotus-glint" d="M128 265C164 256 197 262 223 276"/>
+      </g>
+      <g class="lotus-wing lotus-wing-right">
+        <path class="lotus-petal lotus-petal-front" d="M283 320C347 353 413 325 449 267C391 245 323 261 283 320Z"/>
+        <path class="lotus-vein" d="M433 272C382 281 335 303 303 319M418 290C393 315 359 327 326 327"/>
+        <path class="lotus-glint" d="M432 265C396 256 363 262 337 276"/>
+      </g>
+      <path class="lotus-sepal" d="M280 342C250 357 215 353 188 330C224 327 252 331 280 342C308 331 336 327 372 330C345 353 310 357 280 342Z"/>
+      <path class="lotus-petal lotus-petal-cup" d="M280 346C242 330 229 295 238 258C251 267 268 277 280 278C292 277 309 267 322 258C331 295 318 330 280 346Z"/>
+      <path class="lotus-vein" d="M246 274C249 301 262 324 280 339C298 324 311 301 314 274M280 292V331"/>
+      <path class="lotus-glint" d="M242 277C241 295 247 311 256 321"/>
+      <path class="lotus-throat" d="M257 281Q280 293 303 281M267 283L264 275M280 287V276M293 283L296 275"/>
+    </g>
   </g>
 </svg>
         </div>

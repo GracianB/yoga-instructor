@@ -5526,22 +5526,37 @@ box-shadow:
 }
 }
 /* ================================================================
- LOTUS SIGNATURE v4 · BOTANICAL LOTUS
+ LOTUS SIGNATURE v5 · BOTANICAL LOTUS
  ------------------------------------------------
- Solid, frontal, unmistakable flower silhouette.
- No rings, orbit, target, portal or geometric stack.
+ Layered botanical petals; the shared breath clock controls their opening.
  ================================================================ */
 :root,
 [data-theme="light"] {
 --lotus-color: #466e58;
 --lotus-highlight: #466e58;
+--petal-rose: #cf8e9d;
+--petal-blush: #e4b9be;
+--petal-paper: #f3e9dd;
+--petal-light: #fff9ec;
+--petal-sage: #b7c7ab;
+--petal-shadow: #91aa90;
+--petal-leaf: #54745c;
+--petal-edge: #ac7786;
 }
 [data-theme="dark"] {
 --lotus-color: #c0d6b9;
 --lotus-highlight: #c0d6b9;
+--petal-rose: #d697ab;
+--petal-blush: #d5abb9;
+--petal-paper: #d7ddd0;
+--petal-light: #f4edde;
+--petal-sage: #849d86;
+--petal-shadow: #546f62;
+--petal-leaf: #6e947f;
+--petal-edge: #d3a0b0;
 }
 .mandala-parallax {
-inset: 0 0 0 61.5% !important;
+inset: 0 0 0 61% !important;
 overflow: visible !important;
 background: transparent !important;
 filter: none !important;
@@ -5550,76 +5565,123 @@ filter: none !important;
 .mandala-parallax::after {
 display: none !important;
 }
-.hero-mandala {
+.hero .mandala-parallax .hero-mandala {
 left: 50% !important;
+right: auto !important;
 top: 50% !important;
-width: min(38vw, 535px) !important;
+width: min(39vw, 570px) !important;
 height: auto !important;
-aspect-ratio: 560 / 360 !important;
+aspect-ratio: 560 / 400 !important;
 transform: translate(-50%,-50%) !important;
 overflow: visible !important;
 opacity: 1 !important;
 color: var(--lotus-color) !important;
-filter: none !important;
-}
-[data-theme="dark"] .hero-mandala {
-color: var(--lotus-color) !important;
-filter: none !important;
-}
-[data-theme="light"] .hero-mandala {
-color: var(--lotus-color) !important;
-filter: none !important;
+filter: drop-shadow(0 12px 16px color-mix(in srgb,var(--petal-leaf) 12%,transparent)) !important;
+animation: none !important;
+mix-blend-mode: normal !important;
 }
 .hero-mandala .lotus-bloom {
-fill: url(#lotus-wash) !important;
-stroke: currentColor !important;
-stroke-width: 1.8 !important;
-}
-.hero-mandala .lotus-detail {
 fill: none !important;
-stroke: var(--lotus-highlight) !important;
-stroke-width: .85 !important;
+stroke: none !important;
+transform-box: view-box !important;
+transform-origin: 280px 330px !important;
+transform: translateY(calc(var(--lotus-open,.5) * -5px)) scale(calc(.98 + var(--lotus-open,.5) * .02));
+transition: transform .3s linear;
 }
-[data-theme="dark"] .hero-mandala .lotus-detail {
-stroke: var(--lotus-color) !important;
-opacity: .48 !important;
+.hero-mandala .lotus-petal {
+fill: url(#lotus-wash);
+stroke: url(#lotus-edge);
+stroke-width: 1;
 }
-[data-theme="light"] .hero-mandala .lotus-detail {
-stroke: var(--lotus-color) !important;
-opacity: .45 !important;
+.hero-mandala .lotus-petal-back { fill: url(#lotus-back-wash); }
+.hero-mandala .lotus-petal-side { fill: url(#lotus-side-wash); }
+.hero-mandala .lotus-petal-front,
+.hero-mandala .lotus-petal-cup { fill: url(#lotus-front-wash); }
+.hero-mandala .lotus-sepal { fill: url(#lotus-leaf-wash); }
+.hero-mandala .lotus-wing {
+transform-box: view-box;
+transform-origin: 280px 320px;
+transform: rotate(calc(var(--lotus-open,.5) * var(--lotus-side) * 1.7deg));
+transition: transform .3s linear;
 }
-@media (prefers-reduced-motion: no-preference) {
-.hero[data-breath="cycle"] .hero-mandala {
-  animation: lotusBotanicalBreath 19s ease-in-out infinite !important;
+.lotus-wing-left { --lotus-side: -1; }
+.lotus-wing-right { --lotus-side: 1; }
+.lotus-stop-rose { stop-color: var(--petal-rose); }
+.lotus-stop-blush { stop-color: var(--petal-blush); }
+.lotus-stop-paper { stop-color: var(--petal-paper); }
+.lotus-stop-light { stop-color: var(--petal-light); }
+.lotus-stop-sage { stop-color: var(--petal-sage); }
+.lotus-stop-shadow { stop-color: var(--petal-shadow); }
+.lotus-stop-leaf { stop-color: var(--petal-leaf); }
+.lotus-stop-rose-edge { stop-color: var(--petal-edge); }
+.hero-mandala .lotus-vein {
+fill: none;
+stroke: var(--petal-leaf);
+stroke-width: .7;
+opacity: .28;
 }
-@keyframes lotusBotanicalBreath {
-  0%,100% { transform: translate(-50%,-50%) scale(.992); }
-  50% { transform: translate(-50%,-50%) scale(1.008); }
+.hero-mandala .lotus-glint {
+fill: none;
+stroke: var(--petal-light);
+stroke-width: 1.2;
+opacity: .72;
+}
+.hero-mandala .lotus-throat {
+fill: none;
+stroke: #ac8753;
+stroke-width: 1.6;
+opacity: .8;
+}
+.hero-mandala .lotus-water {
+stroke: var(--lotus-color);
+stroke-width: .8;
+opacity: .22;
+}
+body.quiet-mode .hero-mandala .lotus-bloom,
+body.quiet-mode .hero-mandala .lotus-wing {
+transition: none;
+}
+body.quiet-mode .hero .mandala-parallax {
+transform: none !important;
+transition: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+.hero-mandala .lotus-bloom,
+.hero-mandala .lotus-wing { transition: none; }
+.hero .mandala-parallax {
+transform: none !important;
+transition: none !important;
 }
 }
 @media (max-width: 1100px) and (min-width: 901px) {
 .mandala-parallax {
   inset: 0 0 0 60% !important;
 }
-.hero-mandala {
-  width: min(39vw, 470px) !important;
+.hero .mandala-parallax .hero-mandala {
+  width: min(38vw, 470px) !important;
 }
 }
 @media (max-width: 900px) {
+.hero {
+  --lotus-band: clamp(188px,44vw,275px);
+  padding-top: calc(var(--lotus-band) + 28px) !important;
+}
+.hero-stage { min-height: 0 !important; }
 .mandala-parallax {
   inset: 0 !important;
+  transform: none !important;
+  opacity: 1 !important;
 }
-.hero-mandala {
-  left: 74% !important;
-  top: 17% !important;
-  width: min(76vw, 395px) !important;
+.hero .mandala-parallax .hero-mandala {
+  left: 50% !important;
+  top: calc(var(--lotus-band) / 2 + 18px) !important;
+  width: clamp(240px,74vw,360px) !important;
+  max-width: calc(100% - 32px) !important;
 }
 }
-@media (max-width: 560px) {
-.hero-mandala {
-  left: 78% !important;
-  top: 15% !important;
-  width: min(80vw, 340px) !important;
+@media (min-width: 901px) and (max-height: 620px) {
+.hero .mandala-parallax .hero-mandala {
+  width: min(35vw,460px) !important;
 }
 }
 .instructor-flow {
@@ -5877,12 +5939,6 @@ color: #09130f !important;
   transform: none !important;
 }
 .hero h1 .hero-line-c { font-size: .78em !important; }
-.hero .hero-mandala {
-  left: 80% !important;
-  top: 16% !important;
-  width: min(48vw, 190px) !important;
-  opacity: .22 !important;
-}
 .sanctuary-dock {
   display: flex;
   align-items: center;
@@ -5912,18 +5968,7 @@ body { padding-bottom: 80px; }
 .sanctuary-dock { left: auto; right: 18px; }
 }
 
-/* Rose wash: a gentle highlight, with no extra animation loop. */
-.hero-mandala .lotus-rose-tip { transition: stop-opacity .7s ease; }
-@media (hover: hover) and (pointer: fine) {
-.hero:hover .hero-mandala {
-  filter: drop-shadow(0 0 14px rgba(214,160,174,.26)) !important;
-}
-.hero:hover .lotus-rose-tip { stop-opacity: .65; }
-}
 body.quiet-mode .hero .hero-mandala { filter: none !important; }
-@media (prefers-reduced-motion: reduce) {
-.hero-mandala .lotus-rose-tip { transition: none; }
-}
 
 /* Firefox narrow-viewport compositing budget: don't pre-promote the whole page.
  The browser still promotes actual transforms when animation demands it. */

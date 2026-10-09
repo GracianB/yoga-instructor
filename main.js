@@ -256,15 +256,13 @@
       }
     });
     paintMute();
-    // An unbound button during initial hydration can silently swallow an early
-    // pointer event, especially when a busy browser scrolls into view first.
-    // Enable only after play/pause/error handlers are installed.
+    // Enable after audio handlers are installed.
     playBtn.dataset.audioReady = "true";
     playBtn.disabled = false;
   }
 
 
-  // Presence hero — 4-7-8 breath phase labels + reduced-motion class
+  // Hero motion preferences.
   const hero = document.querySelector(".hero");
   if (hero) {
     const reduce = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
@@ -274,7 +272,7 @@
       document.documentElement.classList.add("reduce-motion");
     } else {
       hero.setAttribute("data-breath", "cycle");
-      // Subtle pointer parallax → --px / --py on .hero (~±14px)
+      // Pointer parallax.
       const max = 8;
       const onMove = (e) => {
         const r = hero.getBoundingClientRect();
@@ -299,9 +297,6 @@
   }
 
 })();
-/* ══════════════════════════════════════════════════════════════
-   ZEN MAX PASS · v=zen-max-1 — added behaviours (self-contained)
-   ══════════════════════════════════════════════════════════════ */
 (() => {
   "use strict";
   const reduce = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
@@ -309,7 +304,7 @@
   const root = document.documentElement;
   const rAF = window.YOGA_RUNTIME.frame;
 
-  /* —— 1 · breathing intro —— */
+  // Intro.
   (function intro() {
     if (!root.classList.contains("intro-on")) return;
     try { sessionStorage.setItem("gb-yoga-intro-seen", "1"); } catch (_) {}
@@ -321,7 +316,7 @@
       window.addEventListener(ev, skip, { once: true, passive: true }));
   })();
 
-  /* —— 2 · scroll progress rail —— */
+  // Scroll rail.
   (function rail() {
     let ticking = false;
     const update = () => {
@@ -335,7 +330,7 @@
     update();
   })();
 
-  /* —— 3 · warm cursor spotlight —— */
+  // Spotlight.
   (function spotlight() {
     if (reduce || !fine) return;
     let shown = false;
@@ -346,7 +341,7 @@
     }, { passive: true });
   })();
 
-  /* —— 4 · magnetic hero CTAs —— */
+  // Magnetic buttons.
   (function magnetic() {
     if (reduce || !fine) return;
     document.querySelectorAll(".hero-actions .btn").forEach((btn) => {
@@ -362,9 +357,8 @@
     });
   })();
 
-  /* —— 5 · live 4-7-8 breath caption —— */
+  /* One clock for the lotus, caption and selected breathing practice. */
   (function breath() {
-    if (reduce) return;
     const hero = document.querySelector(".hero");
     const phaseEl = hero && hero.querySelector(".breath-phase");
     if (!phaseEl) return;
@@ -372,22 +366,41 @@
       es: { inhale: "Inhala", hold: "Sostén", exhale: "Exhala" },
       en: { inhale: "Inhale", hold: "Hold", exhale: "Exhale" }
     };
+    let elapsed = 0, last = performance.now(), source = null;
+    hero.style.setProperty("--lotus-open", reduce ? ".5" : "0");
+    window.addEventListener("yoga:breath", ({detail}) => {
+      source = detail.active ? detail : null;
+      last = performance.now();
+    });
     const tick = () => {
-      if (document.hidden || document.body.classList.contains("quiet-mode")) return;
-      const t = (performance.now() / 1000) % 19;
-      let phase, left;
-      if (t < 4) { phase = "inhale"; left = Math.ceil(4 - t); }
-      else if (t < 11) { phase = "hold"; left = Math.ceil(11 - t); }
-      else { phase = "exhale"; left = Math.ceil(19 - t); }
+      const now = performance.now();
+      const blocked = document.hidden || document.body.classList.contains("quiet-mode");
+      const still = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
+      if (!blocked && !still && !source) elapsed += (now - last) / 1000;
+      last = now;
+      if (blocked) return;
+      if (still && !source) {
+        hero.setAttribute("data-phase", "still");
+        phaseEl.textContent = "4 · 7 · 8";
+        return;
+      }
+      const t = elapsed % 19;
+      const phase = source ? source.phase : t < 4 ? "inhale" : t < 11 ? "hold" : "exhale";
+      const duration = phase === "inhale" ? 4 : phase === "hold" ? 7 : 8;
+      const progress = source ? source.progress : (t - (phase === "inhale" ? 0 : phase === "hold" ? 4 : 11)) / duration;
+      const left = source ? source.remaining : Math.ceil(duration * (1 - progress));
+      if (!still) hero.style.setProperty("--lotus-open", (phase === "inhale" ? progress : phase === "hold" ? 1 : 1 - progress).toFixed(4));
       const lang = root.lang === "en" ? "en" : "es";
       hero.setAttribute("data-phase", phase);
       phaseEl.textContent = words[lang][phase] + " · " + left;
     };
+    document.addEventListener("visibilitychange", () => { last = performance.now(); });
+    document.addEventListener("yoga:quiet", () => { last = performance.now(); tick(); });
     tick();
     setInterval(tick, 250);
   })();
 
-  /* —— 6 · rising motes (soft, warm, drift up) —— */
+  // Ambient particles.
   (function motes() {
     const canvas = document.querySelector(".fx-motes");
     if (!canvas || reduce) return;
@@ -461,9 +474,7 @@
 })();
 
 
-/* ================================================================
-   SANCTUARY PASS · ritual interaction
-   ================================================================ */
+// SANCTUARY PASS · ritual interaction
 (() => {
   "use strict";
   const root = document.body;

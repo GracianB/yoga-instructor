@@ -271,41 +271,33 @@
       document.documentElement.classList.add("reduce-motion");
     } else {
       hero.setAttribute("data-breath", "cycle");
-      // Actual mouse/pen events are more reliable than the hover/fine media
-      // capability in desktop Firefox and automated browser environments.
-      // Touch never drives parallax, and quiet/reduced-motion never writes it.
-      const max = 8;
-      let heroBounds = null;
-      const invalidateBounds = () => { heroBounds = null; };
-      const resetPointer = () => {
-        invalidateBounds();
-        hero.style.setProperty("--px", "0px");
-        hero.style.setProperty("--py", "0px");
-        hero.style.setProperty("--copy-x", "0px");
-        hero.style.setProperty("--copy-y", "0px");
+      // Use mouse/pen events even when Firefox reports no fine hover.
+      let bounds;
+      const reset = () => {
+        bounds = null;
+        for (const key of ["--px", "--py", "--copy-x", "--copy-y"])
+          hero.style.setProperty(key, "0px");
       };
-      const onMove = (e) => {
-        if (e.pointerType === "touch" ||
-            document.body.classList.contains("quiet-mode") ||
+      const move = (e) => {
+        if (e.pointerType === "touch" || document.body.classList.contains("quiet-mode") ||
             window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)")) return;
-        // Cache geometry until the page scrolls, resizes or pointer re-enters:
-        // one layout read instead of forcing a read on every mouse movement.
-        const r = heroBounds || (heroBounds = hero.getBoundingClientRect());
+        // Cached geometry avoids a forced layout read for each pointer move.
+        const r = bounds || (bounds = hero.getBoundingClientRect());
         if (!r.width || !r.height) return;
         const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
         const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
-        hero.style.setProperty("--px", (x * max).toFixed(2) + "px");
-        hero.style.setProperty("--py", (y * max).toFixed(2) + "px");
+        hero.style.setProperty("--px", (x * 8).toFixed(2) + "px");
+        hero.style.setProperty("--py", (y * 8).toFixed(2) + "px");
         hero.style.setProperty("--copy-x", (x * -4).toFixed(2) + "px");
         hero.style.setProperty("--copy-y", (y * -2).toFixed(2) + "px");
       };
-      hero.addEventListener("pointerenter", invalidateBounds, { passive: true });
-      hero.addEventListener("pointermove", onMove, { passive: true });
-      hero.addEventListener("pointerleave", resetPointer, { passive: true });
-      window.addEventListener("scroll", invalidateBounds, { passive: true });
-      window.addEventListener("resize", invalidateBounds, { passive: true });
+      hero.addEventListener("pointermove", move, { passive: true });
+      hero.addEventListener("pointerleave", reset);
+      const invalidate = () => { bounds = null; };
+      window.addEventListener("scroll", invalidate, { passive: true });
+      window.addEventListener("resize", invalidate, { passive: true });
       document.addEventListener("yoga:quiet", () => {
-        if (document.body.classList.contains("quiet-mode")) resetPointer();
+        if (document.body.classList.contains("quiet-mode")) reset();
       });
     }
   }

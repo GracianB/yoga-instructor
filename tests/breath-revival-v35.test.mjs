@@ -24,7 +24,7 @@ test("V35: sound is consent-based, supports local MP3 and never autoplays",()=>{
  assert.match(js,/volume\.addEventListener/);
  assert.match(js,/other\.pause\(\)/);
  assert.doesNotMatch(js,/autoplay/);
- assert.match(js,/\\.\\/audio\\/sustained-focus\.mp3/);
+ assert.ok(js.includes('audio/sustained-focus.mp3'));
 });
 test("V35: dedicated studio assets all wired in dependency order and in Pages",()=>{
  for(const f of ["studio-breath-dragon.js","studio-soundscape.js","yy-breath-revival.css","yy-studio-soundscape.css"]){

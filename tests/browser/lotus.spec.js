@@ -158,20 +158,13 @@ for (const width of [320, 390, 768, 1440]) {
       await expect(page.locator('#breath-phase')).toHaveText('Sostén');
       expect(await openness(page)).toBeGreaterThanOrEqual(0.95);
       await expectContained(page, width);
-      if (width === 390 || width === 1440) {
-        // Screenshot actionability uses animation frames. Resume the browser
-        // clock after deterministic geometry checks, while the dock is held.
-        await page.clock.resume();
-        await test.info().attach(`lotus-${width}-${theme}`, {
-          body: await page.locator('.hero').screenshot({ animations: 'disabled' }), contentType: 'image/png'
-        });
-      }
       expect(failures).toEqual([]);
     });
   }
 }
 
 test('ambient breathing moves the petals and visual quiet holds the exact frame', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page);
   const first = await frame(page);
   await advance(page, 1250);
@@ -198,6 +191,7 @@ test('ambient breathing moves the petals and visual quiet holds the exact frame'
 });
 
 test('one breath synchronizes the hero and dock through inhale, hold and exhale', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page);
   await click(page, '.sanctuary-breath');
   await expect(page.locator('.sanctuary-breath')).toHaveAttribute('aria-pressed', 'true');
@@ -234,6 +228,7 @@ test('one breath synchronizes the hero and dock through inhale, hold and exhale'
 });
 
 test('reduced motion freezes the lotus at load and after a live preference change', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page, { reducedMotion: 'reduce' });
   const initial = await frame(page);
   expect(Number.parseFloat(initial.open)).toBeGreaterThanOrEqual(0);
@@ -266,6 +261,7 @@ test('reduced motion freezes the lotus at load and after a live preference chang
 });
 
 test('guided breath preserves its position across pause and overlapping page visibility', async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page);
   const guide = page.locator('#flow-guide');
   const act = action => click(page, `[data-flow-action="${action}"]`);

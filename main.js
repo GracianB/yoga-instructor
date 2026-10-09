@@ -266,16 +266,32 @@
   const hero = document.querySelector(".hero");
   if (hero) {
     const reduce = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
-    const finePointer = window.YOGA_RUNTIME.mediaMatches("(hover: hover) and (pointer: fine)");
     if (reduce) {
       hero.setAttribute("data-breath", "still");
       document.documentElement.classList.add("reduce-motion");
     } else {
       hero.setAttribute("data-breath", "cycle");
-      // Pointer parallax.
+      // Actual mouse/pen events are more reliable than the hover/fine media
+      // capability in desktop Firefox and automated browser environments.
+      // Touch never drives parallax, and quiet/reduced-motion never writes it.
       const max = 8;
+      let heroBounds = null;
+      const invalidateBounds = () => { heroBounds = null; };
+      const resetPointer = () => {
+        invalidateBounds();
+        hero.style.setProperty("--px", "0px");
+        hero.style.setProperty("--py", "0px");
+        hero.style.setProperty("--copy-x", "0px");
+        hero.style.setProperty("--copy-y", "0px");
+      };
       const onMove = (e) => {
-        const r = hero.getBoundingClientRect();
+        if (e.pointerType === "touch" ||
+            document.body.classList.contains("quiet-mode") ||
+            window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)")) return;
+        // Cache geometry until the page scrolls, resizes or pointer re-enters:
+        // one layout read instead of forcing a read on every mouse movement.
+        const r = heroBounds || (heroBounds = hero.getBoundingClientRect());
+        if (!r.width || !r.height) return;
         const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
         const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
         hero.style.setProperty("--px", (x * max).toFixed(2) + "px");
@@ -283,16 +299,14 @@
         hero.style.setProperty("--copy-x", (x * -4).toFixed(2) + "px");
         hero.style.setProperty("--copy-y", (y * -2).toFixed(2) + "px");
       };
-      const onLeave = () => {
-        hero.style.setProperty("--px", "0px");
-        hero.style.setProperty("--py", "0px");
-        hero.style.setProperty("--copy-x", "0px");
-        hero.style.setProperty("--copy-y", "0px");
-      };
-      if (finePointer) {
-        hero.addEventListener("pointermove", onMove);
-        hero.addEventListener("pointerleave", onLeave);
-      }
+      hero.addEventListener("pointerenter", invalidateBounds, { passive: true });
+      hero.addEventListener("pointermove", onMove, { passive: true });
+      hero.addEventListener("pointerleave", resetPointer, { passive: true });
+      window.addEventListener("scroll", invalidateBounds, { passive: true });
+      window.addEventListener("resize", invalidateBounds, { passive: true });
+      document.addEventListener("yoga:quiet", () => {
+        if (document.body.classList.contains("quiet-mode")) resetPointer();
+      });
     }
   }
 

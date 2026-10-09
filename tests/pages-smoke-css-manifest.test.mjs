@@ -13,7 +13,8 @@ test('GitHub Pages smoke verifies every local stylesheet from release HTML',()=>
  assert.ok(sheets.includes('yy-dragon-d9.css'));
  assert.ok(sheets.includes('yy-dragon-d10.css'));
  assert.match(smoke,/const declaredStylesheets/);
- assert.match(smoke,/expectedIndex\.matchAll/);
+ assert.match(smoke,/localPages\.flatMap/);
+ assert.match(smoke,/const declaredScripts/);
  assert.match(smoke,/\.\.\.declaredStylesheets/);
  assert.match(smoke,/yy-dragon-d10\.css/);
  assert.match(build,/Missing stylesheet from Pages bundle/);

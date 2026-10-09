@@ -31,12 +31,15 @@
  const volume=ui.querySelector(".studio-sound-volume");
  let objectUrl=null;
  let custom=false;
+ let ownerTrack=false;
+ let checkedOwnerTrack=false;
  sound.volume=.32;
  const en=()=>document.documentElement.lang==="en";
  const syncText=()=>{
    ui.querySelector(".studio-sound-kicker").textContent=en()?"SOUND OF THE SANCTUARY":"SONIDO DEL SANTUARIO";
    ui.querySelector(".studio-sound-title").textContent=en()?"Your breathing soundtrack":"Tu música para respirar";
    ui.querySelector(".studio-sound-track").textContent=custom?input.files?.[0]?.name||"Silence Between Notes":
+     ownerTrack?"Silence Between Notes · 3:56":
      en()?"Sustained Focus · included track":"Sustained Focus · pista incluida";
    toggle.textContent=sound.paused?(en()?"Play music":"Escuchar música"):(en()?"Pause music":"Pausar música");
    toggle.setAttribute("aria-pressed",String(!sound.paused));
@@ -46,12 +49,28 @@
    input.setAttribute("aria-label",en()?"Choose soundtrack audio file":"Elegir archivo de música");
  };
  const stop=()=>{if(!sound.paused)sound.pause();syncText();};
+ const resolveOwnerTrack=async()=>{
+   if(checkedOwnerTrack||custom)return;
+   checkedOwnerTrack=true;
+   // Probe only after a real user click. Before the MP3 is committed, the
+   // existing included song remains available and no startup 404 is raised.
+   try{
+     const url=new URL("./audio/silence-between-notes.mp3",document.baseURI);
+     const reply=await fetch(url,{method:"HEAD",cache:"no-store"});
+     if(reply.ok){
+       sound.src=url.href;
+       sound.load();
+       ownerTrack=true;
+     }
+   }catch(_){ /* Offline sessions retain the bundled fallback. */ }
+ };
  toggle.addEventListener("click",async()=>{
    if(root.dataset.studioMode!=="breath")return;
    if(!sound.paused){stop();return;}
    // Never trigger the existing Vortex player or spoken guide.
    const other=document.querySelector("#focus-audio");
    if(other&&!other.paused)other.pause();
+   await resolveOwnerTrack();
    try{await sound.play();}
    catch(_){stop();}
    syncText();
@@ -66,6 +85,8 @@
    objectUrl=URL.createObjectURL(file);
    sound.src=objectUrl;
    custom=true;
+   checkedOwnerTrack=true;
+   ownerTrack=false;
    sound.load();
    syncText();
  });

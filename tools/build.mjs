@@ -5,8 +5,13 @@ const rootFiles = ['index.html', 'cv.html', 'cv.js', '404.html', 'styles.css', '
 // Release contract: every root stylesheet referenced by HTML must be deployed.
 // New visual layers must not silently disappear from GitHub Pages.
 const html = await readFile('index.html', 'utf8');
-for (const [, sheet] of html.matchAll(/<link[^>]+href="\.\/([^"?#]+\.css)(?:\?[^\"]*)?"/g)) {
-  if (!sheet.includes('/') && !rootFiles.includes(sheet)) throw Error('Missing stylesheet from Pages bundle: ' + sheet);
+for (const page of [html, await readFile('cv.html', 'utf8'), await readFile('404.html', 'utf8')]) {
+  for (const [, sheet] of page.matchAll(/<link[^>]+href="\.\/([^"?#]+\.css)(?:\?[^\"]*)?"/g)) {
+    if (!sheet.includes('/') && !rootFiles.includes(sheet)) throw Error('Missing stylesheet from Pages bundle: ' + sheet);
+  }
+  for (const [, script] of page.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)) {
+    if (!script.includes('/') && !rootFiles.includes(script)) throw Error('Missing script from Pages bundle: ' + script);
+  }
 }
 for (const file of rootFiles) await copyFile(file, `dist/${file}`);
 for (const directory of ['assets', 'audio']) await cp(directory, `dist/${directory}`, { recursive: true });

@@ -15,3 +15,12 @@ test("D29: WebKit executes both partitions without oversubscribing the browser",
  assert.match(ci,/--project=webkit --shard=1\/2 --workers=2/);
  assert.match(ci,/--project=webkit --shard=2\/2 --workers=2/);
 });
+
+test("D29: cat-cow pause holds a fixed frame, then resumes real geometry under WebKit load",()=>{
+ const browser=get("tests/browser/closure.spec.js");
+ const section=browser.split("test('Phase B: cat-cow visibly flexes back")[1]
+  .split("test('Phase B: each asana")[0];
+ assert.match(section,/await page\.waitForTimeout\(450\)/);
+ assert.match(section,/expect\(await back\.getAttribute\('d'\)\)\.toBe\(frozen\)/);
+ assert.match(section,/await expect\.poll\(\(\)=>back\.getAttribute\('d'\),\{timeout:7000\}\)\.not\.toBe\(frozen\)/);
+});

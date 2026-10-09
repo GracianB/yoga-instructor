@@ -310,12 +310,11 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   expect(await guide.locator('.yy-pose[data-pose="warmup"] [data-limb^="arm-"]').count()).toBe(2);
   expect(await guide.locator('.yy-pose[data-pose="warmup"] [data-limb^="leg-"]').count()).toBe(2);
   const initial=await back.getAttribute('d');
-  await page.waitForTimeout(650);
-  const animated=await back.getAttribute('d');
-  expect(animated).not.toBe(initial);
+  // Frame scheduling in WebKit is variable under CI load. Observe actual
+  // geometry updates instead of assuming they occur at an exact millisecond.
+  await expect.poll(()=>back.getAttribute('d'),{timeout:6000}).not.toBe(initial);
   const bellyA=await belly.getAttribute('d');
-  await page.waitForTimeout(590);
-  expect(await belly.getAttribute('d')).not.toBe(bellyA);
+  await expect.poll(()=>belly.getAttribute('d'),{timeout:6000}).not.toBe(bellyA);
   expect(await guide.locator('.yy-pose[data-pose="warmup"] .yy-paw-group')
     .evaluateAll(nodes=>nodes.map(n=>n.getAttribute("transform")))).toEqual(grounded);
   const spineNow=await spine.getAttribute('d');
@@ -327,8 +326,9 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   expect(await back.getAttribute('d')).toBe(frozen);
   await act('pause');
   await expect(guide).toHaveAttribute('data-asana-state','running');
-  await page.waitForTimeout(600);
-  expect(await back.getAttribute('d')).not.toBe(frozen);
+  // Still requires a genuine post-resume SVG morph; a permanently frozen
+  // dragon fails, but a busy renderer is allowed to schedule its next frame.
+  await expect.poll(()=>back.getAttribute('d'),{timeout:7000}).not.toBe(frozen);
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(guide).toHaveAttribute('data-asana-state','reduced');
   const reduced=await back.getAttribute('d');

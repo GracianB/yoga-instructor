@@ -1,0 +1,57 @@
+/* V34 · Quiet audio console beneath the breathing guardian.
+   Music is optional, can be paused, and keeps controls accessible. */
+#instructor-flow .studio-soundscape{
+ display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;
+ gap:15px;padding:19px clamp(17px,4vw,42px);
+ background:linear-gradient(110deg,#dfece1,#f3f0e6);
+ border-top:1px solid rgba(59,99,82,.16);color:#26483d
+}
+#instructor-flow .studio-soundscape[hidden]{display:none!important}
+#instructor-flow .studio-sound-copy{display:flex;flex-direction:column;gap:4px;min-width:160px}
+#instructor-flow .studio-sound-kicker{font:600 10px/1.5 'JetBrains Mono',monospace;letter-spacing:.13em;color:#5c786a}
+#instructor-flow .studio-sound-title{font:500 clamp(18px,2vw,24px)/1.2 'Fraunces',serif;color:#29574a}
+#instructor-flow .studio-sound-track{font:400 11px/1.5 'Inter',sans-serif;color:#627e6c}
+#instructor-flow .studio-sound-actions{display:flex;gap:9px;align-items:center;flex-wrap:wrap}
+#instructor-flow .studio-sound-actions button{
+ border:1px solid #427865;border-radius:999px;padding:10px 14px;
+ background:transparent;color:#285645;cursor:pointer;
+ font:600 12px/1.25 'Inter',sans-serif;
+ transition:background .2s,border-color .2s
+}
+#instructor-flow .studio-sound-actions button:hover{background:rgba(255,255,255,.58)}
+#instructor-flow .studio-sound-actions button:focus-visible,
+#instructor-flow .studio-sound-volume:focus-visible{outline:3px solid #a86a3d;outline-offset:3px}
+#instructor-flow .studio-sound-actions .studio-sound-toggle{
+ background:#245448;color:#fff;min-height:42px;border-color:#245448
+}
+#instructor-flow .studio-sound-actions .studio-sound-toggle:hover{background:#326f5b}
+#instructor-flow .studio-sound-volume-label{font:500 11px 'Inter',sans-serif;color:#496d5c}
+#instructor-flow .studio-sound-volume{accent-color:#386f5b;width:85px;min-width:65px;cursor:pointer}
+#instructor-flow .studio-sound-file[hidden]{display:none!important}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-patterns{
+ border-top:1px solid rgba(44,97,77,.12);justify-content:center;padding-top:20px
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-controls{
+ justify-content:center;gap:16px
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-note{
+ text-align:center;max-width:650px;margin:15px auto 20px;padding:0 16px
+}
+html[data-theme="dark"] #instructor-flow .studio-soundscape{
+ background:linear-gradient(105deg,#1b3a33,#263b35);border-color:#557365;color:#f2f0e3
+}
+html[data-theme="dark"] #instructor-flow .studio-sound-title{color:#f3f0db}
+html[data-theme="dark"] #instructor-flow .studio-sound-kicker,
+html[data-theme="dark"] #instructor-flow .studio-sound-track,
+html[data-theme="dark"] #instructor-flow .studio-sound-volume-label{color:#bed5c2}
+html[data-theme="dark"] #instructor-flow .studio-sound-actions button{border-color:#9dbb9d;color:#e6f1df}
+html[data-theme="dark"] #instructor-flow .studio-sound-actions .studio-sound-toggle{background:#c7dfb9;color:#1f4337}
+@media(max-width:600px){
+ #instructor-flow .studio-soundscape{padding:18px;justify-content:center;text-align:center;gap:12px}
+ #instructor-flow .studio-sound-copy{width:100%}
+ #instructor-flow .studio-sound-actions{justify-content:center;gap:10px}
+ #instructor-flow .studio-sound-volume{width:80px}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-sound-actions button{transition:none!important}
+}

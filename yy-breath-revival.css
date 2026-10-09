@@ -1,0 +1,127 @@
+/* V31-V35: Breathe Atelier. The guided dragon has its own 560x400 rig.
+   Preserve the real D17 source for movement and meditation; no bitmap layers. */
+#instructor-flow .studio-companion.yy-guide{
+ --dragon-light:#d4e8d3;--dragon-mid:#8ab9a4;--dragon-deep:#477b71;
+ --wing-light:#dfdfc8;--wing-vein:#fff8db;--chest-light:#fff9e8;
+ --chest-mid:#d6e8d2;--snout:#d8e8d9;--eye:#295347;--cheek:#d59a96;
+}
+#instructor-flow .studio-companion[data-spirit="yin"]{
+ --dragon-light:#eed5d7;--dragon-mid:#c8a7c7;--dragon-deep:#81638f;
+ --wing-light:#f2dddb;--wing-vein:#fff0e8;--chest-light:#fff9f3;
+ --chest-mid:#ead6e1;--snout:#f0dede;--eye:#644762;--cheek:#d18d9f;
+}
+#instructor-flow .studio-companion .studio-breath-dragon{
+ display:none;width:100%;height:100%;overflow:visible;
+ position:absolute;inset:0;isolation:isolate;pointer-events:none;
+ filter:drop-shadow(0 12px 18px rgba(32,65,48,.14));
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion>.yy-svg{
+ opacity:0;pointer-events:none
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion>.studio-breath-dragon{
+ display:block
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion.yy-guide{
+ width:min(100%,580px);height:clamp(252px,40vw,340px);margin:2px auto 0
+}
+#instructor-flow .studio-breath-dragon .sd31-breath-core{
+ transform-box:fill-box;transform-origin:center 47%;
+ transform:scale(var(--studio-rib-expansion,1));
+ transition:transform .21s linear
+}
+#instructor-flow .studio-breath-dragon .sd31-halo{
+ opacity:var(--studio-breath-opacity,.35);
+ transition:opacity .21s linear
+}
+#instructor-flow .studio-breath-dragon .sd31-heart{
+ opacity:var(--studio-d28-halo,.25);
+ transition:opacity .21s linear
+}
+#instructor-flow .studio-breath-dragon .sd31-wings{
+ opacity:var(--studio-wing-opacity,.8);
+ transition:opacity .21s linear
+}
+/* Geometry has no independent oscillator: pause freezes the same clock frame. */
+#instructor-flow .studio-guided[data-studio-status="paused"] .studio-breath-dragon
+ :is(.sd31-breath-core,.sd31-halo,.sd31-heart,.sd31-wings){
+ transition:none!important
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage{
+ min-height:540px;padding-bottom:23px;
+ background:
+ radial-gradient(ellipse 42% 35% at 50% 47%,rgba(201,225,210,.5),transparent 83%),
+ linear-gradient(160deg,#edf6ed 2%,#faf7ec 53%,#e8f0e7 100%)
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::before{
+ inset:17% 8% auto;aspect-ratio:1.3;
+ border:1px solid rgba(84,135,109,.14);border-radius:50%;
+ background:radial-gradient(ellipse at center,rgba(251,250,231,.4),transparent 70%);
+ transform:scale(var(--studio-breath-scale,1));transition:transform .21s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::after{
+ inset:21% 16% 35%;opacity:var(--studio-d28-halo,.25)
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-top{position:relative;z-index:4}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-orb{
+ opacity:0!important;box-shadow:none!important;pointer-events:none
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-title{
+ margin:0 auto 5px;max-width:620px;font-size:clamp(27px,3.6vw,42px);
+ color:#264e42;letter-spacing:-.04em
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-cue{
+ color:#527465;max-width:540px;font-size:clamp(13px,1.7vw,15px)
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-countdown{
+ font-family:'Inter',sans-serif;font-weight:300;
+ font-size:clamp(28px,4.5vw,44px);margin:12px 0 4px;letter-spacing:.07em
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-phase-detail{
+ margin:10px auto 5px;padding:6px 15px;width:max-content;max-width:100%;
+ border-radius:50px;background:rgba(250,249,236,.64);
+ border:1px solid rgba(64,111,88,.16);
+ color:#2a6251;letter-spacing:.07em
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-progress{
+ margin:11px auto 8px;height:3px
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-patterns,
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-controls{
+ background:rgba(236,243,230,.84)
+}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage{
+ background:radial-gradient(ellipse 55% 48% at 50% 46%,#345b51 0%,#1b3833 75%)
+}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-title{color:#f5f2e6}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-cue{color:#d3e3d7}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-phase-detail{
+ background:#29473d;color:#e8edd8;border-color:#6c8d79
+}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-patterns,
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-controls{
+ background:#1c322d
+}
+@media(max-width:600px){
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage{
+  min-height:480px;padding:18px 12px 22px
+ }
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion.yy-guide{
+  height:clamp(245px,80vw,300px);width:min(100%,360px);margin:0 auto
+ }
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-title{font-size:26px}
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-countdown{font-size:30px}
+}
+@media(max-width:380px){
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage{min-height:455px}
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-companion.yy-guide{height:230px}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-breath-dragon :is(.sd31-breath-core,.sd31-halo,.sd31-heart,.sd31-wings),
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::before{
+  transition:none!important;transform:none!important
+ }
+}
+body.quiet-mode #instructor-flow .studio-breath-dragon :is(.sd31-breath-core,.sd31-halo,.sd31-heart,.sd31-wings),
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::before{
+ transition:none!important;transform:none!important
+}

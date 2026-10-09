@@ -268,3 +268,31 @@ npm run build
 ### D.30 · Quality freeze criteria
 
 No se considera publicada o congelada la D.30 solo por crear una PR. Se exige `npm run quality`, `npm run test:browser` en Chromium/Firefox/WebKit con todas sus particiones, fusión sobre el SHA verificado y despliegue GitHub Pages `SUCCESS` con comparación SHA-256 de **todos los JS/CSS locales referenciados** y del HTML público. Consulte [issue #112](https://github.com/GracianB/yoga-instructor/issues/112). / D.30 is frozen only after the complete quality and deployment checks pass.
+
+---
+
+## Breathing Atelier · V31–V35 (solicitado después del cierre D.30)
+
+Nueva revisión limitada a la experiencia de respiración, sin modificar el ciclo de asanas ni otros portfolios.
+
+- **V31:** dragón de respiración SVG con postura sentada propia, cuello-hombros unidos, patas apoyadas, cola enraizada, alas con venas y ojos cerrados. El SVG D17 anterior se conserva para asanas/meditación.
+- **V32:** escena de respiración con composición luminosa, materiales Yin/Yang, oscuro/claro, diseño móvil 320–390 px y movimiento reducido.
+- **V33:** consola musical opcional con pausa y volumen. El audio jamás se inicia sin pulsar el botón.
+- **V34:** jerarquía de texto, foco y controles depurados. Se permite seleccionar música MP3 local, sin transmitirla al servidor.
+- **V35:** pruebas de regresión Node/Playwright en tres navegadores y tamaños 320/390/768/1440. La fusión/publicación requiere CI y GitHub Pages `SUCCESS`.
+
+### Cómo utilizar «Silence Between Notes»
+
+El archivo original (3:56) se conserva en **Google Drive / Yoga Instructor / Silence Between Notes.mp3**. La interfaz permite elegirlo desde «Elegir mi MP3» sin subirlo a ningún servidor; al volver a cargar la página hay que elegirlo de nuevo.
+
+Para publicarlo como pista predeterminada de todos los visitantes se necesita crear el recurso binario `audio/silence-between-notes.mp3` en GitHub. El programa detecta esa pista tras una pulsación explícita de «Escuchar música»; si no está disponible conserva `audio/sustained-focus.mp3` como alternativa. La selección nunca provoca reproducción automática. La copia de Google Drive **no** implica publicación pública en GitHub.
+
+En Windows, desde una copia limpia de este repositorio, se puede ejecutar **una sola vez**:
+
+```powershell
+pwsh -File .\scripts\upload-silence-between-notes.ps1
+```
+
+Se abre un selector para el archivo MP3, se prepara una rama de GitHub separada y se crea la pull request automáticamente cuando esté disponible `gh`; no se hace push directo a `main`. Se espera el CI verde antes del merge y la publicación.
+
+**English:** The new breathing figure is intentionally separate from the asana dragon. Music is strictly opt-in, with volume and pause controls. Select a local MP3 or publish the owner's file under `audio/silence-between-notes.mp3` to use it as the default. Never claim it is public until GitHub Pages serves it.

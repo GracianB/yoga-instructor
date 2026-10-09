@@ -5970,6 +5970,23 @@ body { padding-bottom: 80px; }
 
 body.quiet-mode .hero .hero-mandala { filter: none !important; }
 
+/* Keep decorative parallax fully still without a compositing layer in quiet
+   mode. The old desktop !important transform otherwise overrode this rule. */
+body.quiet-mode .hero .mandala-parallax,
+body.quiet-mode .hero .orb-parallax {
+  transform: none !important;
+  transition: none !important;
+  will-change: auto !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero .mandala-parallax,
+  .hero .orb-parallax {
+    transform: none !important;
+    transition: none !important;
+    will-change: auto !important;
+  }
+}
+
 /* Firefox narrow-viewport compositing budget: don't pre-promote the whole page.
  The browser still promotes actual transforms when animation demands it. */
 @media (max-width: 900px) {

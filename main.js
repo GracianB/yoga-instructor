@@ -266,33 +266,39 @@
   const hero = document.querySelector(".hero");
   if (hero) {
     const reduce = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
-    const finePointer = window.YOGA_RUNTIME.mediaMatches("(hover: hover) and (pointer: fine)");
     if (reduce) {
       hero.setAttribute("data-breath", "still");
       document.documentElement.classList.add("reduce-motion");
     } else {
       hero.setAttribute("data-breath", "cycle");
-      // Pointer parallax.
-      const max = 8;
-      const onMove = (e) => {
-        const r = hero.getBoundingClientRect();
+      // Use mouse/pen events even when Firefox reports no fine hover.
+      let bounds;
+      const reset = () => {
+        bounds = null;
+        for (const key of ["--px", "--py", "--copy-x", "--copy-y"])
+          hero.style.setProperty(key, "0px");
+      };
+      const move = (e) => {
+        if (e.pointerType === "touch" || document.body.classList.contains("quiet-mode") ||
+            window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)")) return;
+        // Cached geometry avoids a forced layout read for each pointer move.
+        const r = bounds || (bounds = hero.getBoundingClientRect());
+        if (!r.width || !r.height) return;
         const x = ((e.clientX - r.left) / r.width - 0.5) * 2;
         const y = ((e.clientY - r.top) / r.height - 0.5) * 2;
-        hero.style.setProperty("--px", (x * max).toFixed(2) + "px");
-        hero.style.setProperty("--py", (y * max).toFixed(2) + "px");
+        hero.style.setProperty("--px", (x * 8).toFixed(2) + "px");
+        hero.style.setProperty("--py", (y * 8).toFixed(2) + "px");
         hero.style.setProperty("--copy-x", (x * -4).toFixed(2) + "px");
         hero.style.setProperty("--copy-y", (y * -2).toFixed(2) + "px");
       };
-      const onLeave = () => {
-        hero.style.setProperty("--px", "0px");
-        hero.style.setProperty("--py", "0px");
-        hero.style.setProperty("--copy-x", "0px");
-        hero.style.setProperty("--copy-y", "0px");
-      };
-      if (finePointer) {
-        hero.addEventListener("pointermove", onMove);
-        hero.addEventListener("pointerleave", onLeave);
-      }
+      hero.addEventListener("pointermove", move, { passive: true });
+      hero.addEventListener("pointerleave", reset);
+      const invalidate = () => { bounds = null; };
+      window.addEventListener("scroll", invalidate, { passive: true });
+      window.addEventListener("resize", invalidate, { passive: true });
+      document.addEventListener("yoga:quiet", () => {
+        if (document.body.classList.contains("quiet-mode")) reset();
+      });
     }
   }
 

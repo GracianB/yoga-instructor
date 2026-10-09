@@ -30,9 +30,14 @@ const declaredStylesheets = localPages.flatMap(html =>
 const declaredScripts = localPages.flatMap(html =>
   [...html.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)]
     .map(([,name]) => name).filter(name => !name.includes('/')));
+// Audio remains optional for older releases, but a committed owner soundtrack
+// must be byte-identical on Pages. A 200 HTML fallback is not a valid MP3.
+const ownerSong='audio/silence-between-notes.mp3';
+const ownerSongExists=await readFile(resolve(root,ownerSong)).then(()=>true,()=>false);
 const files = [...new Set(['index.html', 'cv.html', '404.html', 'favicon.svg',
   'yin-yang-art.js', 'yy-dragon-d9.css', 'yy-dragon-d10.css',
-  ...declaredStylesheets, ...declaredScripts])];
+  ...declaredStylesheets, ...declaredScripts,
+  ...(ownerSongExists?[ownerSong]:[])])];
 const expected = await Promise.all(files.map(async name => {
   const data = await readFile(resolve(root, name));
   return { name, digest: createHash('sha256').update(data).digest('hex') };

@@ -4,8 +4,8 @@ import {readFileSync} from "node:fs";
 const read=(path)=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 const html=read("index.html"),js=read("studio-companion.js"),css=read("yy-studio-companion.css"),build=read("tools/build.mjs");
 test("D19 scripts and styles are wired after original D17 anatomy",()=>{
-  assert.ok(html.includes("studio-companion.js?v=d19-1"));
-  assert.ok(html.includes("yy-studio-companion.css?v=d19-1"));
+  assert.ok(html.includes("studio-companion.js?v=d30-1"));
+  assert.ok(html.includes("yy-studio-companion.css?v=d30-1"));
   assert.ok(html.indexOf("yy-studio-companion.css")>html.indexOf("yy-dragon-d17.css"));
   assert.ok(html.indexOf("studio-companion.js")>html.indexOf("flow-guide.js"));
   assert.match(build,/'studio-companion.js'/);

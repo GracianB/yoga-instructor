@@ -56,8 +56,12 @@
   mount.appendChild(svg);
   orb.insertAdjacentElement("afterend", mount);
 
+  let currentPose = "";
+  const poses = [...svg.querySelectorAll(".yy-pose")];
   const selectPose = (id) => {
-    for (const pose of svg.querySelectorAll(".yy-pose")) {
+    if (id === currentPose) return;
+    currentPose = id;
+    for (const pose of poses) {
       const selected = pose.dataset.pose === id;
       pose.classList.toggle("is-current", selected);
       pose.classList.remove("is-entering", "is-leaving");
@@ -67,16 +71,21 @@
   const sync = () => {
     const mode = host.dataset.studioMode || "asanas";
     const showing = mode === "breath" || mode === "meditation";
-    mount.hidden = !showing;
+    if (mount.hidden !== !showing) mount.hidden = !showing;
     if (!showing) return;
     selectPose(mode === "breath" ? "breath" : "centering");
-    studio.dataset.studioActive = mode;
-    mount.dataset.spirit = guide.dataset.spirit === "yin" ? "yin" : "yang";
-    mount.dataset.status = studio.dataset.studioStatus || "idle";
-    mount.dataset.asanaState = studio.dataset.studioStatus || "idle";
+    if (studio.dataset.studioActive !== mode) studio.dataset.studioActive = mode;
+    const spirit = guide.dataset.spirit === "yin" ? "yin" : "yang";
+    const status = studio.dataset.studioStatus || "idle";
+    if (mount.dataset.spirit !== spirit) mount.dataset.spirit = spirit;
+    if (mount.dataset.status !== status) mount.dataset.status = status;
+    if (mount.dataset.asanaState !== status) mount.dataset.asanaState = status;
   };
-  new MutationObserver(sync).observe(host, {attributes:true,attributeFilter:["data-studio-mode"]});
-  new MutationObserver(sync).observe(guide, {attributes:true,attributeFilter:["data-spirit"]});
-  new MutationObserver(sync).observe(studio, {attributes:true,attributeFilter:["data-studio-status"]});
+  // One observer serves the three sources. Pose class mutations are skipped
+  // unless the mode really changed, eliminating redundant SVG style work.
+  const observer = new MutationObserver(sync);
+  observer.observe(host, {attributes:true,attributeFilter:["data-studio-mode"]});
+  observer.observe(guide, {attributes:true,attributeFilter:["data-spirit"]});
+  observer.observe(studio, {attributes:true,attributeFilter:["data-studio-status"]});
   sync();
 })();

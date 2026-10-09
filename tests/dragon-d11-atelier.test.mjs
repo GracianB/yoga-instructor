@@ -11,7 +11,8 @@ test('D11 ships after D10, busts art cache, and passes Pages stylesheet manifest
  assert.match(html,/yy-dragon-d11\.css\?v=d11-1/);
  assert.match(html,/yin-yang-art\.js\?v=phase-d17-1/);
  assert.match(build,/'yy-dragon-d11\.css'/);
- assert.match(pages,/expectedIndex\.matchAll/);
+ assert.match(pages,/localPages\.flatMap/);
+ assert.match(pages,/const declaredScripts/);
  assert.match(pages,/\.\.\.declaredStylesheets/);
 });
 

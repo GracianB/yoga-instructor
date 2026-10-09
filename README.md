@@ -245,3 +245,26 @@ npm run build
 ```
 
 `test:e2e` is a legacy Node contract suite. `test:browser` opens actual browser engines. Pages deployment requires the complete verification job and a GitHub Actions Pages source.
+
+
+---
+
+## D.30 · Cómo practicar / How to practise
+
+**Tres caminos, un mismo espacio.** La aplicación acompaña, pero nunca obliga a seguir un ritmo.
+
+| Modo / Mode | Qué puedes hacer / What you can do |
+| --- | --- |
+| **Movimiento / Movement** | Diez fases de asanas, Yin o Yang, flechas para avanzar y retroceder, pausa, reinicio y biblioteca de posturas. / Ten phases, Yin or Yang, previous/next, pause, reset and a pose library. |
+| **Respiración / Breathing** | Ritmo suave 3/5, natural 4/6 o libre, sin retenciones obligatorias. / Gentle 3/5, natural 4/6 or free pacing, never mandatory breath holds. |
+| **Meditación / Meditation** | Guía o silencio, atención a la respiración, el cuerpo o el entorno. / Guided or silent, with breath, body or surroundings as a point of attention. |
+
+**Controles / Controls:** selecciona un modo y duración antes de comenzar; **Empezar / Begin**, **Pausar / Pause**, **Continuar / Resume** y **Reiniciar / Reset** controlan una sesión real. La vista de concentración en respiración o meditación se puede cerrar con **Esc** y conserva los controles esenciales. / Choose mode and duration before beginning. Focus view closes with **Esc** while essential session controls remain available.
+
+**Accesibilidad / Accessibility:** español e inglés, modo claro/oscuro, navegación por teclado, indicadores de foco, preferencias de movimiento reducido y modo tranquilo. La guía de voz y el audio requieren activación explícita, sin reproducción automática. / Spanish and English, light/dark themes, keyboard use, visible focus, reduced-motion preference and quiet mode. Speech and audio are opt-in only.
+
+**Nota / Note:** los ritmos respiratorios son orientativos. Si causan incomodidad, vuelve a tu respiración natural. Esta experiencia no evalúa la postura ni sustituye una enseñanza individual o consejo sanitario. / Breath timings are suggestions. Return to natural breathing if uncomfortable. The experience does not diagnose posture or replace individual instruction or medical advice.
+
+### D.30 · Quality freeze criteria
+
+No se considera publicada o congelada la D.30 solo por crear una PR. Se exige `npm run quality`, `npm run test:browser` en Chromium/Firefox/WebKit con todas sus particiones, fusión sobre el SHA verificado y despliegue GitHub Pages `SUCCESS` con comparación SHA-256 de **todos los JS/CSS locales referenciados** y del HTML público. Consulte [issue #112](https://github.com/GracianB/yoga-instructor/issues/112). / D.30 is frozen only after the complete quality and deployment checks pass.

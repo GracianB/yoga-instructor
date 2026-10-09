@@ -20,9 +20,19 @@ if (base.protocol !== 'https:') throw Error('HTTPS required');
 
 // Verify every root stylesheet declared by the release HTML, not a stale hand-maintained list.
 const expectedIndex = await readFile(resolve(root, 'index.html'), 'utf8');
-const declaredStylesheets = [...expectedIndex.matchAll(/<link[^>]+href="\.\/([^"?#]+\.css)(?:\?[^"]*)?"/g)]
-  .map(([,name]) => name).filter(name => !name.includes('/'));
-const files = [...new Set(['index.html', 'yin-yang-art.js', 'yy-dragon-d9.css', 'yy-dragon-d10.css', 'yy-guardian-soul.css', 'flow-guide.js', 'flow-guide.css', 'yy-asana-motion.js', 'yy-asana-motion.css', 'yy-premium-stage.css', 'styles.css', 'favicon.svg', ...declaredStylesheets])];
+const localPages = [expectedIndex, await readFile(resolve(root, 'cv.html'), 'utf8'),
+  await readFile(resolve(root, '404.html'), 'utf8')];
+// A single missing JS can break an entire mode even while the HTML looks fine.
+// Read local assets from all public pages, not just a hand-picked smoke list.
+const declaredStylesheets = localPages.flatMap(html =>
+  [...html.matchAll(/<link[^>]+href="\.\/([^"?#]+\.css)(?:\?[^"]*)?"/g)]
+    .map(([,name]) => name).filter(name => !name.includes('/')));
+const declaredScripts = localPages.flatMap(html =>
+  [...html.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)]
+    .map(([,name]) => name).filter(name => !name.includes('/')));
+const files = [...new Set(['index.html', 'cv.html', '404.html', 'favicon.svg',
+  'yin-yang-art.js', 'yy-dragon-d9.css', 'yy-dragon-d10.css',
+  ...declaredStylesheets, ...declaredScripts])];
 const expected = await Promise.all(files.map(async name => {
   const data = await readFile(resolve(root, name));
   return { name, digest: createHash('sha256').update(data).digest('hex') };
@@ -45,26 +55,38 @@ const readPublished = async (name, attempt) => {
   return new Uint8Array(await response.arrayBuffer());
 };
 
+// Never re-download an already verified asset while waiting for CDN propagation.
+// Bound parallel requests; the first complete SHA-256 match is authoritative.
+const pending = new Map(expected.map(file => [file.name, file]));
 for (let attempt = 1; attempt <= attempts; attempt++) {
   const problems = [];
-  for (const file of expected) {
-    try {
-      const published = await readPublished(file.name, attempt);
-      const actual = digest(published);
-      if (actual !== file.digest) {
-        problems.push(file.name + ': content mismatch (' + actual.slice(0, 12) + ' != ' + file.digest.slice(0, 12) + ')');
-      }
-      if (file.name === 'index.html') {
-        const html = Buffer.from(published).toString('utf8');
-        if (!html.includes(expectedArtRef)) {
-          problems.push('index.html: missing expected art reference '+expectedArtRef);
+  const queue = [...pending.values()];
+  let cursor = 0;
+  const verify = async () => {
+    while (cursor < queue.length) {
+      const file = queue[cursor++];
+      try {
+        const published = await readPublished(file.name, attempt);
+        const actual = digest(published);
+        if (actual !== file.digest) {
+          problems.push(file.name + ': content mismatch (' + actual.slice(0, 12) + ' != ' + file.digest.slice(0, 12) + ')');
+          continue;
         }
+        if (file.name === 'index.html') {
+          const html = Buffer.from(published).toString('utf8');
+          if (!html.includes(expectedArtRef)) {
+            problems.push('index.html: missing expected art reference ' + expectedArtRef);
+            continue;
+          }
+        }
+        pending.delete(file.name);
+      } catch (error) {
+        problems.push(file.name + ': ' + error.message);
       }
-    } catch (error) {
-      problems.push(file.name + ': ' + error.message);
     }
-  }
-  if (!problems.length) {
+  };
+  await Promise.all(Array.from({length: Math.min(8, queue.length)}, () => verify()));
+  if (pending.size === 0) {
     console.log('PUBLIC_RELEASE_OK: ' + base.toString() + ' [' + files.join(', ') + ']');
     console.log('Verified ' + files.length + ' exact SHA-256 asset matches against ' + root);
     process.exit(0);

@@ -35,22 +35,10 @@
 #instructor-flow .studio-companion .yy-character{
  transform-box:view-box;transform-origin:center 68%;animation:none!important
 }
-#instructor-flow .studio-guided[data-studio-status="running"] .studio-companion .yy-character{
- animation:studio-companion-breath 10s ease-in-out infinite!important
-}
-#instructor-flow .studio-guided[data-studio-active="meditation"][data-studio-status="running"]
- .studio-companion .yy-character{
- animation-duration:13s!important
-}
-#instructor-flow .studio-guided[data-studio-status="paused"] .studio-companion .yy-character{
- animation:studio-companion-breath 10s ease-in-out infinite paused!important
-}
-#instructor-flow .studio-guided[data-studio-active="meditation"][data-studio-status="paused"]
- .studio-companion .yy-character{animation-duration:13s!important}
-@keyframes studio-companion-breath{
- 0%,100%{transform:translateY(0)}
- 40%{transform:translateY(-3px)}
- 65%{transform:translateY(-3px)}
+/* D30: the studio dragon stays grounded. Its ribs, light and wings follow the
+   existing monotonic breathing clock, never a competing 10s/13s float loop. */
+#instructor-flow .studio-guided .studio-companion .yy-character{
+ animation:none!important
 }
 #instructor-flow .studio-guided-title{position:relative;z-index:2;margin-top:-13px}
 #instructor-flow .studio-guided-cue{position:relative;z-index:2}

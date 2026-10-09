@@ -64,8 +64,8 @@ jobs:
       - name: Test both WebKit partitions (same installed engine)
         if: ${{ matrix.browser == 'webkit' }}
         run: |
-          npm run test:browser -- --project=webkit --shard=1/2 --workers=3 --pass-with-no-tests
-          npm run test:browser -- --project=webkit --shard=2/2 --workers=3 --pass-with-no-tests
+          npm run test:browser -- --project=webkit --shard=1/2 --workers=2 --pass-with-no-tests
+          npm run test:browser -- --project=webkit --shard=2/2 --workers=2 --pass-with-no-tests
       - uses: actions/upload-artifact@v6
         if: always()
         with:

@@ -27,7 +27,7 @@ test("V36: Vortex uses explicit opt-in and yields to main soundtrack",async({pag
  await page.route("https://vortex-gilt-xi.vercel.app/**",route=>route.fulfill({contentType:"text/html",body:"<html><body>Vortex preview</body></html>"}));
  await page.goto("/");
  const frame=page.locator(".campo-vortex-full iframe");
- await expect(frame).toHaveAttribute("src","about:blank");
+ await expect(frame).toHaveCount(0);
  await expect(page.locator("#vortex-activate")).toBeVisible();
  await page.locator("#audio-play").evaluate(el=>el.click());
  await expect.poll(()=>page.locator("#focus-audio").evaluate(el=>el.paused)).toBe(false);
@@ -36,7 +36,7 @@ test("V36: Vortex uses explicit opt-in and yields to main soundtrack",async({pag
  await expect(frame).toHaveAttribute("src","https://vortex-gilt-xi.vercel.app/");
  await page.locator("#audio-play").evaluate(el=>el.click());
  await expect.poll(()=>page.locator("#focus-audio").evaluate(el=>el.paused),{timeout:10000}).toBe(false);
- await expect(frame).toHaveAttribute("src","about:blank");
+ await expect(frame).toHaveCount(0);
  await expect(page.locator("#vortex-activate")).toBeVisible();
 });
 test("V36: visibly stronger chest breath freezes when paused, reduced motion remains still",async({page})=>{
@@ -46,8 +46,9 @@ test("V36: visibly stronger chest breath freezes when paused, reduced motion rem
  const guided=page.locator("#studio-guided");
  await expect(guided).toHaveAttribute("data-studio-status","running");
  await expect.poll(()=>guided.evaluate(el=>+el.style.getPropertyValue("--studio-guardian-expansion")),{timeout:5000}).toBeGreaterThan(1.025);
- const value=await guided.evaluate(el=>el.style.getPropertyValue("--studio-guardian-expansion"));
  await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
+ await expect(guided).toHaveAttribute("data-studio-status","paused");
+ const value=await guided.evaluate(el=>el.style.getPropertyValue("--studio-guardian-expansion"));
  await page.waitForTimeout(650);
  expect(await guided.evaluate(el=>el.style.getPropertyValue("--studio-guardian-expansion"))).toBe(value);
  await page.emulateMedia({reducedMotion:"reduce"});

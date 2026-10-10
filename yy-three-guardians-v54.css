@@ -1,0 +1,60 @@
+/* V54 · Three guardians: material definition without competing animation clocks.
+   Only compositor-friendly transforms/opacity. Respect stillness as a feature. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian{
+  --mg-edge:color-mix(in srgb,var(--mg-deep) 78%,transparent);
+  filter:drop-shadow(0 7px 9px rgba(65,58,51,.13));
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-body{
+  stroke:var(--mg-edge);stroke-width:2.25;stroke-linejoin:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
+  stroke-width:2.5;stroke-linejoin:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-plane{
+  stroke-opacity:.24;stroke-width:6
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian :is(.mg-socket-light,.mg-hinge-crease){
+  opacity:.42
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-tail-leaf{
+  stroke-width:2.5;stroke-linejoin:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-shadow{
+  opacity:.13
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon{
+  filter:drop-shadow(0 8px 12px rgba(35,71,58,.16))
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-body{
+  stroke-linejoin:round
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-breath-core{
+  transform-origin:center center;will-change:auto
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian{
+  filter:drop-shadow(0 9px 13px rgba(55,51,84,.13))
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian :is(.uma-wing-left,.uma-wing-right,.uma-head,.uma-body){
+  stroke-linejoin:round
+}
+/* Movement pose hand-off: never ghost two creatures at once. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .yy-pose.is-leaving .movement-guardian{
+  opacity:0!important;visibility:hidden!important
+}
+@media (max-width:600px){
+ #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian,
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon,
+ #instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian{
+   filter:none
+ }
+}
+@media (prefers-reduced-motion:reduce){
+ #instructor-flow .movement-guardian *,
+ #instructor-flow .studio-breath-dragon *,
+ #instructor-flow .meditation-guardian *{
+   animation:none!important;transition:none!important
+ }
+}
+body.quiet-mode #instructor-flow :is(.movement-guardian,.studio-breath-dragon,.meditation-guardian) *{
+ animation:none!important;transition:none!important
+}

@@ -296,3 +296,17 @@ pwsh -File .\scripts\upload-silence-between-notes.ps1
 Se abre un selector para el archivo MP3, se prepara una rama de GitHub separada y se crea la pull request automáticamente cuando esté disponible `gh`; no se hace push directo a `main`. Se espera el CI verde antes del merge y la publicación.
 
 **English:** The new breathing figure is intentionally separate from the asana dragon. Music is strictly opt-in, with volume and pause controls. Select a local MP3 or publish the owner's file under `audio/silence-between-notes.mp3` to use it as the default. Never claim it is public until GitHub Pages serves it.
+
+---
+
+## V36 · Un solo paisaje sonoro / One soundtrack
+
+- **Una sola fuente de audio**: `audio/silence-between-notes.mp3`, un único `<audio id="focus-audio">`, sin música automática al cargar la web. El reproductor principal está justo después de la portada.
+- **Tres controles, un reproductor**: Play del primer bloque musical, música dentro de Breathing y botón de música del rincón inferior derecho controlan el mismo audio, volumen y pausa. Seleccionar un MP3 local cambia la pista para los tres controles sin subir nada a un servidor; «Canción original» restaura Silence Between Notes.
+- **Vortex a pantalla amplia**: el iframe externo no se carga hasta pulsar «Entrar en Vortex». Al abrirlo se pausa la música de la página. Si se reproduce música, se descarga el iframe para detener también cualquier sonido ajeno que pudiera emitir; se puede entrar de nuevo manualmente. Los sonidos abiertos en otra pestaña desde un enlace externo quedan fuera del control de esta página.
+- **Respiración más expresiva**: el pecho aumenta hasta un 9,5 % desde el reloj existente y las alas hasta un 4,5 %, con cabeza, patas y raíz de la cola ancladas; las opciones de movimiento reducido y silencio visual desactivan estas transformaciones.
+- **ES/EN y accesibilidad**: etiquetas y controles de música y Vortex traducidos, foco visible, sin autoplay y selección de música por acción expresa.
+
+**English:** a single native music source, three synchronized sets of controls, opt-in Vortex iframe, a roomier particle canvas and a more readable seated dragon breathing cycle. External Vortex sessions opened in another browser tab cannot be managed by this site's audio controller.
+
+**Public release criteria:** green Node, Chromium 2/2, Firefox 2/2 and WebKit 2/2, followed by a Pages deploy matching the checked-out commit and the MP3 SHA-256.

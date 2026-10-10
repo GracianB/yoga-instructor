@@ -33,7 +33,7 @@ test('V66: guardian eyes are readable lines, not filled pupils',()=>{
  assert.match(nila,/class="mg-eye mg-eye-line"/);
  assert.doesNotMatch(nila,/class="mg-pupil"/);
  assert.match(breath,/class="sd31-eye-lines"/);
- assert.match(uma,/class="uma-eye-lines"/);
+ assert.match(uma,/class="uma-closed-eyes uma-eye-lines"/);
  assert.match(css,/\.mg-eye-line/);
 });
 

@@ -25,8 +25,12 @@ test("V55: desktop stage is spacious, figure and controls stay in one cockpit",a
  const consoleRoot=page.locator(".flow-console");
  await expect(consoleRoot).toHaveCSS("display","flex");
  await expect(consoleRoot.locator(".flow-console-top")).toBeVisible();
- await expect(consoleRoot.locator(".flow-controls")).toBeVisible();
+ // Pause/Reset intentionally stay hidden before Start; the primary CTA
+ // remains the only entry point to a live session.
+ await expect(consoleRoot.locator(".flow-controls")).toBeHidden();
  await expect(consoleRoot.locator(".flow-start")).toBeVisible();
+ await consoleRoot.locator(".flow-start").evaluate(el=>el.click());
+ await expect(consoleRoot.locator(".flow-controls")).toBeVisible();
  await expect(consoleRoot.locator(".flow-steps")).toBeVisible();
 });
 test("V55: three characters keep their own artworks and no second audio is created",async({page})=>{

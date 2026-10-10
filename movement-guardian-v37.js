@@ -137,6 +137,9 @@
        '<g class="mg-arms">'+arms+hands+'</g>'+
        head(p)+'</g>';
   };
+  // V53: the three optional asanas use exactly the same anatomical renderer.
+  // A single drawing function eliminates the second, visually unrelated dragon.
+  window.YOGA_MOVEMENT_GUARDIAN=Object.freeze({drawPose:drawing});
   for(const p of art.poses){
     const node=svg.querySelector('.yy-pose[data-pose="'+p.id+'"] .yy-character');
     if(node)node.insertAdjacentHTML("beforeend",drawing(p));

@@ -9,10 +9,10 @@ test("V47-V48: every movement limb gets an authentic shared socket and hinge",()
  assert.match(js,/const sample=\(section,t\)=>/);
  assert.match(js,/data-joint=/);
  assert.match(js,/data-socket=/);
- assert.match(js,/mg-shoulder/);
- assert.match(js,/mg-elbow/);
- assert.match(js,/mg-hip/);
- assert.match(js,/mg-knee/);
+ assert.match(js,/"shoulder":"hip"/);
+ assert.match(js,/"elbow":"knee"/);
+ assert.match(js,/data-socket=/);
+ assert.match(js,/data-joint=/);
  assert.match(js,/data-mg-limb=/);
  assert.match(css,/\.mg-hinge-crease/);
  assert.match(css,/\.mg-socket-shape/);

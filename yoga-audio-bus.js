@@ -5,7 +5,8 @@
 (() => {
   "use strict";
   const audio = document.getElementById("focus-audio");
-  const iframe = document.querySelector(".campo-vortex-full iframe");
+  const frameHost = document.querySelector(".vortex-frame-mount");
+  let iframe = null;
   const vortexStart = document.getElementById("vortex-activate");
   const vortexStop = document.getElementById("vortex-stop");
   if (!audio) return;
@@ -34,15 +35,21 @@
   const deactivateVortex=()=>{
     if (!vortexActive) return;
     vortexActive=false;
-    if (iframe) iframe.src="about:blank"; // unload its independent sound and context
+    if (iframe) {iframe.remove();iframe=null;} // unload remote audio and its document
     updateVortex();
   };
   const activateVortex=()=>{
-    if (!iframe || vortexActive) return;
+    if (!frameHost || vortexActive) return;
     audio.pause(); // One audible source at a time; remote iframe is isolated
     owner=null;
+    iframe=document.createElement("iframe");
+    iframe.title="Vortex";
+    iframe.loading="lazy";
+    iframe.referrerPolicy="no-referrer";
+    iframe.setAttribute("sandbox","allow-scripts allow-same-origin");
+    iframe.src=frameHost.dataset.vortexSrc;
+    frameHost.appendChild(iframe);
     vortexActive=true;
-    iframe.src=iframe.dataset.vortexSrc;
     updateVortex(); send();
   };
   const stop = () => {audio.pause();send();};

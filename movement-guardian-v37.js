@@ -162,11 +162,18 @@
     const arms=p.arms.map((d,i)=>limb(d,"arm",i)).join("");
     const feet=p.feet.map((pt,i)=>paw(pt,"foot",i)).join("");
     const hands=p.hands.map((pt,i)=>paw(pt,"hand",i)).join("");
+    // V56: arm roots live BEHIND the same torso that joins the hip sockets.
+    // Previously the entire shoulder socket sat over the chest like a sticker.
+    // Only the hands and a soft joining-gesture forearm pass in FRONT.
+    const joined=p.kind==="finish";
+    const front=joined?'<g class="mg-gesture-forearms">'+
+      p.arms.map(d=>'<path class="mg-gesture-forearm" d="'+d+'"/>').join("")+'</g>':"";
     return '<g class="movement-guardian" data-guardian="nila" data-kind="'+p.kind+'" aria-hidden="true">'+
        shadows(p)+tail(p)+
        '<g class="mg-legs">'+legs+feet+'</g>'+
+       '<g class="mg-arms mg-arms-behind">'+arms+'</g>'+
        neck(p)+trunk(p)+
-       '<g class="mg-arms">'+arms+hands+'</g>'+
+       front+'<g class="mg-hands">'+hands+'</g>'+
        head(p)+'</g>';
   };
   // V53: the three optional asanas use exactly the same anatomical renderer.

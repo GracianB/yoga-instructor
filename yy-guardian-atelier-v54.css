@@ -1,0 +1,231 @@
+/* V54 · Guardian Atelier: one prominent stage, three entirely distinct souls. */
+/* Movement is a STAGE with compact floating navigation, not two tall rails. */
+#instructor-flow.section{
+ width:min(1240px,calc(100% - 26px))!important;
+ max-width:1240px!important;
+}
+#instructor-flow .studio-entrance,
+#instructor-flow .flow-console,
+#instructor-flow .studio-guided{
+ width:100%;max-width:none;box-sizing:border-box;
+}
+#instructor-flow .studio-modes{gap:clamp(9px,1.5vw,19px)}
+#instructor-flow .studio-mode{
+ min-height:105px;padding:clamp(14px,2vw,26px);
+ border-radius:20px
+}
+#instructor-flow .studio-mode-copy strong{font-size:clamp(18px,2vw,24px)}
+#instructor-flow .studio-mode-copy small{line-height:1.4;font-size:12px}
+#instructor-flow .flow-console{
+ margin-top:22px!important;padding:clamp(12px,1.65vw,21px)!important;
+ border-radius:27px!important;
+ background:linear-gradient(154deg,#e9eee2,#f2f0e4 57%,#e2e9df)!important;
+ box-shadow:0 24px 70px rgba(26,57,46,.09)!important
+}
+#instructor-flow .flow-theater{
+ display:block!important;position:relative!important;
+ grid-template-columns:minmax(0,1fr)!important;
+ width:100%;max-width:none;gap:0!important
+}
+#instructor-flow .flow-theater .flow-guide{
+ width:100%!important;max-width:none!important;
+ margin:0!important;
+ border-radius:23px!important
+}
+#instructor-flow .flow-theater .yy-stage{
+ width:100%!important;max-width:none!important;
+ aspect-ratio:1.80!important;
+ min-height:440px;
+ border-radius:22px 22px 0 0!important
+}
+#instructor-flow .flow-theater .yy-svg{
+ width:100%;height:100%;
+ overflow:visible
+}
+#instructor-flow .flow-theater .flow-side{
+ position:absolute!important;z-index:8;
+ display:flex!important;align-items:center!important;
+ width:62px!important;height:62px!important;
+ top:39%!important;bottom:auto!important;margin:0!important;
+ transform:translateY(-50%);
+ pointer-events:none
+}
+#instructor-flow .flow-theater .flow-side-prev{left:clamp(8px,1.6vw,24px)!important}
+#instructor-flow .flow-theater .flow-side-next{right:clamp(8px,1.6vw,24px)!important}
+#instructor-flow .flow-theater .flow-rail-button{
+ width:62px!important;height:62px!important;min-height:62px!important;
+ max-height:62px!important;border-radius:50%!important;
+ display:grid!important;place-items:center!important;
+ border:1.5px solid rgba(244,242,226,.7)!important;
+ background:rgba(19,48,43,.78)!important;
+ color:#f4f8e9!important;
+ backdrop-filter:blur(10px);
+ box-shadow:0 6px 23px rgba(20,31,31,.19)!important;
+ pointer-events:auto;transition:background .2s ease,scale .2s ease;
+}
+#instructor-flow .flow-theater .flow-rail-button:hover,
+#instructor-flow .flow-theater .flow-rail-button:focus-visible{
+ background:#326153!important;scale:1.06;outline:3px solid #eac492;
+ outline-offset:3px
+}
+#instructor-flow .flow-theater .flow-rail-button:disabled{
+ opacity:.32!important;cursor:not-allowed;scale:1
+}
+#instructor-flow .flow-theater .flow-guide figcaption{
+ padding:17px clamp(18px,3vw,41px) 21px!important;
+ background:linear-gradient(90deg,#f3f4e9,#e7ebe2)!important;
+ border-color:rgba(69,119,96,.15)!important
+}
+#instructor-flow .flow-theater .flow-guide figcaption strong{
+ font-size:clamp(25px,3.5vw,42px)!important;
+ color:#244d40!important
+}
+#instructor-flow .flow-theater .flow-guide figcaption p{
+ font-size:clamp(12px,1.4vw,16px)!important;
+ color:#435f52!important;max-width:70ch
+}
+#instructor-flow .flow-console-top{
+ grid-template-columns:minmax(0,1fr) auto auto!important;
+ align-items:center!important;
+ padding:clamp(16px,2vw,26px)!important;
+ background:rgba(255,255,255,.55);
+ border:1px solid rgba(80,123,105,.14);
+ border-radius:0 0 18px 18px;
+ margin:0!important
+}
+#instructor-flow .flow-console-top .flow-phase #flow-phase-label{
+ font-size:clamp(19px,2.8vw,34px)!important;color:#244d40
+}
+#instructor-flow .flow-console-top .flow-session-clock{
+ padding-left:14px;border-left:1px solid rgba(69,112,91,.16)
+}
+#instructor-flow #flow-phase-cue{
+ max-width:65ch;font-size:13px;line-height:1.5
+}
+#instructor-flow .flow-controls{gap:10px}
+#instructor-flow .flow-control{min-height:47px;border-radius:13px}
+#instructor-flow .flow-progress{margin:16px 9px 12px!important}
+#instructor-flow .flow-phase-progress{margin:0 9px 16px!important}
+#instructor-flow .flow-console-foot{gap:12px}
+#instructor-flow .flow-theater .yy-scene-breadcrumb{
+ top:clamp(12px,1.9vw,25px);left:clamp(15px,3vw,35px)
+}
+#instructor-flow .flow-theater .yy-scene-breadcrumb strong{font-size:13px}
+#instructor-flow .flow-theater .yy-scene-breadcrumb span{font-size:14px}
+/* Nila sculpt: limb volumes taper anatomically and share their root with torso. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
+ fill:var(--mg-coat);stroke:var(--mg-deep);stroke-width:2.2;
+ stroke-linejoin:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-shell{
+ display:none!important
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-plane{
+ stroke-width:3.3!important;stroke-opacity:.17!important
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape,
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell{
+ fill:var(--mg-coat);stroke:var(--mg-deep);stroke-width:1.1;
+ stroke-opacity:.4
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
+ stroke-width:2!important;stroke-opacity:.33!important
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
+ fill:var(--mg-light);stroke:var(--mg-deep);stroke-width:3
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn{
+ fill:var(--mg-leaf);stroke:var(--mg-deep);stroke-width:2.5;
+ stroke-linejoin:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn-shine{
+ fill:none;stroke:var(--mg-light);stroke-width:4;stroke-linecap:round;opacity:.75
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-cheek-fin{
+ fill:var(--mg-coat);stroke:var(--mg-deep);stroke-width:3;stroke-linejoin:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-crest{
+ fill:var(--mg-leaf);stroke:var(--mg-deep);stroke-width:2.5
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-muzzle-ridge{
+ fill:none;stroke:var(--mg-deep);stroke-opacity:.32;stroke-width:3.1;
+ stroke-linecap:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-pupil{
+ fill:none;stroke:var(--mg-eye);stroke-width:4.5;stroke-linecap:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-chin{
+ fill:var(--mg-chest);stroke:var(--mg-deep);stroke-width:1.2;stroke-opacity:.38
+}
+/* The D24 companion panel keeps the same large anatomical portrait. */
+#instructor-flow .studio-library-stage.yy-guide{
+ height:clamp(310px,35vw,435px)!important
+}
+#instructor-flow .studio-library-body{grid-template-columns:minmax(220px,.57fr) minmax(0,1.7fr)}
+/* Breathing and Uma: closer portraits, no nested tiny 580px thumbnails. */
+#instructor-flow .studio-guided .studio-companion.yy-guide{
+ width:min(100%,785px)!important;max-width:785px!important;
+ height:clamp(360px,39vw,465px)!important;
+ margin:5px auto 0!important
+}
+#instructor-flow .studio-guided-stage{
+ min-height:700px!important;
+ padding:clamp(19px,2.5vw,32px) clamp(13px,3vw,35px) 30px!important
+}
+#instructor-flow .studio-guided-title{
+ font-size:clamp(32px,3.6vw,49px)!important;line-height:1.13!important
+}
+#instructor-flow .studio-guided-cue{
+ max-width:650px!important;font-size:clamp(14px,1.55vw,17px)!important;
+ line-height:1.65
+}
+#instructor-flow .studio-guided-countdown{
+ font-size:clamp(48px,6.5vw,76px)!important;margin:8px auto 10px!important
+}
+html[data-theme="dark"] #instructor-flow .flow-console{
+ background:linear-gradient(140deg,#253649,#233b43)!important
+}
+html[data-theme="dark"] #instructor-flow .flow-console-top{
+ background:#293d48;border-color:#496571;color:#e8eee2
+}
+html[data-theme="dark"] #instructor-flow .flow-console-top .flow-phase #flow-phase-label{color:#f0f3dd}
+html[data-theme="dark"] #instructor-flow .flow-theater .flow-guide figcaption{
+ background:linear-gradient(100deg,#263b48,#24404a)!important;border-color:#59737c!important
+}
+html[data-theme="dark"] #instructor-flow .flow-theater .flow-guide figcaption strong{color:#f1efdd!important}
+html[data-theme="dark"] #instructor-flow .flow-theater .flow-guide figcaption p{color:#d0dfd9!important}
+@media(max-width:760px){
+ #instructor-flow.section{width:calc(100% - 16px)!important}
+ #instructor-flow .studio-library-body{grid-template-columns:1fr}
+ #instructor-flow .flow-theater .yy-stage{min-height:330px;aspect-ratio:1.25!important}
+ #instructor-flow .flow-theater .flow-side{
+  top:43%!important;width:45px!important;height:45px!important
+ }
+ #instructor-flow .flow-theater .flow-rail-button{
+  width:45px!important;height:45px!important;min-height:45px!important;max-height:45px!important
+ }
+ #instructor-flow .flow-console-top{
+  grid-template-columns:minmax(0,1fr) auto!important;padding:14px!important
+ }
+ #instructor-flow .flow-console-top .flow-state{grid-column:1/-1}
+ #instructor-flow .studio-guided .studio-companion.yy-guide{
+  width:100%!important;height:clamp(280px,82vw,400px)!important
+ }
+ #instructor-flow .studio-guided-stage{min-height:580px!important}
+}
+@media(max-width:420px){
+ #instructor-flow .flow-console{padding:7px!important}
+ #instructor-flow .flow-theater .yy-stage{min-height:290px}
+ #instructor-flow .studio-guided-stage{min-height:510px!important}
+ #instructor-flow .studio-guided .studio-companion.yy-guide{height:300px!important}
+ #instructor-flow .flow-theater .flow-side-prev{left:7px!important}
+ #instructor-flow .flow-theater .flow-side-next{right:7px!important}
+ #instructor-flow .flow-console-top{grid-template-columns:1fr!important}
+ #instructor-flow .flow-console-top .flow-session-clock{
+  padding:8px 0 0;border-left:0;border-top:1px solid rgba(69,112,91,.16)
+ }
+ #instructor-flow .flow-theater .flow-guide figcaption strong{font-size:22px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .flow-theater .flow-rail-button{transition:none!important}
+}

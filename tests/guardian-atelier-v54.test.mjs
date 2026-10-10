@@ -34,7 +34,9 @@ test("V54: budgets allow future guardian growth but remain enforced",()=>{
  const coreBudget=audit.split("\n").find(line=>line.includes('["index.html", '));
  assert.ok(coreBudget,"Index must have a resource growth gate");
  assert.ok(Number(coreBudget.match(/, (\d+)\]/)?.[1])>=160000);
- assert.match(audit,/\["styles\.css", 320000\]/);
+ const cssBudget=audit.split("\n").find(line=>line.includes('["styles.css", '));
+ assert.ok(cssBudget,"CSS must have a resource growth gate");
+ assert.ok(Number(cssBudget.match(/, (\d+)\]/)?.[1])>=320000);
  assert.match(audit,/if \(bytes <= max\)/);
  assert.match(audit,/else fail\.push/);
 });

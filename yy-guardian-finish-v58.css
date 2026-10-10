@@ -73,3 +73,9 @@
 }
 body.quiet-mode #instructor-flow .studio-breath-dragon,
 body.quiet-mode #instructor-flow .meditation-guardian{filter:none!important}
+
+/* V62: eyebrows are part of the pose-authored face, not another animation. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-brow{
+  fill:none;stroke:var(--mg-eye);stroke-width:2.6;
+  stroke-opacity:.58;stroke-linecap:round;stroke-linejoin:round;
+}

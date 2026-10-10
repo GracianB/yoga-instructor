@@ -25,6 +25,27 @@
   const adaptation=entrance.querySelector(".studio-adaptation");
   modes.after(...[tabs,context,plan,adaptation].filter(Boolean));
 
+  // The same two-column editorial skeleton for all modes. Group the
+  // Movement controls, rather than leaving five autonomous grid tracks
+  // stretching them apart across the character's tall canvas.
+  const controls=document.createElement("div");
+  controls.className="studio-v66-control-pane";
+  controls.setAttribute("aria-label","Controles de secuencia");
+  controls.append(...[...sequence.children].filter(el=>!el.classList.contains("flow-theater")));
+  sequence.appendChild(controls);
+
+  // The old guided stage placed title and countdown below the portrait,
+  // where a tall guardian pushed them out of view. Put instructions first
+  // and keep the single SVG portrait underneath in both seated modes.
+  const guidedStage=guided.querySelector(".studio-guided-stage");
+  const guidedTop=guidedStage?.querySelector(".studio-guided-top");
+  if(guidedTop){
+    const ordered=[".studio-guided-title",".studio-guided-cue",
+      ".studio-breath-phase-detail",".studio-guided-countdown",
+      ".studio-guided-progress",".studio-companion"].map(sel=>guidedStage.querySelector(sel)).filter(Boolean);
+    guidedTop.after(...ordered);
+  }
+
   const copy={
     es:{
       label:"Opciones de movimiento",sequence:"Secuencia guiada",

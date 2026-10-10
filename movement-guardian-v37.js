@@ -139,8 +139,9 @@
       '<path class="mg-face-glaze" d="M-48-40Q-36-57-15-54M28-57Q47-45 51-32"/>'+
       brows+
       '<path class="mg-cheek-fin" d="M-58 13Q-86 16-91 37Q-72 34-56 28 M58 13Q84 16 90 37Q71 34 55 29"/>'+
-      '<path class="mg-snout" d="M-47 21Q-33 12-10 23Q0 30 10 23Q31 10 47 21Q52 50 24 62Q3 74-20 63Q-50 53-47 21Z"/>'+
-      '<path class="mg-muzzle-ridge" d="M-32 28Q-9 36 7 31Q28 24 37 29"/>'+
+      '<path class="mg-snout" d="M-49 19Q-35 9-15 19Q-6 24 0 29Q6 24 15 19Q36 9 49 19Q61 43 39 60Q23 74 1 74Q-24 75-40 60Q-60 43-49 19Z"/>'+
+      '<path class="mg-muzzle-ridge" d="M-36 27Q-17 37-1 34Q18 37 37 27"/>'+
+      '<path class="mg-nasal-bridge" d="M-1 3Q-7 18 0 29"/>'+
       eyes+
       '<path class="mg-nose" d="M-12 43Q-2 46 11 42Q7 52-2 52Q-10 50-12 43Z"/>'+
       '<path class="mg-mouth" d="'+(expression==="smile"?'M-18 56Q1 72 21 55':'M-16 57Q1 63 17 56')+'"/>'+
@@ -156,6 +157,8 @@
       '<path class="mg-breath-plane" d="M'+point(x-rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.71)+' '+point(x+rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.38)+' '+point(x-rx*.40,y+ry*.13)+'Z"/>'+
       '</g>';
   };
+  // V63: one sculpted cervical silhouette, sampled from the existing
+  // pose-authored cubic. No second moving neck or independent animation.
   const neck=(p)=>{
     const [hx,hy,scale,angle]=p.head;
     const [x,y,rx,ry]=p.body;
@@ -165,12 +168,25 @@
     const endX=lateral?hx+46*scale:hx;
     const endY=lateral?hy+12*scale:hy+54*scale;
     const dx=endX-topX,dy=endY-topY;
-    // V60: curved cervical bridge follows the pose angle instead of
-    // a rigid straight tube; preserve authored head and torso endpoints.
     const bend=Math.min(22,Math.abs(dx)*.12+9);
     const c1x=topX+dx*.28,c1y=topY+dy*.24-bend;
     const c2x=topX+dx*.74,c2y=topY+dy*.77-bend*.35;
-    return '<path class="mg-neck" d="M'+point(topX,topY)+' C'+point(c1x,c1y)+' '+point(c2x,c2y)+' '+point(endX,endY)+'"/>';
+    const left=[],right=[];
+    for(let i=0;i<=20;i++){
+      const t=i/20,u=1-t;
+      const cx=u*u*u*topX+3*u*u*t*c1x+3*u*t*t*c2x+t*t*t*endX;
+      const cy=u*u*u*topY+3*u*u*t*c1y+3*u*t*t*c2y+t*t*t*endY;
+      let tx=3*u*u*(c1x-topX)+6*u*t*(c2x-c1x)+3*t*t*(endX-c2x);
+      let ty=3*u*u*(c1y-topY)+6*u*t*(c2y-c1y)+3*t*t*(endY-c2y);
+      // A zero-length pose never turns a cervical cross-section into NaN.
+      if(Math.hypot(tx,ty)<.001){tx=dx;ty=dy;}
+      const len=Math.max(.001,Math.hypot(tx,ty));
+      const radius=(28*(1-t)+27*scale*t)-4*Math.sin(Math.PI*t);
+      const nx=-ty/len,ny=tx/len;
+      left.push(point(cx+nx*radius,cy+ny*radius));
+      right.push(point(cx-nx*radius,cy-ny*radius));
+    }
+    return '<path class="mg-neck" d="M'+left.join(' L')+' L'+right.reverse().join(' L')+'Z"/>';
   };
   const tail=(p)=>{
     const [x,y,rx,ry]=p.body;

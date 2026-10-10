@@ -1,0 +1,33 @@
+/* V56 — Anatomical depth: roots beneath torso, hands above it.
+   One SVG guardian remains visible. No second layer of limbs or animation.
+   The same material is shared by the canonical ten poses and D24 gallery. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-arms-behind{
+ isolation:isolate;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-arms-behind .mg-socket-shape{
+ fill:var(--mg-coat);stroke:var(--mg-deep);
+ stroke-width:1.1;stroke-opacity:.23
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell{
+ fill:var(--mg-coat);
+ stroke:var(--mg-deep);
+ stroke-opacity:.22
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-gesture-forearm{
+ fill:none;stroke:var(--mg-coat);stroke-width:16;
+ stroke-linecap:round;stroke-linejoin:round
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-gesture-forearms{
+ pointer-events:none
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hands{
+ pointer-events:none
+}
+/* Volumes are held in their authored position, including Tree and Cat/Cow.
+   Reduced-motion viewers receive the same physical connection without motion. */
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-arms-behind,
+ #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-gesture-forearms{
+ animation:none!important;transition:none!important
+ }
+}

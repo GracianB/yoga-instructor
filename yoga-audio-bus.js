@@ -49,7 +49,7 @@
   const play = async (source) => {
     deactivateVortex();
     owner=source;
-    try {await audio.play();return true;}catch(_){send();return false;}
+    try {await audio.play();send();return true;}catch(_){send();return false;}
   };
   const toggle = async (source) => {
     if(!audio.paused && owner===source){stop();return false;}

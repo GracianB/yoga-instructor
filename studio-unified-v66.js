@@ -23,7 +23,7 @@
   const context=entrance.querySelector(".studio-path-context");
   const plan=entrance.querySelector(".studio-plan");
   const adaptation=entrance.querySelector(".studio-adaptation");
-  modes.after(...[tabs,context,plan,adaptation].filter(Boolean));
+  modes.after(...[tabs,context].filter(Boolean));
 
   // The same two-column editorial skeleton for all modes. Group the
   // Movement controls, rather than leaving five autonomous grid tracks
@@ -31,7 +31,7 @@
   const controls=document.createElement("div");
   controls.className="studio-v66-control-pane";
   controls.setAttribute("aria-label","Controles de secuencia");
-  controls.append(...[...sequence.children].filter(el=>!el.classList.contains("flow-theater")));
+  controls.append(...[plan,adaptation,...[...sequence.children].filter(el=>!el.classList.contains("flow-theater"))].filter(Boolean));
   sequence.appendChild(controls);
 
   // The old guided stage placed title and countdown below the portrait,

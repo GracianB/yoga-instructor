@@ -1,0 +1,198 @@
+/* V55 — Movement Studio. One practice, one theatre, no stacked dashboards.
+ * V54 remains the anatomy and size baseline. This layer only arranges the UI. */
+#instructor-flow .flow-console{
+ display:flex!important;flex-direction:column!important;
+ gap:0!important;
+ padding:clamp(10px,1.6vw,22px)!important;
+ background:linear-gradient(160deg,#e7ecdf,#f0f3e8)!important;
+ border:1px solid rgba(79,116,95,.28)!important;
+ overflow:visible
+}
+#instructor-flow .flow-console-top{
+ order:0;display:grid!important;
+ grid-template-columns:minmax(0,1fr) auto auto!important;
+ gap:clamp(14px,2vw,28px)!important;
+ padding:clamp(13px,1.6vw,20px) clamp(17px,2.4vw,30px)!important;
+ margin:0 0 9px!important;
+ border-radius:18px!important;
+ background:rgba(255,255,255,.74)!important;
+ border:1px solid rgba(74,110,91,.16)!important
+}
+#instructor-flow .flow-console-top .flow-phase{
+ display:flex;flex-wrap:wrap;align-items:center;gap:5px 13px!important
+}
+#instructor-flow .flow-console-top .flow-phase-kicker{
+ width:100%;letter-spacing:.16em;color:#5c7d67;font-size:9px
+}
+#instructor-flow .flow-console-top .flow-phase #flow-phase-label{
+ font:600 clamp(16px,2.1vw,23px)/1.15 'Fraunces',serif!important;
+ letter-spacing:-.025em;color:#264c3e!important
+}
+#instructor-flow .flow-console-top #flow-phase-meta{
+ color:#567c67;font-size:11px;font-weight:700;letter-spacing:.04em
+}
+#instructor-flow .flow-console-top #flow-phase-cue{
+ width:100%;max-width:55ch!important;
+ font-size:clamp(11px,1.1vw,13px)!important;line-height:1.55;color:#506c5c!important;
+ margin:3px 0 0
+}
+#instructor-flow .flow-session-clock{
+ display:flex;flex-direction:column;align-items:flex-end;justify-content:center;
+ gap:4px;padding-left:24px;border-left:1px solid rgba(77,105,89,.17)!important;
+ white-space:nowrap;color:#396351
+}
+#instructor-flow .flow-session-clock #flow-session-time{
+ font:500 clamp(25px,3vw,34px)/1 'Fraunces',serif;letter-spacing:-.04em;
+ font-variant-numeric:tabular-nums;color:#255644
+}
+#instructor-flow .flow-state{
+ align-self:center;
+ border-radius:999px!important;padding:9px 14px!important;
+ font:700 10px/1.3 'Inter',sans-serif!important;letter-spacing:.06em!important;
+ max-width:130px;white-space:nowrap
+}
+#instructor-flow .flow-theater{order:1;isolation:isolate}
+#instructor-flow .flow-theater .yy-stage{
+ min-height:clamp(445px,44vw,635px)!important;
+ aspect-ratio:1.82!important;
+ background:radial-gradient(ellipse 54% 42% at 50% 69%,rgba(143,186,151,.28),transparent 85%),
+ linear-gradient(160deg,#f6f3e7,#e6eee3 65%,#dce8df)!important;
+ border:1px solid rgba(78,115,93,.14)!important;
+ border-radius:20px 20px 0 0!important
+}
+#instructor-flow #flow-guide[data-spirit="yin"] .yy-stage{
+ background:radial-gradient(ellipse 65% 52% at 50% 65%,rgba(137,126,181,.26),transparent 87%),
+ linear-gradient(159deg,#222c45,#38435c 63%,#364c57)!important;
+ border-color:rgba(200,193,223,.15)!important
+}
+/* Caption belongs to the figure; the phase/time/status belong to the cockpit. */
+#instructor-flow .flow-theater .flow-guide figcaption{
+ border-radius:0 0 20px 20px!important;
+ border-top:0!important;
+ padding:clamp(18px,2vw,29px) clamp(20px,3.2vw,45px)!important
+}
+#instructor-flow .flow-theater .flow-guide figcaption strong{
+ font-size:clamp(27px,3.5vw,41px)!important
+}
+#instructor-flow .flow-theater .flow-guide figcaption p{
+ font-size:clamp(13px,1.25vw,16px)!important;line-height:1.6!important
+}
+#instructor-flow .flow-progress{order:2;height:6px!important;margin:16px 10px 9px!important}
+#instructor-flow .flow-phase-progress{order:3;margin:0 10px 12px!important}
+#instructor-flow .flow-controls{
+ order:4;display:flex;gap:10px!important;justify-content:flex-end;
+ padding:0 10px 8px
+}
+#instructor-flow .flow-control:not(.flow-rail-button){
+ min-height:46px;padding:10px 20px!important;border-radius:999px!important;
+ font:600 12px/1.3 'Inter',sans-serif!important
+}
+#instructor-flow .flow-console-foot{
+ order:5;display:flex!important;align-items:center;
+ justify-content:space-between;gap:16px;flex-wrap:wrap;
+ margin-top:0;padding:7px 10px 5px
+}
+#instructor-flow .flow-entry-actions{
+ display:flex;gap:12px;flex-wrap:wrap;align-items:center
+}
+#instructor-flow .flow-start{
+ min-height:50px;padding:13px 24px!important;border-radius:999px!important;
+ font-weight:700!important;background:#2c604c!important;color:#fff!important;
+ box-shadow:0 9px 20px rgba(40,96,75,.17)
+}
+#instructor-flow .flow-start:disabled{opacity:.5;box-shadow:none}
+#instructor-flow .flow-preview{
+ min-height:46px;border-radius:999px!important;padding:11px 20px!important;
+ background:rgba(255,255,255,.58);border:1px solid rgba(53,96,71,.34)
+}
+#instructor-flow .flow-console-foot>[data-i18n="flowSequence"]{
+ display:none!important
+}
+/* Real progress indicators, keyed to the canonical flow snapshot, never
+   independent timers or clickable steps that would bypass pose locks. */
+#instructor-flow .flow-steps{
+ display:flex;flex:1;align-items:center;justify-content:flex-end;gap:5px;
+ min-width:160px;max-width:430px
+}
+#instructor-flow .flow-step{
+ flex:1;min-width:7px;max-width:36px;height:6px;
+ border-radius:999px;background:#aac2ad;opacity:.56;
+ transition:background .22s ease,opacity .22s ease,scale .22s ease
+}
+#instructor-flow .flow-step.is-complete{background:#608c75;opacity:1}
+#instructor-flow .flow-step.is-current{background:#245d47;opacity:1;scale:1 1.5}
+#instructor-flow .flow-step-label{
+ font:700 10px/1.3 'JetBrains Mono',monospace;
+ color:#3c7056;white-space:nowrap;margin-left:12px
+}
+/* Larger three-way selection with a clear chosen state and less clutter. */
+#instructor-flow .studio-mode{
+ position:relative;min-height:118px!important;
+ border:1px solid rgba(112,151,128,.38)!important
+}
+#instructor-flow .studio-mode[aria-pressed="true"]{
+ outline:2px solid #447962;outline-offset:2px;
+ box-shadow:0 8px 18px rgba(40,91,75,.11)!important
+}
+#instructor-flow .studio-mode .studio-symbol{
+ font-size:clamp(23px,2.4vw,34px)
+}
+#instructor-flow :is(.studio-mode,.flow-start,.flow-preview,.flow-control):focus-visible{
+ outline:3px solid #d8a95b!important;outline-offset:3px
+}
+/* Anatomical continuity: seams soften but remain readable at elbows/hips.
+   Never hide the distinct joints the user requested. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape{
+ stroke-opacity:.16!important;stroke-width:1.15!important
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
+ stroke-opacity:.36!important
+}
+html[data-theme="dark"] #instructor-flow .flow-console{
+ background:linear-gradient(150deg,#1a3032,#22383e)!important
+}
+html[data-theme="dark"] #instructor-flow .flow-console-top{
+ background:#263c40!important;border-color:#42605b!important
+}
+html[data-theme="dark"] #instructor-flow .flow-console-top .flow-phase #flow-phase-label,
+html[data-theme="dark"] #instructor-flow .flow-session-clock #flow-session-time{
+ color:#eff4dc!important
+}
+html[data-theme="dark"] #instructor-flow .flow-console-top #flow-phase-cue,
+html[data-theme="dark"] #instructor-flow .flow-console-top #flow-phase-meta{
+ color:#c3d7c8!important
+}
+html[data-theme="dark"] #instructor-flow .flow-session-clock{
+ color:#dfedda
+}
+html[data-theme="dark"] #instructor-flow .flow-step{background:#82988c}
+html[data-theme="dark"] #instructor-flow .flow-step.is-current{background:#d7d7ac}
+html[data-theme="dark"] #instructor-flow .flow-step-label{color:#e1e5c5}
+@media(max-width:800px){
+ #instructor-flow .flow-console-top{
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:11px!important
+ }
+ #instructor-flow .flow-console-top .flow-state{grid-column:1/-1;justify-self:start}
+ #instructor-flow .flow-session-clock{padding-left:14px!important}
+ #instructor-flow .flow-theater .yy-stage{
+  min-height:clamp(330px,65vw,470px)!important;aspect-ratio:1.3!important
+ }
+ #instructor-flow .flow-console-foot{flex-direction:column;align-items:stretch}
+ #instructor-flow .flow-entry-actions{justify-content:center}
+ #instructor-flow .flow-steps{max-width:none;justify-content:center;width:100%}
+}
+@media(max-width:420px){
+ #instructor-flow .flow-console-top{padding:15px!important}
+ #instructor-flow .flow-console-top #flow-phase-cue{font-size:11px!important}
+ #instructor-flow .flow-session-clock #flow-session-time{font-size:25px}
+ #instructor-flow .flow-theater .yy-stage{min-height:310px!important}
+ #instructor-flow .flow-console-foot{padding:10px 4px}
+ #instructor-flow .flow-entry-actions{gap:7px}
+ #instructor-flow .flow-entry-actions>*{flex:1;min-width:0;padding-left:12px!important;padding-right:12px!important}
+ #instructor-flow .flow-control:not(.flow-rail-button){padding:8px 13px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .flow-step{transition:none!important;scale:1!important}
+}
+body.quiet-mode #instructor-flow .flow-step{transition:none!important;scale:1!important}

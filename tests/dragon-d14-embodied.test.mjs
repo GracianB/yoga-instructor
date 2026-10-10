@@ -53,7 +53,8 @@ test('D14: latest assets are present in Pages and size-budgeted',()=>{
  assert.ok(html.indexOf('yy-dragon-d14.css')>html.indexOf('yy-dragon-d13.css'));
  assert.match(bundle,/'yy-dragon-d14\.css'/);
  assert.match(audit,/yy-dragon-d14\.css/);
- const limit=Number(audit.match(/yy-asana-motion\\.js\'\\)\\.size <= (\\d+)/)?.[1]);
- assert.ok(limit>=7000, "yy-asana-motion.js must have a tested, nonzero growth budget");
+ const budgetLine=audit.split("\n").find(line=>line.includes("statSync('yy-asana-motion.js').size <="));
+ assert.ok(budgetLine, "yy-asana-motion.js must retain a release size gate");
+ assert.ok(Number(budgetLine.match(/size <= (\d+)/)?.[1])>=7000,"yy-asana-motion.js growth budget must remain guarded");
  assert.ok(css.length<=8500);
 });

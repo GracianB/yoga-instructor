@@ -27,3 +27,26 @@ Mover personajes de forma independiente exige respetar los puntos de apoyo. En G
 ## QA y entrega
 
 `npm run quality` y `npm run build`; Chromium 2/2, Firefox 2/2, WebKit 2/2 y Gate. Si el Gate es verde, fusionar con SHA de cabeza fijado y esperar el deploy de Pages que valida todos los activos locales y el MP3 por SHA-256. La aprobación de tests **no sustituye** una revisión estética manual en dispositivos físicos.
+
+---
+
+## Consolidación final · seis entregas V47–V52
+
+No se crean otras diez variantes del mismo personaje. Las seis entregas comparten una única estructura por práctica, un único reloj respiratorio y el motor de posturas ya publicado.
+
+| Entrega | Alcance cerrado |
+| --- | --- |
+| **V47 · Anatomía** | Nila obtiene hombros, codos, caderas y rodillas derivados de las mismas curvas que guían las manos y los pies |
+| **V48 · Continuidad** | Se integran pliegues y sombras en el mismo volumen, sin superponer un segundo cuerpo ni cambiar puntos de apoyo |
+| **V49 · Respiración** | El dragón conserva su diseño; aumentan pecho y alas, y halo y escenario comparten fase con la sesión |
+| **V50 · Meditación** | Uma queda estática, sin reloj de animación ni aleteo independiente |
+| **V51 · Yin / Yang** | La silueta SVG es idéntica en ambas energías; solo cambian colores, filtros de luz y atmósfera |
+| **V52 · QA** | Contratos Node y navegador para diez poses, articulaciones, sincronización, pausa, accesibilidad y paletas |
+
+### Invariantes
+
+- Movimiento no crea estados de sesión nuevos; Cat/Vaca y Árbol conservan sus animaciones y apoyos históricos.
+- Breathing no reproduce música hasta que el visitante la selecciona; la música sigue siendo un único reproductor compartido.
+- La meditación permanece quieta. Cambiar Yin/Yang no introduce ninguna deformación de su figura.
+- Las pruebas automatizadas no constituyen una aprobación estética: la anatomía final debe revisarse visualmente en dispositivos reales.
+- Integración únicamente después del Quality Gate completo y despliegue Pages SHA-256 exacto.

@@ -32,7 +32,7 @@
   // V47: every shoulder, elbow, hip and knee is derived from the SAME
   // quadratic centreline as its paw. No separately positioned joint stickers.
   const curveSections=curve=>{
-    const n=(curve.match(/-?\\d+(?:\\.\\d+)?/g)||[]).map(Number);
+    const n=(curve.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
     if(n.length!==6&&n.length!==10)throw Error("Invalid Nila limb: "+curve);
     const a=[n.slice(0,6)];
     if(n.length===10)a.push([n[4],n[5],n[6],n[7],n[8],n[9]]);

@@ -8,7 +8,11 @@
  const fallback="62 -4 618 440";
  let frame=0;
  const clamp=(n,lo,hi)=>Math.min(hi,Math.max(lo,n));
+ const fixed=()=>root.dataset.status==="running"||root.dataset.status==="paused"||
+   root.dataset.status==="finished"||
+   (typeof window.matchMedia==="function"&&window.matchMedia("(prefers-reduced-motion: reduce)").matches);
  const compute=()=>{
+   if(fixed()){svg.setAttribute("viewBox",fallback);return;}
    const figure=root.querySelector(".yy-pose.is-current .movement-guardian");
    if(!figure||typeof figure.getBBox!=="function"){
      svg.setAttribute("viewBox",fallback);return;
@@ -36,12 +40,17 @@
    if(svg.getAttribute("viewBox")!==view)svg.setAttribute("viewBox",view);
  };
  const schedule=()=>{
-   if(frame)cancelAnimationFrame(frame);
+   // Browsers without optional animation APIs still get correct framing.
+   if(typeof requestAnimationFrame!=="function"){compute();return;}
+   if(frame&&typeof cancelAnimationFrame==="function")cancelAnimationFrame(frame);
    frame=requestAnimationFrame(()=>{frame=0;compute();});
  };
  window.addEventListener("yoga:pose-ready",schedule);
+ // The session starts before its first transition: lock one physical camera
+ // for all ten phases, preventing any planted paws from sliding on screen.
+ window.addEventListener("yoga:flow",schedule);
  window.addEventListener("resize",schedule,{passive:true});
  // Flow emits its initial ready event before this defer-loaded module.
  schedule();
- window.addEventListener("pagehide",()=>{if(frame)cancelAnimationFrame(frame);});
+ window.addEventListener("pagehide",()=>{if(frame&&typeof cancelAnimationFrame==="function")cancelAnimationFrame(frame);});
 })();

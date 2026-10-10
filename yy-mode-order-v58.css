@@ -41,3 +41,6 @@
  #instructor-flow .studio-guided-stage.v58-practice-order .studio-companion.yy-guide{height:clamp(290px,86vw,420px)!important}
  #instructor-flow #movement-stage.v58-practice-order .flow-console-top{flex-wrap:wrap}
 }
+/* Hidden modes must remain truly hidden, even with the flex layout. */
+#instructor-flow #movement-stage.v58-practice-order[hidden],
+#instructor-flow #studio-guided[hidden]{display:none!important}

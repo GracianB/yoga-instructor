@@ -24,8 +24,7 @@
     if(clock.frame)rt.cancel(clock.frame);
     clock.frame=0;
     if(clock.phase!=="warmup" || clock.status!=="running" || !clock.ready || suspended())return;
-    // RAF and the timeout fallback both use the same monotonic clock.
-    // Never force a 32ms step on a 60Hz frame (that doubles the motion speed).
+    // Keep one monotonic clock.
     const raw=clock.last ? now-clock.last : 0;
     const delta=Math.max(0,Math.min(160,raw));
     clock.elapsed+=delta;
@@ -34,11 +33,8 @@
     const angle=(clock.elapsed%8400)/8400*Math.PI*2;
     // D23: phase-continuous neutral start; no snapped Cat/Cow skeleton.
     const curve=Math.sin(angle)*Math.min(1,clock.elapsed/1400);
-    // V40: Nila's abdominal membrane follows this SAME Cat/Cow clock.
-    // One CSS variable, no new animation loop; paws remain at pose anchors.
-    const expansion=(1+0.115*curve).toFixed(4);
-    if(root.style.getPropertyValue("--guardian-spine-pulse")!==expansion)
-      root.style.setProperty("--guardian-spine-pulse",expansion);
+    const pulse=(1+0.115*curve).toFixed(4);
+    root.style.setProperty("--guardian-spine-pulse",pulse);
     // Cat: arched back + tucked abdomen. Cow: dipped back + released belly.
     // Both the DORSAL and VENTRAL surfaces move in opposite directions,
     // while shoulders, hips and the four paws remain grounded.

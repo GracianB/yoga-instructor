@@ -29,8 +29,8 @@ test("V36 soundtrack follows hero, Vortex only mounts on explicit action",()=>{
  assert.equal((html.match(/id="focus-player"/g)||[]).length,1);
  assert.match(html,/id="vortex-activate"/);
  assert.match(html,/id="vortex-stop" hidden/);
- assert.match(html,/src="about:blank" data-vortex-src="https:\/\/vortex-gilt-xi\.vercel\.app\//);
- assert.match(read("yoga-audio-bus.js"),/iframe\.src="about:blank"/);
+ assert.match(html,/class="vortex-frame-mount" data-vortex-src=/);
+ assert.match(read("yoga-audio-bus.js"),/iframe\.remove\(\)/);
  assert.match(read("yy-unified-audio-v36.css"),/#campo \.campo-stage/);
  assert.match(html,/media-src 'self' blob:/);
 });

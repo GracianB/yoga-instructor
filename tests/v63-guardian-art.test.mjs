@@ -15,7 +15,7 @@ test('V63 Nila: single filled cervical volume retains authored pose endpoints',(
  assert.match(movement,/const topX=lateral\?x-rx\*\.63:x/);
  assert.match(movement,/const endX=lateral\?hx\+46\*scale:hx/);
  assert.match(movement,/return '<path class="mg-neck" d="M'/);
- assert.match(movement,/right\.reverse\(\)\.join\(' L'\)\+'Z'/);
+ assert.ok(movement.includes("right.reverse().join(' L')+'Z\"/>'"));
  assert.match(css,/\.movement-guardian \.mg-neck\{/);
  assert.doesNotMatch(movement,/setInterval\(|setTimeout\(|requestAnimationFrame\(/);
 });

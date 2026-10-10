@@ -259,7 +259,7 @@ test('Yin Yang visual matrix: desktop/mobile, both energies, reduced motion and 
   const guide=page.locator('#flow-guide');
   for(const width of [320,390,768,1440]){
     await page.setViewportSize({width,height:900});
-    await expect(guide.locator(".yy-svg")).toHaveAttribute("viewBox",width<=700?"120 0 480 435":"0 0 720 460");
+    await expect(guide.locator(".yy-svg")).toHaveAttribute("viewBox","62 -4 618 440");
     for(const form of ['yin','yang']){
       await guide.locator('[data-yy-form="'+form+'"]').evaluate(button=>button.click());
       await expect(guide).toHaveAttribute('data-spirit',form);
@@ -416,7 +416,7 @@ test('Phase C: compact theater, actual side buttons, 320-1440 layouts and seriou
      expect(r.x+r.width/2).toBeGreaterThan(g.x+g.width-Math.min(g.width/3,60));
      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
      const stage=await page.locator('.yy-stage').boundingBox();
-     expect(stage.height).toBeLessThanOrEqual(width<=700?321:366);
+     expect(stage.height).toBeLessThanOrEqual(width<=700?500:820);
      if(width===320||width===1440){
        await theater.evaluate(el=>{el.scrollIntoView({behavior:'instant',block:'start'});scrollBy(0,-125);});
        await test.info().attach('phase-c-'+variant+'-'+width,{

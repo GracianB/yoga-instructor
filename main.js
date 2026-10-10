@@ -210,7 +210,7 @@
     audio.volume = vol ? Number(vol.value) : 0.45;
     playBtn.addEventListener("click", async () => {
       if (audio.paused) {
-        try { await audio.play(); } catch (error) {
+        try { if(window.YOGA_AUDIO_BUS) await window.YOGA_AUDIO_BUS.play("hero"); else await audio.play(); } catch (error) {
           player?.classList.add("is-audio-error");
           playBtn.setAttribute("aria-label", i18nT().fieldAudioError || "Audio unavailable");
         }

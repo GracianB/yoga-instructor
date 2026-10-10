@@ -60,10 +60,10 @@
 <!-- Large integrated head and muzzle -->
 <path class="sd31-head" d="M280 65 C234 65 212 94 218 136 C220 158 238 174 251 179 C263 187 296 187 308 179 C329 167 344 149 340 125 C339 85 320 65 280 65Z" fill="url(#sd31-head)" stroke="var(--dragon-deep,#568978)" stroke-width="3.8" stroke-linejoin="round"/>
 <path d="M252 147 C256 132 271 136 280 141 C290 135 306 133 310 148 C314 163 298 177 280 178 C263 177 246 165 252 147Z" fill="var(--snout,#d1e8d9)" opacity=".8"/>
-<path d="M237 125 Q253 141 269 126 M292 126 Q308 141 324 125" fill="none" stroke="var(--eye,#264c43)" stroke-width="4.5" stroke-linecap="round"/>
+<path class="sd31-eye-lines" d="M238 124 Q253 137 268 125 M292 125 Q307 137 322 124" fill="none" stroke="var(--eye,#264c43)" stroke-width="4.3" stroke-linecap="round"/>
 <path d="M268 156 Q280 165 293 156" fill="none" stroke="var(--eye,#264c43)" stroke-opacity=".76" stroke-width="3" stroke-linecap="round"/>
 <path class="sd31-snout-bridge" d="M280 120 Q275 134 280 143" fill="none" stroke="var(--dragon-deep,#568978)" stroke-opacity=".3" stroke-width="2.5" stroke-linecap="round"/>
-<circle cx="258" cy="146" r="2.5" fill="var(--eye,#264c43)" opacity=".7"/><circle cx="301" cy="146" r="2.5" fill="var(--eye,#264c43)" opacity=".7"/>
+<path class="sd31-nostril-lines" d="M256 149l5 1 M299 150l5 -1" fill="none" stroke="var(--eye,#264c43)" stroke-opacity=".42" stroke-width="2" stroke-linecap="round"/>
 <path d="M235 148 Q244 154 255 150 M305 150 Q315 154 324 146" fill="none" stroke="var(--cheek,#dbab9e)" stroke-width="6" stroke-opacity=".45" stroke-linecap="round"/>
 <path d="M255 84 Q269 75 283 77" fill="none" stroke="#fff8e5" stroke-width="6" stroke-linecap="round" opacity=".24"/>
 <!-- The planted front feet cover body seams, three small curved claws each -->

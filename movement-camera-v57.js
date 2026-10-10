@@ -48,7 +48,12 @@
  window.addEventListener("yoga:pose-ready",schedule);
  // The session starts before its first transition: lock one physical camera
  // for all ten phases, preventing any planted paws from sliding on screen.
- window.addEventListener("yoga:flow",schedule);
+ window.addEventListener("yoga:flow",()=>{
+   if(fixed()){
+     if(frame&&typeof cancelAnimationFrame==="function")cancelAnimationFrame(frame);
+     frame=0;svg.setAttribute("viewBox",fallback);
+   }else schedule();
+ });
  window.addEventListener("resize",schedule,{passive:true});
  // Flow emits its initial ready event before this defer-loaded module.
  schedule();

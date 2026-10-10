@@ -15,16 +15,18 @@ test("V35: separate breathing artwork retains authored asana source",()=>{
  assert.doesNotMatch(source,/setInterval|setTimeout|requestAnimationFrame/);
  assert.match(read("studio-companion.js"),/source\.cloneNode\(true\)/);
 });
-test("V35: sound is consent-based, supports local MP3 and never autoplays",()=>{
- const js=read("studio-soundscape.js");
- assert.match(js,/sound\.play\(\)/);
- assert.match(js,/toggle\.addEventListener\("click"/);
- assert.match(js,/URL\.createObjectURL\(file\)/);
- assert.match(js,/URL\.revokeObjectURL\(objectUrl\)/);
+test("V36: breathing shares the single opt-in soundtrack with the whole site",()=>{
+ const js=read("studio-soundscape.js"),bus=read("yoga-audio-bus.js");
+ assert.match(js,/bus\.toggle\("breath"\)/);
+ assert.match(js,/bus\.selectFile\(input\.files/);
  assert.match(js,/volume\.addEventListener/);
- assert.match(js,/other\.pause\(\)/);
- assert.doesNotMatch(js,/autoplay/);
- assert.ok(js.includes('audio/sustained-focus.mp3'));
+ assert.doesNotMatch(js,/<audio/);
+ assert.match(bus,/URL\.createObjectURL\(file\)/);
+ assert.match(bus,/URL\.revokeObjectURL\(localUrl\)/);
+ assert.match(bus,/audio\.play\(\)/);
+ assert.match(bus,/deactivateVortex/);
+ assert.match(bus,/audio\/silence-between-notes\.mp3/);
+ assert.doesNotMatch(read("index.html"),/<audio[^>]+autoplay/);
 });
 test("V35: dedicated studio assets all wired in dependency order and in Pages",()=>{
  for(const f of ["studio-breath-dragon.js","studio-soundscape.js","yy-breath-revival.css","yy-studio-soundscape.css"]){

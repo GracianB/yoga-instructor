@@ -29,3 +29,22 @@ test('V63 guardian stage remains robust on narrow viewport',async({page})=>{
   expect(rect.width).toBeLessThanOrEqual(375);
   await expect(page.locator('#flow-guide .yy-pose.is-current .movement-guardian .mg-neck')).toHaveCount(1);
 });
+
+
+test('V64 breathing wings follow existing clock and respect reduced motion',async({page})=>{
+  await page.goto('/');
+  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
+  const studio=page.locator('#studio-guided');
+  const wings=studio.locator('.studio-breath-dragon .sd31-wings');
+  await expect(wings).toBeVisible();
+  const scaled=await studio.evaluate(el=>{
+    el.style.setProperty('--studio-guardian-wing','1.06');
+    const wings=el.querySelector('.sd31-wings');
+    return getComputedStyle(wings).transform;
+  });
+  expect(scaled).not.toBe('none');
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await expect(wings).toHaveCSS('transform','none');
+  await page.setViewportSize({width:375,height:812});
+  await expect(studio.locator('.studio-breath-dragon')).toHaveCSS('filter','none');
+});

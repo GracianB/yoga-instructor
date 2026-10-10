@@ -2,7 +2,7 @@
 <html lang="es" data-theme="light" data-lang="es">
 <head>
   <meta charset="utf-8">
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://gracianb.github.io; media-src 'self'; frame-src https://vortex-gilt-xi.vercel.app; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://gracianb.github.io; media-src 'self' blob:; frame-src https://vortex-gilt-xi.vercel.app; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#f3efe4">
   <meta name="author" content="Gracián Baena">
@@ -58,10 +58,12 @@
   <link rel="stylesheet" href="./yy-studio-d29.css?v=d29-1">
   <link rel="stylesheet" href="./yy-breath-revival.css?v=v34-1">
   <link rel="stylesheet" href="./yy-studio-soundscape.css?v=v34-1">
+  <link rel="stylesheet" href="./yy-unified-audio-v36.css?v=v36-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
   <script src="./i18n.js?v=quiet-geometry-5-yoga-5-guide-1"></script>
+  <script src="./yoga-audio-bus.js?v=v36-1" defer></script>
   <script src="./main.js?v=quiet-geometry-5-yoga-5-lotus-14" defer></script>
   <script src="./flow-engine.js?v=flow-1-yoga-5" defer></script>
   <script src="./flow-session.js?v=session-1-yoga-5" defer></script>
@@ -73,20 +75,20 @@
   <script src="./studio-breath-engine.js?v=d26-1" defer></script>
   <script src="./studio-meditation-d27.js?v=d27-1" defer></script>
   <script src="./studio-anatomy-d28.js?v=d28-1" defer></script>
-  <script src="./practice-studio.js?v=d29-1" defer></script>
+  <script src="./practice-studio.js?v=v36-1" defer></script>
   <script src="./yin-yang-art.js?v=phase-d17-1-d24-1" defer></script>
   <script src="./flow-guide.js?v=d16-1" defer></script>
   <script src="./yy-asana-motion.js?v=d14-1-d23-1" defer></script>
   <script src="./studio-companion.js?v=d30-1" defer></script>
   <script src="./studio-breath-dragon.js?v=v31-1" defer></script>
-  <script src="./studio-soundscape.js?v=v33-1" defer></script>
+  <script src="./studio-soundscape.js?v=v36-1" defer></script>
   <script src="./studio-plan-ui.js?v=d20-1" defer></script>
   <script src="./studio-immersion.js?v=d21-1" defer></script>
   <script src="./studio-finale.js?v=d22-1" defer></script>
   <script src="./asana-library.js?v=d24-1" defer></script>
   <script src="./studio-asana-library.js?v=d24-1" defer></script>
   <script src="./session-design-ui.js?v=d25-1" defer></script>
-  <script src="./sanctuary-experience.js?v=yin-yang-1-lotus-13" defer></script>
+  <script src="./sanctuary-experience.js?v=v36-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -326,7 +328,36 @@
           </ul>
         </div>
       </div>
-      <a class="hero-scroll-cue" href="#campo" data-i18n="scrollCue">Scroll · Respira</a>
+      <a class="hero-scroll-cue" href="#soundtrack" data-i18n="scrollCue">Scroll · Respira</a>
+    </section>
+
+    <section class="section soundtrack-section" id="soundtrack" aria-labelledby="soundtrack-title">
+      <div class="soundtrack-intro">
+        <span class="studio-overline">01 · SOUND OF PRESENCE</span>
+        <h2 id="soundtrack-title">El sonido de <em>estar aquí.</em></h2>
+        <p>Música para respirar, moverse o simplemente escuchar. Tú decides cuándo empieza. Una sola pista para toda la experiencia.</p>
+      </div>
+        <div class="focus-player" id="focus-player">
+          <button type="button" class="player-play" id="audio-play" aria-label="Play" disabled>
+            <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l12-6.5z"/></svg>
+            <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+          </button>
+          <div class="player-meta">
+            <strong data-i18n="fieldTrack">SUSTAINED FOCUS</strong>
+            <small data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM.</small>
+          </div>
+          <div class="player-timeline">
+            <span id="audio-cur">0:00</span>
+            <input type="range" id="audio-seek" min="0" max="100" value="0" step="0.1" data-i18n-aria-label="seekLabel" aria-label="Seek">
+            <span id="audio-dur">0:00</span>
+          </div>
+          <div class="player-vol">
+            <button type="button" class="player-mute" id="audio-mute" data-i18n="fieldMute">Mute</button>
+            <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" data-i18n-aria-label="volumeLabel" aria-label="Volume">
+          </div>
+          <span class="player-origin">SILENCE BETWEEN NOTES · 3:56</span>
+          <audio id="focus-audio" src="./audio/silence-between-notes.mp3" preload="metadata" loop></audio>
+        </div>
     </section>
 
     <section class="section ritual reveal" id="ritual" aria-labelledby="ritual-title">
@@ -521,30 +552,14 @@
         <p class="about-lead" data-i18n="fieldP">La misma presencia, otro medio. Un instrumental lento para practicar — y el campo de partículas si quieres jugar.</p>
       </div>
       <div class="campo-stage">
-        <div class="focus-player" id="focus-player">
-          <button type="button" class="player-play" id="audio-play" aria-label="Play" disabled>
-            <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l12-6.5z"/></svg>
-            <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
-          </button>
-          <div class="player-meta">
-            <strong data-i18n="fieldTrack">SUSTAINED FOCUS</strong>
-            <small data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM.</small>
-          </div>
-          <div class="player-timeline">
-            <span id="audio-cur">0:00</span>
-            <input type="range" id="audio-seek" min="0" max="100" value="0" step="0.1" data-i18n-aria-label="seekLabel" aria-label="Seek">
-            <span id="audio-dur">0:00</span>
-          </div>
-          <div class="player-vol">
-            <button type="button" class="player-mute" id="audio-mute" data-i18n="fieldMute">Mute</button>
-            <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" data-i18n-aria-label="volumeLabel" aria-label="Volume">
-          </div>
-          <a class="player-link" href="https://suno.com/s/PHeOwQjKN3xHHcmM" target="_blank" rel="noreferrer">Suno ↗</a>
-          <a class="player-link player-vortex" href="https://vortex-gilt-xi.vercel.app/" target="_blank" rel="noreferrer" data-i18n="fieldOpen">Abrir ↗</a>
-          <audio id="focus-audio" src="./audio/sustained-focus.mp3" preload="metadata" loop></audio>
-        </div>
         <div class="campo-vortex-full">
-          <iframe title="Vortex" src="https://vortex-gilt-xi.vercel.app/" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>
+          <div class="vortex-activation">
+            <span class="vortex-label">ESPACIO INTERACTIVO · SIN AUDIO AUTOMÁTICO</span>
+            <p>Un campo de partículas para explorar. Se activa solo cuando tú lo decides y se detiene si reproduces música.</p>
+            <button type="button" id="vortex-activate" aria-pressed="false">Entrar en Vortex</button>
+          </div>
+          <button type="button" id="vortex-stop" hidden>Salir de Vortex</button>
+          <iframe title="Vortex" src="about:blank" data-vortex-src="https://vortex-gilt-xi.vercel.app/" loading="lazy" referrerpolicy="no-referrer" sandbox="allow-scripts allow-same-origin"></iframe>
         </div>
       </div>
     </section>

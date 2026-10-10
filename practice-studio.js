@@ -264,6 +264,9 @@
     setVar(orb, "--studio-breath-scale", activeBreath ? breathing.scale.toFixed(4) : "1");
     setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
     setVar(guided, "--studio-rib-expansion", shape.rib);
+    // V36: visible seated dragon breathing, with feet and head planted.
+    setVar(guided, "--studio-guardian-expansion", activeBreath ? (1 + .095 * breathing.expansion).toFixed(4) : "1");
+    setVar(guided, "--studio-guardian-wing", activeBreath ? (1 + .045 * breathing.expansion).toFixed(4) : "1");
     setVar(guided, "--studio-d28-wing-vein", shape.wingVein);
     setVar(guided, "--studio-d28-tail-light", shape.tailLight);
     setVar(guided, "--studio-d28-horn", shape.horn);

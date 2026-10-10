@@ -54,7 +54,7 @@
     for(let i=0;i<=count;i++){
       const seg=Math.min(sections.length-1,Math.floor(i/18));
       const t=seg===sections.length-1?Math.min(1,(i-seg*18)/18):(i%18)/18;
-      const pos=sample(sections[seg],t),mag=Math.max(.001,Math.hypot(pos.dx,pos.dy));
+      const pos=sample(sections[seg],t);
       const u=i/count;
       const base=type==="leg"?27:23;
       // V59: organic volume instead of a straight truncated tube.
@@ -66,9 +66,12 @@
       // Average adjoining tangent vectors at the segment seam.
       // This avoids a sharp normal flip (visible as a kinked elbow).
       let dx=pos.dx,dy=pos.dy;
-      if(sections.length>1 && Math.abs(u-.5)<.029){
+      if(sections.length>1 && u>.41 && u<.59){
         const a=sample(sections[0],1),b=sample(sections[1],0);
-        const blend=(u-.471)/.058;
+        const v=(u-.41)/.18;
+        const blend=v*v*(3-2*v);
+        // Smooth tangent rotation through the anatomical joint while
+        // keeping the actual Bézier centerline and both endpoints fixed.
         dx=a.dx*(1-blend)+b.dx*blend;
         dy=a.dy*(1-blend)+b.dy*blend;
       }
@@ -153,7 +156,13 @@
     const topY=lateral?y-ry*.18:y-ry*.75;
     const endX=lateral?hx+46*scale:hx;
     const endY=lateral?hy+12*scale:hy+54*scale;
-    return '<path class="mg-neck" d="M'+point(topX,topY)+' Q'+point((topX+endX)/2,(topY+endY)/2-13)+' '+point(endX,endY)+'"/>';
+    const dx=endX-topX,dy=endY-topY;
+    // V60: curved cervical bridge follows the pose angle instead of
+    // a rigid straight tube; preserve authored head and torso endpoints.
+    const bend=Math.min(22,Math.abs(dx)*.12+9);
+    const c1x=topX+dx*.28,c1y=topY+dy*.24-bend;
+    const c2x=topX+dx*.74,c2y=topY+dy*.77-bend*.35;
+    return '<path class="mg-neck" d="M'+point(topX,topY)+' C'+point(c1x,c1y)+' '+point(c2x,c2y)+' '+point(endX,endY)+'"/>';
   };
   const tail=(p)=>{
     const [x,y,rx,ry]=p.body;

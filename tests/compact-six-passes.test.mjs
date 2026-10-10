@@ -40,7 +40,7 @@ test("V50-V51: Yin and Yang change colors, never a guardian skeleton",()=>{
 });
 test("V52: revised assets are cache-busted, retaining the old tested yoga runtime",()=>{
  const html=read("index.html");
- for(const entry of ["movement-guardian-v37.js?v=v53-1","yy-three-guardians-v38.css?v=v53-1",
+ for(const entry of ["movement-guardian-v37.js?v=v54-1","yy-three-guardians-v38.css?v=v53-1",
  "practice-studio.js?v=v49-1","yy-breath-revival.css?v=v49-1","yy-meditation-guardian-v43.css?v=v50-1"]){
   assert.ok(html.includes(entry),"Missing updated asset: "+entry);
  }

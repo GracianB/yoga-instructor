@@ -1,0 +1,296 @@
+/* V66 | One practice room, three guardians, two explicit Movement journeys.
+   Responsive shell; existing time engines and vector rigs remain unchanged. */
+#instructor-flow{
+  --v66-ink:#26443a;--v66-accent:#698e78;--v66-paper:#f0f4eb;
+  --v66-line:rgba(105,145,115,.25);
+  --v66-shadow:0 18px 50px rgba(12,48,39,.1);
+}
+#instructor-flow :is(.studio-v66-submodes,.studio-v66-workspace)[hidden],
+#instructor-flow .studio-v66-workspace > [hidden],
+#instructor-flow .studio-v66-workspace .studio-asana-library[hidden]{
+  display:none!important;
+}
+/* The single tab strip lives directly under the three main mode choices. */
+#instructor-flow .studio-v66-submodes{
+  display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;
+  width:min(100%,700px);margin:16px auto 8px;
+  padding:6px;border:1px solid var(--v66-line);border-radius:18px;
+  background:rgba(12,43,36,.11);
+}
+#instructor-flow .studio-v66-submode{
+  flex:1 1 180px;min-height:47px;padding:12px 20px;
+  background:transparent;border:1px solid transparent;border-radius:13px;
+  color:#e1eee3;font:700 14px/1.3 'Inter',sans-serif;
+  cursor:pointer;transition:background .2s,border-color .2s,color .2s;
+}
+#instructor-flow .studio-v66-submode:is(:hover,:focus-visible){
+  border-color:#adcab6;color:#fff;outline-offset:3px;
+}
+#instructor-flow .studio-v66-submode[aria-pressed="true"]{
+  background:#bfd3c3;color:#203c34;border-color:#cfe1d0;
+  box-shadow:0 4px 14px rgba(4,33,25,.14);
+}
+#instructor-flow .studio-v66-submode:disabled{opacity:.46;cursor:not-allowed}
+#instructor-flow[data-movement-view="library"] .studio-plan,
+#instructor-flow[data-movement-view="library"] .studio-adaptation{
+  display:none!important;
+}
+#instructor-flow[data-movement-view="library"] #movement-stage{display:none!important}
+#instructor-flow[data-studio-mode="asanas"][data-movement-view="sequence"] #studio-asana-library{
+  display:none!important;
+}
+#instructor-flow .studio-v66-workspace{
+  width:min(100%,1360px);margin:18px auto 0;
+}
+#instructor-flow .studio-v66-workspace > :is(.flow-console,.studio-guided,.studio-asana-library){
+  width:100%!important;max-width:none!important;min-width:0!important;
+  margin:0!important;border-radius:26px!important;
+  border:1px solid var(--v66-line)!important;box-shadow:var(--v66-shadow)!important;
+  overflow:hidden!important;
+}
+/* Movement cockpit: exactly the same controls-left / guardian-right rhythm
+   as Breath and Meditation. One authored SVG, not a copied portrait. */
+#instructor-flow .studio-v66-workspace .flow-console:not([hidden]){
+  display:grid!important;
+  grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr)!important;
+  grid-template-areas:"status art" "progress art" "phase art" "actions art" "foot art"!important;
+  align-items:start!important;gap:10px 22px!important;
+  padding:clamp(16px,2vw,28px)!important;
+}
+#instructor-flow .studio-v66-workspace .flow-theater{
+  grid-area:art!important;min-width:0!important;align-self:stretch;
+}
+#instructor-flow .studio-v66-workspace .flow-console-top{
+  grid-area:status!important;min-width:0!important;
+  display:flex!important;flex-direction:column!important;align-items:stretch!important;
+  gap:13px!important;margin:0!important;
+}
+#instructor-flow .studio-v66-workspace .flow-console-top .flow-phase{
+  display:block!important;min-width:0;
+}
+#instructor-flow .studio-v66-workspace .flow-console-top .flow-session-clock{
+  min-width:0;
+}
+#instructor-flow .studio-v66-workspace .flow-progress{grid-area:progress!important;min-width:0}
+#instructor-flow .studio-v66-workspace .flow-phase-progress{grid-area:phase!important;min-width:0}
+#instructor-flow .studio-v66-workspace .flow-controls{grid-area:actions!important;min-width:0}
+#instructor-flow .studio-v66-workspace .flow-console-foot{
+  grid-area:foot!important;min-width:0!important;
+  display:flex!important;flex-direction:column!important;gap:12px;
+}
+#instructor-flow .studio-v66-workspace .flow-theater .yy-stage{
+  min-height:clamp(410px,38vw,625px)!important;
+  aspect-ratio:1.38!important;border-radius:20px 20px 0 0!important;
+}
+#instructor-flow .studio-v66-workspace .flow-console .flow-side{
+  max-width:72px;
+}
+/* Both seated modes use the same left-side control column and right-side
+   guardian canvas. Existing guided text, phase, time and buttons all persist. */
+#instructor-flow .studio-v66-workspace .studio-guided:not([hidden]){
+  display:grid!important;
+  grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr)!important;
+  grid-template-rows:repeat(5,auto) 1fr;
+  align-items:start!important;gap:12px 20px!important;
+  padding:clamp(16px,2vw,28px)!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage{
+  grid-column:2!important;grid-row:1 / 8!important;
+  min-height:610px!important;height:100%!important;
+  padding:clamp(17px,2vw,28px)!important;
+  border-radius:20px!important;overflow:hidden;
+  border:1px solid var(--v66-line);
+}
+#instructor-flow .studio-v66-workspace .studio-guided .studio-companion.yy-guide{
+  width:100%!important;max-width:100%!important;
+  height:clamp(320px,35vw,480px)!important;margin:0 auto!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided > :not(.studio-guided-stage){
+  grid-column:1!important;min-width:0!important;
+}
+#instructor-flow .studio-v66-workspace :is(.studio-breath-patterns,.studio-meditation-choices,.studio-meditation-focus,.studio-guided-controls){
+  margin:0!important;max-width:100%;border-radius:16px!important;
+  padding:14px!important;border:1px solid var(--v66-line);
+}
+#instructor-flow .studio-v66-workspace .studio-guided-controls{
+  display:flex!important;align-items:flex-start!important;flex-direction:column!important;
+  justify-content:flex-start!important;gap:17px!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-note{
+  padding:12px!important;margin:0!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided :is(.studio-breath-patterns,.studio-meditation-choices,.studio-meditation-focus)[hidden]{
+  display:none!important;
+}
+/* Asana explorer is NOT a second guided sequence: no timer/steps here. */
+#instructor-flow .studio-v66-workspace .studio-asana-library:not([hidden]){
+  display:block!important;padding:clamp(18px,2.2vw,30px)!important;
+}
+#instructor-flow .studio-v66-workspace .studio-library-heading{
+  margin:0 0 19px!important;
+}
+#instructor-flow .studio-v66-workspace .studio-library-body{
+  display:grid!important;grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr)!important;
+  gap:clamp(16px,2vw,28px)!important;align-items:stretch;
+}
+#instructor-flow .studio-v66-workspace .studio-library-display{
+  min-width:0!important;
+}
+#instructor-flow .studio-v66-workspace .studio-library-stage{
+  min-height:390px!important;
+  background:radial-gradient(ellipse at 45% 30%,rgba(206,223,214,.17),transparent 72%);
+}
+#instructor-flow .studio-v66-workspace .studio-library-choices{
+  display:flex!important;flex-direction:column!important;
+  gap:10px!important;align-self:center;
+}
+#instructor-flow .studio-v66-workspace .studio-library-choices button{
+  min-height:48px;
+}
+/* All three canvases have a comparable visual footprint, without asking
+   a static meditation portrait to behave like a ten-phase animation. */
+@media(max-width:850px){
+ #instructor-flow .studio-v66-workspace .flow-console:not([hidden]){
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-template-areas:"art" "status" "progress" "phase" "actions" "foot"!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-guided:not([hidden]){
+  display:flex!important;flex-direction:column!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-guided > *{
+  width:100%!important;max-width:none!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-guided-stage{
+  min-height:580px!important;height:auto!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-library-body{
+  grid-template-columns:minmax(0,1fr)!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-library-choices{
+  display:grid!important;grid-template-columns:repeat(auto-fit,minmax(165px,1fr))!important;
+ }
+}
+@media(max-width:600px){
+ #instructor-flow .studio-v66-submodes{margin-top:10px;gap:5px;padding:5px}
+ #instructor-flow .studio-v66-submode{flex-basis:120px;min-height:45px;padding:11px 9px;font-size:12px}
+ #instructor-flow .studio-v66-workspace{margin-top:12px}
+ #instructor-flow .studio-v66-workspace .flow-console:not([hidden]),
+ #instructor-flow .studio-v66-workspace .studio-guided:not([hidden]){
+  gap:9px!important;padding:12px!important;border-radius:18px!important;
+ }
+ #instructor-flow .studio-v66-workspace .flow-theater .yy-stage{
+  min-height:clamp(330px,100vw,470px)!important;aspect-ratio:1.14!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-guided-stage{
+  min-height:535px!important;padding:15px 11px!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-guided .studio-companion.yy-guide{
+  height:clamp(270px,80vw,380px)!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-library-stage{min-height:310px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-v66-submode{transition:none!important}
+}
+
+/* V66 facial language: two deliberate strokes, legible from a distance. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-eye-line{
+  fill:none!important;stroke:var(--mg-eye)!important;
+  stroke-width:4.7!important;stroke-linecap:round;stroke-linejoin:round;
+  opacity:.92;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-mouth{
+  fill:none!important;stroke:var(--mg-eye);
+  stroke-width:2.8!important;stroke-linecap:round;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-brow{
+  stroke-width:2.1!important;stroke-opacity:.25!important;
+}
+#instructor-flow .studio-breath-dragon :is(.sd31-eye-lines,.sd31-nostril-lines){
+  fill:none;stroke-linecap:round;stroke-linejoin:round;
+}
+#instructor-flow .meditation-guardian :is(.uma-eye-lines,.uma-nose-line){
+  fill:none;stroke-linecap:round;stroke-linejoin:round;
+}
+
+/* V66 visual audit: compact the left controls into a single narrative pane.
+   Both columns retain their presence without artificially tall empty tracks. */
+#instructor-flow .studio-v66-workspace .flow-console:not([hidden]){
+  grid-template-areas:"controls art"!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  align-items:stretch!important;
+}
+#instructor-flow .studio-v66-workspace .studio-v66-control-pane{
+  grid-area:controls!important;min-width:0;min-height:0;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:stretch;gap:13px;padding:clamp(4px,1.3vw,18px);
+}
+#instructor-flow .studio-v66-workspace .studio-v66-control-pane > *{
+  grid-area:auto!important;margin-top:0!important;margin-bottom:0!important;
+}
+#instructor-flow .studio-v66-control-pane > .flow-console-top{order:0}
+#instructor-flow .studio-v66-control-pane > .flow-console-foot{order:1;align-self:stretch!important}
+#instructor-flow .studio-v66-control-pane > .flow-progress{order:2}
+#instructor-flow .studio-v66-control-pane > .flow-phase-progress{order:3}
+#instructor-flow .studio-v66-control-pane > .flow-controls{order:4}
+/* Breathing and meditation: title/instruction/time ABOVE the figure so the
+   character remains the focus without pushing essential content offscreen. */
+#instructor-flow .studio-v66-workspace .studio-guided-stage{
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:flex-start!important;
+  gap:6px!important;min-height:620px!important;height:auto!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage > :is(.studio-guided-top,.studio-guided-title,.studio-guided-cue,.studio-breath-phase-detail,.studio-guided-countdown,.studio-guided-progress){
+  flex:0 0 auto;max-width:100%;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-top{
+  width:100%!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-title{
+  font-size:clamp(25px,2.5vw,36px)!important;
+  line-height:1.16!important;margin:5px auto 2px!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-cue{
+  font-size:clamp(12px,1.3vw,15px)!important;
+  margin:0 auto!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-countdown{
+  font-size:clamp(25px,2.5vw,38px)!important;margin:6px 0 1px!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-companion.yy-guide{
+  flex:0 0 auto!important;height:clamp(285px,28vw,375px)!important;
+}
+@media(max-width:850px){
+ #instructor-flow .studio-v66-workspace .flow-console:not([hidden]){
+  grid-template-areas:"art" "controls"!important;
+  grid-template-rows:auto auto!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-v66-control-pane{
+  gap:12px;padding:8px 4px 12px!important;
+ }
+}
+@media(max-width:600px){
+ #instructor-flow .studio-v66-workspace .studio-guided-stage{
+  min-height:535px!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-guided-stage .studio-companion.yy-guide{
+  height:clamp(245px,69vw,315px)!important;
+ }
+}
+
+/* V66 QA: light themes must not put white text on pastel surfaces. */
+html[data-theme="light"] #instructor-flow .studio-v66-submode:not([aria-pressed="true"]){
+  color:#254a3e!important;background:rgba(248,252,246,.52);
+}
+html[data-theme="light"] #instructor-flow .studio-v66-submode:not([aria-pressed="true"]):is(:hover,:focus-visible){
+  color:#17392d!important;background:#e3eee3;border-color:#739b80;
+}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"]{
+  color:#244c3c!important;background:#c1d8c4!important;border-color:#457760!important;
+}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"] :is(.studio-mode-copy strong,.studio-mode-copy small,.studio-number,.studio-symbol){
+  color:#244c3c!important;
+}
+html[data-theme="dark"] #instructor-flow .studio-v66-submode:not([aria-pressed="true"]){
+  color:#e4f2e6!important;
+}

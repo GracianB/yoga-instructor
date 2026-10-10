@@ -23,7 +23,8 @@ test("V54: desktop stage is spacious and navigation no longer consists of full-h
  await page.goto("/");
  const scene=page.locator("#instructor-flow .flow-theater .yy-stage");
  const box=await scene.boundingBox();
- expect(box.width).toBeGreaterThan(780);
+ // V66 keeps the artwork spacious inside a shared two-column studio.
+ expect(box.width).toBeGreaterThan(560);
  expect(box.height).toBeGreaterThan(425);
  const rail=page.locator("#instructor-flow .flow-theater .flow-rail-button").first();
  const railBox=await rail.boundingBox();
@@ -38,11 +39,11 @@ test("V54: Breathing and Meditation each have enlarged independent artwork",asyn
  const studio=page.locator("#studio-guided");
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  await expect(studio.locator(".studio-breath-dragon")).toBeVisible();
- expect((await studio.locator(".studio-breath-dragon").boundingBox()).width).toBeGreaterThan(650);
+ expect((await studio.locator(".studio-breath-dragon").boundingBox()).width).toBeGreaterThan(540);
  await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
  await expect(studio.locator(".meditation-guardian")).toBeVisible();
  await expect(studio.locator(".studio-breath-dragon")).toBeHidden();
- expect((await studio.locator(".meditation-guardian").boundingBox()).width).toBeGreaterThan(650);
+ expect((await studio.locator(".meditation-guardian").boundingBox()).width).toBeGreaterThan(540);
 });
 for(const width of [320,390,760,1024]){
  test("V54: theatre and guardians do not cause horizontal overflow at "+width,async({page})=>{

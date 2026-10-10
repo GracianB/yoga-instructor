@@ -20,10 +20,10 @@ test("V55: desktop stage is spacious, figure and controls stay in one cockpit",a
  await page.goto("/");
  const stage=page.locator("#instructor-flow .flow-theater .yy-stage");
  const rect=await stage.boundingBox();
- expect(rect.width).toBeGreaterThan(900);
+ expect(rect.width).toBeGreaterThan(560); // V66 two-column artwork width
  expect(rect.height).toBeGreaterThan(500);
  const consoleRoot=page.locator(".flow-console");
- await expect(consoleRoot).toHaveCSS("display","flex");
+ await expect(consoleRoot).toHaveCSS("display","grid");
  await expect(consoleRoot.locator(".flow-console-top")).toBeVisible();
  // Pause/Reset intentionally stay hidden before Start; the primary CTA
  // remains the only entry point to a live session.

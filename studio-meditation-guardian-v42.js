@@ -32,8 +32,8 @@
  </g>
  <circle cx="226" cy="40" r="8" fill="#e6d9b4"/><circle cx="334" cy="40" r="8" fill="#e6d9b4"/>
  <!-- Large folded wings become a calm mantle -->
- <path class="uma-wing-left" d="M238 151 C190 124 152 147 114 109 Q117 166 151 202 Q108 219 115 275 C143 264 165 283 181 325 Q218 311 248 285Z" fill="url(#uma-wing)" stroke="#6a7794" stroke-width="3"/>
- <path class="uma-wing-right" d="M322 151 C370 124 408 147 446 109 Q443 166 409 202 Q452 219 445 275 C417 264 395 283 379 325 Q342 311 312 285Z" fill="url(#uma-wing)" stroke="#6a7794" stroke-width="3"/>
+ <path class="uma-wing-left" d="M238 151 C195 127 152 144 112 105 C116 160 136 183 151 198 C113 215 105 243 116 277 C150 261 167 283 181 325 Q220 307 248 285Z" fill="url(#uma-wing)" stroke="#6a7794" stroke-width="3"/>
+ <path class="uma-wing-right" d="M322 151 C365 127 408 144 448 105 C444 160 424 183 409 198 C447 215 455 243 444 277 C410 261 393 283 379 325 Q340 307 312 285Z" fill="url(#uma-wing)" stroke="#6a7794" stroke-width="3"/>
  <path d="M229 181Q176 173 137 140 M203 239Q156 234 129 252 M331 181Q384 173 423 140 M357 239Q404 234 431 252" fill="none" stroke="#e6ebda" stroke-opacity=".65" stroke-width="4" stroke-linecap="round"/>
  <!-- Paired knees are connected under the rounded torso -->
  <path d="M250 284Q204 271 175 307Q157 338 189 345Q240 359 274 321Z M310 284Q356 271 385 307Q403 338 371 345Q320 359 286 321Z" fill="url(#uma-body)" stroke="#7774a6" stroke-width="3"/>
@@ -41,16 +41,17 @@
  <path class="uma-body" d="M280 159 C238 159 209 194 208 245 Q200 294 231 323 Q245 340 280 341 Q315 340 329 323 Q360 294 352 245 C351 194 322 159 280 159Z" fill="url(#uma-body)" stroke="#6c6b9e" stroke-width="4" stroke-linejoin="round"/>
  <path d="M254 208Q279 197 305 208 M242 258Q280 283 318 258" fill="none" stroke="#e8e4ee" stroke-width="6" stroke-opacity=".48" stroke-linecap="round"/>
  <!-- Arms rest on knees, not floating away from the torso -->
- <path d="M216 219 C191 256 208 302 240 309 Q253 315 262 300" fill="none" stroke="#9692bd" stroke-width="33" stroke-linecap="round"/>
- <path d="M344 219 C369 256 352 302 320 309 Q307 315 298 300" fill="none" stroke="#9692bd" stroke-width="33" stroke-linecap="round"/>
- <path d="M236 303Q246 312 258 302 M302 302Q315 312 324 303" fill="none" stroke="#eee7e2" stroke-opacity=".72" stroke-width="4" stroke-linecap="round"/>
+ <path class="uma-arm-left" d="M222 213 C203 223 193 255 204 280 C209 300 222 312 242 313 Q253 315 266 303 L263 291 Q248 291 237 290 C224 278 225 253 241 229Z" fill="url(#uma-body)" stroke="#7676a5" stroke-width="2.8" stroke-linejoin="round"/>
+ <path class="uma-arm-right" d="M338 213 C357 223 367 255 356 280 C351 300 338 312 318 313 Q307 315 294 303 L297 291 Q312 291 323 290 C336 278 335 253 319 229Z" fill="url(#uma-body)" stroke="#7676a5" stroke-width="2.8" stroke-linejoin="round"/>
+ <path class="uma-palms" d="M236 303Q246 312 258 302 M302 302Q315 312 324 303" fill="none" stroke="#eee7e2" stroke-opacity=".72" stroke-width="4" stroke-linecap="round"/>
+ <path class="uma-wrist-light" d="M211 266Q209 288 231 300 M349 266Q351 288 329 300" fill="none" stroke="#ebe2f3" stroke-width="3" stroke-opacity=".4" stroke-linecap="round"/>
  <!-- Moth head with leaf-shaped cheeks and soft closed eyes -->
- <path class="uma-head" d="M280 105 C236 105 209 132 210 168 Q207 202 231 220 Q245 235 280 235 Q315 235 329 220 Q353 202 350 168 C351 132 324 105 280 105Z" fill="url(#uma-body)" stroke="#66658f" stroke-width="4"/>
- <path d="M233 152 Q254 171 267 151 M293 151 Q306 171 327 152" fill="none" stroke="#4c4e79" stroke-width="5" stroke-linecap="round"/>
+ <path class="uma-head" d="M280 105 C235 105 206 132 211 165 C205 181 214 210 233 222 Q250 237 280 236 Q310 237 327 222 C346 210 355 181 349 165 C354 132 325 105 280 105Z" fill="url(#uma-body)" stroke="#66658f" stroke-width="4"/>
+ <path class="uma-closed-eyes uma-eye-lines" d="M237 153 Q254 165 268 152 M292 152 Q306 165 323 153" fill="none" stroke="#4c4e79" stroke-width="4.6" stroke-linecap="round"/>
  <path d="M265 194Q280 201 295 194" fill="none" stroke="#595879" stroke-width="3" stroke-linecap="round"/>
- <path d="M269 178 Q280 174 291 178 Q282 188 278 188Z" fill="#f5dfb4"/>
+ <path class="uma-nose-line" d="M271 183 Q280 187 289 183" fill="none" stroke="#766b94" stroke-opacity=".58" stroke-width="2.6" stroke-linecap="round"/>
  <path d="M226 181Q240 190 247 181 M313 181Q327 190 337 181" stroke="#ecc2ca" stroke-width="5" opacity=".55" fill="none" stroke-linecap="round"/>
- <path d="M248 125Q278 111 305 128" fill="none" stroke="#f0e5e8" stroke-opacity=".65" stroke-width="6" stroke-linecap="round"/>
+ <path class="uma-brow-light" d="M251 126Q278 117 303 127" fill="none" stroke="#f0e5e8" stroke-opacity=".32" stroke-width="3.5" stroke-linecap="round"/>
  <!-- An inward-facing crescent is her meditative symbol -->
  <path d="M277 267 A21 21 0 1 0 297 287 A17 17 0 1 1 277 267Z" fill="#faf0ce"/>
  <path d="M235 336Q282 344 325 336" fill="none" stroke="#d8cded" stroke-width="3" stroke-linecap="round"/>

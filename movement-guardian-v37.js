@@ -54,12 +54,29 @@
     for(let i=0;i<=count;i++){
       const seg=Math.min(sections.length-1,Math.floor(i/18));
       const t=seg===sections.length-1?Math.min(1,(i-seg*18)/18):(i%18)/18;
-      const pos=sample(sections[seg],t),mag=Math.max(.001,Math.hypot(pos.dx,pos.dy));
+      const pos=sample(sections[seg],t);
       const u=i/count;
       const base=type==="leg"?27:23;
-      const taper=1-.34*u+.095*Math.sin(Math.PI*u);
+      // V59: organic volume instead of a straight truncated tube.
+      // Keep both endpoints broad enough to meet torso and paws; gently
+      // widen the muscle belly, then narrow towards the wrist/ankle.
+      const muscle=Math.sin(Math.PI*u)**2;
+      const taper=1-.29*u+.13*muscle;
       const width=base*taper;
-      const nx=-pos.dy/mag,ny=pos.dx/mag;
+      // Average adjoining tangent vectors at the segment seam.
+      // This avoids a sharp normal flip (visible as a kinked elbow).
+      let dx=pos.dx,dy=pos.dy;
+      if(sections.length>1 && u>.41 && u<.59){
+        const a=sample(sections[0],1),b=sample(sections[1],0);
+        const v=(u-.41)/.18;
+        const blend=v*v*(3-2*v);
+        // Smooth tangent rotation through the anatomical joint while
+        // keeping the actual Bézier centerline and both endpoints fixed.
+        dx=a.dx*(1-blend)+b.dx*blend;
+        dy=a.dy*(1-blend)+b.dy*blend;
+      }
+      const tangentMag=Math.max(.001,Math.hypot(dx,dy));
+      const nx=-dy/tangentMag,ny=dx/tangentMag;
       left.push(point(pos.x+nx*width,pos.y+ny*width));
       right.push(point(pos.x-nx*width,pos.y-ny*width));
     }
@@ -98,10 +115,23 @@
   const head=(p)=>{
     const [x,y,scale,angle,expression]=p.head;
     const awake=["open","focus","smile"].includes(expression);
+    // V62: pose-authored emotion, not an independent blinking timer.
+    // Gentle brows communicate attention; a soft cheek lift reads as joy.
+    const brows=expression==="focus"
+      ?'<path class="mg-brow" d="M-52 -30Q-36 -39 -20 -30 M20 -30Q36 -39 52 -30"/>'
+      :expression==="smile"
+        ?'<path class="mg-brow" d="M-50 -32Q-35 -42 -20 -34 M20 -34Q35 -42 50 -32"/>'
+        :'';
+    // V66: eyes are expressive strokes, not almond masks and pupils.
+    // The same paths rotate with the authored head in every asana.
     const eyes=awake
-      ?'<path class="mg-eye" d="M-51 -10Q-37 -23 -18 -11Q-33 0 -51 -10Z M17 -11Q35 -23 52 -10Q35 0 17 -11Z"/>'+
-        '<path class="mg-pupil" d="M-36-15Q-30-11-35-5M35-15Q40-11 35-5"/>'
-      :'<path class="mg-eye" d="M-53 -11Q-36 -2 -20 -13 M18 -13Q35 -2 52 -11"/>';
+      ?'<path class="mg-eye mg-eye-line" d="'+
+        (expression==="focus"
+          ?'M-52 -10Q-37 -16 -23 -11 M23 -11Q37 -16 52 -10'
+          :expression==="smile"
+            ?'M-52 -12Q-37 1 -22 -12 M22 -12Q37 1 52 -12'
+            :'M-52 -10Q-37 -4 -22 -10 M22 -10Q37 -4 52 -10')+'"/>'
+      :'<path class="mg-eye mg-eye-line" d="M-52 -12Q-37 -2 -22 -12 M22 -12Q37 -2 52 -12"/>';
     return '<g class="mg-head" transform="translate('+esc(x)+' '+esc(y)+') rotate('+esc(angle)+') scale('+esc(scale)+')">'+
       // Horns sweep backwards. Short side fins make a recognizable draconic profile.
       '<path class="mg-horn mg-horn-left" d="M-37-50Q-66-76-66-110Q-40-91-18-70Z"/>'+
@@ -113,12 +143,14 @@
       '<path class="mg-crest" d="M-25-57Q-18-82-3-93L3-71Q22-92 34-65L29-45Z"/>'+
       '<path class="mg-face" d="M-60-37Q-53-65-19-70Q10-78 40-60Q70-46 67-15Q76 15 55 42Q41 64 14 73Q-13 76-42 55Q-68 35-68 4Q-72-20-60-37Z"/>'+
       '<path class="mg-face-glaze" d="M-48-40Q-36-57-15-54M28-57Q47-45 51-32"/>'+
+      brows+
       '<path class="mg-cheek-fin" d="M-58 13Q-86 16-91 37Q-72 34-56 28 M58 13Q84 16 90 37Q71 34 55 29"/>'+
-      '<path class="mg-snout" d="M-47 21Q-33 12-10 23Q0 30 10 23Q31 10 47 21Q52 50 24 62Q3 74-20 63Q-50 53-47 21Z"/>'+
-      '<path class="mg-muzzle-ridge" d="M-32 28Q-9 36 7 31Q28 24 37 29"/>'+
+      '<path class="mg-snout" d="M-49 19Q-35 9-15 19Q-6 24 0 29Q6 24 15 19Q36 9 49 19Q61 43 39 60Q23 74 1 74Q-24 75-40 60Q-60 43-49 19Z"/>'+
+      '<path class="mg-muzzle-ridge" d="M-36 27Q-17 37-1 34Q18 37 37 27"/>'+
+      '<path class="mg-nasal-bridge" d="M-1 3Q-7 18 0 29"/>'+
       eyes+
       '<path class="mg-nose" d="M-12 43Q-2 46 11 42Q7 52-2 52Q-10 50-12 43Z"/>'+
-      '<path class="mg-mouth" d="'+(expression==="smile"?'M-18 56Q1 72 21 55':'M-16 57Q1 63 17 56')+'"/>'+
+      '<path class="mg-mouth" d="'+(expression==="smile"?'M-15 57Q1 66 17 56':'M-13 57Q1 61 15 57')+'"/>'+
       '<path class="mg-chin" d="M-19 63Q0 78 20 63Q8 83-1 85Q-11 79-19 63Z"/>'+
       '<path class="mg-cheek" d="M-56 26Q-47 32-39 27 M40 27Q48 32 56 26"/>'+
       '</g>';
@@ -131,6 +163,8 @@
       '<path class="mg-breath-plane" d="M'+point(x-rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.71)+' '+point(x+rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.38)+' '+point(x-rx*.40,y+ry*.13)+'Z"/>'+
       '</g>';
   };
+  // V63: one sculpted cervical silhouette, sampled from the existing
+  // pose-authored cubic. No second moving neck or independent animation.
   const neck=(p)=>{
     const [hx,hy,scale,angle]=p.head;
     const [x,y,rx,ry]=p.body;
@@ -139,7 +173,26 @@
     const topY=lateral?y-ry*.18:y-ry*.75;
     const endX=lateral?hx+46*scale:hx;
     const endY=lateral?hy+12*scale:hy+54*scale;
-    return '<path class="mg-neck" d="M'+point(topX,topY)+' Q'+point((topX+endX)/2,(topY+endY)/2-13)+' '+point(endX,endY)+'"/>';
+    const dx=endX-topX,dy=endY-topY;
+    const bend=Math.min(22,Math.abs(dx)*.12+9);
+    const c1x=topX+dx*.28,c1y=topY+dy*.24-bend;
+    const c2x=topX+dx*.74,c2y=topY+dy*.77-bend*.35;
+    const left=[],right=[];
+    for(let i=0;i<=20;i++){
+      const t=i/20,u=1-t;
+      const cx=u*u*u*topX+3*u*u*t*c1x+3*u*t*t*c2x+t*t*t*endX;
+      const cy=u*u*u*topY+3*u*u*t*c1y+3*u*t*t*c2y+t*t*t*endY;
+      let tx=3*u*u*(c1x-topX)+6*u*t*(c2x-c1x)+3*t*t*(endX-c2x);
+      let ty=3*u*u*(c1y-topY)+6*u*t*(c2y-c1y)+3*t*t*(endY-c2y);
+      // A zero-length pose never turns a cervical cross-section into NaN.
+      if(Math.hypot(tx,ty)<.001){tx=dx;ty=dy;}
+      const len=Math.max(.001,Math.hypot(tx,ty));
+      const radius=(28*(1-t)+27*scale*t)-4*Math.sin(Math.PI*t);
+      const nx=-ty/len,ny=tx/len;
+      left.push(point(cx+nx*radius,cy+ny*radius));
+      right.push(point(cx-nx*radius,cy-ny*radius));
+    }
+    return '<path class="mg-neck" d="M'+left.join(' L')+' L'+right.reverse().join(' L')+'Z"/>';
   };
   const tail=(p)=>{
     const [x,y,rx,ry]=p.body;

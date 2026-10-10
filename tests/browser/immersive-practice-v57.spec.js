@@ -6,7 +6,7 @@ test("V57: one large Nila stage and the current pose always stays in frame",asyn
  await expect(root).toHaveAttribute("data-ready","true");
  const stage=page.locator("#instructor-flow .flow-theater .yy-stage");
  const rect=await stage.boundingBox();
- expect(rect.width).toBeGreaterThan(900);
+ expect(rect.width).toBeGreaterThan(560); // V66: guardian column, not full-bleed theater
  expect(rect.height).toBeGreaterThan(535);
  const svg=root.locator("svg.yy-svg");
  await expect.poll(()=>svg.getAttribute("viewBox")).not.toBe(null);

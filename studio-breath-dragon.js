@@ -32,9 +32,9 @@
 <path d="M454 248 C477 251 485 231 473 220" stroke="#e8d6a3" stroke-width="5" fill="none" stroke-linecap="round"/>
 <!-- Layered wings grow from upper back; no detached ellipses -->
 <g class="sd31-wings">
- <path d="M236 170 C184 110 136 118 106 90 Q112 147 138 170 C108 175 103 191 99 214 C138 202 168 212 208 235 Q225 205 236 170Z" fill="url(#sd31-wing)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
- <path d="M325 166 C374 105 424 116 459 88 Q455 150 429 170 Q468 173 469 213 C423 198 393 214 353 236 Q336 196 325 166Z" fill="url(#sd31-wing)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
- <path d="M229 183 Q162 153 123 114 M215 198 Q165 186 112 196 M332 181 Q396 148 445 113 M340 204 Q397 184 454 194" fill="none" stroke="var(--wing-vein,#f4efce)" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+ <path d="M236 170 C197 135 158 123 106 88 C108 122 118 148 139 160 C110 159 96 183 95 214 C130 201 151 206 175 224 Q194 239 208 235 C215 214 231 187 236 170Z" fill="url(#sd31-wing)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M325 166 C363 132 403 121 459 88 C456 124 443 149 421 162 C451 159 465 181 469 214 C434 202 410 206 386 225 Q368 241 353 236 C343 214 331 186 325 166Z" fill="url(#sd31-wing)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
+ <path d="M223 179Q172 151 122 115 M210 213Q162 188 111 193 M337 179Q389 152 445 115 M347 214Q399 187 452 193" fill="none" stroke="var(--wing-vein,#f4efce)" stroke-width="3" stroke-linecap="round" opacity=".7"/>
 </g>
 <!-- Hind legs stay anchored at the same baseline as the front paws -->
 <path d="M216 284 C186 288 173 318 182 336 Q193 350 233 342 L255 317 Z" fill="url(#sd31-body)" stroke="var(--dragon-deep,#568978)" stroke-width="3"/>
@@ -46,7 +46,7 @@
 <g class="sd31-breath-core">
  <path d="M280 179 C249 178 230 217 230 262 C231 302 253 325 280 326 C308 325 330 299 330 260 C330 214 310 180 280 179Z" fill="url(#sd31-chest)" stroke="var(--dragon-deep,#568978)" stroke-opacity=".23" stroke-width="2"/>
  <path d="M259 207 C269 200 288 199 300 207" fill="none" stroke="#fffbed" stroke-opacity=".64" stroke-width="4" stroke-linecap="round"/>
- <path class="sd31-breath-line" d="M250 274 Q280 293 311 274" stroke="var(--dragon-deep,#568978)" stroke-opacity=".3" stroke-width="2" fill="none"/>
+ <path class="sd31-breath-line" d="M245 255 Q280 270 316 255 M250 278 Q280 297 311 278" stroke="var(--dragon-deep,#568978)" stroke-opacity=".26" stroke-width="2" fill="none" stroke-linecap="round"/>
 </g>
 <!-- Forearms extend from integrated shoulder sockets and cradle the abdomen -->
 <path d="M213 197 C190 219 193 272 210 291 Q224 306 245 292 L258 279 Q241 274 231 259 Q228 232 240 218" fill="url(#sd31-body)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
@@ -59,10 +59,11 @@
 <path d="M228 105 Q205 85 209 65 Q225 75 242 92 M329 105 Q349 82 344 66 Q334 75 314 91" fill="url(#sd31-head)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
 <!-- Large integrated head and muzzle -->
 <path class="sd31-head" d="M280 65 C234 65 212 94 218 136 C220 158 238 174 251 179 C263 187 296 187 308 179 C329 167 344 149 340 125 C339 85 320 65 280 65Z" fill="url(#sd31-head)" stroke="var(--dragon-deep,#568978)" stroke-width="3.8" stroke-linejoin="round"/>
-<path d="M258 147 C261 132 300 132 304 147 C311 163 294 175 280 175 C265 175 250 160 258 147Z" fill="var(--snout,#d1e8d9)" opacity=".8"/>
-<path d="M238 126 Q254 138 268 124 M293 124 Q308 139 322 125" fill="none" stroke="var(--eye,#264c43)" stroke-width="4.5" stroke-linecap="round"/>
-<path d="M268 156 Q280 161 291 156" fill="none" stroke="var(--eye,#264c43)" stroke-opacity=".76" stroke-width="3" stroke-linecap="round"/>
-<circle cx="258" cy="146" r="2.5" fill="var(--eye,#264c43)" opacity=".7"/><circle cx="301" cy="146" r="2.5" fill="var(--eye,#264c43)" opacity=".7"/>
+<path d="M252 147 C256 132 271 136 280 141 C290 135 306 133 310 148 C314 163 298 177 280 178 C263 177 246 165 252 147Z" fill="var(--snout,#d1e8d9)" opacity=".8"/>
+<path class="sd31-eye-lines" d="M238 124 Q253 137 268 125 M292 125 Q307 137 322 124" fill="none" stroke="var(--eye,#264c43)" stroke-width="4.3" stroke-linecap="round"/>
+<path d="M268 156 Q280 165 293 156" fill="none" stroke="var(--eye,#264c43)" stroke-opacity=".76" stroke-width="3" stroke-linecap="round"/>
+<path class="sd31-snout-bridge" d="M280 120 Q275 134 280 143" fill="none" stroke="var(--dragon-deep,#568978)" stroke-opacity=".3" stroke-width="2.5" stroke-linecap="round"/>
+<path class="sd31-nostril-lines" d="M256 149l5 1 M299 150l5 -1" fill="none" stroke="var(--eye,#264c43)" stroke-opacity=".42" stroke-width="2" stroke-linecap="round"/>
 <path d="M235 148 Q244 154 255 150 M305 150 Q315 154 324 146" fill="none" stroke="var(--cheek,#dbab9e)" stroke-width="6" stroke-opacity=".45" stroke-linecap="round"/>
 <path d="M255 84 Q269 75 283 77" fill="none" stroke="#fff8e5" stroke-width="6" stroke-linecap="round" opacity=".24"/>
 <!-- The planted front feet cover body seams, three small curved claws each -->

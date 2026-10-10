@@ -1,0 +1,81 @@
+/* V58 — Guardian finish. Cosmetic-only, with existing anatomy and clocks intact.
+   No new SVG layers, motion loops, transforms or independent animation engines. */
+
+/* Nila: soften the old geometric cut-outs. The limb geometry and foot
+   contacts still come exclusively from the authored anatomical rig. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
+  stroke-width:2.2;stroke-opacity:.24;stroke-linejoin:round;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell,
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape{
+  stroke-width:.65;stroke-opacity:.12;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
+  stroke-opacity:.19!important;stroke-width:1.45!important;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-plane{
+  stroke-width:2.4!important;stroke-opacity:.14!important;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-body{
+  stroke-width:1.6;stroke-opacity:.53;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-body-light{
+  stroke-width:5;stroke-opacity:.44;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
+  stroke-width:2.2;stroke-opacity:.78;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face-glaze{
+  stroke-width:4;stroke-opacity:.43;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-shell{
+  stroke-width:1.6;stroke-opacity:.63;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-toes{
+  stroke-width:2.6;stroke-opacity:.73;
+}
+
+/* Breathing companion: preserve the exact phase-driven rib expansion.
+   Details are secondary to a continuous readable silhouette. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon{
+  filter:drop-shadow(0 13px 16px rgba(37,76,61,.14));
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-wings{
+  opacity:clamp(.52,var(--studio-wing-opacity,.8),.92);
+}
+
+/* Uma: a still meditation presence, not a second breathing animation. */
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian{
+  filter:drop-shadow(0 13px 17px rgba(56,65,89,.13));
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-moon{
+  opacity:.62;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-focus="space"] .meditation-guardian .uma-moon{
+  opacity:.83;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .meditation-guardian .uma-moon{
+  opacity:.39;
+}
+
+/* Never sacrifice legibility or performance for a filter on small devices. */
+@media(max-width:600px){
+  #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon,
+  #instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian{
+    filter:none;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon,
+  #instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian{
+    filter:none;
+  }
+}
+body.quiet-mode #instructor-flow .studio-breath-dragon,
+body.quiet-mode #instructor-flow .meditation-guardian{filter:none!important}
+
+/* V62: eyebrows are part of the pose-authored face, not another animation. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-brow{
+  fill:none;stroke:var(--mg-eye);stroke-width:2.6;
+  stroke-opacity:.58;stroke-linecap:round;stroke-linejoin:round;
+}

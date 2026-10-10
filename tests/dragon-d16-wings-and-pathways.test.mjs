@@ -73,8 +73,9 @@ test('D16: Pages contains all versioned visual files and future pathway data',()
  assert.match(html,/flow-guide\.js\?v=d16-1/);
  assert.match(bundle,/'yy-dragon-d16\.css'/);
  assert.match(bundle,/'practice-pathways\.js'/);
- const limit=Number(audit.match(/yy-dragon-d16\\.css\'\\)\\.size <= (\\d+)/)?.[1]);
- assert.ok(limit>=7000, "yy-dragon-d16.css must have a tested, nonzero growth budget");
+ const budgetLine=audit.split("\n").find(line=>line.includes("statSync('yy-dragon-d16.css').size <="));
+ assert.ok(budgetLine, "yy-dragon-d16.css must retain a release size gate");
+ assert.ok(Number(budgetLine.match(/size <= (\d+)/)?.[1])>=7000,"yy-dragon-d16.css growth budget must remain guarded");
  assert.ok(html.indexOf('yy-dragon-d16.css')>html.indexOf('yy-dragon-d15.css'));
  assert.ok(css.length<7000);
 });

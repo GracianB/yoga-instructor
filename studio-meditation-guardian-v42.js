@@ -9,7 +9,7 @@
  if(!host||!studio||!mount||mount.querySelector(".meditation-guardian"))return;
  const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
  svg.classList.add("meditation-guardian");
- svg.setAttribute("viewBox","0 0 560 400");
+ svg.setAttribute("viewBox","75 20 410 355");
  svg.setAttribute("preserveAspectRatio","xMidYMid meet");
  svg.setAttribute("role","presentation");
  svg.setAttribute("aria-hidden","true");

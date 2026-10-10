@@ -92,7 +92,9 @@
   vortexStart?.addEventListener("click",activateVortex);
   vortexStop?.addEventListener("click",deactivateVortex);
   document.addEventListener("visibilitychange",()=>{if(document.hidden&&vortexActive)deactivateVortex();});
-  window.addEventListener("pagehide",()=>{audio.pause();deactivateVortex();if(localUrl)URL.revokeObjectURL(localUrl);});
+  const languageObserver=new MutationObserver(updateVortex);
+  languageObserver.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+  window.addEventListener("pagehide",()=>{languageObserver.disconnect();audio.pause();deactivateVortex();if(localUrl)URL.revokeObjectURL(localUrl);});
   window.YOGA_AUDIO_BUS=Object.freeze({audio,toggle,play,stop,selectFile,resetTrack,
     deactivateVortex,activateVortex,get owner(){return owner;},
     get localName(){return localName;},get vortexActive(){return vortexActive;}});

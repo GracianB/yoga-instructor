@@ -4,7 +4,7 @@
 /* Nila: soften the old geometric cut-outs. The limb geometry and foot
    contacts still come exclusively from the authored anatomical rig. */
 #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
-  stroke-width:1.25;stroke-opacity:.24;stroke-linejoin:round;
+  stroke-width:2.2;stroke-opacity:.24;stroke-linejoin:round;
 }
 #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell,
 #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape{

@@ -24,8 +24,7 @@
     if(clock.frame)rt.cancel(clock.frame);
     clock.frame=0;
     if(clock.phase!=="warmup" || clock.status!=="running" || !clock.ready || suspended())return;
-    // RAF and the timeout fallback both use the same monotonic clock.
-    // Never force a 32ms step on a 60Hz frame (that doubles the motion speed).
+    // Keep one monotonic clock.
     const raw=clock.last ? now-clock.last : 0;
     const delta=Math.max(0,Math.min(160,raw));
     clock.elapsed+=delta;
@@ -34,6 +33,8 @@
     const angle=(clock.elapsed%8400)/8400*Math.PI*2;
     // D23: phase-continuous neutral start; no snapped Cat/Cow skeleton.
     const curve=Math.sin(angle)*Math.min(1,clock.elapsed/1400);
+    const pulse=(1+0.115*curve).toFixed(4);
+    root.style.setProperty("--guardian-spine-pulse",pulse);
     // Cat: arched back + tucked abdomen. Cow: dipped back + released belly.
     // Both the DORSAL and VENTRAL surfaces move in opposite directions,
     // while shoulders, hips and the four paws remain grounded.
@@ -73,6 +74,7 @@
   };
   // Reset hidden Cat/Cow geometry; never reset a frozen pause.
   const neutralWarmup=()=>{
+    root.style.setProperty("--guardian-spine-pulse","1");
     back?.setAttribute("d","M-98.3 -29.6Q-123.1 -2.6 -102.2 28.6Q0 57.0 98.3 28.6Q136.2 0 104.8 -28.6Q0 -58.0 -98.3 -29.6Z");
     spine?.setAttribute("d","M-105 -24Q0 -61.0 104 -24");
     belly?.setAttribute("d","M-95 27Q0 43.0 95 27Q0 56.0 -95 27Z");

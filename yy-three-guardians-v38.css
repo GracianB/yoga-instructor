@@ -1,0 +1,149 @@
+/* V38–V41 · Nila, agile movement guardian. Three characters never share a skeleton.
+   The historical D17 geometry remains testable, but only ONE visual figure
+   occupies an asana: the clean connected rig appended to each authored pose. */
+#instructor-flow #flow-guide{
+ --mg-coat:#e6ac85;--mg-deep:#a55d48;--mg-ink:#684a48;
+ --mg-chest:#fae6ca;--mg-ear:#eecaa1;--mg-light:#ffe6c5;
+ --mg-leaf:#8aa690;--mg-eye:#58453d;
+ border-color:rgba(151,117,91,.25)!important;
+ background:linear-gradient(153deg,#f7f0e5,#ebebdb)!important;
+}
+#instructor-flow #flow-guide[data-spirit="yin"]{
+ --mg-coat:#7774a3;--mg-deep:#484779;--mg-ink:#322e57;
+ --mg-chest:#dbd8ef;--mg-ear:#c6bde7;--mg-light:#ddd6fd;
+ --mg-leaf:#bba3d4;--mg-eye:#382d5b;
+ background:linear-gradient(153deg,#282b4c,#444566)!important;
+}
+#instructor-flow #flow-guide .yy-stage{
+ background:
+ radial-gradient(ellipse 53% 57% at 75% 20%,rgba(249,225,183,.67),transparent 77%),
+ radial-gradient(ellipse 80% 42% at 50% 100%,rgba(178,186,154,.39),transparent 76%),
+ linear-gradient(165deg,#f6efde,#e3e6d5 62%,#cad9cb)!important;
+ border:1px solid rgba(150,151,109,.28);
+ box-shadow:inset 0 0 80px rgba(255,255,255,.22)!important
+}
+#instructor-flow #flow-guide[data-spirit="yin"] .yy-stage{
+ background:
+ radial-gradient(ellipse at 67% 12%,rgba(181,162,217,.38),transparent 65%),
+ linear-gradient(150deg,#1a213d,#363857 60%,#344d58)!important;
+ border-color:rgba(178,164,217,.35)
+}
+#instructor-flow #flow-guide .yy-sky{opacity:.28}
+#instructor-flow #flow-guide .yy-svg>g:first-of-type{opacity:0;pointer-events:none}
+#instructor-flow #flow-guide .yy-character>:not(.movement-guardian){
+ opacity:0!important;pointer-events:none!important
+}
+/* The historical D14 balance choreography remains the parent transform.
+   Only its visual parts are hidden; Nila inherits the same grounded pivot. */
+#instructor-flow #flow-guide .movement-guardian{
+ opacity:1!important;filter:drop-shadow(0 9px 11px rgba(83,78,55,.17));
+ color:var(--mg-deep);
+}
+#instructor-flow #flow-guide .movement-guardian :is(.mg-limb-shell,.mg-neck,.mg-tail-shell){
+ fill:none;stroke:var(--mg-coat);stroke-width:39;
+ stroke-linecap:round;stroke-linejoin:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-leg .mg-limb-shell{stroke-width:43}
+#instructor-flow #flow-guide .movement-guardian .mg-limb-plane{
+ fill:none;stroke:var(--mg-light);stroke-width:9;stroke-opacity:.34;
+ stroke-linecap:round;stroke-linejoin:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-neck{stroke-width:55}
+#instructor-flow #flow-guide .movement-guardian .mg-body,
+#instructor-flow #flow-guide .movement-guardian .mg-paw-shell,
+#instructor-flow #flow-guide .movement-guardian .mg-ear,
+#instructor-flow #flow-guide .movement-guardian .mg-face{
+ fill:var(--mg-coat);stroke:var(--mg-deep);stroke-width:3;
+ stroke-linejoin:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-body{
+ stroke-width:2.5;
+}
+#instructor-flow #flow-guide .movement-guardian .mg-face{
+ fill:var(--mg-light)
+}
+#instructor-flow #flow-guide .movement-guardian .mg-snout,
+#instructor-flow #flow-guide .movement-guardian .mg-breath-plane{
+ fill:var(--mg-chest);stroke:none
+}
+#instructor-flow #flow-guide .movement-guardian .mg-breath-plane{
+ opacity:.78;transform-box:fill-box;transform-origin:50% 46%;
+}
+#instructor-flow #flow-guide .movement-guardian .mg-body-light,
+#instructor-flow #flow-guide .movement-guardian .mg-face-glaze,
+#instructor-flow #flow-guide .movement-guardian .mg-paw-shine{
+ fill:none;stroke:var(--mg-light);stroke-width:6;stroke-opacity:.65;
+ stroke-linecap:round
+}
+#instructor-flow #flow-guide .movement-guardian :is(.mg-eye,.mg-nose,.mg-mouth,.mg-paw-toes){
+ fill:none;stroke:var(--mg-eye);stroke-width:4;
+ stroke-linecap:round;stroke-linejoin:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-nose{fill:var(--mg-eye);stroke-width:1}
+#instructor-flow #flow-guide .movement-guardian .mg-cheek,
+#instructor-flow #flow-guide .movement-guardian .mg-ear-mark{
+ fill:none;stroke:var(--mg-deep);stroke-opacity:.54;stroke-width:5;stroke-linecap:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-crown,
+#instructor-flow #flow-guide .movement-guardian .mg-crest,
+#instructor-flow #flow-guide .movement-guardian .mg-tail-leaf{
+ fill:var(--mg-leaf);stroke:var(--mg-deep);stroke-width:2;
+ stroke-linecap:round;stroke-linejoin:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-tail-shell{
+ stroke:var(--mg-coat);stroke-width:26
+}
+#instructor-flow #flow-guide .movement-guardian .mg-tail-stripe{
+ fill:none;stroke:var(--mg-light);stroke-opacity:.5;stroke-width:6;stroke-linecap:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-shadow{
+ fill:var(--mg-ink);opacity:.18
+}
+#instructor-flow #flow-guide .movement-guardian .mg-crest{stroke-width:1.7}
+#instructor-flow #flow-guide .guide-heading{position:relative;z-index:5}
+#instructor-flow #flow-guide .yy-watermark{font-size:8px;opacity:.6}
+/* V40: cat/cow inhabits the existing motion clock, never a separate timer. */
+#instructor-flow #flow-guide[data-phase="warmup"][data-status="running"] .movement-guardian[data-kind="table"] .mg-breath-plane{
+ transform:scaleY(var(--guardian-spine-pulse,1));
+}
+#instructor-flow #flow-guide[data-phase="breath"][data-status="running"] .movement-guardian .mg-breath-plane{
+ animation:mg-quiet-chest 19s ease-in-out infinite
+}
+@keyframes mg-quiet-chest{0%,100%{transform:scaleY(1)}25%{transform:scaleY(1.065)}}
+#instructor-flow #flow-guide[data-status="paused"] .mg-breath-plane{animation-play-state:paused!important}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow #flow-guide .movement-guardian *,
+ #instructor-flow #flow-guide .movement-guardian{animation:none!important;transition:none!important;filter:none}
+ #instructor-flow #flow-guide .mg-breath-plane{transform:none!important}
+}
+body.quiet-mode #instructor-flow #flow-guide .movement-guardian *{
+ animation:none!important;transition:none!important
+}
+body.quiet-mode #instructor-flow #flow-guide .mg-breath-plane{transform:none!important}
+@media(max-width:700px){
+ #instructor-flow #flow-guide .yy-stage{aspect-ratio:1.05!important}
+ #instructor-flow #flow-guide .movement-guardian{filter:drop-shadow(0 5px 7px rgba(56,48,49,.13))}
+}
+
+/* V39 · One physical creature during passage.
+   Old and new drawing never appear as two overlaid sets of paws. */
+#instructor-flow #flow-guide .yy-pose.is-leaving .movement-guardian{
+ opacity:0!important;visibility:hidden!important;transition:none!important
+}
+#instructor-flow #flow-guide .yy-pose.is-entering .movement-guardian{
+ opacity:1!important
+}
+#instructor-flow #flow-guide .yy-pose .movement-guardian .mg-contact-shadows{
+ opacity:.85
+}
+#instructor-flow #flow-guide .yy-pose[data-pose="warmup"] .mg-contact-shadows,
+#instructor-flow #flow-guide .yy-pose[data-pose="savasana"] .mg-contact-shadows{
+ opacity:.52
+}
+
+/* V41 · Original decorative contacts must not double Nila's own footprints.
+   Keep their DOM for existing pose tests; only the new shadows render. */
+#instructor-flow #flow-guide .yy-pose>.yy-stance,
+#instructor-flow #flow-guide .yy-pose>.yy-dragon-motes{
+ opacity:0!important;pointer-events:none!important
+}

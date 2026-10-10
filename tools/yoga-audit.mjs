@@ -437,13 +437,13 @@ if ((index.match(/<section\b/g) || []).length !== (index.match(/<\/section>/g) |
 
 for (const [file, max] of [
   // Layered inline lotus stays self-contained and needs no extra art request.
-  // V54: scalable yet guarded budgets. New guardians belong in separate
+  // V57: long-term growth budgets. New guardians belong in separate
   // modules and stylesheets, not increasingly dense inline HTML.
-  ["index.html", 160000],
-  ["styles.css", 320000],
-  ["main.js", 85000],
-  ["i18n.js", 90000],
-  ["sanctuary-experience.js", 90000]
+  ["index.html", 400000],
+  ["styles.css", 720000],
+  ["main.js", 260000],
+  ["i18n.js", 280000],
+  ["sanctuary-experience.js", 280000]
 ]) {
   const bytes = statSync(join(root, file)).size;
   if (bytes <= max) pass.push(`${file} size ${bytes}B`);

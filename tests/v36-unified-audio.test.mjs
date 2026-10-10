@@ -38,7 +38,7 @@ test("V36 the seated dragon breathes visibly from one clock while the body stays
  const js=read("practice-studio.js");
  const css=read("yy-unified-audio-v36.css");
  assert.match(js,/--studio-guardian-expansion/);
- assert.match(js,/\.095 \* breathing\.expansion/);
+ assert.match(js,/\.14 \* breathing\.expansion/);
  assert.match(js,/--studio-guardian-wing/);
  assert.match(css,/\.sd31-breath-core/);
  assert.match(css,/\.sd31-wings/);

@@ -11,9 +11,14 @@ test("V45: movement has exactly one current Nila guardian per pose, old art reta
  expect(old).toBe("0");
  // Navigate all ten without duplicating the character or changing Flow's source of truth.
  await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
- for(let i=0;i<9;i++){
-   await page.locator('[data-flow-action="next"]').evaluate(el=>el.click());
-   await expect.poll(()=>root.locator(".yy-pose.is-current .movement-guardian").count(),{timeout:5000}).toBe(1);
+ const sequence=["centering","breath","warmup","pose-1","transition","pose-2","cooldown","savasana","finish"];
+ const next=page.locator('[data-flow-action="next"]');
+ for(const id of sequence){
+   await expect(root).toHaveAttribute("data-ready","true",{timeout:8000});
+   await expect(next).toBeEnabled({timeout:8000});
+   await next.evaluate(el=>el.click());
+   await expect(root).toHaveAttribute("data-phase",id,{timeout:8000});
+   await expect.poll(()=>root.locator(".yy-pose.is-current .movement-guardian").count(),{timeout:8000}).toBe(1);
  }
  await expect(root).toHaveAttribute("data-phase","finish");
  await expect(root.locator(".yy-pose.is-current .movement-guardian")).toHaveCount(1);

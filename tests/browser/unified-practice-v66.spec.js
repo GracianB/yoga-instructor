@@ -49,7 +49,7 @@ test('V66: line faces, accessible controls, consistent mobile room',async({page}
   await page.setViewportSize({width:375,height:812});
   await page.goto('/');
   const root=page.locator('#instructor-flow');
-  await expect(root.locator('.yy-pose.is-current .mg-eye-line')).toHaveCount(1);
+  await expect(root.locator('#flow-guide .yy-pose.is-current .mg-eye-line')).toHaveCount(1);
   await expect(root.locator('.movement-guardian .mg-pupil')).toHaveCount(0);
   await expect(root.locator('.studio-breath-dragon .sd31-eye-lines')).toHaveCount(1);
   await expect(root.locator('.meditation-guardian .uma-eye-lines')).toHaveCount(1);

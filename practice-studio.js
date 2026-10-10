@@ -206,6 +206,7 @@
       button.disabled = busy;
       button.setAttribute("aria-pressed", String(button.dataset.meditationFocus === meditationFocus));
     });
+    guided.dataset.meditationFocus = meditationFocus;
   };
 
   const syncDurations = () => {

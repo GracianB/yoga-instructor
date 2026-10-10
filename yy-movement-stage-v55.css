@@ -148,9 +148,6 @@
 #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
  stroke-opacity:.36!important
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
- stroke-width:1.7!important
-}
 html[data-theme="dark"] #instructor-flow .flow-console{
  background:linear-gradient(150deg,#1a3032,#22383e)!important
 }

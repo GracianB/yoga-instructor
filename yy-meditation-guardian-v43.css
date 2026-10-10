@@ -1,0 +1,54 @@
+/* V43 · Uma's meditation sanctuary. The seated Breathing dragon stays untouched. */
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion>.yy-svg{opacity:0;pointer-events:none}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion>.studio-breath-dragon{display:none!important}
+#instructor-flow .studio-companion>.meditation-guardian{display:none}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion>.meditation-guardian{
+ display:block;position:absolute;inset:0;
+ width:100%;height:100%;overflow:visible;pointer-events:none;
+ filter:drop-shadow(0 12px 18px rgba(56,65,89,.16))
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion.yy-guide{
+ width:min(100%,590px);height:clamp(255px,39vw,345px);margin:4px auto 8px
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-stage{
+ min-height:535px;
+ background:
+ radial-gradient(ellipse 62% 45% at 50% 40%,rgba(222,216,237,.82),transparent 85%),
+ linear-gradient(158deg,#f7f2ef,#ebe7f3 55%,#dce4e7)!important
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-stage::before{
+ background:radial-gradient(circle at center,rgba(248,237,213,.65),transparent 67%);
+ transform:none!important;transition:none!important
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-breath-orb{
+ opacity:0!important;pointer-events:none!important
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-title{
+ color:#554d76;font-size:clamp(27px,3.5vw,40px);letter-spacing:-.03em
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-cue{color:#68647b}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-countdown{color:#625b81;font-weight:300}
+#instructor-flow .studio-guided[data-meditation-focus="body"] .meditation-guardian .uma-moon{opacity:.7}
+#instructor-flow .studio-guided[data-meditation-focus="space"] .meditation-guardian .uma-moon{opacity:.85}
+#instructor-flow .studio-guided[data-meditation-style="silent"] .meditation-guardian .uma-moon{opacity:.46}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-stage{
+ background:radial-gradient(ellipse at 50% 32%,#434062,#1a223b 83%)!important
+}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-title{color:#f1e8fa}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-cue,
+html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-countdown{color:#d7d0ed}
+@media(max-width:600px){
+ #instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-stage{
+ min-height:455px;padding:17px 13px 25px
+ }
+ #instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion.yy-guide{
+ height:clamp(240px,79vw,290px);width:min(100%,360px)
+ }
+}
+/* No autonomous floats or breathing in meditation. Stillness is the feature. */
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided .meditation-guardian,
+ #instructor-flow .studio-guided .meditation-guardian *{animation:none!important;transition:none!important}
+}
+body.quiet-mode #instructor-flow .studio-guided .meditation-guardian *,
+body.quiet-mode #instructor-flow .studio-guided .meditation-guardian{animation:none!important}

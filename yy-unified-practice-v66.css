@@ -277,3 +277,20 @@
   height:clamp(245px,69vw,315px)!important;
  }
 }
+
+/* V66 QA: light themes must not put white text on pastel surfaces. */
+html[data-theme="light"] #instructor-flow .studio-v66-submode:not([aria-pressed="true"]){
+  color:#254a3e!important;background:rgba(248,252,246,.52);
+}
+html[data-theme="light"] #instructor-flow .studio-v66-submode:not([aria-pressed="true"]):is(:hover,:focus-visible){
+  color:#17392d!important;background:#e3eee3;border-color:#739b80;
+}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"]{
+  color:#244c3c!important;background:#c1d8c4!important;border-color:#457760!important;
+}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"] :is(.studio-mode-copy strong,.studio-mode-copy small,.studio-number,.studio-symbol){
+  color:#244c3c!important;
+}
+html[data-theme="dark"] #instructor-flow .studio-v66-submode:not([aria-pressed="true"]){
+  color:#e4f2e6!important;
+}

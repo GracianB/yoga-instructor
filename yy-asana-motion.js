@@ -34,6 +34,11 @@
     const angle=(clock.elapsed%8400)/8400*Math.PI*2;
     // D23: phase-continuous neutral start; no snapped Cat/Cow skeleton.
     const curve=Math.sin(angle)*Math.min(1,clock.elapsed/1400);
+    // V40: Nila's abdominal membrane follows this SAME Cat/Cow clock.
+    // One CSS variable, no new animation loop; paws remain at pose anchors.
+    const expansion=(1+0.115*curve).toFixed(4);
+    if(root.style.getPropertyValue("--guardian-spine-pulse")!==expansion)
+      root.style.setProperty("--guardian-spine-pulse",expansion);
     // Cat: arched back + tucked abdomen. Cow: dipped back + released belly.
     // Both the DORSAL and VENTRAL surfaces move in opposite directions,
     // while shoulders, hips and the four paws remain grounded.
@@ -73,6 +78,7 @@
   };
   // Reset hidden Cat/Cow geometry; never reset a frozen pause.
   const neutralWarmup=()=>{
+    root.style.setProperty("--guardian-spine-pulse","1");
     back?.setAttribute("d","M-98.3 -29.6Q-123.1 -2.6 -102.2 28.6Q0 57.0 98.3 28.6Q136.2 0 104.8 -28.6Q0 -58.0 -98.3 -29.6Z");
     spine?.setAttribute("d","M-105 -24Q0 -61.0 104 -24");
     belly?.setAttribute("d","M-95 27Q0 43.0 95 27Q0 56.0 -95 27Z");

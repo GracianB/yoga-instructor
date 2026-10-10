@@ -8,8 +8,11 @@ const page = readFileSync(new URL('../index.html', import.meta.url), 'utf8');
 
 test('V60: cervical connection retains authored endpoints and a cubic contour', () => {
   assert.match(movement, /const dx=endX-topX,dy=endY-topY/);
-  assert.match(movement, /C'\+point\(c1x,c1y\)/);
-  assert.match(movement, /point\(endX,endY\)/);
+  // V63 preserves the authored cubic centreline, then gives it a filled contour.
+  assert.match(movement, /const c1x=topX\+dx\*\.28/);
+  assert.match(movement, /const c2x=topX\+dx\*\.74/);
+  assert.match(movement, /const cx=u\*u\*u\*topX/);
+  assert.match(movement, /const cy=u\*u\*u\*topY/);
   assert.doesNotMatch(movement, /setInterval\(|requestAnimationFrame\(/);
 });
 

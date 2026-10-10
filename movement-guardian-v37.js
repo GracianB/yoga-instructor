@@ -115,6 +115,13 @@
   const head=(p)=>{
     const [x,y,scale,angle,expression]=p.head;
     const awake=["open","focus","smile"].includes(expression);
+    // V62: pose-authored emotion, not an independent blinking timer.
+    // Gentle brows communicate attention; a soft cheek lift reads as joy.
+    const brows=expression==="focus"
+      ?'<path class="mg-brow" d="M-52 -30Q-36 -39 -20 -30 M20 -30Q36 -39 52 -30"/>'
+      :expression==="smile"
+        ?'<path class="mg-brow" d="M-50 -32Q-35 -42 -20 -34 M20 -34Q35 -42 50 -32"/>'
+        :'';
     const eyes=awake
       ?'<path class="mg-eye" d="M-51 -10Q-37 -23 -18 -11Q-33 0 -51 -10Z M17 -11Q35 -23 52 -10Q35 0 17 -11Z"/>'+
         '<path class="mg-pupil" d="M-36-15Q-30-11-35-5M35-15Q40-11 35-5"/>'
@@ -130,6 +137,7 @@
       '<path class="mg-crest" d="M-25-57Q-18-82-3-93L3-71Q22-92 34-65L29-45Z"/>'+
       '<path class="mg-face" d="M-60-37Q-53-65-19-70Q10-78 40-60Q70-46 67-15Q76 15 55 42Q41 64 14 73Q-13 76-42 55Q-68 35-68 4Q-72-20-60-37Z"/>'+
       '<path class="mg-face-glaze" d="M-48-40Q-36-57-15-54M28-57Q47-45 51-32"/>'+
+      brows+
       '<path class="mg-cheek-fin" d="M-58 13Q-86 16-91 37Q-72 34-56 28 M58 13Q84 16 90 37Q71 34 55 29"/>'+
       '<path class="mg-snout" d="M-47 21Q-33 12-10 23Q0 30 10 23Q31 10 47 21Q52 50 24 62Q3 74-20 63Q-50 53-47 21Z"/>'+
       '<path class="mg-muzzle-ridge" d="M-32 28Q-9 36 7 31Q28 24 37 29"/>'+

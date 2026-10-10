@@ -10,11 +10,11 @@
   const intro=root?.querySelector(".studio-entrance");
   if(!root||!guide||!source||!intro||!art?.drawPose||!guardian?.drawPose||!library?.poses?.length)return;
   const copy={
-    es:{heading:"EXPLORA A TU RITMO",title:"Otras formas de habitar el cuerpo",
-      lead:"Tres posturas adicionales de Nila, el personaje de Movimiento. Explóralas sin empezar una sesión.",
+    es:{heading:"MOVIMIENTO · ASANAS",title:"Explorar asanas",
+      lead:"Elige una postura individual. No inicia la secuencia guiada.",
       contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad."},
-    en:{heading:"EXPLORE AT YOUR PACE",title:"More ways to inhabit your body",
-      lead:"Three extra poses for Nila, your Movement guardian. Explore without starting a session.",
+    en:{heading:"MOVEMENT · ASANAS",title:"Explore asanas",
+      lead:"Choose a single pose. This does not start the guided sequence.",
       contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test."}
   };
   const language=()=>document.documentElement.lang==="en"?"en":"es";
@@ -139,12 +139,13 @@
     next?.focus();
     next?.click();
   });
-  const visible=()=>{section.hidden=busy || (root.dataset.studioMode||"asanas")!=="asanas";};
+  const visible=()=>{section.hidden=busy || (root.dataset.studioMode||"asanas")!=="asanas" ||
+    (root.dataset.movementView||"sequence")!=="library";};
   window.addEventListener("yoga:flow",({detail})=>{
     busy=["running","paused"].includes(detail?.status);
     visible();
   });
-  new MutationObserver(visible).observe(root,{attributes:true,attributeFilter:["data-studio-mode"]});
+  new MutationObserver(visible).observe(root,{attributes:true,attributeFilter:["data-studio-mode","data-movement-view"]});
   new MutationObserver(()=>{stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";})
     .observe(guide,{attributes:true,attributeFilter:["data-spirit"]});
   new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});

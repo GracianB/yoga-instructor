@@ -11,7 +11,7 @@ test("V35: separate breathing artwork retains authored asana source",()=>{
   if(token==="sd31-horn")continue;
   assert.ok(source.includes(token),token);
  }
- assert.ok(source.includes('viewBox","0 0 560 400"'));
+ assert.ok(source.includes('viewBox","65 18 430 360"'));
  assert.doesNotMatch(source,/setInterval|setTimeout|requestAnimationFrame/);
  assert.match(read("studio-companion.js"),/source\.cloneNode\(true\)/);
 });

@@ -9,7 +9,7 @@
  const ns="http://www.w3.org/2000/svg";
  const svg=document.createElementNS(ns,"svg");
  svg.classList.add("studio-breath-dragon");
- svg.setAttribute("viewBox","0 0 560 400");
+ svg.setAttribute("viewBox","65 18 430 360");
  svg.setAttribute("preserveAspectRatio","xMidYMid meet");
  svg.setAttribute("aria-hidden","true");
  svg.setAttribute("focusable","false");

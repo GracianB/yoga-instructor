@@ -90,6 +90,15 @@
     root.dataset.movementView=view;
     render();
   };
+  // The site has its own cinematic smooth-scroll handler. On desktop,
+  // pointerup/click can land after the viewport has already moved.
+  // Capture the explicit mouse intent on pointerdown, before that motion.
+  // Touch keeps click semantics so swipes never activate a tab.
+  tabs.addEventListener("pointerdown",event=>{
+    if(event.pointerType!=="mouse" || event.button!==0)return;
+    const button=event.target.closest("button[data-movement-view]");
+    if(button&&!button.disabled)choose(button.dataset.movementView);
+  },true);
   tabs.addEventListener("click",event=>{
     const button=event.target.closest("button[data-movement-view]");
     if(button&&!button.disabled)choose(button.dataset.movementView);

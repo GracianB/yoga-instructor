@@ -41,6 +41,9 @@ test("V52: the same breath clock moves dragon and sanctuary, meditation stays st
  await page.emulateMedia({reducedMotion:"reduce"});
  const transform=await page.locator(".studio-guided-stage").evaluate(el=>getComputedStyle(el,"::before").transform);
  expect(transform).toBe("none");
+ // A paused session intentionally locks mode switching: reset it first.
+ await page.locator('[data-studio-action="reset"]').evaluate(el=>el.click());
+ await expect(guided).toHaveAttribute("data-studio-status","idle");
  await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
  await expect(page.locator(".meditation-guardian")).toBeVisible();
  await expect(page.locator(".meditation-guardian")).toHaveCSS("animation-name","none");

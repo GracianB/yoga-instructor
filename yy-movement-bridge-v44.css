@@ -1,0 +1,106 @@
+/* V41 + V44 · Movement is one studio, not a cartoon card stacked
+   on top of a second status card. Keep tested DOM, remove double framing. */
+#instructor-flow .flow-console{
+ padding:clamp(12px,2vw,24px)!important;
+ border-radius:30px!important;
+ background:linear-gradient(160deg,#f5f2e8,#e4e8dc 58%,#f7f2e8)!important;
+ border:1px solid rgba(117,133,107,.35)!important;
+ box-shadow:0 20px 60px rgba(54,83,68,.10)!important
+}
+#instructor-flow .flow-theater{
+ margin:0!important;padding:0!important;
+ gap:clamp(6px,1.3vw,15px)!important;align-items:stretch!important;
+}
+#instructor-flow .flow-theater .flow-guide{
+ padding:0!important;margin:0!important;
+ background:transparent!important;border:0!important;box-shadow:none!important;
+ overflow:hidden!important;border-radius:22px 22px 0 0!important;
+ display:flex;flex-direction:column;
+}
+#instructor-flow .flow-theater .yy-stage{
+ width:100%!important;max-width:none!important;
+ border-radius:22px 22px 0 0!important;box-shadow:none!important
+}
+#instructor-flow .flow-theater .flow-guide figcaption{
+ width:100%;box-sizing:border-box;
+ padding:17px clamp(13px,2.6vw,32px) 20px!important;
+ margin:0!important;border-radius:0 0 17px 17px;
+ background:linear-gradient(100deg,rgba(255,255,255,.62),rgba(231,239,227,.72));
+ border:1px solid rgba(111,128,105,.2);
+ border-top:0;text-align:left!important;
+}
+#instructor-flow .flow-theater .flow-guide figcaption strong{
+ font-size:clamp(18px,2.35vw,29px)!important;color:#34594b
+}
+#instructor-flow .flow-theater .flow-guide figcaption p{
+ max-width:78ch!important;margin:6px 0 0!important;color:#577365
+}
+#instructor-flow .flow-theater .flow-side{
+ display:flex!important;align-items:stretch!important
+}
+#instructor-flow .flow-theater .flow-rail-button{
+ align-self:stretch!important;height:100%!important;min-height:100px!important;
+ border-radius:18px!important;
+ background:color-mix(in srgb,var(--surface) 76%,#dbdbc1)!important
+}
+#instructor-flow .flow-console-top{
+ display:grid!important;grid-template-columns:minmax(0,1fr) auto auto!important;
+ align-items:center!important;padding:clamp(16px,2.1vw,25px) 5px 12px!important;
+ margin:0!important;gap:clamp(12px,2vw,24px)!important;
+ border-bottom:1px solid rgba(100,128,107,.12)
+}
+#instructor-flow .flow-console-top .flow-phase{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+#instructor-flow .flow-console-top .flow-phase #flow-phase-label{
+ font-size:clamp(17px,2vw,24px)!important;line-height:1.15!important
+}
+#instructor-flow .flow-console-top .flow-phase #flow-phase-cue{
+ flex-basis:100%;font-size:12px;opacity:.78
+}
+#instructor-flow .flow-console-top .flow-phase-kicker{font-size:9px}
+#instructor-flow .flow-progress{margin:16px 5px 8px!important}
+#instructor-flow .flow-console-foot{
+ display:flex;align-items:center;gap:15px;flex-wrap:wrap
+}
+#instructor-flow .flow-console-foot>span{
+ font-size:10px;line-height:1.5;opacity:.58
+}
+#instructor-flow .flow-stage-bridge{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ padding:9px 12px;margin:3px 0 5px;border-radius:12px;
+ border:1px solid rgba(93,115,93,.17);background:rgba(244,249,234,.58);
+ color:#567166;font:600 10px/1.6 'JetBrains Mono',monospace;
+ letter-spacing:.04em
+}
+#instructor-flow .flow-stage-bridge .flow-bridge-identity{color:#775f4b}
+#instructor-flow .flow-console[data-flow-status="paused"] .flow-stage-bridge{background:#f1e5d7}
+html[data-theme="dark"] #instructor-flow .flow-console{
+ background:linear-gradient(155deg,#263345,#22283e)!important;border-color:#5d6873!important
+}
+html[data-theme="dark"] #instructor-flow .flow-theater .flow-guide figcaption{
+ background:linear-gradient(115deg,#333955,#29374b);border-color:#687481
+}
+html[data-theme="dark"] #instructor-flow .flow-theater .flow-guide figcaption strong{color:#f2e7cf}
+html[data-theme="dark"] #instructor-flow .flow-theater .flow-guide figcaption p{color:#d2d4dd}
+html[data-theme="dark"] #instructor-flow .flow-stage-bridge{
+ background:rgba(65,73,85,.74);color:#d0d8cc;border-color:#66778b
+}
+html[data-theme="dark"] #instructor-flow .flow-stage-bridge .flow-bridge-identity{color:#f1d3b1}
+@media(max-width:780px){
+ #instructor-flow .flow-console-top{grid-template-columns:minmax(0,1fr) auto!important}
+ #instructor-flow .flow-console-top .flow-state{grid-column:1/-1;justify-self:start!important}
+}
+@media(max-width:600px){
+ #instructor-flow .flow-console{padding:8px!important;border-radius:18px!important}
+ #instructor-flow .flow-theater{gap:4px!important;
+ grid-template-columns:clamp(37px,10vw,54px) minmax(0,1fr) clamp(37px,10vw,54px)!important}
+ #instructor-flow .flow-theater .flow-guide{margin:0!important}
+ #instructor-flow .flow-theater .yy-stage{border-radius:13px 13px 0 0!important}
+ #instructor-flow .flow-theater .flow-guide figcaption{
+ padding:10px 10px 12px!important;border-radius:0 0 12px 12px
+ }
+ #instructor-flow .flow-theater .flow-guide figcaption strong{font-size:17px!important}
+ #instructor-flow .flow-theater .flow-guide figcaption p{font-size:11px!important}
+ #instructor-flow .flow-theater .flow-rail-button{border-radius:11px!important}
+ #instructor-flow .flow-console-top{gap:8px!important;padding:14px 6px!important}
+ #instructor-flow .flow-stage-bridge{font-size:9px;flex-wrap:wrap}
+}

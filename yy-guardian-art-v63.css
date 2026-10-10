@@ -1,0 +1,75 @@
+/* V63 · Guardian art direction
+   One silhouette per guardian. Existing practice clocks and asana transforms
+   stay canonical. No CSS animation timers, second rigs or duplicated bodies. */
+
+/* NILA — sculpted cervical bridge, no rectangular stroke-neck. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-neck{
+  fill:var(--mg-coat)!important;
+  stroke:var(--mg-deep)!important;
+  stroke-width:1.8!important;
+  stroke-opacity:.24;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-nasal-bridge{
+  fill:none;stroke:var(--mg-deep);stroke-width:2.8;
+  stroke-linecap:round;stroke-opacity:.28;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-snout{
+  fill:var(--mg-chest);stroke:var(--mg-deep);
+  stroke-width:1.4;stroke-opacity:.25;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-muzzle-ridge{
+  stroke-opacity:.24;stroke-width:2.4;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-head{
+  shape-rendering:geometricPrecision;
+}
+
+/* BREATH — a connected rounded wing silhouette and chest-driven ribs.
+   The existing --studio-rib-expansion and phase clock remain sole motion source. */
+#instructor-flow .studio-breath-dragon .sd31-wings{
+  stroke-linecap:round;stroke-linejoin:round;
+}
+#instructor-flow .studio-breath-dragon .sd31-breath-line{
+  stroke-linecap:round;stroke-linejoin:round;
+}
+#instructor-flow .studio-breath-dragon .sd31-snout-bridge{
+  stroke-linecap:round;
+}
+
+/* UMA — restful wing mantle and anatomical folded arms. No autonomous motion. */
+#instructor-flow .meditation-guardian :is(.uma-arm-left,.uma-arm-right){
+  stroke-linejoin:round;
+}
+#instructor-flow .meditation-guardian .uma-palms,
+#instructor-flow .meditation-guardian .uma-wrist-light,
+#instructor-flow .meditation-guardian .uma-closed-eyes,
+#instructor-flow .meditation-guardian .uma-brow-light{
+  stroke-linecap:round;stroke-linejoin:round;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-moon{
+  opacity:.62;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .meditation-guardian .uma-moon{
+  opacity:.38;
+}
+
+/* Avoid heavy filters on narrow devices without shrinking guardian anatomy. */
+@media(max-width:600px){
+  #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian{
+    filter:none!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .studio-breath-dragon *,
+  #instructor-flow .meditation-guardian *,
+  #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian *{
+    animation:none!important;transition:none!important;
+  }
+}
+body.quiet-mode #instructor-flow .studio-breath-dragon *,
+body.quiet-mode #instructor-flow .meditation-guardian *,
+body.quiet-mode #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian *{
+  animation:none!important;transition:none!important;
+}

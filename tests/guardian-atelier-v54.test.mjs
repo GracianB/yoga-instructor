@@ -4,7 +4,7 @@ import {readFileSync} from "node:fs";
 const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
 test("V54: Nila is a horned guardian with tapered connected limbs, not a woolly face",()=>{
  const js=read("movement-guardian-v37.js"),css=read("yy-guardian-atelier-v54.css");
- for(const piece of ["mg-horn","mg-cheek-fin","mg-crest","mg-snout","mg-chin","mg-pupil","limbVolume","mg-limb-volume","mg-socket","mg-hinge"]){
+ for(const piece of ["mg-horn","mg-cheek-fin","mg-crest","mg-snout","mg-chin","mg-eye-line","limbVolume","mg-limb-volume","mg-socket","mg-hinge"]){
   assert.ok(js.includes(piece),"Missing anatomical feature "+piece);
  }
  assert.match(js,/const curveSections=curve=>/);

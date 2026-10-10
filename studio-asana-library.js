@@ -90,7 +90,7 @@
     button.setAttribute("aria-pressed","false");
     choices.appendChild(button);
   }
-  svg.setAttribute("viewBox","85 8 555 425");
+  svg.setAttribute("viewBox","100 -3 520 420");
   svg.setAttribute("aria-hidden","true");
   svg.setAttribute("focusable","false");
   svg.setAttribute("role","presentation");

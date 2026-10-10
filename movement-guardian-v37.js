@@ -47,6 +47,24 @@
       dy:2*u*(cy-y0)+2*t*(y1-cy)
     };
   };
+  // V54: tapered muscular silhouettes replace parallel-width "hose" limbs.
+  // Normals are evaluated on the same authored curves as paws and joints.
+  const limbVolume=(sections,type)=>{
+    const count=sections.length*18,left=[],right=[];
+    for(let i=0;i<=count;i++){
+      const seg=Math.min(sections.length-1,Math.floor(i/18));
+      const t=seg===sections.length-1?Math.min(1,(i-seg*18)/18):(i%18)/18;
+      const pos=sample(sections[seg],t),mag=Math.max(.001,Math.hypot(pos.dx,pos.dy));
+      const u=i/count;
+      const base=type==="leg"?27:23;
+      const taper=1-.34*u+.095*Math.sin(Math.PI*u);
+      const width=base*taper;
+      const nx=-pos.dy/mag,ny=pos.dx/mag;
+      left.push(point(pos.x+nx*width,pos.y+ny*width));
+      right.push(point(pos.x-nx*width,pos.y-ny*width));
+    }
+    return "M"+left.join(" L")+" L"+right.reverse().join(" L")+"Z";
+  };
   const limb=(curve,type,index)=>{
     const sections=curveSections(curve);
     const root=sample(sections[0],0),hinge=sections.length>1?
@@ -70,25 +88,39 @@
       '<path class="mg-socket-light" d="M-13 -13Q0 -20 12 -10"/>'+
       '</g>';
     return '<g class="mg-limb mg-'+type+'" data-mg-limb="'+type+'-'+index+'">'+
+      '<path class="mg-limb-volume" d="'+limbVolume(sections,type)+'"/>'+
       '<path class="mg-limb-shell" d="'+curve+'"/>'+
       '<path class="mg-limb-plane" d="'+curve+'"/>'+
       socket+joint+'</g>';
   };
+  // V54: Nila is a DRAGON, not a woolly lamb: crest, swept horns, angular
+  // temple fins, almond eyes, long muzzle and a distinct chin silhouette.
   const head=(p)=>{
     const [x,y,scale,angle,expression]=p.head;
+    const awake=["open","focus","smile"].includes(expression);
+    const eyes=awake
+      ?'<path class="mg-eye" d="M-51 -10Q-37 -23 -18 -11Q-33 0 -51 -10Z M17 -11Q35 -23 52 -10Q35 0 17 -11Z"/>'+
+        '<path class="mg-pupil" d="M-36-15Q-30-11-35-5M35-15Q40-11 35-5"/>'
+      :'<path class="mg-eye" d="M-53 -11Q-36 -2 -20 -13 M18 -13Q35 -2 52 -11"/>';
     return '<g class="mg-head" transform="translate('+esc(x)+' '+esc(y)+') rotate('+esc(angle)+') scale('+esc(scale)+')">'+
-      '<path class="mg-ear" d="M-51-32C-87-59-93-102-81-117C-64-99-42-86-31-58Z"/>'+
-      '<path class="mg-ear" d="M48-32C83-60 92-103 80-117C65-96 42-84 30-58Z"/>'+
-      '<path class="mg-ear-mark" d="M-73-94Q-62-76-52-64 M72-95Q62-75 52-63"/>'+
-      '<path class="mg-crown" d="M-28-60Q-5-102 17-80Q29-73 38-49Q5-62-28-60Z"/>'+
-      '<path class="mg-face" d="M-61-39 C-50-68-18-73 2-68 C40-77 67-48 66-13 C75 19 61 53 32 64 C16 82-17 83-34 64 C-62 55-78 22-65-9Z"/>'+
-      '<path class="mg-face-glaze" d="M-40-46Q-16-61 6-56M26-55Q42-49 48-35"/>'+
-      '<path class="mg-snout" d="M-39 16 C-43 36-27 66-6 70 Q4 75 18 69 C38 63 45 38 32 16 C20 24 10 27-1 25 C-12 26-23 20-39 16Z"/>'+
-      '<path class="mg-eye" d="M-53 -6 Q-37 4 -19-6 M17-6 Q35 4 51-6"/>'+
-      '<path class="mg-nose" d="M-11 36Q-2 40 10 35Q6 47-1 46Q-7 45-11 36Z"/>'+
-      '<path class="mg-mouth" d="'+(expression==="smile"?'M-14 57Q1 68 17 56':'M-12 57Q2 62 14 56')+'"/>'+
-      '<path class="mg-cheek" d="M-56 24Q-49 31-41 25M42 24Q50 31 57 24"/>'+
-      '<path class="mg-crest" d="M-39-50 Q-24-85-5-87 Q-18-61 4-65 Q21-88 35-65 L25-42Z"/>'+
+      // Horns sweep backwards. Short side fins make a recognizable draconic profile.
+      '<path class="mg-horn mg-horn-left" d="M-37-50Q-66-76-66-110Q-40-91-18-70Z"/>'+
+      '<path class="mg-horn mg-horn-right" d="M34-51Q62-75 70-113Q73-80 54-58Z"/>'+
+      '<path class="mg-horn-shine" d="M-57-99Q-48-75-34-67M62-99Q53-77 44-67"/>'+
+      '<path class="mg-ear" d="M-54-29Q-78-47-91-62Q-89-35-68-13Z"/>'+
+      '<path class="mg-ear" d="M53-29Q79-47 91-62Q89-35 67-13Z"/>'+
+      '<path class="mg-ear-mark" d="M-78-47Q-72-35-62-29M79-47Q72-35 62-29"/>'+
+      '<path class="mg-crest" d="M-25-57Q-18-82-3-93L3-71Q22-92 34-65L29-45Z"/>'+
+      '<path class="mg-face" d="M-60-37Q-53-65-19-70Q10-78 40-60Q70-46 67-15Q76 15 55 42Q41 64 14 73Q-13 76-42 55Q-68 35-68 4Q-72-20-60-37Z"/>'+
+      '<path class="mg-face-glaze" d="M-48-40Q-36-57-15-54M28-57Q47-45 51-32"/>'+
+      '<path class="mg-cheek-fin" d="M-58 13Q-86 16-91 37Q-72 34-56 28 M58 13Q84 16 90 37Q71 34 55 29"/>'+
+      '<path class="mg-snout" d="M-47 21Q-33 12-10 23Q0 30 10 23Q31 10 47 21Q52 50 24 62Q3 74-20 63Q-50 53-47 21Z"/>'+
+      '<path class="mg-muzzle-ridge" d="M-32 28Q-9 36 7 31Q28 24 37 29"/>'+
+      eyes+
+      '<path class="mg-nose" d="M-12 43Q-2 46 11 42Q7 52-2 52Q-10 50-12 43Z"/>'+
+      '<path class="mg-mouth" d="'+(expression==="smile"?'M-18 56Q1 72 21 55':'M-16 57Q1 63 17 56')+'"/>'+
+      '<path class="mg-chin" d="M-19 63Q0 78 20 63Q8 83-1 85Q-11 79-19 63Z"/>'+
+      '<path class="mg-cheek" d="M-56 26Q-47 32-39 27 M40 27Q48 32 56 26"/>'+
       '</g>';
   };
   const trunk=(p)=>{

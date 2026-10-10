@@ -516,8 +516,12 @@ for(const width of [320,390,768,1440]){
         }
         const [g,l,r]=await Promise.all([guide.boundingBox(),left.boundingBox(),right.boundingBox()]);
         expect(g&&l&&r).toBeTruthy();
-        expect(l.x+l.width).toBeLessThanOrEqual(g.x+2);
-        expect(r.x).toBeGreaterThanOrEqual(g.x+g.width-2);
+        // V54: circular controls float INSIDE the larger illustration rather
+        // than occupying two external columns. All four edges must fit.
+        expect(l.x).toBeGreaterThanOrEqual(g.x-3);
+        expect(l.x+l.width).toBeLessThanOrEqual(g.x+g.width+3);
+        expect(r.x).toBeGreaterThanOrEqual(g.x-3);
+        expect(r.x+r.width).toBeLessThanOrEqual(g.x+g.width+3);
         expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
         const bg=await page.locator('#instructor-flow').evaluate(el=>getComputedStyle(el).backgroundImage);
         expect(bg).toContain('gradient');

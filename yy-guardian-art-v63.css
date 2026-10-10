@@ -51,6 +51,12 @@
 #instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-moon{
   opacity:.62;
 }
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-focus="body"] .meditation-guardian .uma-moon{
+  opacity:.70;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-focus="space"] .meditation-guardian .uma-moon{
+  opacity:.85;
+}
 #instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .meditation-guardian .uma-moon{
   opacity:.38;
 }

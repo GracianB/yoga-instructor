@@ -1,0 +1,138 @@
+/* V57 · three stage-scale guardians; one continuous selection-to-practice
+   experience. Never scale characters individually away from their ground points. */
+#instructor-flow.section{
+ width:min(1440px,calc(100% - 24px))!important;
+ max-width:1440px!important;
+}
+#instructor-flow .studio-modes{gap:clamp(10px,1.7vw,22px)!important}
+#instructor-flow .studio-mode{
+ min-height:132px!important;
+ border-radius:22px!important;
+ padding:clamp(16px,2vw,29px)!important;
+ display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;
+ align-items:center;gap:12px;
+}
+#instructor-flow .studio-mode[aria-pressed="true"]{
+ background:linear-gradient(145deg,#d3e8d5,#b7d6be)!important;
+ border:2px solid #356b55!important;outline:0!important;
+ box-shadow:0 13px 30px rgba(29,88,60,.16)!important;
+}
+#instructor-flow .studio-mode[aria-pressed="true"]::after{
+ content:"";position:absolute;left:20px;right:20px;bottom:0;
+ height:4px;background:#2a6a51;border-radius:5px 5px 0 0
+}
+#instructor-flow .studio-mode-copy strong{font-size:clamp(19px,2vw,28px)!important}
+#instructor-flow .studio-mode-copy small{
+ font-size:clamp(12px,1vw,14px)!important;line-height:1.5!important
+}
+#instructor-flow .studio-path-context{
+ display:flex;align-items:center;gap:18px;
+ padding:16px clamp(16px,2.5vw,30px);margin:14px 0 8px;
+ border:1px solid rgba(79,128,103,.23);
+ border-radius:17px;background:rgba(236,244,234,.75);
+ color:#234c3b;min-height:76px
+}
+#instructor-flow .studio-path-context-icon{
+ display:grid;place-items:center;width:48px;height:48px;flex:none;
+ border-radius:15px;background:#d4e4d5;color:#285d47;
+ font:500 30px/1 'Fraunces',serif
+}
+#instructor-flow .studio-path-context-copy strong{
+ display:block;font:700 11px/1.5 'Inter',sans-serif;letter-spacing:.12em
+}
+#instructor-flow .studio-path-context-copy p{
+ margin:5px 0 0;max-width:65ch;color:#4e6957;
+ font:400 13px/1.6 'Inter',sans-serif
+}
+#instructor-flow .studio-path-context[data-mode="meditation"]{
+ background:#eceaf5;color:#51436b;border-color:#b2a9ca
+}
+#instructor-flow .studio-path-context[data-mode="meditation"] .studio-path-context-icon{
+ background:#d9d1eb;color:#645386
+}
+#instructor-flow .studio-path-context[data-mode="breath"]{
+ background:#e4f0eb;color:#28604f
+}
+/* More room for the actual posture, not extra decorative cards. */
+#instructor-flow .flow-theater .yy-stage{
+ min-height:clamp(540px,58vw,820px)!important;
+ aspect-ratio:1.67!important;
+}
+#instructor-flow .flow-theater .yy-svg{
+ width:100%!important;height:100%!important;display:block
+}
+#instructor-flow .flow-theater .flow-guide figcaption{
+ padding:clamp(20px,2.6vw,35px) clamp(22px,3.8vw,52px)!important
+}
+#instructor-flow .flow-console-top{
+ margin-top:4px!important;border-radius:18px!important
+}
+/* Breathing and Meditation keep their own geometry and emotional language,
+   but display as large, deliberate portraits instead of small thumbnails. */
+#instructor-flow .studio-guided .studio-companion.yy-guide{
+ width:min(100%,1030px)!important;
+ max-width:1030px!important;
+ height:clamp(450px,48vw,610px)!important;
+ margin:6px auto 0!important
+}
+#instructor-flow .studio-guided-stage{
+ min-height:clamp(780px,83vw,960px)!important;
+ padding:clamp(24px,3vw,42px)!important;
+}
+#instructor-flow .studio-guided-title{max-width:26ch;margin-left:auto!important;margin-right:auto!important}
+#instructor-flow .studio-guided-cue{max-width:61ch!important}
+html[data-theme="dark"] #instructor-flow .studio-path-context{
+ background:#253e38;color:#eef3e8;border-color:#587866
+}
+html[data-theme="dark"] #instructor-flow .studio-path-context p{color:#c6d8c9}
+html[data-theme="dark"] #instructor-flow .studio-path-context[data-mode="meditation"]{
+ background:#342f50;border-color:#746c95
+}
+html[data-theme="dark"] #instructor-flow .studio-path-context-icon{background:#375e4d;color:#f2f5e8}
+html[data-theme="dark"] #instructor-flow .studio-path-context[data-mode="meditation"] .studio-path-context-icon{
+ background:#565078;color:#f1eaf8
+}
+html[data-theme="dark"] #instructor-flow .studio-mode[aria-pressed="true"]{
+ background:#aecbb6!important;color:#234d38!important
+}
+@media(max-width:900px){
+ #instructor-flow .studio-mode{min-height:110px!important;padding:13px!important;gap:8px}
+ #instructor-flow .studio-mode-copy strong{font-size:19px!important}
+ #instructor-flow .flow-theater .yy-stage{
+  min-height:clamp(390px,71vw,620px)!important;aspect-ratio:1.38!important
+ }
+ #instructor-flow .studio-guided .studio-companion.yy-guide{
+  height:clamp(355px,65vw,510px)!important
+ }
+ #instructor-flow .studio-guided-stage{min-height:clamp(695px,110vw,830px)!important}
+}
+@media(max-width:600px){
+ #instructor-flow.section{width:calc(100% - 12px)!important}
+ #instructor-flow .studio-modes{gap:7px!important}
+ #instructor-flow .studio-mode{
+  min-height:91px!important;display:flex!important;
+  flex-wrap:wrap;align-content:center;gap:6px!important;
+  border-radius:14px!important;padding:10px!important
+ }
+ #instructor-flow .studio-mode .studio-number{font-size:10px}
+ #instructor-flow .studio-mode-copy strong{font-size:15px!important}
+ #instructor-flow .studio-mode-copy small{font-size:10px!important}
+ #instructor-flow .studio-mode .studio-symbol{display:none!important}
+ #instructor-flow .studio-path-context{
+  padding:11px 13px;gap:11px;min-height:65px;border-radius:13px
+ }
+ #instructor-flow .studio-path-context-icon{width:38px;height:38px;font-size:24px}
+ #instructor-flow .studio-path-context-copy strong{font-size:10px}
+ #instructor-flow .studio-path-context-copy p{font-size:11px;line-height:1.5}
+ #instructor-flow .flow-theater .yy-stage{
+  min-height:clamp(340px,103vw,490px)!important;aspect-ratio:1.15!important
+ }
+ #instructor-flow .studio-guided .studio-companion.yy-guide{
+  width:100%!important;height:clamp(290px,84vw,400px)!important
+ }
+ #instructor-flow .studio-guided-stage{min-height:clamp(610px,166vw,760px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-mode,
+ #instructor-flow .studio-path-context{transition:none!important}
+}

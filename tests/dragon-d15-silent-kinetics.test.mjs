@@ -64,7 +64,8 @@ test('D15: its version, bundle entry and budget are in SHA-verified Pages releas
  assert.match(html,/yin-yang-art\.js\?v=phase-d17-1/);
  assert.ok(html.indexOf('yy-dragon-d15.css')>html.indexOf('yy-dragon-d14.css'));
  assert.match(bundle,/'yy-dragon-d15\.css'/);
- const limit=Number(audit.match(/yy-dragon-d15\\.css\'\\)\\.size <= (\\d+)/)?.[1]);
- assert.ok(limit>=8000, "yy-dragon-d15.css must have a tested, nonzero growth budget");
+ const budgetLine=audit.split("\n").find(line=>line.includes("statSync('yy-dragon-d15.css').size <="));
+ assert.ok(budgetLine, "yy-dragon-d15.css must retain a release size gate");
+ assert.ok(Number(budgetLine.match(/size <= (\d+)/)?.[1])>=8000,"yy-dragon-d15.css growth budget must remain guarded");
  assert.ok(css.length<8000);
 });

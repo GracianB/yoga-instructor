@@ -55,7 +55,7 @@
 }
 /* More room for the actual posture, not extra decorative cards. */
 #instructor-flow .flow-theater .yy-stage{
- min-height:clamp(540px,58vw,830px)!important;
+ min-height:clamp(540px,58vw,820px)!important;
  aspect-ratio:1.67!important;
 }
 #instructor-flow .flow-theater .yy-svg{

@@ -32,7 +32,7 @@
   const limb=(curve,type,index)=>{
     // One continuous curved limb; the outer contour is the broad stroke,
     // the inset band shows muscle direction without an unattached joint.
-    return '<g class="mg-limb mg-'+type+'" data-limb="'+type+'-'+index+'">'+
+    return '<g class="mg-limb mg-'+type+'" data-mg-limb="'+type+'-'+index+'">'+
       '<path class="mg-limb-shell" d="'+curve+'"/>'+
       '<path class="mg-limb-plane" d="'+curve+'"/></g>';
   };

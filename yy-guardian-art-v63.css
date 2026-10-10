@@ -96,3 +96,28 @@ body.quiet-mode #instructor-flow :is(#flow-guide,.studio-library-stage) .movemen
   #instructor-flow .studio-breath-dragon .sd31-wings{transform:none!important}
 }
 body.quiet-mode #instructor-flow .studio-breath-dragon .sd31-wings{transform:none!important}
+
+/* V65: changes grounded in actual twelve-scene Playwright image review.
+   Nila previously read as a pale detached mask with circular mechanical
+   joints. The underlying authored paths remain unchanged and inspectable. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
+  fill:var(--mg-coat)!important;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face-glaze{
+  stroke:var(--mg-light);stroke-opacity:.40;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian
+ :is(.mg-hinge-shell,.mg-socket-shape){
+  opacity:.06;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian
+ :is(.mg-hinge-crease,.mg-socket-light){
+  opacity:.18;
+}
+/* The standing asanas had crest tips pressed against the upper crop.
+   Move the whole connected creature (including feet and contact shadows),
+   never individual paws or the animation's parent pivot. */
+#instructor-flow #flow-guide .yy-pose:is([data-pose="pose-1"],[data-pose="pose-2"],[data-pose="transition"])
+ .movement-guardian{
+  transform:translateY(14px);
+}

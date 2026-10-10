@@ -125,3 +125,43 @@ body.quiet-mode #instructor-flow .studio-breath-dragon :is(.sd31-breath-core,.sd
 body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::before{
  transition:none!important;transform:none!important
 }
+
+/* V49 · Sanctuary and rib cage share one inhalation/exhalation phase.
+   Quiet and reduced-motion paths retain the same text/countdown without
+   additional moving elements or motion loops. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::before{
+ transform:scale(var(--studio-breath-scale,1))!important;
+ opacity:var(--studio-breath-glow,.28)!important;
+ transform-origin:50% 50%;transition:transform .22s linear,opacity .22s linear
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-halo{
+ transform-box:fill-box;transform-origin:center center;
+ transform:scale(var(--studio-breath-scale,1));
+ opacity:var(--studio-breath-glow,.28);
+ transition:transform .22s linear,opacity .22s linear
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage{
+ --room-a:#e4f3e6;--room-b:#f7f0df;
+ background:radial-gradient(ellipse at 50% 43%,var(--room-a),transparent 73%),
+ linear-gradient(165deg,var(--room-b),#e7f0e7 80%)!important
+}
+#instructor-flow .studio-companion[data-spirit="yin"]{
+ --room-a:#e7dff2;--room-b:#f7eaf0
+}
+#instructor-flow .studio-guided[data-studio-active="breath"]:has(.studio-companion[data-spirit="yin"]) .studio-guided-stage{
+ --room-a:#e7dff2;--room-b:#f7eaf0
+}
+#instructor-flow .studio-guided[data-studio-status="paused"] .studio-guided-stage::before,
+#instructor-flow .studio-guided[data-studio-status="paused"] .studio-breath-dragon .sd31-halo{
+ transition:none!important
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::before,
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-halo{
+ transform:none!important;transition:none!important
+ }
+}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-guided-stage::before,
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-halo{
+ transform:none!important;transition:none!important
+}

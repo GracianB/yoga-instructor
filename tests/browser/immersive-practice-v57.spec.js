@@ -21,11 +21,11 @@ test("V57: path selection is bilingual, contextual and screen-reader linked",asy
  await page.goto("/");
  const panel=page.locator(".studio-path-context");
  await expect(panel).toContainText(/MOVIMIENTO|MOVEMENT/);
- await expect(page.locator('[data-studio-mode="asanas"]')).toHaveAttribute("aria-controls","movement-stage");
- await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
+ await expect(page.locator('button[data-studio-mode="asanas"]')).toHaveAttribute("aria-controls","movement-stage");
+ await page.locator('button[data-studio-mode="breath"]').evaluate(el=>el.click());
  await expect(panel).toContainText(/RESPIRACIÓN|BREATHING/);
- await expect(page.locator('[data-studio-mode="breath"]')).toHaveAttribute("aria-controls","studio-guided");
- await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
+ await expect(page.locator('button[data-studio-mode="breath"]')).toHaveAttribute("aria-controls","studio-guided");
+ await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
  await expect(panel).toContainText(/MEDITACIÓN|MEDITATION/);
  await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
  await expect(panel).toContainText("MEDITATION");
@@ -37,10 +37,10 @@ for (const width of [320,390,768,1024,1440]){
    await page.goto("/");
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
    await expect(page.locator(".studio-path-context")).toBeVisible();
-   await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
+   await page.locator('button[data-studio-mode="breath"]').evaluate(el=>el.click());
    await expect(page.locator(".studio-breath-dragon")).toBeVisible();
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
-   await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
+   await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
    await expect(page.locator(".meditation-guardian")).toBeVisible();
    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
  });

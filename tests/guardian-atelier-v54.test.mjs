@@ -39,7 +39,7 @@ test("V54: budgets allow future guardian growth but remain enforced",()=>{
 test("V54: versioned source and linked skin in SHA-verified Pages artifact",()=>{
  const html=read("index.html"),build=read("tools/build.mjs");
  for(const asset of ["yy-guardian-atelier-v54.css?v=v54-1",
-  "movement-guardian-v37.js?v=v54-1","studio-breath-dragon.js?v=v54-1",
+  "movement-guardian-v37.js?v=v56-1","studio-breath-dragon.js?v=v54-1",
   "studio-meditation-guardian-v42.js?v=v54-1","flow-guide.js?v=d16-1-v54-1"])
   assert.ok(html.includes(asset),"Missing asset "+asset);
  assert.match(build,/'yy-guardian-atelier-v54\.css'/);

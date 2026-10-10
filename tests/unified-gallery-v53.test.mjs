@@ -31,7 +31,7 @@ test("V53 dark UI cannot render pale-on-pale breathing instructions",()=>{
 test("V53 every updated asset is versioned and in Pages bundle",()=>{
  const html=read("index.html"),build=read("tools/build.mjs");
  for(const asset of ["yy-unified-gallery-v53.css?v=v53-1",
-  "studio-asana-library.js?v=v53-1","movement-guardian-v37.js?v=v54-1",
+  "studio-asana-library.js?v=v53-1","movement-guardian-v37.js?v=v56-1",
   "yy-three-guardians-v38.css?v=v53-1"])assert.ok(html.includes(asset),asset);
  assert.ok(build.includes("'yy-unified-gallery-v53.css'"));
  assert.ok(html.indexOf("movement-guardian-v37.js?v=v54-1")<html.indexOf("studio-asana-library.js?v=v53-1"));

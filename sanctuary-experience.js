@@ -23,6 +23,7 @@
       complete: "Ya estás aquí.",
       quietOn: "Silencio visual",
       quietOff: "Volver al ambiente",
+      musicOn: "♫ Música", musicOff: "♫ Pausar música",
       shortcut: "B",
       section: "Presencia",
       labels: {
@@ -50,6 +51,7 @@
       complete: "You are here.",
       quietOn: "Visual quiet",
       quietOff: "Bring the room back",
+      musicOn: "♫ Music", musicOff: "♫ Pause music",
       shortcut: "B",
       section: "Presence",
       labels: {
@@ -89,6 +91,7 @@
       '<div class="sanctuary-dock-tools">' +
         '<span class="sanctuary-section" aria-live="polite">' + t().section + '</span>' +
         '<button class="sanctuary-quiet" type="button" aria-pressed="false">' + t().quietOn + '</button>' +
+        '<button class="sanctuary-music" type="button" aria-pressed="false" aria-label="Escuchar música">' + t().musicOn + '</button>' +
       '</div>';
     document.body.appendChild(dock);
     return dock;
@@ -99,6 +102,17 @@
   const breathPhase = dock.querySelector("#breath-phase");
   const breathTime = dock.querySelector(".breath-time");
   const quietButton = dock.querySelector(".sanctuary-quiet");
+  const musicButton = dock.querySelector(".sanctuary-music");
+  const soundBus = window.YOGA_AUDIO_BUS;
+  const paintMusic = () => {
+    if (!musicButton) return;
+    const active=Boolean(soundBus && !soundBus.audio.paused);
+    musicButton.textContent=active?t().musicOff:t().musicOn;
+    musicButton.setAttribute("aria-pressed",String(active && soundBus.owner==="dock"));
+    musicButton.setAttribute("aria-label",active?t().musicOff:t().musicOn);
+  };
+  musicButton?.addEventListener("click",()=>{if(soundBus)void soundBus.toggle("dock");});
+  window.addEventListener("yoga:audiochange",paintMusic);
   const sectionLabel = dock.querySelector(".sanctuary-section");
 
   let breathRunning = false;
@@ -237,6 +251,7 @@
     sectionLabel.textContent = labels.labels[body.dataset.activeSection || "inicio"] || labels.section;
     dock.querySelector(".breath-kicker").textContent = "03 · " + labels.dockLabel;
     quietButton.textContent = body.classList.contains("quiet-mode") ? labels.quietOff : labels.quietOn;
+    paintMusic();
     const phase = body.dataset.breathPhase;
     if (phase === "complete") breathPhase.textContent = labels.complete;
     else if (phase === "inhale" || phase === "hold" || phase === "exhale") breathPhase.textContent = breathText(phase);
@@ -395,4 +410,5 @@
   root.style.setProperty("--scroll-energy", "0");
   root.style.setProperty("--sound-pulse", "0");
   renderBreath(0);
+  paintMusic();
 })();

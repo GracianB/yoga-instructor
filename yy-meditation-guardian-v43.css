@@ -52,3 +52,19 @@ html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="medi
 }
 body.quiet-mode #instructor-flow .studio-guided .meditation-guardian *,
 body.quiet-mode #instructor-flow .studio-guided .meditation-guardian{animation:none!important}
+
+/* V50 · Uma is a still, composed character. Meditation is deliberately free of
+   idle floats, wing beats and independent clocks. Only her color can change. */
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian,
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian *{
+ animation:none!important;transition:none!important
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion[data-spirit="yang"]>.meditation-guardian{
+ filter:sepia(.14) saturate(1.08) drop-shadow(0 12px 17px rgba(66,66,80,.13))
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-companion[data-spirit="yin"]>.meditation-guardian{
+ filter:hue-rotate(17deg) saturate(.91) drop-shadow(0 12px 17px rgba(60,56,99,.16))
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-guided-stage::before{
+ transform:none!important;animation:none!important
+}

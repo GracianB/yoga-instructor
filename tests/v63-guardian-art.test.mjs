@@ -31,7 +31,7 @@ test('V63 breathing companion: existing breath core and clock remain sole source
 test('V63 Uma: both arms modelled as volumes, still meditative',()=>{
  assert.match(meditation,/class="uma-arm-left"/);
  assert.match(meditation,/class="uma-arm-right"/);
- assert.match(meditation,/class="uma-closed-eyes"/);
+ assert.match(meditation,/class="uma-closed-eyes uma-eye-lines"/);
  assert.match(meditation,/class="uma-moon"/);
  assert.doesNotMatch(meditation,/setInterval\(|setTimeout\(|requestAnimationFrame\(/);
 });

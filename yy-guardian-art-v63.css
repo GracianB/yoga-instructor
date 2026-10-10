@@ -30,6 +30,11 @@
    The existing --studio-rib-expansion and phase clock remain sole motion source. */
 #instructor-flow .studio-breath-dragon .sd31-wings{
   stroke-linecap:round;stroke-linejoin:round;
+  /* The existing studio breath clock owns this scale. The wings open
+     symmetrically from the thorax and never acquire an independent loop. */
+  transform-box:fill-box;transform-origin:center 42%;
+  transform:scaleX(var(--studio-guardian-wing,1));
+  transition:transform .21s linear,opacity .21s linear;
 }
 #instructor-flow .studio-breath-dragon .sd31-breath-line{
   stroke-linecap:round;stroke-linejoin:round;
@@ -66,6 +71,11 @@
   #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian{
     filter:none!important;
   }
+  /* Large SVG drop-shadows can cost another compositing pass on mobile. */
+  #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon,
+  #instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian{
+    filter:none!important;
+  }
 }
 @media(prefers-reduced-motion:reduce){
   #instructor-flow .studio-breath-dragon *,
@@ -79,3 +89,10 @@ body.quiet-mode #instructor-flow .meditation-guardian *,
 body.quiet-mode #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian *{
   animation:none!important;transition:none!important;
 }
+
+/* V64: accessibility freezes the wings' breathing scale without affecting
+   the existing textual inhale/exhale cues or their shared clock. */
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .studio-breath-dragon .sd31-wings{transform:none!important}
+}
+body.quiet-mode #instructor-flow .studio-breath-dragon .sd31-wings{transform:none!important}

@@ -1,0 +1,149 @@
+/* V36 · The music belongs to one place in the page and one shared transport.
+   Overrides legacy side-by-side Vortex design without changing the CV or asana stage. */
+.soundtrack-section{
+ width:min(1180px,calc(100% - 32px))!important;
+ max-width:1180px!important;margin:0 auto!important;
+ padding:clamp(50px,7vw,95px) clamp(8px,3vw,36px)!important
+}
+.soundtrack-intro{
+ max-width:720px;margin:0 auto 26px;text-align:center;
+}
+.soundtrack-intro h2{
+ font:500 clamp(34px,5.6vw,68px)/1.08 'Fraunces',serif;
+ letter-spacing:-.055em;color:var(--ink);margin:12px 0 14px
+}
+.soundtrack-intro em{font-style:italic;color:var(--sage)}
+.soundtrack-intro p{max-width:560px;margin:0 auto;color:var(--muted);font:400 15px/1.7 'Inter',sans-serif}
+.soundtrack-section .focus-player{
+ width:min(100%,860px)!important;max-width:860px!important;
+ min-height:330px!important;margin:0 auto!important;
+ padding:clamp(24px,4vw,42px)!important;border-radius:30px!important;
+ display:grid!important;justify-items:center!important;
+ grid-template-columns:minmax(0,1fr)!important;gap:14px!important;
+ text-align:center!important;
+}
+.soundtrack-section .focus-player .player-play{
+ width:74px!important;height:74px!important;min-width:74px!important;
+ margin:0 auto 6px!important;
+}
+.soundtrack-section .focus-player .player-meta{
+ margin:0!important;justify-items:center!important;text-align:center!important;
+}
+.soundtrack-section .focus-player .player-meta strong{
+ max-width:none!important;font-size:clamp(25px,3.4vw,43px)!important;line-height:1.12!important;
+}
+.soundtrack-section .focus-player .player-meta small{max-width:55ch!important}
+.soundtrack-section .focus-player :is(.player-timeline,.player-vol){
+ width:min(100%,590px)!important;margin:0 auto!important
+}
+.soundtrack-section .focus-player .player-origin{
+ font:600 10px/1.5 'JetBrains Mono',monospace;
+ letter-spacing:.13em;color:var(--sage);text-align:center
+}
+/* The Field now gives the particle experience the full available canvas. */
+#campo.section{width:min(1540px,calc(100% - 24px))!important;max-width:1540px!important}
+#campo .campo-stage{
+ display:block!important;grid-template-columns:minmax(0,1fr)!important;
+ padding:0!important;width:100%!important;margin:0 auto!important;
+}
+#campo .campo-vortex-full{
+ width:100%!important;max-width:none!important;min-height:650px!important;
+ position:relative!important;overflow:hidden!important;
+ border-radius:clamp(20px,3vw,36px)!important;
+ padding:clamp(5px,1vw,12px)!important
+}
+#campo .campo-vortex-full iframe{
+ display:block!important;width:100%!important;
+ height:clamp(520px,69vw,780px)!important;
+ min-height:520px!important;border:0!important;
+ border-radius:clamp(17px,2.2vw,29px)!important;
+}
+#campo .campo-vortex-full:not(.is-vortex-active) iframe{
+ visibility:hidden!important
+}
+#campo .campo-vortex-full:not(.is-vortex-active){
+ background:
+ radial-gradient(circle at 23% 24%,rgba(185,211,195,.3),transparent 38%),
+ radial-gradient(circle at 77% 68%,rgba(186,182,149,.22),transparent 39%),
+ linear-gradient(150deg,#edf3e9,#e3e9df 54%,#f4f0e7)!important
+}
+#campo .vortex-activation{
+ position:absolute;z-index:5;inset:12px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ padding:30px 18px;text-align:center;gap:14px;pointer-events:auto;
+}
+#campo .vortex-activation::before{
+ content:"✧";font:400 clamp(56px,13vw,150px)/1 'Fraunces',serif;
+ color:#527e72;opacity:.4;pointer-events:none
+}
+#campo .vortex-activation .vortex-label{
+ color:#315e52;letter-spacing:.16em;font:600 10px/1.5 'JetBrains Mono',monospace
+}
+#campo .vortex-activation p{
+ max-width:480px;color:#365d52;
+ font:400 clamp(14px,1.6vw,17px)/1.7 'Inter',sans-serif;margin:0
+}
+#campo #vortex-activate,#campo #vortex-stop{
+ min-height:46px;border-radius:999px;border:1px solid #315e52;
+ background:#295549;color:#fff;padding:12px 24px;
+ font:600 13px/1.3 'Inter',sans-serif;cursor:pointer
+}
+#campo #vortex-stop{position:absolute;top:24px;right:24px;z-index:10}
+#campo #vortex-stop[hidden]{display:none!important}
+#campo .campo-vortex-full.is-vortex-active .vortex-activation{display:none!important}
+#campo :is(#vortex-activate,#vortex-stop):focus-visible{
+ outline:3px solid #bd9369;outline-offset:4px
+}
+/* The standalone corner breath widget keeps its own timer, but shares music. */
+.sanctuary-dock{
+ left:auto!important;right:clamp(10px,2.5vw,24px)!important;
+ width:min(340px,calc(100vw - 20px))!important
+}
+.sanctuary-dock .sanctuary-music{
+ min-height:40px;padding:8px 13px;
+ border-radius:999px;border:1px solid var(--line);
+ color:var(--ink);background:var(--surface);
+ font:600 11px/1.3 'Inter',sans-serif;cursor:pointer
+}
+.sanctuary-dock .sanctuary-music[aria-pressed="true"]{
+ color:#fff;background:var(--accent);border-color:var(--accent)
+}
+.sanctuary-dock .sanctuary-music:focus-visible{
+ outline:3px solid #bd9369;outline-offset:3px
+}
+/* Breathing is visible in the chest and upper wings, not feet/head/tail. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-breath-core{
+ transform-box:fill-box;transform-origin:center 46%;
+ transform:scale(var(--studio-guardian-expansion,1))!important;
+ transition:transform .21s linear!important;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-wings{
+ transform-box:fill-box;transform-origin:center 72%;
+ transform:scaleX(var(--studio-guardian-wing,1))!important;
+ transition:transform .21s linear,opacity .21s linear!important
+}
+#instructor-flow .studio-guided[data-studio-status="paused"] .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings){
+ transition:none!important
+}
+html[data-theme="dark"] #campo .campo-vortex-full:not(.is-vortex-active){
+ background:radial-gradient(circle at 50% 35%,#365b4e,#132b28 78%)!important
+}
+html[data-theme="dark"] #campo .vortex-activation :is(.vortex-label,p){color:#e3eedd}
+@media(max-width:700px){
+ .soundtrack-section{padding:50px 10px!important}
+ .soundtrack-section .focus-player{
+  min-height:330px!important;padding:22px 15px!important
+ }
+ #campo .campo-vortex-full{min-height:440px!important}
+ #campo .campo-vortex-full iframe{height:440px!important;min-height:440px!important}
+ #campo .vortex-activation{padding:20px 12px}
+ .sanctuary-dock{bottom:10px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings){
+  transform:none!important;transition:none!important
+ }
+}
+body.quiet-mode #instructor-flow .studio-guided .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings){
+ transform:none!important;transition:none!important
+}

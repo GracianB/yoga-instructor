@@ -66,6 +66,7 @@
   <link rel="stylesheet" href="./yy-guardian-atelier-v54.css?v=v54-1">
   <link rel="stylesheet" href="./yy-movement-stage-v55.css?v=v55-1">
   <link rel="stylesheet" href="./yy-anatomy-depth-v56.css?v=v56-1">
+  <link rel="stylesheet" href="./yy-immersive-practice-v57.css?v=v57-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -97,6 +98,8 @@
   <script src="./asana-library.js?v=d24-1" defer></script>
   <script src="./studio-asana-library.js?v=v53-1" defer></script>
   <script src="./movement-cockpit-v55.js?v=v55-1" defer></script>
+  <script src="./movement-camera-v57.js?v=v57-1" defer></script>
+  <script src="./practice-mode-context-v57.js?v=v57-1" defer></script>
   <script src="./session-design-ui.js?v=d25-1" defer></script>
   <script src="./sanctuary-experience.js?v=v36-1" defer></script>
   <script type="application/ld+json">
@@ -466,7 +469,7 @@
         </div>
       </div>
 
-      <div class="flow-console" data-flow-status="idle">
+      <div class="flow-console" id="movement-stage" data-flow-status="idle">
         <div class="flow-theater" role="group" aria-label="Navegación de posturas">
           <div class="flow-side flow-side-prev"><button type="button" class="flow-control ghost flow-rail-button" data-flow-action="previous" data-i18n="flowPrevious" aria-label="Anterior">Anterior</button></div>
           <figure class="flow-guide" id="flow-guide"><figcaption>Un gesto a la vez · One gesture at a time</figcaption></figure>

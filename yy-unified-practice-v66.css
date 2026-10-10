@@ -212,3 +212,68 @@
 #instructor-flow .meditation-guardian :is(.uma-eye-lines,.uma-nose-line){
   fill:none;stroke-linecap:round;stroke-linejoin:round;
 }
+
+/* V66 visual audit: compact the left controls into a single narrative pane.
+   Both columns retain their presence without artificially tall empty tracks. */
+#instructor-flow .studio-v66-workspace .flow-console:not([hidden]){
+  grid-template-areas:"controls art"!important;
+  grid-template-rows:minmax(0,1fr)!important;
+  align-items:stretch!important;
+}
+#instructor-flow .studio-v66-workspace .studio-v66-control-pane{
+  grid-area:controls!important;min-width:0;min-height:0;
+  display:flex;flex-direction:column;justify-content:center;
+  align-items:stretch;gap:13px;padding:clamp(4px,1.3vw,18px);
+}
+#instructor-flow .studio-v66-workspace .studio-v66-control-pane > *{
+  grid-area:auto!important;margin-top:0!important;margin-bottom:0!important;
+}
+#instructor-flow .studio-v66-control-pane > .flow-console-top{order:0}
+#instructor-flow .studio-v66-control-pane > .flow-console-foot{order:1;align-self:stretch!important}
+#instructor-flow .studio-v66-control-pane > .flow-progress{order:2}
+#instructor-flow .studio-v66-control-pane > .flow-phase-progress{order:3}
+#instructor-flow .studio-v66-control-pane > .flow-controls{order:4}
+/* Breathing and meditation: title/instruction/time ABOVE the figure so the
+   character remains the focus without pushing essential content offscreen. */
+#instructor-flow .studio-v66-workspace .studio-guided-stage{
+  display:flex!important;flex-direction:column!important;
+  align-items:center!important;justify-content:flex-start!important;
+  gap:6px!important;min-height:620px!important;height:auto!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage > :is(.studio-guided-top,.studio-guided-title,.studio-guided-cue,.studio-breath-phase-detail,.studio-guided-countdown,.studio-guided-progress){
+  flex:0 0 auto;max-width:100%;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-top{
+  width:100%!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-title{
+  font-size:clamp(25px,2.5vw,36px)!important;
+  line-height:1.16!important;margin:5px auto 2px!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-cue{
+  font-size:clamp(12px,1.3vw,15px)!important;
+  margin:0 auto!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-guided-countdown{
+  font-size:clamp(25px,2.5vw,38px)!important;margin:6px 0 1px!important;
+}
+#instructor-flow .studio-v66-workspace .studio-guided-stage .studio-companion.yy-guide{
+  flex:0 0 auto!important;height:clamp(285px,28vw,375px)!important;
+}
+@media(max-width:850px){
+ #instructor-flow .studio-v66-workspace .flow-console:not([hidden]){
+  grid-template-areas:"art" "controls"!important;
+  grid-template-rows:auto auto!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-v66-control-pane{
+  gap:12px;padding:8px 4px 12px!important;
+ }
+}
+@media(max-width:600px){
+ #instructor-flow .studio-v66-workspace .studio-guided-stage{
+  min-height:535px!important;
+ }
+ #instructor-flow .studio-v66-workspace .studio-guided-stage .studio-companion.yy-guide{
+  height:clamp(245px,69vw,315px)!important;
+ }
+}

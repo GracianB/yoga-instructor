@@ -5,6 +5,9 @@ async function open(page){
  const guide=page.locator("#flow-guide");
  await expect(guide).toHaveAttribute("data-ready","true",{timeout:12000});
  const explorer=page.locator("#studio-asana-library");
+ // V66: the single-asana explorer is genuinely opt-in, never the default.
+ await expect(explorer).toBeHidden();
+ await page.locator('[data-movement-view="library"]').evaluate(el=>el.click());
  await expect(explorer).toBeVisible();
  return {guide,explorer};
 }
@@ -36,7 +39,7 @@ test("D24: Yin/Yang and bilingual keyboard exploration, no interference with gui
  await guide.locator('[data-yy-form="yin"]').evaluate(el=>el.click());
  await expect(explorer.locator(".studio-library-stage")).toHaveAttribute("data-spirit","yin");
  await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
- await expect(explorer.locator(".studio-library-heading h3")).toHaveText("More ways to inhabit your body");
+ await expect(explorer.locator(".studio-library-heading h3")).toHaveText("Explore asanas");
  const first=explorer.locator("button[data-library-pose]").first();
  await first.focus();
  await page.keyboard.press("ArrowRight");
@@ -45,9 +48,13 @@ test("D24: Yin/Yang and bilingual keyboard exploration, no interference with gui
  await expect(explorer).toBeHidden();
  await page.locator('button[data-studio-mode="asanas"]').evaluate(el=>el.click());
  await expect(explorer).toBeVisible();
+ await page.locator('[data-movement-view="sequence"]').evaluate(el=>el.click());
+ await expect(explorer).toBeHidden();
  await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
  await expect(explorer).toBeHidden();
  await page.locator('[data-flow-action="reset"]').evaluate(el=>el.click());
+ await expect(explorer).toBeHidden();
+ await page.locator('[data-movement-view="library"]').evaluate(el=>el.click());
  await expect(explorer).toBeVisible();
 });
 

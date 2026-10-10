@@ -5,15 +5,16 @@
   const root=document.getElementById("instructor-flow");
   const guide=root?.querySelector("#flow-guide");
   const art=window.YIN_YANG_ART,library=window.YOGA_ASANA_LIBRARY;
+  const guardian=window.YOGA_MOVEMENT_GUARDIAN;
   const source=guide?.querySelector("svg.yy-svg");
   const intro=root?.querySelector(".studio-entrance");
-  if(!root||!guide||!source||!intro||!art?.drawPose||!library?.poses?.length)return;
+  if(!root||!guide||!source||!intro||!art?.drawPose||!guardian?.drawPose||!library?.poses?.length)return;
   const copy={
     es:{heading:"EXPLORA A TU RITMO",title:"Otras formas de habitar el cuerpo",
-      lead:"Tres posturas adicionales dibujadas para este dragón. Explóralas sin empezar una sesión.",
+      lead:"Tres posturas adicionales de Nila, el personaje de Movimiento. Explóralas sin empezar una sesión.",
       contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad."},
     en:{heading:"EXPLORE AT YOUR PACE",title:"More ways to inhabit your body",
-      lead:"Three additional poses drawn specifically for this dragon. Explore without starting a session.",
+      lead:"Three extra poses for Nila, your Movement guardian. Explore without starting a session.",
       contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test."}
   };
   const language=()=>document.documentElement.lang==="en"?"en":"es";
@@ -61,6 +62,17 @@
     const group=xml.documentElement.firstElementChild;
     if(!group||group.tagName.toLowerCase()==="parsererror"){section.remove();return;}
     const imported=document.importNode(group,true);
+    // V53: retain the D24 anatomy in DOM for existing regression contracts,
+    // but show the same Nila drawing used in all ten guided Movement poses.
+    const originalBody=imported.querySelector(".yy-character");
+    const extra=new DOMParser().parseFromString(
+      '<svg xmlns="http://www.w3.org/2000/svg">'+guardian.drawPose(pose)+'</svg>',
+      "image/svg+xml");
+    const nila=extra.documentElement.firstElementChild;
+    if(!originalBody||!nila||nila.tagName.toLowerCase()==="parsererror"){
+      section.remove();return;
+    }
+    originalBody.appendChild(document.importNode(nila,true));
     // Newly authored poses also reference the cloned gradients. Rewrite
     // their links before insertion so they cannot borrow the main SVG defs.
     for(const node of [imported,...imported.querySelectorAll("*")]){
@@ -83,6 +95,7 @@
   svg.setAttribute("focusable","false");
   svg.setAttribute("role","presentation");
   stage.appendChild(svg);
+  stage.dataset.libraryGuardian="nila";
   let current=library.poses[0].id;
   let busy=false;
   const render=()=>{

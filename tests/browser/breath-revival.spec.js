@@ -39,9 +39,9 @@ test("V35 soundtrack stays opt-in and accepts provided local MP3 with working co
   buffer:Buffer.from("ID3\\u0004\\u0000\\u0000\\u0000\\u0000\\u0000\\u0000")
  });
  await expect(player.locator(".studio-sound-track")).toContainText("Silence Between Notes.mp3");
- expect(await player.locator("audio").evaluate(el=>el.src.startsWith("blob:"))).toBe(true);
+ expect(await page.locator("#focus-audio").evaluate(el=>el.src.startsWith("blob:"))).toBe(true);
  await player.locator(".studio-sound-volume").evaluate(el=>{el.value="0.5";el.dispatchEvent(new Event("input",{bubbles:true}));});
- expect(await player.locator("audio").evaluate(el=>el.volume)).toBe(.5);
+ expect(await page.locator("#focus-audio").evaluate(el=>el.volume)).toBe(.5);
  await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
  await expect(player).toBeHidden();
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());

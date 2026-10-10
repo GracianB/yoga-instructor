@@ -57,9 +57,23 @@
       const pos=sample(sections[seg],t),mag=Math.max(.001,Math.hypot(pos.dx,pos.dy));
       const u=i/count;
       const base=type==="leg"?27:23;
-      const taper=1-.34*u+.095*Math.sin(Math.PI*u);
+      // V59: organic volume instead of a straight truncated tube.
+      // Keep both endpoints broad enough to meet torso and paws; gently
+      // widen the muscle belly, then narrow towards the wrist/ankle.
+      const muscle=Math.sin(Math.PI*u)**2;
+      const taper=1-.29*u+.13*muscle;
       const width=base*taper;
-      const nx=-pos.dy/mag,ny=pos.dx/mag;
+      // Average adjoining tangent vectors at the segment seam.
+      // This avoids a sharp normal flip (visible as a kinked elbow).
+      let dx=pos.dx,dy=pos.dy;
+      if(sections.length>1 && Math.abs(u-.5)<.029){
+        const a=sample(sections[0],1),b=sample(sections[1],0);
+        const blend=(u-.471)/.058;
+        dx=a.dx*(1-blend)+b.dx*blend;
+        dy=a.dy*(1-blend)+b.dy*blend;
+      }
+      const tangentMag=Math.max(.001,Math.hypot(dx,dy));
+      const nx=-dy/tangentMag,ny=dx/tangentMag;
       left.push(point(pos.x+nx*width,pos.y+ny*width));
       right.push(point(pos.x-nx*width,pos.y-ny*width));
     }

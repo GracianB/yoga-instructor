@@ -14,7 +14,7 @@
  svg.setAttribute("role","presentation");
  svg.setAttribute("aria-hidden","true");
  svg.setAttribute("focusable","false");
- svg.innerHTML=String.raw\`
+ svg.innerHTML=String.raw`
  <defs>
   <linearGradient id="uma-body" x1="0" y1="0" x2=".9" y2="1">
    <stop stop-color="#d5d1e9"/><stop offset=".55" stop-color="#a99fca"/><stop offset="1" stop-color="#716eab"/>
@@ -54,7 +54,7 @@
  <!-- An inward-facing crescent is her meditative symbol -->
  <path d="M277 267 A21 21 0 1 0 297 287 A17 17 0 1 1 277 267Z" fill="#faf0ce"/>
  <path d="M235 336Q282 344 325 336" fill="none" stroke="#d8cded" stroke-width="3" stroke-linecap="round"/>
- \`;
+ `;
  mount.appendChild(svg);
  host.dataset.meditationGuardian="uma";
 })();

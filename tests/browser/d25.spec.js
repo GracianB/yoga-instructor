@@ -1,4 +1,14 @@
 const {test,expect}=require("@playwright/test");
+async function enableRecovery(root){
+ const checkbox=root.locator('[data-d25-option="recovery"]');
+ await expect(checkbox).toBeEnabled();
+ // A real keyboard interaction, independent of scrolling animations that
+ // sometimes displace the small checkbox while Playwright attempts a click.
+ await checkbox.focus();
+ await checkbox.press("Space");
+ await expect(checkbox).toBeChecked();
+}
+
 async function open(page){
  await page.addInitScript(()=>{try{sessionStorage.setItem("gb-yoga-intro-seen","1")}catch(_){}});
  await page.goto("/");
@@ -36,7 +46,7 @@ test("D25: recovery increases actual resting time and keeps exact total requeste
   });
  });
  const first=await get();
- await root.locator('[data-d25-option="recovery"]').check();
+ await enableRecovery(root);
  const updated=await get();
  expect(first.totalSeconds).toBe(1020);
  expect(updated.totalSeconds).toBe(1020);
@@ -51,7 +61,7 @@ test("D25: options survive reload, disappear in meditation and fit 320px reduced
  const root=await open(page);
  await root.locator('[data-d25-option="length"]').selectOption("extended");
  await root.locator('[data-d25-option="level"]').selectOption("gentle");
- await root.locator('[data-d25-option="recovery"]').check();
+ await enableRecovery(root);
  await page.reload();
  await expect(root.locator('[data-d25-option="length"]')).toHaveValue("extended");
  await expect(root.locator('[data-d25-option="recovery"]')).toBeChecked();

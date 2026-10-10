@@ -654,20 +654,20 @@ test('D5 complete character review: ten poses, two energies, responsive and stil
  expect(errors).toEqual([]);
 });
 
-test('D5 cinematic contact sheet: all 10 poses, Yin and Yang, mobile and desktop',async ({page,browserName})=>{
- test.skip(browserName!=='chromium','Visual contact sheet is recorded on Chromium; other engines retain the cross-browser suite.');
- test.setTimeout(180000);
-  // Manual navigation screenshots must not race the automatic five-second tour.
-  await page.addInitScript(() => { const fixedNow = Date.now(); Date.now = () => fixedNow; });
- const errors=await open(page);
- const guide=page.locator('#flow-guide');
- const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
- const phases=['start','centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
- await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
- for(const width of [390,1440]){
-  await page.setViewportSize({width,height:900});
-  for(const spirit of ['yang','yin']){
-   await act('reset');
+// V64: the old 40-screenshot mega-test held one Chromium worker for three
+// minutes and regularly timed out. Split into isolated combinations so the
+// CI worker pool can execute them concurrently without losing coverage.
+for(const width of [390,1440]){
+ for(const spirit of ['yang','yin']){
+  test('D5 cinematic contact sheet '+width+'px '+spirit+' (all 10 poses)',async ({page,browserName})=>{
+   test.skip(browserName!=='chromium','Visual contact sheet on Chromium; other engines retain cross-browser coverage.');
+   test.setTimeout(110000);
+   await page.addInitScript(()=>{const fixedNow=Date.now();Date.now=()=>fixedNow;});
+   await page.setViewportSize({width,height:900});
+   const errors=await open(page);
+   const guide=page.locator('#flow-guide');
+   const act=action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
+   const phases=['start','centering','breath','warmup','pose-1','transition','pose-2','cooldown','savasana','finish'];
    await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
    await guide.locator('[data-yy-form="'+spirit+'"]').evaluate(el=>el.click());
    await expect(guide).toHaveAttribute('data-spirit',spirit);
@@ -678,14 +678,18 @@ test('D5 cinematic contact sheet: all 10 poses, Yin and Yang, mobile and desktop
     await expect(guide).toHaveAttribute('data-phase',phases[i]);
     await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});
     await expect(guide.locator('.yy-pose.is-current')).toHaveCount(1);
+    // Element screenshot waits for stability and can hang forever on
+    // breathing/guardian animations. A page capture does not.
+    await guide.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));
     await test.info().attach('d5-'+width+'-'+spirit+'-'+String(i+1).padStart(2,'0')+'-'+phases[i],{
-      body:await guide.screenshot({animations:'disabled'}),contentType:'image/png'
+      body:await page.screenshot({type:'jpeg',quality:86,animations:'disabled',timeout:10000}),
+      contentType:'image/jpeg'
     });
    }
-  }
+   expect(errors).toEqual([]);
+  });
  }
- expect(errors).toEqual([]);
-});
+}
 
 test('quick tour advances automatically while pause prevents unsolicited movement', async ({page,browserName})=>{
   test.skip(browserName!=='chromium','Time-sensitive real-clock interaction checked once.');

@@ -69,6 +69,7 @@
   <link rel="stylesheet" href="./yy-immersive-practice-v57.css?v=v57-1">
   <link rel="stylesheet" href="./yy-guardian-finish-v58.css?v=v58-1">
   <link rel="stylesheet" href="./yy-guardian-art-v63.css?v=v63-1">
+  <link rel="stylesheet" href="./yy-unified-practice-v66.css?v=v66-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -104,6 +105,7 @@
   <script src="./practice-mode-context-v57.js?v=v57-1" defer></script>
   <script src="./session-design-ui.js?v=d25-1" defer></script>
   <script src="./sanctuary-experience.js?v=v36-1" defer></script>
+  <script src="./studio-unified-v66.js?v=v66-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -437,7 +439,7 @@
   </div>
 </section>
 
-    <section class="section instructor-flow reveal" id="instructor-flow" aria-labelledby="instructor-flow-title">
+    <section class="section instructor-flow reveal" id="instructor-flow" data-movement-view="sequence" aria-labelledby="instructor-flow-title">
       <div class="section-head instructor-flow-head">
         <p class="kicker" data-i18n="flowKicker">INSTRUCTOR FLOW · SESIÓN</p>
         <h2 id="instructor-flow-title" data-i18n-html="flowH2">Una práctica.<br><em>Un ritmo claro.</em></h2>
@@ -468,6 +470,10 @@
             <span class="studio-mode-copy"><strong data-studio-copy="meditation">Meditación</strong><small data-studio-copy="meditationDetail">Uma · guardiana lunar</small></span>
             <span class="studio-symbol" aria-hidden="true">✧</span>
           </button>
+        </div>
+        <div class="studio-v66-submodes" role="group" aria-label="Opciones de movimiento">
+          <button type="button" class="studio-v66-submode is-selected" data-movement-view="sequence" aria-pressed="true">Secuencia guiada</button>
+          <button type="button" class="studio-v66-submode" data-movement-view="library" aria-pressed="false">Explorar asanas</button>
         </div>
       </div>
 

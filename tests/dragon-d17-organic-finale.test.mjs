@@ -49,8 +49,9 @@ test('D17 release keeps mode foundation and versioned files with budget',()=>{
  assert.match(html,/yin-yang-art\.js\?v=phase-d17-1/);
  assert.ok(html.indexOf('yy-dragon-d17.css')>html.indexOf('yy-dragon-d16.css'));
  assert.match(build,/'yy-dragon-d17\.css'/);
- const limit=Number(audit.match(/yy-dragon-d17\\.css\'\\)\\.size <= (\\d+)/)?.[1]);
- assert.ok(limit>=7000, "yy-dragon-d17.css must have a tested, nonzero growth budget");
+ const budgetLine=audit.split("\n").find(line=>line.includes("statSync('yy-dragon-d17.css').size <="));
+ assert.ok(budgetLine, "yy-dragon-d17.css must retain a release size gate");
+ assert.ok(Number(budgetLine.match(/size <= (\d+)/)?.[1])>=7000,"yy-dragon-d17.css growth budget must remain guarded");
  assert.ok(css.length<7000);
  assert.match(build,/'practice-pathways\.js'/);
 });

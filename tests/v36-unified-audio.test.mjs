@@ -1,0 +1,48 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import {readFileSync} from "node:fs";
+const read=p=>readFileSync(new URL("../"+p,import.meta.url),"utf8");
+test("V36 one first-party sound source and a single common transport",()=>{
+ const html=read("index.html");
+ const bus=read("yoga-audio-bus.js");
+ const studio=read("studio-soundscape.js");
+ const dock=read("sanctuary-experience.js");
+ assert.equal((html.match(/<audio\b/g)||[]).length,1);
+ assert.match(html,/id="focus-audio" src="\.\/audio\/silence-between-notes\.mp3"/);
+ assert.doesNotMatch(html,/sustained-focus\.mp3/);
+ assert.doesNotMatch(studio,/<audio\b/);
+ assert.match(studio,/bus\.toggle\("breath"\)/);
+ assert.match(dock,/soundBus\.toggle\("dock"\)/);
+ assert.match(bus,/owner=source/);
+ assert.match(bus,/document\.addEventListener\("play"/);
+ assert.match(bus,/deactivateVortex\(\)/);
+ assert.match(bus,/audio\.pause\(\)/);
+ assert.doesNotMatch(html,/<audio[^>]*autoplay/);
+});
+test("V36 soundtrack follows hero, Vortex only mounts on explicit action",()=>{
+ const html=read("index.html");
+ const idx=html.indexOf('id="inicio"');
+ const song=html.indexOf('id="soundtrack"');
+ const ritual=html.indexOf('id="ritual"');
+ const field=html.indexOf('id="campo"');
+ assert.ok(idx<song&&song<ritual&&ritual<field);
+ assert.equal((html.match(/id="focus-player"/g)||[]).length,1);
+ assert.match(html,/id="vortex-activate"/);
+ assert.match(html,/id="vortex-stop" hidden/);
+ assert.match(html,/class="vortex-frame-mount" data-vortex-src=/);
+ assert.match(read("yoga-audio-bus.js"),/iframe\.remove\(\)/);
+ assert.match(read("yy-unified-audio-v36.css"),/#campo \.campo-stage/);
+ assert.match(html,/media-src 'self' blob:/);
+});
+test("V36 the seated dragon breathes visibly from one clock while the body stays grounded",()=>{
+ const js=read("practice-studio.js");
+ const css=read("yy-unified-audio-v36.css");
+ assert.match(js,/--studio-guardian-expansion/);
+ assert.match(js,/\.095 \* breathing\.expansion/);
+ assert.match(js,/--studio-guardian-wing/);
+ assert.match(css,/\.sd31-breath-core/);
+ assert.match(css,/\.sd31-wings/);
+ assert.match(css,/prefers-reduced-motion:reduce/);
+ assert.match(css,/body\.quiet-mode/);
+ assert.doesNotMatch(read("studio-breath-dragon.js"),/requestAnimationFrame|setInterval/);
+});

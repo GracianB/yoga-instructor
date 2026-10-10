@@ -22,15 +22,15 @@ test('GitHub Pages smoke verifies every local stylesheet from release HTML',()=>
 
 test('Silence Between Notes is shipped as a real opt-in MP3, with a remote SHA release gate',()=>{
  const fs=requireAudioFile();
- const player=read('studio-soundscape.js');
+ const player=read('studio-soundscape.js'),bus=read('yoga-audio-bus.js');
  assert.ok(fs.size>1000000 && fs.size<10000000, 'MP3 must exist and stay inside size budget');
  assert.match(smoke,/audio\/silence-between-notes\.mp3/);
  assert.match(smoke,/ownerSongExists/);
  assert.match(smoke,/actual !== file\.digest/);
  assert.match(build,/for \(const directory of \['assets', 'audio'\]\)/);
- assert.match(player,/silence-between-notes\.mp3/);
+ assert.match(bus,/silence-between-notes\.mp3/);
  assert.match(player,/toggle\.addEventListener\("click"/);
- assert.match(player,/method:"HEAD"/);
+ assert.match(player,/bus\.toggle\("breath"\)/);
 });
 
 function requireAudioFile(){

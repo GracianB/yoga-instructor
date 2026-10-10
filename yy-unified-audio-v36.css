@@ -147,3 +147,15 @@ html[data-theme="dark"] #campo .vortex-activation :is(.vortex-label,p){color:#e3
 body.quiet-mode #instructor-flow .studio-guided .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings){
  transform:none!important;transition:none!important
 }
+
+/* Reduced-motion accessibility must outrank the active-breath stage selector. */
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-breath-core,
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-wings{
+  transform:none!important;transition:none!important
+ }
+}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-breath-core,
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-wings{
+ transform:none!important;transition:none!important
+}

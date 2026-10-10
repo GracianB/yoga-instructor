@@ -122,10 +122,16 @@
       :expression==="smile"
         ?'<path class="mg-brow" d="M-50 -32Q-35 -42 -20 -34 M20 -34Q35 -42 50 -32"/>'
         :'';
+    // V66: eyes are expressive strokes, not almond masks and pupils.
+    // The same paths rotate with the authored head in every asana.
     const eyes=awake
-      ?'<path class="mg-eye" d="M-51 -10Q-37 -23 -18 -11Q-33 0 -51 -10Z M17 -11Q35 -23 52 -10Q35 0 17 -11Z"/>'+
-        '<path class="mg-pupil" d="M-36-15Q-30-11-35-5M35-15Q40-11 35-5"/>'
-      :'<path class="mg-eye" d="M-53 -11Q-36 -2 -20 -13 M18 -13Q35 -2 52 -11"/>';
+      ?'<path class="mg-eye mg-eye-line" d="'+
+        (expression==="focus"
+          ?'M-52 -10Q-37 -16 -23 -11 M23 -11Q37 -16 52 -10'
+          :expression==="smile"
+            ?'M-52 -12Q-37 1 -22 -12 M22 -12Q37 1 52 -12'
+            :'M-52 -10Q-37 -4 -22 -10 M22 -10Q37 -4 52 -10')+'"/>'
+      :'<path class="mg-eye mg-eye-line" d="M-52 -12Q-37 -2 -22 -12 M22 -12Q37 -2 52 -12"/>';
     return '<g class="mg-head" transform="translate('+esc(x)+' '+esc(y)+') rotate('+esc(angle)+') scale('+esc(scale)+')">'+
       // Horns sweep backwards. Short side fins make a recognizable draconic profile.
       '<path class="mg-horn mg-horn-left" d="M-37-50Q-66-76-66-110Q-40-91-18-70Z"/>'+
@@ -144,7 +150,7 @@
       '<path class="mg-nasal-bridge" d="M-1 3Q-7 18 0 29"/>'+
       eyes+
       '<path class="mg-nose" d="M-12 43Q-2 46 11 42Q7 52-2 52Q-10 50-12 43Z"/>'+
-      '<path class="mg-mouth" d="'+(expression==="smile"?'M-18 56Q1 72 21 55':'M-16 57Q1 63 17 56')+'"/>'+
+      '<path class="mg-mouth" d="'+(expression==="smile"?'M-15 57Q1 66 17 56':'M-13 57Q1 61 15 57')+'"/>'+
       '<path class="mg-chin" d="M-19 63Q0 78 20 63Q8 83-1 85Q-11 79-19 63Z"/>'+
       '<path class="mg-cheek" d="M-56 26Q-47 32-39 27 M40 27Q48 32 56 26"/>'+
       '</g>';

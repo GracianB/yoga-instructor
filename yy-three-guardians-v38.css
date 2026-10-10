@@ -141,3 +141,10 @@ body.quiet-mode #instructor-flow #flow-guide .mg-breath-plane{transform:none!imp
 #instructor-flow #flow-guide .yy-pose[data-pose="savasana"] .mg-contact-shadows{
  opacity:.52
 }
+
+/* V41 · Original decorative contacts must not double Nila's own footprints.
+   Keep their DOM for existing pose tests; only the new shadows render. */
+#instructor-flow #flow-guide .yy-pose>.yy-stance,
+#instructor-flow #flow-guide .yy-pose>.yy-dragon-motes{
+ opacity:0!important;pointer-events:none!important
+}

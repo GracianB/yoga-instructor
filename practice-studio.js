@@ -262,12 +262,15 @@
     setData(guided, "studioStatus", snapshot.status);
     setData(guided, "breathPhase", isBreathing && !waiting && !complete ? breathing.phase : "rest");
     // One monotonic clock controls both the words and the guardian's light.
-    setVar(orb, "--studio-breath-scale", activeBreath ? breathing.scale.toFixed(4) : "1");
+    const roomScale=activeBreath ? breathing.scale.toFixed(4) : "1";
+    setVar(orb, "--studio-breath-scale", roomScale);
+    // V49: the environment, chest and wing share this existing breath clock.
+    setVar(guided, "--studio-breath-scale", roomScale);
     setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
     setVar(guided, "--studio-rib-expansion", shape.rib);
     // V36: visible seated dragon breathing, with feet and head planted.
-    setVar(guided, "--studio-guardian-expansion", activeBreath ? (1 + .095 * breathing.expansion).toFixed(4) : "1");
-    setVar(guided, "--studio-guardian-wing", activeBreath ? (1 + .045 * breathing.expansion).toFixed(4) : "1");
+    setVar(guided, "--studio-guardian-expansion", activeBreath ? (1 + .14 * breathing.expansion).toFixed(4) : "1");
+    setVar(guided, "--studio-guardian-wing", activeBreath ? (1 + .06 * breathing.expansion).toFixed(4) : "1");
     setVar(guided, "--studio-d28-wing-vein", shape.wingVein);
     setVar(guided, "--studio-d28-tail-light", shape.tailLight);
     setVar(guided, "--studio-d28-horn", shape.horn);

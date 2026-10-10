@@ -29,12 +29,50 @@
       '<path d="M-10 4 Q-3 9 3 4 M4 2 Q10 7 14 1" class="mg-paw-toes"/>'+
       (vertical?'<path d="M-11 -8Q-5 -12 1 -9" class="mg-paw-shine"/>':'')+'</g>';
   };
+  // V47: every shoulder, elbow, hip and knee is derived from the SAME
+  // quadratic centreline as its paw. No separately positioned joint stickers.
+  const curveSections=curve=>{
+    const n=(curve.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+    if(n.length!==6&&n.length!==10)throw Error("Invalid Nila limb: "+curve);
+    const a=[n.slice(0,6)];
+    if(n.length===10)a.push([n[4],n[5],n[6],n[7],n[8],n[9]]);
+    return a;
+  };
+  const sample=(section,t)=>{
+    const [x0,y0,cx,cy,x1,y1]=section,u=1-t;
+    return {
+      x:u*u*x0+2*u*t*cx+t*t*x1,
+      y:u*u*y0+2*u*t*cy+t*t*y1,
+      dx:2*u*(cx-x0)+2*t*(x1-cx),
+      dy:2*u*(cy-y0)+2*t*(y1-cy)
+    };
+  };
   const limb=(curve,type,index)=>{
-    // One continuous curved limb; the outer contour is the broad stroke,
-    // the inset band shows muscle direction without an unattached joint.
+    const sections=curveSections(curve);
+    const root=sample(sections[0],0),hinge=sections.length>1?
+      sample(sections[0],1):sample(sections[0],.54);
+    const degree=Math.atan2(hinge.dy,hinge.dx)*180/Math.PI;
+    const wide=type==="leg"?22:19;
+    // These overlapping membranes bridge the visible hinge and root,
+    // while the uninterrupted limb silhouette preserves grounded contacts.
+    const joint='<g class="mg-hinge mg-'+(type==="arm"?"elbow":"knee")+
+      '" data-joint="'+type+'-'+index+'" transform="translate('+
+      point(hinge.x,hinge.y)+') rotate('+esc(degree)+')">'+
+      '<path class="mg-hinge-shell" d="M-'+wide+' -9 Q-13 -18 1 -16 Q'+wide+
+      ' -12 '+wide+' 0 Q'+(wide-5)+' 13 0 16 Q-'+wide+' 11 -'+wide+' -9Z"/>'+
+      '<path class="mg-hinge-crease" d="M-10 4Q0 10 11 4"/>'+
+      '</g>';
+    const socket='<g class="mg-socket mg-'+(type==="arm"?"shoulder":"hip")+
+      '" data-socket="'+type+'-'+index+'" transform="translate('+
+      point(root.x,root.y)+') rotate('+
+      esc(Math.atan2(root.dy,root.dx)*180/Math.PI)+')">'+
+      '<path class="mg-socket-shape" d="M-25 -16Q-8 -29 14 -17Q29 -3 16 17Q-7 25 -25 13Q-31 2 -25 -16Z"/>'+
+      '<path class="mg-socket-light" d="M-13 -13Q0 -20 12 -10"/>'+
+      '</g>';
     return '<g class="mg-limb mg-'+type+'" data-mg-limb="'+type+'-'+index+'">'+
       '<path class="mg-limb-shell" d="'+curve+'"/>'+
-      '<path class="mg-limb-plane" d="'+curve+'"/></g>';
+      '<path class="mg-limb-plane" d="'+curve+'"/>'+
+      socket+joint+'</g>';
   };
   const head=(p)=>{
     const [x,y,scale,angle,expression]=p.head;

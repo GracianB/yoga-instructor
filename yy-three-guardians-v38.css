@@ -147,3 +147,34 @@ body.quiet-mode #instructor-flow #flow-guide .mg-breath-plane{transform:none!imp
 #instructor-flow #flow-guide .yy-pose>.yy-dragon-motes{
  opacity:0!important;pointer-events:none!important
 }
+
+/* V48 · Articulation is sculpted into the same skin, not an extra creature.
+   Every joint is computed from the exact limb centreline in V47. */
+#instructor-flow #flow-guide .movement-guardian .mg-socket-shape,
+#instructor-flow #flow-guide .movement-guardian .mg-hinge-shell{
+ fill:var(--mg-coat);stroke:none
+}
+#instructor-flow #flow-guide .movement-guardian .mg-socket-light{
+ fill:none;stroke:var(--mg-light);stroke-width:4;stroke-opacity:.42;
+ stroke-linecap:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-hinge-crease{
+ fill:none;stroke:var(--mg-deep);stroke-width:2.5;stroke-opacity:.56;
+ stroke-linecap:round
+}
+#instructor-flow #flow-guide .movement-guardian .mg-shoulder .mg-socket-shape{
+ fill:var(--mg-coat)
+}
+#instructor-flow #flow-guide .movement-guardian .mg-elbow .mg-hinge-shell{
+ fill:var(--mg-coat)
+}
+/* The parent retains its tested tree-balance transform. Grounded feet stay at
+   their canonical authored endpoints; shadows are the only soft projections. */
+#instructor-flow #flow-guide .movement-guardian .mg-paw-shell{
+ stroke-width:2.5;stroke-linejoin:round
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow #flow-guide .movement-guardian :is(.mg-socket,.mg-hinge){
+ animation:none!important;transition:none!important
+ }
+}

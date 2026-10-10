@@ -31,8 +31,8 @@
   box-shadow:0 4px 14px rgba(4,33,25,.14);
 }
 #instructor-flow .studio-v66-submode:disabled{opacity:.46;cursor:not-allowed}
-#instructor-flow[data-studio-mode="asanas"][data-movement-view="library"] .studio-plan,
-#instructor-flow[data-studio-mode="asanas"][data-movement-view="library"] .studio-adaptation{
+#instructor-flow[data-movement-view="library"] .studio-plan,
+#instructor-flow[data-movement-view="library"] .studio-adaptation{
   display:none!important;
 }
 #instructor-flow[data-movement-view="library"] #movement-stage{display:none!important}

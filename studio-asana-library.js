@@ -22,7 +22,7 @@
   const language=()=>document.documentElement.lang==="en"?"en":"es";
   const section=document.createElement("section");
   section.id="studio-asana-library";
-  section.className="section studio-asana-library studio-asana-book reveal";
+  section.className="section studio-asana-library studio-asana-book";
   section.dataset.bookStandalone="true";
   section.setAttribute("aria-labelledby","studio-library-title");
   section.innerHTML=

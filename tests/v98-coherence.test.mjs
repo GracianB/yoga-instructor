@@ -17,3 +17,9 @@ for(const bad of ["setInterval(","setTimeout(","requestAnimationFrame(","fetch("
 for(const size of ["max-width:720px","max-width:400px","prefers-reduced-motion:reduce"])assert.ok(css.includes(size),size);
 for(const file of ["studio-coherence-v98.js","studio-coherence-ui-v98.js","studio-coherence-v98.css"]){assert.ok(read("index.html").includes("./"+file));assert.ok(read("tools/build.mjs").includes("'"+file+"'"))}
 });
+
+test("V98 waits for the custom route and preferences before binding live summary",()=>{
+const h=read("index.html");
+assert.ok(h.indexOf("movement-custom-ui-v94.js")<h.indexOf("studio-coherence-ui-v98.js"));
+assert.ok(h.indexOf("studio-personalization-ui-v95.js")<h.indexOf("studio-coherence-ui-v98.js"));
+});

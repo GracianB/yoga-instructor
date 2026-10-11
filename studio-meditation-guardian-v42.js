@@ -35,6 +35,7 @@
  <path class="uma-wing-left" d="M238 151 C195 127 152 144 112 105 C116 160 136 183 151 198 C113 215 105 243 116 277 C150 261 167 283 181 325 Q220 307 248 285Z" fill="url(#uma-wing)" stroke="#6a7794" stroke-width="3"/>
  <path class="uma-wing-right" d="M322 151 C365 127 408 144 448 105 C444 160 424 183 409 198 C447 215 455 243 444 277 C410 261 393 283 379 325 Q340 307 312 285Z" fill="url(#uma-wing)" stroke="#6a7794" stroke-width="3"/>
  <path d="M229 181Q176 173 137 140 M203 239Q156 234 129 252 M331 181Q384 173 423 140 M357 239Q404 234 431 252" fill="none" stroke="#e6ebda" stroke-opacity=".65" stroke-width="4" stroke-linecap="round"/>
+ <path class="uma-lunar-thread" d="M185 211Q165 195 147 180 M375 211Q397 192 417 178 M178 267Q160 265 150 258 M382 267Q400 265 410 258"/>
  <!-- Paired knees are connected under the rounded torso -->
  <path d="M250 284Q204 271 175 307Q157 338 189 345Q240 359 274 321Z M310 284Q356 271 385 307Q403 338 371 345Q320 359 286 321Z" fill="url(#uma-body)" stroke="#7774a6" stroke-width="3"/>
  <!-- Torso, no independent rectangular neck -->
@@ -52,6 +53,8 @@
  <path class="uma-nose-line" d="M271 183 Q280 187 289 183" fill="none" stroke="#766b94" stroke-opacity=".58" stroke-width="2.6" stroke-linecap="round"/>
  <path d="M226 181Q240 190 247 181 M313 181Q327 190 337 181" stroke="#ecc2ca" stroke-width="5" opacity=".55" fill="none" stroke-linecap="round"/>
  <path class="uma-brow-light" d="M251 126Q278 117 303 127" fill="none" stroke="#f0e5e8" stroke-opacity=".32" stroke-width="3.5" stroke-linecap="round"/>
+ <path class="uma-breath-crest" d="M256 238Q280 229 304 238" stroke="#ece5ff" stroke-opacity=".43"
+  stroke-width="3.1" fill="none" stroke-linecap="round"/>
  <!-- An inward-facing crescent is her meditative symbol -->
  <path d="M277 267 A21 21 0 1 0 297 287 A17 17 0 1 1 277 267Z" fill="#faf0ce"/>
  <path d="M235 336Q282 344 325 336" fill="none" stroke="#d8cded" stroke-width="3" stroke-linecap="round"/>

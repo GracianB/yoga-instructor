@@ -2,8 +2,8 @@ name: Yoga Quality
 on:
   push:
     branches: [main]
+  # Stacked feature PRs must also be validated, even when the base is a feature branch.
   pull_request:
-    branches: [main, feature/yoga-v72-library-breath-meditation, feature/yoga-v73-professional-portfolio, feature/yoga-v74-teaching-casebook, feature/yoga-v75-editorial-atlas]
   workflow_dispatch:
 concurrency:
   group: yoga-quality-${{ github.ref }}

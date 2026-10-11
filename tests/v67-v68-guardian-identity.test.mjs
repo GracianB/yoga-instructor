@@ -40,7 +40,7 @@ test('V68 filters twelve asanas, never instantiates a second timer',()=>{
 
 test('V67 guardian-specific brand palettes, bilingual tone and real SVG artwork',()=>{
  for(const key of ['asanas','breath','meditation'])assert.ok(css.includes('data-studio-mode="'+key+'"'));
- for(const key of ['standing','seated','restorative'])assert.ok(css.includes(key));
+ for(const key of ['standing','seated','restorative'])assert.ok(gallery.includes(key));
  for(const name of ['NILA','UMA','DRAGÓN','DRAGON'])assert.ok(brand.includes(name));
  for(const cls of ['mg-forehead-mark','sd31-wing-shimmer','uma-lunar-thread'])
   assert.ok(css.includes(cls),'Style missing for '+cls);

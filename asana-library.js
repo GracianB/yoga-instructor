@@ -40,6 +40,99 @@
       hands:[[319,343],[400,343]],feet:[[315,366],[404,366]],
       tail:[429,280,.62,9]
     }
+    ,    // V68: nine additional independent postures, each with its own
+    // shoulders, joints, supports, head position, hands and feet.
+    // None is injected into the ten-phase canonical Flow clock.
+    {
+      id:"v68-warrior-ii",kind:"warrior",category:"standing",
+      name:["Guerrero II · Virabhadrasana II","Warrior II · Virabhadrasana II"],
+      cue:["Abre los brazos, flexiona la rodilla delantera y suaviza la mirada sobre la mano.","Open both arms, bend the front knee and gaze softly over your hand."],
+      support:["Rodilla alineada con el pie, hombros sueltos; acorta la zancada si es necesario.","Knee tracking over the foot, shoulders soft; shorten the stance if needed."],
+      body:[361,234,72,87,-3],head:[355,105,.78,-8,"focus"],
+      arms:["M312 187Q253 189 191 185","M412 189Q476 185 531 189"],
+      legs:["M328 298Q258 332 235 370","M401 294Q452 302 513 376"],
+      hands:[[191,185],[531,189]],feet:[[235,370],[513,376]],tail:[444,254,.54,-18]
+    },
+    {
+      id:"v68-tree",kind:"tree",category:"standing",
+      name:["Árbol · Vrksasana","Tree · Vrksasana"],
+      cue:["Enraíza un pie; apoya el otro en tobillo o pantorrilla, nunca en la rodilla.","Root through one foot; rest the other on ankle or calf, never on the knee."],
+      support:["Usa una pared o deja la punta del pie apoyada para mejorar el equilibrio.","Use a wall or keep your toes grounded for balance."],
+      body:[364,235,61,83,0],head:[364,111,.8,0,"focus"],
+      arms:["M313 194Q283 141 330 91","M412 194Q445 142 395 92"],
+      legs:["M338 296Q332 339 333 382","M390 291Q432 315 369 331"],
+      hands:[[330,91],[395,92]],feet:[[333,382],[369,331]],tail:[437,254,.61,12]
+    },
+    {
+      id:"v68-triangle",kind:"triangle",category:"standing",
+      name:["Triángulo · Trikonasana","Triangle · Trikonasana"],
+      cue:["Alarga ambos costados y abre el pecho; no necesitas alcanzar el suelo.","Lengthen both sides and open the chest; reaching the floor is optional."],
+      support:["Apoya la mano en la espinilla o en un bloque, sin comprimir el cuello.","Rest your hand on the shin or a block without compressing the neck."],
+      body:[350,242,65,86,-30],head:[291,119,.76,-27,"focus"],
+      arms:["M311 189Q278 236 253 316","M388 207Q428 152 469 102"],
+      legs:["M318 304Q264 321 225 379","M398 295Q454 316 511 378"],
+      hands:[[253,316],[469,102]],feet:[[225,379],[511,378]],tail:[438,257,.58,-31]
+    },
+    {
+      id:"v68-easy-seat",kind:"seat",category:"seated",
+      name:["Postura fácil · Sukhasana","Easy pose · Sukhasana"],
+      cue:["Eleva la coronilla, afloja la mandíbula y deja las manos descansar sobre las piernas.","Lengthen through your crown, relax the jaw and rest your hands on your legs."],
+      support:["Si la pelvis se inclina hacia atrás, siéntate sobre una manta doblada.","Sit on a folded blanket if your pelvis tips backward."],
+      body:[359,261,68,84,0],head:[359,140,.85,0,"closed"],
+      arms:["M310 228Q280 277 282 326","M409 228Q439 277 435 326"],
+      legs:["M329 315Q279 343 240 356","M388 315Q439 342 477 356"],
+      hands:[[282,326],[435,326]],feet:[[240,356],[477,356]],tail:[436,274,.55,12]
+    },
+    {
+      id:"v68-twist",kind:"twist",category:"seated",
+      name:["Torsión sentada suave","Gentle seated twist"],
+      cue:["Gira desde la caja torácica, mantén la columna larga y respira sin forzar.","Rotate through the ribs with a long spine and breathe without forcing."],
+      support:["Mantén ambas caderas en contacto; reduce la rotación si lo necesitas.","Keep both sitting bones grounded; reduce the twist when needed."],
+      body:[363,268,69,82,13],head:[386,145,.82,18,"soft"],
+      arms:["M309 233Q330 280 404 308","M409 237Q447 282 439 344"],
+      legs:["M333 317Q266 330 252 356","M396 319Q444 330 474 352"],
+      hands:[[404,308],[439,344]],feet:[[252,356],[474,352]],tail:[433,286,.62,19]
+    },
+    {
+      id:"v68-seated-fold",kind:"fold",category:"seated",
+      name:["Flexión sentada · Paschimottanasana","Seated forward fold · Paschimottanasana"],
+      cue:["Inclínate desde las caderas y alarga el torso; las rodillas pueden doblarse.","Hinge from the hips and lengthen your torso; the knees may stay bent."],
+      support:["Usa una correa en los pies y evita tirar de la espalda.","Use a strap at your feet; do not pull through the spine."],
+      body:[353,291,108,52,-33],head:[275,249,.70,-38,"closed"],
+      arms:["M294 286Q259 326 217 352","M338 309Q307 345 276 358"],
+      legs:["M403 320Q464 337 528 364","M413 300Q484 316 536 343"],
+      hands:[[217,352],[276,358]],feet:[[528,364],[536,343]],tail:[444,269,.53,-28]
+    },
+    {
+      id:"v68-child",kind:"child",category:"restorative",
+      name:["Niño · Balasana","Child's pose · Balasana"],
+      cue:["Lleva la pelvis hacia los talones y descansa la frente; brazos hacia delante o atrás.","Sink toward the heels and rest your forehead; arms may reach forward or back."],
+      support:["Coloca una manta bajo las rodillas o un cojín bajo el torso si ayuda.","Use a blanket beneath the knees or a bolster under the chest."],
+      body:[393,300,118,47,-17],head:[239,317,.67,-58,"closed"],
+      arms:["M312 301Q244 330 171 359","M350 319Q298 346 216 378"],
+      legs:["M445 304Q484 342 481 367","M470 292Q513 322 516 356"],
+      hands:[[171,359],[216,378]],feet:[[481,367],[516,356]],tail:[471,267,.52,-18]
+    },
+    {
+      id:"v68-forward-fold",kind:"fold",category:"standing",
+      name:["Pinza de pie · Uttanasana","Standing forward fold · Uttanasana"],
+      cue:["Flexiona las caderas y deja caer el peso del torso; dobla las rodillas sin problema.","Hinge at the hips and let the torso release; soft knees are welcome."],
+      support:["Apoya las manos en bloques y evita forzar los isquiotibiales.","Rest hands on blocks and avoid forcing the hamstrings."],
+      body:[366,236,64,91,70],head:[272,281,.7,69,"closed"],
+      arms:["M323 220Q277 280 264 362","M368 246Q328 305 335 369"],
+      legs:["M338 294Q339 347 337 384","M389 295Q397 347 401 384"],
+      hands:[[264,362],[335,369]],feet:[[337,384],[401,384]],tail:[419,248,.54,-10]
+    },
+    {
+      id:"v68-gratitude",kind:"seat",category:"restorative",
+      name:["Gratitud · Anjali Mudra","Gratitude · Anjali Mudra"],
+      cue:["Acerca ambas manos al centro del pecho y deja que la respiración se asiente.","Bring both hands toward your heart and let the breath settle."],
+      support:["Puedes mantener las manos separadas si hay tensión en muñecas u hombros.","Keep your palms apart if wrists or shoulders feel tense."],
+      body:[360,265,68,85,0],head:[360,143,.84,0,"smile"],
+      arms:["M310 225Q302 272 350 251","M409 225Q418 273 370 251"],
+      legs:["M327 318Q265 346 238 357","M392 318Q457 344 482 357"],
+      hands:[[350,251],[370,251]],feet:[[238,357],[482,357]],tail:[434,279,.6,7]
+    }
   ];
   // All positions and limbs are authored, not generated by reflecting one side.
   const names = poses.map(p=>p.id);

@@ -53,3 +53,6 @@
 @media(max-width:450px){#demostracion .v78-chapters button{padding:12px 8px}#demostracion .v78-console{padding:20px}#demostracion .v78-visual{min-height:245px}#demostracion .v78-art{max-height:250px}}
 @media(prefers-reduced-motion:reduce){#demostracion *,#demostracion *::before,#demostracion *::after{animation:none!important;transition:none!important}}
 @media print{#demostracion .v78-controls,#demostracion .v78-timeline{display:none}#demostracion .v78-transcript{display:block}}
+
+/* Keep the primary control legible on the dark theme's pale-sage fill. */
+html[data-theme="dark"] #demostracion .v78-primary{color:#10291d}

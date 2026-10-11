@@ -21,14 +21,34 @@
       "C",point(x-rx*.58,y+ry*.88),point(x-rx*1.00,y+ry*.30),point(x-rx*.92,y-ry*.29),"Z"
     ].join(" ");
   };
-  const paw=(xy,kind,index)=>{
+  // V71: limbs and paws share an authored terminal tangent. A palm
+  // should follow an elevated arm, while weight-bearing contacts stay
+  // flat on the mat. Prayer palms have a recognizable joined silhouette.
+  const paw=(xy,kind,index,curve,atHeart)=>{
     const [x,y]=xy,vertical=kind==="foot";
-    return '<g class="mg-paw mg-'+kind+'" data-contact="'+kind+'-'+index+
-      '" transform="translate('+esc(x)+' '+esc(y)+')">'+
-      '<path d="M-20 -8 Q-9 -18 5 -12 Q20 -8 19 5 Q14 15 -3 14 Q-21 14 -20 -8Z" class="mg-paw-shell"/>'+
-      '<path d="M-13 2 Q-9 7 -5 3 M-2 5 Q3 10 7 4 M10 3 Q14 6 16 1" class="mg-paw-toes"/>'+
-      '<path d="M-14 -1Q-12 -4 -8 -5" class="mg-wrist-crease"/>'+
-      (vertical?'<path d="M-11 -8Q-5 -12 1 -9" class="mg-paw-shine"/>':'')+'</g>';
+    const parts=curveSections(curve);
+    const tip=sample(parts[parts.length-1],.985);
+    const degrees=Math.atan2(tip.dy,tip.dx)*180/Math.PI;
+    const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+    const orientation=atHeart?(index===0?-18:18):
+      vertical||y>=346?0:clamp(degrees,-66,66);
+    const palm=atHeart
+      ?'M-12 -12 Q-9 -24 1 -20 Q15 -16 16 -2 Q17 13 4 17 Q-11 17 -15 6 Q-17 -6 -12 -12Z'
+      :vertical
+        ?'M-24 -8 Q-13 -20 3 -15 Q22 -11 26 4 Q26 17 9 17 Q-13 18 -24 8Z'
+        :'M-18 -10 Q-7 -20 7 -13 Q20 -7 18 7 Q11 18 -5 16 Q-19 13 -18 -10Z';
+    const crease=atHeart
+      ?'M-6 -5Q0 0 7 -5 M-6 3Q0 8 7 3'
+      :vertical
+        ?'M-16 4Q-10 9 -4 5 M1 7Q6 12 11 6 M15 4Q19 7 21 3'
+        :'M-12 1Q-8 7 -4 2 M0 5Q4 10 8 4 M11 2Q14 6 16 2';
+    return '<g class="mg-paw mg-'+kind+(atHeart?' mg-prayer-palm':'')+
+      '" data-contact="'+kind+'-'+index+
+      '" transform="translate('+esc(x)+' '+esc(y)+') rotate('+esc(orientation)+')">'+
+      '<path d="'+palm+'" class="mg-paw-shell"/>'+
+      '<path d="'+crease+'" class="mg-paw-toes"/>'+
+      '<path d="M-10 -2Q-7 -6 -3 -6" class="mg-wrist-crease"/>'+
+      (vertical?'<path d="M-12 -8Q-3 -12 6 -8" class="mg-paw-shine"/>':'')+'</g>';
   };
   // V47: every shoulder, elbow, hip and knee is derived from the SAME
   // quadratic centreline as its paw. No separately positioned joint stickers.
@@ -207,7 +227,7 @@
       '<path class="mg-tail-leaf" d="M'+point(ex-8,ey-16)+' Q'+point(ex+16,ey-43)+' '+point(ex+29,ey-8)+' Q'+point(ex+13,ey+12)+' '+point(ex-8,ey-16)+'Z"/></g>';
   };
   const shadows=p=>{
-    const contacts=p.kind==="table"||p.kind==="child"||p.kind==="savasana"||p.kind==="rest"?
+    const contacts=p.kind==="table"||p.kind==="child"||p.kind==="downward"||p.kind==="savasana"||p.kind==="rest"?
       p.hands.concat(p.feet):p.kind==="tree"?p.feet.slice(0,1):p.feet;
     return '<g class="mg-contact-shadows">'+contacts.map(([x,y])=>
       '<ellipse cx="'+esc(x)+'" cy="'+esc(y+15)+'" rx="28" ry="7" class="mg-shadow"/>').join("")+'</g>';
@@ -215,12 +235,12 @@
   const drawing=p=>{
     const legs=p.legs.map((d,i)=>limb(d,"leg",i)).join("");
     const arms=p.arms.map((d,i)=>limb(d,"arm",i)).join("");
-    const feet=p.feet.map((pt,i)=>paw(pt,"foot",i)).join("");
-    const hands=p.hands.map((pt,i)=>paw(pt,"hand",i)).join("");
     // V56: arm roots live BEHIND the same torso that joins the hip sockets.
     // Previously the entire shoulder socket sat over the chest like a sticker.
     // Only the hands and a soft joining-gesture forearm pass in FRONT.
     const joined=p.kind==="finish"||p.id==="v68-gratitude";
+    const feet=p.feet.map((pt,i)=>paw(pt,"foot",i,p.legs[i],false)).join("");
+    const hands=p.hands.map((pt,i)=>paw(pt,"hand",i,p.arms[i],joined)).join("");
     const front=joined?'<g class="mg-gesture-forearms">'+
       p.arms.map(d=>'<path class="mg-gesture-forearm" d="'+d+'"/>').join("")+'</g>':"";
     return '<g class="movement-guardian" data-guardian="nila" data-kind="'+p.kind+'" aria-hidden="true">'+

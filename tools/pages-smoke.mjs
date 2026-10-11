@@ -4,6 +4,7 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import {verifyManifest} from './v100-manifest.mjs';
 
 const argv = process.argv.slice(2);
 const option = (name, fallback) => {

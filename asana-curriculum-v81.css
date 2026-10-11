@@ -20,3 +20,13 @@
 #studio-asana-library :is(.v81-atlas button,.v81-search input):focus-visible{outline:3px solid var(--sage);outline-offset:3px}
 @media(max-width:660px){#studio-asana-library .v81-tracks{grid-template-columns:1fr}#studio-asana-library .v81-tracks button{min-height:56px}}
 @media(prefers-reduced-motion:reduce){#studio-asana-library .v81-atlas *{animation:none!important;transition:none!important}}
+
+/* The Asana Book keeps a pale paper background in dark-mode.
+   Do not inherit the light text tokens from the dark studio shell here. */
+html[data-theme="dark"] #studio-asana-library .v81-familynote,
+html[data-theme="dark"] #studio-asana-library .v81-familynote strong {
+  color:#243d30;
+}
+html[data-theme="dark"] #studio-asana-library .v81-familynote span {
+  color:#395747;
+}

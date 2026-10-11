@@ -1,0 +1,102 @@
+/* V74 · Teaching casebook: material-rich evidence chapter, separated from practice engine */
+#casos.v74-casebook{
+ --v74-ink:var(--ink,#223329);
+ --v74-text:var(--muted,#586758);
+ --v74-accent:var(--accent,#2f6b4f);
+ --v74-surface:var(--surface,#fffcf7);
+ --v74-sheet:var(--surface2,#f1f0e8);
+ --v74-rule:var(--line-strong,rgba(33,51,40,.18));
+ padding-top:clamp(70px,9vw,128px);
+ padding-bottom:clamp(70px,9vw,128px);
+ max-width:1480px;
+ margin:auto;
+ scroll-margin-top:100px;
+}
+#casos .v74-eyebrow{font:700 .68rem/1.5 "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--v74-accent);margin:0 0 18px}
+#casos .v74-masthead{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(250px,.62fr);gap:clamp(22px,5vw,75px);align-items:end;margin-bottom:clamp(30px,5vw,64px)}
+#casos .v74-masthead h2{font:500 clamp(2.7rem,6.1vw,6.4rem)/1.04 Fraunces,Georgia,serif;letter-spacing:-.055em;margin:0 0 22px;max-width:13ch;text-wrap:balance}
+#casos .v74-masthead h2 em{display:block;font-weight:400;color:var(--v74-accent)}
+#casos .v74-intro{max-width:65ch;font-size:clamp(1rem,1.35vw,1.17rem);line-height:1.78;color:var(--v74-text);margin:0}
+#casos .v74-trust{border-left:2px solid var(--v74-accent);padding:12px 0 12px clamp(18px,2vw,32px)}
+#casos .v74-trust-symbol{display:block;color:var(--v74-accent);font-size:2rem;margin-bottom:14px}
+#casos .v74-trust h3{font:500 clamp(1.2rem,1.7vw,1.6rem)/1.2 Fraunces,Georgia,serif;margin:0 0 12px}
+#casos .v74-trust p{font-size:.84rem;line-height:1.7;color:var(--v74-text);margin:0}
+#casos .v74-case-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(14px,2vw,26px)}
+#casos .v74-case{min-width:0;border:1px solid var(--v74-rule);background:var(--v74-surface);display:flex;flex-direction:column;border-radius:9px 9px 25px 9px;overflow:hidden}
+#casos .v74-case--sala{--v74-figure:#385d4b;--v74-figure-bg:#dce9dc}
+#casos .v74-case--personal{--v74-figure:#7a4f4e;--v74-figure-bg:#f1dbd5}
+#casos .v74-case--corporate{--v74-figure:#34566e;--v74-figure-bg:#dce7ef}
+#casos .v74-case-illustration{height:clamp(170px,20vw,245px);background:var(--v74-figure-bg);color:var(--v74-figure);display:grid;place-items:center;position:relative;overflow:hidden}
+#casos .v74-case-illustration svg{width:min(100%,400px);max-height:100%;height:auto;display:block}
+#casos .v74-figure-id{position:absolute;bottom:12px;left:18px;color:var(--v74-figure);font:700 .58rem/1.4 "JetBrains Mono",monospace;letter-spacing:.12em}
+#casos .v74-case-content{padding:clamp(18px,2.5vw,31px);display:flex;flex-direction:column;flex:1;min-width:0}
+#casos .v74-case-top{display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:18px;color:var(--v74-accent)}
+#casos .v74-case-number{font:500 2.2rem/1 Fraunces,Georgia,serif}
+#casos .v74-case-period{font:700 .62rem/1.4 "JetBrains Mono",monospace;letter-spacing:.04em}
+#casos .v74-case h3{font:500 clamp(1.5rem,2.2vw,2.45rem)/1.12 Fraunces,Georgia,serif;margin:0 0 12px;letter-spacing:-.035em;text-wrap:balance}
+#casos .v74-case-subtitle{color:var(--v74-accent);font-weight:700;font-size:.84rem;margin:0 0 18px}
+#casos .v74-case-lead{font-size:.95rem;line-height:1.72;color:var(--v74-text);margin:0 0 22px}
+#casos .v74-facts{padding:0;margin:0;display:grid;gap:0}
+#casos .v74-facts > div{display:grid;gap:5px;padding:16px 0;border-top:1px solid var(--v74-rule)}
+#casos .v74-facts dt{font:700 .63rem/1.4 "JetBrains Mono",monospace;letter-spacing:.11em;text-transform:uppercase;color:var(--v74-accent)}
+#casos .v74-facts dd{margin:0;font-size:.89rem;line-height:1.65}
+#casos .v74-case-foot{margin-top:auto;display:flex;flex-wrap:wrap;align-items:center;gap:14px;justify-content:space-between;border-top:1px solid var(--v74-rule);padding-top:22px}
+#casos .v74-case-foot span{font-size:.72rem;color:var(--v74-text)}
+#casos .v74-case-foot a{color:var(--v74-accent);font-size:.8rem;font-weight:700;text-decoration:underline;text-underline-offset:4px}
+#casos .v74-blueprint{margin-top:clamp(44px,7vw,90px);border:1px solid var(--v74-rule);border-radius:24px 7px 24px 7px;background:var(--v74-sheet);padding:clamp(22px,4vw,60px);scroll-margin-top:100px}
+#casos .v74-blueprint-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(215px,.42fr);gap:clamp(24px,5vw,76px);align-items:end;margin-bottom:34px}
+#casos .v74-blueprint-head h3{font:500 clamp(2rem,4vw,3.7rem)/1.12 Fraunces,Georgia,serif;letter-spacing:-.04em;margin:0 0 15px;max-width:19ch}
+#casos .v74-blueprint-head p{max-width:57ch;margin:0;font-size:.94rem;color:var(--v74-text);line-height:1.73}
+#casos .v74-blueprint-controls{display:grid;gap:8px}
+#casos .v74-blueprint-controls label{font:700 .7rem/1.5 "JetBrains Mono",monospace;color:var(--v74-accent);letter-spacing:.05em}
+#casos .v74-blueprint-controls select{width:100%;min-height:50px;border:1px solid var(--v74-rule);border-radius:7px;background:var(--v74-surface);color:var(--v74-ink);padding:12px 15px;font:600 .9rem/1.4 Inter,system-ui,sans-serif;cursor:pointer;margin-bottom:10px}
+#casos .v74-blueprint :is(a,button,select):focus-visible{outline:3px solid var(--v74-accent);outline-offset:4px}
+#casos .v74-plan-output{display:grid;grid-template-columns:minmax(200px,.7fr) minmax(0,1.3fr);gap:clamp(24px,5vw,68px);padding:clamp(22px,3vw,42px);border:1px solid var(--v74-rule);background:var(--v74-surface);border-radius:7px 24px 7px 24px}
+#casos .v74-plan-overview > span{font:700 .68rem/1.5 "JetBrains Mono",monospace;letter-spacing:.12em;color:var(--v74-accent)}
+#casos #v74-total{display:block;margin:14px 0 23px;font:500 clamp(3.8rem,7vw,7rem)/1 Fraunces,Georgia,serif;letter-spacing:-.07em;font-variant-numeric:tabular-nums;color:var(--v74-ink)}
+#casos #v74-total small{font:700 .8rem/1.2 "JetBrains Mono",monospace;letter-spacing:.03em;color:var(--v74-text)}
+#casos .v74-plan-bar{height:11px;display:flex;overflow:hidden;border-radius:5px;gap:3px;margin-bottom:24px}
+#casos .v74-plan-bar span{min-width:0;background:var(--v74-accent)}
+#casos .v74-plan-bar span:nth-child(1){opacity:.34}
+#casos .v74-plan-bar span:nth-child(2){opacity:.55}
+#casos .v74-plan-bar span:nth-child(3){opacity:1}
+#casos .v74-plan-bar span:nth-child(4){opacity:.7}
+#casos #v74-adaptation{font:.94rem/1.7 Inter,system-ui,sans-serif;color:var(--v74-text);margin:0}
+#casos .v74-plan-actions{margin-top:27px;display:grid;gap:14px}
+#casos .v74-plan-actions a{font-size:.84rem;font-weight:700;color:var(--v74-accent);text-underline-offset:4px}
+#casos .v74-plan-steps{margin:0;padding:0;list-style:none;display:grid}
+#casos .v74-plan-steps li{display:grid;grid-template-columns:43px minmax(0,1fr) auto;gap:15px;align-items:start;padding:19px 0;border-bottom:1px solid var(--v74-rule)}
+#casos .v74-plan-steps li:first-child{padding-top:0}
+#casos .v74-plan-steps li:last-child{border-bottom:0;padding-bottom:0}
+#casos .v74-plan-steps li > b{font:700 .69rem/1.7 "JetBrains Mono",monospace;color:var(--v74-accent)}
+#casos .v74-plan-steps li > span{display:grid;gap:7px;min-width:0}
+#casos .v74-plan-steps li strong{font:500 clamp(1.06rem,1.65vw,1.32rem)/1.25 Fraunces,Georgia,serif}
+#casos .v74-plan-steps li span span{line-height:1.62;color:var(--v74-text);font-size:.82rem}
+#casos .v74-plan-steps li > small{white-space:nowrap;font:700 .78rem/1.5 "JetBrains Mono",monospace;color:var(--v74-accent)}
+#casos .v74-disclaimer{color:var(--v74-text);font-size:.72rem;line-height:1.6;margin:22px 0 0;max-width:94ch}
+@media(max-width:1120px){
+ #casos .v74-case-grid{grid-template-columns:1fr 1fr}
+ #casos .v74-case:last-child{grid-column:1/-1}
+ #casos .v74-case:last-child .v74-case-illustration{height:200px}
+}
+@media(max-width:780px){
+ #casos .v74-masthead,#casos .v74-blueprint-head,#casos .v74-plan-output{grid-template-columns:1fr}
+ #casos .v74-case-grid{grid-template-columns:1fr}
+ #casos .v74-case:last-child{grid-column:auto}
+ #casos .v74-case-illustration,#casos .v74-case:last-child .v74-case-illustration{height:225px}
+ #casos .v74-trust{border-top:1px solid var(--v74-rule);border-left:0;padding:22px 0 0}
+ #casos .v74-case-content{padding:clamp(20px,5vw,32px)}
+}
+@media(max-width:520px){
+ #casos.v74-casebook{padding-inline:clamp(15px,5vw,25px)}
+ #casos .v74-masthead h2{font-size:clamp(2.3rem,10.3vw,3.3rem)}
+ #casos .v74-blueprint{padding:18px}
+ #casos .v74-plan-output{padding:18px}
+ #casos .v74-plan-steps li{grid-template-columns:29px minmax(0,1fr);gap:9px}
+ #casos .v74-plan-steps li > small{grid-column:2}
+}
+@media print{
+ #casos .v74-case{break-inside:avoid;box-shadow:none}
+ #casos .v74-blueprint{break-before:page}
+ #casos .v74-plan-output{break-inside:avoid}
+}

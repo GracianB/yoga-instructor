@@ -47,7 +47,7 @@ en:{
  roots:"Find your base",mobility:"Gentle mobility",restore:"Active rest",
  soft:"Gentle 3/5",natural:"Natural 4/6",free:"Free",guided:"Guided",silent:"Silent",body:"Body",space:"Surroundings",
  apply:"Apply without starting",save:"Save on this device",clear:"Clear saved preferences",
- privacy:"Only these five choices are saved when you click Save. No practice history or health data is stored. You can clear them here.",
+ privacy:"Only when you click Save are these five choices, visual comfort and your three-pose sequence stored locally. No practice history or health data is stored. You can clear everything here.",
  applied:"Preferences applied. Your practice stays stopped until you press Begin.",
  busy:"Finish or reset the active session before changing its settings.",
  kept:"Saved on this device. Next visit, press Apply to use them.",

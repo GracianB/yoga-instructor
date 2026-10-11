@@ -41,6 +41,9 @@ function refresh(){
   for(const opt of row.querySelector("select").options)opt.textContent=lib.byId(opt.value).name[ix];
   row.querySelector("[data-v94-direction=up]").textContent=words.up;
   row.querySelector("[data-v94-direction=down]").textContent=words.down;
+  for(const button of row.querySelectorAll("[data-v94-direction]")){
+   button.setAttribute("aria-label",words.step(i+1)+" · "+(button.dataset.v94Direction==="up"?words.up:words.down));
+  }
  }
 }
 function draw(){

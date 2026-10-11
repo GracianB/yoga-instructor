@@ -21,6 +21,7 @@
   const Breath = window.YOGA_BREATH_D26;
   const Meditation = window.YOGA_MEDITATION_D27;
   const Sculpt = window.YOGA_ANATOMY_D28;
+  const Articulation = window.YOGA_BREATH_ARTICULATION_V86;
   const immersionButton = root.querySelector('[data-studio-action="immersion"]');
   const meditationChoices = root.querySelector(".studio-meditation-choices");
   const meditationFocusChoices = root.querySelector(".studio-meditation-focus");
@@ -229,6 +230,11 @@
     const breathing = Breath.frame(elapsed, breathPattern);
     const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
     const shape = Sculpt.sculpt(breathing, activeBreath);
+    const articulated=Articulation?.sculpt(breathing,{
+      status:isBreathing?snapshot.status:"idle",
+      quiet:document.body.classList.contains("quiet-mode")||
+        window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
+    });
     let titleKey = isBreathing ? "breathReady" : "meditationReady";
     let cueKey = isBreathing ? "breathCue" : "meditationCue";
 
@@ -273,6 +279,14 @@
     setVar(guided, "--studio-breath-scale", roomScale);
     setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
     setVar(guided, "--studio-rib-expansion", shape.rib);
+    // V86 uses this same 200-ms PracticeClock: pause freezes the frame.
+    if(articulated){
+      setVar(guided,"--v86-chest",articulated.chest);
+      setVar(guided,"--v86-wing",articulated.wing);
+      setVar(guided,"--v86-head",articulated.head);
+      setVar(guided,"--v86-heart",articulated.heart);
+      setData(guided,"v86Breath",articulated.phase);
+    }
     // V36: visible seated dragon breathing, with feet and head planted.
     // V72: a visible inhale without lifting planted feet. Torso, wings,
     // ribs and head share the existing 200-ms monotonic PracticeClock.

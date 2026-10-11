@@ -1,0 +1,17 @@
+/* V86: ribcage/wing/head share the source clock, feet and tail remain planted. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-breath-core{
+ transform:scale(var(--v86-chest,1));transform-box:fill-box;transform-origin:50% 57%;transition:transform .2s linear
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-wings{
+ transform:scaleX(var(--v86-wing,1));transform-box:fill-box;transform-origin:50% 70%;transition:transform .2s linear
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-head-unit{
+ transform:translateY(var(--v86-head,0px));transition:transform .2s linear
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-heart{opacity:var(--v86-heart,.22)}
+#instructor-flow .studio-guided[data-studio-status="paused"] .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings,.sd31-head-unit){transition:none!important}
+#instructor-flow .studio-guided[data-breath-pattern="free"] .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings,.sd31-head-unit){transform:none!important}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings,.sd31-head-unit){transform:none!important;transition:none!important}
+}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon :is(.sd31-breath-core,.sd31-wings,.sd31-head-unit){transform:none!important;transition:none!important}

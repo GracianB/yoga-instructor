@@ -1,0 +1,14 @@
+/* V91. Uma does not hover or flutter independently of the session.
+   Her facial expression follows the real meditation phase, not an extra clock. */
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-open-eyes,
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-focus-sparks{opacity:0}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="return"] .meditation-guardian .uma-open-eyes,
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="complete"] .meditation-guardian .uma-open-eyes{opacity:1}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="return"] .meditation-guardian .uma-closed-eyes,
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="complete"] .meditation-guardian .uma-closed-eyes{opacity:0}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="anchor"][data-meditation-style="guided"] .meditation-guardian .uma-focus-sparks{opacity:.72}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="anchor"] .meditation-guardian .uma-moon{opacity:.9}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="return"] .meditation-guardian .uma-moon{opacity:.6}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .meditation-guardian .uma-focus-sparks{opacity:0!important}
+@media(prefers-reduced-motion:reduce){#instructor-flow .meditation-guardian *,#instructor-flow .meditation-guardian{animation:none!important;transition:none!important}}
+body.quiet-mode #instructor-flow .meditation-guardian *{animation:none!important;transition:none!important}

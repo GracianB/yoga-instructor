@@ -84,6 +84,7 @@
   <link rel="stylesheet" href="./credential-ledger-v77.css?v=v77-1">
   <link rel="stylesheet" href="./professional-demo-v78.css?v=v78-1">
   <link rel="stylesheet" href="./discoverability-v79.css?v=v79-1">
+  <link rel="stylesheet" href="./visitor-gateway-v80.css?v=v80-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -129,6 +130,7 @@
   <script src="./credential-ledger-v77.js?v=v77-1" defer></script>
   <script src="./professional-demo-v78.js?v=v78-1" defer></script>
   <script src="./discoverability-v79.js?v=v79-1" defer></script>
+  <script src="./visitor-gateway-v80.js?v=v80-1" defer></script>
   <script type="application/ld+json" id="v79-faq-schema">{}</script>
   <script type="application/ld+json">
   {
@@ -375,6 +377,61 @@
 
     
     
+
+    <!-- V80 · One arrival, three meaningful visitor journeys -->
+    <section class="v80-gateway" id="orientacion" aria-labelledby="v80-title">
+      <div class="v80-topline">
+        <span data-v80-text="eyebrow">V80 / UN PORTFOLIO, TRES CAMINOS</span>
+        <span class="v80-topline-end" data-v80-text="editorial">GUÍA INTERACTIVA · SIN CUENTAS</span>
+      </div>
+      <div class="v80-header">
+        <div><h2 id="v80-title"><span data-v80-text="titleFirst">Encuentra tu</span><em data-v80-text="titleSecond">punto de partida.</em></h2></div>
+        <p data-v80-text="lead">No necesitas explorar toda la web para saber si esto es para ti. Elige qué te trae aquí y descubre una ruta breve por las piezas importantes.</p>
+      </div>
+      <div class="v80-shell">
+        <div class="v80-options" role="group" aria-label="Elegir recorrido" data-v80-label="group">
+          <button type="button" data-v80-route="practice" aria-pressed="true">
+            <span class="v80-choice-number">01</span>
+            <span class="v80-choice-body"><strong data-v80-text="practice">Quiero practicar</strong><small data-v80-text="practiceSub">Conocer la experiencia guiada</small></span>
+            <span class="v80-choice-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button type="button" data-v80-route="studio" aria-pressed="false">
+            <span class="v80-choice-number">02</span>
+            <span class="v80-choice-body"><strong data-v80-text="studio">Busco un instructor</strong><small data-v80-text="studioSub">Experiencia, metodología y CV</small></span>
+            <span class="v80-choice-arrow" aria-hidden="true">↗</span>
+          </button>
+          <button type="button" data-v80-route="teams" aria-pressed="false">
+            <span class="v80-choice-number">03</span>
+            <span class="v80-choice-body"><strong data-v80-text="teams">Organizo bienestar</strong><small data-v80-text="teamsSub">Propuestas para equipos</small></span>
+            <span class="v80-choice-arrow" aria-hidden="true">↗</span>
+          </button>
+        </div>
+        <div class="v80-route-content" id="v80-route-content" data-v80-active="practice">
+          <div class="v80-route-head">
+            <span class="v80-route-overline" data-v80-text="routeCaption">TU RUTA</span>
+            <span class="v80-duration" data-v80-text="routeTime">3 pasos claros</span>
+          </div>
+          <div class="v80-route-art" aria-hidden="true">
+            <svg viewBox="0 0 440 165" focusable="false">
+              <path d="M32 113C84 113 91 40 163 40S250 128 309 105 365 55 408 55" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-dasharray="3 7"/>
+              <g fill="currentColor"><circle cx="32" cy="113" r="8"/><circle cx="163" cy="40" r="10"/><circle cx="309" cy="105" r="10"/><circle cx="408" cy="55" r="8"/></g>
+              <g fill="none" stroke="currentColor" stroke-opacity=".26"><circle cx="163" cy="40" r="28"/><circle cx="309" cy="105" r="28"/><path d="M5 148H435M5 16H435"/></g>
+            </svg>
+          </div>
+          <h3 id="v80-route-title">Explora tu práctica.</h3>
+          <p id="v80-route-description">Empieza con una demostración breve, entra en la sala interactiva y aclara tus dudas.</p>
+          <ol class="v80-route-steps" id="v80-route-steps">
+            <li><a href="#demostracion"><span>01</span><strong>Una demostración en un minuto</strong><span aria-hidden="true">↗</span></a></li>
+            <li><a href="#instructor-flow"><span>02</span><strong>Prueba la sala interactiva</strong><span aria-hidden="true">↗</span></a></li>
+            <li><a href="#preguntas"><span>03</span><strong>Resuelve tus preguntas</strong><span aria-hidden="true">↗</span></a></li>
+          </ol>
+          <a class="v80-primary" id="v80-primary" href="#demostracion">Comenzar el recorrido ↗</a>
+          <p class="v80-fineprint" data-v80-text="fineprint">Navegación libre. Sin registro, sin pasos obligatorios y sin recogida de preferencias.</p>
+        </div>
+      </div>
+      <p class="v80-status" id="v80-status" aria-live="polite" role="status"></p>
+    </section>
+
     <!-- V75: visual atlas and section navigation; fully functional without animation -->
     <section class="v75-atlas" id="atlas" aria-labelledby="v75-title">
       <div class="v75-atlas-content">

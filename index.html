@@ -75,6 +75,7 @@
   <link rel="stylesheet" href="./yy-clock-legibility-v70.css?v=v70-1">
   <link rel="stylesheet" href="./yy-asana-atelier-v71.css?v=v71-1">
   <link rel="stylesheet" href="./yy-practice-journey-v72.css?v=v72-1">
+  <link rel="stylesheet" href="./portfolio-v73.css?v=v73-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -113,6 +114,7 @@
   <script src="./studio-unified-v66.js?v=v66-1" defer></script>
   <script src="./studio-guardian-identities-v67.js?v=v67-1" defer></script>
   <script src="./studio-presence-v72.js?v=v72-1" defer></script>
+  <script src="./portfolio-v73.js?v=v73-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -177,6 +179,7 @@
       </span>
     </a>
     <nav class="nav" id="nav" data-i18n-aria-label="navLabel" aria-label="Primary">
+      <a href="#portfolio" data-v73-nav>Portfolio</a>
       <a href="#sobre" data-i18n="navAbout">Sobre mí</a>
       <a href="#campo" data-i18n="navField">Campo</a>
       <a href="#ritual" data-i18n="navRitual">Práctica</a>
@@ -352,7 +355,110 @@
           </ul>
         </div>
       </div>
-      <a class="hero-scroll-cue" href="#soundtrack" data-i18n="scrollCue">Scroll · Respira</a>
+      <a class="hero-scroll-cue" href="#portfolio" data-i18n="scrollCue">Scroll · Respira</a>
+    </section>
+
+    
+    <!-- V73: professional portfolio first, interactive practice second -->
+    <section class="section portfolio-v73" id="portfolio" aria-labelledby="portfolio-v73-title">
+      <header class="p73-heading">
+        <span class="p73-eyebrow" data-v73-text="overline">01 / PORTFOLIO DEL INSTRUCTOR</span>
+        <h2 id="portfolio-v73-title"><span data-v73-text="titleFirst">Enseñar yoga es</span><em data-v73-text="titleSecond">saber acompañar.</em></h2>
+        <p data-v73-text="intro">Una práctica clara, adaptable y humana. Del primer minuto de atención al último momento de descanso, cada clase tiene un porqué.</p>
+      </header>
+
+      <div class="p73-story">
+        <div class="p73-manifesto">
+          <span class="p73-label" data-v73-text="eyebrow">MI ENFOQUE</span>
+          <h3 data-v73-text="studyTitle">Una estructura con espacio para las personas</h3>
+          <ol class="p73-principles">
+            <li data-v73-text="principle1">Escuchar antes de proponer</li>
+            <li data-v73-text="principle2">Dar opciones, no imponer formas</li>
+            <li data-v73-text="principle3">Cerrar con integración, no con prisa</li>
+          </ol>
+        </div>
+        <div class="p73-journey">
+          <svg viewBox="0 0 420 240" aria-hidden="true" focusable="false">
+            <path class="p73-path" d="M28 173 C110 173 105 64 207 66 S326 185 389 64"/>
+            <path class="p73-path" d="M28 201 H390" opacity=".22" stroke-dasharray="3 12"/>
+            <circle class="p73-node" cx="28" cy="173" r="12"/>
+            <circle class="p73-node p73-node-center" cx="207" cy="66" r="16"/>
+            <circle class="p73-node" cx="389" cy="64" r="12"/>
+          </svg>
+          <p data-v73-text="journeyQuote">Atención al principio. Opciones durante la clase. Calma al final.</p>
+        </div>
+      </div>
+
+      <div class="p73-proof" aria-labelledby="portfolio-v73-proof-title">
+        <div class="p73-proof-head">
+          <div>
+            <span class="p73-label" data-v73-text="sourceTag">EXPERIENCIA RELACIONADA</span>
+            <h3 id="portfolio-v73-proof-title" data-v73-text="proofTitle">Una trayectoria que se puede comprobar</h3>
+          </div>
+          <p data-v73-text="proofLead">Formación y experiencia de sala, enseñanza individual y bienestar corporativo. Sin cifras inventadas ni promesas milagrosas.</p>
+        </div>
+        <div class="p73-proof-grid">
+          <article class="p73-proof-card">
+            <span class="p73-proof-date" data-v73-text="proof1Period">2019 · Madrid</span>
+            <h4 data-v73-text="proof1Title">Formación en yoga</h4>
+            <p data-v73-text="proof1Text">Asanas, pranayama, filosofía y práctica docente.</p>
+          </article>
+          <article class="p73-proof-card">
+            <span class="p73-proof-date" data-v73-text="proof2Period">2022–jun. 2026 · Murcia</span>
+            <h4 data-v73-text="proof2Title">Mood Fitness</h4>
+            <p data-v73-text="proof2Text">Clases de yoga multinivel en un centro deportivo.</p>
+          </article>
+          <article class="p73-proof-card">
+            <span class="p73-proof-date" data-v73-text="proof3Period">2020–2021</span>
+            <h4 data-v73-text="proof3Title">Majorel · Google / YouTube</h4>
+            <p data-v73-text="proof3Text">Wellness Ambassador y sesiones para equipos en un contexto corporativo.</p>
+          </article>
+        </div>
+        <a href="#experiencia" data-v73-text="proofLink">Ver experiencia detallada ↗</a>
+      </div>
+
+      <div class="p73-routes">
+        <span class="p73-label" data-v73-text="offerTag">FORMATO DE ENSEÑANZA</span>
+        <h3 data-v73-text="routesTitle">Elige cómo trabajar conmigo</h3>
+        <p class="p73-route-lead" data-v73-text="routesLead">Tres contextos distintos. Una misma idea: adaptar la práctica a las personas, no al revés.</p>
+        <div class="p73-tablist" role="tablist" aria-label="Modalidad de enseñanza">
+          <button id="portfolio-v73-tab-sala" type="button" role="tab" data-v73-track="sala" data-v73-text="routeSala" aria-selected="true" aria-controls="portfolio-v73-panel" tabindex="0">En sala</button>
+          <button id="portfolio-v73-tab-individual" type="button" role="tab" data-v73-track="individual" data-v73-text="routeOne" aria-selected="false" aria-controls="portfolio-v73-panel" tabindex="-1">Individual</button>
+          <button id="portfolio-v73-tab-equipos" type="button" role="tab" data-v73-track="equipos" data-v73-text="routeWork" aria-selected="false" aria-controls="portfolio-v73-panel" tabindex="-1">Equipos</button>
+        </div>
+        <div class="p73-detail" id="portfolio-v73-panel" role="tabpanel" aria-labelledby="portfolio-v73-tab-sala" tabindex="0">
+          <div>
+            <span class="p73-label" id="portfolio-v73-eyebrow">MOVIMIENTO · CONEXIÓN · ADAPTACIÓN</span>
+            <h4 id="portfolio-v73-offer">Clases colectivas con atención individual.</h4>
+            <p id="portfolio-v73-description">Ofrezco progresiones y variantes para que cada persona participe desde su punto de partida.</p>
+            <div class="p73-actions">
+              <a id="portfolio-v73-contact" href="mailto:gracianbaenagonzalez@gmail.com" data-v73-text="contact">Consultar disponibilidad</a>
+              <a href="#instructor-flow" data-v73-text="studio">Entrar al estudio guiado</a>
+              <a href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-v73-text="curriculum">Ver CV completo</a>
+            </div>
+          </div>
+          <div>
+            <span class="p73-label" data-v73-text="detailTag">CÓMO LO TRABAJO</span>
+            <ul class="p73-details" id="portfolio-v73-details">
+              <li>Lectura del grupo antes de establecer la intensidad.</li>
+              <li>Opciones para movilidad, equilibrio y descanso.</li>
+              <li>Transiciones explicadas con calma y sentido.</li>
+            </ul>
+            <span class="p73-label" data-v73-text="sourceTag">EXPERIENCIA RELACIONADA</span>
+            <p class="p73-source" id="portfolio-v73-source">Mood Fitness · Murcia, 2022 a junio de 2026.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="p73-method">
+        <span class="p73-label" data-v73-text="studyLabel">ASÍ DISEÑO UNA CLASE</span>
+        <h3 data-v73-text="studyTitle">Una estructura con espacio para las personas</h3>
+        <ol>
+          <li><h4 data-v73-text="study1">01 · Llegar</h4><p data-v73-text="study1Body">Observamos el estado del grupo y damos tiempo para aterrizar.</p></li>
+          <li><h4 data-v73-text="study2">02 · Explorar</h4><p data-v73-text="study2Body">Progresiones, movilidad y opciones reales para distintos niveles.</p></li>
+          <li><h4 data-v73-text="study3">03 · Integrar</h4><p data-v73-text="study3Body">Respiración, pausa y salida consciente antes de volver al día.</p></li>
+        </ol>
+      </div>
     </section>
 
     <section class="section soundtrack-section" id="soundtrack" aria-labelledby="soundtrack-title">

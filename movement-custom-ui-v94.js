@@ -90,5 +90,9 @@ editor.querySelector(".v94-reset").addEventListener("click",()=>{
 const observer=new MutationObserver(events=>{if(events.some(x=>x.attributeName==="lang"))refresh()});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
 window.addEventListener("pagehide",()=>observer.disconnect(),{once:true});
+window.addEventListener("yoga:v94-restore",()=>{
+ draw();
+ if(route.value==="custom")route.dispatchEvent(new Event("change",{bubbles:true}));
+});
 draw();
 })();

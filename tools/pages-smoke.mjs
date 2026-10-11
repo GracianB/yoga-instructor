@@ -31,9 +31,9 @@ const expectedIndex=await readFile(resolve(root,'index.html'),'utf8');
 const localPages=[expectedIndex,await readFile(resolve(root,'cv.html'),'utf8'),
   await readFile(resolve(root,'404.html'),'utf8')];
 const declaredStylesheets=localPages.flatMap(html=>
-  [...html.matchAll(/<link[^>]+href="\\.\\/([^"?#]+\\.css)(?:\\?[^"]*)?"/g)].map(([,name])=>name));
+  [...html.matchAll(/<link[^>]+href="\.\/([^"?#]+\.css)(?:\?[^"]*)?"/g)].map(([,name])=>name));
 const declaredScripts=localPages.flatMap(html=>
-  [...html.matchAll(/<script\\b[^>]*\\bsrc="\\.\\/([^"?#]+\\.js)(?:\\?[^"]*)?"/g)].map(([,name])=>name));
+  [...html.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)].map(([,name])=>name));
 const ledgerPaths=new Set(manifest.files.map(file=>file.path));
 for(const name of [...declaredStylesheets,...declaredScripts,'index.html','cv.html','404.html']){
   if(!ledgerPaths.has(name))throw Error('Public asset not in SHA-256 ledger: '+name);

@@ -6,7 +6,10 @@ test("V78 opens paused, supports chapter seeking and supplies full alternative t
  await root.locator('[data-v78-jump="20"]').evaluate(b=>b.click());
  await expect(root.locator("#v78-phase-title")).toContainText("explorar");
  await expect(root.locator("#v78-timer")).toContainText("00:20");
- await root.locator("#v78-seek").fill("50");
+ await root.locator("#v78-seek").evaluate(input=>{
+   input.value="50";
+   input.dispatchEvent(new Event("input",{bubbles:true}));
+ });
  await expect(root.locator("#v78-phase-title")).toContainText("integrar");
  await root.locator(".v78-transcript summary").evaluate(b=>b.click());
  await expect(root.locator(".v78-transcript-grid")).toBeVisible();

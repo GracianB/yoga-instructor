@@ -19,7 +19,7 @@ test("V75: editorial atlas precedes the portfolio, evidence and live studio",()=
 
 test("V75: bilingual accessible chapter navigation is native and reduced-motion safe",()=>{
  const script=read("editorial-atlas-v75.js"),css=read("editorial-atlas-v75.css"),html=read("index.html");
- for(const token of ["es:{","en:{","new MutationObserver","IntersectionObserver","aria-current","aria-label","activate(link.dataset.v75Step)","rootMargin"])assert.ok(script.includes(token),token);
+ for(const token of ["es:{","en:{","new MutationObserver","IntersectionObserver","aria-current","aria-label","requestedChapter = link.dataset.v75Step","activate(requestedChapter)","rootMargin"])assert.ok(script.includes(token),token);
  for(const path of ['href="#portfolio"','href="#casos"','href="#instructor-flow"','href="#experiencia"','href="#contacto"'])assert.ok(html.includes(path),path);
  assert.match(css,/@media \(prefers-reduced-motion:reduce\)/);
  assert.match(css,/@media\(max-width:480px\)/);

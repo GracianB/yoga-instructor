@@ -8,7 +8,7 @@ await expect.poll(()=>page.evaluate(()=>localStorage.getItem("yoga-practice-defa
 await prefs.locator('[data-v93-action="apply"]').evaluate(x=>x.click());
 await expect(page.locator("#instructor-flow")).toHaveAttribute("data-studio-mode","breath");
 await expect(page.locator("#studio-guided")).toHaveAttribute("data-studio-status","idle");
-await expect(page.locator('[data-breath-pattern="free"]')).toHaveAttribute("aria-pressed","true");
+await expect(page.locator('button[data-breath-pattern="free"]')).toHaveAttribute("aria-pressed","true");
 await prefs.locator('[data-v93-action="save"]').evaluate(x=>x.click());
 await expect.poll(()=>page.evaluate(()=>localStorage.getItem("yoga-practice-defaults-v93"))).toContain('"mode":"breath"');
 await prefs.locator('[data-v93-action="clear"]').evaluate(x=>x.click());

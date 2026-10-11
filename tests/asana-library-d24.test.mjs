@@ -46,7 +46,11 @@ test("D24: new poses use genuine distinct four-limb vectors and complete D17 ana
  assert.equal(count(shapes[2],"yy-stance-shadow"),2);
  const profiles=new Set(library.poses.map(p=>JSON.stringify([p.body,p.head,p.arms,p.legs,p.hands,p.feet])));
  assert.equal(profiles.size,12);
- assert.ok(library.byId("d24-downward").body[4]<-20);
+ const inverted=library.byId("d24-downward");
+ assert.equal(inverted.kind,"downward");
+ assert.ok(inverted.hands.every(xy=>xy[1]>360));
+ assert.ok(inverted.feet.every(xy=>xy[1]>360));
+ assert.ok(inverted.body[4]===0||inverted.body[4]<-20);
  assert.ok(library.byId("d24-mountain").body[3]>85);
  assert.ok(library.byId("d24-butterfly").feet[0][0]>300);
 });

@@ -12,13 +12,13 @@ const nila=read('movement-guardian-v37.js');
 const breath=read('studio-breath-dragon.js');
 const uma=read('studio-meditation-guardian-v42.js');
 
-test('V66: explicit movement selector is accessible and defaults to guided sequence',()=>{
- assert.match(html,/data-movement-view="sequence" aria-pressed="true"/);
- assert.match(html,/data-movement-view="library" aria-pressed="false"/);
+test('V66/V72: three guided modes share a studio; the book is a separate chapter',()=>{
  assert.match(html,/id="instructor-flow" data-studio-mode="asanas" data-movement-view="sequence"/);
- assert.match(js,/workspace\.append\(sequence,guided,gallery\)/);
- assert.match(js,/aria-controls/);
- assert.match(lib,/root\.dataset\.movementView\|\|"sequence"/);
+ assert.doesNotMatch(html,/class="studio-v66-submodes"/);
+ assert.match(js,/workspace\.append\(sequence,guided\)/);
+ assert.match(lib,/root\.before\(section\)/);
+ assert.match(lib,/studio-asana-book/);
+ assert.ok(!lib.includes('root.dataset.movementView||"sequence"'));
 });
 
 test('V66: three practice modes keep one room and no new timers',()=>{

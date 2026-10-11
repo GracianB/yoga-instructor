@@ -6,16 +6,19 @@
  const controls=root?.querySelector(".studio-v66-control-pane");
  const guided=root?.querySelector("#studio-guided");
  const gallery=root?.querySelector("#studio-asana-library .studio-library-heading");
+ const guide=root?.querySelector("#flow-guide");
  if(!root||!controls||!guided||!gallery)return;
  const copy={
   es:{
-   asanas:["✺","NILA · MOVIMIENTO","Tierra y fuego suave · Fuerza con calma"],
+   asanas:["✺","NILA · MOVIMIENTO","Yang · Tierra y fuego suave · Fuerza con calma"],
+   asanasYin:["☾","NILA · MOVIMIENTO YIN","Yin · Quietud lunar · Descanso consciente"],
    breath:["≈","DRAGÓN · RESPIRACIÓN","Agua y aire · Espacio en cada exhalación"],
    meditation:["☾","UMA · MEDITACIÓN","Luna y quietud · Descansar en el presente"],
    library:["✺","NILA · 12 ASANAS","Posturas individuales para explorar a tu ritmo"]
   },
   en:{
-   asanas:["✺","NILA · MOVEMENT","Earth and gentle fire · Grounded strength"],
+   asanas:["✺","NILA · MOVEMENT YANG","Yang · Earth and gentle fire · Grounded strength"],
+   asanasYin:["☾","NILA · MOVEMENT YIN","Yin · Moonlit calm · Unhurried recovery"],
    breath:["≈","DRAGON · BREATH","Water and air · Space in every exhale"],
    meditation:["☾","UMA · MEDITATION","Moon and stillness · Rest in the present"],
    library:["✺","NILA · 12 ASANAS","Independent postures, your own pace"]
@@ -46,15 +49,17 @@
   const locale=document.documentElement.lang==="en"?"en":"es";
   const mode=root.dataset.studioMode==="breath"?"breath":
     root.dataset.studioMode==="meditation"?"meditation":"asanas";
-  paint(movement,copy[locale].asanas);
+  const activeMovement=(guide?.dataset.spirit==="yin")?copy[locale].asanasYin:copy[locale].asanas;
+  paint(movement,activeMovement);
   paint(rest,copy[locale][mode==="asanas"?"breath":mode]);
   paint(lib,copy[locale].library);
   rest.tag.hidden=mode==="asanas";
-  movement.tag.setAttribute("aria-label",copy[locale].asanas[1]);
+  movement.tag.setAttribute("aria-label",activeMovement[1]);
   rest.tag.setAttribute("aria-label",copy[locale][mode==="asanas"?"breath":mode][1]);
  };
  const watch=new MutationObserver(update);
  watch.observe(root,{attributes:true,attributeFilter:["data-studio-mode"]});
+ if(guide)watch.observe(guide,{attributes:true,attributeFilter:["data-spirit"]});
  watch.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
  window.addEventListener("pagehide",()=>watch.disconnect(),{once:true});
  update();

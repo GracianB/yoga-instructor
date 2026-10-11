@@ -16,7 +16,7 @@ panel.className="v93-preferences";panel.id="studio-preferences";
 panel.innerHTML='<summary class="v93-summary"><span class="v93-summary-main"></span><span class="v93-summary-hint"></span></summary>'+
 '<div class="v93-fields">'+
 '<label><span data-v93-label="mode"></span><select data-v93-setting="mode"><option value="asanas"></option><option value="breath"></option><option value="meditation"></option></select></label>'+
-'<label><span data-v93-label="route"></span><select data-v93-setting="route"><option value="roots"></option><option value="mobility"></option><option value="restore"></option></select></label>'+
+'<label><span data-v93-label="route"></span><select data-v93-setting="route"><option value="roots"></option><option value="mobility"></option><option value="restore"></option><option value="custom"></option></select></label>'+
 '<label><span data-v93-label="pattern"></span><select data-v93-setting="pattern"><option value="soft"></option><option value="natural"></option><option value="free"></option></select></label>'+
 '<label><span data-v93-label="style"></span><select data-v93-setting="style"><option value="guided"></option><option value="silent"></option></select></label>'+
 '<label><span data-v93-label="focus"></span><select data-v93-setting="focus"><option value="breath"></option><option value="body"></option><option value="space"></option></select></label>'+

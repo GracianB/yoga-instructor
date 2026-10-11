@@ -49,7 +49,7 @@ const words=()=>lex[lang()];
 const clamp=s=>Math.max(0,Math.min(DURATION,Number.isFinite(s)?s:0));
 function sceneAt(seconds){const n=clamp(seconds);return n>=42?2:n>=20?1:0}
 let seconds=0,running=false,frameId=null,stamp=null;
-const format=v=>"00:"+String(Math.floor(v)).padStart(2,"0");
+const format=v=>v>=60?"01:00":"00:"+String(Math.floor(v)).padStart(2,"0");
 function draw(){
  const w=words(),scene=sceneAt(seconds),record=sections[scene];
  root.querySelectorAll("[data-v78-text]").forEach(el=>{const value=w[el.dataset.v78Text];if(typeof value==="string"&&el!==play)el.textContent=value});

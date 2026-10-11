@@ -35,7 +35,7 @@
     es: {
       overline: "TU ESPACIO · TRES CAMINOS", entranceTitle: "¿Qué necesita tu cuerpo hoy?",
       entranceLead: "Elige una práctica. Sin prisa, sin tener que demostrar nada.",
-      asanas: "Movimiento", asanasDetail: "Nila · 10 posturas Yin/Yang",
+      asanas: "Movimiento", asanasDetail: "Nila · secuencia guiada Yin/Yang",
       breath: "Respiración", breathDetail: "Dragón sereno · a tu ritmo",
       meditation: "Meditación", meditationDetail: "Uma · guardiana lunar",
       minutes: "DURACIÓN", ready: "PREPARADO", idle: "PREPARADO", running: "EN PRÁCTICA",
@@ -73,7 +73,7 @@
     en: {
       overline: "YOUR SPACE · THREE PATHS", entranceTitle: "What does your body need today?",
       entranceLead: "Choose a practice. No hurry, nothing to prove.",
-      asanas: "Movement", asanasDetail: "Nila · 10 Yin/Yang poses",
+      asanas: "Movement", asanasDetail: "Nila · guided Yin/Yang sequence",
       breath: "Breathing", breathDetail: "Calm dragon · at your pace",
       meditation: "Meditation", meditationDetail: "Uma · lunar guardian",
       minutes: "DURATION", ready: "READY", idle: "READY", running: "PRACTISING",

@@ -23,14 +23,14 @@ for(const b of root.querySelectorAll("[data-v85-action]"))buttons[b.dataset.v85A
 const dict={
 es:{kicker:"MOVIMIENTO · MINI SECUENCIA",title:"Tres posturas. Una intención.",
  intro:"Recorre tres posiciones sin prisa, con controles manuales. Nila utiliza el mismo dibujo del libro.",
- select:"Recorrido",routes:{roots:"Enraizar",mobility:"Movilidad amable",restore:"Descanso activo"},
+ select:"Recorrido",routes:{roots:"Enraizar",mobility:"Movilidad amable",restore:"Descanso activo",custom:"Mi secuencia"},
  step:n=>"ETAPA "+n+" / 03",prev:"← Anterior",next:"Siguiente →",finish:"Recorrido completo",
  restart:"↶ Volver al principio",footnote:"Sin tiempo impuesto ni reproducción automática. Puedes salir en cualquier momento.",
  link:"Abrir la sesión completa de Movement ↗",aria:"Progreso del recorrido",
  selected:"Postura seleccionada",noClock:"Este recorrido no pone en marcha la práctica guiada."},
 en:{kicker:"MOVEMENT · MINI SEQUENCE",title:"Three postures. One intention.",
  intro:"Explore three positions at your own pace, using manual controls. Nila reuses the same drawings as the book.",
- select:"Journey",routes:{roots:"Find your base",mobility:"Gentle mobility",restore:"Active rest"},
+ select:"Journey",routes:{roots:"Find your base",mobility:"Gentle mobility",restore:"Active rest",custom:"My sequence"},
  step:n=>"STAGE "+n+" / 03",prev:"← Previous",next:"Next →",finish:"Journey complete",
  restart:"↶ Back to start",footnote:"No imposed timing or automatic playback. You can leave at any moment.",
  link:"Open the complete Movement session ↗",aria:"Journey progress",
@@ -38,15 +38,18 @@ en:{kicker:"MOVEMENT · MINI SEQUENCE",title:"Three postures. One intention.",
 };
 const lang=()=>document.documentElement.lang==="en"?"en":"es";
 let route="roots",index=0,activated=false;
+const custom=window.YOGA_MOVEMENT_CUSTOM_V94;
+const getPlan=(name,language)=>name==="custom"&&custom?custom.plan(language):model.plan(name,language);
 function useExistingBook(poseId){
  // The book remains the sole selector and renderer of Nila.
+ if(route==="custom")book.querySelector(".v81-clear")?.click();
  const routeButton=book.querySelector('[data-v81-route="'+route+'"]');
  if(routeButton?.getAttribute("aria-pressed")!=="true")routeButton?.click();
  const poseButton=book.querySelector('button[data-library-pose="'+poseId+'"]');
  if(poseButton&&!poseButton.hidden)poseButton.click();
 }
 function render(){
- const w=dict[lang()],steps=model.plan(route,lang()),current=steps[index];
+ const w=dict[lang()],steps=getPlan(route,lang()),current=steps[index];
  root.querySelector(".v85-kicker").textContent=w.kicker;
  root.querySelector("#v85-title").textContent=w.title;
  root.querySelector(".v85-intro-copy").textContent=w.intro;
@@ -70,13 +73,13 @@ function render(){
  root.dataset.v85Step=String(index);
  book.dataset.v85Active=String(activated);
 }
-select.addEventListener("change",()=>{route=select.value;index=0;activated=true;useExistingBook(model.plan(route)[0].id);render()});
+select.addEventListener("change",()=>{route=select.value;index=0;activated=true;useExistingBook(getPlan(route,lang())[0].id);render()});
 root.querySelector(".v85-actions").addEventListener("click",event=>{
  const b=event.target.closest("[data-v85-action]");if(!b)return;
  if(b.dataset.v85Action==="next")index=model.clampStep(index+1);
  if(b.dataset.v85Action==="previous")index=model.clampStep(index-1);
  if(b.dataset.v85Action==="restart")index=0;
- activated=true;useExistingBook(model.plan(route)[index].id);render();
+ activated=true;useExistingBook(getPlan(route,lang())[index].id);render();
 });
 new MutationObserver(records=>{if(records.some(r=>r.attributeName==="lang"))render()})
  .observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});

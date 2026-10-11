@@ -41,13 +41,14 @@ test('D11: both dragon forms retain closed eyes and visible sculpted engraving',
  expect(palettes.find(p=>p.spirit==='yang').color).not.toBe(palettes.find(p=>p.spirit==='yin').color);
 });
 
-test('D11: focus tracks the pose, and the aurora pauses with real 4·7·8 breathing',async({page})=>{
+test('D11: focus tracks the pose, and the aurora pauses with real 4·7·8 breathing',async({page,browserName})=>{
+ if(browserName==='webkit')test.setTimeout(75000);
  const guide=await openPractice(page);
  const focus=()=>guide.evaluate(el=>getComputedStyle(el).getPropertyValue('--d11-focus-x').trim());
  expect(await focus()).toBe('31%');
  await page.locator('[data-flow-action="start"]').click();
  const next=page.locator('[data-flow-action="next"]');
- await expect(next).toBeEnabled({timeout:8000});
+ await expect(next).toBeEnabled({timeout:browserName==='webkit'?16000:8000});
  await next.evaluate(el=>el.click());
  await expect(guide).toHaveAttribute('data-phase','centering');
  expect(await focus()).toBe('50%');

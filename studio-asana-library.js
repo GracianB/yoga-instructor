@@ -10,23 +10,25 @@
   const intro=root?.querySelector(".studio-entrance");
   if(!root||!guide||!source||!intro||!art?.drawPose||!guardian?.drawPose||!library?.poses?.length)return;
   const copy={
-    es:{heading:"MOVIMIENTO · ASANAS",title:"Explorar asanas",
-      lead:"Elige una postura individual. No inicia la secuencia guiada.",
+    es:{heading:"LIBRO DE ASANAS · 12 POSTURAS",title:"El libro de asanas",
+      lead:"Explora cada postura, cómo prepararte, respirar y salir de ella. Un libro independiente, antes de empezar tu práctica.",
       contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad.",
-      dockShow:"Mostrar controles de música y respiración",dockHide:"Ocultar controles de música y respiración"},
-    en:{heading:"MOVEMENT · ASANAS",title:"Explore asanas",
-      lead:"Choose a single pose. This does not start the guided sequence.",
+      dockShow:"Mostrar música y respiración",dockHide:"Ocultar música y respiración",practice:"Ir a las sesiones guiadas ↗"},
+    en:{heading:"ASANA BOOK · 12 POSTURES",title:"The asana book",
+      lead:"Explore each posture, its setup, breathing and release. A separate guide before you begin your practice.",
       contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test.",
-      dockShow:"Show music and breathing controls",dockHide:"Hide music and breathing controls"}
+      dockShow:"Show music and breathing",dockHide:"Hide music and breathing",practice:"Explore guided sessions ↗"}
   };
   const language=()=>document.documentElement.lang==="en"?"en":"es";
   const section=document.createElement("section");
   section.id="studio-asana-library";
-  section.className="studio-asana-library";
+  section.className="section studio-asana-library studio-asana-book";
+  section.dataset.bookStandalone="true";
   section.setAttribute("aria-labelledby","studio-library-title");
   section.innerHTML=
     '<div class="studio-library-heading"><span class="studio-library-eyebrow"></span>'+
     '<h3 id="studio-library-title"></h3><p class="studio-library-lead"></p>'+
+    '<a class="studio-book-practice-link" href="#instructor-flow"></a>'+
     '<button type="button" class="studio-library-dock-toggle" aria-pressed="false"></button></div>'+
     '<div class="studio-library-body"><div class="studio-library-choices" role="group"></div>'+
     '<div class="studio-library-display"><div class="studio-library-stage yy-guide" data-asana-state="idle" aria-hidden="true"></div>'+
@@ -40,7 +42,9 @@
         '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
       '</ol></section></div></div>'+
     '<p class="studio-library-foot"></p>';
-  intro.insertAdjacentElement("afterend",section);
+  // A separate editorial chapter BEFORE the three-mode practice studio.
+  // The book is not a Movement sub-tab and never starts the guided clock.
+  root.before(section);
   const dockToggle=section.querySelector(".studio-library-dock-toggle");
   // The global floating dock obscured long asana coaching text. Keep its
   // controls available on demand, never permanently discard them.
@@ -146,6 +150,7 @@
     section.querySelector(".studio-library-eyebrow").textContent=w.heading;
     section.querySelector("#studio-library-title").textContent=w.title;
     section.querySelector(".studio-library-lead").textContent=w.lead;
+    section.querySelector(".studio-book-practice-link").textContent=w.practice;
     dockToggle.textContent=dockOpen?w.dockHide:w.dockShow;
     dockToggle.setAttribute("aria-pressed",String(dockOpen));
     section.querySelector(".studio-library-foot").textContent=w.foot;
@@ -209,16 +214,58 @@
     next?.focus();
     next?.click();
   });
-  const visible=()=>{section.hidden=busy || (root.dataset.studioMode||"asanas")!=="asanas" ||
-    (root.dataset.movementView||"sequence")!=="library";};
+  const visible=()=>{section.hidden=false;};
   window.addEventListener("yoga:flow",({detail})=>{
     busy=["running","paused"].includes(detail?.status);
     visible();
   });
-  new MutationObserver(visible).observe(root,{attributes:true,attributeFilter:["data-studio-mode","data-movement-view"]});
+  // V72: the book is a standalone chapter. Do not depend on optional
+  // IntersectionObserver (it can be undefined in privacy-restricted browsers).
+  // A viewport check also avoids dock state lingering during anchor jumps.
+  let leavingBook=false;
+  let leftViewport=false;
+  const syncBookVisibility=()=>{
+    const bounds=section.getBoundingClientRect();
+    const amount=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-
+      Math.max(bounds.top,0));
+    const minimum=Math.min(48,window.innerHeight*.04);
+    const overlaps=amount>minimum;
+    if(leavingBook){
+      if(!overlaps)leftViewport=true;
+      else if(leftViewport)leavingBook=false;
+    }
+    document.body.dataset.asanaBookVisible=String(overlaps&&!leavingBook);
+  };
+  // Re-entering by mouse or keyboard makes the book an active reading
+  // surface again; an explicit visit to the practice room always wins
+  // over transient viewport overlap during the site's cinematic scroll.
+  section.addEventListener("pointerdown",()=>{leavingBook=false;syncBookVisibility();});
+  section.addEventListener("focusin",()=>{leavingBook=false;syncBookVisibility();});
+  const bookLink=section.querySelector(".studio-book-practice-link");
+  bookLink?.addEventListener("click",event=>{
+    event.preventDefault();
+    event.stopPropagation();
+    leavingBook=true;
+    leftViewport=false;
+    document.body.dataset.asanaBookVisible="false";
+    root.scrollIntoView({block:"start",behavior:"instant"});
+    try {
+      if(window.history?.replaceState)
+        window.history.replaceState(window.history.state,"","#instructor-flow");
+    } catch (_) { /* navigation works even with restricted history */ }
+    syncBookVisibility();
+  });
+  window.addEventListener("scroll",syncBookVisibility,{passive:true});
+  window.addEventListener("resize",syncBookVisibility,{passive:true});
+  window.addEventListener("pagehide",()=>{
+    window.removeEventListener("scroll",syncBookVisibility);
+    window.removeEventListener("resize",syncBookVisibility);
+    delete document.body.dataset.asanaBookVisible;
+  },{once:true});
   new MutationObserver(()=>{stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";})
     .observe(guide,{attributes:true,attributeFilter:["data-spirit"]});
   new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
   render();
   visible();
+  syncBookVisibility();
 })();

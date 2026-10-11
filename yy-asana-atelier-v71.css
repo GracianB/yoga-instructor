@@ -110,7 +110,7 @@
 
 /* V71 visual audit: the fixed global One Breath player obscured coaching text.
    Readers can reveal it on demand using a labelled button in the gallery. */
-body:has(#studio-asana-library:not([hidden])[data-dock-open="false"]) .sanctuary-dock{
+body[data-asana-book-visible="true"]:has(#studio-asana-library[data-dock-open="false"]) .sanctuary-dock{
   display:none!important;
 }
 #instructor-flow .studio-library-heading .studio-library-dock-toggle{

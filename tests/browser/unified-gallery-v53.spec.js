@@ -2,8 +2,6 @@ const {test,expect}=require("@playwright/test");
 test("V53/V68: the twelve additional poses show Nila, with no visible old skeleton",async({page})=>{
  await page.goto("/");
  const explorer=page.locator("#studio-asana-library");
- await expect(explorer).toBeHidden();
- await page.locator('[data-movement-view="library"]').evaluate(el=>el.click());
  await expect(explorer).toBeVisible();
  await expect(explorer.locator(".movement-guardian")).toHaveCount(12);
  await expect(explorer.locator(".yy-pose")).toHaveCount(12);

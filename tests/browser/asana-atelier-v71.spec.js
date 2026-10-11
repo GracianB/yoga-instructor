@@ -2,9 +2,10 @@ const {test,expect}=require('@playwright/test');
 
 const openLibrary=async page=>{
   await page.goto('/');
-  await page.locator('#instructor-flow button[data-movement-view="library"]').evaluate(el=>el.click());
   const gallery=page.locator('#studio-asana-library');
   await expect(gallery).toBeVisible();
+  await gallery.evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
+  await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','true');
   return gallery;
 };
 
@@ -89,6 +90,7 @@ test('V71: asana coaching is not covered by the global breathing dock, but contr
   await expect(toggle).toHaveAttribute('aria-pressed','true');
   await toggle.evaluate(el=>el.click());
   await expect(dock).toBeHidden();
-  await page.locator('#instructor-flow button[data-movement-view="sequence"]').evaluate(el=>el.click());
+  await gallery.locator('.studio-book-practice-link').evaluate(el=>el.click());
+  await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','false');
   await expect(dock).toBeVisible();
 });

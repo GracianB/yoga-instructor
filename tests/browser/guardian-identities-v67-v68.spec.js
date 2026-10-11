@@ -56,3 +56,31 @@ test('V68: twelve anatomies remain finite and mobile has no horizontal overflow'
   await gallery.locator('[data-library-pose="v68-tree"]').evaluate(el=>el.click());
   await expect(gallery.locator('.yy-pose.is-current')).toHaveAttribute('data-pose','v68-tree');
 });
+
+
+test('V67/V68 art review: each console and two distinct new asanas',async({page,browserName},testInfo)=>{
+  test.skip(browserName!=='chromium','Capture a single canonical contact set in Chromium');
+  test.setTimeout(75000);
+  await page.setViewportSize({width:1440,height:900});
+  await page.emulateMedia({reducedMotion:'reduce'});
+  await page.goto('/');
+  const root=page.locator('#instructor-flow');
+  const snap=async(name,selector)=>{
+    await page.locator(selector).evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));
+    await page.screenshot({path:testInfo.outputPath(name+'.jpg'),type:'jpeg',quality:84,animations:'disabled',timeout:10000});
+  };
+  await snap('v67-nila-movement','#movement-stage');
+  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
+  await expect(root.locator('.studio-breath-dragon')).toBeVisible();
+  await snap('v67-dragon-breath','#studio-guided');
+  await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
+  await expect(root.locator('.meditation-guardian')).toBeVisible();
+  await snap('v67-uma-meditation','#studio-guided');
+  await page.locator('[data-studio-mode="asanas"]').evaluate(el=>el.click());
+  await page.locator('[data-movement-view="library"]').evaluate(el=>el.click());
+  for(const id of ['v68-tree','v68-gratitude']){
+    await page.locator('[data-library-pose="'+id+'"]').evaluate(el=>el.click());
+    await expect(page.locator('#studio-asana-library .yy-pose.is-current')).toHaveAttribute('data-pose',id);
+    await snap(id,'#studio-asana-library');
+  }
+});

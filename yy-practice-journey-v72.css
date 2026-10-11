@@ -460,3 +460,126 @@ html[data-theme="dark"] #studio-asana-library .studio-library-display :is(.studi
   animation:none!important;transition:none!important
  }
 }
+
+/* V72 · Breath dragon: real motion driven exclusively by PracticeClock.
+ * Each change is interpolated over the studio's existing 200ms updates.
+ * Feet, seated hips and ground-shadow retain their actual locations. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-body{
+ transform-box:fill-box;
+ transform-origin:center 95%;
+ transform:scaleX(var(--studio-body-width,1));
+ transition:transform .21s ease-out;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-head-unit{
+ transform-box:view-box;
+ transform-origin:280px 184px;
+ transform:translateY(var(--studio-head-lift,0px));
+ transition:transform .21s ease-out;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-wings{
+ transform-box:fill-box;
+ transform-origin:center 51%;
+ transform:scaleX(var(--studio-guardian-wing,1));
+ transition:transform .21s ease-out,opacity .21s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-breath-core{
+ transform-box:fill-box;transform-origin:center 58%;
+ transform:scale(var(--studio-rib-expansion,1));
+ transition:transform .21s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"][data-breath-phase="inhale"]
+ .studio-breath-phase-detail{
+ border-color:#53a39b!important;
+ box-shadow:0 0 0 3px rgba(93,188,177,.14);
+}
+#instructor-flow .studio-guided[data-studio-status="paused"] .studio-breath-dragon :is(
+ .sd31-body,.sd31-head-unit,.sd31-wings,.sd31-breath-core){
+ transition:none!important;
+}
+/* Meditation: a thoughtful attention experience rather than a blank timer. */
+#instructor-flow .studio-presence-journey{
+ grid-column:1!important;width:100%;
+ min-width:0;margin:4px 0 0;padding:clamp(14px,1.8vw,22px);
+ color:#3f3c64;
+ background:linear-gradient(150deg,#f7f4fe,#eeebf9);
+ border:1px solid #c8bedc;border-radius:19px;
+ box-shadow:0 9px 28px rgba(86,75,130,.08);
+}
+#instructor-flow .studio-presence-journey[hidden]{display:none!important}
+#instructor-flow .studio-presence-overline{
+ color:#6a609c;font:750 10px/1.4 'JetBrains Mono',monospace;
+ letter-spacing:.12em;
+}
+#instructor-flow .studio-presence-journey h4{
+ margin:10px 0 7px;color:#45446a;
+ font:550 clamp(19px,2vw,25px)/1.23 'Fraunces',serif;
+}
+#instructor-flow .studio-presence-invitation{
+ margin:0 0 16px;color:#565575;
+ font:500 13px/1.65 'Inter',sans-serif;
+}
+#instructor-flow .studio-presence-steps{
+ list-style:none;margin:0;padding:0;display:grid;gap:8px;
+}
+#instructor-flow .studio-presence-steps li{
+ display:grid;gap:5px;padding:12px 13px;
+ background:rgba(255,255,255,.58);
+ border:1px solid #e0dceb;border-radius:13px;
+ color:#585777;
+}
+#instructor-flow .studio-presence-steps li strong{
+ font:750 12px/1.4 'Inter',sans-serif;color:#514d84;
+}
+#instructor-flow .studio-presence-steps li span{
+ font:450 12px/1.55 'Inter',sans-serif;color:#4f4d6e;
+}
+#instructor-flow .studio-presence-steps li.is-current{
+ border-color:#9888bf;background:#f2edff;
+ box-shadow:inset 3px 0 0 #9888bf;
+}
+#instructor-flow .studio-presence-return{
+ font:600 12px/1.55 'Inter',sans-serif;
+ color:#514c79;margin:15px 0 0;
+ padding:11px 13px;
+ border-left:3px solid #afa3d6;
+ border-radius:4px 10px 10px 4px;
+ background:#e8e2f6;
+}
+#instructor-flow .studio-guided[data-meditation-style="silent"] .studio-presence-steps li{
+ opacity:.75;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .studio-meditation-focus button[aria-pressed="true"]{
+ background:#6e659e!important;color:#fff!important;border-color:#6e659e!important;
+}
+html[data-theme="dark"] #instructor-flow .studio-presence-journey{
+ background:linear-gradient(145deg,#353651,#3f4164);
+ border-color:#706a97;color:#f4f0fc;
+}
+html[data-theme="dark"] #instructor-flow .studio-presence-journey :is(
+ .studio-presence-overline,.studio-presence-invitation,.studio-presence-return){
+ color:#e8e2f5;
+}
+html[data-theme="dark"] #instructor-flow .studio-presence-journey h4{color:#f6f0fe}
+html[data-theme="dark"] #instructor-flow .studio-presence-steps li{
+ background:rgba(255,255,255,.08);border-color:#6b678e;
+}
+html[data-theme="dark"] #instructor-flow .studio-presence-steps li :is(strong,span){color:#f3edff}
+html[data-theme="dark"] #instructor-flow .studio-presence-steps li.is-current{
+ background:#4c4979;border-color:#b1a5dc;
+}
+html[data-theme="dark"] #instructor-flow .studio-presence-return{
+ background:#4d486b;color:#f4eeff;
+}
+@media(max-width:850px){
+ #instructor-flow .studio-presence-journey{width:100%!important;margin:0}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon :is(
+  .sd31-body,.sd31-head-unit,.sd31-wings,.sd31-breath-core){
+  transform:none!important;transition:none!important;
+ }
+}
+body.quiet-mode #instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon :is(
+ .sd31-body,.sd31-head-unit,.sd31-wings,.sd31-breath-core){
+ transform:none!important;transition:none!important;
+}

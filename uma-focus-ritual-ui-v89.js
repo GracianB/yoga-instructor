@@ -10,7 +10,7 @@ panel.setAttribute("aria-labelledby","v89-title");
 panel.innerHTML='<div class="v89-top"><span class="v89-kicker"></span><span class="v89-caption"></span></div>'+
 '<div class="v89-sequence" role="group"><span data-v89-phase="arrive"></span><span data-v89-phase="anchor"></span><span data-v89-phase="return"></span></div>'+
 '<div class="v89-heart"><div class="v89-moon" aria-hidden="true">☾</div><div><h4 id="v89-title"></h4>'+
-'<p class="v89-message"></p></div></div>'+
+'<p class="v89-message" tabindex="-1"></p></div></div>'+
 '<div class="v89-actions"><button type="button" class="v89-return"></button>'+
 '<span class="v89-advice"></span></div>';
 focus.after(panel);

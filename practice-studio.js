@@ -260,6 +260,11 @@
     setText(cue, copy(cueKey));
     setText(status, copy(snapshot.status));
     setData(guided, "studioStatus", snapshot.status);
+    // The meditation invitation follows the SAME clock and status already
+    // used by the studio. No new loop, no autonomous audio or instructions.
+    const meditationStep=complete?"complete":waiting?"prepare":
+      snapshot.progress<.18?"arrive":snapshot.progress<.78?"anchor":"return";
+    setData(guided, "meditationStep", meditationStep);
     setData(guided, "breathPhase", isBreathing && !waiting && !complete ? breathing.phase : "rest");
     // One monotonic clock controls both the words and the guardian's light.
     const roomScale=activeBreath ? breathing.scale.toFixed(4) : "1";
@@ -269,8 +274,12 @@
     setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
     setVar(guided, "--studio-rib-expansion", shape.rib);
     // V36: visible seated dragon breathing, with feet and head planted.
+    // V72: a visible inhale without lifting planted feet. Torso, wings,
+    // ribs and head share the existing 200-ms monotonic PracticeClock.
     setVar(guided, "--studio-guardian-expansion", activeBreath ? (1 + .14 * breathing.expansion).toFixed(4) : "1");
-    setVar(guided, "--studio-guardian-wing", activeBreath ? (1 + .06 * breathing.expansion).toFixed(4) : "1");
+    setVar(guided, "--studio-guardian-wing", activeBreath ? (1 + .15 * breathing.expansion).toFixed(4) : "1");
+    setVar(guided, "--studio-body-width", activeBreath ? (1 + .047 * breathing.expansion).toFixed(4) : "1");
+    setVar(guided, "--studio-head-lift", activeBreath ? (-5.5 * breathing.expansion).toFixed(2) + "px" : "0px");
     setVar(guided, "--studio-d28-wing-vein", shape.wingVein);
     setVar(guided, "--studio-d28-tail-light", shape.tailLight);
     setVar(guided, "--studio-d28-horn", shape.horn);

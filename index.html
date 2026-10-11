@@ -80,6 +80,7 @@
   <link rel="stylesheet" href="./editorial-atlas-v75.css?v=v75-1">
   <link rel="stylesheet" href="./yoga-enquiry-v76.css?v=v76-1">
   <link rel="stylesheet" href="./credential-ledger-v77.css?v=v77-1">
+  <link rel="stylesheet" href="./professional-demo-v78.css?v=v78-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -123,6 +124,7 @@
   <script src="./editorial-atlas-v75.js?v=v75-1" defer></script>
   <script src="./yoga-enquiry-v76.js?v=v76-1" defer></script>
   <script src="./credential-ledger-v77.js?v=v77-1" defer></script>
+  <script src="./professional-demo-v78.js?v=v78-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1078,6 +1080,69 @@
         <a class="v77-document" id="v77-cv" href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-v77-text="cv">Consultar CV · ES</a>
         <a class="v77-document" id="v77-letter" href="./Gracian_Baena_Carta_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-v77-text="letter">Carta de presentación</a>
         <button class="v77-print" id="v77-print" type="button" data-v77-text="print">Imprimir esta trayectoria</button>
+      </div>
+    </section>
+
+
+    <!-- V78: 60-second professional studio demo. Text equivalent always available. -->
+    <section class="v78-demo section" id="demostracion" aria-labelledby="v78-title">
+      <div class="v78-heading">
+        <div><p class="v78-kicker" data-v78-text="kicker">04 / PRESENCIA EN UN MINUTO</p>
+          <h2 id="v78-title"><span data-v78-text="titleOne">Así comienza</span><em data-v78-text="titleTwo">una clase.</em></h2></div>
+        <div class="v78-heading-aside"><p data-v78-text="intro">Una demostración editorial de mi forma de acompañar. Tres momentos, una guía de sesenta segundos y control total para quien la visita.</p>
+          <p class="v78-note" data-v78-text="note">Recreación didáctica, no grabación de una clase real. Sin sonido ni reproducción automática.</p></div>
+      </div>
+      <div class="v78-player" data-v78-scene="0">
+        <div class="v78-visual" aria-hidden="true">
+          <div class="v78-illustration">
+            <svg viewBox="0 0 640 380" focusable="false" class="v78-art" role="img">
+              <defs>
+                <linearGradient id="v78-wash" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="currentColor" stop-opacity=".14"/><stop offset="1" stop-color="currentColor" stop-opacity="0"/></linearGradient>
+              </defs>
+              <circle cx="320" cy="190" r="163" fill="url(#v78-wash)" stroke="currentColor" stroke-width="1" stroke-opacity=".35"/>
+              <circle class="v78-outer" cx="320" cy="190" r="120" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width="1.5"/>
+              <path class="v78-petal v78-petal-1" d="M320 187C265 156 263 90 320 45C377 90 375 156 320 187Z" fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="2"/>
+              <path class="v78-petal v78-petal-2" d="M320 187C243 208 196 160 191 107C249 108 299 130 320 187Z" fill="currentColor" fill-opacity=".14" stroke="currentColor" stroke-width="2"/>
+              <path class="v78-petal v78-petal-3" d="M320 187C397 208 444 160 449 107C391 108 341 130 320 187Z" fill="currentColor" fill-opacity=".14" stroke="currentColor" stroke-width="2"/>
+              <path d="M200 277C242 248 276 258 320 279C364 258 398 248 440 277" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              <path class="v78-horizon" d="M42 320Q170 288 320 320T598 320" fill="none" stroke="currentColor" stroke-width="2"/>
+              <path class="v78-figure" d="M320 165C335 165 342 174 342 186C342 199 332 207 320 207C307 207 297 198 297 186C297 174 306 165 320 165ZM320 208V265M320 223C278 222 260 241 248 259M320 223C362 222 380 241 392 259M320 264C292 282 260 283 236 271M320 264C348 282 380 283 404 271" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+              <circle class="v78-heart" cx="320" cy="240" r="8" fill="currentColor" fill-opacity=".65"/>
+            </svg>
+          </div>
+          <div class="v78-scene-badge"><span data-v78-text="sceneMarker">ESCENA</span> <strong id="v78-scene-number">01 / 03</strong></div>
+        </div>
+        <div class="v78-console">
+          <div class="v78-current">
+            <span class="v78-kicker" id="v78-phase-label">LLEGADA · 00–20</span>
+            <h3 id="v78-phase-title">Primero, llegar.</h3>
+            <p id="v78-phase-cue">Una postura cómoda, un punto de atención y permiso para empezar desde donde estás.</p>
+          </div>
+          <div class="v78-timeline">
+            <label for="v78-seek" data-v78-text="timeline">Recorrer la demostración</label>
+            <input id="v78-seek" type="range" min="0" max="60" step="1" value="0">
+            <div class="v78-ticks"><span>00:00</span><output id="v78-timer" for="v78-seek" aria-live="off">00:00 / 01:00</output><span>01:00</span></div>
+          </div>
+          <div class="v78-chapters" role="group" aria-label="Escenas" data-v78-chapter-label="chapters">
+            <button type="button" data-v78-jump="0" aria-pressed="true"><span>01</span><strong data-v78-text="arrival">Llegada</strong><small>00–20</small></button>
+            <button type="button" data-v78-jump="20" aria-pressed="false"><span>02</span><strong data-v78-text="explore">Explorar</strong><small>20–42</small></button>
+            <button type="button" data-v78-jump="42" aria-pressed="false"><span>03</span><strong data-v78-text="integrate">Integrar</strong><small>42–60</small></button>
+          </div>
+          <div class="v78-controls">
+            <button type="button" class="v78-primary" id="v78-play" aria-pressed="false" data-v78-text="play">▶ Reproducir</button>
+            <button type="button" class="v78-reset" id="v78-reset" data-v78-text="restart">↶ Desde el principio</button>
+            <span id="v78-live" role="status" aria-live="polite" class="v78-status"></span>
+          </div>
+          <details class="v78-transcript">
+            <summary data-v78-text="transcript">Leer la demostración completa</summary>
+            <div class="v78-transcript-grid">
+              <div><strong data-v78-text="arrival">Llegada</strong><p data-v78-text="transcriptArrival">Nos situamos. Puedes sentarte, quedarte de pie o buscar otra postura cómoda. No hay una forma única de comenzar.</p></div>
+              <div><strong data-v78-text="explore">Explorar</strong><p data-v78-text="transcriptExplore">Observamos el cuerpo, elegimos un movimiento amable y ofrecemos alternativas. La respiración acompaña, no impone.</p></div>
+              <div><strong data-v78-text="integrate">Integrar</strong><p data-v78-text="transcriptIntegrate">Volvemos a un punto estable y notamos cómo estamos. La pausa forma parte de la práctica.</p></div>
+            </div>
+          </details>
+          <a class="v78-cta" href="#instructor-flow" data-v78-text="cta">Explorar el estudio completo ↗</a>
+        </div>
       </div>
     </section>
 

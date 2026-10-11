@@ -14,6 +14,7 @@
       titleSecond: "saber acompañar.",
       intro: "Una práctica clara, adaptable y humana. Del primer minuto de atención al último momento de descanso, cada clase tiene un porqué.",
       eyebrow: "MI ENFOQUE",
+      journeyQuote: "Atención al principio. Opciones durante la clase. Calma al final.",
       principle1: "Escuchar antes de proponer",
       principle2: "Dar opciones, no imponer formas",
       principle3: "Cerrar con integración, no con prisa",
@@ -83,6 +84,7 @@
       titleSecond: "knowing how to support.",
       intro: "A clear, adaptable, human practice. From the first moment of attention to the last moment of rest, every part of a class has a purpose.",
       eyebrow: "MY APPROACH",
+      journeyQuote: "Attention at the start. Options throughout. Calm at the end.",
       principle1: "Listen before proposing",
       principle2: "Offer choices rather than impose shapes",
       principle3: "Close with integration, never in a rush",
@@ -160,6 +162,7 @@
       button.setAttribute("aria-selected", String(active));
       button.tabIndex = active ? 0 : -1;
     });
+    tablist.setAttribute("aria-label", t.routeLabel);
     panel.setAttribute("aria-labelledby", "portfolio-v73-tab-" + selected);
     root.querySelector("#portfolio-v73-eyebrow").textContent = item.eyebrow;
     root.querySelector("#portfolio-v73-offer").textContent = item.title;

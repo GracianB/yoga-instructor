@@ -22,11 +22,11 @@
       cue:["Eleva la pelvis como una montaña y reparte el apoyo entre manos y pies. Dobla las rodillas si lo necesitas.",
            "Lift the hips into an inverted V. Share the weight across hands and feet; bend the knees if helpful."],
       support:["Cuatro apoyos; evita empujar la cabeza hacia el suelo.","Four contact points; do not force the head towards the mat."],
-      body:[361,234,118,46,-25],head:[206,303,.68,-49,"closed"],
-      arms:["M292 249Q232 310 173 370","M315 266Q276 321 230 383"],
-      legs:["M431 238Q483 278 499 378","M459 220Q528 278 547 373"],
-      hands:[[173,370],[230,383]],feet:[[499,378],[547,373]],
-      tail:[467,189,.61,-39]
+      body:[368,235,112,43,0],head:[221,297,.66,-42,"closed"],
+      arms:["M291 251Q235 302 179 371","M312 270Q283 319 235 377"],
+      legs:["M432 217Q487 256 499 377","M447 211Q527 267 547 374"],
+      hands:[[179,371],[235,377]],feet:[[499,377],[547,374]],
+      tail:[463,183,.55,-30]
     },
     {
       id:"d24-butterfly",kind:"butterfly",
@@ -58,10 +58,10 @@
       name:["Árbol · Vrksasana","Tree · Vrksasana"],
       cue:["Enraíza un pie; apoya el otro en tobillo o pantorrilla, nunca en la rodilla.","Root through one foot; rest the other on ankle or calf, never on the knee."],
       support:["Usa una pared o deja la punta del pie apoyada para mejorar el equilibrio.","Use a wall or keep your toes grounded for balance."],
-      body:[364,235,61,83,0],head:[364,111,.8,0,"focus"],
-      arms:["M313 194Q283 141 330 91","M412 194Q445 142 395 92"],
-      legs:["M338 296Q332 339 333 382","M390 291Q432 315 369 331"],
-      hands:[[330,91],[395,92]],feet:[[333,382],[369,331]],tail:[437,254,.61,12]
+      body:[363,232,60,85,0],head:[363,109,.8,0,"focus"],
+      arms:["M316 190Q281 139 330 94","M408 190Q444 138 398 94"],
+      legs:["M343 293Q338 341 342 381","M390 296Q441 300 415 329Q398 346 372 328"],
+      hands:[[330,94],[398,94]],feet:[[342,381],[372,328]],tail:[437,256,.6,11]
     },
     {
       id:"v68-triangle",kind:"triangle",category:"standing",

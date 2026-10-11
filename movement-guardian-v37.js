@@ -12,6 +12,8 @@
   const point=(x,y)=>esc(x)+" "+esc(y);
   const bodyPath=(p)=>{
     const [x,y,rx,ry]=p.body;
+    // V83: A sculpted inverted-V torso joins shoulders to an elevated pelvis.
+    if(p.kind==="downward")return "M274 264 C300 242 341 183 418 183 C451 184 466 218 461 239 C442 248 431 236 409 229 C360 220 344 282 290 284 Z";
     // All four contour quadrants share tangents; no overlapping ovals or hip stickers.
     return [
       "M",point(x-rx*.92,y-ry*.29),
@@ -31,7 +33,7 @@
     const degrees=Math.atan2(tip.dy,tip.dx)*180/Math.PI;
     const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
     const orientation=atHeart?(index===0?-18:18):
-      vertical||y>=346?0:clamp(degrees,-66,66);
+      vertical&&y<350?-27:vertical||y>=346?0:clamp(degrees,-66,66);
     const palm=atHeart
       ?'M-12 -12 Q-9 -24 1 -20 Q15 -16 16 -2 Q17 13 4 17 Q-11 17 -15 6 Q-17 -6 -12 -12Z'
       :vertical
@@ -179,9 +181,12 @@
   };
   const trunk=(p)=>{
     const [x,y,rx,ry,r]=p.body;
-    return '<g class="mg-torso" data-pose-kind="'+p.kind+'" transform="rotate('+esc(r)+' '+esc(x)+' '+esc(y)+')">'+
+    const torsoAngle=p.kind==="downward"?0:r;
+    return '<g class="mg-torso" data-pose-kind="'+p.kind+'" transform="rotate('+esc(torsoAngle)+' '+esc(x)+' '+esc(y)+')">'+
       '<path class="mg-body" d="'+bodyPath(p)+'"/>'+
-      '<path class="mg-body-light" d="M'+point(x-rx*.53,y-ry*.30)+' Q'+point(x-rx*.37,y-ry*.72)+' '+point(x+rx*.18,y-ry*.72)+'"/>'+
+      '<path class="mg-body-light" d="'+(p.kind==="downward"?
+        "M318 246Q362 202 420 207":
+        "M"+point(x-rx*.53,y-ry*.30)+" Q"+point(x-rx*.37,y-ry*.72)+" "+point(x+rx*.18,y-ry*.72))+'"/>'+
       '<path class="mg-breath-plane" d="M'+point(x-rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.71)+' '+point(x+rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.38)+' '+point(x-rx*.40,y+ry*.13)+'Z"/>'+
       '</g>';
   };

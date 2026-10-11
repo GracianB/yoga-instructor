@@ -1,3 +1,4 @@
+import {writeManifest,verifyManifest} from "./v100-manifest.mjs";
 import { mkdir, rm, copyFile, cp, readFile } from 'node:fs/promises';
 await rm('dist', { recursive: true, force: true });
 await mkdir('dist');
@@ -15,4 +16,7 @@ for (const page of [html, await readFile('cv.html', 'utf8'), await readFile('404
 }
 for (const file of rootFiles) await copyFile(file, `dist/${file}`);
 for (const directory of ['assets', 'audio']) await cp(directory, `dist/${directory}`, { recursive: true });
+const release=await writeManifest("dist");
+await verifyManifest("dist");
+console.log("V100_SHA256_LEDGER_OK: "+release.manifest.assets+" files; "+release.sha256);
 console.log('Pages artifact ready');

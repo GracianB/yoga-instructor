@@ -219,21 +219,38 @@
     busy=["running","paused"].includes(detail?.status);
     visible();
   });
-  // Hide the floating player only while this external book intersects the
-  // viewport, not across the entire remainder of the page.
-  if("IntersectionObserver" in window){
-    const visibility=new IntersectionObserver(entries=>{
-      document.body.dataset.asanaBookVisible=String(entries.some(e=>e.isIntersecting));
-    },{threshold:.03});
-    visibility.observe(section);
-    window.addEventListener("pagehide",()=>{
-      visibility.disconnect();
-      delete document.body.dataset.asanaBookVisible;
-    },{once:true});
-  }
+  // V72: the book is a standalone chapter. Do not depend on optional
+  // IntersectionObserver (it can be undefined in privacy-restricted browsers).
+  // A viewport check also avoids dock state lingering during anchor jumps.
+  const syncBookVisibility=()=>{
+    const bounds=section.getBoundingClientRect();
+    const amount=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-
+      Math.max(bounds.top,0));
+    const minimum=Math.min(48,window.innerHeight*.04);
+    document.body.dataset.asanaBookVisible=String(amount>minimum);
+  };
+  const bookLink=section.querySelector(".studio-book-practice-link");
+  bookLink?.addEventListener("click",event=>{
+    // The page uses a cinematic anchor handler. Take responsibility for
+    // this internal transition so the library doesn't overlap the console.
+    event.preventDefault();
+    event.stopPropagation();
+    root.scrollIntoView({block:"start",behavior:"instant"});
+    if(window.history?.replaceState)
+      window.history.replaceState(window.history.state,"","#instructor-flow");
+    syncBookVisibility();
+  });
+  window.addEventListener("scroll",syncBookVisibility,{passive:true});
+  window.addEventListener("resize",syncBookVisibility,{passive:true});
+  window.addEventListener("pagehide",()=>{
+    window.removeEventListener("scroll",syncBookVisibility);
+    window.removeEventListener("resize",syncBookVisibility);
+    delete document.body.dataset.asanaBookVisible;
+  },{once:true});
   new MutationObserver(()=>{stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";})
     .observe(guide,{attributes:true,attributeFilter:["data-spirit"]});
   new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
   render();
   visible();
+  syncBookVisibility();
 })();

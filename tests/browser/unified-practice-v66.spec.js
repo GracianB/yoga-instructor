@@ -15,7 +15,7 @@ test('V66: Movement defaults to guided sequence, asanas are deliberate and indep
   await expect(root).toHaveAttribute('data-movement-view','library');
   await expect(sequence).toBeHidden();
   await expect(gallery).toBeVisible();
-  await expect(gallery.locator('button[data-library-pose]')).toHaveCount(3);
+  await expect(gallery.locator('button[data-library-pose]')).toHaveCount(12);
   await expect(root.locator('.studio-plan')).toBeHidden();
   await expect(root.locator('.studio-adaptation')).toBeHidden();
   await tabs.locator('[data-movement-view="sequence"]').click();

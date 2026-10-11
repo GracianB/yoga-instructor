@@ -22,3 +22,6 @@ html[data-theme="dark"] #instructor-flow .studio-guided[data-v88-atmosphere="oce
 html[data-theme="dark"] #instructor-flow .studio-guided[data-v88-atmosphere="twilight"] .studio-guided-stage{background:radial-gradient(ellipse at 50% 36%,#654862 0%,#30283b 78%)}
 @media(max-width:430px){#instructor-flow .v88-atmosphere button{flex:1 1 28%;padding:9px}}
 @media(prefers-reduced-motion:reduce){#instructor-flow .v88-atmosphere *{animation:none!important;transition:none!important}}
+
+/* Quiet mode keeps the palette but neutralizes sensory emphasis. */
+body.quiet-mode #instructor-flow .v88-atmosphere{background:var(--surface,#eff1ea);border-color:var(--line,#b4c5b7)}

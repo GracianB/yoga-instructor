@@ -1,5 +1,13 @@
 const {test, expect}=require("@playwright/test");
 
+// Enquiry specs exercise the form, not the one-time welcome overlay.
+// A visible introduction can intercept clicks while the test scrolls to Contact.
+test.beforeEach(async ({page})=>{
+ await page.addInitScript(()=>{
+  try { sessionStorage.setItem("gb-yoga-intro-seen","1"); } catch (_) {}
+ });
+});
+
 test("V76: enquiry creates a contextual email without submitting data",async({page})=>{
  await page.goto("/");
  const root=page.locator("#v76-enquiry");

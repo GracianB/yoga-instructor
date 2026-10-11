@@ -21,7 +21,9 @@ unique(/id="focus-audio"/g,"single audio element");
 for(const id of ["studio-asana-library","studio-preferences","movement-mini"]){
 const script=id==="studio-asana-library"?"studio-asana-library.js":
  id==="studio-preferences"?"studio-preferences-ui-v93.js":"movement-journey-ui-v85.js";
-requireToken(await read(script),'id="'+id+'"',id+" must have one owner");
+const source=await read(script);
+if(!source.includes('id="'+id+'"')&&!source.includes('.id="'+id+'"'))
+ failures.push(id+" must have one owner");
 }
 const core={
  "asanas":["asana-library.js","movement-guardian-v37.js","studio-asana-library.js","movement-custom-ui-v94.js"],

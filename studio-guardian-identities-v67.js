@@ -5,7 +5,7 @@
  const root=document.getElementById("instructor-flow");
  const controls=root?.querySelector(".studio-v66-control-pane");
  const guided=root?.querySelector("#studio-guided");
- const gallery=root?.querySelector("#studio-asana-library .studio-library-heading");
+ const gallery=document.querySelector("#studio-asana-library .studio-library-heading");
  const guide=root?.querySelector("#flow-guide");
  if(!root||!controls||!guided||!gallery)return;
  const copy={

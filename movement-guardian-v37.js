@@ -184,7 +184,9 @@
     const torsoAngle=p.kind==="downward"?0:r;
     return '<g class="mg-torso" data-pose-kind="'+p.kind+'" transform="rotate('+esc(torsoAngle)+' '+esc(x)+' '+esc(y)+')">'+
       '<path class="mg-body" d="'+bodyPath(p)+'"/>'+
-      '<path class="mg-body-light" d="M'+point(x-rx*.53,y-ry*.30)+' Q'+point(x-rx*.37,y-ry*.72)+' '+point(x+rx*.18,y-ry*.72)+'"/>'+
+      '<path class="mg-body-light" d="'+(p.kind==="downward"?
+        "M318 246Q362 202 420 207":
+        "M"+point(x-rx*.53,y-ry*.30)+" Q"+point(x-rx*.37,y-ry*.72)+" "+point(x+rx*.18,y-ry*.72))+'"/>'+
       '<path class="mg-breath-plane" d="M'+point(x-rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.71)+' '+point(x+rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.38)+' '+point(x-rx*.40,y+ry*.13)+'Z"/>'+
       '</g>';
   };

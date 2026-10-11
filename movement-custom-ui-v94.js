@@ -82,8 +82,13 @@ steps.addEventListener("click",event=>{
  const target=b.dataset.v94Direction==="up"?index-1:index+1;
  const data=read();[data[index],data[target]]=[data[target],data[index]];
  // Preserve uncommitted selections while reordering.
- if(new Set(data).size===3){model.set(data);draw()}
- else{const cells=[...steps.querySelectorAll("select")];cells.forEach((cell,i)=>cell.value=data[i])}
+ if(new Set(data).size===3){
+  model.set(data);draw();
+  const direction=b.dataset.v94Direction;
+  const focusDirection=steps.querySelector(`[data-v94-index="${target}"] [data-v94-direction="${direction}"]:not(:disabled)`)
+    ||steps.querySelector(`[data-v94-index="${target}"] select`);
+  focusDirection?.focus({preventScroll:true});
+ }else{const cells=[...steps.querySelectorAll("select")];cells.forEach((cell,i)=>cell.value=data[i])}
 });
 editor.querySelector(".v94-apply").addEventListener("click",()=>setCustom(read()));
 editor.querySelector(".v94-reset").addEventListener("click",()=>{

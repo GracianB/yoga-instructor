@@ -19,6 +19,9 @@ if (!Number.isInteger(attempts) || attempts < 1 || attempts > 40) throw Error('I
 if (!(waitSeconds >= 0 && waitSeconds <= 20)) throw Error('Invalid interval');
 if (base.protocol !== 'https:') throw Error('HTTPS required');
 
+const inventory=await verifyManifest(root);
+console.log('V100_LOCAL_LEDGER_OK: '+inventory.assets+' assets');
+
 // The post-release smoke test must compare every published byte listed in the
 // deterministic ledger, not only a curated set of CSS, JS and HTML files.
 // The local verification above already proves this ledger matches the built dist.

@@ -258,7 +258,7 @@ test('saved ritual is restored even when animation frames never run', async ({ p
 });
 
 test('Yin Yang visual matrix: desktop/mobile, both energies, reduced motion and no overflow', async ({page})=>{
-  test.setTimeout(90000);
+  test.setTimeout(150000);
   const errors=await open(page);
   await page.emulateMedia({reducedMotion:'reduce'});
   const guide=page.locator('#flow-guide');

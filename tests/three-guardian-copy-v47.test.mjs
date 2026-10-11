@@ -21,7 +21,7 @@ test("V47: all practice cards describe the correct three separate guardians befo
  }
  assert.ok(!html.includes("10 fases · dragón Yin / Yang"),
   "Retired Movement copy must not call Nila a dragon");
- assert.equal((html.match(/data-studio-mode="(?:asanas|breath|meditation)"/g)||[]).length,3);
+ assert.equal((html.match(/<button[^>]*data-studio-mode="(?:asanas|breath|meditation)"/g)||[]).length,3);
  assert.ok(html.includes('./practice-studio.js?v=v49-1'),
   "New guardian names must not be hidden by a stale JavaScript cache");
 });

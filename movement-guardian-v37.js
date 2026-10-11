@@ -26,7 +26,8 @@
     return '<g class="mg-paw mg-'+kind+'" data-contact="'+kind+'-'+index+
       '" transform="translate('+esc(x)+' '+esc(y)+')">'+
       '<path d="M-20 -8 Q-9 -18 5 -12 Q20 -8 19 5 Q14 15 -3 14 Q-21 14 -20 -8Z" class="mg-paw-shell"/>'+
-      '<path d="M-10 4 Q-3 9 3 4 M4 2 Q10 7 14 1" class="mg-paw-toes"/>'+
+      '<path d="M-13 2 Q-9 7 -5 3 M-2 5 Q3 10 7 4 M10 3 Q14 6 16 1" class="mg-paw-toes"/>'+
+      '<path d="M-14 -1Q-12 -4 -8 -5" class="mg-wrist-crease"/>'+
       (vertical?'<path d="M-11 -8Q-5 -12 1 -9" class="mg-paw-shine"/>':'')+'</g>';
   };
   // V47: every shoulder, elbow, hip and knee is derived from the SAME
@@ -143,6 +144,7 @@
       '<path class="mg-crest" d="M-25-57Q-18-82-3-93L3-71Q22-92 34-65L29-45Z"/>'+
       '<path class="mg-face" d="M-60-37Q-53-65-19-70Q10-78 40-60Q70-46 67-15Q76 15 55 42Q41 64 14 73Q-13 76-42 55Q-68 35-68 4Q-72-20-60-37Z"/>'+
       '<path class="mg-face-glaze" d="M-48-40Q-36-57-15-54M28-57Q47-45 51-32"/>'+
+      '<path class="mg-forehead-mark" d="M-10 -48Q0 -55 10 -48"/>'+
       brows+
       '<path class="mg-cheek-fin" d="M-58 13Q-86 16-91 37Q-72 34-56 28 M58 13Q84 16 90 37Q71 34 55 29"/>'+
       '<path class="mg-snout" d="M-49 19Q-35 9-15 19Q-6 24 0 29Q6 24 15 19Q36 9 49 19Q61 43 39 60Q23 74 1 74Q-24 75-40 60Q-60 43-49 19Z"/>'+
@@ -218,7 +220,7 @@
     // V56: arm roots live BEHIND the same torso that joins the hip sockets.
     // Previously the entire shoulder socket sat over the chest like a sticker.
     // Only the hands and a soft joining-gesture forearm pass in FRONT.
-    const joined=p.kind==="finish";
+    const joined=p.kind==="finish"||p.id==="v68-gratitude";
     const front=joined?'<g class="mg-gesture-forearms">'+
       p.arms.map(d=>'<path class="mg-gesture-forearm" d="'+d+'"/>').join("")+'</g>':"";
     return '<g class="movement-guardian" data-guardian="nila" data-kind="'+p.kind+'" aria-hidden="true">'+
@@ -229,7 +231,7 @@
        front+'<g class="mg-hands">'+hands+'</g>'+
        head(p)+'</g>';
   };
-  // V53: the three optional asanas use exactly the same anatomical renderer.
+  // V68: all twelve optional asanas use exactly the same anatomical renderer.
   // A single drawing function eliminates the second, visually unrelated dragon.
   window.YOGA_MOVEMENT_GUARDIAN=Object.freeze({drawPose:drawing});
   for(const p of art.poses){

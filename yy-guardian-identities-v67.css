@@ -1,0 +1,256 @@
+/* V67/V68 · Three distinct visual energies, one consistent Yoga Studio.
+   Ayurveda is used here as aesthetic inspiration (ground, flow, stillness),
+   not as a diagnosis or a claim of therapeutic effect. */
+#instructor-flow{
+  --guardian-accent:#c28564;--guardian-deep:#69483d;
+  --guardian-line:#c8a78f;--guardian-surface:#f8efe4;
+  --guardian-surface-alt:#e9e7d7;--guardian-glow:rgba(214,167,106,.24);
+  --guardian-ink:#35423a;--guardian-button-ink:#fffaf3;
+}
+#instructor-flow[data-studio-mode="breath"]{
+  --guardian-accent:#378c88;--guardian-deep:#205c61;
+  --guardian-line:#9bccc2;--guardian-surface:#e8f6f2;
+  --guardian-surface-alt:#d3eae5;--guardian-glow:rgba(80,174,162,.25);
+  --guardian-ink:#245553;--guardian-button-ink:#f4fffb;
+}
+#instructor-flow[data-studio-mode="meditation"]{
+  --guardian-accent:#8177b4;--guardian-deep:#414770;
+  --guardian-line:#bdb3da;--guardian-surface:#f1eefb;
+  --guardian-surface-alt:#e1ddf0;--guardian-glow:rgba(148,136,202,.22);
+  --guardian-ink:#353a60;--guardian-button-ink:#fffaff;
+}
+/* Shared composition and typography; three different material palettes. */
+#instructor-flow .studio-v66-workspace > :is(.flow-console,.studio-guided,.studio-asana-library){
+  background:
+    radial-gradient(ellipse 55% 65% at 93% 13%,var(--guardian-glow),transparent 81%),
+    linear-gradient(145deg,var(--guardian-surface),var(--guardian-surface-alt))!important;
+  border-color:var(--guardian-line)!important;
+  color:var(--guardian-ink)!important;
+  box-shadow:0 24px 65px rgba(23,47,44,.10),inset 0 1px 0 rgba(255,255,255,.64)!important;
+}
+#instructor-flow .studio-v66-workspace .studio-v66-control-pane{
+  background:radial-gradient(circle at 9% 8%,var(--guardian-glow),transparent 40%);
+  border-radius:20px;
+}
+#instructor-flow .studio-v66-workspace :is(.flow-console-top,.studio-guided-controls,
+  .studio-breath-patterns,.studio-meditation-choices,.studio-meditation-focus,
+  .studio-library-display){
+  border:1px solid color-mix(in srgb,var(--guardian-line) 65%,transparent)!important;
+  background:rgba(255,255,255,.38)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.43)!important;
+}
+#instructor-flow .studio-v66-workspace :is(.studio-plan,.studio-adaptation){
+  border-top-color:var(--guardian-line);
+}
+#instructor-flow .studio-v66-workspace :is(.studio-plan-heading,.studio-adaptation-heading,
+  .studio-adaptation-field,.studio-adaptation-rest,.studio-adaptation-summary,
+  .studio-plan-description){
+  color:var(--guardian-ink)!important;
+}
+#instructor-flow .studio-v66-workspace .studio-plan-options button[aria-pressed="true"],
+#instructor-flow .studio-v66-workspace .studio-v66-submode[aria-pressed="true"]{
+  background:var(--guardian-accent)!important;
+  border-color:var(--guardian-accent)!important;
+  color:var(--guardian-button-ink)!important;
+}
+#instructor-flow :is(.studio-v66-control-pane,.studio-guided,.studio-asana-library)
+ :is(button:focus-visible,select:focus-visible){
+  outline:3px solid var(--guardian-accent)!important;
+  outline-offset:3px;
+}
+#instructor-flow .flow-start,
+#instructor-flow .studio-guided-controls .studio-primary,
+#instructor-flow .studio-library-choices button[data-library-pose][aria-pressed="true"]{
+  background:linear-gradient(130deg,var(--guardian-deep),var(--guardian-accent))!important;
+  border:1px solid var(--guardian-line)!important;
+  color:var(--guardian-button-ink)!important;
+  box-shadow:0 8px 18px var(--guardian-glow)!important;
+}
+#instructor-flow .flow-progress > span,
+#instructor-flow .flow-phase-progress > span,
+#instructor-flow #studio-guided-progress{
+  background:linear-gradient(90deg,var(--guardian-deep),var(--guardian-accent))!important;
+}
+#instructor-flow[data-studio-mode="asanas"] #flow-guide .yy-stage{
+  background:
+    radial-gradient(circle at 50% 73%,rgba(167,181,131,.25),transparent 48%),
+    radial-gradient(circle at 70% 15%,rgba(245,195,145,.28),transparent 45%),
+    linear-gradient(155deg,#fbf1e3,#e9ece0)!important;
+}
+#instructor-flow[data-studio-mode="asanas"] #flow-guide[data-spirit="yin"] .yy-stage{
+  background:radial-gradient(circle at 55% 75%,rgba(113,135,139,.21),transparent 56%),
+    linear-gradient(155deg,#2b3448,#465068)!important;
+}
+#instructor-flow[data-studio-mode="breath"] .studio-guided-stage{
+  background:radial-gradient(circle at 50% 66%,rgba(115,221,208,.17),transparent 62%),
+    linear-gradient(158deg,#f2fcf8,#d9efed)!important;
+  border-color:#a0cfc6!important;
+}
+#instructor-flow[data-studio-mode="meditation"] .studio-guided-stage{
+  background:radial-gradient(circle at 50% 62%,rgba(184,171,230,.25),transparent 64%),
+    linear-gradient(158deg,#faf8ff,#e6e2f3)!important;
+  border-color:#c8bedd!important;
+}
+#instructor-flow[data-studio-mode="asanas"] .studio-library-stage{
+  background:radial-gradient(circle at 50% 74%,rgba(214,177,130,.20),transparent 58%),
+    linear-gradient(160deg,#fbf5e9,#e7eadf)!important;
+}
+/* Color identity lives in the mode selection as well as the canvas. */
+#instructor-flow .studio-mode[data-studio-mode="asanas"]{--choice-color:#be8767;--choice-tint:#f6eadd}
+#instructor-flow .studio-mode[data-studio-mode="breath"]{--choice-color:#438f89;--choice-tint:#e1f3ee}
+#instructor-flow .studio-mode[data-studio-mode="meditation"]{--choice-color:#8177b1;--choice-tint:#efebfa}
+#instructor-flow .studio-mode .studio-symbol{color:var(--choice-color)!important}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"]{
+  background:var(--choice-tint)!important;
+  border-color:var(--choice-color)!important;color:#283e39!important;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.62),0 10px 22px rgba(20,46,37,.09);
+}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"] .studio-mode-copy :is(strong,small){
+  color:#293f39!important;
+}
+#instructor-flow .studio-v66-submode[aria-pressed="true"]{
+  background:var(--guardian-accent)!important;
+  border-color:var(--guardian-line)!important;color:var(--guardian-button-ink)!important;
+}
+#instructor-flow .studio-v66-submodes{
+  border-color:var(--guardian-line)!important;
+  background:color-mix(in srgb,var(--guardian-glow) 65%,transparent)!important;
+}
+#instructor-flow .studio-v66-submode:not([aria-pressed="true"]){
+  color:var(--guardian-ink)!important;background:rgba(255,255,255,.38)!important;
+}
+/* Small editorial signature for each guardian. */
+#instructor-flow .studio-v67-identity{
+  display:flex;align-items:center;gap:12px;
+  padding:12px 14px;margin:0 0 4px;border-radius:17px;
+  border:1px solid var(--guardian-line);
+  background:linear-gradient(125deg,rgba(255,255,255,.52),var(--guardian-glow));
+  color:var(--guardian-ink);min-width:0;
+}
+#instructor-flow .studio-v67-identity-symbol{
+  display:grid;place-items:center;flex:0 0 38px;
+  width:38px;height:38px;border-radius:13px;
+  color:var(--guardian-button-ink);
+  background:var(--guardian-accent);font-size:21px;
+}
+#instructor-flow .studio-v67-identity div{display:grid;gap:2px;min-width:0}
+#instructor-flow .studio-v67-identity strong{
+  font:700 11px/1.3 'JetBrains Mono',monospace;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--guardian-deep);
+}
+#instructor-flow .studio-v67-identity small{
+  font:500 12px/1.45 'Inter',sans-serif;color:var(--guardian-ink);
+}
+#instructor-flow .studio-guided > .studio-v67-identity{
+  grid-column:1!important;min-width:0;
+}
+#instructor-flow .studio-guided-stage .studio-v67-identity{display:none}
+/* NILA · clay, sage, warm oat. Never lose the Yin/Yang distinction. */
+#instructor-flow #flow-guide:not([data-spirit="yin"]),
+#instructor-flow .studio-library-stage:not([data-spirit="yin"]){
+  --mg-coat:#da9b76;--mg-deep:#93604f;--mg-ink:#614c45;
+  --mg-chest:#f7e7d2;--mg-ear:#ecc8ad;--mg-light:#f9d6b0;
+  --mg-leaf:#83a48b;--mg-eye:#4a453f;
+}
+#instructor-flow #flow-guide[data-spirit="yin"],
+#instructor-flow .studio-library-stage[data-spirit="yin"]{
+  --mg-coat:#8b85b0;--mg-deep:#5c5685;--mg-ink:#363652;
+  --mg-chest:#e8e2f3;--mg-ear:#c6bae3;--mg-light:#dfd0ef;
+  --mg-leaf:#a6b9ad;--mg-eye:#3d3a5e;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn{
+  fill:var(--mg-light)!important;stroke:var(--mg-deep)!important;
+  stroke-width:2.4!important;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-toes{
+  stroke-width:2.9!important;stroke-opacity:.65;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-nasal-bridge{
+  stroke-opacity:.18;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-forehead-mark{
+  fill:none;stroke:var(--mg-light);stroke-width:3;stroke-opacity:.45;stroke-linecap:round;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-wrist-crease{
+  fill:none;stroke:var(--mg-deep);stroke-width:2.2;stroke-opacity:.32;stroke-linecap:round;
+}
+/* BREATH · sea glass. SVG gradients consume these genuine CSS properties. */
+#instructor-flow .studio-breath-dragon{
+  --dragon-light:#b4e4da;--dragon-mid:#76b8ac;--dragon-deep:#427e78;
+  --wing-light:#c9f0e9;--wing-vein:#f2ffef;
+  --chest-light:#f1fffa;--chest-mid:#c9ede3;
+  --snout:#e7f8ef;--eye:#245b5b;--cheek:#dfa89b;
+}
+#instructor-flow .studio-breath-dragon .sd31-heart{
+  fill:#efffe7;opacity:.58;
+}
+#instructor-flow .studio-breath-dragon .sd31-wing-shimmer{
+  fill:none;stroke:#dffbf6;stroke-width:2.5;
+  stroke-linecap:round;stroke-opacity:.56;
+}
+/* UMA · moonstone, amethyst and pearlescent silver. */
+#instructor-flow .meditation-guardian #uma-body stop:nth-child(1){stop-color:#e2dcf6}
+#instructor-flow .meditation-guardian #uma-body stop:nth-child(2){stop-color:#b3a9d4}
+#instructor-flow .meditation-guardian #uma-body stop:nth-child(3){stop-color:#736caa}
+#instructor-flow .meditation-guardian #uma-wing stop:nth-child(1){stop-color:#d9d1f0}
+#instructor-flow .meditation-guardian #uma-wing stop:nth-child(2){stop-color:#aba6ce}
+#instructor-flow .meditation-guardian #uma-wing stop:nth-child(3){stop-color:#7875a7}
+#instructor-flow .meditation-guardian .uma-closed-eyes{stroke:#4a4b75;stroke-width:3.9}
+#instructor-flow .meditation-guardian .uma-lunar-thread{
+  fill:none;stroke:#ede6ff;stroke-width:2.2;stroke-linecap:round;
+  stroke-opacity:.67;
+}
+#instructor-flow .meditation-guardian .uma-moon{opacity:.58}
+/* V68 · 12-asana library: clear family filters and bounded, easy scrolling. */
+#instructor-flow .studio-library-choices{
+  align-self:start!important;min-height:0;
+  max-height:min(66vh,640px);overflow:auto;
+  overscroll-behavior:contain;padding:3px 10px 3px 2px;
+  scrollbar-color:var(--guardian-line) transparent;
+}
+#instructor-flow .studio-library-filters{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:6px;margin-bottom:12px;padding-bottom:12px;
+  border-bottom:1px solid var(--guardian-line);
+}
+#instructor-flow .studio-library-filters button[data-asana-filter]{
+  min-height:39px;padding:8px 10px;border-radius:11px;
+  border:1px solid var(--guardian-line);
+  font:600 11px/1.35 'Inter',sans-serif;
+  background:rgba(255,255,255,.45);color:var(--guardian-ink);
+  box-shadow:none!important;
+}
+#instructor-flow .studio-library-filters button[data-asana-filter][aria-pressed="true"]{
+  background:var(--guardian-deep)!important;color:#fff!important;
+  border-color:var(--guardian-deep)!important;
+}
+#instructor-flow .studio-library-choices button[data-library-pose][hidden]{display:none!important}
+#instructor-flow .studio-library-choices button[data-library-pose]{
+  border-radius:12px!important;min-height:43px!important;
+  transition:background .16s ease,border-color .16s ease;
+}
+#instructor-flow .studio-library-choices button[data-library-pose]:not([aria-pressed="true"]){
+  background:rgba(255,255,255,.4)!important;color:var(--guardian-ink)!important;
+  border:1px solid var(--guardian-line)!important;
+}
+@media(max-width:850px){
+  #instructor-flow .studio-library-choices{
+    max-height:unset!important;overflow:visible!important;
+  }
+  #instructor-flow .studio-library-filters{grid-column:1 / -1}
+  #instructor-flow .studio-v66-workspace .studio-library-choices{
+    display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+}
+@media(max-width:450px){
+  #instructor-flow .studio-v66-workspace .studio-library-choices{
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  #instructor-flow .studio-library-filters{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  }
+  #instructor-flow .studio-v67-identity{padding:9px 11px}
+}
+@media(prefers-reduced-motion:reduce){
+  #instructor-flow .studio-library-choices button[data-library-pose]{transition:none!important}
+}

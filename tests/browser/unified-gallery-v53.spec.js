@@ -1,12 +1,12 @@
 const {test,expect}=require("@playwright/test");
-test("V53: the three additional poses show Nila, with no visible old skeleton",async({page})=>{
+test("V53/V68: the twelve additional poses show Nila, with no visible old skeleton",async({page})=>{
  await page.goto("/");
  const explorer=page.locator("#studio-asana-library");
  await expect(explorer).toBeHidden();
  await page.locator('[data-movement-view="library"]').evaluate(el=>el.click());
  await expect(explorer).toBeVisible();
- await expect(explorer.locator(".movement-guardian")).toHaveCount(3);
- await expect(explorer.locator(".yy-pose")).toHaveCount(3);
+ await expect(explorer.locator(".movement-guardian")).toHaveCount(12);
+ await expect(explorer.locator(".yy-pose")).toHaveCount(12);
  await expect(explorer.locator(".studio-library-stage")).toHaveAttribute("data-library-guardian","nila");
  for(const id of ["d24-mountain","d24-downward","d24-butterfly"]){
   await explorer.locator('[data-library-pose="'+id+'"]').evaluate(el=>el.click());

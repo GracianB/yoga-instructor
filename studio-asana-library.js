@@ -32,6 +32,21 @@
     '<p class="studio-library-foot"></p>';
   intro.insertAdjacentElement("afterend",section);
   const choices=section.querySelector(".studio-library-choices");
+  // Filters only affect opt-in library, not the ten canonical Flow phases.
+  const filters=document.createElement("div");
+  filters.className="studio-library-filters";
+  filters.setAttribute("role","group");
+  for(const key of ["all","standing","seated","restorative"]){
+    const chip=document.createElement("button");
+    chip.type="button";chip.dataset.asanaFilter=key;
+    chip.setAttribute("aria-pressed",String(key==="all"));
+    filters.appendChild(chip);
+  }
+  choices.prepend(filters);
+  let filter="all";
+  const category=p=>p.category||
+    (["mountain","warrior","tree","triangle","downward"].includes(p.kind)?"standing":
+    (["rest","child"].includes(p.kind)?"restorative":"seated"));
   const stage=section.querySelector(".studio-library-stage");
   const display=section.querySelector(".studio-library-display");
   const svg=source.cloneNode(true);
@@ -87,6 +102,7 @@
     const button=document.createElement("button");
     button.type="button";
     button.dataset.libraryPose=pose.id;
+    button.dataset.category=category(pose);
     button.setAttribute("aria-pressed","false");
     choices.appendChild(button);
   }
@@ -100,6 +116,13 @@
   let busy=false;
   const render=()=>{
     const index=language()==="en"?1:0,w=copy[language()];
+    const labels=index?{all:"All 12",standing:"Standing",seated:"Seated",restorative:"Rest"}:
+      {all:"Las 12",standing:"De pie",seated:"Sentadas",restorative:"Descanso"};
+    filters.setAttribute("aria-label",index?"Filter by posture family":"Filtrar por familia de posturas");
+    for(const chip of filters.querySelectorAll("button[data-asana-filter]")){
+      chip.textContent=labels[chip.dataset.asanaFilter];
+      chip.setAttribute("aria-pressed",String(chip.dataset.asanaFilter===filter));
+    }
     section.querySelector(".studio-library-eyebrow").textContent=w.heading;
     section.querySelector("#studio-library-title").textContent=w.title;
     section.querySelector(".studio-library-lead").textContent=w.lead;
@@ -107,8 +130,9 @@
     choices.setAttribute("aria-label",w.choose);
     const active=library.byId(current);
     if(!active)return;
-    for(const button of choices.querySelectorAll("button")){
+    for(const button of choices.querySelectorAll("button[data-library-pose]")){
       const pose=library.byId(button.dataset.libraryPose);
+      button.hidden=filter!=="all" && category(pose)!==filter;
       button.textContent=pose.name[index];
       button.setAttribute("aria-pressed",String(current===pose.id));
     }
@@ -122,8 +146,16 @@
     stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";
   };
   choices.addEventListener("click",event=>{
+    const chip=event.target.closest("button[data-asana-filter]");
+    if(chip){
+      filter=chip.dataset.asanaFilter;
+      const active=library.byId(current);
+      if(filter!=="all" && category(active)!==filter)
+        current=library.poses.find(p=>category(p)===filter)?.id||current;
+      render();return;
+    }
     const button=event.target.closest("button[data-library-pose]");
-    if(!button)return;
+    if(!button||button.hidden)return;
     if(library.byId(button.dataset.libraryPose)){
       current=button.dataset.libraryPose;
       render();
@@ -132,7 +164,7 @@
   choices.addEventListener("keydown",event=>{
     if(event.key!=="ArrowLeft"&&event.key!=="ArrowRight")return;
     event.preventDefault();
-    const buttons=[...choices.querySelectorAll("button")];
+    const buttons=[...choices.querySelectorAll("button[data-library-pose]:not([hidden])")];
     const active=buttons.indexOf(document.activeElement);
     const offset=event.key==="ArrowRight"?1:-1;
     const next=buttons[(active+offset+buttons.length)%buttons.length];

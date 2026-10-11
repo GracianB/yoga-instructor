@@ -14,8 +14,9 @@ const html=read("index.html"),build=read("tools/build.mjs"),
 const count=(markup,cls)=>[...markup.matchAll(/class="([^"]+)"/g)]
  .filter(x=>x[1].split(/\s+/).includes(cls)).length;
 
-test("D24: exactly three independently authored postures, canonical Flow remains at ten",()=>{
- assert.deepEqual(library.poses.map(p=>p.id),["d24-mountain","d24-downward","d24-butterfly"]);
+test("D24/V68: twelve independently authored postures, canonical Flow remains at ten",()=>{
+ assert.equal(library.poses.length,12);
+ assert.deepEqual(library.poses.slice(0,3).map(p=>p.id),["d24-mountain","d24-downward","d24-butterfly"]);
  assert.equal(art.poses.length,10);
  assert.equal(count(art.markup(),"yy-pose"),10);
  assert.equal(typeof art.drawPose,"function");
@@ -44,7 +45,7 @@ test("D24: new poses use genuine distinct four-limb vectors and complete D17 ana
  assert.equal(count(shapes[1],"yy-stance-shadow"),4);
  assert.equal(count(shapes[2],"yy-stance-shadow"),2);
  const profiles=new Set(library.poses.map(p=>JSON.stringify([p.body,p.head,p.arms,p.legs,p.hands,p.feet])));
- assert.equal(profiles.size,3);
+ assert.equal(profiles.size,12);
  assert.ok(library.byId("d24-downward").body[4]<-20);
  assert.ok(library.byId("d24-mountain").body[3]>85);
  assert.ok(library.byId("d24-butterfly").feet[0][0]>300);

@@ -1,0 +1,22 @@
+/* V81: route-based asana learning at the same book, no second library. */
+#studio-asana-library .v81-atlas{margin:22px 0 26px;display:grid;gap:16px}
+#studio-asana-library .v81-intro{display:grid;gap:6px}
+#studio-asana-library .v81-intro h4{font:500 clamp(1.4rem,2.7vw,2.2rem)/1.18 Fraunces,Georgia,serif;margin:0}
+#studio-asana-library .v81-intro p{font-size:.83rem;line-height:1.65;color:var(--muted);margin:0}
+#studio-asana-library .v81-tracks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+#studio-asana-library .v81-tracks button{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:7px 16px 7px 16px;min-height:69px;padding:13px;text-align:left;display:grid;gap:6px;cursor:pointer}
+#studio-asana-library .v81-tracks button[aria-pressed="true"]{border:2px solid var(--sage);padding:12px;background:color-mix(in srgb,var(--surface) 90%,var(--sage))}
+#studio-asana-library .v81-tracks strong{font:500 clamp(.9rem,1.5vw,1.14rem)/1.25 Fraunces,Georgia,serif}
+#studio-asana-library .v81-tracks small{font:.69rem/1.5 Inter,system-ui,sans-serif;color:var(--muted)}
+#studio-asana-library .v81-tools{display:flex;align-items:end;flex-wrap:wrap;gap:12px}
+#studio-asana-library .v81-search{flex:1 1 190px;display:grid;gap:7px}
+#studio-asana-library .v81-search label{font:.78rem/1.4 Inter,system-ui,sans-serif;font-weight:700}
+#studio-asana-library .v81-search input{background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:8px;min-height:44px;padding:9px 13px;width:100%}
+#studio-asana-library .v81-clear{min-height:44px;padding:9px 15px;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;cursor:pointer}
+#studio-asana-library .v81-results{font:.76rem/1.4 "JetBrains Mono",monospace;color:var(--muted);padding:9px 0}
+#studio-asana-library .v81-familynote{margin-top:12px;display:grid;gap:6px;border-left:3px solid var(--sage);padding:9px 15px;color:var(--ink)}
+#studio-asana-library .v81-familynote strong{font:500 1.1rem/1.25 Fraunces,Georgia,serif}
+#studio-asana-library .v81-familynote span{font-size:.8rem;line-height:1.6;color:var(--muted)}
+#studio-asana-library :is(.v81-atlas button,.v81-search input):focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+@media(max-width:660px){#studio-asana-library .v81-tracks{grid-template-columns:1fr}#studio-asana-library .v81-tracks button{min-height:56px}}
+@media(prefers-reduced-motion:reduce){#studio-asana-library .v81-atlas *{animation:none!important;transition:none!important}}

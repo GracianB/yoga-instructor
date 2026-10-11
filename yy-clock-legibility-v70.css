@@ -1,0 +1,83 @@
+/* Yoga V70 · Finish the real-world V69 screenshot review.
+ * V69 restored the main texts; the original timer legends ("Tiempo",
+ * "Quedan", "Objetivo") still inherited dim labels in both themes.
+ * These selectors only affect the existing Movement clock. No timers,
+ * breath engines, poses, geometry or other guardians are modified. */
+
+#instructor-flow .studio-v66-workspace #movement-stage .flow-session-clock{
+  color:var(--console-text)!important;
+  border-left-color:color-mix(in srgb,var(--console-rule) 44%,transparent)!important;
+  gap:6px!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-session-clock > [data-i18n="flowClock"]{
+  display:block!important;
+  color:var(--console-label)!important;
+  opacity:1!important;
+  font:700 11px/1.4 'JetBrains Mono',monospace!important;
+  letter-spacing:.12em!important;
+  text-transform:uppercase;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-phase-timing{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:7px!important;
+  margin-top:9px!important;
+  min-width:0;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-phase-timing small{
+  display:flex!important;
+  justify-content:space-between!important;
+  align-items:baseline!important;
+  gap:14px!important;
+  font:600 11px/1.5 'Inter',sans-serif!important;
+  color:var(--console-label)!important;
+  opacity:1!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-phase-timing small > span{
+  color:var(--console-label)!important;
+  opacity:1!important;
+  font-size:11px!important;
+  font-weight:600!important;
+  line-height:1.5!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-phase-timing small > b{
+  color:var(--console-text)!important;
+  opacity:1!important;
+  font:700 12px/1.45 'JetBrains Mono',monospace!important;
+  font-variant-numeric:tabular-nums!important;
+  letter-spacing:.02em;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-session-clock #flow-session-time{
+  color:var(--console-text)!important;
+  opacity:1!important;
+  font-variant-numeric:tabular-nums!important;
+}
+/* Dark surfaces never inherit the pale-panel dark text for captions. */
+#instructor-flow .studio-v66-workspace #movement-stage .flow-console-foot [data-i18n="flowSequence"]{
+  color:var(--console-hint)!important;
+  opacity:.88!important;
+}
+/* Readable at 375px too, without clipping the two timed values. */
+@media(max-width:450px){
+  #instructor-flow .studio-v66-workspace #movement-stage .flow-session-clock{
+    width:100%!important;
+    align-items:stretch!important;
+    padding-left:0!important;
+    border-left:0!important;
+  }
+  #instructor-flow .studio-v66-workspace #movement-stage .flow-session-clock > [data-i18n="flowClock"]{
+    align-self:flex-end!important;
+  }
+  #instructor-flow .studio-v66-workspace #movement-stage .flow-session-clock #flow-session-time{
+    align-self:flex-end!important;
+  }
+  #instructor-flow .studio-v66-workspace #movement-stage .flow-phase-timing{
+    width:100%!important;
+  }
+}
+@media(prefers-contrast:more){
+  #instructor-flow .studio-v66-workspace #movement-stage .flow-session-clock > [data-i18n="flowClock"],
+  #instructor-flow .studio-v66-workspace #movement-stage .flow-phase-timing small > span{
+    color:var(--console-text)!important;
+  }
+}

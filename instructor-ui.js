@@ -99,7 +99,9 @@
         (action === "reset" && idle) ||
         (action === "start" && !(idle || snapshot.status === "finished")) ||
         (action === "preview" && !idle) ||
-        (poseLocked && ["start", "preview", "previous", "next"].includes(action));
+        // Start and Repeat must remain available from idle/finished even if
+        // the previous pose-ready event is still settling after Reset.
+        (poseLocked && ["preview", "previous", "next"].includes(action));
 
       button.disabled = disabled;
       button.setAttribute("aria-disabled", String(disabled));

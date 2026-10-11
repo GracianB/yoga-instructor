@@ -34,7 +34,7 @@ es:{
  roots:"Enraizar",mobility:"Movilidad amable",restore:"Descanso activo",
  soft:"Suave 3/5",natural:"Natural 4/6",free:"Libre",guided:"Acompañada",silent:"En silencio",body:"Cuerpo",space:"Entorno",
  apply:"Aplicar sin comenzar",save:"Guardar en este dispositivo",clear:"Borrar lo guardado",
- privacy:"La aplicación conserva solo estas cinco elecciones cuando pulsas Guardar. No guarda historial ni datos de salud. Puedes borrarlas aquí.",
+ privacy:"Solo al pulsar Guardar se conservan estas cinco elecciones, la presentación visual y tu secuencia de tres posturas. No se guarda historial ni información de salud. Puedes borrarlo todo aquí.",
  applied:"Preferencias aplicadas. La práctica sigue parada hasta que pulses Empezar.",
  busy:"Primero termina o reinicia la práctica activa para cambiar la configuración.",
  kept:"Guardadas en este dispositivo. Al volver, pulsa Aplicar para activarlas.",

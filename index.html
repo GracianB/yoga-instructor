@@ -79,6 +79,7 @@
   <link rel="stylesheet" href="./teaching-casebook-v74.css?v=v74-1">
   <link rel="stylesheet" href="./editorial-atlas-v75.css?v=v75-1">
   <link rel="stylesheet" href="./yoga-enquiry-v76.css?v=v76-1">
+  <link rel="stylesheet" href="./credential-ledger-v77.css?v=v77-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -121,6 +122,7 @@
   <script src="./teaching-casebook-v74.js?v=v74-1" defer></script>
   <script src="./editorial-atlas-v75.js?v=v75-1" defer></script>
   <script src="./yoga-enquiry-v76.js?v=v76-1" defer></script>
+  <script src="./credential-ledger-v77.js?v=v77-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1016,6 +1018,67 @@
           </div>
         </li>
       </ol>
+    </section>
+
+
+    <!-- V77 · Evidence-led narrative CV, not a claim of independent verification -->
+    <section class="v77-ledger section" id="trayectoria" aria-labelledby="v77-title">
+      <div class="v77-lead">
+        <div>
+          <p class="v77-kicker" data-v77-text="kicker">03 / TRAYECTORIA EN CONTEXTO</p>
+          <h2 id="v77-title"><span data-v77-text="titleA">Más allá de las fechas.</span><em data-v77-text="titleB">Así enseño.</em></h2>
+        </div>
+        <div class="v77-explainer">
+          <p data-v77-text="lead">Una línea de experiencia profesional que puedes explorar por tipo de enseñanza. Cada entrada distingue trayectoria declarada, método y documentación disponible.</p>
+          <p class="v77-honesty" data-v77-text="honesty">Trayectoria descrita por el instructor. Los CV son documentos propios; no sustituyen una verificación independiente de titulaciones o empleo.</p>
+        </div>
+      </div>
+      <div class="v77-navigator">
+        <div class="v77-filters" role="group" aria-label="Filtrar experiencia" data-v77-label="filterGroup">
+          <button type="button" data-v77-filter="all" aria-pressed="true" data-v77-text="filterAll">Todo</button>
+          <button type="button" data-v77-filter="group" aria-pressed="false" data-v77-text="filterGroup">Sala</button>
+          <button type="button" data-v77-filter="individual" aria-pressed="false" data-v77-text="filterIndividual">1:1</button>
+          <button type="button" data-v77-filter="workplace" aria-pressed="false" data-v77-text="filterWorkplace">Equipos</button>
+          <button type="button" data-v77-filter="training" aria-pressed="false" data-v77-text="filterTraining">Formación</button>
+        </div>
+        <span id="v77-count" class="v77-count" role="status" aria-live="polite">4 experiencias</span>
+      </div>
+      <div class="v77-grid" id="v77-grid">
+        <article class="v77-entry" data-v77-role="group">
+          <div class="v77-entry-meta"><time datetime="2022">2022–2026</time><span>01 / GROUP</span></div>
+          <h3>Mood Fitness · Murcia</h3>
+          <p class="v77-sub" data-v77-text="moodType">Docencia presencial · hasta junio de 2026</p>
+          <p data-v77-text="moodStory">Clases para distintos niveles, usando alternativas, atención al movimiento y progresión dentro de un espacio compartido.</p>
+          <details><summary data-v77-text="approach">Enfoque y límites</summary><div class="v77-detail" data-v77-text="moodDetail">La carga y las posturas se ajustan a la experiencia del grupo. Sin afirmar resultados medidos ni atribuir la actividad del centro a una sola persona.</div></details>
+        </article>
+        <article class="v77-entry" data-v77-role="individual">
+          <div class="v77-entry-meta"><time datetime="2019">2019–2022</time><span>02 / 1:1</span></div>
+          <h3 data-v77-text="oneTitle">Clases individuales</h3>
+          <p class="v77-sub" data-v77-text="oneType">Personalización · atención particular</p>
+          <p data-v77-text="oneStory">Conversar sobre el objetivo, observar el punto de partida y adaptar la propuesta sin imponer una práctica única.</p>
+          <details><summary data-v77-text="approach">Enfoque y límites</summary><div class="v77-detail" data-v77-text="oneDetail">La sesión puede variar según movilidad, experiencia y comodidad. La práctica no sustituye orientación médica individualizada.</div></details>
+        </article>
+        <article class="v77-entry" data-v77-role="workplace">
+          <div class="v77-entry-meta"><time datetime="2020">2020–2021</time><span>03 / TEAMS</span></div>
+          <h3>Majorel · Wellness Ambassador</h3>
+          <p class="v77-sub" data-v77-text="teamType">Entorno corporativo · proyectos Google/YouTube</p>
+          <p data-v77-text="teamStory">Apoyo al bienestar en un contexto de operaciones, con prácticas que se adaptan a pausas de trabajo y equipos diversos.</p>
+          <details><summary data-v77-text="approach">Enfoque y límites</summary><div class="v77-detail" data-v77-text="teamDetail">Experiencia como profesional de Majorel en proyectos de Google/YouTube, no empleo directo por estas últimas empresas. Sin métricas clínicas ni testimonios atribuidos.</div></details>
+        </article>
+        <article class="v77-entry v77-entry-training" data-v77-role="training">
+          <div class="v77-entry-meta"><time datetime="2019">2019</time><span>04 / STUDY</span></div>
+          <h3 data-v77-text="trainingTitle">Formación de instructor · Madrid</h3>
+          <p class="v77-sub" data-v77-text="trainingType">Asanas · pranayama · filosofía</p>
+          <p data-v77-text="trainingStory">Formación intensiva y prácticas de enseñanza como base para las posteriores clases individuales y en sala.</p>
+          <details><summary data-v77-text="approach">Enfoque y límites</summary><div class="v77-detail" data-v77-text="trainingDetail">El portfolio recoge la formación declarada. Para comprobar entidad emisora y certificación específica es necesario consultar el certificado original.</div></details>
+        </article>
+      </div>
+      <div class="v77-actions">
+        <div><strong data-v77-text="documents">Documentos de referencia</strong><small data-v77-text="documentNote">El CV y la carta son documentos propios, sin aval externo implícito.</small></div>
+        <a class="v77-document" id="v77-cv" href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noopener" data-v77-text="cv">Consultar CV · ES</a>
+        <a class="v77-document" id="v77-letter" href="./Gracian_Baena_Carta_Yoga_ES.pdf" target="_blank" rel="noopener" data-v77-text="letter">Carta de presentación</a>
+        <button class="v77-print" id="v77-print" type="button" data-v77-text="print">Imprimir esta trayectoria</button>
+      </div>
     </section>
 
     <!-- EXPERIENCE -->

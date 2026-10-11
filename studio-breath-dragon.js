@@ -53,6 +53,7 @@
 <path d="M213 197 C190 219 193 272 210 291 Q224 306 245 292 L258 279 Q241 274 231 259 Q228 232 240 218" fill="url(#sd31-body)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
 <path d="M349 196 C373 215 371 271 352 293 Q339 306 317 291 L304 279 Q322 274 331 256 Q332 226 321 217" fill="url(#sd31-body)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
 <path d="M221 284 Q230 290 240 286 M321 285 Q332 291 342 285" fill="none" stroke="var(--dragon-deep,#568978)" stroke-opacity=".55" stroke-width="2" stroke-linecap="round"/>
+<g class="sd31-head-unit">
 <!-- Broad neck seamlessly emerges behind the face, no rectangle -->
 <path d="M252 148 Q242 168 252 190 Q278 204 305 190 Q314 168 306 149Z" fill="url(#sd31-body)" stroke="var(--dragon-deep,#568978)" stroke-width="3"/>
 <!-- Horn and two silhouette crests -->
@@ -67,6 +68,7 @@
 <path class="sd31-nostril-lines" d="M256 149l5 1 M299 150l5 -1" fill="none" stroke="var(--eye,#264c43)" stroke-opacity=".42" stroke-width="2" stroke-linecap="round"/>
 <path d="M235 148 Q244 154 255 150 M305 150 Q315 154 324 146" fill="none" stroke="var(--cheek,#dbab9e)" stroke-width="6" stroke-opacity=".45" stroke-linecap="round"/>
 <path d="M255 84 Q269 75 283 77" fill="none" stroke="#fff8e5" stroke-width="6" stroke-linecap="round" opacity=".24"/>
+</g>
 <!-- The planted front feet cover body seams, three small curved claws each -->
 <path d="M221 314 C203 314 190 331 199 343 Q217 352 251 347 Q266 337 248 318Z" fill="url(#sd31-head)" stroke="var(--dragon-deep,#568978)" stroke-width="3"/>
 <path d="M338 313 C356 313 373 331 363 343 Q345 352 307 347 Q291 337 309 318Z" fill="url(#sd31-head)" stroke="var(--dragon-deep,#568978)" stroke-width="3"/>

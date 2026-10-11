@@ -35,6 +35,7 @@
  <path d="M236 170 C197 135 158 123 106 88 C108 122 118 148 139 160 C110 159 96 183 95 214 C130 201 151 206 175 224 Q194 239 208 235 C215 214 231 187 236 170Z" fill="url(#sd31-wing)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
  <path d="M325 166 C363 132 403 121 459 88 C456 124 443 149 421 162 C451 159 465 181 469 214 C434 202 410 206 386 225 Q368 241 353 236 C343 214 331 186 325 166Z" fill="url(#sd31-wing)" stroke="var(--dragon-deep,#568978)" stroke-width="3" stroke-linejoin="round"/>
  <path d="M223 179Q172 151 122 115 M210 213Q162 188 111 193 M337 179Q389 152 445 115 M347 214Q399 187 452 193" fill="none" stroke="var(--wing-vein,#f4efce)" stroke-width="3" stroke-linecap="round" opacity=".7"/>
+ <path class="sd31-wing-shimmer" d="M205 192Q167 168 138 155 M352 190Q394 164 420 152"/>
 </g>
 <!-- Hind legs stay anchored at the same baseline as the front paws -->
 <path d="M216 284 C186 288 173 318 182 336 Q193 350 233 342 L255 317 Z" fill="url(#sd31-body)" stroke="var(--dragon-deep,#568978)" stroke-width="3"/>
@@ -71,6 +72,8 @@
 <path d="M338 313 C356 313 373 331 363 343 Q345 352 307 347 Q291 337 309 318Z" fill="url(#sd31-head)" stroke="var(--dragon-deep,#568978)" stroke-width="3"/>
 <path d="M214 336 L213 344 M232 337 L231 345 M248 335 L249 342 M320 336 L319 344 M338 337 L338 345 M356 335 L357 342" fill="none" stroke="var(--dragon-deep,#568978)" stroke-opacity=".5" stroke-width="2" stroke-linecap="round"/>
 <circle class="sd31-heart" cx="280" cy="253" r="10" fill="#f9e6b3" opacity=".36"/>
+<path class="sd31-chest-prana" d="M271 251Q280 241 289 251 M274 261Q280 267 286 261"
+  fill="none" stroke="var(--dragon-deep,#568978)" stroke-opacity=".29" stroke-width="2" stroke-linecap="round"/>
 `;
  mount.appendChild(svg);
 })();

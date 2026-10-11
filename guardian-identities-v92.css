@@ -1,0 +1,21 @@
+/* V92: individual identities, not a universal green recolour. */
+#instructor-flow .studio-mode{position:relative;isolation:isolate;overflow:hidden}
+#instructor-flow .studio-mode::before{content:"";position:absolute;inset:0 auto 0 0;width:5px;background:var(--v92-accent);border-radius:8px}
+#instructor-flow .studio-mode[data-studio-mode="asanas"]{--v92-accent:#b96948;--v92-edge:#f7d0b0;--v92-ink:#713e2b;--v92-aura:#fff3e3}
+#instructor-flow .studio-mode[data-studio-mode="breath"]{--v92-accent:#287f82;--v92-edge:#a6dfd5;--v92-ink:#1b575e;--v92-aura:#e9f9f3}
+#instructor-flow .studio-mode[data-studio-mode="meditation"]{--v92-accent:#7562a6;--v92-edge:#d4c4ee;--v92-ink:#534478;--v92-aura:#f4effc}
+#instructor-flow .studio-mode .v92-identity-signature{display:block;font:700 .64rem/1.5 "JetBrains Mono",monospace;letter-spacing:.07em;color:var(--v92-ink);white-space:normal;margin-top:7px}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"]{background:var(--v92-aura)!important;border-color:var(--v92-accent)!important}
+html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"] .v92-identity-signature{color:var(--v92-ink)!important}
+html[data-theme="dark"] #instructor-flow .studio-mode[data-studio-mode="asanas"]{--v92-accent:#d9a080;--v92-ink:#f5ccb2;--v92-aura:#382a29}
+html[data-theme="dark"] #instructor-flow .studio-mode[data-studio-mode="breath"]{--v92-accent:#84d0c8;--v92-ink:#c2f1e9;--v92-aura:#193b3e}
+html[data-theme="dark"] #instructor-flow .studio-mode[data-studio-mode="meditation"]{--v92-accent:#c0afe9;--v92-ink:#e2d6f7;--v92-aura:#302a45}
+html[data-theme="dark"] #instructor-flow .studio-mode[aria-pressed="true"]{background:var(--v92-aura)!important;border-color:var(--v92-accent)!important}
+html[data-theme="dark"] #instructor-flow .studio-mode .v92-identity-signature{color:var(--v92-ink)}
+#instructor-flow .studio-mode:focus-visible{outline:3px solid var(--v92-accent)!important;outline-offset:3px}
+/* Distinctive character accents stay within the correct stage only. */
+#instructor-flow[data-studio-mode="asanas"] .studio-v67-identity-symbol{color:#af704d}
+#instructor-flow[data-studio-mode="breath"] .studio-v67-identity-symbol{color:#318481}
+#instructor-flow[data-studio-mode="meditation"] .studio-v67-identity-symbol{color:#8a77b8}
+@media(max-width:480px){#instructor-flow .studio-mode .v92-identity-signature{font-size:.59rem;letter-spacing:.035em}}
+@media(prefers-reduced-motion:reduce){#instructor-flow .studio-mode *{animation:none!important;transition:none!important}}

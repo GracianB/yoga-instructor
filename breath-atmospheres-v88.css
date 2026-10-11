@@ -1,0 +1,24 @@
+/* V88: distinct breathable environments and a genuine stillness control. */
+#instructor-flow .v88-atmosphere{padding:17px clamp(16px,4vw,42px) 24px;background:#edf1e7;display:grid;gap:14px;border-top:1px solid #bfd0bf}
+#instructor-flow .v88-atmosphere[hidden]{display:none!important}
+#instructor-flow .v88-head{display:grid;gap:5px}
+#instructor-flow .v88-head strong{font:700 .71rem/1.4 "JetBrains Mono",monospace;letter-spacing:.1em;color:#2a503e}
+#instructor-flow .v88-head p,#instructor-flow .v88-note{font:.76rem/1.7 Inter,system-ui,sans-serif;color:#365746;margin:0}
+#instructor-flow .v88-options,#instructor-flow .v88-visual{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+#instructor-flow .v88-visual-label{font:700 .76rem/1.4 Inter,system-ui,sans-serif;color:#2f5341;flex:0 0 100%;margin-bottom:3px}
+#instructor-flow .v88-atmosphere button{min-height:44px;padding:10px 13px;font:700 .78rem/1.4 Inter,system-ui,sans-serif;background:#fffdf7;color:#284a3a;border:1px solid #8eaa96;border-radius:22px;cursor:pointer}
+#instructor-flow .v88-atmosphere button[aria-pressed="true"]{background:#284e3c;color:#fff;border-color:#284e3c}
+#instructor-flow .v88-atmosphere button:focus-visible{outline:3px solid #265b46;outline-offset:3px}
+#instructor-flow .studio-guided[data-studio-active="breath"][data-v88-atmosphere="ocean"] .studio-guided-stage{background:radial-gradient(ellipse at 50% 37%,#e2f6f2 0%,#d2e8f0 55%,#c9dfe4 100%)}
+#instructor-flow .studio-guided[data-studio-active="breath"][data-v88-atmosphere="twilight"] .studio-guided-stage{background:radial-gradient(ellipse at 50% 35%,#fbf1e0 0%,#efddda 55%,#e4dce9 100%)}
+#instructor-flow .studio-guided[data-v88-atmosphere="ocean"] .studio-companion{--dragon-light:#d5f4e6;--dragon-mid:#7eb4be;--dragon-deep:#3c6d86;--wing-light:#cde9eb;--wing-vein:#eefdf5;--chest-mid:#cbe9e5}
+#instructor-flow .studio-guided[data-v88-atmosphere="twilight"] .studio-companion{--dragon-light:#f6d8c9;--dragon-mid:#c8aba8;--dragon-deep:#86597b;--wing-light:#e7ccdf;--wing-vein:#fff3df;--chest-mid:#f1dbd7}
+html[data-theme="dark"] #instructor-flow .v88-atmosphere{background:#1a322e;border-top-color:#557d6b}
+html[data-theme="dark"] #instructor-flow .v88-head strong,html[data-theme="dark"] #instructor-flow .v88-head p,
+html[data-theme="dark"] #instructor-flow .v88-visual-label,html[data-theme="dark"] #instructor-flow .v88-note{color:#e5eddf}
+html[data-theme="dark"] #instructor-flow .v88-atmosphere button{background:#2a4940;color:#eaf4e9;border-color:#789c89}
+html[data-theme="dark"] #instructor-flow .v88-atmosphere button[aria-pressed="true"]{background:#e4e9d6;color:#1d382a}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-v88-atmosphere="ocean"] .studio-guided-stage{background:radial-gradient(ellipse at 50% 36%,#315e69 0%,#18353d 78%)}
+html[data-theme="dark"] #instructor-flow .studio-guided[data-v88-atmosphere="twilight"] .studio-guided-stage{background:radial-gradient(ellipse at 50% 36%,#654862 0%,#30283b 78%)}
+@media(max-width:430px){#instructor-flow .v88-atmosphere button{flex:1 1 28%;padding:9px}}
+@media(prefers-reduced-motion:reduce){#instructor-flow .v88-atmosphere *{animation:none!important;transition:none!important}}

@@ -78,6 +78,7 @@
   <link rel="stylesheet" href="./portfolio-v73.css?v=v73-1">
   <link rel="stylesheet" href="./teaching-casebook-v74.css?v=v74-1">
   <link rel="stylesheet" href="./editorial-atlas-v75.css?v=v75-1">
+  <link rel="stylesheet" href="./yoga-enquiry-v76.css?v=v76-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -119,6 +120,7 @@
   <script src="./portfolio-v73.js?v=v73-1" defer></script>
   <script src="./teaching-casebook-v74.js?v=v74-1" defer></script>
   <script src="./editorial-atlas-v75.js?v=v75-1" defer></script>
+  <script src="./yoga-enquiry-v76.js?v=v76-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1162,6 +1164,102 @@
         <p class="contact-lead" data-i18n="contactLead">
           Disponible para clases, colaboraciones y bienestar en equipos. Murcia · abierto a propuestas.
         </p>
+
+        <section class="v76-enquiry" id="v76-enquiry" aria-labelledby="v76-title">
+          <div class="v76-intro">
+            <p class="v76-kicker" data-v76-text="kicker">VAMOS A TRABAJAR JUNTOS</p>
+            <h3 id="v76-title" data-v76-text="title">Cuéntame qué necesitas.</h3>
+            <p class="v76-lead" data-v76-text="lead">Una conversación empieza mejor con un poco de contexto. Diseña tu consulta en tres pasos y abre tu correo cuando el mensaje te represente.</p>
+            <div class="v76-sigil" aria-hidden="true">
+              <svg viewBox="0 0 280 160" focusable="false">
+                <g fill="none" stroke="currentColor" stroke-linecap="round">
+                  <path d="M15 96C62 96 62 49 107 49S156 117 204 117 237 70 265 70" stroke-width="3"/>
+                  <circle cx="107" cy="49" r="12" fill="currentColor" fill-opacity=".12" stroke-width="2"/>
+                  <circle cx="204" cy="117" r="12" fill="currentColor" fill-opacity=".12" stroke-width="2"/>
+                  <path d="M15 130H265M15 24H265" stroke-width="1" opacity=".23"/>
+                </g>
+              </svg>
+            </div>
+            <p class="v76-privacy" data-v76-text="privacy">Tus respuestas no se guardan ni se envían desde esta página. Se incorporan solamente al mensaje que decides abrir en tu aplicación de correo.</p>
+          </div>
+          <div class="v76-workspace">
+            <form id="v76-form" novalidate>
+              <fieldset class="v76-services">
+                <legend data-v76-text="step1">01 / TIPO DE PRÁCTICA</legend>
+                <div class="v76-service-grid">
+                  <label class="v76-service is-selected">
+                    <input type="radio" name="v76-service" value="sala" checked>
+                    <span><strong data-v76-text="sala">Clases en sala</strong><small data-v76-text="salaSub">Grupo y progresiones</small></span>
+                  </label>
+                  <label class="v76-service">
+                    <input type="radio" name="v76-service" value="individual">
+                    <span><strong data-v76-text="individual">Sesión individual</strong><small data-v76-text="individualSub">Atención personal</small></span>
+                  </label>
+                  <label class="v76-service">
+                    <input type="radio" name="v76-service" value="equipos">
+                    <span><strong data-v76-text="equipos">Bienestar para equipos</strong><small data-v76-text="equiposSub">Pausas adaptables</small></span>
+                  </label>
+                </div>
+              </fieldset>
+              <fieldset class="v76-options">
+                <legend data-v76-text="step2">02 / FORMATO Y OBJETIVO</legend>
+                <div class="v76-option-grid">
+                  <div>
+                    <label for="v76-format" data-v76-text="formatLabel">Modalidad preferida</label>
+                    <select id="v76-format" name="format">
+                      <option value="default" data-v76-text="formatDefault">Sin preferencia</option>
+                      <option value="presencial" data-v76-text="formatPresencial">Presencial · Murcia</option>
+                      <option value="online" data-v76-text="formatOnline">En línea</option>
+                      <option value="empresa" data-v76-text="formatEmpresa">En la organización</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="v76-focus" data-v76-text="focusLabel">Objetivo principal</label>
+                    <select id="v76-focus" name="focus">
+                      <option value="general" data-v76-text="focusGeneral">Conocer las posibilidades</option>
+                      <option value="movilidad" data-v76-text="focusMovilidad">Movimiento y movilidad</option>
+                      <option value="respiracion" data-v76-text="focusRespiracion">Respiración y pausa</option>
+                      <option value="atencion" data-v76-text="focusAtencion">Concentración y atención</option>
+                      <option value="equipo" data-v76-text="focusEquipo">Bienestar del equipo</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label for="v76-size" data-v76-text="sizeLabel">Participantes orientativos</label>
+                    <select id="v76-size" name="size">
+                      <option value="unknown" data-v76-text="sizeUnsure">Por concretar</option>
+                      <option value="solo" data-v76-text="sizeSolo">Una persona</option>
+                      <option value="small" data-v76-text="sizeSmall">2–8 personas</option>
+                      <option value="medium" data-v76-text="sizeMedium">9–20 personas</option>
+                      <option value="large" data-v76-text="sizeLarge">Más de 20</option>
+                    </select>
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset class="v76-context">
+                <legend data-v76-text="step3">03 / TU CONTEXTO</legend>
+                <label for="v76-details" data-v76-text="detailsLabel">Qué te gustaría contarme</label>
+                <textarea id="v76-details" name="details" rows="4" maxlength="500" placeholder="Disponibilidad, experiencia previa, espacio, necesidades o dudas. No incluyas datos médicos sensibles."></textarea>
+                <p class="v76-counter" id="v76-counter" aria-live="off">0 / 500 caracteres</p>
+              </fieldset>
+              <div class="v76-compose-actions">
+                <button id="v76-compose" type="submit" data-v76-text="compose">Preparar mi mensaje</button>
+                <button id="v76-reset" type="button" data-v76-text="reset">Limpiar selección</button>
+              </div>
+              <p id="v76-live" class="v76-status" role="status" aria-live="polite"></p>
+            </form>
+            <section class="v76-results" id="v76-results" aria-labelledby="v76-preview-title" hidden>
+              <div class="v76-results-head">
+                <span class="v76-kicker" data-v76-text="previewTitle">TU MENSAJE, A TU MANERA</span>
+                <p data-v76-text="previewLead">Puedes revisar y editar este texto antes de enviar el correo.</p>
+              </div>
+              <label class="v76-preview-label" for="v76-preview" id="v76-preview-title" data-v76-text="previewTitle">TU MENSAJE, A TU MANERA</label>
+              <textarea id="v76-preview" rows="11" spellcheck="true"></textarea>
+              <a class="v76-mail" id="v76-mail" href="#" data-v76-text="mail">Abrir mi correo ↗</a>
+              <p class="v76-footnote" data-v76-text="copyTip">El correo se abre en tu aplicación habitual; aquí no se envía automáticamente.</p>
+            </section>
+          </div>
+        </section>
+
         <div class="contact-actions">
           <a class="btn primary" href="mailto:gracianbaenagonzalez@gmail.com">Email ↗</a>
           <a class="btn ghost" href="https://calendar.app.google/n99psBFktwYyoAWi9" target="_blank" rel="noreferrer" data-i18n="contactAgenda">Agendar ↗</a>

@@ -1,0 +1,184 @@
+/* Yoga V69 · screenshot-driven console repair.
+   The V67 identity layer supplied dark lettering to a legacy dark Movement
+   cockpit. This final presentation layer deliberately separates dark cockpit
+   text from pale scene and identity-card text. No pose geometry is changed. */
+
+#instructor-flow .studio-v66-workspace > #movement-stage.flow-console{
+  --console-base:#203d3a;
+  --console-base-2:#193431;
+  --console-text:#f5f2e9;
+  --console-label:#d5e7da;
+  --console-hint:#c9ddd1;
+  --console-rule:#88ad9c;
+  --console-accent:#f0b795;
+  --console-button:#efd4b7;
+  color:var(--console-text)!important;
+  background:
+    radial-gradient(ellipse 68% 70% at 84% 4%,rgba(179,126,92,.09),transparent 78%),
+    linear-gradient(145deg,var(--console-base),var(--console-base-2))!important;
+  border-color:var(--console-rule)!important;
+}
+/* The purple Yin guardian must not live beside a terracotta Yang cockpit. */
+#instructor-flow:has(#flow-guide[data-spirit="yin"]) .studio-v66-workspace > #movement-stage.flow-console{
+  --console-base:#2b324d;
+  --console-base-2:#222c43;
+  --console-text:#f6f1ff;
+  --console-label:#e0dcf5;
+  --console-hint:#cdd0e7;
+  --console-rule:#8e90ba;
+  --console-accent:#c2addf;
+  --console-button:#e6d6f8;
+  background:
+    radial-gradient(ellipse 62% 75% at 83% 4%,rgba(167,144,224,.12),transparent 79%),
+    linear-gradient(148deg,var(--console-base),var(--console-base-2))!important;
+}
+/* The old CSS applied --guardian-ink (dark on cream) with !important to
+   these controls. Force one readable foreground across all original states. */
+#instructor-flow .studio-v66-workspace #movement-stage .studio-v66-control-pane{
+  color:var(--console-text)!important;
+  background:transparent!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage :is(
+ .studio-plan,.studio-adaptation,.flow-console-top,.flow-console-foot,
+ .flow-phase,.flow-session-clock,.flow-progress,.flow-phase-progress,.flow-controls
+){
+  color:var(--console-text)!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage :is(
+ .studio-plan-heading,.studio-adaptation-heading,.studio-adaptation-field,
+ .studio-adaptation-rest,.studio-plan-description,.studio-adaptation-summary,
+ .flow-phase-kicker,.flow-phase-meta,.flow-phase-timing,
+ .flow-console-foot [data-i18n="flowSequence"]
+){
+  color:var(--console-label)!important;
+  opacity:1!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage :is(
+ .studio-plan-description,.studio-adaptation-summary,
+ .studio-adaptation-field,.studio-adaptation-rest
+){
+  font-size:12px!important;
+  line-height:1.6!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage :is(
+ #flow-phase-label,#flow-phase-cue,#flow-session-time,#flow-state,
+ #flow-phase-time,#flow-phase-target
+){
+  color:var(--console-text)!important;
+  opacity:1!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage #flow-phase-cue{
+  color:var(--console-hint)!important;
+  font-size:13px!important;line-height:1.6!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .studio-adaptation-rest{
+  gap:10px;min-height:30px;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .studio-adaptation-rest input{
+  accent-color:var(--console-accent);
+}
+/* Restore a clear typographic hierarchy: label, title + phase count, cue. */
+#instructor-flow .studio-v66-workspace #movement-stage .flow-phase{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:baseline;gap:6px 12px;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-phase-kicker{
+  grid-column:1 / -1;display:block!important;
+  color:var(--console-label)!important;
+  font-size:10px!important;letter-spacing:.12em;
+}
+#instructor-flow .studio-v66-workspace #movement-stage #flow-phase-label{
+  grid-column:1;display:block!important;
+  font-size:clamp(20px,2vw,27px)!important;
+  line-height:1.22!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage #flow-phase-meta{
+  grid-column:2;justify-self:end;
+  color:var(--console-label)!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage #flow-phase-cue{
+  grid-column:1 / -1;display:block!important;margin:0!important;
+}
+/* Dark pane stays dark. A transparent white overlay, rather than a pale slab,
+   keeps the scene and controls visually related. */
+#instructor-flow .studio-v66-workspace #movement-stage :is(
+ .flow-console-top,.studio-plan,.studio-adaptation
+){
+  border-color:color-mix(in srgb,var(--console-rule) 60%,transparent)!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-console-top{
+  background:rgba(255,255,255,.055)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.08)!important;
+}
+/* Yin and Yang keep the SAME control layout, but not the same accents. */
+#instructor-flow .studio-v66-workspace #movement-stage .studio-plan-options button{
+  border-color:var(--console-rule)!important;
+  color:var(--console-text)!important;
+  background:rgba(255,255,255,.07)!important;
+  opacity:1!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .studio-plan-options button[aria-pressed="true"]{
+  background:var(--console-accent)!important;
+  border-color:var(--console-accent)!important;
+  color:#242b33!important;
+  font-weight:750!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .studio-adaptation select{
+  background:#304c48!important;
+  border-color:var(--console-rule)!important;
+  color:#f7f5ef!important;
+}
+#instructor-flow:has(#flow-guide[data-spirit="yin"])
+ .studio-v66-workspace #movement-stage .studio-adaptation select{
+  background:#353d5c!important;
+  color:#f7f1ff!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage :is(
+ .flow-progress #flow-progress-bar,
+ .flow-phase-progress #flow-phase-progress-bar
+){
+  background:linear-gradient(90deg,var(--console-rule),var(--console-accent))!important;
+  box-shadow:0 0 11px rgba(0,0,0,.08);
+}
+#instructor-flow .studio-v66-workspace #movement-stage .flow-start{
+  background:linear-gradient(125deg,var(--console-accent),var(--console-button))!important;
+  border-color:var(--console-accent)!important;
+  color:#29313b!important;
+}
+/* Identity card is always a LIGHT surface and therefore uses DARK lettering.
+   This deliberately does not inherit the cockpit's pale type. */
+#instructor-flow .studio-v66-workspace #movement-stage .studio-v67-identity{
+  background:linear-gradient(115deg,#f5ebdb,#e9dac6)!important;
+  border-color:#d9bd9e!important;
+  color:#48382f!important;
+  box-shadow:0 7px 20px rgba(10,17,19,.12)!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .studio-v67-identity :is(strong,small){
+  color:#48382f!important;opacity:1!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage .studio-v67-identity-symbol{
+  color:#fff8ef!important;background:#ae7458!important;
+}
+#instructor-flow:has(#flow-guide[data-spirit="yin"])
+ .studio-v66-workspace #movement-stage .studio-v67-identity{
+  background:linear-gradient(115deg,#f0eafd,#ddd6ee)!important;
+  border-color:#c3b7d9!important;
+}
+#instructor-flow:has(#flow-guide[data-spirit="yin"])
+ .studio-v66-workspace #movement-stage .studio-v67-identity :is(strong,small){
+  color:#32314f!important;
+}
+#instructor-flow:has(#flow-guide[data-spirit="yin"])
+ .studio-v66-workspace #movement-stage .studio-v67-identity-symbol{
+  background:#70659f!important;color:white!important;
+}
+#instructor-flow .studio-v66-workspace #movement-stage button:focus-visible,
+#instructor-flow .studio-v66-workspace #movement-stage select:focus-visible{
+  outline:3px solid var(--console-accent)!important;outline-offset:3px;
+}
+@media(prefers-contrast:more){
+  #instructor-flow .studio-v66-workspace #movement-stage{
+    --console-label:#f2f4ef;--console-hint:#eef4f0;
+  }
+}

@@ -73,6 +73,12 @@ pane.addEventListener("click",event=>{
  const c=event.target.closest("button[data-v95-comfort]");
  if(c){comfort=c.dataset.v95Comfort;paint();status.textContent=copy[locale()].comfort}
 });
+// The real Movement editor and the preference sheet must agree on "My sequence".
+const movementRoute=document.getElementById("v85-route");
+movementRoute?.addEventListener("change",()=>{
+ const field=prefs.querySelector('select[data-v93-setting="route"]');
+ if(field&&movementRoute.value==="custom")field.value="custom";
+});
 // This listener observes the exact existing V93 Save/Clear gestures.
 // Never save on a change of selected options or via automatic effects.
 prefs.addEventListener("click",event=>{

@@ -22,7 +22,7 @@ test("V49: breathing room, torso and wings derive from the original session cloc
  const js=read("practice-studio.js"),css=read("yy-breath-revival.css");
  assert.match(js,/setVar\(guided, "--studio-breath-scale", roomScale\)/);
  assert.match(js,/\.14 \* breathing\.expansion/);
- assert.match(js,/\.06 \* breathing\.expansion/);
+ assert.match(js,/\.15 \* breathing\.expansion/);
  assert.match(css,/\.studio-guided-stage::before/);
  assert.match(css,/\.sd31-halo/);
  assert.match(css,/--studio-breath-scale/);

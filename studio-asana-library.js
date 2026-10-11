@@ -28,7 +28,14 @@
     '<div class="studio-library-body"><div class="studio-library-choices" role="group"></div>'+
     '<div class="studio-library-display"><div class="studio-library-stage yy-guide" data-asana-state="idle" aria-hidden="true"></div>'+
     '<h4 class="studio-library-name" aria-live="polite"></h4><p class="studio-library-cue"></p>'+
-    '<p class="studio-library-ground"></p></div></div>'+
+    '<p class="studio-library-ground"></p>'+
+    '<section class="studio-library-coaching" aria-labelledby="studio-library-how-title">'+
+      '<h5 id="studio-library-how-title"></h5>'+
+      '<ol class="studio-library-steps">'+
+        '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
+        '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
+        '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
+      '</ol></section></div></div>'+
     '<p class="studio-library-foot"></p>';
   intro.insertAdjacentElement("afterend",section);
   const choices=section.querySelector(".studio-library-choices");
@@ -142,6 +149,18 @@
     section.querySelector(".studio-library-name").textContent=active.name[index];
     section.querySelector(".studio-library-cue").textContent=active.cue[index];
     section.querySelector(".studio-library-ground").textContent=w.contact+" · "+active.support[index];
+    // V71: three short, practical steps give the selected posture a
+    // meaningful start, calm breathing cue and deliberate finish.
+    const coaching=active.coaching;
+    const guideTitle=section.querySelector("#studio-library-how-title");
+    guideTitle.textContent=index?"Explore the posture":"Explora la postura";
+    const labels=index?["1 · Set up","2 · Breathe","3 · Release"]:
+      ["1 · Prepárate","2 · Respira","3 · Sal"];
+    for(const [i,key] of ["setup","breath","exit"].entries()){
+      const item=section.querySelectorAll(".studio-library-steps li")[i];
+      item.querySelector(".studio-library-step-label").textContent=labels[i];
+      item.querySelector(".studio-library-step-text").textContent=coaching[key][index];
+    }
     display.dataset.libraryCurrent=current;
     stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";
   };
@@ -162,12 +181,16 @@
     }
   });
   choices.addEventListener("keydown",event=>{
-    if(event.key!=="ArrowLeft"&&event.key!=="ArrowRight")return;
+    if(!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Home","End"].includes(event.key))return;
+    if(!event.target.matches("button[data-library-pose]"))return;
     event.preventDefault();
     const buttons=[...choices.querySelectorAll("button[data-library-pose]:not([hidden])")];
+    if(!buttons.length)return;
     const active=buttons.indexOf(document.activeElement);
-    const offset=event.key==="ArrowRight"?1:-1;
-    const next=buttons[(active+offset+buttons.length)%buttons.length];
+    const offset=["ArrowRight","ArrowDown"].includes(event.key)?1:-1;
+    const nextIndex=event.key==="Home"?0:event.key==="End"?buttons.length-1:
+      (active+offset+buttons.length)%buttons.length;
+    const next=buttons[nextIndex];
     next?.focus();
     next?.click();
   });

@@ -107,3 +107,29 @@
     animation:none!important;transition:none!important;
   }
 }
+
+/* V71 visual audit: the fixed global One Breath player obscured coaching text.
+   Readers can reveal it on demand using a labelled button in the gallery. */
+body:has(#studio-asana-library:not([hidden])[data-dock-open="false"]) .sanctuary-dock{
+  display:none!important;
+}
+#instructor-flow .studio-library-heading .studio-library-dock-toggle{
+  display:inline-flex;align-items:center;gap:7px;
+  min-height:38px;max-width:100%;
+  padding:8px 13px;margin:6px 0 0;
+  background:rgba(255,255,255,.50);
+  color:var(--guardian-deep)!important;
+  border:1px solid var(--guardian-line)!important;
+  border-radius:12px;
+  font:650 12px/1.4 'Inter',sans-serif;
+  text-align:left;
+  white-space:normal;
+}
+#instructor-flow .studio-library-heading .studio-library-dock-toggle[aria-pressed="true"]{
+  background:var(--guardian-deep)!important;
+  color:#fff!important;
+}
+#instructor-flow .studio-library-heading .studio-library-dock-toggle:focus-visible{
+  outline:3px solid var(--guardian-accent)!important;
+  outline-offset:3px;
+}

@@ -235,6 +235,7 @@
     const shape = Sculpt.sculpt(breathing, activeBreath);
     const articulated=Articulation?.sculpt(breathing,{
       status:isBreathing?snapshot.status:"idle",
+      intensity:guided.dataset.v88Intensity==="still"?0:guided.dataset.v88Intensity==="expressive"?1:.55,
       quiet:document.body.classList.contains("quiet-mode")||
         window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
     });
@@ -421,6 +422,7 @@
   });
 
   root.addEventListener("yoga:breath-presentation",()=>{if(mode==="breath")render()});
+  root.addEventListener("yoga:breath-atmosphere",()=>{if(mode==="breath")render()});
   window.addEventListener("yoga:flow", ({detail}) => {
     asanaBusy = ["running","paused"].includes(detail?.status);
     lockChoices();

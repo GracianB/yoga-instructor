@@ -155,7 +155,8 @@
     form.reset();
     details.value="";
     preview.value="";
-    email.href="mailto:"+targetEmail;
+    // A reset preview must not expose a second active mailto link.
+    email.href="#";
     results.hidden=true;
     root.querySelector("#v76-live").textContent=t().empty;
     root.querySelector("#v76-compose").textContent=t().compose;

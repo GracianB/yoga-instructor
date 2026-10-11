@@ -154,11 +154,11 @@
     const coaching=active.coaching;
     const guideTitle=section.querySelector("#studio-library-how-title");
     guideTitle.textContent=index?"Explore the posture":"Explora la postura";
-    const labels=index?["1 · Set up","2 · Breathe","3 · Release"]:
+    const stepNames=index?["1 · Set up","2 · Breathe","3 · Release"]:
       ["1 · Prepárate","2 · Respira","3 · Sal"];
     for(const [i,key] of ["setup","breath","exit"].entries()){
       const item=section.querySelectorAll(".studio-library-steps li")[i];
-      item.querySelector(".studio-library-step-label").textContent=labels[i];
+      item.querySelector(".studio-library-step-label").textContent=stepNames[i];
       item.querySelector(".studio-library-step-text").textContent=coaching[key][index];
     }
     display.dataset.libraryCurrent=current;

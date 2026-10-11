@@ -3,9 +3,7 @@ const {test,expect}=require('@playwright/test');
 test('V68: twelve distinct asanas and their accessible category filters',async({page})=>{
   await page.goto('/');
   const root=page.locator('#instructor-flow');
-  const library=root.locator('#studio-asana-library');
-  await expect(library).toBeHidden();
-  await root.locator('button[data-movement-view="library"]').evaluate(el=>el.click());
+  const library=page.locator('#studio-asana-library');
   await expect(library).toBeVisible();
   await expect(library.locator('.yy-pose')).toHaveCount(12);
   await expect(library.locator('.movement-guardian')).toHaveCount(12);
@@ -46,7 +44,6 @@ test('V67: mode palettes are unique and character titles follow language',async(
 test('V68: twelve anatomies remain finite and mobile has no horizontal overflow',async({page})=>{
   await page.setViewportSize({width:375,height:812});
   await page.goto('/');
-  await page.locator('[data-movement-view="library"]').evaluate(el=>el.click());
   const gallery=page.locator('#studio-asana-library');
   await expect(gallery).toBeVisible();
   const paths=await gallery.locator('.movement-guardian path').evaluateAll(nodes=>nodes.map(el=>el.getAttribute('d')||''));
@@ -77,7 +74,6 @@ test('V67/V68 art review: each console and two distinct new asanas',async({page,
   await expect(root.locator('.meditation-guardian')).toBeVisible();
   await snap('v67-uma-meditation','#studio-guided');
   await page.locator('[data-studio-mode="asanas"]').evaluate(el=>el.click());
-  await page.locator('[data-movement-view="library"]').evaluate(el=>el.click());
   for(const id of ['v68-tree','v68-gratitude']){
     await page.locator('[data-library-pose="'+id+'"]').evaluate(el=>el.click());
     await expect(page.locator('#studio-asana-library .yy-pose.is-current')).toHaveAttribute('data-pose',id);

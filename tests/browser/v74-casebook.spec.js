@@ -23,6 +23,14 @@ test("V74: minute allocations sum perfectly for each setting and length",async({
  }
  await expect(root.locator("#v74-contact")).toHaveAttribute("href",/subject=/);
 });
+test("V74: links from each case open the matching example session",async({page})=>{
+ await page.goto("/");
+ for(const [study,selected] of [["sala","sala"],["personal","individual"],["corporate","equipos"]]){
+  await page.locator(".v74-case--"+study+" [data-v74-choose]").click();
+  await expect(page.locator("#v74-setting")).toHaveValue(selected);
+  await expect(page).toHaveURL(/#programa$/);
+ }
+});
 test("V74: English translation and small-screen sizing",async({page})=>{
  await page.setViewportSize({width:375,height:812});
  await page.goto("/");

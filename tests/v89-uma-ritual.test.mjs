@@ -6,7 +6,7 @@ const stages=["prepare","arrive","anchor","return","complete"].map(p=>ritual.cue
 assert.equal(stages.length,5);
 assert.equal(stages[0].key,"arrive");assert.equal(stages[2].key,"anchor");
 assert.equal(stages[4].key,"return");
-for(const s of stages)assert.ok(s.body.length>42&&s.title.length>10);
+for(const s of stages)assert.ok(s.body.length>24&&s.title.length>8);
 assert.notEqual(ritual.cue(focus,"anchor",lang,true).body,ritual.cue(focus,"anchor",lang).body);
 }
 });

@@ -221,6 +221,9 @@
     });
   };
 
+  // V96: button attributes / disabled states only change on actual control
+  // transitions, never five times a second with a running clock.
+  let lastControlsKey = "";
   const render = () => {
     if (mode === "asanas") return;
     const snapshot = clock.snapshot();
@@ -319,14 +322,21 @@
       copy(isBreathing ? breathPattern === "free" ? "breathFreeNote" : "breathNote" : "meditationNote"));
     setText(primary, copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
       snapshot.status === "paused" ? "resume" : "again"));
-    primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
-    setImmersive(immersive);
-    reset.disabled = waiting;
-    syncDurations();
-    syncBreathButtons();
-    syncMeditationButtons();
-    syncFocusButtons();
-    lockChoices();
+    const controlsKey=[
+      mode, snapshot.status, durationIndex, breathPattern,
+      meditationStyle, meditationFocus, immersive, language(), asanaBusy
+    ].join("|");
+    if(controlsKey!==lastControlsKey){
+      lastControlsKey=controlsKey;
+      primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
+      setImmersive(immersive);
+      reset.disabled = waiting;
+      syncDurations();
+      syncBreathButtons();
+      syncMeditationButtons();
+      syncFocusButtons();
+      lockChoices();
+    }
     if (complete) stopTick();
   };
 

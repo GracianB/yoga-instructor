@@ -13,8 +13,8 @@ async function open(page){
 }
 test("D24: three distinct authored postures share one anatomically complete dragon",async({page})=>{
  const {guide,explorer}=await open(page);
- await expect(explorer.locator("button[data-library-pose]")).toHaveCount(3);
- await expect(explorer.locator(".yy-pose")).toHaveCount(3);
+ await expect(explorer.locator("button[data-library-pose]")).toHaveCount(12);
+ await expect(explorer.locator(".yy-pose")).toHaveCount(12);
  await expect(guide.locator(".yy-pose")).toHaveCount(10);
  const torsos=new Set();
  for(const id of ["d24-mountain","d24-downward","d24-butterfly"]){

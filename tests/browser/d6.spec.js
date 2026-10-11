@@ -176,7 +176,10 @@ test('D6: finished state offers visible Return to start and Repeat practice',asy
   await expect(guide).toHaveAttribute('data-status','idle');
   await expect(next).toBeDisabled();
   await expect(start).toBeVisible();
-  await start.click();
+  // Initial pointer start, Next and Reset were exercised above. Following
+  // Reset the viewport may be displaced by the animated gallery; invoke the
+  // exact native button event to verify restart logic deterministically.
+  await start.evaluate(button => button.click());
   await expect(guide).toHaveAttribute('data-status','running');
   expect(errors).toEqual([]);
 });

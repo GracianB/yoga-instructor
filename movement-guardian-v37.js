@@ -237,6 +237,23 @@
     return '<g class="mg-contact-shadows">'+contacts.map(([x,y])=>
       '<ellipse cx="'+esc(x)+'" cy="'+esc(y+15)+'" rx="28" ry="7" class="mg-shadow"/>').join("")+'</g>';
   };
+  const grounding=p=>{
+    const engine=window.YOGA_NILA_KINEMATICS_V84;
+    if(!engine)return "";
+    const measured=engine.support(p);
+    const floor=measured.floor;
+    // Contacts are drawn in the same native 720x420 coordinate space as limbs.
+    // Their position is derived from the actual palm/sole anchors, not CSS.
+    const marks=measured.load.map(item=>
+      '<g class="mg-ground-contact" data-ground="'+item.kind+'-'+item.index+
+      '" transform="translate('+esc(item.x)+' '+esc(item.y)+')">'+
+      '<ellipse class="mg-ground-outer" rx="32" ry="11"/>'+
+      '<ellipse class="mg-ground-inner" rx="19" ry="6"/>'+
+      '<circle class="mg-ground-pin" cx="0" cy="0" r="2.5"/></g>').join("");
+    return '<g class="mg-grounding" aria-hidden="true">'+
+      '<path class="mg-ground-line" d="M'+esc(floor.minX-24)+' '+esc(floor.maxY+13)+
+      ' H'+esc(floor.maxX+24)+'"/>'+marks+'</g>';
+  };
   const drawing=p=>{
     const legs=p.legs.map((d,i)=>limb(d,"leg",i)).join("");
     const arms=p.arms.map((d,i)=>limb(d,"arm",i)).join("");
@@ -249,7 +266,7 @@
     const front=joined?'<g class="mg-gesture-forearms">'+
       p.arms.map(d=>'<path class="mg-gesture-forearm" d="'+d+'"/>').join("")+'</g>':"";
     return '<g class="movement-guardian" data-guardian="nila" data-kind="'+p.kind+'" aria-hidden="true">'+
-       shadows(p)+tail(p)+
+       grounding(p)+shadows(p)+tail(p)+
        '<g class="mg-legs">'+legs+feet+'</g>'+
        '<g class="mg-arms mg-arms-behind">'+arms+'</g>'+
        neck(p)+trunk(p)+

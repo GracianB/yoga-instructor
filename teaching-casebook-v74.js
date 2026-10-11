@@ -185,6 +185,10 @@
     steps.setAttribute("aria-label", lang()==="en"?"Session phases":"Fases de la sesión");
     renderPlan();
   }
+  root.querySelectorAll("a[data-v74-choose]").forEach(link => link.addEventListener("click", () => {
+    setting.value = link.dataset.v74Choose;
+    renderPlan();
+  }));
   setting.addEventListener("change", renderPlan);
   duration.addEventListener("change", renderPlan);
   new MutationObserver(changes => {

@@ -37,3 +37,6 @@
 @media(max-width:620px){#orientacion .v80-topline-end{display:none}#orientacion .v80-options{grid-template-columns:1fr}#orientacion .v80-options button{flex-direction:row;min-height:88px}#orientacion .v80-route-art{height:105px}#orientacion .v80-primary{width:100%}}
 @media(prefers-reduced-motion:reduce){#orientacion *,#orientacion *::before,#orientacion *::after{transition:none!important;animation:none!important}}
 @media print{#orientacion .v80-options{display:none}#orientacion .v80-shell{display:block}}
+
+/* Primary path button uses dark ink on the dark theme's light-green accent. */
+html[data-theme="dark"] #orientacion .v80-primary{color:#10291d}

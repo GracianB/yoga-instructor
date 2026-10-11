@@ -1,0 +1,19 @@
+/* V93 · A quiet, collapsible preference sheet inside the real studio entrance. */
+#instructor-flow .v93-preferences{max-width:100%;background:var(--surface,#f8f5ea);border:1px solid var(--line,#b6c5b6);border-radius:8px 24px 8px 24px;color:var(--ink,#263a30);padding:17px clamp(16px,3vw,30px);margin:18px 0}
+#instructor-flow .v93-summary{cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;list-style:revert;font-weight:700;font-size:.88rem}
+#instructor-flow .v93-summary-hint{font-size:.73rem;color:var(--muted,#556f60);font-weight:500}
+#instructor-flow .v93-fields{margin:24px 0 16px;display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px}
+#instructor-flow .v93-fields label{display:grid;gap:9px;font-size:.75rem;font-weight:700}
+#instructor-flow .v93-fields select{width:100%;min-height:44px;padding:9px 12px;background:var(--surface,#fff);color:var(--ink,#283c2e);border:1px solid var(--line,#b6c5b6);border-radius:8px;font-size:.82rem}
+#instructor-flow .v93-actions{display:flex;flex-wrap:wrap;gap:9px}
+#instructor-flow .v93-actions button{min-height:44px;padding:11px 15px;background:transparent;color:var(--ink,#223a31);border:1px solid var(--line,#aabbb0);border-radius:7px;cursor:pointer;font-size:.8rem;font-weight:700}
+#instructor-flow .v93-actions [data-v93-action="apply"]{background:#365f4e;color:#fff;border-color:#365f4e}
+#instructor-flow .v93-privacy,#instructor-flow .v93-status{font-size:.76rem;line-height:1.7;color:var(--muted,#4d6957);margin:13px 0 0}
+#instructor-flow .v93-status:empty{display:none}
+#instructor-flow .v93-preferences :is(summary,button,select):focus-visible{outline:3px solid #5b8367;outline-offset:4px}
+html[data-theme="dark"] #instructor-flow .v93-preferences{background:#233b34;border-color:#6d8c7b;color:#e6f2e5}
+html[data-theme="dark"] #instructor-flow .v93-preferences :is(.v93-privacy,.v93-status,.v93-summary-hint){color:#d1e3d5}
+html[data-theme="dark"] #instructor-flow .v93-fields select{background:#20362f;color:#e9f4e9;border-color:#8fae98}
+html[data-theme="dark"] #instructor-flow .v93-actions button{color:#eaf1e8;border-color:#9dbca7}
+html[data-theme="dark"] #instructor-flow .v93-actions [data-v93-action="apply"]{background:#d6e6cf;color:#213729}
+@media(prefers-reduced-motion:reduce){#instructor-flow .v93-preferences *{transition:none!important;animation:none!important}}

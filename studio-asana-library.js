@@ -222,22 +222,37 @@
   // V72: the book is a standalone chapter. Do not depend on optional
   // IntersectionObserver (it can be undefined in privacy-restricted browsers).
   // A viewport check also avoids dock state lingering during anchor jumps.
+  let leavingBook=false;
+  let leftViewport=false;
   const syncBookVisibility=()=>{
     const bounds=section.getBoundingClientRect();
     const amount=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-
       Math.max(bounds.top,0));
     const minimum=Math.min(48,window.innerHeight*.04);
-    document.body.dataset.asanaBookVisible=String(amount>minimum);
+    const overlaps=amount>minimum;
+    if(leavingBook){
+      if(!overlaps)leftViewport=true;
+      else if(leftViewport)leavingBook=false;
+    }
+    document.body.dataset.asanaBookVisible=String(overlaps&&!leavingBook);
   };
+  // Re-entering by mouse or keyboard makes the book an active reading
+  // surface again; an explicit visit to the practice room always wins
+  // over transient viewport overlap during the site's cinematic scroll.
+  section.addEventListener("pointerdown",()=>{leavingBook=false;syncBookVisibility();});
+  section.addEventListener("focusin",()=>{leavingBook=false;syncBookVisibility();});
   const bookLink=section.querySelector(".studio-book-practice-link");
   bookLink?.addEventListener("click",event=>{
-    // The page uses a cinematic anchor handler. Take responsibility for
-    // this internal transition so the library doesn't overlap the console.
     event.preventDefault();
     event.stopPropagation();
+    leavingBook=true;
+    leftViewport=false;
+    document.body.dataset.asanaBookVisible="false";
     root.scrollIntoView({block:"start",behavior:"instant"});
-    if(window.history?.replaceState)
-      window.history.replaceState(window.history.state,"","#instructor-flow");
+    try {
+      if(window.history?.replaceState)
+        window.history.replaceState(window.history.state,"","#instructor-flow");
+    } catch (_) { /* navigation works even with restricted history */ }
     syncBookVisibility();
   });
   window.addEventListener("scroll",syncBookVisibility,{passive:true});

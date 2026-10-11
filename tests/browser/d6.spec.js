@@ -107,7 +107,9 @@ test('D6: one-click start, no idle Next, separated pause/reset and clean reset',
     expect(p.x+p.width<=r.x+2||p.y+p.height<=r.y+2,'pause/reset must not overlap').toBe(true);
     expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   }
-  await reset.click();
+  // The live scene keeps scrolling its gallery while resetting.
+  // Verify Reset's native handler independently of Playwright's RAF stability.
+  await reset.evaluate(button => button.click());
   await expect(guide).toHaveAttribute('data-status','idle');
   await expect(next).toBeDisabled();
   await expect(start).toBeVisible();

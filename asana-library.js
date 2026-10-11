@@ -134,6 +134,114 @@
       hands:[[350,251],[370,251]],feet:[[238,357],[482,357]],tail:[434,279,.6,7]
     }
   ];
+  // V71: precise, optional micro-guidance for each individual exploration.
+  // Each pose has a setup, a calm breathing cue and an intentional release.
+  // This supplements rather than modifies the ten-step guided sequence.
+  const coaching={
+    "d24-mountain":{
+      setup:["Separa los pies al ancho de las caderas. Apoya talón, base del dedo gordo y base del meñique.",
+             "Stand with feet hip-width apart. Ground through heel, big-toe mound and little-toe mound."],
+      breath:["Inhala creciendo desde la coronilla; exhala relajando hombros y mandíbula.",
+              "Inhale to lengthen through your crown; exhale to soften shoulders and jaw."],
+      exit:["Afloja las rodillas, mueve los dedos y camina unos pasos con calma.",
+            "Release the knees, wiggle your toes and take a few easy steps."]
+    },
+    "d24-downward":{
+      setup:["Desde cuatro apoyos, separa los dedos y lleva las caderas arriba y atrás. Rodillas flexionadas si hace falta.",
+             "From hands and knees, spread your fingers and send hips up and back. Keep knees bent if useful."],
+      breath:["Respira por la espalda y alarga la columna; no fuerces los talones hacia el suelo.",
+              "Breathe into your back and lengthen the spine. Heels need not touch the mat."],
+      exit:["Baja las rodillas despacio y descansa en una postura cómoda.",
+            "Lower your knees slowly and rest in a comfortable position."]
+    },
+    "d24-butterfly":{
+      setup:["Siéntate sobre una manta si lo necesitas. Junta las plantas de los pies sin tirar de las rodillas.",
+             "Sit on a folded blanket if helpful. Bring soles together without pulling your knees down."],
+      breath:["Inhala elevando suavemente el pecho; exhala dejando que las caderas se ablanden.",
+              "Inhale to gently lift your chest; exhale to soften around the hips."],
+      exit:["Ayuda con las manos a juntar las rodillas y extiende las piernas poco a poco.",
+            "Use your hands to bring knees together, then extend your legs gradually."]
+    },
+    "v68-warrior-ii":{
+      setup:["Separa los pies ampliamente. Gira el pie delantero y flexiona esa rodilla en su dirección. Abre los brazos.",
+             "Step feet wide. Turn the front foot out and bend that knee along its direction. Open both arms."],
+      breath:["Inhala alargando los costados; exhala relajando los hombros sin hundir el pecho.",
+              "Inhale into the side ribs; exhale to release the shoulders without collapsing the chest."],
+      exit:["Estira suavemente la pierna delantera, baja los brazos y repite al otro lado.",
+            "Gently straighten your front leg, lower the arms and repeat on the other side."]
+    },
+    "v68-tree":{
+      setup:["Apoya un pie firmemente. Sitúa el otro sobre el tobillo o la pantorrilla, nunca contra la rodilla.",
+             "Stand strongly on one foot. Rest the other on ankle or calf, never against the knee joint."],
+      breath:["Mantén la mirada en un punto fijo y respira con naturalidad, sin bloquear el abdomen.",
+              "Rest your gaze on one steady point and breathe naturally without bracing the belly."],
+      exit:["Baja el pie con control. Recupera el equilibrio antes de cambiar de lado.",
+            "Lower your foot with control. Regain balance before changing sides."]
+    },
+    "v68-triangle":{
+      setup:["Da una zancada amplia. Alarga ambos costados e inclínate sobre la pierna delantera sin cerrar el pecho.",
+             "Take a wide stance. Lengthen both sides and hinge over the front leg without closing the chest."],
+      breath:["Inhala creando espacio entre las costillas; exhala soltando tensión del cuello.",
+              "Inhale to make room between the ribs; exhale to soften the neck."],
+      exit:["Activa suavemente las piernas para volver a subir. Cambia de lado con calma.",
+            "Engage your legs gently to come upright. Change sides without rushing."]
+    },
+    "v68-easy-seat":{
+      setup:["Cruza las piernas cómodamente. Eleva las caderas con un cojín si la espalda se redondea.",
+             "Cross the legs comfortably. Raise the hips on a cushion if the back rounds."],
+      breath:["Inhala creciendo; exhala soltando mandíbula, hombros y abdomen.",
+              "Inhale to lengthen; exhale to release jaw, shoulders and belly."],
+      exit:["Descruza las piernas lentamente y prueba el otro cruce si lo deseas.",
+            "Uncross gently and try the opposite crossing if you wish."]
+    },
+    "v68-twist":{
+      setup:["Siéntate con la pelvis estable. Alarga el tronco antes de girar ligeramente desde las costillas.",
+             "Sit with a stable pelvis. Lengthen your torso before rotating gently through the ribs."],
+      breath:["Inhala para crecer; exhala para mantener un giro pequeño, sin forzarlo.",
+              "Inhale to grow tall; exhale into a small, unforced rotation."],
+      exit:["Vuelve al centro al inhalar. Descansa y repite hacia el otro lado.",
+            "Return to centre on an inhale. Rest, then repeat to the other side."]
+    },
+    "v68-seated-fold":{
+      setup:["Estira las piernas con rodillas algo flexionadas. Inclínate desde las caderas sin tirar de los pies.",
+             "Extend the legs with soft knees. Hinge at the hips without pulling on the feet."],
+      breath:["Respira en la espalda manteniendo espacio entre el pecho y el abdomen.",
+              "Breathe into the back while allowing space between chest and belly."],
+      exit:["Apoya las manos para subir vértebra a vértebra, sin rebotes.",
+            "Use your hands for support as you slowly return upright, without bouncing."]
+    },
+    "v68-child":{
+      setup:["Desde cuatro apoyos, lleva las caderas hacia los talones. Ajusta la separación de las rodillas.",
+             "From hands and knees, send hips towards heels. Adjust knee spacing as comfortable."],
+      breath:["Deja respirar las costillas posteriores. Usa un cojín bajo el torso si lo necesitas.",
+              "Breathe into the back ribs. Use a bolster under the chest if helpful."],
+      exit:["Acerca las manos al cuerpo y sube lentamente, apoyándote en los brazos.",
+            "Walk hands back and rise slowly with arm support."]
+    },
+    "v68-forward-fold":{
+      setup:["Desde pie, dobla las rodillas y gira desde las caderas. Apoya las manos en bloques si ayuda.",
+             "From standing, bend knees and hinge at the hips. Use blocks under your hands if useful."],
+      breath:["Deja que la cabeza cuelgue sin tirar del cuello. Mantén una respiración suave.",
+              "Let the head release without pulling on the neck. Keep breathing easily."],
+      exit:["Dobla más las rodillas y sube despacio, manteniendo el peso equilibrado.",
+            "Bend the knees more and rise slowly with balanced weight."]
+    },
+    "v68-gratitude":{
+      setup:["Siéntate cómodo y acerca las palmas al corazón sin tensar muñecas ni hombros.",
+             "Sit comfortably and bring palms towards your heart without straining wrists or shoulders."],
+      breath:["Inhala con espacio en el pecho; exhala dejando que las manos y la cara se suavicen.",
+              "Inhale with room in the chest; exhale to soften hands and face."],
+      exit:["Separa las manos y déjalas descansar sobre las piernas. Abre los ojos a tu ritmo.",
+            "Release the hands onto your legs. Open your eyes at your own pace."]
+    }
+  };
+  for(const pose of poses){
+    const detail=coaching[pose.id];
+    if(!detail||!["setup","breath","exit"].every(key=>
+       Array.isArray(detail[key])&&detail[key].length===2&&detail[key].every(Boolean)))
+      throw Error("Missing bilingual coaching steps: "+pose.id);
+    pose.coaching=Object.freeze(detail);
+  }
   // All positions and limbs are authored, not generated by reflecting one side.
   const names = poses.map(p=>p.id);
   if(new Set(names).size!==poses.length)throw Error("Duplicate asana identifiers");

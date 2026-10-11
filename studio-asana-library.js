@@ -71,6 +71,29 @@
   const category=p=>p.category||
     (["mountain","warrior","tree","triangle","downward"].includes(p.kind)?"standing":
     (["rest","child"].includes(p.kind)?"restorative":"seated"));
+  // V81: small curriculum UI lives in the existing Asana Book, not another chapter.
+  const Curriculum=window.YOGA_CURRICULUM_V81;
+  let routeId=null,searchText="";
+  const atlas=document.createElement("div");
+  atlas.className="v81-atlas";
+  atlas.innerHTML='<div class="v81-intro"><h4></h4><p></p></div>'+
+   '<div class="v81-tracks" role="group"></div>'+
+   '<div class="v81-tools"><div class="v81-search"><label for="v81-search"></label>'+
+   '<input id="v81-search" type="search" maxlength="80" autocomplete="off"></div>'+
+   '<button type="button" class="v81-clear"></button><output class="v81-results" aria-live="polite"></output></div>';
+  if(Curriculum){
+    filters.before(atlas);
+    const tracks=atlas.querySelector(".v81-tracks");
+    for(const [key] of Object.entries(Curriculum.learn)){
+      const btn=document.createElement("button");
+      btn.type="button";btn.dataset.v81Route=key;btn.setAttribute("aria-pressed","false");
+      btn.innerHTML="<strong></strong><small></small>";tracks.append(btn);
+    }
+  }
+  const familyNote=document.createElement("div");
+  familyNote.className="v81-familynote";
+  familyNote.innerHTML="<strong></strong><span></span>";
+  section.querySelector(".studio-library-ground").after(familyNote);
   const stage=section.querySelector(".studio-library-stage");
   const display=section.querySelector(".studio-library-display");
   const svg=source.cloneNode(true);
@@ -157,9 +180,48 @@
     choices.setAttribute("aria-label",w.choose);
     const active=library.byId(current);
     if(!active)return;
+    if(Curriculum){
+      const en=!!index;
+      const ui=en?{
+        title:"Explore by purpose",lead:"Choose a short learning route, or search the twelve posture cards.",
+        search:"Search posture, support or cue",placeholder:"e.g. balance, knees, rest",
+        clear:"Show all postures",count:n=>n===1?"1 posture":n+" postures"
+      }:{
+        title:"Explora por intención",lead:"Elige un camino didáctico o busca entre las doce fichas.",
+        search:"Buscar postura, apoyo o indicación",placeholder:"Ej. equilibrio, rodillas, descanso",
+        clear:"Mostrar todas",count:n=>n===1?"1 postura":n+" posturas"
+      };
+      atlas.querySelector(".v81-intro h4").textContent=ui.title;
+      atlas.querySelector(".v81-intro p").textContent=ui.lead;
+      atlas.querySelector(".v81-search label").textContent=ui.search;
+      atlas.querySelector(".v81-search input").placeholder=ui.placeholder;
+      atlas.querySelector(".v81-clear").textContent=ui.clear;
+      const trackGroup=atlas.querySelector(".v81-tracks");
+      trackGroup.setAttribute("aria-label",en?"Explore learning routes":"Explorar caminos didácticos");
+      for(const button of trackGroup.querySelectorAll("[data-v81-route]")){
+        const record=Curriculum.route(button.dataset.v81Route);
+        button.querySelector("strong").textContent=record.name[index];
+        button.querySelector("small").textContent=record.intro[index];
+        button.setAttribute("aria-pressed",String(button.dataset.v81Route===routeId));
+      }
+      const matches=new Set(Curriculum.search(library.poses,searchText,language()).map(p=>p.id));
+      const track=routeId?Curriculum.route(routeId):null;
+      let count=0;
+      for(const button of choices.querySelectorAll("button[data-library-pose]")){
+        const pose=library.byId(button.dataset.libraryPose);
+        const visible=(filter==="all"||category(pose)===filter)&&matches.has(pose.id)&&(!track||track.poses.includes(pose.id));
+        button.hidden=!visible;if(visible)count++;
+      }
+      atlas.querySelector(".v81-results").textContent=ui.count(count);
+      const selectedButton=choices.querySelector('button[data-library-pose="'+current+'"]');
+      if(selectedButton?.hidden){
+        const first=[...choices.querySelectorAll("button[data-library-pose]")].find(b=>!b.hidden);
+        if(first)current=first.dataset.libraryPose;
+      }
+    }
     for(const button of choices.querySelectorAll("button[data-library-pose]")){
       const pose=library.byId(button.dataset.libraryPose);
-      button.hidden=filter!=="all" && category(pose)!==filter;
+      if(!Curriculum)button.hidden=filter!=="all" && category(pose)!==filter;
       button.textContent=pose.name[index];
       button.setAttribute("aria-pressed",String(current===pose.id));
     }
@@ -169,6 +231,11 @@
     section.querySelector(".studio-library-name").textContent=active.name[index];
     section.querySelector(".studio-library-cue").textContent=active.cue[index];
     section.querySelector(".studio-library-ground").textContent=w.contact+" · "+active.support[index];
+    if(Curriculum){
+      const record=Curriculum.families[Curriculum.family(active)];
+      familyNote.querySelector("strong").textContent=record[index?"en":"es"];
+      familyNote.querySelector("span").textContent=record.intent[index];
+    }else familyNote.hidden=true;
     // V71: three short, practical steps give the selected posture a
     // meaningful start, calm breathing cue and deliberate finish.
     const coaching=active.coaching;
@@ -188,6 +255,7 @@
     const chip=event.target.closest("button[data-asana-filter]");
     if(chip){
       filter=chip.dataset.asanaFilter;
+      routeId=null;
       const active=library.byId(current);
       if(filter!=="all" && category(active)!==filter)
         current=library.poses.find(p=>category(p)===filter)?.id||current;
@@ -200,6 +268,22 @@
       render();
     }
   });
+  if(Curriculum){
+    const input=atlas.querySelector("#v81-search");
+    input.addEventListener("input",()=>{searchText=input.value.trim();render();});
+    atlas.querySelector(".v81-clear").addEventListener("click",()=>{
+      routeId=null;filter="all";searchText="";input.value="";render();
+    });
+    atlas.querySelector(".v81-tracks").addEventListener("click",event=>{
+      const button=event.target.closest("button[data-v81-route]");
+      if(!button)return;
+      routeId=routeId===button.dataset.v81Route?null:button.dataset.v81Route;
+      filter="all";searchText="";input.value="";
+      if(routeId)current=Curriculum.route(routeId).poses[0];
+      render();
+      choices.querySelector('button[data-library-pose="'+current+'"]')?.focus();
+    });
+  }
   choices.addEventListener("keydown",event=>{
     if(!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Home","End"].includes(event.key))return;
     if(!event.target.matches("button[data-library-pose]"))return;

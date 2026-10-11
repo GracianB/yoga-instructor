@@ -10,14 +10,14 @@
   const intro=root?.querySelector(".studio-entrance");
   if(!root||!guide||!source||!intro||!art?.drawPose||!guardian?.drawPose||!library?.poses?.length)return;
   const copy={
-    es:{heading:"MOVIMIENTO · ASANAS",title:"Explorar asanas",
-      lead:"Elige una postura individual. No inicia la secuencia guiada.",
+    es:{heading:"LIBRO DE ASANAS · 12 POSTURAS",title:"El libro de asanas",
+      lead:"Explora cada postura, cómo prepararte, respirar y salir de ella. Un libro independiente, antes de empezar tu práctica.",
       contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad.",
-      dockShow:"Mostrar controles de música y respiración",dockHide:"Ocultar controles de música y respiración"},
-    en:{heading:"MOVEMENT · ASANAS",title:"Explore asanas",
-      lead:"Choose a single pose. This does not start the guided sequence.",
+      dockShow:"Mostrar música y respiración",dockHide:"Ocultar música y respiración",practice:"Ir a las sesiones guiadas ↗"},
+    en:{heading:"ASANA BOOK · 12 POSTURES",title:"The asana book",
+      lead:"Explore each posture, its setup, breathing and release. A separate guide before you begin your practice.",
       contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test.",
-      dockShow:"Show music and breathing controls",dockHide:"Hide music and breathing controls"}
+      dockShow:"Show music and breathing",dockHide:"Hide music and breathing",practice:"Explore guided sessions ↗"}
   };
   const language=()=>document.documentElement.lang==="en"?"en":"es";
   const section=document.createElement("section");
@@ -28,6 +28,7 @@
   section.innerHTML=
     '<div class="studio-library-heading"><span class="studio-library-eyebrow"></span>'+
     '<h3 id="studio-library-title"></h3><p class="studio-library-lead"></p>'+
+    '<a class="studio-book-practice-link" href="#instructor-flow"></a>'+
     '<button type="button" class="studio-library-dock-toggle" aria-pressed="false"></button></div>'+
     '<div class="studio-library-body"><div class="studio-library-choices" role="group"></div>'+
     '<div class="studio-library-display"><div class="studio-library-stage yy-guide" data-asana-state="idle" aria-hidden="true"></div>'+
@@ -149,6 +150,7 @@
     section.querySelector(".studio-library-eyebrow").textContent=w.heading;
     section.querySelector("#studio-library-title").textContent=w.title;
     section.querySelector(".studio-library-lead").textContent=w.lead;
+    section.querySelector(".studio-book-practice-link").textContent=w.practice;
     dockToggle.textContent=dockOpen?w.dockHide:w.dockShow;
     dockToggle.setAttribute("aria-pressed",String(dockOpen));
     section.querySelector(".studio-library-foot").textContent=w.foot;
@@ -217,7 +219,18 @@
     busy=["running","paused"].includes(detail?.status);
     visible();
   });
-  new MutationObserver(visible).observe(root,{attributes:true,attributeFilter:["data-studio-mode","data-movement-view"]});
+  // Hide the floating player only while this external book intersects the
+  // viewport, not across the entire remainder of the page.
+  if("IntersectionObserver" in window){
+    const visibility=new IntersectionObserver(entries=>{
+      document.body.dataset.asanaBookVisible=String(entries.some(e=>e.isIntersecting));
+    },{threshold:.03});
+    visibility.observe(section);
+    window.addEventListener("pagehide",()=>{
+      visibility.disconnect();
+      delete document.body.dataset.asanaBookVisible;
+    },{once:true});
+  }
   new MutationObserver(()=>{stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";})
     .observe(guide,{attributes:true,attributeFilter:["data-spirit"]});
   new MutationObserver(render).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});

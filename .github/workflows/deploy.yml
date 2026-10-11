@@ -63,5 +63,7 @@ jobs:
       - uses: actions/setup-node@v7
         with:
           node-version: 24
-      - name: Verify production HTML and assets after deployment
-        run: node tools/pages-smoke.mjs --attempts=30 --interval=5
+      - name: Reproduce the exact SHA-256 asset inventory from validated source
+        run: npm run build
+      - name: Verify every declared public asset and the V100 manifest after deployment
+        run: node tools/pages-smoke.mjs --root=dist --attempts=30 --interval=5

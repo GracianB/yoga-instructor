@@ -32,7 +32,7 @@ test('V67: mode palettes are unique and character titles follow language',async(
   const root=page.locator('#instructor-flow');
   const palettes=[];
   for(const [mode,guardian] of [['asanas','.movement-guardian'],['breath','.studio-breath-dragon'],['meditation','.meditation-guardian']]){
-    await page.locator('[data-studio-mode="'+mode+'"]').evaluate(el=>el.click());
+    await page.locator('button[data-studio-mode="'+mode+'"]').evaluate(el=>el.click());
     await expect(root).toHaveAttribute('data-studio-mode',mode);
     palettes.push(await root.evaluate(el=>getComputedStyle(el).getPropertyValue('--guardian-accent').trim()));
     await expect(root.locator(guardian).first()).toBeAttached();

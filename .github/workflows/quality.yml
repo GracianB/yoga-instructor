@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main, feature/yoga-v72-library-breath-meditation]
+    branches: [main, feature/yoga-v72-library-breath-meditation, feature/yoga-v73-professional-portfolio]
   workflow_dispatch:
 concurrency:
   group: yoga-quality-${{ github.ref }}

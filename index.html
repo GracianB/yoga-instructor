@@ -77,6 +77,7 @@
   <link rel="stylesheet" href="./yy-practice-journey-v72.css?v=v72-1">
   <link rel="stylesheet" href="./portfolio-v73.css?v=v73-1">
   <link rel="stylesheet" href="./teaching-casebook-v74.css?v=v74-1">
+  <link rel="stylesheet" href="./editorial-atlas-v75.css?v=v75-1">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -117,6 +118,7 @@
   <script src="./studio-presence-v72.js?v=v72-1" defer></script>
   <script src="./portfolio-v73.js?v=v73-1" defer></script>
   <script src="./teaching-casebook-v74.js?v=v74-1" defer></script>
+  <script src="./editorial-atlas-v75.js?v=v75-1" defer></script>
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -361,6 +363,74 @@
     </section>
 
     
+    
+    <!-- V75: visual atlas and section navigation; fully functional without animation -->
+    <section class="v75-atlas" id="atlas" aria-labelledby="v75-title">
+      <div class="v75-atlas-content">
+        <div class="v75-atlas-story">
+          <span class="v75-overline" data-v75-text="eyebrow">UNA VISITA CON SENTIDO · 2026</span>
+          <h2 id="v75-title"><span data-v75-text="titleFirst">Del propósito</span><em data-v75-text="titleSecond">a la presencia.</em></h2>
+          <p data-v75-text="lead">Conoce mi forma de enseñar, descubre la experiencia que la sostiene y entra al estudio cuando quieras. Sin rodeos y sin perderte en la interfaz.</p>
+          <div class="v75-atlas-signature">
+            <span class="v75-signature-sigil" aria-hidden="true">✳</span>
+            <div><strong data-v75-text="signature">Gracián Baena</strong><small data-v75-text="signatureRole">Instructor de yoga · Murcia · ES / EN</small></div>
+          </div>
+        </div>
+        <div class="v75-atlas-art" aria-hidden="true">
+          <svg viewBox="0 0 540 380" focusable="false">
+            <defs>
+              <linearGradient id="v75-petal" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#accbb7"/><stop offset="1" stop-color="#3f745b"/></linearGradient>
+              <linearGradient id="v75-stone" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7ead0"/><stop offset="1" stop-color="#c9ad85"/></linearGradient>
+            </defs>
+            <g class="v75-art-orbits" fill="none" stroke="currentColor" stroke-width="1">
+              <circle cx="270" cy="186" r="157" stroke-dasharray="1 11"/>
+              <circle cx="270" cy="186" r="126" opacity=".26"/>
+              <circle cx="270" cy="186" r="91" opacity=".23"/>
+              <path d="M40 188H500M270 19V354" opacity=".12"/>
+            </g>
+            <g class="v75-art-petals" fill="url(#v75-petal)" stroke="#38644f" stroke-width="2">
+              <path d="M270 222 C232 184 233 125 270 70 C307 125 308 184 270 222Z"/>
+              <path d="M273 223C227 233 177 194 166 135C225 150 259 179 273 223Z" opacity=".82"/>
+              <path d="M267 223C313 233 363 194 374 135C315 150 281 179 267 223Z" opacity=".82"/>
+              <path d="M269 235C218 264 172 250 144 211C205 197 244 206 269 235Z" opacity=".65"/>
+              <path d="M271 235C322 264 368 250 396 211C335 197 296 206 271 235Z" opacity=".65"/>
+            </g>
+            <path d="M270 222C255 266 240 284 219 308M270 222C285 266 300 284 321 308" fill="none" stroke="#537c61" stroke-width="5" stroke-linecap="round"/>
+            <g fill="url(#v75-stone)" stroke="#a98f73" stroke-width="1.7">
+              <ellipse cx="270" cy="317" rx="55" ry="10"/>
+              <ellipse cx="270" cy="335" rx="91" ry="10" opacity=".58"/>
+            </g>
+            <g fill="#b99266">
+              <circle cx="93" cy="174" r="4"/><circle cx="447" cy="180" r="4"/>
+              <circle cx="127" cy="85" r="3"/><circle cx="421" cy="97" r="3"/>
+            </g>
+          </svg>
+          <span class="v75-art-caption">PRESENCIA / MOVIMIENTO / RESPIRACIÓN</span>
+        </div>
+      </div>
+      <nav class="v75-atlas-nav" id="v75-atlas-nav" aria-label="Mapa de este portfolio">
+        <a href="#portfolio" data-v75-step="portfolio" aria-current="location">
+          <span class="v75-route-index">01</span><span class="v75-route-copy"><b data-v75-text="stop1">Mi enfoque</b><small data-v75-text="stop1sub">El método y las opciones</small></span><span class="v75-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a href="#casos" data-v75-step="casos">
+          <span class="v75-route-index">02</span><span class="v75-route-copy"><b data-v75-text="stop2">Casos reales</b><small data-v75-text="stop2sub">Tres escenarios de enseñanza</small></span><span class="v75-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a href="#instructor-flow" data-v75-step="instructor-flow">
+          <span class="v75-route-index">03</span><span class="v75-route-copy"><b data-v75-text="stop3">Estudio guiado</b><small data-v75-text="stop3sub">Movimiento · Breath · Meditation</small></span><span class="v75-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a href="#experiencia" data-v75-step="experiencia">
+          <span class="v75-route-index">04</span><span class="v75-route-copy"><b data-v75-text="stop4">Trayectoria</b><small data-v75-text="stop4sub">Experiencia y formación</small></span><span class="v75-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a href="#contacto" data-v75-step="contacto">
+          <span class="v75-route-index">05</span><span class="v75-route-copy"><b data-v75-text="stop5">Hablemos</b><small data-v75-text="stop5sub">Una propuesta concreta</small></span><span class="v75-route-arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+      <div class="v75-atlas-bottom">
+        <span data-v75-text="chapterNote">PORTFOLIO PROFESIONAL / ESTUDIO INTERACTIVO</span>
+        <span class="v75-atlas-progress" aria-label="Capítulo activo"><span id="v75-current">01</span> / 05</span>
+      </div>
+    </section>
+
     <!-- V73: professional portfolio first, interactive practice second -->
     <section class="section portfolio-v73" id="portfolio" aria-labelledby="portfolio-v73-title">
       <header class="p73-heading">

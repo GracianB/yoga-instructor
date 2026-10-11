@@ -15,7 +15,7 @@ const uma=read('studio-meditation-guardian-v42.js');
 test('V66: explicit movement selector is accessible and defaults to guided sequence',()=>{
  assert.match(html,/data-movement-view="sequence" aria-pressed="true"/);
  assert.match(html,/data-movement-view="library" aria-pressed="false"/);
- assert.match(html,/id="instructor-flow" data-movement-view="sequence"/);
+ assert.match(html,/id="instructor-flow" data-studio-mode="asanas" data-movement-view="sequence"/);
  assert.match(js,/workspace\.append\(sequence,guided,gallery\)/);
  assert.match(js,/aria-controls/);
  assert.match(lib,/root\.dataset\.movementView\|\|"sequence"/);

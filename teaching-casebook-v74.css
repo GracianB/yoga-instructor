@@ -100,3 +100,12 @@
  #casos .v74-blueprint{break-before:page}
  #casos .v74-plan-output{break-inside:avoid}
 }
+
+/* V74 accessibility correction: the plan sits on a mixed parchment surface.
+   Explicit ink colors prevent translucent muted tokens from falling below AA. */
+html[data-theme="light"] #casos :is(.v74-blueprint-head p,.v74-disclaimer){
+  color:#263c30;
+}
+html[data-theme="dark"] #casos :is(.v74-blueprint-head p,.v74-disclaimer){
+  color:#edf4e9;
+}

@@ -22,6 +22,7 @@
   const Meditation = window.YOGA_MEDITATION_D27;
   const Sculpt = window.YOGA_ANATOMY_D28;
   const Articulation = window.YOGA_BREATH_ARTICULATION_V86;
+  const BreathGuide = window.YOGA_BREATH_GUIDANCE_V87;
   const immersionButton = root.querySelector('[data-studio-action="immersion"]');
   const meditationChoices = root.querySelector(".studio-meditation-choices");
   const meditationFocusChoices = root.querySelector(".studio-meditation-focus");
@@ -228,6 +229,8 @@
     const waiting = snapshot.status === "idle";
     const elapsed = snapshot.elapsedMs;
     const breathing = Breath.frame(elapsed, breathPattern);
+    const reading=BreathGuide?.reading(breathing,Breath.PATTERNS[breathPattern],
+      guided.dataset.v87Display||"numbers");
     const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
     const shape = Sculpt.sculpt(breathing, activeBreath);
     const articulated=Articulation?.sculpt(breathing,{
@@ -260,10 +263,15 @@
       const label = waiting ? copy("breathingReadyLabel") :
         complete ? copy("finished") :
         breathing.phase === "free" ? copy("breathingFreeLabel") :
-        copy(breathing.phase) + " · " + Math.ceil(breathing.phaseRemaining) + " s";
+        copy(breathing.phase) + (reading?.seconds == null ? "" : " · " + reading.seconds + " s");
       setText(breathPhaseDetail, label);
     }
     setText(cue, copy(cueKey));
+    // V87: the optional phase bar consumes the same 200-ms snapshot.
+    const phaseGuide=guided.querySelector(".v87-guidance");
+    if(phaseGuide)setVar(phaseGuide,"--v87-cycle-progress",
+      !waiting&&!complete&&breathing.phase!=="free"?
+      (reading?.progress||0).toFixed(4):"0");
     setText(status, copy(snapshot.status));
     setData(guided, "studioStatus", snapshot.status);
     // The meditation invitation follows the SAME clock and status already
@@ -412,6 +420,7 @@
     render();
   });
 
+  root.addEventListener("yoga:breath-presentation",()=>{if(mode==="breath")render()});
   window.addEventListener("yoga:flow", ({detail}) => {
     asanaBusy = ["running","paused"].includes(detail?.status);
     lockChoices();

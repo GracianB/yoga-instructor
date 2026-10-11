@@ -15,8 +15,8 @@ test("V54: Nila has dragon horns, sculpted tapered limbs and keeps the 10 asanas
  const skeletal=await pane.locator(".mg-limb-shell").first().evaluate(el=>getComputedStyle(el).display);
  expect(skeletal).toBe("none");
  const gallery=page.locator("#studio-asana-library");
- await expect(gallery.locator(".movement-guardian")).toHaveCount(3);
- await expect(gallery.locator(".mg-horn")).toHaveCount(6);
+ await expect(gallery.locator(".movement-guardian")).toHaveCount(12);
+ await expect(gallery.locator(".mg-horn")).toHaveCount(24);
 });
 test("V54: desktop stage is spacious and navigation no longer consists of full-height rails",async({page})=>{
  await page.setViewportSize({width:1440,height:900});

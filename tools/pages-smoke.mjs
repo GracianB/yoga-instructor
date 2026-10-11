@@ -37,7 +37,7 @@ const declaredScripts = localPages.flatMap(html =>
 // must be byte-identical on Pages. A 200 HTML fallback is not a valid MP3.
 const ownerSong='audio/silence-between-notes.mp3';
 const ownerSongExists=await readFile(resolve(root,ownerSong)).then(()=>true,()=>false);
-const files = [...new Set(['index.html', 'cv.html', '404.html', 'favicon.svg',
+const files = [...new Set(['release-manifest-v100.json', 'index.html', 'cv.html', '404.html', 'favicon.svg',
   'yin-yang-art.js', 'yy-dragon-d9.css', 'yy-dragon-d10.css',
   ...declaredStylesheets, ...declaredScripts,
   ...(ownerSongExists?[ownerSong]:[])])];

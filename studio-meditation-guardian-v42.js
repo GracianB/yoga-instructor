@@ -48,6 +48,17 @@
  <path class="uma-wrist-light" d="M211 266Q209 288 231 300 M349 266Q351 288 329 300" fill="none" stroke="#ebe2f3" stroke-width="3" stroke-opacity=".4" stroke-linecap="round"/>
  <!-- Moth head with leaf-shaped cheeks and soft closed eyes -->
  <path class="uma-head" d="M280 105 C235 105 206 132 211 165 C205 181 214 210 233 222 Q250 237 280 236 Q310 237 327 222 C346 210 355 181 349 165 C354 132 325 105 280 105Z" fill="url(#uma-body)" stroke="#66658f" stroke-width="4"/>
+ <!-- V91: awakening is a stage change, never an independent idle animation. -->
+ <g class="uma-open-eyes" opacity="0">
+   <path d="M237 156 Q252 145 268 156 M292 156 Q307 145 323 156" fill="none" stroke="#4c4e79" stroke-width="4" stroke-linecap="round"/>
+   <ellipse cx="253" cy="153" rx="4.5" ry="6" fill="#4c4e79"/>
+   <ellipse cx="307" cy="153" rx="4.5" ry="6" fill="#4c4e79"/>
+   <circle cx="255" cy="151" r="1.5" fill="#faf7ec"/>
+   <circle cx="309" cy="151" r="1.5" fill="#faf7ec"/>
+ </g>
+ <g class="uma-focus-sparks" opacity="0" fill="none" stroke="#e6d4a3" stroke-linecap="round" stroke-width="2">
+   <path d="M281 63V77 M274 70H288 M185 119V130 M179 124H191 M375 119V130 M369 124H381"/>
+ </g>
  <path class="uma-closed-eyes uma-eye-lines" d="M237 153 Q254 165 268 152 M292 152 Q306 165 323 153" fill="none" stroke="#4c4e79" stroke-width="4.6" stroke-linecap="round"/>
  <path d="M265 194Q280 201 295 194" fill="none" stroke="#595879" stroke-width="3" stroke-linecap="round"/>
  <path class="uma-nose-line" d="M271 183 Q280 187 289 183" fill="none" stroke="#766b94" stroke-opacity=".58" stroke-width="2.6" stroke-linecap="round"/>

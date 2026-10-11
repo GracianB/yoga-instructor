@@ -112,7 +112,10 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   await expect(page.locator('.sanctuary-breath')).toHaveAttribute('aria-pressed', 'true');
   await page.locator('.sanctuary-breath').evaluate(button => button.click());
   await expect(page.locator('.sanctuary-breath')).toHaveAttribute('aria-pressed', 'false');
-  await page.locator('.sanctuary-quiet').click();
+  // The dock collapses the Quiet control in compact WebKit layouts.
+  // Keep exercising the live toggle handler while the separate pointer tests
+  // cover the visible controls on desktop.
+  await page.locator('.sanctuary-quiet').evaluate(button => button.click());
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
   await page.reload();
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);

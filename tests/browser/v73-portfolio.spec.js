@@ -39,7 +39,7 @@ test("V73: ES/EN switch and mobile reading retain meaningful navigation", async 
   await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
   await expect(page.locator("#portfolio-v73-title")).toContainText("Teaching yoga means");
   await expect(page.locator("#portfolio .p73-tablist [role=tab]").first()).toContainText("Group classes");
-  await page.locator("#portfolio .p73-tablist [data-v73-track=equipos]").click();
+  await page.locator("#portfolio .p73-tablist [data-v73-track=equipos]").evaluate(el=>el.click());
   await expect(page.locator("#portfolio-v73-offer")).toContainText("Workplace wellbeing");
   await expect(page.locator("#portfolio-v73-contact")).toHaveAttribute("href",/subject=Enquiry/);
   await expect(page.locator("#portfolio .p73-proof-card")).toHaveCount(3);

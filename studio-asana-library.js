@@ -12,10 +12,12 @@
   const copy={
     es:{heading:"MOVIMIENTO · ASANAS",title:"Explorar asanas",
       lead:"Elige una postura individual. No inicia la secuencia guiada.",
-      contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad."},
+      contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad.",
+      dockShow:"Mostrar controles de música y respiración",dockHide:"Ocultar controles de música y respiración"},
     en:{heading:"MOVEMENT · ASANAS",title:"Explore asanas",
       lead:"Choose a single pose. This does not start the guided sequence.",
-      contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test."}
+      contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test.",
+      dockShow:"Show music and breathing controls",dockHide:"Hide music and breathing controls"}
   };
   const language=()=>document.documentElement.lang==="en"?"en":"es";
   const section=document.createElement("section");
@@ -24,13 +26,31 @@
   section.setAttribute("aria-labelledby","studio-library-title");
   section.innerHTML=
     '<div class="studio-library-heading"><span class="studio-library-eyebrow"></span>'+
-    '<h3 id="studio-library-title"></h3><p class="studio-library-lead"></p></div>'+
+    '<h3 id="studio-library-title"></h3><p class="studio-library-lead"></p>'+
+    '<button type="button" class="studio-library-dock-toggle" aria-pressed="false"></button></div>'+
     '<div class="studio-library-body"><div class="studio-library-choices" role="group"></div>'+
     '<div class="studio-library-display"><div class="studio-library-stage yy-guide" data-asana-state="idle" aria-hidden="true"></div>'+
     '<h4 class="studio-library-name" aria-live="polite"></h4><p class="studio-library-cue"></p>'+
-    '<p class="studio-library-ground"></p></div></div>'+
+    '<p class="studio-library-ground"></p>'+
+    '<section class="studio-library-coaching" aria-labelledby="studio-library-how-title">'+
+      '<h5 id="studio-library-how-title"></h5>'+
+      '<ol class="studio-library-steps">'+
+        '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
+        '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
+        '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
+      '</ol></section></div></div>'+
     '<p class="studio-library-foot"></p>';
   intro.insertAdjacentElement("afterend",section);
+  const dockToggle=section.querySelector(".studio-library-dock-toggle");
+  // The global floating dock obscured long asana coaching text. Keep its
+  // controls available on demand, never permanently discard them.
+  let dockOpen=false;
+  section.dataset.dockOpen="false";
+  dockToggle.addEventListener("click",()=>{
+    dockOpen=!dockOpen;
+    section.dataset.dockOpen=String(dockOpen);
+    render();
+  });
   const choices=section.querySelector(".studio-library-choices");
   // Filters only affect opt-in library, not the ten canonical Flow phases.
   const filters=document.createElement("div");
@@ -126,6 +146,8 @@
     section.querySelector(".studio-library-eyebrow").textContent=w.heading;
     section.querySelector("#studio-library-title").textContent=w.title;
     section.querySelector(".studio-library-lead").textContent=w.lead;
+    dockToggle.textContent=dockOpen?w.dockHide:w.dockShow;
+    dockToggle.setAttribute("aria-pressed",String(dockOpen));
     section.querySelector(".studio-library-foot").textContent=w.foot;
     choices.setAttribute("aria-label",w.choose);
     const active=library.byId(current);
@@ -142,6 +164,18 @@
     section.querySelector(".studio-library-name").textContent=active.name[index];
     section.querySelector(".studio-library-cue").textContent=active.cue[index];
     section.querySelector(".studio-library-ground").textContent=w.contact+" · "+active.support[index];
+    // V71: three short, practical steps give the selected posture a
+    // meaningful start, calm breathing cue and deliberate finish.
+    const coaching=active.coaching;
+    const guideTitle=section.querySelector("#studio-library-how-title");
+    guideTitle.textContent=index?"Explore the posture":"Explora la postura";
+    const stepNames=index?["1 · Set up","2 · Breathe","3 · Release"]:
+      ["1 · Prepárate","2 · Respira","3 · Sal"];
+    for(const [i,key] of ["setup","breath","exit"].entries()){
+      const item=section.querySelectorAll(".studio-library-steps li")[i];
+      item.querySelector(".studio-library-step-label").textContent=stepNames[i];
+      item.querySelector(".studio-library-step-text").textContent=coaching[key][index];
+    }
     display.dataset.libraryCurrent=current;
     stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";
   };
@@ -162,12 +196,16 @@
     }
   });
   choices.addEventListener("keydown",event=>{
-    if(event.key!=="ArrowLeft"&&event.key!=="ArrowRight")return;
+    if(!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Home","End"].includes(event.key))return;
+    if(!event.target.matches("button[data-library-pose]"))return;
     event.preventDefault();
     const buttons=[...choices.querySelectorAll("button[data-library-pose]:not([hidden])")];
+    if(!buttons.length)return;
     const active=buttons.indexOf(document.activeElement);
-    const offset=event.key==="ArrowRight"?1:-1;
-    const next=buttons[(active+offset+buttons.length)%buttons.length];
+    const offset=["ArrowRight","ArrowDown"].includes(event.key)?1:-1;
+    const nextIndex=event.key==="Home"?0:event.key==="End"?buttons.length-1:
+      (active+offset+buttons.length)%buttons.length;
+    const next=buttons[nextIndex];
     next?.focus();
     next?.click();
   });

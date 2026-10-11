@@ -3,7 +3,7 @@
 "use strict";
 const SCHEMA=Object.freeze({
  mode:Object.freeze(["asanas","breath","meditation"]),
- route:Object.freeze(["roots","mobility","restore"]),
+ route:Object.freeze(["roots","mobility","restore","custom"]),
  pattern:Object.freeze(["soft","natural","free"]),
  style:Object.freeze(["guided","silent"]),
  focus:Object.freeze(["breath","body","space"])

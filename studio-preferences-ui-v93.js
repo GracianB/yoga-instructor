@@ -31,7 +31,7 @@ es:{
  title:"PREPARA TU PRÁCTICA",hint:"Preferencias · opcionales",
  intro:"Modo",mode:"Modo",route:"Recorrido Movement",pattern:"Ritmo Breath",style:"Meditation · guía",focus:"Meditation · foco",
  asanas:"Movement · Nila",breath:"Breath · Dragón",meditation:"Meditation · Uma",
- roots:"Enraizar",mobility:"Movilidad amable",restore:"Descanso activo",
+ roots:"Enraizar",mobility:"Movilidad amable",restore:"Descanso activo",custom:"Mi secuencia",
  soft:"Suave 3/5",natural:"Natural 4/6",free:"Libre",guided:"Acompañada",silent:"En silencio",body:"Cuerpo",space:"Entorno",
  apply:"Aplicar sin comenzar",save:"Guardar en este dispositivo",clear:"Borrar lo guardado",
  privacy:"Solo al pulsar Guardar se conservan estas cinco elecciones, la presentación visual y tu secuencia de tres posturas. No se guarda historial ni información de salud. Puedes borrarlo todo aquí.",

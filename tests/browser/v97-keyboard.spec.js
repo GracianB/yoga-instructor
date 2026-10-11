@@ -13,8 +13,8 @@ await page.goto("/");const editor=page.locator("#studio-asana-library .v94-edito
 const b=editor.locator('[data-v94-index="1"] [data-v94-direction="up"]');
 await b.focus();await expect(b).toBeFocused();await page.keyboard.press("Enter");
 const focus=page.locator(":focus");
-await expect(focus).toHaveAttribute("data-v94-direction","up");
-await expect(focus).toHaveAttribute("aria-label",/Postura 1/);
+await expect(focus).toHaveAttribute("id","v94-pose-0");
+await expect(editor.locator('label[for="v94-pose-0"]')).toHaveText("Postura 1");
 });
 test("V97 user-invoked focus return is readable as its own message",async({page})=>{
 await page.goto("/");await page.locator('[data-studio-mode="meditation"]').first().evaluate(x=>x.click());

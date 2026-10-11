@@ -33,3 +33,7 @@ html[data-theme="dark"] #studio-asana-library .v85-actions [data-v85-action="nex
 @media(max-width:660px){#studio-asana-library .v85-intro{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){#studio-asana-library .v85-mini *,#studio-asana-library[data-v85-active="true"] .movement-guardian{animation:none!important;transition:none!important}}
 body.quiet-mode #studio-asana-library[data-v85-active="true"] .movement-guardian{animation:none!important}
+
+/* V99 WCAG AA: mini Movement route text must contrast with the tinted material. */
+html[data-theme="light"] #studio-asana-library .v85-mini :is(.v85-asana-title,.v85-cue){color:#294537}
+html[data-theme="dark"] #studio-asana-library .v85-mini :is(.v85-asana-title,.v85-cue){color:#e4eee4}

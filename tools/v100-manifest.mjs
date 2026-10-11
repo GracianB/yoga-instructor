@@ -18,7 +18,7 @@ async function enumerate(root,current=root){
 }
 export async function entries(directory){
  const root=resolve(directory);
- const files=(await enumerate(root)).sort((a,b)=>a.name.localeCompare(b.name,"en"));
+ const files=(await enumerate(root)).sort((a,b)=>a.name<b.name?-1:a.name>b.name?1:0);
  return Promise.all(files.map(async file=>{
  const contents=await readFile(file.full);
  return {path:file.name,bytes:contents.byteLength,sha256:digest(contents)};

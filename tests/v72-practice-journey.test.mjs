@@ -15,7 +15,7 @@ test('V72: the Asana Book is a separate chapter before all guided modes',()=>{
  assert.doesNotMatch(modes,/workspace\.append\(sequence,guided,gallery\)/);
 });
 
-test('V72: the dragon's geometry follows the existing studio clock without an independent oscillator',()=>{
+test("V72: the dragon's geometry follows the existing studio clock without an independent oscillator",()=>{
  const clock=read('practice-studio.js'),dragon=read('studio-breath-dragon.js'),css=read('yy-practice-journey-v72.css');
  for(const property of ['--studio-guardian-wing','--studio-body-width','--studio-head-lift','--studio-rib-expansion'])
   assert.ok(clock.includes(property),'Missing shared phase property: '+property);

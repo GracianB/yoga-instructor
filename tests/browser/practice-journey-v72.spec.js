@@ -83,3 +83,21 @@ test('V72 mobile reading remains bounded, focus visible and guided studio remain
  await expect(page.locator('.studio-presence-journey')).toBeVisible();
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });
+
+
+test('V72: standalone book restores the dock without IntersectionObserver',async({page})=>{
+ await page.addInitScript(()=>{window.IntersectionObserver=undefined;});
+ const errors=[];
+ page.on('pageerror',e=>errors.push(e.message));
+ await page.goto('/');
+ const book=page.locator('#studio-asana-library');
+ const dock=page.locator('.sanctuary-dock');
+ await expect(book).toBeVisible();
+ await book.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));
+ await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','true');
+ await expect(dock).toBeHidden();
+ await book.locator('.studio-book-practice-link').evaluate(el=>el.click());
+ await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','false');
+ await expect(dock).toBeVisible();
+ expect(errors).toEqual([]);
+});

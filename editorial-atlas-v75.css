@@ -1,0 +1,406 @@
+/* ═══════════════════════════════════════════════════════════
+   V75 / EDITORIAL ATLAS · professional Yoga Instructor identity
+   A coherent design for biography, teaching evidence and inquiry.
+   The three interactive guardian stages keep their own palettes.
+   ═══════════════════════════════════════════════════════════ */
+:root,
+html[data-theme="light"]{
+ --v75-forest:#315842;
+ --v75-jade:#557b65;
+ --v75-bark:#685d48;
+ --v75-clay:#a16d5f;
+ --v75-dusk:#466b7b;
+ --v75-parchment:#f7f3e9;
+ --v75-linen:#ede8dc;
+ --v75-ink:#27342b;
+ --v75-divider:rgba(49,88,66,.17);
+}
+html[data-theme="dark"]{
+ --v75-forest:#a9ceb5;
+ --v75-jade:#bbd6b9;
+ --v75-bark:#dac6aa;
+ --v75-clay:#e7b5a5;
+ --v75-dusk:#b2d2e4;
+ --v75-parchment:#1b2722;
+ --v75-linen:#202c27;
+ --v75-ink:#f2f4ec;
+ --v75-divider:rgba(187,214,185,.21);
+}
+/* Professional identity, independent of the movement/breath/meditation engines. */
+.site-header{
+ border-bottom:1px solid var(--v75-divider);
+ box-shadow:0 2px 28px rgba(25,42,32,.05);
+}
+.site-header .brand-mark{
+ border-radius:50%;
+ border-width:1.5px;
+ font-family:Fraunces,Georgia,serif;
+ font-style:italic;
+ font-weight:500;
+ font-size:15px;
+ letter-spacing:-.03em;
+}
+.site-header .brand-text small{letter-spacing:.1em}
+.site-header .nav a[href="#portfolio"]{color:var(--v75-forest)}
+/* Hero stays the single h1 and keeps all existing content and controls. */
+#inicio.hero{
+ --v75-hero-halo:color-mix(in srgb,var(--v75-jade) 11%,transparent);
+ background:
+   radial-gradient(ellipse 60% 50% at 81% 35%,var(--v75-hero-halo),transparent 75%),
+   linear-gradient(160deg, color-mix(in srgb,var(--bg) 96%,var(--v75-linen)),var(--bg));
+}
+#inicio .hero-stage{
+ position:relative;
+ border-left:1px solid var(--v75-divider);
+ padding-left:clamp(10px,3vw,45px);
+}
+#inicio .hero-rail{color:var(--v75-jade)}
+#inicio .hero-inner .kicker{letter-spacing:.13em!important;color:var(--v75-forest)}
+#inicio .hero-inner h1{
+ font-family:Fraunces,Georgia,serif!important;
+ font-weight:500!important;
+ letter-spacing:-.055em!important;
+ line-height:1.02!important;
+ font-size:clamp(35px,7.3vmin,80px)!important;
+ max-width:14ch!important;
+ text-wrap:balance;
+}
+#inicio .hero-inner h1 em{font-weight:400!important}
+#inicio .hero-lead{line-height:1.7!important;max-width:51ch!important;letter-spacing:.002em}
+#inicio .hero-manifesto{border-top:1px solid var(--v75-divider);padding-top:18px}
+#inicio .hero-stats li{
+ border:1px solid var(--v75-divider);
+ background:color-mix(in srgb,var(--surface) 89%,transparent);
+ border-radius:14px 3px 14px 3px;
+ box-shadow:0 10px 24px rgba(25,42,32,.035);
+}
+#inicio .hero-stats li strong{font-family:Fraunces,Georgia,serif;font-size:clamp(1.4rem,2vw,2rem);font-weight:500;letter-spacing:-.04em}
+#inicio .hero-actions .btn.primary{
+ box-shadow:0 13px 30px color-mix(in srgb,var(--v75-forest) 18%,transparent);
+}
+#inicio .hero-scroll-cue{letter-spacing:.13em}
+/* Curated visit atlas: an editorial spread plus live landmark index. */
+#atlas.v75-atlas{
+ width:min(100%,1500px);
+ margin:0 auto;
+ padding:clamp(54px,8vw,120px) max(var(--pad,24px),clamp(18px,3.1vw,52px)) clamp(52px,8vw,110px);
+ color:var(--v75-ink);
+ scroll-margin-top:100px;
+ border-bottom:1px solid var(--v75-divider);
+ position:relative;
+ isolation:isolate;
+}
+#atlas.v75-atlas::before{
+ content:"";position:absolute;z-index:-1;inset:clamp(22px,4vw,60px) 0 clamp(32px,5vw,70px);
+ border-radius:24px 4px 24px 4px;
+ background:linear-gradient(145deg, color-mix(in srgb,var(--v75-parchment) 75%,transparent),transparent 86%);
+ pointer-events:none;
+}
+#atlas .v75-atlas-content{
+ display:grid;grid-template-columns:minmax(0,1.1fr) minmax(260px,.9fr);
+ gap:clamp(20px,5vw,80px);align-items:center;
+ margin-bottom:clamp(28px,5vw,56px);
+}
+#atlas .v75-overline{
+ display:inline-block;font:700 .65rem/1.5 "JetBrains Mono",monospace;
+ letter-spacing:.17em;text-transform:uppercase;color:var(--v75-jade);margin-bottom:18px;
+}
+#atlas h2{
+ font:500 clamp(2.7rem,6.2vw,6.6rem)/1.02 Fraunces,Georgia,serif;
+ letter-spacing:-.055em;margin:0 0 24px;text-wrap:balance;
+}
+#atlas h2 span,#atlas h2 em{display:block}
+#atlas h2 em{font-weight:400;color:var(--v75-forest)}
+#atlas .v75-atlas-story>p{
+ color:var(--muted);max-width:57ch;margin:0;
+ font-size:clamp(1rem,1.45vw,1.18rem);line-height:1.75;
+}
+#atlas .v75-atlas-signature{
+ display:flex;align-items:center;gap:18px;margin-top:clamp(28px,4vw,49px);
+ padding-top:19px;max-width:465px;border-top:1px solid var(--v75-divider);
+}
+#atlas .v75-signature-sigil{
+ display:grid;place-items:center;flex:none;
+ width:53px;height:53px;border-radius:50%;
+ border:1px solid var(--v75-forest);color:var(--v75-forest);font-size:1.55rem;
+}
+#atlas .v75-atlas-signature strong{
+ display:block;font:500 1.3rem/1.2 Fraunces,Georgia,serif;
+}
+#atlas .v75-atlas-signature small{
+ display:block;margin-top:6px;font:.72rem/1.5 "JetBrains Mono",monospace;color:var(--muted);
+}
+#atlas .v75-atlas-art{
+ min-width:0;position:relative;
+ aspect-ratio:1.3;display:flex;align-items:center;justify-content:center;
+ background:
+  radial-gradient(ellipse at 50% 52%,color-mix(in srgb,var(--v75-jade) 13%,transparent),transparent 63%),
+  linear-gradient(135deg, color-mix(in srgb,var(--v75-linen) 73%,transparent),transparent 85%);
+ border:1px solid var(--v75-divider);border-radius:48% 48% 8px 8px;
+ overflow:hidden;
+}
+#atlas .v75-atlas-art svg{display:block;width:min(100%,530px);height:auto;max-height:100%}
+#atlas .v75-art-orbits{color:var(--v75-forest)}
+#atlas .v75-art-caption{
+ position:absolute;left:18px;right:18px;bottom:16px;text-align:center;
+ color:var(--v75-bark);font:700 .53rem/1.4 "JetBrains Mono",monospace;
+ letter-spacing:.12em;
+}
+#atlas .v75-atlas-nav{
+ display:grid;grid-template-columns:repeat(5,minmax(0,1fr));
+ border:1px solid var(--v75-divider);
+ border-radius:6px 24px 6px 24px;
+ background:var(--surface);
+ overflow:hidden;
+}
+#atlas .v75-atlas-nav a{
+ min-width:0;display:grid;grid-template-rows:auto 1fr;gap:13px;
+ padding:clamp(16px,2vw,28px);
+ color:var(--v75-ink);text-decoration:none;
+ border-right:1px solid var(--v75-divider);
+ position:relative;
+ transition:background .22s ease,color .22s ease;
+}
+#atlas .v75-atlas-nav a:last-child{border-right:0}
+#atlas .v75-route-index{
+ display:block;color:var(--v75-jade);
+ font:700 .76rem/1.3 "JetBrains Mono",monospace;letter-spacing:.08em;
+}
+#atlas .v75-route-copy{display:grid;align-content:start;gap:8px;min-width:0}
+#atlas .v75-route-copy b{
+ font:500 clamp(1.05rem,1.5vw,1.45rem)/1.2 Fraunces,Georgia,serif;
+}
+#atlas .v75-route-copy small{
+ color:var(--muted);font:.72rem/1.55 Inter,system-ui,sans-serif;
+}
+#atlas .v75-route-arrow{
+ position:absolute;top:17px;right:17px;font-size:1.18rem;
+ color:var(--v75-jade);
+}
+#atlas .v75-atlas-nav a:hover,#atlas .v75-atlas-nav a[aria-current="location"]{
+ background:color-mix(in srgb,var(--v75-forest) 10%,var(--surface));
+}
+#atlas .v75-atlas-nav a[aria-current="location"]::before{
+ content:"";height:3px;background:var(--v75-forest);
+ position:absolute;top:0;left:0;right:0;
+}
+#atlas .v75-atlas-nav a:focus-visible{outline:3px solid var(--v75-forest);outline-offset:-5px;z-index:2}
+#atlas .v75-atlas-bottom{
+ margin-top:17px;display:flex;align-items:center;justify-content:space-between;gap:16px;
+ font:700 .61rem/1.5 "JetBrains Mono",monospace;letter-spacing:.13em;color:var(--v75-bark);
+}
+#atlas .v75-atlas-progress{font-variant-numeric:tabular-nums;color:var(--v75-forest)}
+#atlas .v75-atlas-progress #v75-current{font-size:.95rem}
+/* Asymmetrical professional storytelling, not three identical product cards. */
+#portfolio.portfolio-v73{
+ --p73-sage:var(--v75-forest);
+ --p73-line:var(--v75-divider);
+ --p73-muted:var(--muted);
+ padding-top:clamp(80px,11vw,150px);
+}
+#portfolio .p73-heading{border-top:1px solid var(--v75-divider);padding-top:30px;position:relative}
+#portfolio .p73-heading::before{
+ content:"01 / 05";position:absolute;top:-18px;right:0;
+ font:700 .65rem/1.5 "JetBrains Mono",monospace;letter-spacing:.13em;
+ color:var(--v75-bark);background:var(--bg);padding:6px 0 6px 12px;
+}
+#portfolio .p73-heading h2{max-width:18ch;line-height:1.02;letter-spacing:-.055em}
+#portfolio .p73-manifesto{
+ border-radius:6px 32px 6px 32px;
+ border-color:var(--v75-divider);
+ background:linear-gradient(145deg,color-mix(in srgb,var(--v75-parchment) 85%,transparent),var(--surface));
+}
+#portfolio .p73-manifesto h3{letter-spacing:-.035em}
+#portfolio .p73-journey{
+ border-radius:32px 6px 32px 6px;
+ background:linear-gradient(155deg,color-mix(in srgb,var(--v75-linen) 80%,transparent),color-mix(in srgb,var(--v75-parchment) 40%,transparent));
+}
+#portfolio .p73-journey svg{max-height:300px}
+#portfolio .p73-journey .p73-node-center{fill:var(--v75-forest)}
+#portfolio .p73-proof-card{
+ border-radius:8px 8px 22px 8px;
+ border-color:var(--v75-divider);position:relative;
+ border-top:4px solid var(--v75-jade);
+}
+#portfolio .p73-proof-card:nth-child(2){border-top-color:var(--v75-clay)}
+#portfolio .p73-proof-card:nth-child(3){border-top-color:var(--v75-dusk)}
+#portfolio .p73-proof-card h4{font-size:clamp(1.28rem,2vw,1.85rem)}
+#portfolio .p73-proof .v74-jump{margin-left:clamp(12px,3vw,32px);display:inline-block;color:var(--v75-clay)}
+#portfolio .p73-routes{
+ border-color:var(--v75-divider);
+ background:linear-gradient(155deg,var(--surface),color-mix(in srgb,var(--v75-parchment) 50%,transparent));
+ border-radius:32px 6px 32px 6px;
+}
+#portfolio .p73-tablist{gap:12px}
+#portfolio .p73-tablist button{
+ border-radius:6px;font-family:"JetBrains Mono",monospace;
+ font-size:.75rem;letter-spacing:.03em;
+}
+#portfolio .p73-tablist button[aria-selected="true"]{
+ border-color:var(--v75-forest);background:var(--v75-forest);
+ color:var(--bg);
+}
+#portfolio .p73-detail h4{max-width:22ch}
+#portfolio .p73-method li:nth-child(1){border-top-color:var(--v75-forest)}
+#portfolio .p73-method li:nth-child(2){border-top-color:var(--v75-clay)}
+#portfolio .p73-method li:nth-child(3){border-top-color:var(--v75-dusk)}
+/* Casebook becomes a studio-quality editorial gallery, still a professional casebook. */
+#casos.v74-casebook{position:relative;isolation:isolate}
+#casos .v74-masthead h2{max-width:16ch;line-height:1.02}
+#casos .v74-trust{border-left-color:var(--v75-clay)}
+#casos .v74-trust-symbol{color:var(--v75-clay)}
+#casos .v74-case{
+ border-color:var(--v75-divider);
+ background:var(--surface);
+ border-radius:8px 8px 30px 8px;
+ box-shadow:0 16px 46px rgba(30,50,37,.055);
+}
+#casos .v74-case-illustration{
+ border-bottom:1px solid var(--v75-divider);
+ background-image:radial-gradient(ellipse at 47% 50%,rgba(255,255,255,.35),transparent 68%);
+}
+#casos .v74-case-illustration svg{
+ filter:drop-shadow(0 10px 12px rgba(25,52,38,.09));
+ transform-origin:50% 76%;
+ transition:transform .55s cubic-bezier(.2,.7,.25,1);
+}
+#casos .v74-case:focus-within .v74-case-illustration svg,
+#casos .v74-case:hover .v74-case-illustration svg{
+ transform:translateY(-5px) scale(1.025);
+}
+#casos .v74-case h3{letter-spacing:-.046em}
+#casos .v74-case-subtitle{letter-spacing:.01em}
+#casos .v74-facts > div{grid-template-columns:minmax(0,1fr);gap:8px}
+#casos .v74-blueprint{
+ background:linear-gradient(150deg,color-mix(in srgb,var(--v75-linen) 78%,var(--surface)),var(--surface));
+ border-color:var(--v75-divider);
+ box-shadow:0 22px 55px rgba(25,50,38,.04);
+}
+#casos .v74-plan-output{border-color:var(--v75-divider)}
+#casos .v74-plan-bar span:nth-child(1){background:var(--v75-forest);opacity:.38}
+#casos .v74-plan-bar span:nth-child(2){background:var(--v75-jade);opacity:.72}
+#casos .v74-plan-bar span:nth-child(3){background:var(--v75-clay);opacity:1}
+#casos .v74-plan-bar span:nth-child(4){background:var(--v75-dusk);opacity:.9}
+#casos .v74-plan-steps li{min-width:0}
+/* A coherent visual identity extends into real background and CV sections. */
+#sobre .section-head,#experiencia .section-head,#formacion .section-head,#oferta .section-head{position:relative}
+#sobre .section-head h2,#experiencia .section-head h2,#formacion .section-head h2,#camino .section-head h2,#oferta .section-head h2{
+ font-family:Fraunces,Georgia,serif;
+ font-weight:500;
+ letter-spacing:-.045em;
+ line-height:1.08;
+ text-wrap:balance;
+}
+#sobre .pillars article{
+ border-radius:6px 22px 6px 22px;
+ border:1px solid var(--v75-divider);
+ background:linear-gradient(155deg,var(--surface),color-mix(in srgb,var(--v75-linen) 35%,var(--surface)));
+}
+#sobre .pillars article:nth-child(2){border-top:3px solid var(--v75-clay)}
+#sobre .pillars article:nth-child(3){border-top:3px solid var(--v75-dusk)}
+#oferta .practice-doors article{border-radius:8px 24px 8px 24px}
+#oferta .practice-doors article:nth-child(1){border-top:4px solid var(--v75-forest)}
+#oferta .practice-doors article:nth-child(2){border-top:4px solid var(--v75-clay)}
+#oferta .practice-doors article:nth-child(3){border-top:4px solid var(--v75-dusk)}
+#camino .timeline{border-left:1px solid var(--v75-divider)}
+#camino .timeline li h3{font-family:Fraunces,Georgia,serif;font-weight:500}
+#experiencia .role{
+ position:relative;border-color:var(--v75-divider);
+ border-left:4px solid var(--v75-forest);
+ border-radius:7px 20px 7px 20px;
+ padding:clamp(20px,2.6vw,32px);
+ background:linear-gradient(110deg,color-mix(in srgb,var(--v75-linen) 40%,var(--surface)),var(--surface));
+}
+#experiencia .role:nth-child(2){border-left-color:var(--v75-dusk)}
+#experiencia .role:nth-child(3){border-left-color:var(--v75-clay)}
+#experiencia .role h3{font:500 clamp(1.55rem,2.5vw,2.4rem)/1.1 Fraunces,Georgia,serif;letter-spacing:-.03em}
+#formacion .edu{
+ border:1px solid var(--v75-divider);
+ border-radius:7px 23px 7px 23px;
+ background:color-mix(in srgb,var(--surface) 88%,transparent);
+}
+#formacion .edu.featured{
+ border-left:4px solid var(--v75-forest);
+ background:linear-gradient(130deg,color-mix(in srgb,var(--v75-linen) 75%,var(--surface)),var(--surface));
+}
+#formacion .edu h3{font-family:Fraunces,Georgia,serif;font-weight:500}
+#filosofia .philo{
+ border:1px solid var(--v75-divider);
+ border-radius:28px 7px 28px 7px;
+ background:linear-gradient(125deg,color-mix(in srgb,var(--v75-linen) 60%,var(--surface)),var(--surface));
+}
+#contacto.section{
+ max-width:none;
+ padding-left:max(var(--pad),calc((100% - var(--max))/2 + var(--pad)));
+ padding-right:max(var(--pad),calc((100% - var(--max))/2 + var(--pad)));
+ background:linear-gradient(135deg,color-mix(in srgb,var(--v75-linen) 72%,var(--bg)),var(--bg) 78%);
+ border-top:1px solid var(--v75-divider);
+}
+#contacto .contact-inner{max-width:840px}
+#contacto h2{
+ font-family:Fraunces,Georgia,serif;
+ font-weight:500;letter-spacing:-.05em;
+ font-size:clamp(3.1rem,8vw,7rem);line-height:1.03;
+}
+#contacto .contact-lead{max-width:52ch;line-height:1.7}
+#contacto .contact-actions a.btn{min-height:50px;border-radius:7px}
+#contacto .contact-actions a.btn.primary{
+ background:var(--v75-forest);color:var(--bg);
+ box-shadow:0 16px 30px color-mix(in srgb,var(--v75-forest) 15%,transparent);
+}
+#contacto .langs span{border-color:var(--v75-divider)}
+/* Quiet atmospheric motion only; never drives timing in the yoga studio. */
+@media (prefers-reduced-motion:no-preference){
+ #atlas .v75-art-petals{transform-origin:50% 55%;animation:v75-lotus-breathe 9s ease-in-out infinite}
+ #atlas .v75-art-orbits{transform-origin:50% 50%;animation:v75-orbit-presence 70s linear infinite}
+}
+@keyframes v75-lotus-breathe{
+ 0%,100%{transform:scale(.985)}
+ 50%{transform:scale(1.025)}
+}
+@keyframes v75-orbit-presence{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){
+ #atlas *,#atlas *::before,#atlas *::after,
+ #casos .v74-case-illustration svg{animation:none!important;transition:none!important;transform:none!important;scroll-behavior:auto!important}
+}
+@media(max-width:1140px){
+ #atlas .v75-atlas-nav{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #atlas .v75-atlas-nav a:nth-child(3){border-right:0}
+ #atlas .v75-atlas-nav a:nth-child(n+4){border-top:1px solid var(--v75-divider)}
+}
+@media(max-width:900px){
+ #atlas .v75-atlas-content{grid-template-columns:minmax(0,1fr) minmax(220px,.72fr);gap:20px}
+ #atlas h2{font-size:clamp(2.5rem,6.7vw,4.4rem)}
+ #portfolio .p73-proof .v74-jump{margin-left:0;display:block;margin-top:13px}
+ #inicio .hero-stage{padding-left:clamp(10px,2vw,20px)}
+}
+@media(max-width:760px){
+ #atlas .v75-atlas-content{grid-template-columns:1fr}
+ #atlas .v75-atlas-art{aspect-ratio:1.7;max-height:280px;border-radius:26px 26px 7px 7px}
+ #atlas .v75-atlas-art svg{max-width:390px}
+ #atlas .v75-atlas-nav{grid-template-columns:repeat(2,minmax(0,1fr))}
+ #atlas .v75-atlas-nav a:nth-child(3){border-right:1px solid var(--v75-divider)}
+ #atlas .v75-atlas-nav a:nth-child(2n){border-right:0}
+ #atlas .v75-atlas-nav a:nth-child(n+3){border-top:1px solid var(--v75-divider)}
+ #portfolio .p73-heading h2{font-size:clamp(2.55rem,9vw,4rem)}
+ #inicio .hero-stats li strong{font-size:1.45rem}
+}
+@media(max-width:480px){
+ #atlas.v75-atlas{padding-inline:clamp(15px,5vw,25px)}
+ #atlas h2{font-size:clamp(2.35rem,10vw,3.3rem)}
+ #atlas .v75-atlas-nav{grid-template-columns:1fr;border-radius:8px 19px 8px 19px}
+ #atlas .v75-atlas-nav a{border-right:0!important;border-top:1px solid var(--v75-divider);padding:14px 20px;grid-template-columns:33px 1fr;gap:6px 15px}
+ #atlas .v75-atlas-nav a:first-child{border-top:0}
+ #atlas .v75-route-copy{gap:4px}
+ #atlas .v75-route-copy b{font-size:1.15rem}
+ #atlas .v75-atlas-bottom{flex-wrap:wrap;font-size:.55rem}
+ #inicio .hero-stage{border-left:0;padding-left:0}
+ #inicio .hero-inner h1{font-size:clamp(34px,10vw,48px)!important}
+ #casos .v74-case{box-shadow:none}
+}
+@media print{
+ #atlas .v75-atlas-nav{display:none}
+ #atlas .v75-atlas-art{max-height:240px}
+ #casos .v74-case-illustration svg{transform:none}
+ #contacto.section{background:transparent}
+}

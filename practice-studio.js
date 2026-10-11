@@ -23,6 +23,7 @@
   const Sculpt = window.YOGA_ANATOMY_D28;
   const Articulation = window.YOGA_BREATH_ARTICULATION_V86;
   const BreathGuide = window.YOGA_BREATH_GUIDANCE_V87;
+  const RenderPolicy = window.YOGA_STUDIO_RENDER_POLICY_V96;
   const immersionButton = root.querySelector('[data-studio-action="immersion"]');
   const meditationChoices = root.querySelector(".studio-meditation-choices");
   const meditationFocusChoices = root.querySelector(".studio-meditation-focus");
@@ -221,6 +222,9 @@
     });
   };
 
+  // V96: button attributes / disabled states only change on actual control
+  // transitions, never five times a second with a running clock.
+  let lastControlsKey = "";
   const render = () => {
     if (mode === "asanas") return;
     const snapshot = clock.snapshot();
@@ -319,14 +323,21 @@
       copy(isBreathing ? breathPattern === "free" ? "breathFreeNote" : "breathNote" : "meditationNote"));
     setText(primary, copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
       snapshot.status === "paused" ? "resume" : "again"));
-    primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
-    setImmersive(immersive);
-    reset.disabled = waiting;
-    syncDurations();
-    syncBreathButtons();
-    syncMeditationButtons();
-    syncFocusButtons();
-    lockChoices();
+    const controlsKey=RenderPolicy?.key({
+      mode,status:snapshot.status,durationIndex,breathPattern,
+      meditationStyle,meditationFocus,immersive,language:language(),asanaBusy
+    })||[mode,snapshot.status,language()].join("|");
+    if(controlsKey!==lastControlsKey){
+      lastControlsKey=controlsKey;
+      primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
+      setImmersive(immersive);
+      reset.disabled = waiting;
+      syncDurations();
+      syncBreathButtons();
+      syncMeditationButtons();
+      syncFocusButtons();
+      lockChoices();
+    }
     if (complete) stopTick();
   };
 

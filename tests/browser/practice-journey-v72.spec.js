@@ -4,6 +4,10 @@ test('V72 book stands before the three-mode app, without hijacking Movement',asy
  await page.goto('/');
  const book=page.locator('#studio-asana-library'),room=page.locator('#instructor-flow');
  await expect(book).toBeVisible();
+ // Book is created after the site's static reveal observer initializes;
+ // it must not remain opacity:0 and visually vanish.
+ const opacity=await book.evaluate(el=>getComputedStyle(el).opacity);
+ expect(Number(opacity)).toBeGreaterThanOrEqual(.99);
  await expect(book.locator('.studio-library-stage .movement-guardian')).toHaveCount(12);
  await expect(room.locator('.studio-v66-submodes')).toHaveCount(0);
  await expect(room.locator('#movement-stage')).toBeVisible();

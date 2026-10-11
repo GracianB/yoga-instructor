@@ -185,9 +185,18 @@
     steps.setAttribute("aria-label", lang()==="en"?"Session phases":"Fases de la sesión");
     renderPlan();
   }
-  root.querySelectorAll("a[data-v74-choose]").forEach(link => link.addEventListener("click", () => {
+  root.querySelectorAll("a[data-v74-choose]").forEach(link => link.addEventListener("click", event => {
+    event.preventDefault();
     setting.value = link.dataset.v74Choose;
     renderPlan();
+    // Keep both the selected teaching context and a real, shareable anchor.
+    // Other site navigation scripts can otherwise consume the native jump.
+    try {
+      window.history.replaceState(window.history.state, "", "#programa");
+    } catch (_) {
+      window.location.hash = "programa";
+    }
+    document.getElementById("programa")?.scrollIntoView({block:"start",behavior:"instant"});
   }));
   setting.addEventListener("change", renderPlan);
   duration.addEventListener("change", renderPlan);

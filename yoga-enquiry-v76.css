@@ -140,3 +140,12 @@ html[data-theme="dark"] #v76-enquiry .v76-mail{color:#102218}
  #v76-enquiry .v76-compose-actions,#v76-enquiry .v76-mail{display:none}
  #v76-enquiry.v76-enquiry{break-before:page;box-shadow:none}
 }
+
+/* WCAG AA: small sublabels on selected radio cards need opaque ink,
+   not inherited translucent muted text mixed with the tinted surface. */
+html[data-theme="light"] #v76-enquiry .v76-service small{
+  color:#304438;
+}
+html[data-theme="dark"] #v76-enquiry .v76-service small{
+  color:#e5f0e7;
+}

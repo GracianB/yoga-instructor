@@ -35,7 +35,9 @@ const declaredStylesheets=localPages.flatMap(html=>
 const declaredScripts=localPages.flatMap(html=>
   [...html.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)].map(([,name])=>name));
 const ledgerPaths=new Set(manifest.files.map(file=>file.path));
-for(const name of [...declaredStylesheets,...declaredScripts,'index.html','cv.html','404.html']){
+const ownerSong='audio/silence-between-notes.mp3';
+const ownerSongExists=ledgerPaths.has(ownerSong);
+for(const name of [...declaredStylesheets, ...declaredScripts,'index.html','cv.html','404.html','yy-dragon-d10.css',ownerSong]){
   if(!ledgerPaths.has(name))throw Error('Public asset not in SHA-256 ledger: '+name);
 }
 const expected=[

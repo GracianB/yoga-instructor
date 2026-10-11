@@ -178,7 +178,7 @@
     dockToggle.setAttribute("aria-pressed",String(dockOpen));
     section.querySelector(".studio-library-foot").textContent=w.foot;
     choices.setAttribute("aria-label",w.choose);
-    const active=library.byId(current);
+    let active=library.byId(current);
     if(!active)return;
     if(Curriculum){
       const en=!!index;
@@ -219,6 +219,7 @@
         if(first)current=first.dataset.libraryPose;
       }
     }
+    active=library.byId(current);
     for(const button of choices.querySelectorAll("button[data-library-pose]")){
       const pose=library.byId(button.dataset.libraryPose);
       if(!Curriculum)button.hidden=filter!=="all" && category(pose)!==filter;

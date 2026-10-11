@@ -12,7 +12,7 @@ assert.throws(()=>model.plan("unknown"),RangeError);
 });
 test("V85 reuse of original Nila book never starts second practice clock",()=>{
 const script=read("movement-journey-ui-v85.js");
-for(const token of ['studio-asana-library','data-library-pose','data-v81-route','poseButton.click()','aria-live','aria-pressed','data-v85-active'])assert.ok(script.includes(token),token);
+for(const token of ['studio-asana-library','data-library-pose','data-v81-route','poseButton.click()','aria-live','aria-pressed','book.dataset.v85Active'])assert.ok(script.includes(token),token);
 for(const forbidden of ["setTimeout(","setInterval(","requestAnimationFrame(","fetch(","localStorage.","sessionStorage."])assert.ok(!script.includes(forbidden),forbidden);
 });
 test("V85 new choreography respects reduced motion and release packaging",()=>{

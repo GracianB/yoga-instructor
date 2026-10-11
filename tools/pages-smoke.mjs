@@ -20,6 +20,8 @@ if (!(waitSeconds >= 0 && waitSeconds <= 20)) throw Error('Invalid interval');
 if (base.protocol !== 'https:') throw Error('HTTPS required');
 
 // Verify every root stylesheet declared by the release HTML, not a stale hand-maintained list.
+const inventory=await verifyManifest(root);
+console.log('V100_LOCAL_LEDGER_OK: '+inventory.assets+' assets');
 const expectedIndex = await readFile(resolve(root, 'index.html'), 'utf8');
 const localPages = [expectedIndex, await readFile(resolve(root, 'cv.html'), 'utf8'),
   await readFile(resolve(root, '404.html'), 'utf8')];

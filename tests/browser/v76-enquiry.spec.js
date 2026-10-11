@@ -36,7 +36,9 @@ test("V76: edited preview overrides generated body and reset erases values",asyn
 test("V76: language change keeps selected options and translates the new mail",async({page})=>{
  await page.goto("/");
  const root=page.locator("#v76-enquiry");
- await root.locator('input[name="v76-service"][value="individual"]').check();
+ // Keep the earlier end-to-end test for real pointer selection;
+ // this translation test isolates the radio change event from page scrolling.
+ await root.locator('input[name="v76-service"][value="individual"]').evaluate(input=>input.click());
  await root.locator("#v76-focus").selectOption("movilidad");
  await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
  await expect(root.locator("#v76-title")).toContainText("Tell me what you need");

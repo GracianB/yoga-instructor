@@ -1,0 +1,39 @@
+/* V85 · Calm manual transition choreography for one existing Nila stage */
+#studio-asana-library .v85-mini{--v85-ink:var(--ink);--v85-muted:var(--muted);--v85-color:var(--sage);margin-top:clamp(24px,4vw,54px);padding:clamp(20px,3vw,38px);border:1px solid var(--line);border-radius:8px 26px 8px 26px;background:var(--surface);display:grid;gap:21px}
+#studio-asana-library .v85-intro{display:grid;grid-template-columns:1.3fr .7fr;align-items:end;gap:25px}
+#studio-asana-library .v85-kicker{font:700 .7rem/1.4 "JetBrains Mono",monospace;letter-spacing:.13em;color:var(--v85-color)}
+#studio-asana-library .v85-intro h4{font:500 clamp(1.6rem,3vw,2.5rem)/1.1 Fraunces,Georgia,serif;letter-spacing:-.03em;margin:13px 0 0}
+#studio-asana-library .v85-intro-copy{font:.83rem/1.7 Inter,system-ui,sans-serif;color:var(--v85-muted);margin:0}
+#studio-asana-library .v85-controls{display:grid;gap:9px;max-width:340px}
+#studio-asana-library .v85-controls label{font-size:.78rem;font-weight:700}
+#studio-asana-library .v85-controls select{min-height:47px;border:1px solid var(--line);border-radius:8px;background:var(--surface);color:var(--v85-ink);padding:9px 13px;width:100%}
+#studio-asana-library .v85-progress{display:grid;gap:9px}
+#studio-asana-library .v85-step-label{font:700 .72rem/1.3 "JetBrains Mono",monospace;color:var(--v85-color)}
+#studio-asana-library .v85-progress progress{appearance:none;display:block;width:100%;height:8px;border:0;border-radius:9px;overflow:hidden;background:color-mix(in srgb,var(--v85-color) 15%,var(--surface));accent-color:var(--v85-color)}
+#studio-asana-library .v85-progress progress::-webkit-progress-bar{background:color-mix(in srgb,var(--v85-color) 15%,var(--surface))}
+#studio-asana-library .v85-progress progress::-webkit-progress-value{background:var(--v85-color);border-radius:9px}
+#studio-asana-library .v85-progress progress::-moz-progress-bar{background:var(--v85-color);border-radius:9px}
+#studio-asana-library .v85-current{border-left:3px solid var(--v85-color);padding:12px 0 12px 21px;min-height:130px;background:color-mix(in srgb,var(--surface) 94%,var(--v85-color))}
+#studio-asana-library .v85-asana-title{font:700 .76rem/1.4 "JetBrains Mono",monospace;color:var(--v85-color)}
+#studio-asana-library .v85-current h5{font:500 clamp(1.3rem,2.2vw,1.9rem)/1.2 Fraunces,Georgia,serif;margin:8px 0}
+#studio-asana-library .v85-cue{font:.83rem/1.75 Inter,system-ui,sans-serif;color:var(--v85-muted);margin:0}
+#studio-asana-library .v85-actions{display:flex;flex-wrap:wrap;gap:10px}
+#studio-asana-library .v85-actions button{cursor:pointer;min-height:46px;padding:11px 17px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--v85-ink);font-size:.82rem;font-weight:700}
+#studio-asana-library .v85-actions [data-v85-action="next"]{background:var(--v85-color);border-color:var(--v85-color);color:#fff}
+html[data-theme="dark"] #studio-asana-library .v85-actions [data-v85-action="next"]{color:#10291d}
+#studio-asana-library .v85-actions button:disabled{opacity:.55;cursor:default}
+#studio-asana-library .v85-status{font-size:.75rem;line-height:1.6;color:var(--v85-color);margin:0}
+#studio-asana-library .v85-status:empty{display:none}
+#studio-asana-library .v85-footnote{font-size:.76rem;line-height:1.65;color:var(--v85-muted);margin:0}
+#studio-asana-library .v85-main-link{font-size:.85rem;font-weight:700;line-height:1.5;color:var(--v85-color)}
+#studio-asana-library :is(.v85-mini button,.v85-mini a,.v85-mini select):focus-visible{outline:3px solid var(--v85-color);outline-offset:4px}
+/* Choreography uses the same selected Nila figure and no secondary RAF. */
+#studio-asana-library[data-v85-active="true"] .studio-library-stage .yy-pose.is-current .movement-guardian{animation:v85-arrive .72s cubic-bezier(.2,.8,.2,1) both}
+@keyframes v85-arrive{from{opacity:.4;transform:translateY(9px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:660px){#studio-asana-library .v85-intro{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){#studio-asana-library .v85-mini *,#studio-asana-library[data-v85-active="true"] .movement-guardian{animation:none!important;transition:none!important}}
+body.quiet-mode #studio-asana-library[data-v85-active="true"] .movement-guardian{animation:none!important}
+
+/* Ensure the Movement sequence text retains AA contrast in both studio themes. */
+html[data-theme="light"] #studio-asana-library .v85-mini :is(.v85-asana-title,.v85-cue){color:#294537}
+html[data-theme="dark"] #studio-asana-library .v85-mini :is(.v85-asana-title,.v85-cue){color:#e4eee4}

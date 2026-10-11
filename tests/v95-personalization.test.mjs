@@ -18,3 +18,11 @@ for(const attr of ['data-v95-comfort="calm"','data-v95-comfort="readable"',"pref
 assert.ok(h.indexOf("studio-personalization-v95.js")<h.indexOf("studio-personalization-ui-v95.js"));
 for(const forbidden of ["setInterval(","setTimeout(","requestAnimationFrame(","fetch("])assert.ok(!s.includes(forbidden),forbidden);
 });
+test("V95 saved custom route restores the real three-pose editor, not just opaque identifiers",()=>{
+const prefs=require("../studio-preferences-v93.js");
+const route=prefs.normalize({mode:"asanas",route:"custom"});
+assert.equal(prefs.decode(prefs.encode(route)).route,"custom");
+const ui=read("studio-personalization-ui-v95.js"),editor=read("movement-custom-ui-v94.js");
+assert.ok(ui.includes('movementRoute?.addEventListener("change"'));
+assert.ok(editor.includes('window.addEventListener("yoga:v94-restore"'));
+});

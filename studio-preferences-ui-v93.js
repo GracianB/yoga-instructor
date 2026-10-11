@@ -16,7 +16,7 @@ panel.className="v93-preferences";panel.id="studio-preferences";
 panel.innerHTML='<summary class="v93-summary"><span class="v93-summary-main"></span><span class="v93-summary-hint"></span></summary>'+
 '<div class="v93-fields">'+
 '<label><span data-v93-label="mode"></span><select data-v93-setting="mode"><option value="asanas"></option><option value="breath"></option><option value="meditation"></option></select></label>'+
-'<label><span data-v93-label="route"></span><select data-v93-setting="route"><option value="roots"></option><option value="mobility"></option><option value="restore"></option></select></label>'+
+'<label><span data-v93-label="route"></span><select data-v93-setting="route"><option value="roots"></option><option value="mobility"></option><option value="restore"></option><option value="custom"></option></select></label>'+
 '<label><span data-v93-label="pattern"></span><select data-v93-setting="pattern"><option value="soft"></option><option value="natural"></option><option value="free"></option></select></label>'+
 '<label><span data-v93-label="style"></span><select data-v93-setting="style"><option value="guided"></option><option value="silent"></option></select></label>'+
 '<label><span data-v93-label="focus"></span><select data-v93-setting="focus"><option value="breath"></option><option value="body"></option><option value="space"></option></select></label>'+
@@ -31,10 +31,10 @@ es:{
  title:"PREPARA TU PRÁCTICA",hint:"Preferencias · opcionales",
  intro:"Modo",mode:"Modo",route:"Recorrido Movement",pattern:"Ritmo Breath",style:"Meditation · guía",focus:"Meditation · foco",
  asanas:"Movement · Nila",breath:"Breath · Dragón",meditation:"Meditation · Uma",
- roots:"Enraizar",mobility:"Movilidad amable",restore:"Descanso activo",
+ roots:"Enraizar",mobility:"Movilidad amable",restore:"Descanso activo",custom:"Mi secuencia",
  soft:"Suave 3/5",natural:"Natural 4/6",free:"Libre",guided:"Acompañada",silent:"En silencio",body:"Cuerpo",space:"Entorno",
  apply:"Aplicar sin comenzar",save:"Guardar en este dispositivo",clear:"Borrar lo guardado",
- privacy:"La aplicación conserva solo estas cinco elecciones cuando pulsas Guardar. No guarda historial ni datos de salud. Puedes borrarlas aquí.",
+ privacy:"Solo al pulsar Guardar se conservan estas cinco elecciones, la presentación visual y tu secuencia de tres posturas. No se guarda historial ni información de salud. Puedes borrarlo todo aquí.",
  applied:"Preferencias aplicadas. La práctica sigue parada hasta que pulses Empezar.",
  busy:"Primero termina o reinicia la práctica activa para cambiar la configuración.",
  kept:"Guardadas en este dispositivo. Al volver, pulsa Aplicar para activarlas.",
@@ -44,10 +44,10 @@ en:{
  title:"PREPARE YOUR PRACTICE",hint:"Preferences · optional",
  mode:"Mode",route:"Movement route",pattern:"Breath pace",style:"Meditation guidance",focus:"Meditation focus",
  asanas:"Movement · Nila",breath:"Breath · Dragon",meditation:"Meditation · Uma",
- roots:"Find your base",mobility:"Gentle mobility",restore:"Active rest",
+ roots:"Find your base",mobility:"Gentle mobility",restore:"Active rest",custom:"My sequence",
  soft:"Gentle 3/5",natural:"Natural 4/6",free:"Free",guided:"Guided",silent:"Silent",body:"Body",space:"Surroundings",
  apply:"Apply without starting",save:"Save on this device",clear:"Clear saved preferences",
- privacy:"Only these five choices are saved when you click Save. No practice history or health data is stored. You can clear them here.",
+ privacy:"Only when you click Save are these five choices, visual comfort and your three-pose sequence stored locally. No practice history or health data is stored. You can clear everything here.",
  applied:"Preferences applied. Your practice stays stopped until you press Begin.",
  busy:"Finish or reset the active session before changing its settings.",
  kept:"Saved on this device. Next visit, press Apply to use them.",

@@ -180,7 +180,8 @@ test('D6: finished state offers visible Return to start and Repeat practice',asy
   await expect(guide).toHaveAttribute('data-status','idle');
   await expect(next).toBeDisabled();
   await expect(start).toBeVisible();
-  // Exercise the production restart handler after asserting idle and disabled Next.
+  await expect(start).toBeEnabled();
+  // Regression: a reset must not leave Start disabled by a stale pose lock.
   await start.evaluate(button => button.click());
   await expect(guide).toHaveAttribute('data-status','running');
   expect(errors).toEqual([]);

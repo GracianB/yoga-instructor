@@ -22,7 +22,8 @@
   const language=()=>document.documentElement.lang==="en"?"en":"es";
   const section=document.createElement("section");
   section.id="studio-asana-library";
-  section.className="studio-asana-library";
+  section.className="section studio-asana-library studio-asana-book reveal";
+  section.dataset.bookStandalone="true";
   section.setAttribute("aria-labelledby","studio-library-title");
   section.innerHTML=
     '<div class="studio-library-heading"><span class="studio-library-eyebrow"></span>'+
@@ -40,7 +41,9 @@
         '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
       '</ol></section></div></div>'+
     '<p class="studio-library-foot"></p>';
-  intro.insertAdjacentElement("afterend",section);
+  // A separate editorial chapter BEFORE the three-mode practice studio.
+  // The book is not a Movement sub-tab and never starts the guided clock.
+  root.before(section);
   const dockToggle=section.querySelector(".studio-library-dock-toggle");
   // The global floating dock obscured long asana coaching text. Keep its
   // controls available on demand, never permanently discard them.
@@ -209,8 +212,7 @@
     next?.focus();
     next?.click();
   });
-  const visible=()=>{section.hidden=busy || (root.dataset.studioMode||"asanas")!=="asanas" ||
-    (root.dataset.movementView||"sequence")!=="library";};
+  const visible=()=>{section.hidden=false;};
   window.addEventListener("yoga:flow",({detail})=>{
     busy=["running","paused"].includes(detail?.status);
     visible();

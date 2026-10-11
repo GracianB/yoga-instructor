@@ -39,6 +39,7 @@
     }
   };
   let current = "portfolio";
+  let requestedChapter = null;
   const getLanguage = () => document.documentElement.lang === "en" ? "en" : "es";
   function activate(id) {
     if (!links.some(link => link.dataset.v75Step === id)) return;
@@ -61,11 +62,26 @@
   }
   // The observer sees sections as they cross the reading region.
   // Clicking an anchor immediately reflects the user's explicit choice.
-  links.forEach(link => link.addEventListener("click",() => activate(link.dataset.v75Step)));
+  // A smooth anchor jump crosses earlier chapters. Do not overwrite the
+  // chapter explicitly requested by the user during that transition.
+  links.forEach(link => link.addEventListener("click",() => {
+    requestedChapter = link.dataset.v75Step;
+    activate(requestedChapter);
+  }));
+  // An interrupted jump returns control to real viewport observation.
+  ["wheel","touchstart"].forEach(event =>
+    window.addEventListener(event, () => { requestedChapter = null; }, {passive:true}));
   if (typeof IntersectionObserver === "function" && targets.length) {
     const observer = new IntersectionObserver(entries => {
       const visible = entries.filter(entry => entry.isIntersecting);
       if (!visible.length) return;
+      if (requestedChapter) {
+        const requested = visible.find(entry => entry.target.id === requestedChapter);
+        if (!requested) return;
+        requestedChapter = null;
+        activate(requested.target.id);
+        return;
+      }
       visible.sort((a,b) => a.boundingClientRect.top - b.boundingClientRect.top);
       activate(visible[0].target.id);
     }, {threshold:0,rootMargin:"-12% 0px -62% 0px"});

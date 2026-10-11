@@ -7,7 +7,7 @@ const studio=readFileSync(new URL("../practice-studio.js",import.meta.url),"utf8
 
 test("V47: all practice cards describe the correct three separate guardians before JavaScript hydration",()=>{
  const expected=[
-  ["asanas","asanasDetail","Nila · 10 posturas Yin/Yang"],
+  ["asanas","asanasDetail","Nila · secuencia guiada Yin/Yang"],
   ["breath","breathDetail","Dragón sereno · a tu ritmo"],
   ["meditation","meditationDetail","Uma · guardiana lunar"]
  ];
@@ -27,7 +27,7 @@ test("V47: all practice cards describe the correct three separate guardians befo
 });
 test("V47: English copy identifies each guardian without cloning their identity",()=>{
  for(const token of [
-  'asanasDetail: "Nila · 10 Yin/Yang poses"',
+  'asanasDetail: "Nila · guided Yin/Yang sequence"',
   'breathDetail: "Calm dragon · at your pace"',
   'meditationDetail: "Uma · lunar guardian"'
  ])assert.ok(studio.includes(token),"English guardian copy missing: "+token);

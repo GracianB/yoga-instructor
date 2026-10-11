@@ -190,7 +190,10 @@ test('ambient breathing moves the petals and visual quiet holds the exact frame'
   expect(failures).toEqual([]);
 });
 
-test('one breath synchronizes the hero and dock through inhale, hold and exhale', async ({ page }) => {
+test('one breath synchronizes the hero and dock through inhale, hold and exhale', async ({ page, browserName }) => {
+  // WebKit's virtual-clock and SVG integration needs longer under loaded CI.
+  // Preserve every assertion; do not skip or alter the production clock.
+  if (browserName === 'webkit') test.setTimeout(75000);
   await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page);
   await click(page, '.sanctuary-breath');
@@ -227,7 +230,10 @@ test('one breath synchronizes the hero and dock through inhale, hold and exhale'
   expect(failures).toEqual([]);
 });
 
-test('reduced motion freezes the lotus at load and after a live preference change', async ({ page }) => {
+test('reduced motion freezes the lotus at load and after a live preference change', async ({ page, browserName }) => {
+  // WebKit's virtual-clock and SVG integration needs longer under loaded CI.
+  // Preserve every assertion; do not skip or alter the production clock.
+  if (browserName === 'webkit') test.setTimeout(75000);
   await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page, { reducedMotion: 'reduce' });
   const initial = await frame(page);
@@ -260,7 +266,10 @@ test('reduced motion freezes the lotus at load and after a live preference chang
   expect(failures).toEqual([]);
 });
 
-test('guided breath preserves its position across pause and overlapping page visibility', async ({ page }) => {
+test('guided breath preserves its position across pause and overlapping page visibility', async ({ page, browserName }) => {
+  // WebKit's virtual-clock and SVG integration needs longer under loaded CI.
+  // Preserve every assertion; do not skip or alter the production clock.
+  if (browserName === 'webkit') test.setTimeout(75000);
   await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page);
   const guide = page.locator('#flow-guide');

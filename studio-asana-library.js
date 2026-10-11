@@ -12,10 +12,12 @@
   const copy={
     es:{heading:"MOVIMIENTO · ASANAS",title:"Explorar asanas",
       lead:"Elige una postura individual. No inicia la secuencia guiada.",
-      contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad."},
+      contact:"APOYO",choose:"Elige una postura",foot:"Son propuestas suaves de exploración, no una exigencia de flexibilidad.",
+      dockShow:"Mostrar controles de música y respiración",dockHide:"Ocultar controles de música y respiración"},
     en:{heading:"MOVEMENT · ASANAS",title:"Explore asanas",
       lead:"Choose a single pose. This does not start the guided sequence.",
-      contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test."}
+      contact:"GROUNDING",choose:"Choose a posture",foot:"Gentle options for exploration, not a flexibility test.",
+      dockShow:"Show music and breathing controls",dockHide:"Hide music and breathing controls"}
   };
   const language=()=>document.documentElement.lang==="en"?"en":"es";
   const section=document.createElement("section");
@@ -24,7 +26,8 @@
   section.setAttribute("aria-labelledby","studio-library-title");
   section.innerHTML=
     '<div class="studio-library-heading"><span class="studio-library-eyebrow"></span>'+
-    '<h3 id="studio-library-title"></h3><p class="studio-library-lead"></p></div>'+
+    '<h3 id="studio-library-title"></h3><p class="studio-library-lead"></p>'+
+    '<button type="button" class="studio-library-dock-toggle" aria-pressed="false"></button></div>'+
     '<div class="studio-library-body"><div class="studio-library-choices" role="group"></div>'+
     '<div class="studio-library-display"><div class="studio-library-stage yy-guide" data-asana-state="idle" aria-hidden="true"></div>'+
     '<h4 class="studio-library-name" aria-live="polite"></h4><p class="studio-library-cue"></p>'+
@@ -38,6 +41,16 @@
       '</ol></section></div></div>'+
     '<p class="studio-library-foot"></p>';
   intro.insertAdjacentElement("afterend",section);
+  const dockToggle=section.querySelector(".studio-library-dock-toggle");
+  // The global floating dock obscured long asana coaching text. Keep its
+  // controls available on demand, never permanently discard them.
+  let dockOpen=false;
+  section.dataset.dockOpen="false";
+  dockToggle.addEventListener("click",()=>{
+    dockOpen=!dockOpen;
+    section.dataset.dockOpen=String(dockOpen);
+    render();
+  });
   const choices=section.querySelector(".studio-library-choices");
   // Filters only affect opt-in library, not the ten canonical Flow phases.
   const filters=document.createElement("div");
@@ -133,6 +146,8 @@
     section.querySelector(".studio-library-eyebrow").textContent=w.heading;
     section.querySelector("#studio-library-title").textContent=w.title;
     section.querySelector(".studio-library-lead").textContent=w.lead;
+    dockToggle.textContent=dockOpen?w.dockHide:w.dockShow;
+    dockToggle.setAttribute("aria-pressed",String(dockOpen));
     section.querySelector(".studio-library-foot").textContent=w.foot;
     choices.setAttribute("aria-label",w.choose);
     const active=library.byId(current);

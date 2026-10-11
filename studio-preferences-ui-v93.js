@@ -44,7 +44,7 @@ en:{
  title:"PREPARE YOUR PRACTICE",hint:"Preferences · optional",
  mode:"Mode",route:"Movement route",pattern:"Breath pace",style:"Meditation guidance",focus:"Meditation focus",
  asanas:"Movement · Nila",breath:"Breath · Dragon",meditation:"Meditation · Uma",
- roots:"Find your base",mobility:"Gentle mobility",restore:"Active rest",
+ roots:"Find your base",mobility:"Gentle mobility",restore:"Active rest",custom:"My sequence",
  soft:"Gentle 3/5",natural:"Natural 4/6",free:"Free",guided:"Guided",silent:"Silent",body:"Body",space:"Surroundings",
  apply:"Apply without starting",save:"Save on this device",clear:"Clear saved preferences",
  privacy:"Only when you click Save are these five choices, visual comfort and your three-pose sequence stored locally. No practice history or health data is stored. You can clear everything here.",

@@ -21,6 +21,19 @@ test("V102: every canonical SVG dragon has a filled pelvis and two joined axilla
   assert.equal((piece.match(/data-limb="arm-/g)||[]).length,2,p.id);
  }
 });
+test("V102: Tree's two paws remain outside the scaled head instead of vanishing behind its face",()=>{
+ const p=art().poses.find(p=>p.id==="pose-2");
+ assert.ok(p,"Tree pose must exist");
+ const [headX,,scale]=p.head;
+ const safeX=70*scale+19;
+ assert.ok(p.hands[0][0]<headX-safeX,"Left palm clears the head and horns");
+ assert.ok(p.hands[1][0]>headX+safeX,"Right palm clears the head and horns");
+ assert.ok(p.hands.every(([x,y])=>y<90&&x>=200&&x<=520),"Raised hands stay within the stage");
+ for(let i=0;i<2;i++){
+  const nums=(p.arms[i].match(/-?\\d+(?:\\.\\d+)?/g)||[]).map(Number);
+  assert.deepEqual(nums.slice(-2),p.hands[i],"Palm follows the canonical authored arm endpoint");
+ }
+});
 test("V102: Nila uses original roots for visible paired arms, hip and shoulder webs",()=>{
  const source=read("movement-guardian-v37.js");
  for(const s of ["mg-v102-pelvis","mg-v102-underarm","mg-v102-forearm","frontArms(p)","curveSections(d)","sample(sections[index]","mg-arms-behind"])

@@ -39,13 +39,11 @@ function setText(selector,value){
 }
 function paintLabels(labels){
  const map=[
+ // The existing practice controller owns mode, breath and meditation
+ // group names. V101 must never overwrite them or fight its language updates.
  [entrance,labels.entrance],
- [choose(".studio-modes"),labels.modes],
  [choose("#studio-v66-workspace"),labels.workspace],
  [choose(".studio-v66-control-pane"),labels.controls],
- [choose(".studio-breath-patterns"),labels.breath],
- [choose(".studio-meditation-choices"),labels.meditation],
- [choose(".studio-meditation-focus"),labels.focus],
  [choose(".studio-duration"),labels.duration]
  ];
  for(const [element,value]of map){

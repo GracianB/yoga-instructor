@@ -57,7 +57,7 @@ test("V101 translates live labels and guidance to English without resetting the 
  await expect(guide.locator(".v101-summary")).toHaveText("How this space works");
  await expect(page.locator(".studio-entrance")).toHaveAttribute("aria-label","Practice studio");
  await expect(page.locator("#studio-v66-workspace")).toHaveAttribute("aria-label","Practice workspace");
- await expect(page.locator(".studio-modes")).toHaveAttribute("aria-label","Choose a practice type");
+ await expect(page.locator(".studio-modes")).toHaveAttribute("aria-label","Choose practice type");
  await page.locator('button.studio-mode[data-studio-mode="meditation"]').evaluate(el=>el.click());
  await expect(guide.locator(".v101-cue")).toContainText("Nothing starts on its own");
  await expect(guide.locator(".v101-find")).toHaveText("Go to Start");

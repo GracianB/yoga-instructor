@@ -40,9 +40,16 @@ const ownerSongExists=ledgerPaths.has(ownerSong);
 for(const name of [...declaredStylesheets, ...declaredScripts,'index.html','cv.html','404.html','yy-dragon-d10.css',ownerSong]){
   if(!ledgerPaths.has(name))throw Error('Public asset not in SHA-256 ledger: '+name);
 }
+// .nojekyll is a Pages build directive, never an HTTP-served resource.
+// The complete local SHA-256 manifest above still verifies its exact bytes.
+// Exclude only this known directive from remote GETs; all public assets
+// (including the manifest itself) must match their published SHA-256.
+if (!ledgerPaths.has('.nojekyll')) throw Error('Pages release missing .nojekyll directive');
+const pagesDirectives=new Set(['.nojekyll']);
 const expected=[
   {name:'release-manifest-v100.json',digest:createHash('sha256').update(manifestBytes).digest('hex')},
-  ...manifest.files.map(file=>({name:file.path,digest:file.sha256}))
+  ...manifest.files.filter(file=>!pagesDirectives.has(file.path))
+    .map(file=>({name:file.path,digest:file.sha256}))
 ];
 const files=expected.map(file=>file.name);
 const expectedArtRef = expectedIndex.match(/yin-yang-art\.js\?v=[^"']+/)?.[0];

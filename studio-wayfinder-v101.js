@@ -37,7 +37,7 @@ const locales={
     steps:["Choose Gentle, Natural or Free: Free has no forced countdown.","Choose a duration and press Start. Dragon shares the same practice clock.","Pause at any time, and always return to a comfortable natural breath."],
     cue:{idle:"Choose a rhythm and duration before you begin.",running:"Follow gently, without strain. The main control can pause.",paused:"The clock is paused. Resume whenever you feel ready.",finished:"Breathing practice complete. Repeat or rest."}},
    meditation:{
-    steps:["Choose Guided or Silent and optionally a focus point.","Select a duration and press Start.","If your attention wanders, return gently. Pausing keeps your progress."],
+    steps:["Choose Guided or Silent and optionally a focus point.","Choose a comfortable duration, then press Start.","If your attention wanders, return gently. Pausing keeps your progress."],
     cue:{idle:"Choose a gentle focus and duration. Nothing starts on its own.",running:"Nothing to achieve. Return to your focus whenever you need.",paused:"Meditation is paused. Return to stillness at your own pace.",finished:"Meditation complete. Give yourself a moment before moving on."}}
   },
   free:"Free rhythm selected: breathe without counting seconds.",

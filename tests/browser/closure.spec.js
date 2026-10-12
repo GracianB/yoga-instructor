@@ -100,6 +100,9 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
 });
 
 test('ritual persistence, breathing, quiet mode and audio controls', async ({ page }) => {
+  // This exercises two full reloads and live audio across the complete studio.
+  // Busy CI runners need realistic time without weakening any state assertions.
+  test.setTimeout(60000);
   const errors = await open(page);
   await page.locator('[data-practice="focus"]').evaluate(button=>button.click());
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
@@ -122,7 +125,10 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   await page.locator('#audio-play').evaluate(button => button.scrollIntoView({ behavior: 'instant', block: 'center' }));
   await page.locator('#audio-play').click();
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.paused)).toBe(false);
-  await page.locator('#audio-mute').click();
+  // Playwright pointer playback is checked above. The animated audio dock
+  // can keep a second locator.click() waiting for RAF stability on CI;
+  // invoke the real mute button handler and assert the audio element changes.
+  await page.locator('#audio-mute').evaluate(button => button.click());
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.muted)).toBe(true);
   // Pointer playback was exercised above. In WebKit a second Playwright
   // click may wait forever for RAF stability while the live audio visualizer

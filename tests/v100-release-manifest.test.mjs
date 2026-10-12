@@ -31,3 +31,16 @@ assert.ok(deploy.includes("pages-smoke.mjs --root=dist"));
 assert.ok(deploy.includes("workflow_run.head_sha"));
 assert.ok(deploy.includes("needs: [node]"));
 });
+
+test("V100 Pages checks every HTTP-served asset while verifying .nojekyll only as a local build directive",()=>{
+ const smoke=read("tools/pages-smoke.mjs");
+ // The local ledger checks ALL dist files, including .nojekyll.
+ assert.match(smoke,/verifyManifest\(root\)/);
+ assert.match(smoke,/ledgerPaths\.has\('\.nojekyll'\)/);
+ // Pages consumes .nojekyll as a control file and returns HTTP 404 for it.
+ // No other file may disappear from the remote SHA-256 verification.
+ assert.match(smoke,/pagesDirectives=new Set\(\['\.nojekyll'\]\)/);
+ assert.match(smoke,/manifest\.files\.filter\(file=>!pagesDirectives\.has\(file\.path\)\)/);
+ assert.match(smoke,/name:'release-manifest-v100\.json'/);
+ assert.match(smoke,/actual !== file\.digest/);
+});

@@ -30,7 +30,11 @@ jobs:
     name: Browser / ${{ matrix.browser }} shard ${{ matrix.shard }}
     needs: quality
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    # WebKit runs both complete partitions serially in one installation.
+    # Measured: shard 1 took 12.2m and shard 2 needed more than 7m;
+    # the old 20m limit cancelled healthy tests midway through shard 2.
+    # Keep full coverage and allow enough time for the combined job.
+    timeout-minutes: 35
     strategy:
       fail-fast: false
       max-parallel: 5

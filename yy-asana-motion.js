@@ -98,12 +98,9 @@
       return;
     }
     if(!clock.frame && !clock.timer){
-      // Resume with one immediate frame so a throttled RAF cannot leave the
-      // previously paused SVG frozen. Continue with the same single clock;
-      // frame() itself schedules the next RAF and its timer fallback.
-      const resuming=clock.elapsed>0;
+      // Paint immediately on resume, then reuse the same RAF/timer fallback.
       const now=performance.now();
-      clock.last=resuming?now-100:0;
+      clock.last=clock.elapsed?now-100:0;
       frame(now);
     }
   }

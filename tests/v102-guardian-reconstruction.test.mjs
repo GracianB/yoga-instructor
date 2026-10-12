@@ -30,7 +30,7 @@ test("V102: Tree's two paws remain outside the scaled head instead of vanishing 
  assert.ok(p.hands[1][0]>headX+safeX,"Right palm clears the head and horns");
  assert.ok(p.hands.every(([x,y])=>y<90&&x>=200&&x<=520),"Raised hands stay within the stage");
  for(let i=0;i<2;i++){
-  const nums=(p.arms[i].match(/-?\\d+(?:\\.\\d+)?/g)||[]).map(Number);
+  const nums=(p.arms[i].match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
   assert.deepEqual(nums.slice(-2),p.hands[i],"Palm follows the canonical authored arm endpoint");
  }
 });

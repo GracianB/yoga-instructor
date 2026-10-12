@@ -311,8 +311,9 @@
        '<g class="mg-arms mg-arms-behind">'+arms+'</g>'+
        '<g class="mg-v102-hip-web">'+anatomy.pelvis+'</g>'+
 
-       neck(p)+trunk(p)+
-       '<g class="mg-v102-axillary-web">'+anatomy.underarms+'</g>'+ 
+       neck(p)+
+       '<g class="mg-v102-axillary-web">'+anatomy.underarms+'</g>'+
+       trunk(p)+ 
        '<g class="mg-v102-arms-front">'+frontArms(p)+'</g>'+
        front+'<g class="mg-hands">'+hands+'</g>'+
        head(p)+'</g>';

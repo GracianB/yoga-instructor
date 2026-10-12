@@ -334,7 +334,28 @@
       '<ellipse class="yy-d15-pressure-mark" cx="'+x+'" cy="'+(y+13)+
       '" rx="'+fmt(21+pressure*4)+'" ry="'+fmt(3+pressure*1.7)+'"/>').join('')+'</g>';
   };
+  // V102: filled pelvis and shoulder membranes follow the authored geometry.
+  const solidJoints=p=>{
+    const [x,y,rx,ry]=p.body,horizontal=ry<60;
+    const cx=horizontal?x+rx*.51:x,cy=horizontal?y+ry*.21:y+ry*.63;
+    const w=horizontal?rx*.43:rx*.72,h=horizontal?Math.max(24,ry*.58):Math.max(24,ry*.34);
+    const pelvis='<path class="yy-v102-pelvis-solid" d="M'+fmt(cx-w)+' '+fmt(cy)+
+      'Q'+fmt(cx-w*.92)+' '+fmt(cy-h)+' '+fmt(cx)+' '+fmt(cy-h)+
+      'Q'+fmt(cx+w*.92)+' '+fmt(cy-h)+' '+fmt(cx+w)+' '+fmt(cy)+
+      'Q'+fmt(cx+w*.85)+' '+fmt(cy+h)+' '+fmt(cx)+' '+fmt(cy+h)+
+      'Q'+fmt(cx-w*.85)+' '+fmt(cy+h)+' '+fmt(cx-w)+' '+fmt(cy)+'Z"/>';
+    const caps=p.arms.map((d,i)=>{
+      const n=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+      const [sx,sy]=n,dx=x-sx,dy=y-sy,mag=Math.max(1,Math.hypot(dx,dy));
+      const nx=-dy/mag,ny=dx/mag,mx=sx+dx*.50,my=sy+dy*.50;
+      return '<path class="yy-v102-axilla-solid" data-axilla="'+i+'" d="M'+fmt(sx+nx*24)+' '+fmt(sy+ny*24)+
+        'Q'+fmt(mx+nx*17)+' '+fmt(my+ny*17)+' '+fmt(x)+' '+fmt(y)+
+        'Q'+fmt(mx-nx*17)+' '+fmt(my-ny*17)+' '+fmt(sx-nx*24)+' '+fmt(sy-ny*24)+'Z"/>';
+    }).join('');
+    return {pelvis,caps};
+  };
   const drawing=p=>{
+    const joints=solidJoints(p);
     const twoLegs=p.legs.map((d,i)=>limb(d,'leg',i)).join('');
     const twoArms=p.arms.map((d,i)=>limb(d,'arm',i)).join('');
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
@@ -345,7 +366,9 @@
       circle(p.head[0]+115,p.head[1]-28,2.0,'yy-mote yy-mote-b')+
       circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
       '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
-      '<g class="yy-legs">'+twoLegs+feet+'</g>'+attachments(p,'leg')+wings(p)+neck(p)+torso(p)+
+      '<g class="yy-legs">'+twoLegs+feet+'</g>'+attachments(p,'leg')+
+      '<g class="yy-v102-pelvis-web">'+joints.pelvis+'</g>'+wings(p)+neck(p)+torso(p)+
+      '<g class="yy-v102-underarm-web">'+joints.caps+'</g>'+
       attachments(p,'arm')+'<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';

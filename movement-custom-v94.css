@@ -1,0 +1,22 @@
+/* V94 · Integrated, accessible posture order editor */
+#studio-asana-library .v94-editor{border:1px solid var(--line,#b7c8b6);border-radius:7px 20px 7px 20px;background:var(--surface,#fbf9f1);padding:16px 22px;color:var(--ink,#233b2d)}
+#studio-asana-library .v94-heading{cursor:pointer;font-weight:700;font-size:.94rem;line-height:1.5}
+#studio-asana-library .v94-body{margin-top:18px;display:grid;gap:17px}
+#studio-asana-library .v94-lead{color:var(--muted,#51695a);font-size:.82rem;line-height:1.7;margin:0}
+#studio-asana-library .v94-steps{display:grid;gap:11px}
+#studio-asana-library .v94-row{display:grid;grid-template-columns:100px minmax(140px,1fr) auto;align-items:center;gap:12px}
+#studio-asana-library .v94-row label{font-size:.77rem;font-weight:700}
+#studio-asana-library .v94-row select{min-height:45px;padding:9px 11px;width:100%;border-radius:6px;border:1px solid var(--line,#b5c3b6);background:var(--surface,#fff);color:var(--ink,#2b4534)}
+#studio-asana-library .v94-reorder,.v94-actions{display:flex;gap:8px;flex-wrap:wrap}
+#studio-asana-library .v94-editor button{min-height:44px;padding:9px 13px;border-radius:7px;background:transparent;color:var(--ink,#2b4234);border:1px solid var(--line,#aec1b0);font-weight:700;cursor:pointer;font-size:.77rem}
+#studio-asana-library .v94-editor button:disabled{opacity:.4;cursor:default}
+#studio-asana-library .v94-editor .v94-apply{background:#365e4c;color:white}
+#studio-asana-library .v94-status{font-size:.77rem;line-height:1.5;color:var(--muted,#476451);margin:0}
+#studio-asana-library :is(.v94-editor button,.v94-editor select,.v94-editor summary):focus-visible{outline:3px solid #477b5c;outline-offset:4px}
+html[data-theme="dark"] #studio-asana-library .v94-editor{background:#23392f;color:#e5f0e3;border-color:#789382}
+html[data-theme="dark"] #studio-asana-library .v94-editor :is(.v94-lead,.v94-status){color:#d8e8d7}
+html[data-theme="dark"] #studio-asana-library .v94-editor button{color:#e6eee1;border-color:#91a997}
+html[data-theme="dark"] #studio-asana-library .v94-editor select{background:#1c3027;color:#e8f2e5;border-color:#92aa99}
+html[data-theme="dark"] #studio-asana-library .v94-editor .v94-apply{background:#dce9d4;color:#1f3928}
+@media(max-width:680px){#studio-asana-library .v94-row{grid-template-columns:1fr}.v94-reorder button{flex:1}}
+@media(prefers-reduced-motion:reduce){#studio-asana-library .v94-editor *{transition:none!important;animation:none!important}}

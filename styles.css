@@ -6015,3 +6015,14 @@ body.quiet-mode .hero .orb-parallax {
 
 /* V10: human signature in header, lotus and practice title own the cover. */
 .brand-text b{font-size:clamp(.69rem,.83vw,.92rem)}
+
+/* V85 release accessibility: stable AA ink on blended editorial surfaces.
+ * Scoped specificity outranks earlier pale-sage decorative tokens. */
+html[data-theme="light"] #trayectoria .v77-entry-training :is(.v77-entry-meta,.v77-entry-meta span,.v77-sub,.v77-entry p){color:#263e30}
+html[data-theme="dark"] #trayectoria .v77-entry-training :is(.v77-entry-meta,.v77-entry-meta span,.v77-sub,.v77-entry p){color:#e2efdf}
+html[data-theme="light"] #orientacion :is(.v80-topline,.v80-topline-end,.v80-header p,.v80-choice-number,.v80-choice-body small,.v80-route-steps a>span:first-child,.v80-fineprint,.v80-duration){color:#254331}
+html[data-theme="dark"] #orientacion :is(.v80-topline,.v80-topline-end,.v80-header p,.v80-choice-number,.v80-choice-body small,.v80-route-steps a>span:first-child,.v80-fineprint,.v80-duration){color:#deecdf}
+html[data-theme="light"] #demostracion :is(.v78-ticks,.v78-chapters button>span,.v78-chapters small,.v78-heading-aside,.v78-note){color:#304635}
+html[data-theme="dark"] #demostracion :is(.v78-ticks,.v78-chapters button>span,.v78-chapters small,.v78-heading-aside,.v78-note){color:#e4eee3}
+html[data-theme="light"] #studio-asana-library :is(.v82-lead,.v82-disclaimer,.v82-safety p,.v81-tracks small,.v81-results){color:#324737}
+html[data-theme="dark"] #studio-asana-library :is(.v82-lead,.v82-disclaimer,.v82-safety p,.v81-tracks small,.v81-results){color:#e3eee4}

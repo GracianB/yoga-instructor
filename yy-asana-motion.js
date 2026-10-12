@@ -98,9 +98,10 @@
       return;
     }
     if(!clock.frame && !clock.timer){
-      clock.last=0;
-      clock.frame=rt.frame(frame);
-      clock.timer=setTimeout(()=>frame(performance.now()),140);
+      // Paint immediately on resume, then reuse the same RAF/timer fallback.
+      const now=performance.now();
+      clock.last=clock.elapsed?now-100:0;
+      frame(now);
     }
   }
   window.addEventListener("yoga:pose-changing",()=>{

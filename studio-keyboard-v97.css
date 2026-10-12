@@ -1,0 +1,6 @@
+/* V97: keyboard focus entry stays visible over cinematic overlay and hero. */
+body>.v97-skip{position:absolute;left:14px;top:8px;z-index:99999;padding:14px 18px;min-height:46px;background:#214e40;color:#fff;font:700 .9rem/1.3 Inter,system-ui,sans-serif;border-radius:9px;text-decoration:none;transform:translateY(-160px);transition:transform .12s}
+body>.v97-skip:focus-visible{transform:translateY(0);outline:3px solid #e7cf8b;outline-offset:3px}
+#studio-asana-library .v94-editor .v94-reorder button:focus-visible{outline:3px solid #476f58;outline-offset:4px}
+#instructor-flow .v89-message:focus{outline:3px solid #765b94;outline-offset:5px;border-radius:4px}
+@media(prefers-reduced-motion:reduce){body>.v97-skip{transition:none!important}}

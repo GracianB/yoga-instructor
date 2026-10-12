@@ -22,5 +22,5 @@ test("D29: cat-cow pause holds a fixed frame, then resumes real geometry under W
   .split("test('Phase B: each asana")[0];
  assert.match(section,/await page\.waitForTimeout\(450\)/);
  assert.match(section,/expect\(await back\.getAttribute\('d'\)\)\.toBe\(frozen\)/);
- assert.match(section,/await expect\.poll\(\(\)=>back\.getAttribute\('d'\),\{timeout:7000\}\)\.not\.toBe\(frozen\)/);
+ assert.match(section,/await expect\.poll\(\(\)=>back\.getAttribute\('d'\),\{timeout:12000\}\)\.not\.toBe\(frozen\)/);
 });

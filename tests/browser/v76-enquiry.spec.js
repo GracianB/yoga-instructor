@@ -31,7 +31,10 @@ test("V76: enquiry creates a contextual email without submitting data",async({pa
 test("V76: edited preview overrides generated body and reset erases values",async({page})=>{
  await page.goto("/");
  const root=page.locator("#v76-enquiry");
- await root.locator("#v76-compose").click();
+ // Other V76 tests cover pointer clicks. Isolate the email-editor contract
+ // from long scroll-driven animations under Firefox CI load.
+ await root.locator("#v76-compose").evaluate(button=>button.click());
+ await expect(root.locator("#v76-results")).toBeVisible();
  await root.locator("#v76-preview").fill("Texto propio y revisado.");
  const href=await root.locator("#v76-mail").getAttribute("href");
  expect(decodeURIComponent(href)).toContain("Texto propio y revisado.");

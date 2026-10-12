@@ -38,9 +38,14 @@
  <path class="uma-lunar-thread" d="M185 211Q165 195 147 180 M375 211Q397 192 417 178 M178 267Q160 265 150 258 M382 267Q400 265 410 258"/>
  <!-- Paired knees are connected under the rounded torso -->
  <path d="M250 284Q204 271 175 307Q157 338 189 345Q240 359 274 321Z M310 284Q356 271 385 307Q403 338 371 345Q320 359 286 321Z" fill="url(#uma-body)" stroke="#7774a6" stroke-width="3"/>
+ <!-- V102: uninterrupted pelvic bridge between both seated knees. -->
+ <path class="uma-v102-pelvis" d="M234 298Q248 271 280 275Q313 271 326 298Q333 322 302 337Q280 347 257 337Q226 322 234 298Z"/>
  <!-- Torso, no independent rectangular neck -->
  <path class="uma-body" d="M280 159 C238 159 209 194 208 245 Q200 294 231 323 Q245 340 280 341 Q315 340 329 323 Q360 294 352 245 C351 194 322 159 280 159Z" fill="url(#uma-body)" stroke="#6c6b9e" stroke-width="4" stroke-linejoin="round"/>
  <path d="M254 208Q279 197 305 208 M242 258Q280 283 318 258" fill="none" stroke="#e8e4ee" stroke-width="6" stroke-opacity=".48" stroke-linecap="round"/>
+ <!-- Axillary gussets remain attached when the mantle and arms overlap. -->
+ <path class="uma-v102-axilla" d="M211 218Q217 190 241 198Q257 210 251 231L233 251Q212 251 211 218Z"/>
+ <path class="uma-v102-axilla" d="M349 218Q343 190 319 198Q303 210 309 231L327 251Q348 251 349 218Z"/>
  <!-- Arms rest on knees, not floating away from the torso -->
  <path class="uma-arm-left" d="M222 213 C203 223 193 255 204 280 C209 300 222 312 242 313 Q253 315 266 303 L263 291 Q248 291 237 290 C224 278 225 253 241 229Z" fill="url(#uma-body)" stroke="#7676a5" stroke-width="2.8" stroke-linejoin="round"/>
  <path class="uma-arm-right" d="M338 213 C357 223 367 255 356 280 C351 300 338 312 318 313 Q307 315 294 303 L297 291 Q312 291 323 290 C336 278 335 253 319 229Z" fill="url(#uma-body)" stroke="#7676a5" stroke-width="2.8" stroke-linejoin="round"/>
@@ -66,6 +71,23 @@
  <path class="uma-brow-light" d="M251 126Q278 117 303 127" fill="none" stroke="#f0e5e8" stroke-opacity=".32" stroke-width="3.5" stroke-linecap="round"/>
  <path class="uma-breath-crest" d="M256 238Q280 229 304 238" stroke="#ece5ff" stroke-opacity=".43"
   stroke-width="3.1" fill="none" stroke-linecap="round"/>
+ <!-- V102: Uma's tiny, pleasantly drowsy firefly and living lotus.
+      They use the EXISTING session clock via CSS custom properties. -->
+ <g class="uma-v102-firefly" aria-hidden="true">
+  <ellipse cx="392" cy="101" rx="12" ry="9" fill="#fff6d8" opacity=".92"/>
+  <path d="M381 96Q372 83 380 80Q389 85 390 96M394 96Q404 82 411 85Q415 94 402 100" fill="#e2d6f3" stroke="#a08bb6" stroke-width="1.8"/>
+  <path d="M387 101Q390 104 393 101M397 101Q400 104 403 101" fill="none" stroke="#6b5b80" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M393 108Q398 112 401 108" fill="none" stroke="#a78bad" stroke-width="1.3" stroke-linecap="round"/>
+  <circle cx="378" cy="108" r="3" fill="#ffecb3" opacity=".8"/>
+ </g>
+ <g class="uma-v102-orbit-star" aria-hidden="true" fill="none" stroke="#e4cb8d" stroke-width="2.8" stroke-linecap="round">
+  <path d="M165 95V117M154 106H176M173 77V87M168 82H178"/>
+ </g>
+ <g class="uma-v102-lotus" aria-hidden="true">
+  <path d="M140 155Q128 136 141 116Q155 132 156 149Q164 127 178 125Q182 144 160 156Q151 163 140 155Z" fill="#e4c8e4" stroke="#a681b3" stroke-width="2"/>
+  <path d="M145 153Q141 135 155 119Q166 138 155 156Z" fill="#ffedda"/>
+  <path d="M126 157Q149 171 176 156" fill="none" stroke="#a681b3" stroke-width="2.2" stroke-linecap="round"/>
+ </g>
  <!-- An inward-facing crescent is her meditative symbol -->
  <path d="M277 267 A21 21 0 1 0 297 287 A17 17 0 1 1 277 267Z" fill="#faf0ce"/>
  <path d="M235 336Q282 344 325 336" fill="none" stroke="#d8cded" stroke-width="3" stroke-linecap="round"/>

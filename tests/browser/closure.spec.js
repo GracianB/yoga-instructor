@@ -333,9 +333,11 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   expect(await back.getAttribute('d')).toBe(frozen);
   await act('pause');
   await expect(guide).toHaveAttribute('data-asana-state','running');
-  // Still requires a genuine post-resume SVG morph; a permanently frozen
-  // dragon fails, but a busy renderer is allowed to schedule its next frame.
-  await expect.poll(()=>back.getAttribute('d'),{timeout:7000}).not.toBe(frozen);
+  // Ensure this heavy end-to-end scenario is foregrounded before checking
+  // the resumed frame. A permanently frozen spine must still fail: the SVG
+  // path itself must actually change after the pause.
+  await page.bringToFront();
+  await expect.poll(()=>back.getAttribute('d'),{timeout:12000}).not.toBe(frozen);
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(guide).toHaveAttribute('data-asana-state','reduced');
   const reduced=await back.getAttribute('d');

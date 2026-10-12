@@ -8,7 +8,7 @@
     {id:"warmup",name:["Despertar el cuerpo","Wake your body"],cue:["A cuatro apoyos, moviliza suavemente la columna.","On all fours, move your spine gently."],kind:"table",body:[364,267,131,52,-5],head:[223,236,.73,-18,"open"],arms:["M292 283Q270 325 258 367","M329 290Q319 337 316 366"],legs:["M429 279Q455 318 451 368","M461 252Q509 287 505 363"],hands:[[258,367],[316,366]],feet:[[451,368],[505,363]],tail:[461,238,.83,-24]},
     {id:"pose-1",name:["Guerrero II","Warrior II"],cue:["Abre los brazos, afianza tus pies y mira al frente.","Open your arms, ground your feet and look ahead."],kind:"warrior",body:[357,230,62,86,-3],head:[358,123,.79,-13,"focus"],arms:["M309 190Q239 183 155 190","M407 195Q484 184 562 192"],legs:["M322 299Q298 308 272 325Q264 355 253 378","M391 304Q460 311 474 343Q495 360 536 383"],hands:[[155,190],[562,192]],feet:[[253,378],[536,383]],tail:[426,261,.68,10]},
     {id:"transition",name:["Fluir con presencia","Flow with presence"],cue:["Abre el pecho, juega con el ritmo y mantén los pies enraizados.","Open your chest, feel the rhythm and keep both feet grounded."],kind:"flow",body:[365,237,69,86,11],head:[345,125,.80,-9,"smile"],arms:["M318 193Q269 148 237 109","M417 199Q464 150 514 164"],legs:["M349 305Q294 335 240 378","M410 302Q466 346 520 381"],hands:[[237,109],[514,164]],feet:[[240,378],[520,381]],tail:[437,253,.59,16]},
-    {id:"pose-2",name:["Árbol del equilibrio","Tree of balance"],cue:["Busca un punto estable y sostén tu equilibrio.","Find a steady point and hold your balance."],kind:"tree",body:[360,226,62,84,0],head:[359,114,.79,0,"focus"],arms:["M311 188Q280 130 334 84","M407 188Q444 128 389 84"],legs:["M343 298Q339 345 349 386","M391 302Q453 310 425 333Q398 349 371 329"],hands:[[334,84],[389,84]],feet:[[349,386],[371,329]],tail:[426,260,.75,-6]},
+    {id:"pose-2",name:["Árbol del equilibrio","Tree of balance"],cue:["Busca un punto estable y sostén tu equilibrio.","Find a steady point and hold your balance."],kind:"tree",body:[360,226,62,84,0],head:[359,114,.79,0,"focus"],arms:["M311 188Q258 125 270 66","M407 188Q462 125 447 66"],legs:["M343 298Q339 345 349 386","M391 302Q453 310 425 333Q398 349 371 329"],hands:[[270,66],[447,66]],feet:[[349,386],[371,329]],tail:[426,260,.75,-6]},
     {id:"cooldown",name:["Postura del niño","Child's pose"],cue:["Recoge la energía y descansa la frente.","Fold inward and let your forehead rest."],kind:"child",body:[376,304,117,58,8],head:[264,319,.68,-43,"closed"],arms:["M309 333Q242 357 185 366","M340 344Q269 376 214 379"],legs:["M429 320Q446 364 400 369","M447 304Q489 350 454 365"],hands:[[185,366],[214,379]],feet:[[400,369],[454,365]],tail:[452,280,.66,28]},
     {id:"savasana",name:["Savasana","Savasana"],cue:["Afloja el cuerpo. No hay nada que conseguir.","Release your body. There is nothing to achieve."],kind:"savasana",body:[363,320,132,39,-1],head:[220,304,.76,-70,"closed"],arms:["M282 319Q262 348 243 366","M352 338Q353 365 332 375"],legs:["M439 322Q491 325 539 344","M444 308Q495 316 546 334"],hands:[[243,366],[332,375]],feet:[[539,344],[546,334]],tail:[452,291,.66,-14]},
     {id:"finish",name:["Un instante de gratitud","A moment of gratitude"],cue:["Junta las manos. Llévate esta calma contigo.","Bring your hands together. Carry this calm with you."],kind:"finish",body:[359,263,65,88,0],head:[359,142,.87,0,"smile"],arms:["M309 231Q300 268 346 263","M411 231Q425 268 373 263"],legs:["M323 326Q280 354 243 338","M395 326Q440 354 476 338"],hands:[[346,263],[373,263]],feet:[[243,338],[476,338]],tail:[425,283,.67,10]}
@@ -334,7 +334,28 @@
       '<ellipse class="yy-d15-pressure-mark" cx="'+x+'" cy="'+(y+13)+
       '" rx="'+fmt(21+pressure*4)+'" ry="'+fmt(3+pressure*1.7)+'"/>').join('')+'</g>';
   };
+  // V102: filled pelvis and shoulder membranes follow the authored geometry.
+  const solidJoints=p=>{
+    const [x,y,rx,ry]=p.body,horizontal=ry<60;
+    const cx=horizontal?x+rx*.51:x,cy=horizontal?y+ry*.21:y+ry*.63;
+    const w=horizontal?rx*.43:rx*.72,h=horizontal?Math.max(24,ry*.58):Math.max(24,ry*.34);
+    const pelvis='<path class="yy-v102-pelvis-solid" d="M'+fmt(cx-w)+' '+fmt(cy)+
+      'Q'+fmt(cx-w*.92)+' '+fmt(cy-h)+' '+fmt(cx)+' '+fmt(cy-h)+
+      'Q'+fmt(cx+w*.92)+' '+fmt(cy-h)+' '+fmt(cx+w)+' '+fmt(cy)+
+      'Q'+fmt(cx+w*.85)+' '+fmt(cy+h)+' '+fmt(cx)+' '+fmt(cy+h)+
+      'Q'+fmt(cx-w*.85)+' '+fmt(cy+h)+' '+fmt(cx-w)+' '+fmt(cy)+'Z"/>';
+    const caps=p.arms.map((d,i)=>{
+      const n=(d.match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
+      const [sx,sy]=n,dx=x-sx,dy=y-sy,mag=Math.max(1,Math.hypot(dx,dy));
+      const nx=-dy/mag,ny=dx/mag,mx=sx+dx*.50,my=sy+dy*.50;
+      return '<path class="yy-v102-axilla-solid" data-axilla="'+i+'" d="M'+fmt(sx+nx*24)+' '+fmt(sy+ny*24)+
+        'Q'+fmt(mx+nx*17)+' '+fmt(my+ny*17)+' '+fmt(x)+' '+fmt(y)+
+        'Q'+fmt(mx-nx*17)+' '+fmt(my-ny*17)+' '+fmt(sx-nx*24)+' '+fmt(sy-ny*24)+'Z"/>';
+    }).join('');
+    return {pelvis,caps};
+  };
   const drawing=p=>{
+    const joints=solidJoints(p);
     const twoLegs=p.legs.map((d,i)=>limb(d,'leg',i)).join('');
     const twoArms=p.arms.map((d,i)=>limb(d,'arm',i)).join('');
     const feet=p.feet.map(pos=>point(pos,'yy-paw yy-foot')).join('');
@@ -345,7 +366,9 @@
       circle(p.head[0]+115,p.head[1]-28,2.0,'yy-mote yy-mote-b')+
       circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
       '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
-      '<g class="yy-legs">'+twoLegs+feet+'</g>'+attachments(p,'leg')+wings(p)+neck(p)+torso(p)+
+      '<g class="yy-legs">'+twoLegs+feet+'</g>'+attachments(p,'leg')+
+      '<g class="yy-v102-pelvis-web">'+joints.pelvis+'</g>'+wings(p)+neck(p)+
+      '<g class="yy-v102-underarm-web">'+joints.caps+'</g>'+torso(p)+
       attachments(p,'arm')+'<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';

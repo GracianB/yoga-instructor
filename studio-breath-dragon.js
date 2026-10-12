@@ -47,6 +47,11 @@
 <g class="sd31-breath-core">
  <path d="M280 179 C249 178 230 217 230 262 C231 302 253 325 280 326 C308 325 330 299 330 260 C330 214 310 180 280 179Z" fill="url(#sd31-chest)" stroke="var(--dragon-deep,#568978)" stroke-opacity=".23" stroke-width="2"/>
  <path d="M259 207 C269 200 288 199 300 207" fill="none" stroke="#fffbed" stroke-opacity=".64" stroke-width="4" stroke-linecap="round"/>
+ <!-- A second, separate belly muscle lets the inhale read even on mobile. -->
+ <g class="sd31-v102-belly" aria-hidden="true">
+  <ellipse cx="280" cy="283" rx="41" ry="31" fill="url(#sd31-chest)" opacity=".58"/>
+  <path d="M254 283 Q280 296 306 283" stroke="var(--dragon-deep,#568978)" stroke-opacity=".28" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+ </g>
  <path class="sd31-breath-line" d="M245 255 Q280 270 316 255 M250 278 Q280 297 311 278" stroke="var(--dragon-deep,#568978)" stroke-opacity=".26" stroke-width="2" fill="none" stroke-linecap="round"/>
 </g>
 <!-- Forearms extend from integrated shoulder sockets and cradle the abdomen -->
@@ -68,6 +73,12 @@
 <path class="sd31-nostril-lines" d="M256 149l5 1 M299 150l5 -1" fill="none" stroke="var(--eye,#264c43)" stroke-opacity=".42" stroke-width="2" stroke-linecap="round"/>
 <path d="M235 148 Q244 154 255 150 M305 150 Q315 154 324 146" fill="none" stroke="var(--cheek,#dbab9e)" stroke-width="6" stroke-opacity=".45" stroke-linecap="round"/>
 <path d="M255 84 Q269 75 283 77" fill="none" stroke="#fff8e5" stroke-width="6" stroke-linecap="round" opacity=".24"/>
+</g>
+<!-- One quiet exhale cloud follows the same breath frame as the chest. -->
+<g class="sd31-v102-exhale-mist" fill="none" stroke="#79b7b4" stroke-linecap="round" stroke-width="4" aria-hidden="true">
+ <path d="M333 143Q356 131 350 113Q343 96 361 89"/>
+ <path d="M343 157Q373 146 370 127"/>
+ <path d="M354 140Q384 127 380 111" opacity=".56"/>
 </g>
 <!-- The planted front feet cover body seams, three small curved claws each -->
 <path d="M221 314 C203 314 190 331 199 343 Q217 352 251 347 Q266 337 248 318Z" fill="url(#sd31-head)" stroke="var(--dragon-deep,#568978)" stroke-width="3"/>

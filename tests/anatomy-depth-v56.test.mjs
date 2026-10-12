@@ -7,9 +7,14 @@ test("V56 shoulders are layered beneath Nila's torso and hands remain in front",
  const src=read("movement-guardian-v37.js");
  const render=src.slice(src.indexOf("const drawing=p=>"));
  const before=render.indexOf("'<g class=\"mg-arms mg-arms-behind\">");
- const torso=render.indexOf("neck(p)+trunk(p)");
+ const neck=render.indexOf("neck(p)+");
+ const axilla=render.indexOf("'<g class=\"mg-v102-axillary-web\">");
+ const torso=render.indexOf("trunk(p)+");
+ const forearms=render.indexOf("'<g class=\"mg-v102-arms-front\">");
  const after=render.indexOf("'<g class=\"mg-hands\">");
- assert.ok(before>=0 && torso>before && after>torso,"Depth ordering must be arms, torso, hands");
+ assert.ok(before>=0 && neck>before && axilla>neck && torso>axilla &&
+   forearms>torso && after>forearms,
+   "Depth ordering must preserve rear arms, inner axillary bridges, torso, visible forearms, then hands");
  assert.match(render,/const joined=p\.kind==="finish"/);
  assert.match(render,/mg-gesture-forearm/);
  assert.match(render,/window\.YOGA_MOVEMENT_GUARDIAN=Object\.freeze/);

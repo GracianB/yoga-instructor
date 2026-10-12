@@ -254,12 +254,52 @@
       '<path class="mg-ground-line" d="M'+esc(floor.minX-24)+' '+esc(floor.maxY+13)+
       ' H'+esc(floor.maxX+24)+'"/>'+marks+'</g>';
   };
+  // V102: pelvic web + underarm membranes, derived from authored body roots.
+  const joins=p=>{
+    const [x,y,rx,ry]=p.body;
+    const horizontal=ry<60||p.kind==="downward";
+    const cx=horizontal?x+rx*.54:x,cy=horizontal?y+ry*.20:y+ry*.67;
+    const w=horizontal?rx*.44:rx*.68,h=horizontal?Math.max(25,ry*.60):Math.max(22,ry*.35);
+    const pelvis='M'+point(cx-w,cy)+' Q'+point(cx-w*.95,cy-h)+
+      ' '+point(cx,cy-h)+' Q'+point(cx+w*.95,cy-h)+
+      ' '+point(cx+w,cy)+' Q'+point(cx+w*.86,cy+h)+
+      ' '+point(cx,cy+h)+' Q'+point(cx-w*.86,cy+h)+
+      ' '+point(cx-w,cy)+'Z';
+    const underarms=p.arms.map((d,i)=>{
+      const [sx,sy]=curveSections(d)[0];
+      const tx=sx+(x-sx)*.58,ty=sy+(y-sy)*.58;
+      const dx=x-sx,dy=y-sy,mag=Math.max(1,Math.hypot(dx,dy));
+      const nx=-dy/mag,ny=dx/mag;
+      const membrane='M'+point(sx+nx*23,sy+ny*23)+
+        ' Q'+point(tx+nx*16,ty+ny*16)+' '+point(x,y)+
+        ' Q'+point(tx-nx*16,ty-ny*16)+' '+point(sx-nx*23,sy-ny*23)+'Z';
+      return '<path class="mg-v102-underarm" data-axilla="'+i+'" d="'+membrane+'"/>';
+    }).join('');
+    return {pelvis:'<path class="mg-v102-pelvis" d="'+pelvis+'"/>',underarms};
+  };
+  // Forearm layer follows the exact same curve as the rear arm.
+  // Its tapered visible surface prevents the chest from hiding whole limbs.
+  const frontArms=p=>p.arms.map((d,i)=>{
+    const sections=curveSections(d),left=[],right=[];
+    for(let k=0;k<=18;k++){
+      const u=.21+.79*k/18,scaled=u*sections.length;
+      const index=Math.min(sections.length-1,Math.floor(scaled));
+      const at=sample(sections[index],Math.min(1,scaled-index));
+      const mag=Math.max(.001,Math.hypot(at.dx,at.dy));
+      const nx=-at.dy/mag,ny=at.dx/mag,width=21-(k/18)*7;
+      left.push(point(at.x+nx*width,at.y+ny*width));
+      right.push(point(at.x-nx*width,at.y-ny*width));
+    }
+    return '<path class="mg-v102-forearm" data-visible-arm="'+i+'" d="M'+
+      left.join(' L')+' L'+right.reverse().join(' L')+'Z"/>';
+  }).join('');
   const drawing=p=>{
     const legs=p.legs.map((d,i)=>limb(d,"leg",i)).join("");
     const arms=p.arms.map((d,i)=>limb(d,"arm",i)).join("");
     // V56: arm roots live BEHIND the same torso that joins the hip sockets.
     // Previously the entire shoulder socket sat over the chest like a sticker.
     // Only the hands and a soft joining-gesture forearm pass in FRONT.
+    const anatomy=joins(p);
     const joined=p.kind==="finish"||p.id==="v68-gratitude";
     const feet=p.feet.map((pt,i)=>paw(pt,"foot",i,p.legs[i],false)).join("");
     const hands=p.hands.map((pt,i)=>paw(pt,"hand",i,p.arms[i],joined)).join("");
@@ -269,7 +309,12 @@
        grounding(p)+shadows(p)+tail(p)+
        '<g class="mg-legs">'+legs+feet+'</g>'+
        '<g class="mg-arms mg-arms-behind">'+arms+'</g>'+
-       neck(p)+trunk(p)+
+       '<g class="mg-v102-hip-web">'+anatomy.pelvis+'</g>'+
+
+       neck(p)+
+       '<g class="mg-v102-axillary-web">'+anatomy.underarms+'</g>'+
+       trunk(p)+ 
+       '<g class="mg-v102-arms-front">'+frontArms(p)+'</g>'+
        front+'<g class="mg-hands">'+hands+'</g>'+
        head(p)+'</g>';
   };

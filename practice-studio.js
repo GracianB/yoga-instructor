@@ -235,6 +235,12 @@
     const breathing = Breath.frame(elapsed, breathPattern);
     const reading=BreathGuide?.reading(breathing,Breath.PATTERNS[breathPattern],
       guided.dataset.v87Display||"numbers");
+    const v102=window.YOGA_GUARDIAN_MOTION_V102;
+    const reduced=document.body.classList.contains("quiet-mode")||
+      window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
+    const v102Breath=v102?.breath(breathing,{status:isBreathing?snapshot.status:"idle",quiet:reduced});
+    const v102Uma=v102?.meditation({elapsedMs:elapsed,
+      status:isBreathing?"idle":snapshot.status,quiet:reduced});
     const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
     const shape = Sculpt.sculpt(breathing, activeBreath);
     const articulated=Articulation?.sculpt(breathing,{
@@ -291,6 +297,24 @@
     // V49: the environment, chest and wing share this existing breath clock.
     setVar(guided, "--studio-breath-scale", roomScale);
     setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
+    if(v102Breath){
+      setVar(guided,"--v102-chest-x",v102Breath.chestX);
+      setVar(guided,"--v102-chest-y",v102Breath.chestY);
+      setVar(guided,"--v102-belly-x",v102Breath.bellyX);
+      setVar(guided,"--v102-body-x",v102Breath.bodyX);
+      setVar(guided,"--v102-halo-scale",v102Breath.halo);
+      setVar(guided,"--v102-halo-opacity",v102Breath.haloOpacity);
+      setVar(guided,"--v102-wing-scale",v102Breath.wing);
+      setVar(guided,"--v102-mist-opacity",v102Breath.mistOpacity);
+    }
+    if(v102Uma){
+      setVar(guided,"--v102-firefly-x",v102Uma.fireflyX);
+      setVar(guided,"--v102-firefly-y",v102Uma.fireflyY);
+      setVar(guided,"--v102-star-x",v102Uma.starX);
+      setVar(guided,"--v102-star-y",v102Uma.starY);
+      setVar(guided,"--v102-lantern-glow",v102Uma.lanternGlow);
+      setVar(guided,"--v102-lotus-open",v102Uma.lotus);
+    }
     setVar(guided, "--studio-rib-expansion", shape.rib);
     // V86 uses this same 200-ms PracticeClock: pause freezes the frame.
     if(articulated){

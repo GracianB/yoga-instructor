@@ -1,0 +1,17 @@
+/* V98 coherent summary: mode, details, status; readable from 320px to desktop. */
+#instructor-flow .v98-readiness{margin:20px 0 14px;padding:clamp(18px,2.8vw,30px);border:1px solid var(--guardian-line,#b4c1ad);background:color-mix(in srgb,var(--guardian-surface,#faf6ed) 96%,#fff);border-radius:8px 24px 8px 24px;color:var(--guardian-ink,#243d34);min-width:0}
+#instructor-flow .v98-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:20px}
+#instructor-flow #v98-title{font:700 .7rem/1.45 "JetBrains Mono",monospace;letter-spacing:.11em;margin:0;color:var(--guardian-deep,#395e48)}
+#instructor-flow .v98-preferences{font:700 .8rem/1.5 Inter,system-ui,sans-serif;color:var(--guardian-deep,#385d4a);text-underline-offset:4px;min-height:44px;display:inline-flex;align-items:center}
+#instructor-flow .v98-grid{display:grid;grid-template-columns:1fr 1.25fr .85fr;gap:16px}
+#instructor-flow .v98-grid>div{display:grid;align-content:start;gap:10px;min-width:0}
+#instructor-flow .v98-grid>div+div{border-left:1px solid var(--guardian-line,#b8cbbf);padding-left:17px}
+#instructor-flow .v98-grid small{font:700 .65rem/1.4 "JetBrains Mono",monospace;letter-spacing:.1em;color:var(--guardian-deep,#426f58)}
+#instructor-flow .v98-grid strong,#instructor-flow .v98-grid output{font:500 clamp(1rem,1.45vw,1.32rem)/1.35 Fraunces,Georgia,serif;color:var(--guardian-ink,#253d32);overflow-wrap:anywhere}
+#instructor-flow .v98-preferences:focus-visible{outline:3px solid var(--guardian-deep,#336d4d);outline-offset:4px}
+html[data-theme="dark"] #instructor-flow .v98-readiness{background:#24352f;color:#e7f2e4;border-color:#809f8a}
+html[data-theme="dark"] #instructor-flow .v98-readiness :is(#v98-title,.v98-preferences,.v98-grid small){color:#e0eddf}
+html[data-theme="dark"] #instructor-flow .v98-grid :is(strong,output){color:#f5faf1}
+@media(max-width:720px){#instructor-flow .v98-grid{grid-template-columns:1fr 1fr}#instructor-flow .v98-grid>div:last-child{grid-column:1/-1}#instructor-flow .v98-grid>div:last-child{border-left:0;padding-left:0;border-top:1px solid var(--guardian-line,#bcc8c0);padding-top:15px}}
+@media(max-width:400px){#instructor-flow .v98-grid{grid-template-columns:1fr}#instructor-flow .v98-grid>div+div{border-left:0;border-top:1px solid var(--guardian-line,#b8cabb);padding:13px 0 0}#instructor-flow .v98-grid>div:last-child{grid-column:auto}}
+@media(prefers-reduced-motion:reduce){#instructor-flow .v98-readiness *{animation:none!important;transition:none!important}}

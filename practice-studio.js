@@ -21,6 +21,9 @@
   const Breath = window.YOGA_BREATH_D26;
   const Meditation = window.YOGA_MEDITATION_D27;
   const Sculpt = window.YOGA_ANATOMY_D28;
+  const Articulation = window.YOGA_BREATH_ARTICULATION_V86;
+  const BreathGuide = window.YOGA_BREATH_GUIDANCE_V87;
+  const RenderPolicy = window.YOGA_STUDIO_RENDER_POLICY_V96;
   const immersionButton = root.querySelector('[data-studio-action="immersion"]');
   const meditationChoices = root.querySelector(".studio-meditation-choices");
   const meditationFocusChoices = root.querySelector(".studio-meditation-focus");
@@ -219,6 +222,9 @@
     });
   };
 
+  // V96: button attributes / disabled states only change on actual control
+  // transitions, never five times a second with a running clock.
+  let lastControlsKey = "";
   const render = () => {
     if (mode === "asanas") return;
     const snapshot = clock.snapshot();
@@ -227,8 +233,16 @@
     const waiting = snapshot.status === "idle";
     const elapsed = snapshot.elapsedMs;
     const breathing = Breath.frame(elapsed, breathPattern);
+    const reading=BreathGuide?.reading(breathing,Breath.PATTERNS[breathPattern],
+      guided.dataset.v87Display||"numbers");
     const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
     const shape = Sculpt.sculpt(breathing, activeBreath);
+    const articulated=Articulation?.sculpt(breathing,{
+      status:isBreathing?snapshot.status:"idle",
+      intensity:guided.dataset.v88Intensity==="still"?0:guided.dataset.v88Intensity==="expressive"?1:.55,
+      quiet:document.body.classList.contains("quiet-mode")||
+        window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches
+    });
     let titleKey = isBreathing ? "breathReady" : "meditationReady";
     let cueKey = isBreathing ? "breathCue" : "meditationCue";
 
@@ -254,10 +268,15 @@
       const label = waiting ? copy("breathingReadyLabel") :
         complete ? copy("finished") :
         breathing.phase === "free" ? copy("breathingFreeLabel") :
-        copy(breathing.phase) + " · " + Math.ceil(breathing.phaseRemaining) + " s";
+        copy(breathing.phase) + (reading?.seconds == null ? "" : " · " + reading.seconds + " s");
       setText(breathPhaseDetail, label);
     }
     setText(cue, copy(cueKey));
+    // V87: the optional phase bar consumes the same 200-ms snapshot.
+    const phaseGuide=guided.querySelector(".v87-guidance");
+    if(phaseGuide)setVar(phaseGuide,"--v87-cycle-progress",
+      !waiting&&!complete&&breathing.phase!=="free"?
+      (reading?.progress||0).toFixed(4):"0");
     setText(status, copy(snapshot.status));
     setData(guided, "studioStatus", snapshot.status);
     // The meditation invitation follows the SAME clock and status already
@@ -273,6 +292,14 @@
     setVar(guided, "--studio-breath-scale", roomScale);
     setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
     setVar(guided, "--studio-rib-expansion", shape.rib);
+    // V86 uses this same 200-ms PracticeClock: pause freezes the frame.
+    if(articulated){
+      setVar(guided,"--v86-chest",articulated.chest);
+      setVar(guided,"--v86-wing",articulated.wing);
+      setVar(guided,"--v86-head",articulated.head);
+      setVar(guided,"--v86-heart",articulated.heart);
+      setData(guided,"v86Breath",articulated.phase);
+    }
     // V36: visible seated dragon breathing, with feet and head planted.
     // V72: a visible inhale without lifting planted feet. Torso, wings,
     // ribs and head share the existing 200-ms monotonic PracticeClock.
@@ -296,14 +323,21 @@
       copy(isBreathing ? breathPattern === "free" ? "breathFreeNote" : "breathNote" : "meditationNote"));
     setText(primary, copy(waiting ? "begin" : snapshot.status === "running" ? "pause" :
       snapshot.status === "paused" ? "resume" : "again"));
-    primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
-    setImmersive(immersive);
-    reset.disabled = waiting;
-    syncDurations();
-    syncBreathButtons();
-    syncMeditationButtons();
-    syncFocusButtons();
-    lockChoices();
+    const controlsKey=RenderPolicy?.key({
+      mode,status:snapshot.status,durationIndex,breathPattern,
+      meditationStyle,meditationFocus,immersive,language:language(),asanaBusy
+    })||[mode,snapshot.status,language()].join("|");
+    if(controlsKey!==lastControlsKey){
+      lastControlsKey=controlsKey;
+      primary.setAttribute("aria-pressed", String(snapshot.status === "running"));
+      setImmersive(immersive);
+      reset.disabled = waiting;
+      syncDurations();
+      syncBreathButtons();
+      syncMeditationButtons();
+      syncFocusButtons();
+      lockChoices();
+    }
     if (complete) stopTick();
   };
 
@@ -398,6 +432,8 @@
     render();
   });
 
+  root.addEventListener("yoga:breath-presentation",()=>{if(mode==="breath")render()});
+  root.addEventListener("yoga:breath-atmosphere",()=>{if(mode==="breath")render()});
   window.addEventListener("yoga:flow", ({detail}) => {
     asanaBusy = ["running","paused"].includes(detail?.status);
     lockChoices();

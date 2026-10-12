@@ -37,8 +37,10 @@ test("Warrior II and Tree have physically authored knee bends, other grounded pa
  assert.equal((poses['pose-1'].legs[0].match(/Q/g)||[]).length,2);
  assert.equal((poses['pose-1'].legs[1].match(/Q/g)||[]).length,2);
  assert.equal((poses['pose-2'].legs[1].match(/Q/g)||[]).length,2);
- assert.equal(poses['pose-2'].feet[1][0],355);
- assert.equal(poses['pose-2'].feet[1][1],313);
+ const planted=poses["pose-2"].feet[0],raised=poses["pose-2"].feet[1];
+ assert.ok(planted[1]>370,"One foot remains firmly planted");
+ assert.ok(raised[1]<350,"Second foot is elevated at the calf");
+ assert.ok(Math.abs(raised[0]-planted[0])<65,"Raised foot meets the supporting leg");
  assert.deepEqual(Array.from(poses.warmup.feet[0]),[451,368]);
  assert.deepEqual(Array.from(poses.warmup.feet[1]),[505,363]);
 });

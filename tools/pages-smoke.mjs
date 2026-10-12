@@ -4,6 +4,7 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import {verifyManifest} from './v100-manifest.mjs';
 
 const argv = process.argv.slice(2);
 const option = (name, fallback) => {
@@ -18,31 +19,32 @@ if (!Number.isInteger(attempts) || attempts < 1 || attempts > 40) throw Error('I
 if (!(waitSeconds >= 0 && waitSeconds <= 20)) throw Error('Invalid interval');
 if (base.protocol !== 'https:') throw Error('HTTPS required');
 
-// Verify every root stylesheet declared by the release HTML, not a stale hand-maintained list.
-const expectedIndex = await readFile(resolve(root, 'index.html'), 'utf8');
-const localPages = [expectedIndex, await readFile(resolve(root, 'cv.html'), 'utf8'),
-  await readFile(resolve(root, '404.html'), 'utf8')];
-// A single missing JS can break an entire mode even while the HTML looks fine.
-// Read local assets from all public pages, not just a hand-picked smoke list.
-const declaredStylesheets = localPages.flatMap(html =>
-  [...html.matchAll(/<link[^>]+href="\.\/([^"?#]+\.css)(?:\?[^"]*)?"/g)]
-    .map(([,name]) => name).filter(name => !name.includes('/')));
-const declaredScripts = localPages.flatMap(html =>
-  [...html.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)]
-    .map(([,name]) => name).filter(name => !name.includes('/')));
-// Audio remains optional for older releases, but a committed owner soundtrack
-// must be byte-identical on Pages. A 200 HTML fallback is not a valid MP3.
-const ownerSong='audio/silence-between-notes.mp3';
-const ownerSongExists=await readFile(resolve(root,ownerSong)).then(()=>true,()=>false);
-const files = [...new Set(['index.html', 'cv.html', '404.html', 'favicon.svg',
-  'yin-yang-art.js', 'yy-dragon-d9.css', 'yy-dragon-d10.css',
-  ...declaredStylesheets, ...declaredScripts,
-  ...(ownerSongExists?[ownerSong]:[])])];
-const expected = await Promise.all(files.map(async name => {
-  const data = await readFile(resolve(root, name));
-  return { name, digest: createHash('sha256').update(data).digest('hex') };
-}));
+const inventory=await verifyManifest(root);
+console.log('V100_LOCAL_LEDGER_OK: '+inventory.assets+' assets');
 
+// The post-release smoke test must compare every published byte listed in the
+// deterministic ledger, not only a curated set of CSS, JS and HTML files.
+// The local verification above already proves this ledger matches the built dist.
+const manifestBytes=await readFile(resolve(root,'release-manifest-v100.json'));
+const manifest=JSON.parse(manifestBytes.toString('utf8'));
+const expectedIndex=await readFile(resolve(root,'index.html'),'utf8');
+const localPages=[expectedIndex,await readFile(resolve(root,'cv.html'),'utf8'),
+  await readFile(resolve(root,'404.html'),'utf8')];
+const declaredStylesheets=localPages.flatMap(html=>
+  [...html.matchAll(/<link[^>]+href="\.\/([^"?#]+\.css)(?:\?[^"]*)?"/g)].map(([,name])=>name));
+const declaredScripts=localPages.flatMap(html=>
+  [...html.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)].map(([,name])=>name));
+const ledgerPaths=new Set(manifest.files.map(file=>file.path));
+const ownerSong='audio/silence-between-notes.mp3';
+const ownerSongExists=ledgerPaths.has(ownerSong);
+for(const name of [...declaredStylesheets, ...declaredScripts,'index.html','cv.html','404.html','yy-dragon-d10.css',ownerSong]){
+  if(!ledgerPaths.has(name))throw Error('Public asset not in SHA-256 ledger: '+name);
+}
+const expected=[
+  {name:'release-manifest-v100.json',digest:createHash('sha256').update(manifestBytes).digest('hex')},
+  ...manifest.files.map(file=>({name:file.path,digest:file.sha256}))
+];
+const files=expected.map(file=>file.name);
 const expectedArtRef = expectedIndex.match(/yin-yang-art\.js\?v=[^"']+/)?.[0];
 if (!expectedArtRef) throw Error('No versioned Yin/Yang art reference in release HTML');
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));

@@ -1,0 +1,24 @@
+/* V90 meditation audio: opt-in, distinct violet identity, no independent player */
+#instructor-flow .v90-sound{padding:clamp(18px,3vw,32px);margin:12px clamp(16px,4vw,42px) 24px;border-radius:8px 24px 8px 24px;border:1px solid #d3c3dc;background:#f5f0f6;color:#463954;display:grid;gap:17px}
+#instructor-flow .v90-sound[hidden]{display:none!important}
+#instructor-flow .v90-header{display:grid;grid-template-columns:1fr 1fr;align-items:end;gap:18px}
+#instructor-flow .v90-kicker{font:700 .68rem/1.4 "JetBrains Mono",monospace;letter-spacing:.13em;color:#695078}
+#instructor-flow .v90-header h4{font:500 clamp(1.45rem,2.4vw,2.3rem)/1.15 Fraunces,Georgia,serif;margin:12px 0 0}
+#instructor-flow .v90-description{font:.85rem/1.75 Inter,system-ui,sans-serif;color:#574b5e;margin:0}
+#instructor-flow .v90-sound-options{display:flex;gap:9px;flex-wrap:wrap}
+#instructor-flow .v90-sound button{min-height:45px;padding:11px 16px;background:#fffbff;color:#513e62;border:1px solid #ad92bd;border-radius:8px;cursor:pointer;font:700 .8rem/1.3 Inter,system-ui,sans-serif}
+#instructor-flow .v90-sound button[aria-pressed="true"]{background:#644e79;color:#fff}
+#instructor-flow .v90-sound button:disabled{opacity:.62;cursor:not-allowed}
+#instructor-flow .v90-voice{display:flex;gap:16px;align-items:center;justify-content:space-between;padding:19px 0;border-top:1px solid #d9c5df;border-bottom:1px solid #d9c5df}
+#instructor-flow .v90-voice-title{font:500 1.18rem/1.3 Fraunces,Georgia,serif}
+#instructor-flow .v90-voice-note{font:.77rem/1.7 Inter,system-ui,sans-serif;margin:6px 0 0;color:#574b5e}
+#instructor-flow .v90-voice button{flex-shrink:0}
+#instructor-flow .v90-status{font:.8rem/1.5 Inter,system-ui,sans-serif;color:#4e4058;margin:0}
+#instructor-flow .v90-status:empty{display:none}
+#instructor-flow .v90-sound :is(button,input):focus-visible{outline:3px solid #84649b;outline-offset:4px}
+html[data-theme="dark"] #instructor-flow .v90-sound{background:#2c273e;border-color:#6d5d7b;color:#f3e9f6}
+html[data-theme="dark"] #instructor-flow .v90-sound :is(.v90-kicker,.v90-description,.v90-voice-note,.v90-status){color:#e6dcf1}
+html[data-theme="dark"] #instructor-flow .v90-sound button{background:#41324f;color:#f5edf6;border-color:#9786a9}
+html[data-theme="dark"] #instructor-flow .v90-sound button[aria-pressed="true"]{background:#dbc4ec;color:#35263f}
+@media(max-width:670px){#instructor-flow .v90-header{grid-template-columns:1fr}#instructor-flow .v90-voice{flex-wrap:wrap}}
+@media(prefers-reduced-motion:reduce){#instructor-flow .v90-sound *{animation:none!important;transition:none!important}}

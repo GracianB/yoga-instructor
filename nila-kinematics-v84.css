@@ -1,0 +1,11 @@
+/* V84 · Anchors are visibly connected to the floor, not free-floating ornaments. */
+.movement-guardian .mg-grounding{pointer-events:none}
+.movement-guardian .mg-grounding .mg-ground-line{fill:none;stroke:var(--yy-ink,var(--sage,#406c52));stroke-width:1.5;stroke-opacity:.32;stroke-linecap:round;stroke-dasharray:4 9;vector-effect:non-scaling-stroke}
+.movement-guardian .mg-grounding .mg-ground-outer{fill:none;stroke:var(--yy-ink,var(--sage,#406c52));stroke-opacity:.42;stroke-width:2;vector-effect:non-scaling-stroke}
+.movement-guardian .mg-grounding .mg-ground-inner{fill:var(--sage,#476b57);fill-opacity:.17;stroke:var(--sage,#476b57);stroke-opacity:.37;stroke-width:1.4;vector-effect:non-scaling-stroke}
+.movement-guardian .mg-grounding .mg-ground-pin{fill:var(--sage,#476b57);fill-opacity:.72}
+.movement-guardian[data-kind="tree"] .mg-grounding .mg-ground-outer{stroke-width:3;stroke-opacity:.6}
+.movement-guardian[data-kind="downward"] .mg-grounding .mg-ground-inner{fill-opacity:.23}
+#studio-asana-library .movement-guardian .mg-grounding{opacity:.97}
+#flow-guide .movement-guardian .mg-grounding{opacity:.78}
+@media(prefers-reduced-motion:reduce){.movement-guardian .mg-grounding *{animation:none!important;transition:none!important}}

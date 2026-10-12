@@ -12,9 +12,11 @@
     "start": "node tools/serve.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
-    "quality": "npm run syntax && npm run check && npm test && npm run audit:release",
+    "quality": "npm run syntax && npm run check && npm test && npm run audit:v80 && npm run audit:v99 && npm run audit:release",
     "build": "node tools/build.mjs",
-    "audit:release": "node tools/release-audit.mjs"
+    "audit:release": "node tools/release-audit.mjs",
+    "audit:v80": "node tools/v80-audit.mjs",
+    "audit:v99": "node tools/v99-integrity.mjs"
   },
   "engines": {
     "node": ">=24"

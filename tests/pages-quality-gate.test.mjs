@@ -27,8 +27,8 @@ test('Pages builds and verifies the exact SHA accepted by browser quality',()=>{
   assert.match(deploy,/npm run build/);
   assert.match(deploy,/actions\/upload-pages-artifact@v4/);
   assert.match(deploy,/needs: \[node\]/);
-  assert.match(deploy,/Verify production HTML and assets after deployment/);
-  assert.match(deploy,/tools\/pages-smoke.mjs --attempts=30 --interval=5/);
+  assert.match(deploy,/Verify every declared public asset and the V100 manifest after deployment/);
+  assert.match(deploy,/tools\/pages-smoke.mjs --root=dist --attempts=30 --interval=5/);
 });
 
 test('All six browser partitions and quality gate remain mandatory, never duplicated by Pages',()=>{

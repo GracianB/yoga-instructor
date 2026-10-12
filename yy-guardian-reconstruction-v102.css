@@ -1,0 +1,140 @@
+/* V102 · Structural guardian repair and unmistakable clock-led presence.
+   No free-running animation. All motion comes from PracticeClock variables. */
+
+/* Nila: anatomical fill layers share the same paint as the authored torso. */
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian
+:is(.mg-v102-pelvis,.mg-v102-underarm,.mg-v102-forearm){
+  fill:var(--mg-coat,#ccac98);
+  stroke-linecap:round;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-pelvis{
+  stroke:var(--mg-deep,#6b6b6b);
+  stroke-width:1;
+  stroke-opacity:.13;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-underarm{
+  stroke:none;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-forearm{
+  stroke:var(--mg-deep,#6b6b6b);
+  stroke-width:1.8;
+  stroke-opacity:.30;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-arms-front{
+  pointer-events:none;
+}
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-hip-web,
+#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-axillary-web{
+  pointer-events:none;
+}
+/* Original Dragon: pelvic cup and paired membranes are part of each pose.
+   The source is also cloned into the Breath and Meditation studio. */
+#instructor-flow .yy-guide .yy-v102-pelvis-solid,
+#instructor-flow .yy-guide .yy-v102-axilla-solid{
+  fill:var(--yy-fur,#8cb8a2);
+  fill:url(#yy-fur-grad);
+  stroke:none;
+  pointer-events:none;
+}
+#instructor-flow .studio-companion .yy-v102-pelvis-solid,
+#instructor-flow .studio-companion .yy-v102-axilla-solid{
+  fill:var(--yy-fur,#8cb8a2);
+  stroke:none;
+}
+
+/* Dragon · the ribcage now visibly widens, and the abdomen has its own pulse.
+   The head, wings' root, arms and paws remain at their anatomical anchors. */
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-breath-core{
+  transform-box:fill-box;
+  transform-origin:center 49%;
+  transform:scale(var(--v102-chest-x,1),var(--v102-chest-y,1));
+  transition:transform .22s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-v102-belly{
+  transform-box:fill-box;
+  transform-origin:center;
+  transform:scaleX(var(--v102-belly-x,1));
+  transition:transform .22s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-body{
+  transform-box:fill-box;
+  transform-origin:center 72%;
+  transform:scaleX(var(--v102-body-x,1));
+  transition:transform .22s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-halo{
+  transform-box:fill-box;transform-origin:center;
+  transform:scale(var(--v102-halo-scale,1));
+  opacity:var(--v102-halo-opacity,.39);
+  transition:transform .22s linear,opacity .22s linear;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-wings{
+  transform-box:fill-box;transform-origin:center 40%;
+  transform:scaleX(var(--v102-wing-scale,1));
+}
+#instructor-flow .studio-guided[data-studio-active="breath"] .studio-breath-dragon .sd31-v102-exhale-mist{
+  opacity:var(--v102-mist-opacity,0);
+  transition:opacity .22s linear;
+  pointer-events:none;
+}
+/* Prevent free timing from inventing breath cadence. */
+#instructor-flow .studio-guided[data-studio-active="breath"][data-breath-pattern="free"]
+ :is(.sd31-breath-core,.sd31-v102-belly,.sd31-body,.sd31-halo,.sd31-wings){
+  transform:none!important;
+}
+#instructor-flow .studio-guided[data-studio-active="breath"][data-breath-pattern="free"] .sd31-v102-exhale-mist{opacity:0!important}
+
+/* Uma · the folded arms and seated pelvis never separate. Only the lantern,
+   lotus and moonlit ornaments drift gently with the existing session clock. */
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian
+:is(.uma-v102-pelvis,.uma-v102-axilla){
+  fill:url(#uma-body);
+  stroke:#7774a6;
+  stroke-opacity:.22;
+  stroke-width:1.5;
+  stroke-linejoin:round;
+  pointer-events:none;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-v102-firefly{
+  transform:translate(var(--v102-firefly-x,0px),var(--v102-firefly-y,0px));
+  opacity:var(--v102-lantern-glow,.55);
+  transition:transform .22s linear,opacity .22s linear;
+  pointer-events:none;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-v102-orbit-star{
+  transform:translate(var(--v102-star-x,0px),var(--v102-star-y,0px));
+  opacity:var(--v102-lantern-glow,.55);
+  transition:transform .22s linear,opacity .22s linear;
+  pointer-events:none;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"] .meditation-guardian .uma-v102-lotus{
+  transform-box:fill-box;transform-origin:center 85%;
+  transform:scale(var(--v102-lotus-open,.22));
+  transition:transform .22s linear;
+  pointer-events:none;
+}
+#instructor-flow .studio-guided[data-studio-active="meditation"][data-meditation-step="complete"]
+ .meditation-guardian .uma-v102-lotus{opacity:1}
+
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow .studio-guided .studio-breath-dragon
+ :is(.sd31-breath-core,.sd31-v102-belly,.sd31-body,.sd31-halo,.sd31-wings){
+   transform:none!important;transition:none!important;
+ }
+ #instructor-flow .studio-guided .studio-breath-dragon .sd31-v102-exhale-mist{opacity:0!important}
+ #instructor-flow .studio-guided .meditation-guardian
+ :is(.uma-v102-firefly,.uma-v102-orbit-star,.uma-v102-lotus){
+   transform:none!important;transition:none!important;
+ }
+}
+body.quiet-mode #instructor-flow .studio-guided .studio-breath-dragon
+:is(.sd31-breath-core,.sd31-v102-belly,.sd31-body,.sd31-halo,.sd31-wings){
+ transform:none!important;transition:none!important;
+}
+body.quiet-mode #instructor-flow .studio-guided .studio-breath-dragon .sd31-v102-exhale-mist{opacity:0!important}
+body.quiet-mode #instructor-flow .studio-guided .meditation-guardian
+:is(.uma-v102-firefly,.uma-v102-orbit-star,.uma-v102-lotus){
+ transform:none!important;transition:none!important;
+}

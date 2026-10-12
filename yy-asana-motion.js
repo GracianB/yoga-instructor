@@ -98,9 +98,13 @@
       return;
     }
     if(!clock.frame && !clock.timer){
-      clock.last=0;
-      clock.frame=rt.frame(frame);
-      clock.timer=setTimeout(()=>frame(performance.now()),140);
+      // Resume with one immediate frame so a throttled RAF cannot leave the
+      // previously paused SVG frozen. Continue with the same single clock;
+      // frame() itself schedules the next RAF and its timer fallback.
+      const resuming=clock.elapsed>0;
+      const now=performance.now();
+      clock.last=resuming?now-100:0;
+      frame(now);
     }
   }
   window.addEventListener("yoga:pose-changing",()=>{

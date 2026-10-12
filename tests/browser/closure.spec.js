@@ -337,12 +337,12 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   const frozen=await back.getAttribute('d');
   await page.waitForTimeout(450);
   expect(await back.getAttribute('d')).toBe(frozen);
+  // CI may throttle background tabs during a long browser shard. Focus the
+  // page BEFORE resuming so the original motion controller can arm its clock.
+  // The existing test still requires the REAL back-path geometry to animate.
+  await page.bringToFront();
   await act('pause');
   await expect(guide).toHaveAttribute('data-asana-state','running');
-  // Ensure this heavy end-to-end scenario is foregrounded before checking
-  // the resumed frame. A permanently frozen spine must still fail: the SVG
-  // path itself must actually change after the pause.
-  await page.bringToFront();
   await expect.poll(()=>back.getAttribute('d'),{timeout:12000}).not.toBe(frozen);
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(guide).toHaveAttribute('data-asana-state','reduced');

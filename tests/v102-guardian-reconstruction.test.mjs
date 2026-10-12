@@ -31,7 +31,7 @@ test("V102: Tree's two paws remain outside the scaled head instead of vanishing 
  assert.ok(p.hands.every(([x,y])=>y<90&&x>=200&&x<=520),"Raised hands stay within the stage");
  for(let i=0;i<2;i++){
   const nums=(p.arms[i].match(/-?\d+(?:\.\d+)?/g)||[]).map(Number);
-  assert.deepEqual(nums.slice(-2),p.hands[i],"Palm follows the canonical authored arm endpoint");
+  assert.deepEqual(nums.slice(-2),Array.from(p.hands[i]),"Palm follows the canonical authored arm endpoint");
  }
 });
 test("V102: Nila uses original roots for visible paired arms, hip and shoulder webs",()=>{

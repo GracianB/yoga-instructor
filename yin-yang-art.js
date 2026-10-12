@@ -367,8 +367,8 @@
       circle(p.head[0]+79,p.head[1]+89,1.5,'yy-mote yy-mote-c')+'</g>'+
       '<g class="yy-character" data-weight="'+p.kind+'"><g class="yy-tail-motion">'+tail(p)+'</g>'+
       '<g class="yy-legs">'+twoLegs+feet+'</g>'+attachments(p,'leg')+
-      '<g class="yy-v102-pelvis-web">'+joints.pelvis+'</g>'+wings(p)+neck(p)+torso(p)+
-      '<g class="yy-v102-underarm-web">'+joints.caps+'</g>'+
+      '<g class="yy-v102-pelvis-web">'+joints.pelvis+'</g>'+wings(p)+neck(p)+
+      '<g class="yy-v102-underarm-web">'+joints.caps+'</g>'+torso(p)+
       attachments(p,'arm')+'<g class="yy-arms">'+twoArms+hands+'</g>'+
       '<g class="yy-head-motion">'+face(p)+'</g>'+
       '</g></g>';

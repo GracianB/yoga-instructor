@@ -1,0 +1,67 @@
+/* Yoga P2 · quiet, five-step ceremonial rhythm, not a second timer. */
+#instructor-flow #studio-guided .p2-ritual{
+  margin:18px auto 0;max-width:680px;width:100%;
+  padding:15px clamp(10px,2.4vw,20px);
+  border-radius:17px;border:1px solid rgba(128,168,151,.34);
+  background:color-mix(in srgb,var(--guardian-glow,#b7d7c3) 17%,transparent);
+  color:var(--guardian-ink,#264939);
+}
+#instructor-flow #studio-guided .p2-ritual[hidden]{display:none!important}
+#instructor-flow #studio-guided .p2-ritual-top{
+  display:flex;align-items:baseline;justify-content:space-between;gap:10px;
+  margin-bottom:13px;flex-wrap:wrap
+}
+#instructor-flow #studio-guided .p2-ritual-top strong{
+  font:750 10px/1.5 'JetBrains Mono',monospace;
+  letter-spacing:.13em;color:inherit;
+}
+#instructor-flow #studio-guided .p2-ritual-position{
+  font:550 11px/1.4 Inter,sans-serif;opacity:.85
+}
+#instructor-flow #studio-guided .p2-ritual-track{
+  display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px;
+  list-style:none;padding:0;margin:0;max-width:100%;
+}
+#instructor-flow #studio-guided .p2-ritual-track li{
+  min-width:0;display:flex;flex-direction:column;align-items:center;
+  gap:6px;text-align:center;opacity:.57;color:inherit;
+}
+#instructor-flow #studio-guided .p2-ritual-track .p2-dot{
+  display:block;width:12px;height:12px;border-radius:50%;
+  border:1px solid currentColor;opacity:.66;
+}
+#instructor-flow #studio-guided .p2-ritual-track [data-complete="true"]{
+  opacity:.87
+}
+#instructor-flow #studio-guided .p2-ritual-track [data-complete="true"] .p2-dot{
+  background:currentColor;
+}
+#instructor-flow #studio-guided .p2-ritual-track [data-current="true"]{
+  opacity:1;font-weight:750
+}
+#instructor-flow #studio-guided .p2-ritual-track [data-current="true"] .p2-dot{
+  width:15px;height:15px;border-width:3px;
+  background:color-mix(in srgb,var(--guardian-accent,#76b397) 67%,transparent);
+}
+#instructor-flow #studio-guided .p2-step-text{
+  overflow-wrap:anywhere;font:650 clamp(8px,1.15vw,10px)/1.4 Inter,sans-serif;
+}
+#instructor-flow #studio-guided .p2-ritual-note{
+  margin:12px 0 0;font:450 11px/1.55 Inter,sans-serif;opacity:.82;
+}
+#instructor-flow #studio-guided[data-studio-active="meditation"] .v89-sequence{
+  display:none;
+}
+#instructor-flow #studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .p2-ritual,
+#instructor-flow #studio-guided[data-studio-active="meditation"][data-meditation-style="silent"] .v89-ritual{
+  display:none!important;
+}
+@media(max-width:420px){
+ #instructor-flow #studio-guided .p2-ritual{padding:12px 8px}
+ #instructor-flow #studio-guided .p2-ritual-track{gap:3px}
+ #instructor-flow #studio-guided .p2-step-text{font-size:8px;letter-spacing:-.01em}
+}
+@media(prefers-reduced-motion:reduce){
+ #instructor-flow #studio-guided .p2-ritual *,
+ #instructor-flow #studio-guided .p2-ritual{animation:none!important;transition:none!important}
+}

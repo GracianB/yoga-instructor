@@ -30,10 +30,19 @@ function render(){
  const point=stage.dataset.meditationFocus||"breath";
  if(point!==previousFocus||phase!==previousStep){wandering=false;previousFocus=point;previousStep=phase}
  const data=ritual.cue(point,phase,language(),wandering);
+ const isGuided=style!=="silent",p2=window.YOGA_PRACTICE_RITUAL_V104;
+ const ceremony=p2?.frame({
+   mode:"meditation",
+   progress:stage.dataset.p2RitualStage==="arrive"?.05:
+     stage.dataset.p2RitualStage==="anchor"?.23:
+     stage.dataset.p2RitualStage==="observe"?.49:
+     stage.dataset.p2RitualStage==="soften"?.76:.95,
+   focus:point,lang:language(),style,status:stage.dataset.studioStatus
+ });
  panel.querySelector(".v89-kicker").textContent=w.kicker;
  panel.querySelector(".v89-caption").textContent=w.caption;
  panel.querySelector("#v89-title").textContent=data.title;
- panel.querySelector(".v89-message").textContent=data.body;
+ panel.querySelector(".v89-message").textContent=wandering?data.body:ceremony&&isGuided?ceremony.body:data.body;
  panel.querySelector(".v89-return").textContent=w.button;
  panel.querySelector(".v89-advice").textContent=w.advice;
  panel.querySelector(".v89-sequence").setAttribute("aria-label",w.kicker);
@@ -46,9 +55,9 @@ panel.querySelector(".v89-return").addEventListener("click",()=>{
  wandering=true;render();panel.querySelector(".v89-message").focus?.();
 });
 const observer=new MutationObserver(changes=>{
- if(changes.some(c=>["data-meditation-step","data-meditation-focus","data-meditation-style","data-studio-active","lang","data-studio-mode"].includes(c.attributeName)))render();
+ if(changes.some(c=>["data-meditation-step","data-meditation-focus","data-meditation-style","data-studio-active","data-p2-ritual-stage","data-studio-status","lang","data-studio-mode"].includes(c.attributeName)))render();
 });
-observer.observe(stage,{attributes:true,attributeFilter:["data-meditation-step","data-meditation-focus","data-meditation-style","data-studio-active"]});
+observer.observe(stage,{attributes:true,attributeFilter:["data-meditation-step","data-meditation-focus","data-meditation-style","data-studio-active","data-p2-ritual-stage","data-studio-status"]});
 observer.observe(root,{attributes:true,attributeFilter:["data-studio-mode"]});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
 window.addEventListener("pagehide",()=>observer.disconnect(),{once:true});render();

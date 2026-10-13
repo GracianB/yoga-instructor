@@ -1,23 +1,23 @@
 /* V53 | One movement guardian everywhere. The D24 exploration now shares
    Nila's exact renderer, materials and two palettes with the ten-pose flow. */
-#instructor-flow .studio-library-stage{
+#studio-asana-library .studio-library-stage{
  --mg-coat:#e6ac85;--mg-deep:#a55d48;--mg-ink:#684a48;
  --mg-chest:#fae6ca;--mg-ear:#eecaa1;--mg-light:#ffe6c5;
  --mg-leaf:#8aa690;--mg-eye:#58453d;
 }
-#instructor-flow .studio-library-stage[data-spirit="yin"]{
+#studio-asana-library .studio-library-stage[data-spirit="yin"]{
  --mg-coat:#7774a3;--mg-deep:#484779;--mg-ink:#322e57;
  --mg-chest:#dbd8ef;--mg-ear:#c6bde7;--mg-light:#ddd6fd;
  --mg-leaf:#bba3d4;--mg-eye:#382d5b;
 }
-#instructor-flow .studio-library-stage[data-library-guardian="nila"] .yy-character>:not(.movement-guardian){
+#studio-asana-library .studio-library-stage[data-library-guardian="nila"] .yy-character>:not(.movement-guardian){
  opacity:0!important;visibility:hidden!important;pointer-events:none!important
 }
-#instructor-flow .studio-library-stage[data-library-guardian="nila"] .yy-pose :is(.yy-stance,.yy-dragon-motes){
+#studio-asana-library .studio-library-stage[data-library-guardian="nila"] .yy-pose :is(.yy-stance,.yy-dragon-motes){
  opacity:0!important;visibility:hidden!important
 }
-#instructor-flow .studio-library-stage .movement-guardian{opacity:1!important}
-#instructor-flow .studio-library-stage.yy-guide{
+#studio-asana-library .studio-library-stage .movement-guardian{opacity:1!important}
+#studio-asana-library .studio-library-stage.yy-guide{
  height:clamp(265px,31vw,350px);
 }
 #instructor-flow .studio-library-display{
@@ -28,7 +28,7 @@ html[data-theme="dark"] #instructor-flow .studio-library-display{
  background:radial-gradient(ellipse at 50% 73%,rgba(114,149,123,.3),transparent 70%),
  linear-gradient(165deg,#26483e,#19352f)!important;
 }
-#instructor-flow .studio-library-stage .yy-svg{
+#studio-asana-library .studio-library-stage .yy-svg{
  filter:drop-shadow(0 9px 12px rgba(49,71,55,.14))
 }
 #instructor-flow .studio-library-name{
@@ -53,14 +53,14 @@ html[data-theme="dark"] #instructor-flow .studio-guided[data-studio-active="brea
  color:#234a40!important
 }
 @media(max-width:760px){
- #instructor-flow .studio-library-stage.yy-guide{height:clamp(210px,49vw,310px)}
+ #studio-asana-library .studio-library-stage.yy-guide{height:clamp(210px,49vw,310px)}
 }
 @media(max-width:420px){
- #instructor-flow .studio-library-stage.yy-guide{height:230px}
+ #studio-asana-library .studio-library-stage.yy-guide{height:230px}
 }
 @media(prefers-reduced-motion:reduce){
- #instructor-flow .studio-library-stage .movement-guardian,
- #instructor-flow .studio-library-stage .movement-guardian *{
+ #studio-asana-library .studio-library-stage .movement-guardian,
+ #studio-asana-library .studio-library-stage .movement-guardian *{
  animation:none!important;transition:none!important;transform-origin:initial
  }
 }

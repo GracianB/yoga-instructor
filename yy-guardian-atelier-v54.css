@@ -113,48 +113,48 @@
 #instructor-flow .flow-theater .yy-scene-breadcrumb strong{font-size:13px}
 #instructor-flow .flow-theater .yy-scene-breadcrumb span{font-size:14px}
 /* Nila sculpt: limb volumes taper anatomically and share their root with torso. */
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
  fill:var(--mg-coat);stroke:var(--mg-deep);stroke-width:2.2;
  stroke-linejoin:round
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-shell{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-shell{
  display:none!important
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-plane{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-plane{
  stroke-width:3.3!important;stroke-opacity:.17!important
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape,
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape,
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell{
  fill:var(--mg-coat);stroke:var(--mg-deep);stroke-width:1.1;
  stroke-opacity:.4
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
  stroke-width:2!important;stroke-opacity:.33!important
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
  fill:var(--mg-light);stroke:var(--mg-deep);stroke-width:3
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn{
  fill:var(--mg-leaf);stroke:var(--mg-deep);stroke-width:2.5;
  stroke-linejoin:round
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn-shine{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn-shine{
  fill:none;stroke:var(--mg-light);stroke-width:4;stroke-linecap:round;opacity:.75
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-cheek-fin{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-cheek-fin{
  fill:var(--mg-coat);stroke:var(--mg-deep);stroke-width:3;stroke-linejoin:round
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-crest{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-crest{
  fill:var(--mg-leaf);stroke:var(--mg-deep);stroke-width:2.5
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-muzzle-ridge{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-muzzle-ridge{
  fill:none;stroke:var(--mg-deep);stroke-opacity:.32;stroke-width:3.1;
  stroke-linecap:round
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-pupil{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-pupil{
  fill:none;stroke:var(--mg-eye);stroke-width:4.5;stroke-linecap:round
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-chin{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-chin{
  fill:var(--mg-chest);stroke:var(--mg-deep);stroke-width:1.2;stroke-opacity:.38
 }
 /* The D24 companion panel keeps the same large anatomical portrait. */

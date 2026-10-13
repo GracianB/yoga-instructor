@@ -147,31 +147,31 @@ html[data-theme="light"] #instructor-flow .studio-mode[aria-pressed="true"] .stu
 #instructor-flow .studio-guided-stage .studio-v67-identity{display:none}
 /* NILA · clay, sage, warm oat. Never lose the Yin/Yang distinction. */
 #instructor-flow #flow-guide:not([data-spirit="yin"]),
-#instructor-flow .studio-library-stage:not([data-spirit="yin"]){
+#studio-asana-library .studio-library-stage:not([data-spirit="yin"]){
   --mg-coat:#da9b76;--mg-deep:#93604f;--mg-ink:#614c45;
   --mg-chest:#f7e7d2;--mg-ear:#ecc8ad;--mg-light:#f9d6b0;
   --mg-leaf:#83a48b;--mg-eye:#4a453f;
 }
 #instructor-flow #flow-guide[data-spirit="yin"],
-#instructor-flow .studio-library-stage[data-spirit="yin"]{
+#studio-asana-library .studio-library-stage[data-spirit="yin"]{
   --mg-coat:#8b85b0;--mg-deep:#5c5685;--mg-ink:#363652;
   --mg-chest:#e8e2f3;--mg-ear:#c6bae3;--mg-light:#dfd0ef;
   --mg-leaf:#a6b9ad;--mg-eye:#3d3a5e;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-horn{
   fill:var(--mg-light)!important;stroke:var(--mg-deep)!important;
   stroke-width:2.4!important;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-toes{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-toes{
   stroke-width:2.9!important;stroke-opacity:.65;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-nasal-bridge{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-nasal-bridge{
   stroke-opacity:.18;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-forehead-mark{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-forehead-mark{
   fill:none;stroke:var(--mg-light);stroke-width:3;stroke-opacity:.45;stroke-linecap:round;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-wrist-crease{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-wrist-crease{
   fill:none;stroke:var(--mg-deep);stroke-width:2.2;stroke-opacity:.32;stroke-linecap:round;
 }
 /* BREATH · sea glass. SVG gradients consume these genuine CSS properties. */

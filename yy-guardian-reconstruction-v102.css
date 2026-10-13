@@ -2,31 +2,31 @@
    No free-running animation. All motion comes from PracticeClock variables. */
 
 /* Nila: anatomical fill layers share the same paint as the authored torso. */
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian
 :is(.mg-v102-pelvis,.mg-v102-underarm,.mg-v102-forearm){
   fill:var(--mg-coat,#ccac98);
   stroke-linecap:round;
   stroke-linejoin:round;
   vector-effect:non-scaling-stroke;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-pelvis{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-pelvis{
   stroke:var(--mg-deep,#6b6b6b);
   stroke-width:1;
   stroke-opacity:.13;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-underarm{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-underarm{
   stroke:none;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-forearm{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-forearm{
   stroke:var(--mg-deep,#6b6b6b);
   stroke-width:1.8;
   stroke-opacity:.30;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-arms-front{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-arms-front{
   pointer-events:none;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-hip-web,
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-axillary-web{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-hip-web,
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-v102-axillary-web{
   pointer-events:none;
 }
 /* Original Dragon: pelvic cup and paired membranes are part of each pose.

@@ -3,35 +3,35 @@
 
 /* Nila: soften the old geometric cut-outs. The limb geometry and foot
    contacts still come exclusively from the authored anatomical rig. */
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-volume{
   stroke-width:2.2;stroke-opacity:.24;stroke-linejoin:round;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell,
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-shell,
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape{
   stroke-width:.65;stroke-opacity:.12;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
   stroke-opacity:.19!important;stroke-width:1.45!important;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-plane{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-limb-plane{
   stroke-width:2.4!important;stroke-opacity:.14!important;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-body{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-body{
   stroke-width:1.6;stroke-opacity:.53;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-body-light{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-body-light{
   stroke-width:5;stroke-opacity:.44;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
   stroke-width:2.2;stroke-opacity:.78;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face-glaze{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face-glaze{
   stroke-width:4;stroke-opacity:.43;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-shell{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-shell{
   stroke-width:1.6;stroke-opacity:.63;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-toes{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw-toes{
   stroke-width:2.6;stroke-opacity:.73;
 }
 
@@ -75,7 +75,7 @@ body.quiet-mode #instructor-flow .studio-breath-dragon,
 body.quiet-mode #instructor-flow .meditation-guardian{filter:none!important}
 
 /* V62: eyebrows are part of the pose-authored face, not another animation. */
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-brow{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-brow{
   fill:none;stroke:var(--mg-eye);stroke-width:2.6;
   stroke-opacity:.58;stroke-linecap:round;stroke-linejoin:round;
 }

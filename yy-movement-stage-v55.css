@@ -142,10 +142,10 @@
 }
 /* Anatomical continuity: seams soften but remain readable at elbows/hips.
    Never hide the distinct joints the user requested. */
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-socket-shape{
  stroke-opacity:.16!important;stroke-width:1.15!important
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-hinge-crease{
  stroke-opacity:.36!important
 }
 html[data-theme="dark"] #instructor-flow .flow-console{

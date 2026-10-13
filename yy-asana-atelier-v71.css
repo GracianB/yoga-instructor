@@ -72,24 +72,24 @@
   outline:3px solid var(--guardian-accent)!important;
   outline-offset:3px;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-prayer-palm .mg-paw-shell{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-prayer-palm .mg-paw-shell{
   fill:var(--mg-chest)!important;
   stroke:var(--mg-deep)!important;
   stroke-width:2.1!important;
   stroke-linejoin:round;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-prayer-palm .mg-paw-toes{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-prayer-palm .mg-paw-toes{
   stroke:var(--mg-deep)!important;
   stroke-width:1.75!important;
   opacity:.7;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-paw{
   transform-box:view-box;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-foot .mg-paw-shell{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-foot .mg-paw-shell{
   stroke-width:2.6!important;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-wrist-crease{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-wrist-crease{
   stroke-opacity:.21;
 }
 @media(max-width:850px){

@@ -70,6 +70,18 @@
       dy:2*u*(cy-y0)+2*t*(y1-cy)
     };
   };
+  // P0: every limb has a real, stable joint on its OWN centreline.
+  // A one-curve pose is split mathematically (de Casteljau), not redrawn:
+  // the exact silhouette and the original hand/foot anchors are preserved.
+  // Author-specified two-curve joints remain precisely where authored.
+  const jointSections=sections=>{
+    if(sections.length===2)return sections;
+    const [x0,y0,cx,cy,x1,y1]=sections[0],t=.54,u=1-t;
+    const ax=u*x0+t*cx,ay=u*y0+t*cy;
+    const bx=u*cx+t*x1,by=u*cy+t*y1;
+    const mx=u*ax+t*bx,my=u*ay+t*by;
+    return [[x0,y0,ax,ay,mx,my],[mx,my,bx,by,x1,y1]];
+  };
   // V54: tapered muscular silhouettes replace parallel-width "hose" limbs.
   // Normals are evaluated on the same authored curves as paws and joints.
   const limbVolume=(sections,type)=>{
@@ -107,18 +119,28 @@
   };
   const limb=(curve,type,index)=>{
     const sections=curveSections(curve);
-    const root=sample(sections[0],0),hinge=sections.length>1?
-      sample(sections[0],1):sample(sections[0],.54);
+    const original=sections;
+    const rig=jointSections(sections);
+    const root=sample(rig[0],0),hinge=sample(rig[0],1);
     const degree=Math.atan2(hinge.dy,hinge.dx)*180/Math.PI;
+    const before=sample(rig[0],.25),after=sample(rig[1],.75);
+    const turn=Math.atan2(before.dx*after.dy-before.dy*after.dx,
+      before.dx*after.dx+before.dy*after.dy)*180/Math.PI;
+    const flex=Math.abs(turn);
     const wide=type==="leg"?22:19;
     // These overlapping membranes bridge the visible hinge and root,
     // while the uninterrupted limb silhouette preserves grounded contacts.
     const joint='<g class="mg-hinge mg-'+(type==="arm"?"elbow":"knee")+
-      '" data-joint="'+type+'-'+index+'" transform="translate('+
+      '" data-joint="'+type+'-'+index+
+      '" data-rig-source="'+(original.length===2?'authored':'derived')+
+      '" data-flex-deg="'+esc(flex)+'" transform="translate('+
       point(hinge.x,hinge.y)+') rotate('+esc(degree)+')">'+
       '<path class="mg-hinge-shell" d="M-'+wide+' -9 Q-13 -18 1 -16 Q'+wide+
       ' -12 '+wide+' 0 Q'+(wide-5)+' 13 0 16 Q-'+wide+' 11 -'+wide+' -9Z"/>'+
-      '<path class="mg-hinge-crease" d="M-10 4Q0 10 11 4"/>'+
+      (type==="leg"
+        ?'<path class="mg-p0-kneecap" d="M-14 -12Q-1 -20 13 -12Q20 -1 12 11Q-1 19 -14 9Q-19 -1 -14 -12Z"/>'+
+         '<path class="mg-p0-patella-light" d="M-9 -6Q-1 -11 8 -6"/>'
+        :'<path class="mg-p0-elbow-fold" d="M-9 6Q1 12 10 5"/>')+
       '</g>';
     const socket='<g class="mg-socket mg-'+(type==="arm"?"shoulder":"hip")+
       '" data-socket="'+type+'-'+index+'" transform="translate('+
@@ -127,11 +149,17 @@
       '<path class="mg-socket-shape" d="M-25 -16Q-8 -29 14 -17Q29 -3 16 17Q-7 25 -25 13Q-31 2 -25 -16Z"/>'+
       '<path class="mg-socket-light" d="M-13 -13Q0 -20 12 -10"/>'+
       '</g>';
+    const ankle=type==="leg"?sample(rig[1],.80):null;
+    const ankleMark=ankle?
+      '<g class="mg-p0-ankle" data-ankle="'+index+'" transform="translate('+
+      point(ankle.x,ankle.y)+') rotate('+
+      esc(Math.atan2(ankle.dy,ankle.dx)*180/Math.PI)+')">'+
+      '<path class="mg-p0-ankle-crease" d="M-9 5Q0 9 9 5"/></g>':"";
     return '<g class="mg-limb mg-'+type+'" data-mg-limb="'+type+'-'+index+'">'+
-      '<path class="mg-limb-volume" d="'+limbVolume(sections,type)+'"/>'+
+      '<path class="mg-limb-volume" d="'+limbVolume(rig,type)+'"/>'+
       '<path class="mg-limb-shell" d="'+curve+'"/>'+
       '<path class="mg-limb-plane" d="'+curve+'"/>'+
-      socket+joint+'</g>';
+      socket+joint+ankleMark+'</g>';
   };
   // V54: Nila is a DRAGON, not a woolly lamb: crest, swept horns, angular
   // temple fins, almond eyes, long muzzle and a distinct chin silhouette.

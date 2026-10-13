@@ -3,7 +3,7 @@
    stay canonical. No CSS animation timers, second rigs or duplicated bodies. */
 
 /* NILA — sculpted cervical bridge, no rectangular stroke-neck. */
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-neck{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-neck{
   fill:var(--mg-coat)!important;
   stroke:var(--mg-deep)!important;
   stroke-width:1.8!important;
@@ -11,18 +11,18 @@
   stroke-linecap:round;
   stroke-linejoin:round;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-nasal-bridge{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-nasal-bridge{
   fill:none;stroke:var(--mg-deep);stroke-width:2.8;
   stroke-linecap:round;stroke-opacity:.28;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-snout{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-snout{
   fill:var(--mg-chest);stroke:var(--mg-deep);
   stroke-width:1.4;stroke-opacity:.25;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-muzzle-ridge{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-muzzle-ridge{
   stroke-opacity:.24;stroke-width:2.4;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-head{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-head{
   shape-rendering:geometricPrecision;
 }
 
@@ -68,7 +68,7 @@
 
 /* Avoid heavy filters on narrow devices without shrinking guardian anatomy. */
 @media(max-width:600px){
-  #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian{
+  :is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian{
     filter:none!important;
   }
   /* Large SVG drop-shadows can cost another compositing pass on mobile. */
@@ -80,13 +80,13 @@
 @media(prefers-reduced-motion:reduce){
   #instructor-flow .studio-breath-dragon *,
   #instructor-flow .meditation-guardian *,
-  #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian *{
+  :is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian *{
     animation:none!important;transition:none!important;
   }
 }
 body.quiet-mode #instructor-flow .studio-breath-dragon *,
 body.quiet-mode #instructor-flow .meditation-guardian *,
-body.quiet-mode #instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian *{
+body.quiet-mode :is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian *{
   animation:none!important;transition:none!important;
 }
 
@@ -100,17 +100,17 @@ body.quiet-mode #instructor-flow .studio-breath-dragon .sd31-wings{transform:non
 /* V65: changes grounded in actual twelve-scene Playwright image review.
    Nila previously read as a pale detached mask with circular mechanical
    joints. The underlying authored paths remain unchanged and inspectable. */
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face{
   fill:var(--mg-coat)!important;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face-glaze{
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-face-glaze{
   stroke:var(--mg-light);stroke-opacity:.40;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian
  :is(.mg-hinge-shell,.mg-socket-shape){
   opacity:.06;
 }
-#instructor-flow :is(#flow-guide,.studio-library-stage) .movement-guardian
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage) .movement-guardian
  :is(.mg-hinge-crease,.mg-socket-light){
   opacity:.18;
 }

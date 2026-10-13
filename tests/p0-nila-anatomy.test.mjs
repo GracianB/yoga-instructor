@@ -29,7 +29,7 @@ test("P0 · real knees, elbows and ankles in all 22 canonical SVG drawings",()=>
   assert.equal((markup.match(/class="mg-paw mg-foot/g)||[]).length,2,pose.id);
   assert.equal((markup.match(/class="mg-paw mg-hand/g)||[]).length,2,pose.id);
   assert.doesNotMatch(markup,/NaN|undefined|Infinity/);
-  const joints=[...markup.matchAll(/data-joint="leg-[01]" data-rig-source="(derived|authored)" data-flex-deg="([\\d.]+)" transform="translate\\(([\\d.]+) ([\\d.]+)\\)/g)];
+  const joints=[...markup.matchAll(/data-joint="leg-[01]" data-rig-source="(derived|authored)" data-flex-deg="([\d.]+)" transform="translate\(([\d.]+) ([\d.]+)\)/g)];
   assert.equal(joints.length,2,pose.id);
   for(const [,source,angle,x,y] of joints){
    assert.ok(source==="authored"||source==="derived");
@@ -52,8 +52,8 @@ test("P0 · the standalone Asana Book receives all guardian palette and anatomic
   assert.ok(!text.includes("#instructor-flow :is(#flow-guide,.studio-library-stage)"),name);
  }
  const colors=read("yy-unified-gallery-v53.css");
- assert.match(colors,/#studio-asana-library \\.studio-library-stage\\[data-spirit="yin"\\]/);
- assert.match(colors,/#studio-asana-library \\.studio-library-stage\\{/);
+ assert.match(colors,/#studio-asana-library \.studio-library-stage\[data-spirit="yin"\]/);
+ assert.match(colors,/#studio-asana-library \.studio-library-stage\{/);
  const css=read("yy-guardian-reconstruction-v102.css");
  for(const part of ["mg-knee .mg-hinge-shell","mg-p0-kneecap","mg-p0-ankle-crease","mg-p0-elbow-fold"])
   assert.ok(css.includes(part),part);

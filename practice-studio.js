@@ -233,17 +233,33 @@
     const waiting = snapshot.status === "idle";
     const elapsed = snapshot.elapsedMs;
     const breathing = Breath.frame(elapsed, breathPattern);
+    const ceremony=window.YOGA_PRACTICE_RITUAL_V104?.frame({
+      mode:isBreathing?"breath":"meditation",progress:snapshot.progress,
+      status:snapshot.status,lang:language(),style:meditationStyle,
+      focus:meditationFocus,pattern:breathPattern
+    });
+    const envelope=ceremony?.envelope??1;
+    const breathingVisual={...breathing,
+      expansion:breathing.expansion*envelope,
+      scale:1+(breathing.scale-1)*envelope,
+      glow:.28+(breathing.glow-.28)*envelope};
+    if(ceremony){
+      setData(guided,"p2RitualStage",ceremony.stage);
+      setData(guided,"p2RitualIndex",String(ceremony.index));
+      setData(guided,"p2RitualTotal",String(ceremony.total));
+      setData(guided,"p2RitualVoice",ceremony.canNarrate?ceremony.body:"");
+    }
     const reading=BreathGuide?.reading(breathing,Breath.PATTERNS[breathPattern],
       guided.dataset.v87Display||"numbers");
     const v102=window.YOGA_GUARDIAN_MOTION_V102;
     const reduced=document.body.classList.contains("quiet-mode")||
       window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches;
-    const v102Breath=v102?.breath(breathing,{status:isBreathing?snapshot.status:"idle",quiet:reduced});
+    const v102Breath=v102?.breath(breathingVisual,{status:isBreathing?snapshot.status:"idle",quiet:reduced});
     const v102Uma=v102?.meditation({elapsedMs:elapsed,
       status:isBreathing?"idle":snapshot.status,quiet:reduced});
     const activeBreath = isBreathing && !waiting && !complete && breathing.phase !== "free";
     const shape = Sculpt.sculpt(breathing, activeBreath);
-    const articulated=Articulation?.sculpt(breathing,{
+    const articulated=Articulation?.sculpt(breathingVisual,{
       status:isBreathing?snapshot.status:"idle",
       intensity:guided.dataset.v88Intensity==="still"?0:guided.dataset.v88Intensity==="expressive"?1:.55,
       quiet:document.body.classList.contains("quiet-mode")||
@@ -268,7 +284,9 @@
     const announce = isBreathing && breathPattern !== "free" ||
       !isBreathing && meditationStyle === "guided" ? "polite" : "off";
     if (heading.getAttribute("aria-live") !== announce) heading.setAttribute("aria-live", announce);
-    setText(heading, copy(titleKey));
+    // Keep the canonical mode title (Free Breathing / guided arrival / silent),
+    // while the independent P2 panel communicates the five ritual moments.
+    setText(heading,copy(titleKey));
     breathPhaseDetail.hidden = !isBreathing;
     if (isBreathing) {
       const label = waiting ? copy("breathingReadyLabel") :
@@ -277,7 +295,7 @@
         copy(breathing.phase) + (reading?.seconds == null ? "" : " · " + reading.seconds + " s");
       setText(breathPhaseDetail, label);
     }
-    setText(cue, copy(cueKey));
+    setText(cue,ceremony && (isBreathing||meditationStyle==="guided")?ceremony.body:copy(cueKey));
     // V87: the optional phase bar consumes the same 200-ms snapshot.
     const phaseGuide=guided.querySelector(".v87-guidance");
     if(phaseGuide)setVar(phaseGuide,"--v87-cycle-progress",
@@ -292,11 +310,11 @@
     setData(guided, "meditationStep", meditationStep);
     setData(guided, "breathPhase", isBreathing && !waiting && !complete ? breathing.phase : "rest");
     // One monotonic clock controls both the words and the guardian's light.
-    const roomScale=activeBreath ? breathing.scale.toFixed(4) : "1";
+    const roomScale=activeBreath ? breathingVisual.scale.toFixed(4) : "1";
     setVar(orb, "--studio-breath-scale", roomScale);
     // V49: the environment, chest and wing share this existing breath clock.
     setVar(guided, "--studio-breath-scale", roomScale);
-    setVar(guided, "--studio-breath-glow", activeBreath ? breathing.glow.toFixed(4) : ".28");
+    setVar(guided, "--studio-breath-glow", activeBreath ? breathingVisual.glow.toFixed(4) : ".28");
     if(v102Breath){
       setVar(guided,"--v102-chest-x",v102Breath.chestX);
       setVar(guided,"--v102-chest-y",v102Breath.chestY);
@@ -327,10 +345,10 @@
     // V36: visible seated dragon breathing, with feet and head planted.
     // V72: a visible inhale without lifting planted feet. Torso, wings,
     // ribs and head share the existing 200-ms monotonic PracticeClock.
-    setVar(guided, "--studio-guardian-expansion", activeBreath ? (1 + .14 * breathing.expansion).toFixed(4) : "1");
-    setVar(guided, "--studio-guardian-wing", activeBreath ? (1 + .15 * breathing.expansion).toFixed(4) : "1");
-    setVar(guided, "--studio-body-width", activeBreath ? (1 + .047 * breathing.expansion).toFixed(4) : "1");
-    setVar(guided, "--studio-head-lift", activeBreath ? (-5.5 * breathing.expansion).toFixed(2) + "px" : "0px");
+    setVar(guided, "--studio-guardian-expansion", activeBreath ? (1 + .14 * breathing.expansion * envelope).toFixed(4) : "1");
+    setVar(guided, "--studio-guardian-wing", activeBreath ? (1 + .15 * breathing.expansion * envelope).toFixed(4) : "1");
+    setVar(guided, "--studio-body-width", activeBreath ? (1 + .047 * breathing.expansion * envelope).toFixed(4) : "1");
+    setVar(guided, "--studio-head-lift", activeBreath ? (-5.5 * breathing.expansion * envelope).toFixed(2) + "px" : "0px");
     setVar(guided, "--studio-d28-wing-vein", shape.wingVein);
     setVar(guided, "--studio-d28-tail-light", shape.tailLight);
     setVar(guided, "--studio-d28-horn", shape.horn);

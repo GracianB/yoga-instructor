@@ -56,15 +56,17 @@ function readGuidance(){
   stage.dataset.studioStatus!=="running")return;
  const phase=stage.dataset.meditationStep||"prepare";
  const focus=stage.dataset.meditationFocus||"breath";
- const key=locale()+":"+focus+":"+phase;
+ const ritualStage=stage.dataset.p2RitualStage||phase;
+ const key=locale()+":"+focus+":"+phase+":"+ritualStage;
  if(key===spokenKey)return;
  spokenKey=key;
  if(!bus.audio.paused)bus.stop(); // One intentional audio source at a time.
  cancelVoice();
  const cue=window.YOGA_MEDITATION_RITUAL_V89?.cue(focus,phase,locale());
  if(!cue)return;
+ const words=stage.dataset.p2RitualVoice||cue.body;
  try{
-  const utterance=new window.SpeechSynthesisUtterance(cue.body);
+  const utterance=new window.SpeechSynthesisUtterance(words);
   utterance.lang=locale()==="en"?"en-GB":"es-ES";
   utterance.rate=.9;utterance.volume=.75;
   synth.speak(utterance);
@@ -137,7 +139,7 @@ const observe=new MutationObserver(changes=>{
  if(stage.dataset.studioStatus!=="running")cancelVoice();
  readGuidance();paint();
 });
-observe.observe(stage,{attributes:true,attributeFilter:["data-meditation-step","data-meditation-focus","data-meditation-style","data-studio-status"]});
+observe.observe(stage,{attributes:true,attributeFilter:["data-meditation-step","data-meditation-focus","data-meditation-style","data-studio-status","data-p2-ritual-stage","data-p2-ritual-voice"]});
 observe.observe(root,{attributes:true,attributeFilter:["data-studio-mode"]});
 observe.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
 document.addEventListener("visibilitychange",()=>{

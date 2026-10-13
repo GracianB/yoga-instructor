@@ -39,9 +39,7 @@ test("P4 · bundled Pages CSS retains source cascade and interactive studio acro
  await page.locator('#p1-sequence [data-p1="prepare"]').evaluate(el=>el.click());
  await expect(page.locator("#instructor-flow")).toHaveAttribute("data-movement-sequence","guided");
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true");
- await page.locator('#flow-guide [data-flow-action="start"]').count().then(async count=>{
-  if(count)await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
- });
+ await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","running");
  await page.locator('[data-flow-action="reset"]').evaluate(el=>el.click());
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());

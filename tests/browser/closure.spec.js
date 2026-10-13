@@ -307,7 +307,10 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   const guide=page.locator('#flow-guide');
   const act=async action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
   await expect(guide).toHaveAttribute('data-ready','true');
-  await act('preview');
+  // Preview uses only five seconds per phase. It can advance beyond warmup
+  // while pause/resume geometry is asserted on a busy CI worker.
+  // Use the normal 120s warmup: the movement must still visibly resume.
+  await act('start');
   await expect(guide).toHaveAttribute('data-status','running');
   for(const phase of ['centering','breath','warmup']){
     await expect(guide).toHaveAttribute('data-ready','true');
@@ -343,7 +346,9 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   await page.bringToFront();
   await act('pause');
   await expect(guide).toHaveAttribute('data-asana-state','running');
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await expect.poll(()=>back.getAttribute('d'),{timeout:12000}).not.toBe(frozen);
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(guide).toHaveAttribute('data-asana-state','reduced');
   const reduced=await back.getAttribute('d');

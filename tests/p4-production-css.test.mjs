@@ -22,7 +22,7 @@ test("P4: 77 original sheets become one versioned request without changing casca
  assert.ok(result.filename.includes(result.digest.slice(0,16)));
  // Byte-for-byte reproduction of all 77 CSS modules in source order.
  const exact=(await Promise.all(links.map(async ({path})=>
-   "/* P4 original: "+path+" */\\n"+await get(path)+"\\n"))).join("\\n");
+   "/* P4 original: "+path+" */\n"+await get(path)+"\n"))).join("\n");
  assert.equal(result.css,exact);
  const tree=postcss.parse(result.css,{from:result.filename});
  assert.ok(tree.nodes.length>100);
@@ -32,13 +32,13 @@ test("P4: 77 original sheets become one versioned request without changing casca
 
 test("P4: build-only CSS optimization retains fonts, all deferred scripts and content",async()=>{
  const result=await build();
- const scripts=html=>[...html.matchAll(/<script\\b[^>]*\\bsrc="[^"]+"[^>]*>/g)].map(x=>x[0]);
+ const scripts=html=>[...html.matchAll(/<script\b[^>]*\bsrc="[^"]+"[^>]*>/g)].map(x=>x[0]);
  assert.deepEqual(scripts(result.html),scripts(source));
  assert.ok(result.html.includes("https://fonts.googleapis.com/css2"));
  assert.equal(result.html.replace('<link rel="stylesheet" href="./'+result.filename+'">',"")
-   .replace(/\\n\\s*\\n/g,"\\n").includes("<body>"),true);
- assert.equal(result.html.match(/<link\\b[^>]*rel="stylesheet"[^>]*>/g)?.length,2);
- assert.equal((result.html.match(/<script\\b[^>]*\\bsrc=/g)||[]).length,76);
+   .replace(/\n\s*\n/g,"\n").includes("<body>"),true);
+ assert.equal(result.html.match(/<link\b[^>]*rel="stylesheet"[^>]*>/g)?.length,2);
+ assert.equal((result.html.match(/<script\b[^>]*\bsrc=/g)||[]).length,76);
  assert.ok(result.html.includes('id="studio-asana-library"')===source.includes('id="studio-asana-library"'));
 });
 

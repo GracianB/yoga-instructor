@@ -7,7 +7,7 @@
   const root = document.getElementById("instructor-flow");
   if (!engineApi || !sessionApi || !phaseApi || !root) return;
 
-  const engine = engineApi.create();
+  let engine = engineApi.create();
   const session = sessionApi.create();
   const phase = phaseApi.create();
   const sessionTime = document.getElementById("flow-session-time");
@@ -146,6 +146,7 @@
   });
   const durationFor = snapshot => {
     if (preview) return 5;
+    if (snapshot.phase.startsWith("seq-")) return snapshot.durationSeconds;
     const designer = window.YOGA_SESSION_DESIGN;
     if (!designer) return window.YOGA_STUDIO_PLANS?.duration(snapshot.durationSeconds,root.dataset.studioPace||"balanced") ?? (snapshot.durationSeconds||0);
     const options = designSettings(), key = [options.level,options.length,options.recovery,options.pace].join(":");
@@ -173,7 +174,8 @@
       const cues = { start: "Arrive and prepare for practice.", centering: "Find stability and attention.", breath: "Regulate your breathing without forcing.", warmup: "Mobilise your body progressively.", "pose-1": "Hold the pose with steady breathing.", transition: "Transition with control and without rushing.", "pose-2": "Integrate strength, mobility and attention.", cooldown: "Reduce intensity and leave room for breathing.", savasana: "Release effort and remain still.", finish: "Close the practice with attention." };
       if (phaseCue) {
         const adapted = window.YOGA_SESSION_DESIGN?.cue(snapshot.phase,lang,designSettings());
-        phaseCue.textContent = adapted || (lang === "en" ? cues[snapshot.phase] : snapshot.cue || "");
+        phaseCue.textContent = engine.current.localizedCue?.[lang] ||
+          adapted || (lang === "en" ? cues[snapshot.phase] : snapshot.cue || "");
       }
       if (phaseTarget) phaseTarget.textContent = formatTime(duration);
       phaseTime.textContent = formatTime(remaining);
@@ -204,7 +206,8 @@
 
   const render = (snapshot) => {
     const lang = getLang();
-    const copy = labels[lang][snapshot.phase] || snapshot.label;
+    const copy = engine.current.localizedName?.[lang]?.toUpperCase() ||
+      labels[lang][snapshot.phase] || snapshot.label;
     if (phaseLabel) phaseLabel.textContent = copy;
     if (phaseMeta) phaseMeta.textContent = `${snapshot.index + 1} / ${snapshot.total}`;
     if (state) state.textContent = stateLabels[lang][snapshot.status] || snapshot.status.toUpperCase();
@@ -248,6 +251,42 @@
     },
     reset: () => { session.reset(); phase.reset(); engine.reset(); setPreview(false); renderSession(); }
   };
+
+  // P1: configure the existing Flow controller rather than running a second
+  // timer or creating a duplicate practice stage. No automatic start or sound.
+  const configureMovement = plan => {
+    const status=engine.snapshot().status;
+    if(root.dataset.studioMode!=="asanas"||["running","paused"].includes(status))return false;
+    const valid=window.YOGA_MOVEMENT_FLOW_P1;
+    if(!valid||!plan?.poses||!plan?.phases||plan?.totalSeconds!==
+      plan.phases.reduce((sum,p)=>sum+p.durationSeconds,0))return false;
+    if(!window.YOGA_FLOW_STAGE?.configure(plan))return false;
+    session.reset();phase.reset();setPreview(false);
+    engine=engineApi.create(plan.phases);
+    lastPhase=engine.snapshot().phase;
+    root.dataset.movementSequence="guided";
+    root.dataset.movementSequenceCount=String(plan.postureCount);
+    root.dataset.movementSequenceMinutes=String(plan.minutes);
+    engine.emit();renderSession();
+    return true;
+  };
+  const restoreClassic = () => {
+    if(["running","paused"].includes(engine.snapshot().status))return false;
+    session.reset();phase.reset();setPreview(false);
+    engine=engineApi.create();
+    lastPhase=engine.snapshot().phase;
+    root.dataset.movementSequence="classic";
+    delete root.dataset.movementSequenceCount;
+    delete root.dataset.movementSequenceMinutes;
+    window.YOGA_FLOW_STAGE?.classic();
+    engine.emit();renderSession();
+    return true;
+  };
+  window.YOGA_MOVEMENT_FLOW=Object.freeze({
+    configure:configureMovement,classic:restoreClassic,
+    snapshot:()=>engine.snapshot(),
+    selected:()=>root.dataset.movementSequence==="guided"
+  });
 
   const runAction = (name) => {
     const button = root.querySelector(`[data-flow-action="${name}"]`);

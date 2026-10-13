@@ -59,8 +59,18 @@ function paint(){
  setText(".v101-cue",state.cue);
  setText(".v101-summary",state.stepsLabel);
  setText(".v101-safety",state.safety);
+ const sequence=state.mode==="asanas"&&root.dataset.movementSequence==="guided";
+ const steps=sequence?(locale()==="en"?[
+  "Your selected postures, transitions and Savasana are ready in the Movement Flow.",
+  "Press Begin practice; use Previous, Next or Pause whenever needed.",
+  "Finish gently, or Reset without losing your prepared sequence."
+ ]:[
+  "Tus posturas, transiciones y Savasana están preparadas en Movement.",
+  "Pulsa Empezar práctica; usa Anterior, Siguiente o Pausa cuando lo necesites.",
+  "Termina con calma o reinicia sin perder la secuencia elegida."
+ ]):state.steps;
  panel.querySelectorAll(".v101-steps li").forEach((li,i)=>{
-  if(li.textContent!==state.steps[i])li.textContent=state.steps[i];
+  if(li.textContent!==steps[i])li.textContent=steps[i];
  });
  find.textContent=state.action;
  find.disabled=!target||target.disabled||!target.isConnected;
@@ -76,7 +86,7 @@ find.addEventListener("click",()=>{
 const observer=new MutationObserver(records=>{
  if(records.some(record=>["data-studio-mode","data-studio-status","data-status","lang","aria-pressed","disabled"].includes(record.attributeName)))paint();
 });
-observer.observe(root,{attributes:true,attributeFilter:["data-studio-mode"]});
+observer.observe(root,{attributes:true,attributeFilter:["data-studio-mode","data-movement-sequence"]});
 observer.observe(guided,{attributes:true,attributeFilter:["data-studio-status"]});
 observer.observe(movement,{attributes:true,attributeFilter:["data-status"]});
 observer.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});

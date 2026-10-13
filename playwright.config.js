@@ -16,7 +16,9 @@ module.exports = defineConfig({
   },
   reporter: [['list'], ['html', { open: 'never' }]],
   webServer: {
-    command: 'npm start',
+    // Build the exact Pages artifact before E2E so /dist/ is exercised too.
+    // Source / remains the historical baseline for all existing browser tests.
+    command: 'npm run build && npm start',
     url: 'http://127.0.0.1:4185',
     reuseExistingServer: !process.env.CI
   },

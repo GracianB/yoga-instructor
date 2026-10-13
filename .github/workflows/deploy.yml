@@ -8,16 +8,19 @@ on:
     types: [completed]
 permissions:
   contents: read
+# PR-triggered Yoga Quality runs must never cancel a verified main release.
+# Main releases queue for a SHA check; PR runs use their own per-run group.
 concurrency:
-  group: yoga-pages
-  cancel-in-progress: true
+  group: yoga-pages-${{ github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && 'main' || github.event.workflow_run.id }}
+  cancel-in-progress: false
 
 jobs:
   node:
     name: Verified release candidate
-    # The exact SHA is checked against the current main ref below; do not use
+    # A successful quality workflow on main must match the live main SHA.
+    # PR merge refs cannot pass that SHA check. Do not use
     # head_repository.full_name here because some workflow_run payloads omit it.
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' }}
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:

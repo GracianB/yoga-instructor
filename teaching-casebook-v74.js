@@ -45,6 +45,7 @@
       settingLabel:"¿Para quién?", settingSala:"Grupo multinivel", settingOne:"Sesión individual",settingTeams:"Equipo de trabajo",
       durationLabel:"Duración total",totalLabel:"DURACIÓN PROPUESTA", planContact:"Consultar una sesión real ↗",
       tryStudio:"Explorar el estudio guiado ↗",
+      trySequence:"Diseñar una secuencia con Nila ↗",
       safety:"El plan es educativo y orientativo. En presencia de dolor, lesión o condiciones médicas, consulta a un profesional sanitario antes de adaptar la práctica.",
       phases:{
         sala:{
@@ -103,6 +104,7 @@
       settingLabel:"Who is it for?",settingSala:"Multilevel group",settingOne:"One-to-one",settingTeams:"Workplace team",
       durationLabel:"Total duration",totalLabel:"SUGGESTED DURATION",planContact:"Enquire about a real session ↗",
       tryStudio:"Explore guided studio ↗",
+      trySequence:"Build a sequence with Nila ↗",
       safety:"This plan is educational and illustrative. If you have pain, an injury or a medical condition, consult a healthcare professional before adapting your practice.",
       phases:{
         sala:{

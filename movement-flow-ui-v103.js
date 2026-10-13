@@ -63,6 +63,7 @@ const words={
  " asanas · "+p.transitionCount+" transitions · "+p.phases.length+" phases"}
 };
 let ids=model.source("roots"),dirty=false;
+let lastLocked=null;
 const route=()=>routes?.value||"roots";
 const locked=()=>["running","paused"].includes(controller.snapshot().status)||
  studio.dataset.studioMode!=="asanas";
@@ -112,6 +113,7 @@ function paint(){
   }
  }
  const disabled=locked();
+ lastLocked=disabled;
  panel.querySelector('[data-p1="prepare"]').disabled=disabled;
  panel.querySelector('[data-p1="classic"]').disabled=disabled;
  panel.querySelector('[data-p1="add"]').disabled=disabled||ids.length>=model.MAX;
@@ -171,8 +173,11 @@ panel.addEventListener("click",event=>{
 const obs=new MutationObserver(paint);
 obs.observe(studio,{attributes:true,attributeFilter:["data-studio-mode"]});
 obs.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
-window.addEventListener("yoga:flow",paint);
-window.addEventListener("pagehide",()=>{obs.disconnect();window.removeEventListener("yoga:flow",paint)},{once:true});
+// Flow emits on phase/timer events; the editing panel only needs to react
+// when its disabled state changes, not re-render 96 options each tick.
+const onFlow=()=>{if(locked()!==lastLocked)paint()};
+window.addEventListener("yoga:flow",onFlow);
+window.addEventListener("pagehide",()=>{obs.disconnect();window.removeEventListener("yoga:flow",onFlow)},{once:true});
 window.addEventListener("yoga:v94-restore",()=>{if(route()==="custom")updateFromRoute()});
 rowMarkup();
 })();

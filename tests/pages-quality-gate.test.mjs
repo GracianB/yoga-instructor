@@ -10,8 +10,8 @@ test('Pages publication requires a successful main push Quality workflow',()=>{
   assert.match(deploy,/workflows: \[Yoga Quality\]/);
   assert.match(deploy,/types: \[completed\]/);
   // workflow_run can omit head_repository metadata. The actual protection is
-  // a successful main push AND equality with the live repository main SHA.
-  for(const value of ["workflow_run.conclusion == 'success'","workflow_run.event == 'push'","workflow_run.head_branch == 'main'"]){
+  // a successful quality result on the main branch AND equality with the live SHA.
+  for(const value of ["workflow_run.conclusion == 'success'","workflow_run.head_branch == 'main'"]){
     assert.ok(deploy.includes(value),value);
   }
   assert.match(deploy,/test "\$\(git rev-parse HEAD\)" = "\$VERIFIED_SHA"/);
@@ -47,5 +47,11 @@ test('All six browser partitions and quality gate remain mandatory, never duplic
   assert.doesNotMatch(deploy,/\n\s*browser:\s*\n/);
   assert.doesNotMatch(deploy,/playwright install --with-deps/);
   assert.match(deploy,/group: yoga-pages/);
-  assert.match(deploy,/cancel-in-progress: true/);
+  // PR-triggered workflow runs cannot cancel a successful main release.
+  // Main SHA is reverified in the node job before any deployment.
+  assert.doesNotMatch(deploy,/if:.*workflow_run.event == 'push'/);
+  assert.match(deploy,/workflow_run.head_branch == 'main'/);
+  assert.match(deploy,/workflow_run.id/);
+  assert.match(deploy,/cancel-in-progress: false/);
+  assert.doesNotMatch(deploy,/cancel-in-progress: true/);
 });

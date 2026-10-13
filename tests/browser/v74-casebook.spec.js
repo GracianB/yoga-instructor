@@ -22,6 +22,7 @@ test("V74: minute allocations sum perfectly for each setting and length",async({
   }
  }
  await expect(root.locator("#v74-contact")).toHaveAttribute("href",/subject=/);
+ await expect(root.locator('a[data-v74-text="trySequence"]')).toHaveAttribute("href","#studio-asana-library");
 });
 test("V74: links from each case open the matching example session",async({page})=>{
  await page.goto("/");
@@ -42,5 +43,6 @@ test("V74: English translation and small-screen sizing",async({page})=>{
  await root.locator("#v74-duration").selectOption("45");
  await expect(root.locator("#v74-adaptation")).toContainText("listen");
  await expect(root.locator("#v74-contact")).toHaveAttribute("href",/subject=Enquiry/);
+ await expect(root.locator('a[data-v74-text="trySequence"]')).toContainText("Build a sequence");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
 });

@@ -450,7 +450,9 @@ test('Phase C: compact theater, actual side buttons, 320-1440 layouts and seriou
 
 
 test('Phase D1: calm Yin/Yang guardian eyes in awake and resting asanas',async ({page})=>{
-  test.setTimeout(80000);
+  // Four viewport/energy combinations and four attached screenshots can take
+  // more than 80s on headless WebKit; keep EVERY existing assertion.
+  test.setTimeout(150000);
   const errors=await open(page);
   const guide=page.locator('#flow-guide');
   await expect(guide).toHaveAttribute('data-ready','true',{timeout:8000});

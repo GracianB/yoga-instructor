@@ -191,11 +191,10 @@
     renderPlan();
     // Keep both the selected teaching context and a real, shareable anchor.
     // Other site navigation scripts can otherwise consume the native jump.
-    try {
-      window.history.replaceState(window.history.state, "", "#programa");
-    } catch (_) {
-      window.location.hash = "programa";
-    }
+    // Use the native fragment setter: Firefox can leave the address bar
+    // unchanged after a history-only replacement during scripted scrolling.
+    // A real hash also works with browser history, keyboard and shared links.
+    if (window.location.hash !== "#programa") window.location.hash = "programa";
     document.getElementById("programa")?.scrollIntoView({block:"start",behavior:"instant"});
   }));
   setting.addEventListener("change", renderPlan);

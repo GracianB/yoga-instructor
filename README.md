@@ -310,3 +310,38 @@ Se abre un selector para el archivo MP3, se prepara una rama de GitHub separada 
 **English:** a single native music source, three synchronized sets of controls, opt-in Vortex iframe, a roomier particle canvas and a more readable seated dragon breathing cycle. External Vortex sessions opened in another browser tab cannot be managed by this site's audio controller.
 
 **Public release criteria:** green Node, Chromium 2/2, Firefox 2/2 and WebKit 2/2, followed by a Pages deploy matching the checked-out commit and the MP3 SHA-256.
+
+
+## P3 · Quality and publication contract
+
+The published study deliberately maintains a separate **Asana Book** and practice
+controller. Movement (Nila), Breathing (Dragon) and Meditation (Uma) share the
+existing session-control system; a selection in the Book is not a medical
+recommendation or an automatically started class.
+
+### Resource and deployment checks
+
+- `npm run audit:architecture` inventories stylesheet/script requests, their bytes,
+  eager JS exceptions, duplicated dependencies, broken local links and budgets.
+  It reports existing architectural debt without pretending to have already bundled
+  the stylesheets or changed browser rendering order.
+- `npm run quality` runs those budgets alongside Node tests, asset integrity and
+  accessibility/safety contracts. Browser acceptance still requires Chromium,
+  Firefox and WebKit, including a 320px viewport.
+- Pages publication requires a fully successful quality **push on main**, matches
+  the published SHA and verifies every served resource against the manifest.
+  PR validations cannot cancel a valid main release. The deploy job requires
+  a successful Yoga Quality workflow on main and validates that its exact SHA
+  still equals the live main ref before uploading anything.
+
+### Yoga experience acceptance
+
+- **Nila:** anatomical joins, knees, elbows, ankles, the same materials in Flow and
+  the separate Book, and a complete practice with manually chosen postures.
+- **Dragon:** start and end gradually, visible torso breathing at the chosen rhythm,
+  free breath without imposed cadence, freeze on pause and reduced motion.
+- **Uma:** distinct arrival/focus/observing/return phases, focus for body/breath/space,
+  truly silent mode, optional spoken guidance only after opting in.
+
+Public site: https://gracianb.github.io/yoga-instructor/ . The source repository
+does not prove a given build is live until the **Yoga Deploy** workflow has passed.

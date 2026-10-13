@@ -81,8 +81,16 @@ test("P1 · 320px, keyboard and dark mode preserve responsive planner and idle s
  await expect(panel).toBeVisible();
  await panel.locator('[data-p1="add"]').evaluate(el=>el.click());
  await expect(panel.locator(".p1-row")).toHaveCount(4);
- const overflow=await panel.evaluate(el=>el.scrollWidth-el.clientWidth);
- expect(overflow).toBeLessThanOrEqual(1);
+ const bounds=await panel.evaluate(el=>{
+  const edge=el.getBoundingClientRect().right;
+  const offenders=[...el.querySelectorAll("*")].filter(n=>{
+   const r=n.getBoundingClientRect();
+   return r.right>edge+1&&getComputedStyle(n).display!=="none";
+  }).slice(0,12).map(n=>({tag:n.tagName,cls:String(n.className).slice(0,80),
+   extra:Math.round(n.getBoundingClientRect().right-edge)}));
+  return {overflow:el.scrollWidth-el.clientWidth,offenders};
+ });
+ expect(bounds.overflow,JSON.stringify(bounds.offenders)).toBeLessThanOrEqual(1);
  await panel.locator(".p1-row").first().locator("select").focus();
  await expect(panel.locator(".p1-row").first().locator("select")).toBeFocused();
  await panel.locator('[data-p1="prepare"]').evaluate(el=>el.click());

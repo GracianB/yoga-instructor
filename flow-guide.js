@@ -47,7 +47,7 @@
     if(!pose)return;
     root.dataset.status=snapshot.status;
     root.dataset.phase=snapshot.phase;
-    root.querySelector(".yy-count").textContent=String(snapshot.index+1).padStart(2,"0")+" / 10";
+    root.querySelector(".yy-count").textContent=String(snapshot.index+1).padStart(2,"0")+" / "+snapshot.total;
     root.querySelector(".yy-current-asana").textContent=titleFor(snapshot.phase);
     title.textContent=pose.name[language()==="en"?1:0];
     text.textContent=pose.cue[language()==="en"?1:0];
@@ -62,6 +62,36 @@
   };
   // The passage is an editorial choice, never a new animation clock.
   // Later experiences (asana, pranayama, meditation) can use this vocabulary.
+  // P1: register authored postures as additional scenes in the ORIGINAL SVG.
+  // Only the canonical Flow renderer handles fades, focus and pose-ready gates.
+  const stagePlan=plan=>{
+    const entries=plan?.phases,guardian=window.YOGA_MOVEMENT_GUARDIAN;
+    const library=window.YOGA_ASANA_LIBRARY;
+    if(!Array.isArray(entries)||!guardian?.drawPose||!library?.byId)return false;
+    const container=artSvg.querySelector(".yy-pose-container");
+    if(!container)return false;
+    for(const node of container.querySelectorAll('[data-p1-sequence="true"]'))node.remove();
+    for(const key of Object.keys(byId))if(key.startsWith("seq-"))delete byId[key];
+    for(const phase of entries){
+      const pose=library.byId(phase.stagePose)||art.poses.find(p=>p.id===phase.stagePose);
+      if(!pose||!phase.id.startsWith("seq-"))return false;
+      const authored={...pose,id:phase.id};
+      // Authored internal SVG only: no remote content or untrusted HTML.
+      container.insertAdjacentHTML("beforeend",art.drawPose(authored));
+      const node=container.lastElementChild;
+      node.setAttribute("data-p1-sequence","true");
+      const character=node.querySelector(".yy-character");
+      character?.insertAdjacentHTML("beforeend",guardian.drawPose(authored));
+      byId[phase.id]={...authored,name:[phase.localizedName.es,phase.localizedName.en],
+        cue:[phase.localizedCue.es,phase.localizedCue.en]};
+    }
+    return true;
+  };
+  const classicStage=()=>{
+    artSvg.querySelectorAll('[data-p1-sequence="true"]').forEach(node=>node.remove());
+    for(const key of Object.keys(byId))if(key.startsWith("seq-"))delete byId[key];
+  };
+  window.YOGA_FLOW_STAGE=Object.freeze({configure:stagePlan,classic:classicStage});
   const passageFor=id=>{
     const kind=byId[id]?.kind;
     if(["table","rest","savasana","child"].includes(kind))return "ground";

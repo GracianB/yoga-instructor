@@ -23,8 +23,11 @@
 
   class YogaFlowEngine {
     constructor(phases = PHASES) {
-      if (!Array.isArray(phases) || phases.length !== 10) {
-        throw new Error("YogaFlowEngine requires exactly 10 phases");
+      const variable=Array.isArray(phases)&&phases.length>=8&&phases.length<=24&&
+        phases.every(p=>p?.id?.startsWith("seq-")&&Number.isFinite(p.durationSeconds)&&p.durationSeconds>0)&&
+        new Set(phases.map(p=>p.id)).size===phases.length;
+      if (!Array.isArray(phases) || (phases.length !== 10 && !variable)) {
+        throw new Error("YogaFlowEngine requires exactly 10 phases or a validated guided Movement plan");
       }
       this.phases = Object.freeze(phases.map((phase) => Object.freeze({ ...phase })));
       this.index = 0;
@@ -131,7 +134,7 @@
     PHASES,
     STATUS,
     YogaFlowEngine,
-    create() { return new YogaFlowEngine(); }
+    create(phases = PHASES) { return new YogaFlowEngine(phases); }
   });
 
   if (typeof window !== "undefined") window.YOGA_FLOW = api;

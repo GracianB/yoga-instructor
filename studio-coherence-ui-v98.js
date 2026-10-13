@@ -27,7 +27,11 @@ function paint(){
    style:chosen("button[data-meditation-style]","data-meditation-style")||"guided",
    focus:chosen("button[data-meditation-focus]","data-meditation-focus")||"breath"
  },language());
- const entries={".v98-mode":summary.mode,".v98-detail":summary.detail,
+ const guidedDetail=mode==="asanas"&&root.dataset.movementSequence==="guided"?
+  (language()==="en"?"Guided · ":"Guiada · ")+
+  (root.dataset.movementSequenceCount||"3")+(language()==="en"?" poses · ":" posturas · ")+
+  (root.dataset.movementSequenceMinutes||"20")+" min":null;
+ const entries={".v98-mode":summary.mode,".v98-detail":guidedDetail||summary.detail,
  ".v98-state":summary.status,".v98-label-mode":summary.modeLabel,
  ".v98-label-detail":summary.detailLabel,".v98-label-state":summary.stateLabel,
  "#v98-title":summary.heading,".v98-preferences":summary.preferences};
@@ -44,7 +48,7 @@ const observe=new MutationObserver(records=>{
  if(records.some(r=>["data-studio-mode","data-studio-status","data-status",
  "aria-pressed","lang"].includes(r.attributeName)))paint();
 });
-observe.observe(root,{attributes:true,attributeFilter:["data-studio-mode"]});
+observe.observe(root,{attributes:true,attributeFilter:["data-studio-mode","data-movement-sequence","data-movement-sequence-count","data-movement-sequence-minutes"]});
 observe.observe(guided,{attributes:true,attributeFilter:["data-studio-status"]});
 observe.observe(movement,{attributes:true,attributeFilter:["data-status"]});
 for(const button of root.querySelectorAll("button[data-breath-pattern],button[data-meditation-style],button[data-meditation-focus]")){

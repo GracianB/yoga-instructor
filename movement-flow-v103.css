@@ -152,6 +152,7 @@ html[data-theme="dark"] #studio-asana-library .p1-prepare{color:#1d3c2e}
 /* Narrow WebKit: intrinsic control widths must never widen the Book itself.
    Keep all controls visible, wrap actions rather than clip interactive targets. */
 @media (max-width:420px) {
+ #studio-asana-library .p1-sequence{overflow-x:clip;overflow-clip-margin:0}
  #studio-asana-library .p1-sequence,
  #studio-asana-library .p1-sequence :is(.p1-rows,.p1-row,.p1-options,.p1-actions,.p1-addline,.p1-reorder) {
   min-width:0!important;max-width:100%!important;box-sizing:border-box!important;

@@ -138,3 +138,50 @@ body.quiet-mode #instructor-flow .studio-guided .meditation-guardian
 :is(.uma-v102-firefly,.uma-v102-orbit-star,.uma-v102-lotus){
  transform:none!important;transition:none!important;
 }
+
+/* P0 · All 22 Nila drawings now share their base paint in both DOM chapters.
+   Knees, elbows and ankles are derived from the SAME authored Bézier curves,
+   never independently animated and never allowed to move grounded paws. */
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian .mg-knee .mg-hinge-shell{
+  fill:var(--mg-coat,#8b85b0);
+  stroke:var(--mg-deep,#5c5685);
+  stroke-width:1.25;
+  stroke-opacity:.38;
+  opacity:.88;
+}
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian .mg-elbow .mg-hinge-shell{
+  fill:var(--mg-coat,#8b85b0);
+  opacity:.68;
+}
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian .mg-p0-kneecap{
+  fill:color-mix(in srgb,var(--mg-coat,#8b85b0) 83%,var(--mg-chest,#e8e2f3));
+  stroke:var(--mg-deep,#5c5685);
+  stroke-width:1.55;
+  stroke-opacity:.44;
+  opacity:.94;
+  stroke-linejoin:round;
+  vector-effect:non-scaling-stroke;
+}
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian :is(.mg-p0-patella-light,.mg-p0-elbow-fold,.mg-p0-ankle-crease){
+  fill:none;
+  stroke:var(--mg-light,#dfd0ef);
+  stroke-width:2.4;
+  stroke-opacity:.7;
+  stroke-linecap:round;
+  vector-effect:non-scaling-stroke;
+}
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian .mg-p0-elbow-fold{
+  stroke:var(--mg-deep,#5c5685);
+  stroke-opacity:.35;
+}
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian .mg-p0-ankle-crease{
+  stroke:var(--mg-deep,#5c5685);
+  stroke-width:1.7;
+  stroke-opacity:.26;
+}

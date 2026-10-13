@@ -109,7 +109,10 @@ html[data-theme="dark"] #studio-asana-library .p1-addline button{
 }
 html[data-theme="dark"] #studio-asana-library .p1-prepare{color:#1d3c2e}
 @media(max-width:760px){
- #studio-asana-library .p1-row{grid-template-columns:1fr;gap:7px}
+ #studio-asana-library .p1-sequence{width:100%;max-width:100%;min-width:0;box-sizing:border-box}
+ #studio-asana-library .p1-rows{min-width:0;max-width:100%}
+ #studio-asana-library .p1-row{grid-template-columns:minmax(0,1fr);min-width:0;max-width:100%;box-sizing:border-box;gap:7px}
+ #studio-asana-library .p1-row select{max-width:100%;width:100%;min-width:0;box-sizing:border-box}
  #studio-asana-library .p1-reorder{justify-content:flex-start}
  #studio-asana-library .p1-options{grid-template-columns:1fr}
 }

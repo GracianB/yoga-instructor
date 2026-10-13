@@ -118,11 +118,12 @@
     return "M"+left.join(" L")+" L"+right.reverse().join(" L")+"Z";
   };
   const limb=(curve,type,index)=>{
-    const original=curveSections(curve);
-    const sections=jointSections(original);
-    const root=sample(sections[0],0),hinge=sample(sections[0],1);
+    const sections=curveSections(curve);
+    const original=sections;
+    const rig=jointSections(sections);
+    const root=sample(rig[0],0),hinge=sample(rig[0],1);
     const degree=Math.atan2(hinge.dy,hinge.dx)*180/Math.PI;
-    const before=sample(sections[0],.25),after=sample(sections[1],.75);
+    const before=sample(rig[0],.25),after=sample(rig[1],.75);
     const turn=Math.atan2(before.dx*after.dy-before.dy*after.dx,
       before.dx*after.dx+before.dy*after.dy)*180/Math.PI;
     const flex=Math.abs(turn);
@@ -148,14 +149,14 @@
       '<path class="mg-socket-shape" d="M-25 -16Q-8 -29 14 -17Q29 -3 16 17Q-7 25 -25 13Q-31 2 -25 -16Z"/>'+
       '<path class="mg-socket-light" d="M-13 -13Q0 -20 12 -10"/>'+
       '</g>';
-    const ankle=type==="leg"?sample(sections[1],.80):null;
+    const ankle=type==="leg"?sample(rig[1],.80):null;
     const ankleMark=ankle?
       '<g class="mg-p0-ankle" data-ankle="'+index+'" transform="translate('+
       point(ankle.x,ankle.y)+') rotate('+
       esc(Math.atan2(ankle.dy,ankle.dx)*180/Math.PI)+')">'+
       '<path class="mg-p0-ankle-crease" d="M-9 5Q0 9 9 5"/></g>':"";
     return '<g class="mg-limb mg-'+type+'" data-mg-limb="'+type+'-'+index+'">'+
-      '<path class="mg-limb-volume" d="'+limbVolume(sections,type)+'"/>'+
+      '<path class="mg-limb-volume" d="'+limbVolume(rig,type)+'"/>'+
       '<path class="mg-limb-shell" d="'+curve+'"/>'+
       '<path class="mg-limb-plane" d="'+curve+'"/>'+
       socket+joint+ankleMark+'</g>';

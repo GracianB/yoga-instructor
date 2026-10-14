@@ -1,6 +1,8 @@
 name: Rive P0 experimental artifact
 on:
-  pull_request:
+  push:
+    branches:
+      - yoga-p0-anatomy-foundation
     paths:
       - 'rive-p0/**'
       - '.github/workflows/rive-p0.yml'
@@ -62,11 +64,11 @@ jobs:
           retention-days: 7
 
       - name: Commit compiled demo to experimental branch only
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'yoga-p0-anatomy-foundation'
+        if: github.event_name == 'push' && github.ref == 'refs/heads/yoga-p0-anatomy-foundation'
         shell: bash
         env:
-          TARGET_BRANCH: ${{ github.head_ref }}
-          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+          TARGET_BRANCH: yoga-p0-anatomy-foundation
+          EXPECTED_HEAD: ${{ github.sha }}
         run: |
           cp rive-p0/build/nila-yoga-p0.riv /tmp/nila-yoga-p0.riv
           git fetch origin "$TARGET_BRANCH"

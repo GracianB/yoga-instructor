@@ -19,6 +19,7 @@ const studioRoot=document.getElementById("instructor-flow"),modeChoices=studioRo
 const optional=studioRoot?.querySelector('.studio-adaptation');if(optional){const drawer=document.createElement('details');drawer.className='practice-settings-drawer';drawer.innerHTML='<summary data-chapter-copy="settings"></summary>';optional.before(drawer);drawer.append(optional);}
 for(const [selector,label] of [['.v87-guidance','guide'],['.v88-atmosphere','atmosphere'],['.v90-sound','voice']]){const panel=studioRoot?.querySelector(selector);if(panel){const drawer=document.createElement('details');drawer.className='studio-option-drawer';drawer.innerHTML='<summary data-chapter-copy="'+label+'"></summary>';panel.before(drawer);drawer.append(panel);const sync=()=>{drawer.hidden=panel.hidden};new MutationObserver(sync).observe(panel,{attributes:true,attributeFilter:['hidden']});sync();}}
 const credentials=document.createElement("details");credentials.className="yoga-credentials";credentials.innerHTML='<summary data-chapter-copy="more"></summary>';main.append(credentials);
+const proof=document.querySelector("#portfolio .p73-proof");if(proof)credentials.append(proof);
 for(const id of ["sobre","oferta","camino","trayectoria","demostracion","experiencia","formacion","filosofia","cv"])move(id,credentials);
 for(const id of ["preguntas","contacto"])move(id,main);
 // Superseded introductions stay addressable for old links; the three doors replace them.
@@ -27,6 +28,7 @@ const builder=document.getElementById("p1-sequence");if(builder){const detail=do
 const nav=document.getElementById("nav");if(nav){nav.innerHTML='<a href="#teaching" data-chapter-copy="teach"></a><a href="#learning" data-chapter-copy="learn"></a><a href="#practice" data-chapter-copy="practice"></a><a href="#contacto">Contacto</a>';}
 function paint(){const t=copy[locale()];for(const el of document.querySelectorAll("[data-chapter-copy]"))el.textContent=t[el.dataset.chapterCopy];if(nav)nav.lastElementChild.textContent=locale()==="en"?"Contact":"Contacto";}
 function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}if(!id)return;const el=document.getElementById(id);if(!el)return;if(el.classList.contains("chapter-legacy"))el.hidden=false;let p=el.parentElement;while(p){if(p.tagName==="DETAILS")p.open=true;p=p.parentElement;}}
+const chapterObserver=new IntersectionObserver(entries=>{for(const entry of entries)if(entry.isIntersecting){for(const link of doors.querySelectorAll("a")){if(link.hash==="#"+entry.target.id)link.setAttribute("aria-current","location");else link.removeAttribute("aria-current");}}},{rootMargin:"-15% 0px -70% 0px"});for(const chapter of [teaching,learning,practice])chapterObserver.observe(chapter);
 function markCurrent(){for(const link of doors.querySelectorAll('a')){if(link.hash===location.hash)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');}}
 window.addEventListener('hashchange',markCurrent);markCurrent();
 window.addEventListener("hashchange",revealHash);revealHash();paint();new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});

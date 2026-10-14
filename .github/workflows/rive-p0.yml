@@ -1,0 +1,45 @@
+name: Rive P0 experimental artifact
+on:
+  pull_request:
+    paths:
+      - 'rive-p0/**'
+      - '.github/workflows/rive-p0.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  compile-rive:
+    name: Verify and build Rive P0
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout exact commit
+        uses: actions/checkout@v6
+
+      - name: Install Rive official CLI
+        shell: bash
+        run: |
+          curl --fail --location --silent --show-error https://releases.rive.app/cli/install.sh -o /tmp/install-rive.sh
+          bash /tmp/install-rive.sh
+          echo "$HOME/.rive/bin" >> "$GITHUB_PATH"
+
+      - name: Verify source without publishing
+        shell: bash
+        run: rive rive-p0 --verify
+
+      - name: Build local .riv without account
+        shell: bash
+        run: |
+          rive rive-p0 --once
+          test -s rive-p0/build/nila-yoga-p0.riv
+          file rive-p0/build/nila-yoga-p0.riv
+
+      - name: Store binary proof for review
+        uses: actions/upload-artifact@v6
+        with:
+          name: nila-yoga-p0-rive
+          path: rive-p0/build/nila-yoga-p0.riv
+          if-no-files-found: error
+          retention-days: 7

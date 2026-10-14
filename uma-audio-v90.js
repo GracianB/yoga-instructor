@@ -125,7 +125,7 @@ file.addEventListener("change",()=>{
  if(bus.selectFile(file.files?.[0]))sayStatus(copy[locale()].fileSelected);
  paint();
 });
-window.addEventListener("yoga:audiochange",paint);
+window.addEventListener("yoga:audiochange",()=>{if(!bus.audio.paused&&voiceEnabled){voiceEnabled=false;spokenKey=null;cancelVoice()}paint()});
 const observe=new MutationObserver(changes=>{
  if(changes.some(c=>c.attributeName==="data-studio-mode"||c.attributeName==="lang"))paint();
  if(root.dataset.studioMode!=="meditation"){

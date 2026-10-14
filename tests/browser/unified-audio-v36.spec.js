@@ -9,6 +9,9 @@ test("V36: three visible controls share exactly one audio source and always star
  expect(await audio.evaluate(el=>new URL(el.currentSrc||el.src).pathname.endsWith("/audio/silence-between-notes.mp3"))).toBe(true);
  await page.locator("#audio-play").evaluate(el=>el.click());
  await expect.poll(()=>audio.evaluate(el=>el.paused),{timeout:10000}).toBe(false);
+ await expect(page.locator(".sanctuary-music")).toHaveAttribute("aria-pressed","true");
+ await page.locator(".sanctuary-music").evaluate(el=>el.click());
+ await expect.poll(()=>audio.evaluate(el=>el.paused)).toBe(true);
  await page.locator(".sanctuary-music").evaluate(el=>el.click());
  await expect.poll(()=>audio.evaluate(el=>el.paused)).toBe(false);
  await expect(page.locator(".sanctuary-music")).toHaveAttribute("aria-pressed","true");

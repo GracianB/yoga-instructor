@@ -14,6 +14,7 @@ const cases=document.getElementById("casos");if(cases){const caseDrawer=document
 move("studio-asana-library",learning);
 for(const id of ["instructor-flow","soundtrack","campo"])move(id,practice);
 const studioRoot=document.getElementById("instructor-flow"),modeChoices=studioRoot?.querySelector(".studio-modes"),workspace=studioRoot?.querySelector("#studio-v66-workspace");if(modeChoices&&workspace)workspace.before(modeChoices);
+const optional=studioRoot?.querySelector('.studio-adaptation');if(optional){const drawer=document.createElement('details');drawer.className='practice-settings-drawer';drawer.innerHTML='<summary>Personalizar mi práctica</summary>';optional.before(drawer);drawer.append(optional);}
 const credentials=document.createElement("details");credentials.className="yoga-credentials";credentials.innerHTML='<summary data-chapter-copy="more"></summary>';main.append(credentials);
 for(const id of ["sobre","oferta","camino","trayectoria","demostracion","experiencia","formacion","filosofia","cv"])move(id,credentials);
 for(const id of ["preguntas","contacto"])move(id,main);

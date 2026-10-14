@@ -80,6 +80,7 @@
       container.insertAdjacentHTML("beforeend",art.drawPose(authored));
       const node=container.lastElementChild;
       node.setAttribute("data-p1-sequence","true");
+      node.dataset.sourcePose=phase.stagePose;
       const character=node.querySelector(".yy-character");
       character?.insertAdjacentHTML("beforeend",guardian.drawPose(authored));
       byId[phase.id]={...authored,name:[phase.localizedName.es,phase.localizedName.en],

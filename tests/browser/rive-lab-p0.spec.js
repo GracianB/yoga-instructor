@@ -5,11 +5,16 @@ test("Rive P0 lab stays isolated, animates IK slider, and loads runtime only on 
  await page.goto("/rive-lab.html");
  await expect(page.getByRole("heading",{name:/Del dibujo a un personaje/})).toBeVisible();
  await expect(page.locator("#ik-stage svg")).toHaveCount(1);
+ await expect(page.locator("#ik-stage radialGradient")).toHaveCount(1);
+ await page.locator("#fold-joints").check();
+ await expect(page.locator("#ik-stage [data-joint]")).toHaveCount(15);
+ await page.locator("#fold-joints").uncheck();
  expect(cdn).toHaveLength(0);
  const slider=page.locator("#fold-progress");
  await slider.evaluate(el=>{el.value="100";el.dispatchEvent(new Event("input",{bubbles:true}));});
  await expect(page.locator("#fold-value")).toHaveText("100%");
  await expect(page.locator("#ik-stage")).toHaveAttribute("aria-label","Uttanasana");
+ await expect(page.locator("#ik-stage svg")).toHaveCount(1);
  await page.locator("#rive-file").setInputFiles({name:"not-rive.txt",mimeType:"text/plain",buffer:Buffer.from("bad")});
  await expect(page.locator("#rive-status")).toContainText("extensión .riv");
  expect(cdn).toHaveLength(0);

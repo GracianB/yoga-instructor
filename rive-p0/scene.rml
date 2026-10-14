@@ -17,29 +17,32 @@
     </Node>
     <Shape name="Pelvis" x="240" y="348"><Ellipse name="Contour" width="111" height="72" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FF9D85D6"/></Fill></Shape>
     <Node x="240" y="344" name="Cadera / pivote de columna" id="0:10">
-      <Shape name="Tronco" x="0" y="-67"><Ellipse name="Contour" width="111" height="156" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFBCAAE8"/></Fill></Shape>
-      <Shape name="Vientre" x="0" y="-36"><Ellipse name="Contour" width="84" height="70" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFCAB9F2"/></Fill></Shape>
-      <Shape name="Cuello" x="0" y="-137"><Ellipse name="Contour" width="34" height="46" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFAE9BE0"/></Fill></Shape>
-      <Node x="-52" y="-114" name="Hombro Izquierdo" id="0:11">
-        <Shape name="Brazo Izquierdo" x="0" y="40"><Ellipse name="Contour" width="31" height="84" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFA48ED5"/></Fill></Shape>
-        <Shape name="Codo Izquierdo" x="0" y="82"><Ellipse name="Contour" width="30" height="33" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFCAB8F1"/></Fill></Shape>
-        <Shape name="Antebrazo Izquierdo" x="0" y="125"><Ellipse name="Contour" width="27" height="76" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFAC96DF"/></Fill></Shape>
-        <Shape name="Mano Izquierdo" x="0" y="167"><Ellipse name="Contour" width="28" height="34" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFD4C2F8"/></Fill></Shape>
-      </Node>
-      <Node x="52" y="-114" name="Hombro Derecho" id="0:12">
-        <Shape name="Brazo Derecho" x="0" y="40"><Ellipse name="Contour" width="31" height="84" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFA48ED5"/></Fill></Shape>
-        <Shape name="Codo Derecho" x="0" y="82"><Ellipse name="Contour" width="30" height="33" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFCAB8F1"/></Fill></Shape>
-        <Shape name="Antebrazo Derecho" x="0" y="125"><Ellipse name="Contour" width="27" height="76" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFAC96DF"/></Fill></Shape>
-        <Shape name="Mano Derecho" x="0" y="167"><Ellipse name="Contour" width="28" height="34" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFD4C2F8"/></Fill></Shape>
-      </Node>
-      <Shape name="Oreja izquierda" x="-59" y="-188"><Ellipse name="Contour" width="34" height="77" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FF9879CA"/></Fill></Shape>
-      <Shape name="Oreja derecha" x="59" y="-188"><Ellipse name="Contour" width="34" height="77" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FF9879CA"/></Fill></Shape>
-      <Shape name="Cabeza" x="0" y="-185"><Ellipse name="Contour" width="125" height="116" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFD5C4FC"/></Fill></Shape>
+      <Shape name="Sonrisa" x="0" y="-149"><Ellipse name="Contour" width="18" height="5" originX="0.5" originY="0.5"/><Fill name="Fill"><SolidColor name="Color" colorValue="FF8A6489"/></Fill></Shape>
       <Shape name="Mejilla izquierda" x="-35" y="-172"><Ellipse name="Contour" width="23" height="15" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFE8B3D8"/></Fill></Shape>
       <Shape name="Mejilla derecha" x="35" y="-172"><Ellipse name="Contour" width="23" height="15" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFE8B3D8"/></Fill></Shape>
       <Shape name="Ojo izquierdo" x="-23" y="-185"><Ellipse name="Contour" width="10" height="13" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FF58466F"/></Fill></Shape>
       <Shape name="Ojo derecho" x="23" y="-185"><Ellipse name="Contour" width="10" height="13" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FF58466F"/></Fill></Shape>
       <Shape name="Nariz" x="0" y="-165"><Ellipse name="Contour" width="12" height="9" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFB98CB7"/></Fill></Shape>
+      <Shape name="Flequillo" x="0" y="-220"><Ellipse name="Contour" width="126" height="41" originX="0.5" originY="0.5"/><Fill name="Hair"><SolidColor name="Color" colorValue="FF8366B2"/></Fill></Shape>
+      <Shape name="Broche loto" x="0" y="-97"><Ellipse name="Contour" width="21" height="26" originX="0.5" originY="0.5"/><Fill name="Gold"><SolidColor name="Color" colorValue="FFF1DDB0"/></Fill></Shape>
+      <Shape name="Tronco" x="0" y="-67"><Ellipse name="Contour" width="111" height="156" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFBCAAE8"/></Fill></Shape>
+      <Shape name="Vientre" x="0" y="-36"><Ellipse name="Contour" width="84" height="70" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFCAB9F2"/></Fill></Shape>
+      <Shape name="Cuello" x="0" y="-137"><Ellipse name="Contour" width="34" height="46" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFAE9BE0"/></Fill></Shape>
+      <Node x="-52" y="-114" name="Hombro Izquierdo" id="0:11">
+        <Shape name="Brazo Izquierdo" x="0" y="30"><Ellipse name="Contour" width="31" height="64" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFA48ED5"/></Fill></Shape>
+        <Shape name="Codo Izquierdo" x="0" y="63"><Ellipse name="Contour" width="30" height="31" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFCAB8F1"/></Fill></Shape>
+        <Shape name="Antebrazo Izquierdo" x="0" y="95"><Ellipse name="Contour" width="27" height="65" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFAC96DF"/></Fill></Shape>
+        <Shape name="Mano Izquierdo" x="0" y="131"><Ellipse name="Contour" width="28" height="31" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFD4C2F8"/></Fill></Shape>
+      </Node>
+      <Node x="52" y="-114" name="Hombro Derecho" id="0:12">
+        <Shape name="Brazo Derecho" x="0" y="30"><Ellipse name="Contour" width="31" height="64" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFA48ED5"/></Fill></Shape>
+        <Shape name="Codo Derecho" x="0" y="63"><Ellipse name="Contour" width="30" height="31" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFCAB8F1"/></Fill></Shape>
+        <Shape name="Antebrazo Derecho" x="0" y="95"><Ellipse name="Contour" width="27" height="65" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFAC96DF"/></Fill></Shape>
+        <Shape name="Mano Derecho" x="0" y="131"><Ellipse name="Contour" width="28" height="31" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFD4C2F8"/></Fill></Shape>
+      </Node>
+      <Shape name="Oreja izquierda" x="-59" y="-188"><Ellipse name="Contour" width="34" height="77" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FF9879CA"/></Fill></Shape>
+      <Shape name="Oreja derecha" x="59" y="-188"><Ellipse name="Contour" width="34" height="77" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FF9879CA"/></Fill></Shape>
+      <Shape name="Cabeza" x="0" y="-185"><Ellipse name="Contour" width="125" height="116" originX="0.5" originY="0.5"/><Fill name="Skin"><SolidColor name="Color" colorValue="FFD5C4FC"/></Fill></Shape>
     </Node>
     <LinearAnimation loopValue="loop" fps="60" duration="180" name="Tadasana a Uttanasana y regreso" id="0:80">
       <KeyedObject objectId="0:10"><KeyedProperty propertyKey="15">

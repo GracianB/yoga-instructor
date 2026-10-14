@@ -31,7 +31,7 @@
  function scan(){document.querySelectorAll("#instructor-flow .meditation-guardian").forEach(enchant)}
  function watchConsole(){
   const target=document.querySelector("#instructor-flow");
-  if(!target||!("IntersectionObserver" in window))return;
+  if(!target||typeof window.IntersectionObserver!=="function")return;
   new IntersectionObserver(entries=>{for(const e of entries)
    document.body.dataset.v105Console=e.isIntersecting?"in-view":"away";},{threshold:.15}).observe(target);
  }

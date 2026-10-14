@@ -25,6 +25,11 @@ jobs:
           bash /tmp/install-rive.sh
           echo "$HOME/.rive/bin" >> "$GITHUB_PATH"
 
+      - name: Install renderer shared libraries
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends libegl1 libgles2 libx11-6
+
       - name: Verify source without publishing
         shell: bash
         run: rive rive-p0 --verify

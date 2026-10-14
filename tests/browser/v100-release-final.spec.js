@@ -1,7 +1,7 @@
 const{test,expect}=require("@playwright/test");
 test("V100 320px studio behaves in three languages/modes without a duplicate guardian",async({page})=>{
 await page.setViewportSize({width:320,height:780});
-await page.goto("/");
+await page.goto("/");await page.locator(".studio-status-drawer>summary").click();
 const root=page.locator("#instructor-flow");await expect(page.locator("#studio-readiness")).toBeVisible();
 await expect(page.locator(".meditation-guardian")).toHaveCount(1);
 await expect(page.locator(".studio-breath-dragon")).toHaveCount(1);
@@ -17,7 +17,7 @@ const overflow=await page.locator("#instructor-flow").evaluate(el=>el.scrollWidt
 expect(overflow).toBeLessThanOrEqual(1);
 });
 test("V100 browser respects a reduced-motion meditation and a silent exit",async({page})=>{
-await page.emulateMedia({reducedMotion:"reduce"});await page.goto("/");
+await page.emulateMedia({reducedMotion:"reduce"});await page.goto("/");await page.locator(".studio-status-drawer>summary").click();
 await page.locator('[data-studio-mode="meditation"]').first().evaluate(x=>x.click());
 const guided=page.locator("#studio-guided");
 await page.locator('button[data-meditation-style="silent"]').evaluate(x=>x.click());

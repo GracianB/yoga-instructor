@@ -3,7 +3,7 @@ const {test,expect}=require("@playwright/test");
 test("P4 · bundled Pages CSS retains source cascade and interactive studio across engines",async({page})=>{
  test.setTimeout(100000);
  await page.setViewportSize({width:390,height:844});
- await page.goto("/");
+ await page.goto("/#p1-sequence");
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true");
  await expect(page.locator("#p1-sequence")).toBeVisible();
  const sample=()=>page.evaluate(()=>{
@@ -26,7 +26,7 @@ test("P4 · bundled Pages CSS retains source cascade and interactive studio acro
   if(u.pathname.startsWith("/dist/")&&u.pathname.endsWith(".css"))
    localCss.push(u.pathname);
  });
- await page.goto("/dist/");
+ await page.goto("/dist/#p1-sequence");
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true");
  await expect(page.locator("#p1-sequence")).toBeVisible();
  const sheets=await page.locator('link[rel="stylesheet"][href^="./"]').count();

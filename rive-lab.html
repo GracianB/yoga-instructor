@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://unpkg.com 'wasm-unsafe-eval'; connect-src 'self' blob: https://unpkg.com; style-src 'self'; img-src 'self' data: blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="robots" content="noindex">
+<title>Yoga Instructor · Laboratorio Rive</title>
+<meta name="description" content="Prueba aislada de rig vectorial y reproducción Rive para Yoga Instructor.">
+<link rel="icon" href="./favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="./rive-lab.css">
+</head>
+<body>
+<header class="topbar"><a href="./index.html" class="back">← Volver al portfolio</a><span>YOGA MOTION LAB · P0</span><span class="pill">Experimental</span></header>
+<main>
+<section class="intro"><p class="eyebrow">ANATOMÍA · HUESOS · MALLAS</p><h1>Del dibujo a un personaje que <em>pueda moverse.</em></h1><p>Banco de pruebas independiente. La figura vectorial es una <strong>plantilla de rig</strong>, no un personaje ya animado. Importa sus piezas en Rive y carga un archivo .riv exportado para compararlo aquí.</p></section>
+<div class="workbench">
+<section class="panel" aria-labelledby="rig-title"><div class="panel-head"><span class="index">01 / SVG</span><h2 id="rig-title">Capas para rigging</h2><p>Piezas independientes: muslos, tibias, antebrazos, brazos, manos, pies, pelvis y cabeza.</p></div>
+<div class="viewport"><img src="./rive-nila-rig-template.svg" alt="Plantilla frontal lila de Nila; las partes están separadas en grupos SVG y preparadas para asignar huesos en Rive." width="480" height="640"></div>
+<div class="controls"><a class="action" href="./rive-nila-rig-template.svg" download="nila-rive-rig-template.svg">Descargar SVG para Rive</a><a class="ghost" href="https://rive.app/editor" target="_blank" rel="noopener noreferrer">Abrir editor Rive ↗</a></div></section>
+<section class="panel" aria-labelledby="rive-title"><div class="panel-head"><span class="index">02 / RIVE</span><h2 id="rive-title">Previsualización interactiva</h2><p>El archivo se procesa en tu navegador. No se envía ni se almacena en nuestro sitio.</p></div>
+<div class="viewport rive-viewport"><canvas id="rive-canvas" width="480" height="640" aria-label="Lienzo de previsualización de animación Rive" role="img"></canvas><p class="empty" id="rive-empty">Pulsa «Ver demo Rive real» o carga tu archivo .riv para comprobar la animación.</p></div>
+<div class="controls"><button id="rive-demo" class="action" type="button">Ver demo Rive real</button><label class="ghost upload" for="rive-file">Cargar archivo .riv</label><input id="rive-file" type="file" accept=".riv,application/octet-stream"><button id="rive-play" class="ghost" type="button" disabled>Reproducir</button><button id="rive-clear" class="ghost" type="button" disabled>Limpiar</button></div>
+<p class="status" id="rive-status" role="status" aria-live="polite">Sin archivo cargado.</p></section>
+</div>
+<section class="kinematics" aria-labelledby="ik-title">
+<div><p class="eyebrow">03 / CINEMÁTICA</p><h2 id="ik-title">Tadasana → Uttanasana</h2><p>Prototipo matemático de articulaciones: dos piernas, longitudes constantes y pies fijos. Es una vista esquelética lateral, no el arte definitivo.</p>
+<label for="fold-progress">Flexión desde las caderas · <output id="fold-value" for="fold-progress">0%</output></label><input id="fold-progress" type="range" min="0" max="100" value="0" step="1"><div class="fold-options"><label><input id="fold-joints" type="checkbox"> Ver articulaciones</label><button type="button" class="ghost" id="fold-animate">Animar transición</button></div><p class="fold-note">Puntos y segmentos conectados a un mismo esqueleto. Los pies permanecen en contacto con el suelo.</p></div>
+<div id="ik-stage" class="ik-stage" aria-live="off"></div>
+</section>
+<section class="next-steps"><h2>Cómo convertirlo en un rig real</h2><ol><li>Abre Rive Editor (plan Free) e importa el SVG descargado. Comprueba qué grupos conserva; separa manualmente los que haya fusionado.</li><li>Crea la jerarquía pelvis → tronco → cuello → cabeza; pelvis → muslo → tibia → pie para cada pierna; tronco → brazo → antebrazo → mano para cada lado.</li><li>Vincula las superficies a huesos, distribuye los pesos de malla y fija objetivos IK para manos y pies. Mantén los pies sobre el suelo en Tadasana.</li><li>Anima una transición de Tadasana a Uttanasana con flexión desde la cadera y flexión adaptable de rodillas. Verifica cada fotograma.</li><li>Exporta un .riv con el plan Free y pruébalo en el visor. La exportación gratuita puede incluir una breve pantalla inicial de Rive.</li></ol><p>La aplicación pública y su motor SVG no se modifican desde este laboratorio. El runtime Rive solo se descarga cuando cargas un archivo.</p></section>
+</main>
+<footer>Yoga Instructor · prototipo de compatibilidad Rive · sin suscripción requerida</footer>
+<script type="module" src="./rive-lab.js"></script>
+</body>
+</html>

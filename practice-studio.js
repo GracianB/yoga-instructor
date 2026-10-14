@@ -171,6 +171,7 @@
     if (mode !== "asanas") render();
   };
 
+  root.querySelector('.studio-modes')?.setAttribute('role','tablist');
   const lockChoices = () => {
     const guidedBusy = mode !== "asanas" && ["running","paused"].includes(clock.snapshot().status);
     const locked = asanaBusy || guidedBusy;
@@ -179,6 +180,7 @@
       button.setAttribute("aria-pressed", String(selected));
       button.classList.toggle("is-selected", selected);
       button.disabled = false;
+      button.setAttribute('role','tab');button.setAttribute('aria-selected',String(selected));button.tabIndex=selected?0:-1;
     });
   };
 
@@ -408,6 +410,9 @@
   // The original Flow listens for keyboard shortcuts on this same section.
   // Never let an invisible asana session start while a guided mode is active.
   root.addEventListener("keydown", (event) => {
+    const modeControl=event.target.closest?.('.studio-modes button[data-studio-mode]');
+    if(modeControl){const index=modes.indexOf(modeControl);let next=index;if(event.key==='ArrowRight')next=(index+1)%modes.length;else if(event.key==='ArrowLeft')next=(index+modes.length-1)%modes.length;else if(event.key==='Home')next=0;else if(event.key==='End')next=modes.length-1;else return;event.preventDefault();event.stopImmediatePropagation();select(modes[next].dataset.studioMode);modes[next].focus();return;}
+
     if (event.key === "Escape" && immersive && mode !== "asanas") {
       event.preventDefault();
       setImmersive(false);

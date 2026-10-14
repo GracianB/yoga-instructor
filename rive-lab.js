@@ -1,4 +1,5 @@
-import {solveAsana,svgSkeleton} from "./anatomy-foundation-p0.mjs";
+import {solveAsana} from "./anatomy-foundation-p0.mjs";
+import {renderSkinnedAsana} from "./anatomy-skin-p0.mjs";
 /* Yoga Rive lab P0: opt-in, sandboxed-by-page Rive preview.
  * No runtime requested on page load, no telemetry, no network file upload.
  * Runtime pinned: @rive-app/canvas 2.44.2 (MIT).
@@ -99,15 +100,55 @@ if(typeof ResizeObserver!=="undefined"){
  window.addEventListener("pagehide",()=>{resize.disconnect();dispose();},{once:true});
 }else window.addEventListener("pagehide",dispose,{once:true});
 
-// Pure, user-controlled comparison; the actual Rive runtime remains opt-in.
+// Isolated, joint-driven vector preview; no dependency on Rive CDN.
 const foldSlider=document.getElementById("fold-progress");
 const foldStage=document.getElementById("ik-stage");
 const foldValue=document.getElementById("fold-value");
+const jointsToggle=document.getElementById("fold-joints");
+const animateButton=document.getElementById("fold-animate");
+let foldFrame=0,animationStart=0;
+const smooth=t=>t*t*(3-2*t);
 function renderFold(){
  const progress=Number(foldSlider.value)/100;
  foldValue.textContent=foldSlider.value+"%";
- foldStage.innerHTML=svgSkeleton(solveAsana("uttanasana",{progress}));
+ const pose=solveAsana("uttanasana",{progress});
+ foldStage.innerHTML=renderSkinnedAsana(pose,{showJoints:jointsToggle.checked});
  foldStage.setAttribute("aria-label",progress===0?"Tadasana":progress===1?"Uttanasana":"Transición anatómica: "+foldSlider.value+" por ciento");
 }
-foldSlider.addEventListener("input",renderFold);
+function stopFold(){
+ if(foldFrame)cancelAnimationFrame(foldFrame);
+ foldFrame=0;
+ animationStart=0;
+ animateButton.textContent="Animar transición";
+}
+function animateFold(now){
+ if(document.hidden||reduced.matches){stopFold();return;}
+ if(!animationStart)animationStart=now;
+ const duration=6800;
+ const phase=Math.min(1,(now-animationStart)/duration);
+ const twoWay=phase<.5?smooth(phase*2):smooth((1-phase)*2);
+ foldSlider.value=String(Math.round(twoWay*100));
+ renderFold();
+ if(phase>=1){stopFold();return;}
+ foldFrame=requestAnimationFrame(animateFold);
+}
+foldSlider.addEventListener("input",()=>{stopFold();renderFold();});
+jointsToggle.addEventListener("change",renderFold);
+animateButton.addEventListener("click",()=>{
+ if(foldFrame){stopFold();return;}
+ if(reduced.matches)return;
+ foldSlider.value="0";
+ renderFold();
+ animationStart=0;
+ animateButton.textContent="Detener animación";
+ foldFrame=requestAnimationFrame(animateFold);
+});
+const syncMotion=()=>{
+ animateButton.disabled=reduced.matches;
+ if(reduced.matches)stopFold();
+};
+reduced.addEventListener?.("change",syncMotion);
+document.addEventListener("visibilitychange",()=>{if(document.hidden)stopFold();});
+window.addEventListener("pagehide",stopFold,{once:true});
+syncMotion();
 renderFold();

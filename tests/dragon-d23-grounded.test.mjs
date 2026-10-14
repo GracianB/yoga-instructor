@@ -28,7 +28,7 @@ test("D23: Cat/Cow begins neutral, restarts without displaced spine and retains 
  assert.match(motion,/278\+curve\*5\.8/);
  assert.match(motion,/fmt\(-curve\*1\.3\)\+" 461 238/);
  assert.match(motion,/clock\.status==="paused"/);
- assert.ok(motion.length<7000);
+ assert.ok(motion.replace(/\r\n/g,"\n").length<7000);
 });
 test("D23: all 10 original postures preserve authored feet and closed eyes",()=>{
  const context={window:{}};

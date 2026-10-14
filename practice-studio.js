@@ -178,7 +178,7 @@
       const selected = button.dataset.studioMode === mode;
       button.setAttribute("aria-pressed", String(selected));
       button.classList.toggle("is-selected", selected);
-      button.disabled = locked && !selected;
+      button.disabled = false;
     });
   };
 
@@ -385,8 +385,10 @@
 
   const select = (next) => {
     if (!["asanas","breath","meditation"].includes(next) || next === mode) return;
-    if (asanaBusy || (mode !== "asanas" &&
-        ["running","paused"].includes(clock.snapshot().status))) return;
+    // A mode change ends the previous practice before preparing the next.
+    if(asanaBusy){root.querySelector('[data-flow-action="reset"]')?.click();asanaBusy=false;}
+    if(mode!=="asanas")clock.reset(configuredDuration());
+    window.speechSynthesis?.cancel();
     stopTick();
     mode = next;
     setImmersive(false);

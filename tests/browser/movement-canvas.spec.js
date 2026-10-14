@@ -9,6 +9,6 @@ test('Canvas presents every library posture with full-body framing',async({page}
   await expect(canvas).toHaveAttribute('data-skin','anatomical');
   expect(await canvas.evaluate(el=>el.width>0&&el.height>0)).toBe(true);
  }
- await page.locator('#studio-asana-library .canvas-view-controls button').click();
- await expect(page.locator('#studio-asana-library .canvas-view-controls button')).toHaveAttribute('aria-pressed','true');
+ await page.locator('#studio-asana-library .canvas-view-controls button:not(.canvas-silhouette-toggle)').click();
+ await expect(page.locator('#studio-asana-library .canvas-view-controls button:not(.canvas-silhouette-toggle)')).toHaveAttribute('aria-pressed','true');
 });

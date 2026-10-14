@@ -41,6 +41,24 @@ jobs:
           test -s rive-p0/build/nila-yoga-p0.riv
           file rive-p0/build/nila-yoga-p0.riv
 
+      - name: Inspect and render pose checkpoints
+        shell: bash
+        run: |
+          rive inspect rive-p0/build/nila-yoga-p0.riv --summary
+          mkdir -p rive-p0/build/frames
+          rive rive-p0 --screenshot=rive-p0/build/frames/01-tadasana.png --advance=1
+          rive rive-p0 --screenshot=rive-p0/build/frames/02-uttanasana.png --advance=60
+          rive rive-p0 --screenshot=rive-p0/build/frames/03-hold.png --advance=100
+          rive rive-p0 --screenshot=rive-p0/build/frames/04-return.png --advance=165
+
+      - name: Upload Rive pose screenshots
+        uses: actions/upload-artifact@v6
+        with:
+          name: nila-yoga-p0-screenshots
+          path: rive-p0/build/frames/*.png
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Store binary proof for review
         uses: actions/upload-artifact@v6
         with:

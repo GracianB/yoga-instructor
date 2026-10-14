@@ -34,3 +34,12 @@ test("P0 Rive lab has restrictive CSP with opt-in CDN",async()=>{
  assert.match(html,/connect-src 'self' blob: https:\/\/unpkg\.com/);
  assert.match(html,/form-action 'none'/);
 });
+
+test("P0: demo .riv loads only on explicit click, from same origin",async()=>{
+ const [html,client,build]=await Promise.all([get("rive-lab.html"),get("rive-lab.js"),get("tools/build.mjs")]);
+ assert.match(html,/id="rive-demo"/);
+ assert.match(client,/demoButton\.addEventListener\("click"/);
+ assert.match(client,/fetch\("\.\/rive-nila-demo-p0\.riv"/);
+ assert.match(client,/new File\(\[blob\],"nila-yoga-p0\.riv"/);
+ assert.match(build,/copyFile\('rive-nila-demo-p0\.riv'/);
+});

@@ -1,3 +1,4 @@
+import {solveAsana,svgSkeleton} from "./anatomy-foundation-p0.mjs";
 /* Yoga Rive lab P0: opt-in, sandboxed-by-page Rive preview.
  * No runtime requested on page load, no telemetry, no network file upload.
  * Runtime pinned: @rive-app/canvas 2.44.2 (MIT).
@@ -97,3 +98,16 @@ if(typeof ResizeObserver!=="undefined"){
  resize.observe(canvas.parentElement);
  window.addEventListener("pagehide",()=>{resize.disconnect();dispose();},{once:true});
 }else window.addEventListener("pagehide",dispose,{once:true});
+
+// Pure, user-controlled comparison; the actual Rive runtime remains opt-in.
+const foldSlider=document.getElementById("fold-progress");
+const foldStage=document.getElementById("ik-stage");
+const foldValue=document.getElementById("fold-value");
+function renderFold(){
+ const progress=Number(foldSlider.value)/100;
+ foldValue.textContent=foldSlider.value+"%";
+ foldStage.innerHTML=svgSkeleton(solveAsana("uttanasana",{progress}));
+ foldStage.setAttribute("aria-label",progress===0?"Tadasana":progress===1?"Uttanasana":"Transición anatómica: "+foldSlider.value+" por ciento");
+}
+foldSlider.addEventListener("input",renderFold);
+renderFold();

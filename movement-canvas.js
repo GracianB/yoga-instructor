@@ -21,7 +21,7 @@ if(active&&originalSvg){
  const frameWidth=right-left,frameHeight=bottom-top,fit=Math.min(720/frameWidth,450/frameHeight);
  const defs=originalSvg.querySelector('defs')?.outerHTML||'';
  const svg='<svg xmlns="http://www.w3.org/2000/svg" width="720" height="450" viewBox="'+left+' '+top+' '+frameWidth+' '+frameHeight+'">'+defs+new XMLSerializer().serializeToString(clone)+'</svg>';
- const picture=new Image(),requestKey=key,requestRevision=++revision;
+ canvas.dataset.skin='loading';const picture=new Image(),requestKey=key,requestRevision=++revision;
  picture.onload=()=>{if(key!==requestKey||revision!==requestRevision)return;ctx.setTransform(d,0,0,d,0,0);ctx.clearRect(0,0,w,h);ctx.translate((w-720*scale)/2,(h-450*scale)/2);ctx.scale(scale,scale);ctx.drawImage(picture,0,0,720,450);ctx.save();ctx.translate((720-frameWidth*fit)/2,(450-frameHeight*fit)/2);ctx.scale(fit,fit);ctx.translate(-left,-top);if(skeleton&&window.YOGA_NILA_KINEMATICS_V84){
  const model=window.YOGA_NILA_KINEMATICS_V84;
  const names=en()?['Shoulder','Elbow','Wrist','Hip','Knee','Ankle']:['Hombro','Codo','Muñeca','Cadera','Rodilla','Tobillo'];

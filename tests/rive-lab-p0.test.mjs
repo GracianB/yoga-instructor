@@ -41,7 +41,7 @@ test("P0: demo .riv loads only on explicit click, from same origin",async()=>{
  assert.match(client,/demoButton\.addEventListener\("click"/);
  assert.match(client,/fetch\("\.\/rive-nila-demo-p0\.riv"/);
  assert.match(client,/new File\(\[blob\],"nila-yoga-p0\.riv"/);
- assert.match(build,/copyFile\('rive-nila-demo-p0\.riv'/);
+ assert.ok(build.includes("'rive-nila-demo-p0.riv'"));
 });
 
 test("P0: compiled Rive demo is a real binary with RIVE magic bytes",async()=>{

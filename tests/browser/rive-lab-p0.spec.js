@@ -1,0 +1,20 @@
+const {test,expect}=require("@playwright/test");
+test("Rive P0 lab stays isolated, animates IK slider, and loads runtime only on demand",async({page})=>{
+ const cdn=[];
+ await page.route("https://unpkg.com/**",route=>{cdn.push(route.request().url());return route.abort();});
+ await page.goto("/rive-lab.html");
+ await expect(page.getByRole("heading",{name:/Del dibujo a un personaje/})).toBeVisible();
+ await expect(page.locator("#ik-stage svg")).toHaveCount(1);
+ expect(cdn).toHaveLength(0);
+ const slider=page.locator("#fold-progress");
+ await slider.evaluate(el=>{el.value="100";el.dispatchEvent(new Event("input",{bubbles:true}));});
+ await expect(page.locator("#fold-value")).toHaveText("100%");
+ await expect(page.locator("#ik-stage")).toHaveAttribute("aria-label","Uttanasana");
+ await page.locator("#rive-file").setInputFiles({name:"not-rive.txt",mimeType:"text/plain",buffer:Buffer.from("bad")});
+ await expect(page.locator("#rive-status")).toContainText("extensión .riv");
+ expect(cdn).toHaveLength(0);
+ await page.locator("#rive-file").setInputFiles({name:"sample.riv",mimeType:"application/octet-stream",buffer:Buffer.from([0,1,2,3])});
+ await expect(page.locator("#rive-status")).toContainText("Error de visor");
+ expect(cdn.length).toBeGreaterThan(0);
+ await expect(page.locator("#rive-play")).toBeDisabled();
+});

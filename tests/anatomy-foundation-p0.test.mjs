@@ -22,3 +22,9 @@ test("Interpolation preserves shared joint endpoints",()=>{
  }
 });
 test("Invalid pose is rejected",()=>assert.throws(()=>solveAsana("fake"),RangeError));
+
+test("Halfway fold remains above the hip and never rotates below it",()=>{
+ const j=solveAsana("uttanasana",{progress:0.5}).joints;
+ assert.ok(j.shoulder.y<j.hip.y,"torso must remain above hip at midpoint");
+ assert.ok(j.shoulder.x>j.hip.x,"torso must fold forward");
+});

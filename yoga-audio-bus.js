@@ -47,6 +47,7 @@
   };
   const activateVortex=()=>{
     if (!frameHost || vortexActive) return;
+    channel?.postMessage("claim");window.speechSynthesis?.cancel();
     audio.pause(); // One audible source at a time; remote iframe is isolated
     owner=null;
     iframe=document.createElement("iframe");

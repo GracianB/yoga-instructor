@@ -38,7 +38,7 @@ test("P4: build-only CSS optimization retains fonts, all deferred scripts and co
  assert.equal(result.html.replace('<link rel="stylesheet" href="./'+result.filename+'">',"")
    .replace(/\n\s*\n/g,"\n").includes("<body>"),true);
  assert.equal(result.html.match(/<link\b[^>]*rel="stylesheet"[^>]*>/g)?.length,2);
- assert.equal((result.html.match(/<script\b[^>]*\bsrc=/g)||[]).length,77);
+ assert.equal((result.html.match(/<script\b[^>]*\bsrc=/g)||[]).length,79);
  assert.ok(result.html.includes('id="studio-asana-library"')===source.includes('id="studio-asana-library"'));
 });
 

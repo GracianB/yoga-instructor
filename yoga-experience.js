@@ -1,0 +1,26 @@
+/* Clear chapters, one existing practice engine. */
+(()=>{"use strict";
+const main=document.getElementById("main"),hero=document.getElementById("inicio");if(!main||!hero)return;
+const copy={es:{examples:"Ver ejemplos de cómo planteo una clase",intro:"UN ESPACIO. TRES FORMAS DE ENTRAR.",teach:"Mi forma de enseñar",teachNote:"El enfoque, las clases y las opciones para trabajar conmigo.",learn:"Aprender asanas",learnNote:"Leer, explorar apoyos y conocer las posturas. A tu ritmo, sin sesión activa.",practice:"Entrar al estudio",practiceNote:"Movement, Breath y Meditation. Tres prácticas, cada una con su propio propósito.",more:"Trayectoria, formación y documentos",sequence:"Preparar mi secuencia · opcional",details:"Conocer mi trayectoria",study:"02 / APRENDER",studio:"03 / PRACTICAR",method:"01 / MI FORMA DE ENSEÑAR"},en:{examples:"Explore how I plan a class",intro:"ONE PLACE. THREE WAYS IN.",teach:"How I teach",teachNote:"My approach, classes and ways to work together.",learn:"Learn the asanas",learnNote:"Read, explore support and understand each pose. At your own pace, without starting a session.",practice:"Enter the studio",practiceNote:"Movement, Breath and Meditation. Three practices, each with its own purpose.",more:"Experience, training and documents",sequence:"Prepare my sequence · optional",details:"Explore my experience",study:"02 / LEARN",studio:"03 / PRACTISE",method:"01 / HOW I TEACH"}};
+const locale=()=>document.documentElement.lang==="en"?"en":"es";
+const doors=document.createElement("nav");doors.className="yoga-paths";doors.setAttribute("aria-label","Yoga");
+doors.innerHTML='<p data-chapter-copy="intro"></p><div>'+[["teaching","teach","teachNote","01"],["learning","learn","learnNote","02"],["practice","practice","practiceNote","03"]].map(([id,title,note,n])=>'<a href="#'+id+'"><span>'+n+'</span><strong data-chapter-copy="'+title+'"></strong><small data-chapter-copy="'+note+'"></small><b aria-hidden="true">↗</b></a>').join('')+'</div>';
+hero.after(doors);
+function chapter(id,key,title){const group=document.createElement("div");group.id=id;group.className="yoga-chapter";group.innerHTML='<div class="chapter-heading"><span data-chapter-copy="'+key+'"></span><h2 data-chapter-copy="'+title+'"></h2></div>';main.append(group);return group;}
+const teaching=chapter("teaching","method","teach"),learning=chapter("learning","study","learn"),practice=chapter("practice","studio","practice");
+const move=(id,host)=>{const el=document.getElementById(id);if(el)host.append(el)};
+move("portfolio",teaching);
+const cases=document.getElementById("casos");if(cases){const caseDrawer=document.createElement("details");caseDrawer.className="teaching-examples";caseDrawer.innerHTML='<summary data-chapter-copy="examples"></summary>';teaching.append(caseDrawer);caseDrawer.append(cases);}
+move("studio-asana-library",learning);
+for(const id of ["instructor-flow","soundtrack","campo"])move(id,practice);
+const credentials=document.createElement("details");credentials.className="yoga-credentials";credentials.innerHTML='<summary data-chapter-copy="more"></summary>';main.append(credentials);
+for(const id of ["sobre","oferta","camino","trayectoria","demostracion","experiencia","formacion","filosofia","cv"])move(id,credentials);
+for(const id of ["preguntas","contacto"])move(id,main);
+// Superseded introductions stay addressable for old links; the three doors replace them.
+for(const id of ["orientacion","atlas","ritual"]){const el=document.getElementById(id);if(el){el.hidden=true;el.classList.add("chapter-legacy");}}
+const builder=document.getElementById("p1-sequence");if(builder){const detail=document.createElement("details");detail.className="sequence-drawer";detail.innerHTML='<summary data-chapter-copy="sequence"></summary>';builder.before(detail);detail.append(builder);}
+const nav=document.getElementById("nav");if(nav){nav.innerHTML='<a href="#teaching" data-chapter-copy="teach"></a><a href="#learning" data-chapter-copy="learn"></a><a href="#practice" data-chapter-copy="practice"></a><a href="#contacto">Contacto</a>';}
+function paint(){const t=copy[locale()];for(const el of document.querySelectorAll("[data-chapter-copy]"))el.textContent=t[el.dataset.chapterCopy];if(nav)nav.lastElementChild.textContent=locale()==="en"?"Contact":"Contacto";}
+function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1));}catch(_){return;}if(!id)return;const el=document.getElementById(id);if(!el)return;if(el.classList.contains("chapter-legacy"))el.hidden=false;let p=el.parentElement;while(p){if(p.tagName==="DETAILS")p.open=true;p=p.parentElement;}}
+window.addEventListener("hashchange",revealHash);revealHash();paint();new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+})();

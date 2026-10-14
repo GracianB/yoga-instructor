@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="640" viewBox="0 0 480 640" role="img" aria-labelledby="title desc">
+<title id="title">Nila · plantilla de rig vectorial para Rive</title>
+<desc id="desc">Plantilla frontal con grupos separados de brazos, piernas, pelvis, tronco, cuello, cabeza, manos y pies. Importar en el editor Rive y asignar huesos.</desc>
+<defs>
+ <linearGradient id="body" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ceb9f8"/><stop offset="1" stop-color="#8d76cf"/></linearGradient>
+ <linearGradient id="limb" x1="0" y1="0" x2=".7" y2="1"><stop stop-color="#ccb8f1"/><stop offset="1" stop-color="#9c83d8"/></linearGradient>
+ <linearGradient id="hair" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#6b539c"/><stop offset="1" stop-color="#9c7ec6"/></linearGradient>
+</defs>
+<!-- IMPORTACIÓN: cada grupo define una pieza del rig, no un hueso animado. -->
+<g id="L_FOOT"><path d="M173 548Q164 550 146 560Q135 566 144 574Q164 580 194 572L208 556Z" fill="#8d75c8" stroke="#64528d" stroke-width="3"/></g>
+<g id="R_FOOT"><path d="M269 556L285 573Q314 582 335 574Q344 568 330 560Q310 549 299 548Z" fill="#8d75c8" stroke="#64528d" stroke-width="3"/></g>
+<g id="L_SHIN"><path d="M184 445Q181 492 182 549Q189 558 206 553L220 444Z" fill="url(#limb)" stroke="#7b65b1" stroke-width="3"/></g>
+<g id="R_SHIN"><path d="M260 444L273 553Q289 558 297 549Q297 490 294 445Z" fill="url(#limb)" stroke="#7b65b1" stroke-width="3"/></g>
+<g id="L_THIGH"><path d="M202 334Q184 371 184 448Q200 461 220 449L235 350Z" fill="url(#limb)" stroke="#7b65b1" stroke-width="3"/></g>
+<g id="R_THIGH"><path d="M244 350L260 449Q279 461 296 448Q296 376 277 334Z" fill="url(#limb)" stroke="#7b65b1" stroke-width="3"/></g>
+<g id="L_HAND"><path d="M115 410Q106 415 108 432Q111 450 121 451Q134 444 134 427L130 413Z" fill="#ceb9ee" stroke="#8668ae" stroke-width="3"/></g>
+<g id="R_HAND"><path d="M349 413L344 429Q344 448 357 451Q369 448 372 431Q376 419 362 409Z" fill="#ceb9ee" stroke="#8668ae" stroke-width="3"/></g>
+<g id="L_FOREARM"><path d="M129 336Q114 362 114 416Q122 425 133 416L154 347Z" fill="url(#limb)" stroke="#8066b4" stroke-width="3"/></g>
+<g id="R_FOREARM"><path d="M327 347L349 417Q361 425 369 416Q368 367 351 336Z" fill="url(#limb)" stroke="#8066b4" stroke-width="3"/></g>
+<g id="L_UPPER_ARM"><path d="M179 258Q152 266 132 339Q136 353 153 353L195 289Z" fill="url(#limb)" stroke="#8066b4" stroke-width="3"/></g>
+<g id="R_UPPER_ARM"><path d="M285 289L327 353Q344 353 350 339Q329 264 302 258Z" fill="url(#limb)" stroke="#8066b4" stroke-width="3"/></g>
+<g id="PELVIS"><path d="M195 333Q205 353 239 359Q275 353 285 333L274 316H207Z" fill="#9578cb" stroke="#755aab" stroke-width="3"/></g>
+<g id="TORSO"><path d="M189 259Q195 243 217 239H263Q289 242 293 259L281 330Q257 347 240 349Q216 346 199 330Z" fill="url(#body)" stroke="#8067b0" stroke-width="3"/><path d="M209 284Q240 298 271 284" fill="none" stroke="#e7dfff" stroke-width="5" opacity=".7"/></g>
+<g id="NECK"><path d="M225 243V222H255V243Q241 253 225 243Z" fill="#c4adee" stroke="#836aae" stroke-width="3"/></g>
+<g id="L_EAR"><path d="M184 176Q165 155 162 130Q180 128 198 155Z" fill="#a98cdd" stroke="#8061b6" stroke-width="4"/></g>
+<g id="R_EAR"><path d="M281 155Q296 128 316 130Q313 158 294 176Z" fill="#a98cdd" stroke="#8061b6" stroke-width="4"/></g>
+<g id="HEAD"><path d="M176 165Q176 106 239 106Q303 106 303 166Q303 225 240 229Q176 225 176 165Z" fill="#d5c1fb" stroke="#7b61af" stroke-width="4"/></g>
+<g id="HAIR"><path d="M177 170Q166 121 194 106Q213 90 241 100Q281 85 301 119Q312 141 301 170Q299 140 282 136Q273 153 255 151Q229 151 218 131Q207 151 177 170Z" fill="url(#hair)"/></g>
+<g id="FACE"><path d="M206 175Q216 185 225 175M253 175Q263 185 274 175" fill="none" stroke="#58466f" stroke-width="4" stroke-linecap="round"/><path d="M234 194Q240 201 247 194" stroke="#a3759c" stroke-width="3" fill="none" stroke-linecap="round"/><circle cx="197" cy="189" r="7" fill="#e7a5bc" opacity=".55"/><circle cx="283" cy="189" r="7" fill="#e7a5bc" opacity=".55"/></g>
+<g id="LOTUS_BADGE"><path d="M240 287Q225 274 240 261Q255 274 240 287ZM239 288Q221 284 218 273Q235 271 239 288ZM241 288Q259 284 262 273Q245 271 241 288Z" fill="#f7e7b2" opacity=".9"/></g>
+</svg>

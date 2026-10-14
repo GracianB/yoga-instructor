@@ -16,17 +16,20 @@ if(active&&originalSvg){
  const clone=active.cloneNode(true),originals=[active,...active.querySelectorAll('*')],copies=[clone,...clone.querySelectorAll('*')];
  originals.forEach((node,i)=>{const computed=getComputedStyle(node);for(const property of ['fill','stroke','stroke-width','stroke-linecap','stroke-linejoin','opacity','fill-rule'])copies[i].style.setProperty(property,computed.getPropertyValue(property));});
  if(silhouette)for(const node of copies){if(node.style.fill!=='none')node.style.fill=dark?'#edbfd2':'#234e40';if(node.style.stroke!=='none')node.style.stroke=dark?'#edbfd2':'#234e40';}
+ const points=[...p.hands,...p.feet,[p.head[0]-100*p.head[2],p.head[1]-100*p.head[2]],[p.head[0]+100*p.head[2],p.head[1]+100*p.head[2]],[p.body[0]-p.body[2]-p.body[3]*.15,p.body[1]-p.body[3]],[p.body[0]+p.body[2]+p.body[3]*.15,p.body[1]+p.body[3]],[p.tail[0]-45,p.tail[1]-110*p.tail[2]],[p.tail[0]+165*p.tail[2],p.tail[1]+80*p.tail[2]]];
+ const left=Math.min(...points.map(v=>v[0]))-32,top=Math.min(...points.map(v=>v[1]))-32,right=Math.max(...points.map(v=>v[0]))+32,bottom=Math.max(...points.map(v=>v[1]))+32;
+ const frameWidth=right-left,frameHeight=bottom-top,fit=Math.min(720/frameWidth,450/frameHeight);
  const defs=originalSvg.querySelector('defs')?.outerHTML||'';
- const svg='<svg xmlns="http://www.w3.org/2000/svg" width="720" height="450" viewBox="0 0 720 450">'+defs+new XMLSerializer().serializeToString(clone)+'</svg>';
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" width="720" height="450" viewBox="'+left+' '+top+' '+frameWidth+' '+frameHeight+'">'+defs+new XMLSerializer().serializeToString(clone)+'</svg>';
  const picture=new Image(),requestKey=key,requestRevision=++revision;
- picture.onload=()=>{if(key!==requestKey||revision!==requestRevision)return;ctx.setTransform(d,0,0,d,0,0);ctx.clearRect(0,0,w,h);ctx.translate((w-720*scale)/2,(h-450*scale)/2);ctx.scale(scale,scale);ctx.drawImage(picture,0,0,720,450);if(skeleton&&window.YOGA_NILA_KINEMATICS_V84){
+ picture.onload=()=>{if(key!==requestKey||revision!==requestRevision)return;ctx.setTransform(d,0,0,d,0,0);ctx.clearRect(0,0,w,h);ctx.translate((w-720*scale)/2,(h-450*scale)/2);ctx.scale(scale,scale);ctx.drawImage(picture,0,0,720,450);ctx.save();ctx.translate((720-frameWidth*fit)/2,(450-frameHeight*fit)/2);ctx.scale(fit,fit);ctx.translate(-left,-top);if(skeleton&&window.YOGA_NILA_KINEMATICS_V84){
  const model=window.YOGA_NILA_KINEMATICS_V84;
  const names=en()?['Shoulder','Elbow','Wrist','Hip','Knee','Ankle']:['Hombro','Codo','Muñeca','Cadera','Rodilla','Tobillo'];
  const chains=[...p.arms,...p.legs].map(path=>model.curve(path));
  ctx.strokeStyle=dark?'#fff4fa':'#123b2d';ctx.lineWidth=3;
  chains.forEach((chain,index)=>{const points=[chain.start,chain.joint,chain.end];ctx.beginPath();ctx.moveTo(...points[0]);ctx.lineTo(...points[1]);ctx.lineTo(...points[2]);ctx.stroke();points.forEach(([x,y],joint)=>{ellipse(x,y,7,7,dark?'#edbfd2':'#234e40');ellipse(x,y,3,3,dark?'#123b2d':'#fff7fa');if(index===0||index===2){ctx.font='bold 12px system-ui';ctx.fillStyle=dark?'#fff4fa':'#123b2d';ctx.fillText(names[(index===0?0:3)+joint],x+12,y-9);}});});
 }
-canvas.hidden=false;host.classList.add('canvas-character-ready');canvas.dataset.skin='anatomical';};
+ctx.restore();canvas.dataset.framing='full-body';canvas.hidden=false;host.classList.add('canvas-character-ready');canvas.dataset.skin='anatomical';};
  picture.onerror=()=>{if(revision!==requestRevision)return;host.classList.remove('canvas-character-ready');canvas.hidden=true;};
  picture.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
 }

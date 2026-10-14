@@ -77,7 +77,7 @@
   function applyTheme() {
     document.documentElement.setAttribute("data-theme", theme);
     const meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.setAttribute("content", theme === "dark" ? "#06070a" : "#f4efe4");
+    if (meta) meta.setAttribute("content", theme === "dark" ? "#0b211b" : "#faf3f3");
     document.querySelectorAll("[data-set-theme]").forEach((btn) => {
       const active = btn.getAttribute("data-set-theme") === theme;
       btn.classList.toggle("is-active", active);
@@ -103,6 +103,7 @@
     theme = next === "dark" ? "dark" : "light";
     if (persist) {
       try { localStorage.setItem(THEME_KEY, theme); } catch (_) {}
+      try {const url=new URL(location.href);url.searchParams.set("theme",theme);history.replaceState(null,"",url);}catch(_){}
     }
     applyTheme();
   }

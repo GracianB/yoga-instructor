@@ -1,0 +1,2 @@
+const {test,expect}=require('@playwright/test');
+test('theme choices update shareable URL and survive reload at the same chapter',async({page})=>{await page.goto('/?lang=en&theme=light#instructor-flow');await page.locator('[data-set-theme="dark"]').click();await expect(page).toHaveURL(/theme=dark/);expect(new URL(page.url()).hash).toBe('#instructor-flow');await page.reload();await expect(page.locator('html')).toHaveAttribute('data-theme','dark');await expect(page.locator('html')).toHaveAttribute('lang','en');});

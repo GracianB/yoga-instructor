@@ -32,9 +32,9 @@
     const active=!bus.audio.paused;
     ui.querySelector(".studio-sound-kicker").textContent=en()?"ONE SOUNDTRACK":"UNA SOLA BANDA SONORA";
     ui.querySelector(".studio-sound-title").textContent=en()?"Breathe with music":"Respira con música";
-    ui.querySelector(".studio-sound-track").textContent=bus.localName||"Silence Between Notes · 3:56";
+    ui.querySelector(".studio-sound-track").textContent=bus.trackName;
     toggle.textContent=active?(en()?"Pause music":"Pausar música"):(en()?"Play music":"Escuchar música");
-    toggle.setAttribute("aria-pressed",String(active&&bus.owner==="breath"));
+    toggle.setAttribute("aria-pressed",String(active));
     volume.setAttribute("aria-label",en()?"Music volume":"Volumen de la música");
     ui.querySelector(".studio-sound-volume-label").textContent=en()?"Volume":"Volumen";
     if(document.activeElement!==volume)volume.value=String(bus.audio.volume);

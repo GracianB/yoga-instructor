@@ -80,7 +80,7 @@ function paint(){
  panel.querySelector(".v90-description").textContent=t.description;
  panel.querySelector(".v90-voice-title").textContent=t.voiceTitle;
  panel.querySelector(".v90-voice-note").textContent=voiceAvailable?t.voiceNote:t.unsupported;
- const active=!bus.audio.paused&&bus.owner==="meditation";
+ const active=!bus.audio.paused;
  const buttons={};
  for(const b of panel.querySelectorAll("[data-v90-action]"))buttons[b.dataset.v90Action]=b;
  buttons.silence.textContent=t.silence;
@@ -96,7 +96,7 @@ function paint(){
  if(lastMessage)status.textContent=lastMessage;
 }
 async function toggleMusic(){
- if(!bus.audio.paused&&bus.owner==="meditation"){bus.stop();sayStatus(copy[locale()].stop)}
+ if(!bus.audio.paused){bus.stop();sayStatus(copy[locale()].stop)}
  else{
   if(voiceEnabled){voiceEnabled=false;cancelVoice();spokenKey=null}
   const ok=await bus.play("meditation");
@@ -125,7 +125,7 @@ file.addEventListener("change",()=>{
  if(bus.selectFile(file.files?.[0]))sayStatus(copy[locale()].fileSelected);
  paint();
 });
-window.addEventListener("yoga:audiochange",paint);
+window.addEventListener("yoga:audiochange",()=>{if(!bus.audio.paused&&voiceEnabled){voiceEnabled=false;spokenKey=null;cancelVoice()}paint()});
 const observe=new MutationObserver(changes=>{
  if(changes.some(c=>c.attributeName==="data-studio-mode"||c.attributeName==="lang"))paint();
  if(root.dataset.studioMode!=="meditation"){

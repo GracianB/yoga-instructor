@@ -9,7 +9,7 @@ const mix=(a,b,t)=>a+(b-a)*t;
 const mixPoint=(a,b,t)=>point(mix(a.x,b.x,t),mix(a.y,b.y,t));
 const targets={
  tadasana:{hip:point(200,255),trunk:-Math.PI,neck:-Math.PI,arm:0.05,knee:0.015},
- uttanasana:{hip:point(200,255),trunk:-Math.PI/2,neck:-Math.PI/2+0.18,arm:Math.PI/2,knee:0.12}
+ uttanasana:{hip:point(200,255),trunk:-Math.PI/2,neck:-Math.PI/2+0.18,arm:0,knee:0.12}
 };
 /** A forward fold rotates around the hip, not around the neck.
  * Knee flexion and foot position are explicitly modelled.

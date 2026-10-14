@@ -16,3 +16,5 @@ test('normal motion actually redraws the lotus',async({page})=>{
  await page.emulateMedia({reducedMotion:'no-preference'});await page.goto('/');const canvas=page.locator('.living-lotus-hero');await expect(canvas).toHaveAttribute('data-motion','animated');
  const initial=await canvas.evaluate(el=>el.toDataURL());await expect.poll(()=>canvas.evaluate(el=>el.toDataURL())).not.toBe(initial);
 });
+
+test('visual quiet freezes the rendered lotus even with normal motion preference',async({page})=>{await page.goto('/');await page.locator('body').press('q');const canvas=page.locator('.living-lotus-hero');await expect(canvas).toHaveAttribute('data-motion','static');const image=await canvas.evaluate(el=>el.toDataURL());await page.waitForTimeout(300);expect(await canvas.evaluate(el=>el.toDataURL())).toBe(image);});

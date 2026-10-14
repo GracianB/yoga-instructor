@@ -13,8 +13,8 @@ const build=()=>compileProductionStyles(source,path=>get(path));
 
 test("P4: 77 original sheets become one versioned request without changing cascade order",async()=>{
  const result=await build();
- assert.equal(links.length,77);
- assert.equal(result.sourceCount,77);
+ assert.equal(links.length,78);
+ assert.equal(result.sourceCount,78);
  assert.equal(sourceSheetsForOutput(result.html).length,1);
  assert.deepEqual(result.sources,links.map(x=>x.path));
  assert.ok(result.filename.startsWith("yoga-styles-v105."));

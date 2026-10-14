@@ -11,16 +11,16 @@ const source=await get("index.html");
 const links=sourceSheets(source);
 const build=()=>compileProductionStyles(source,path=>get(path));
 
-test("P4: 77 original sheets become one versioned request without changing cascade order",async()=>{
+test("P4: 78 original sheets (77 + V105 polish) become one versioned request without changing cascade order",async()=>{
  const result=await build();
- assert.equal(links.length,77);
- assert.equal(result.sourceCount,77);
+ assert.equal(links.length,78);
+ assert.equal(result.sourceCount,78);
  assert.equal(sourceSheetsForOutput(result.html).length,1);
  assert.deepEqual(result.sources,links.map(x=>x.path));
  assert.ok(result.filename.startsWith("yoga-styles-v105."));
  assert.equal(createHash("sha256").update(result.css).digest("hex"),result.digest);
  assert.ok(result.filename.includes(result.digest.slice(0,16)));
- // Byte-for-byte reproduction of all 77 CSS modules in source order.
+ // Byte-for-byte reproduction of all 78 CSS modules in source order.
  const exact=(await Promise.all(links.map(async ({path})=>
    "/* P4 original: "+path+" */\n"+await get(path)+"\n"))).join("\n");
  assert.equal(result.css,exact);
@@ -38,7 +38,7 @@ test("P4: build-only CSS optimization retains fonts, all deferred scripts and co
  assert.equal(result.html.replace('<link rel="stylesheet" href="./'+result.filename+'">',"")
    .replace(/\n\s*\n/g,"\n").includes("<body>"),true);
  assert.equal(result.html.match(/<link\b[^>]*rel="stylesheet"[^>]*>/g)?.length,2);
- assert.equal((result.html.match(/<script\b[^>]*\bsrc=/g)||[]).length,76);
+ assert.equal((result.html.match(/<script\b[^>]*\bsrc=/g)||[]).length,77);
  assert.ok(result.html.includes('id="studio-asana-library"')===source.includes('id="studio-asana-library"'));
 });
 

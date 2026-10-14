@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   compile-rive:
@@ -50,6 +50,8 @@ jobs:
           rive rive-p0 --screenshot=rive-p0/build/frames/02-uttanasana.png --advance=60
           rive rive-p0 --screenshot=rive-p0/build/frames/03-hold.png --advance=100
           rive rive-p0 --screenshot=rive-p0/build/frames/04-return.png --advance=165
+          ! cmp -s rive-p0/build/frames/01-tadasana.png rive-p0/build/frames/02-uttanasana.png
+          cmp -s rive-p0/build/frames/01-tadasana.png rive-p0/build/frames/04-return.png
 
       - name: Upload Rive pose screenshots
         uses: actions/upload-artifact@v6
@@ -58,6 +60,32 @@ jobs:
           path: rive-p0/build/frames/*.png
           if-no-files-found: error
           retention-days: 7
+
+      - name: Commit compiled demo to experimental branch only
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && github.head_ref == 'yoga-p0-anatomy-foundation'
+        shell: bash
+        env:
+          TARGET_BRANCH: ${{ github.head_ref }}
+          EXPECTED_HEAD: ${{ github.event.pull_request.head.sha }}
+        run: |
+          cp rive-p0/build/nila-yoga-p0.riv /tmp/nila-yoga-p0.riv
+          git fetch origin "$TARGET_BRANCH"
+          ACTUAL_HEAD="$(git rev-parse FETCH_HEAD)"
+          if [ "$ACTUAL_HEAD" != "$EXPECTED_HEAD" ]; then
+            echo "Branch moved while building; skipping stale binary commit."
+            exit 0
+          fi
+          git checkout -B "$TARGET_BRANCH" "origin/$TARGET_BRANCH"
+          cp /tmp/nila-yoga-p0.riv rive-nila-demo-p0.riv
+          git add rive-nila-demo-p0.riv
+          if git diff --cached --quiet; then
+            echo "Binary unchanged."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git commit -m "Rive P0: version generated proof of concept"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
 
       - name: Store binary proof for review
         uses: actions/upload-artifact@v6

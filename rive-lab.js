@@ -78,6 +78,23 @@ async function openFile(file){
  }
 }
 input.addEventListener("change",()=>{void openFile(input.files?.[0]);});
+const demoButton=document.getElementById("rive-demo");
+demoButton.addEventListener("click",async()=>{
+ demoButton.disabled=true;
+ notify("Descargando la demo local desde el mismo sitio…");
+ try{
+  const response=await fetch("./rive-nila-demo-p0.riv",{cache:"no-cache"});
+  if(!response.ok)throw new Error("La animación todavía no está compilada para esta versión. Consulta el artefacto de GitHub Actions.");
+  const blob=await response.blob();
+  const file=new File([blob],"nila-yoga-p0.riv",{type:"application/octet-stream"});
+  await openFile(file);
+ }catch(error){
+  notify("Demo no disponible: "+error.message);
+ }finally{
+  demoButton.disabled=false;
+ }
+});
+
 playButton.addEventListener("click",()=>{
  if(!player)return;
  requestedPlay=!requestedPlay;

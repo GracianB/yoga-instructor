@@ -109,7 +109,7 @@
   <script src="./boot.js?v=yoga-5"></script>
 
   <script src="./i18n.js?v=quiet-geometry-5-yoga-5-guide-1"></script>
-  <script src="./yoga-audio-bus.js?v=v36-1" defer></script>
+  <script src="./yoga-audio-bus.js?v=playlist-1" defer></script>
   <script src="./main.js?v=quiet-geometry-5-yoga-5-lotus-14" defer></script>
   <script src="./flow-engine.js?v=flow-1-yoga-5" defer></script>
   <script src="./flow-session.js?v=session-1-yoga-5" defer></script>
@@ -133,7 +133,7 @@
   <script src="./breath-atmospheres-v88.js?v=v88-1" defer></script>
   <script src="./uma-focus-ritual-ui-v89.js?v=v89-1" defer></script>
   <script src="./practice-ritual-ui-v104.js?v=v104-1" defer></script>
-  <script src="./uma-audio-v90.js?v=v90-1" defer></script>
+  <script src="./uma-audio-v90.js?v=playlist-1" defer></script>
   <script src="./yin-yang-art.js?v=phase-d17-1-d24-1" defer></script>
   <script src="./flow-guide.js?v=d16-1-v54-1" defer></script>
   <script src="./nila-kinematics-v84.js?v=v84-1" defer></script>
@@ -142,7 +142,7 @@
   <script src="./studio-companion.js?v=d30-1" defer></script>
   <script src="./studio-breath-dragon.js?v=v54-1" defer></script>
   <script src="./studio-meditation-guardian-v42.js?v=v54-1" defer></script>
-  <script src="./studio-soundscape.js?v=v36-1" defer></script>
+  <script src="./studio-soundscape.js?v=playlist-1" defer></script>
   <script src="./studio-plan-ui.js?v=d20-1" defer></script>
   <script src="./studio-immersion.js?v=d21-1" defer></script>
   <script src="./studio-finale.js?v=d22-1" defer></script>
@@ -161,7 +161,7 @@
   <script src="./movement-camera-v57.js?v=v57-1" defer></script>
   <script src="./practice-mode-context-v57.js?v=v57-1" defer></script>
   <script src="./session-design-ui.js?v=d25-1" defer></script>
-  <script src="./sanctuary-experience.js?v=v36-1" defer></script>
+  <script src="./sanctuary-experience.js?v=playlist-1" defer></script>
   <script src="./studio-unified-v66.js?v=v66-1" defer></script>
   <script src="./studio-guardian-identities-v67.js?v=v67-1" defer></script>
   <script src="./guardian-identities-v92.js?v=v92-1" defer></script>
@@ -200,6 +200,7 @@
     ]
   }
   </script>
+<script src="./music-playlist.js" defer></script>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><i></i></div>
@@ -816,7 +817,7 @@
             <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
           </button>
           <div class="player-meta">
-            <strong data-i18n="fieldTrack">SUSTAINED FOCUS</strong>
+            <strong id="playlist-title">Silence Between Notes</strong>
             <small data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM.</small>
           </div>
           <div class="player-timeline">
@@ -828,7 +829,7 @@
             <button type="button" class="player-mute" id="audio-mute" data-i18n="fieldMute">Mute</button>
             <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" data-i18n-aria-label="volumeLabel" aria-label="Volume">
           </div>
-          <span class="player-origin">SILENCE BETWEEN NOTES · 3:56</span>
+          <span class="player-origin" id="playlist-origin">Silence Between Notes</span>
           <audio id="focus-audio" src="./audio/silence-between-notes.mp3" preload="metadata" loop></audio>
         </div>
     </section>

@@ -108,7 +108,7 @@
     if (!musicButton) return;
     const active=Boolean(soundBus && !soundBus.audio.paused);
     musicButton.textContent=active?t().musicOff:t().musicOn;
-    musicButton.setAttribute("aria-pressed",String(active && soundBus.owner==="dock"));
+    musicButton.setAttribute("aria-pressed",String(active));
     musicButton.setAttribute("aria-label",active?t().musicOff:t().musicOn);
   };
   musicButton?.addEventListener("click",()=>{if(soundBus)void soundBus.toggle("dock");});

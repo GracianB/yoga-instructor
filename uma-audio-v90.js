@@ -80,7 +80,7 @@ function paint(){
  panel.querySelector(".v90-description").textContent=t.description;
  panel.querySelector(".v90-voice-title").textContent=t.voiceTitle;
  panel.querySelector(".v90-voice-note").textContent=voiceAvailable?t.voiceNote:t.unsupported;
- const active=!bus.audio.paused&&bus.owner==="meditation";
+ const active=!bus.audio.paused;
  const buttons={};
  for(const b of panel.querySelectorAll("[data-v90-action]"))buttons[b.dataset.v90Action]=b;
  buttons.silence.textContent=t.silence;
@@ -96,7 +96,7 @@ function paint(){
  if(lastMessage)status.textContent=lastMessage;
 }
 async function toggleMusic(){
- if(!bus.audio.paused&&bus.owner==="meditation"){bus.stop();sayStatus(copy[locale()].stop)}
+ if(!bus.audio.paused){bus.stop();sayStatus(copy[locale()].stop)}
  else{
   if(voiceEnabled){voiceEnabled=false;cancelVoice();spokenKey=null}
   const ok=await bus.play("meditation");

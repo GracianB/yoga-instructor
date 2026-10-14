@@ -12,13 +12,20 @@
   if (!audio) return;
   const originalSrc = "./audio/silence-between-notes.mp3";
   audio.setAttribute("src", originalSrc);
+  const tracks = [
+    {name:"Silence Between Notes",src:"./audio/silence-between-notes.mp3"},
+    {name:"Sustained Focus",src:"./audio/sustained-focus.mp3"}
+  ];
+  let trackIndex=0;
+  const channel=typeof BroadcastChannel==="function"?new BroadcastChannel("gracian-music"):null;
+  channel?.addEventListener("message",()=>{audio.pause();window.speechSynthesis?.cancel();deactivateVortex();});
   let owner = null;
   let localUrl = null;
   let localName = "";
   let vortexActive = false;
   const language = () => document.documentElement.lang === "en" ? "en" : "es";
   const send = () => window.dispatchEvent(new CustomEvent("yoga:audiochange", {
-    detail:{playing:!audio.paused, owner, name: localName || "Silence Between Notes", volume:audio.volume}
+    detail:{playing:!audio.paused, owner, name: localName || tracks[trackIndex].name, volume:audio.volume}
   }));
   function updateVortex() {
     if (vortexStart) {
@@ -56,10 +63,10 @@
   const play = async (source) => {
     deactivateVortex();
     owner=source;
-    try {await audio.play();send();return true;}catch(_){send();return false;}
+    try {window.speechSynthesis?.cancel();channel?.postMessage("claim");await audio.play();send();return true;}catch(_){send();return false;}
   };
   const toggle = async (source) => {
-    if(!audio.paused && owner===source){stop();return false;}
+    if(!audio.paused){stop();return false;}
     return play(source);
   };
   const selectFile = (file) => {
@@ -76,7 +83,7 @@
   };
   const resetTrack=()=>{
     stop(); if(localUrl)URL.revokeObjectURL(localUrl);
-    localUrl=null;localName="";audio.src=originalSrc;audio.load();owner=null;send();
+    localUrl=null;localName="";trackIndex=0;audio.src=originalSrc;audio.load();owner=null;send();
   };
   // One native player covers every public control. Refuse any surprise
   // playback by other media elements within this document.
@@ -95,14 +102,24 @@
   },true);
   audio.addEventListener("pause",send);
   audio.addEventListener("volumechange",send);
-  audio.addEventListener("ended",send);
+  audio.loop=false;
+  const selectTrack=async(index,resume=!audio.paused)=>{
+    if(!Number.isInteger(index)||!tracks[index])return false;
+    stop();if(localUrl)URL.revokeObjectURL(localUrl);
+    localUrl=null;localName="";trackIndex=index;
+    audio.src=tracks[index].src;audio.load();send();
+    return resume?play(owner||"playlist"):true;
+  };
+  audio.addEventListener("ended",()=>{void selectTrack((trackIndex+1)%tracks.length,true);});
+  audio.addEventListener("play",()=>{channel?.postMessage("claim");window.speechSynthesis?.cancel();});
   vortexStart?.addEventListener("click",activateVortex);
   vortexStop?.addEventListener("click",deactivateVortex);
   document.addEventListener("visibilitychange",()=>{if(document.hidden&&vortexActive)deactivateVortex();});
   const languageObserver=new MutationObserver(updateVortex);
   languageObserver.observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
-  window.addEventListener("pagehide",()=>{languageObserver.disconnect();audio.pause();deactivateVortex();if(localUrl)URL.revokeObjectURL(localUrl);});
-  window.YOGA_AUDIO_BUS=Object.freeze({audio,toggle,play,stop,selectFile,resetTrack,
+  window.addEventListener("pagehide",()=>{channel?.close();languageObserver.disconnect();audio.pause();deactivateVortex();if(localUrl)URL.revokeObjectURL(localUrl);});
+  window.YOGA_AUDIO_BUS=Object.freeze({audio,toggle,play,stop,selectFile,resetTrack,selectTrack,tracks,
+    get trackIndex(){return trackIndex;},get trackName(){return localName||tracks[trackIndex].name;},
     deactivateVortex,activateVortex,get owner(){return owner;},
     get localName(){return localName;},get vortexActive(){return vortexActive;}});
   // A native track needs an explicit click; no autoplay, including restore.

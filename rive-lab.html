@@ -23,6 +23,11 @@
 <div class="controls"><label class="action upload" for="rive-file">Cargar archivo .riv</label><input id="rive-file" type="file" accept=".riv,application/octet-stream"><button id="rive-play" class="ghost" type="button" disabled>Reproducir</button><button id="rive-clear" class="ghost" type="button" disabled>Limpiar</button></div>
 <p class="status" id="rive-status" role="status" aria-live="polite">Sin archivo cargado.</p></section>
 </div>
+<section class="kinematics" aria-labelledby="ik-title">
+<div><p class="eyebrow">03 / CINEMÁTICA</p><h2 id="ik-title">Tadasana → Uttanasana</h2><p>Prototipo matemático de articulaciones: dos piernas, longitudes constantes y pies fijos. Es una vista esquelética lateral, no el arte definitivo.</p>
+<label for="fold-progress">Flexión desde las caderas · <output id="fold-value" for="fold-progress">0%</output></label><input id="fold-progress" type="range" min="0" max="100" value="0" step="1"></div>
+<div id="ik-stage" class="ik-stage" aria-live="off"></div>
+</section>
 <section class="next-steps"><h2>Cómo convertirlo en un rig real</h2><ol><li>Abre Rive Editor (plan Free) e importa el SVG descargado. Comprueba qué grupos conserva; separa manualmente los que haya fusionado.</li><li>Crea la jerarquía pelvis → tronco → cuello → cabeza; pelvis → muslo → tibia → pie para cada pierna; tronco → brazo → antebrazo → mano para cada lado.</li><li>Vincula las superficies a huesos, distribuye los pesos de malla y fija objetivos IK para manos y pies. Mantén los pies sobre el suelo en Tadasana.</li><li>Anima una transición de Tadasana a Uttanasana con flexión desde la cadera y flexión adaptable de rodillas. Verifica cada fotograma.</li><li>Exporta un .riv con el plan Free y pruébalo en el visor. La exportación gratuita puede incluir una breve pantalla inicial de Rive.</li></ol><p>La aplicación pública y su motor SVG no se modifican desde este laboratorio. El runtime Rive solo se descarga cuando cargas un archivo.</p></section>
 </main>
 <footer>Yoga Instructor · prototipo de compatibilidad Rive · sin suscripción requerida</footer>

@@ -16,7 +16,8 @@ const phase=dock.querySelector('#breath-phase'),time=dock.querySelector('.breath
 if(phase)phase.textContent=label|| (en()?'Ready to breathe':'Listo para respirar');
 if(time)time.textContent=guided.querySelector('.studio-guided-countdown')?.textContent||'';
 breathControl.setAttribute('aria-pressed',String(guided.dataset.studioStatus==='running'));
-dock.dataset.sessionPhase=guided.dataset.breathPhase||'rest';}
+dock.dataset.sessionPhase=guided.dataset.breathPhase||'rest';
+const ring=dock.querySelector('.breath-ring-fill');if(ring)ring.style.transform='scale('+(guided.style.getPropertyValue('--studio-breath-scale')||'1')+')';}
 new MutationObserver(syncSession).observe(guided,{attributes:true,childList:true,subtree:true});
 open.addEventListener('click',()=>{enabled=true;small=false;paint();if(!['running','paused'].includes(guided.dataset.studioStatus))transport?.click();syncSession();});
 toolbar.addEventListener('click',event=>{const action=event.target.closest('[data-companion]')?.dataset.companion;if(action==='minimize'){small=!small;paint()}if(action==='close'){enabled=false;small=false;const control=dock.querySelector('.sanctuary-breath');if(root.dataset.studioMode==='breath'&&guided.dataset.studioStatus==='running')transport?.click();paint();open.focus();}});

@@ -10,8 +10,8 @@ const mixPoint=(a,b,t)=>pt(mix(a.x,b.x,t),mix(a.y,b.y,t));
 const angleMix=(a,b,t)=>a+Math.atan2(Math.sin(b-a),Math.cos(b-a))*t;
 const EARTH=460;
 const ASANAS=Object.freeze({
- tadasana:{hip:pt(200,241),spine:Math.PI,arm:0.03},
- uttanasana:{hip:pt(184,245),spine:0.22,arm:0.03}
+ tadasana:{hip:pt(200,241),lumbar:Math.PI,thorax:Math.PI,arm:0.03},
+ uttanasana:{hip:pt(184,245),lumbar:1.1,thorax:0.1,arm:0.03}
 });
 /* Two-segment planar IK with fixed bone lengths and fixed ankle target.
  * Bend toward the front (+x) on this side-view coordinate system.
@@ -35,13 +35,16 @@ export function solveAsana(id,{progress=1,kneeBend=0}={}){
  const from=ASANAS.tadasana;
  const hip=mixPoint(from.hip,target.hip,t);
  hip.y+=28*bend; // Lower the centre of mass; knees flex without changing bone lengths.
- const spine=angleMix(from.spine,target.spine,t);
- const shoulder=move(hip,108,spine);
- const neck=move(shoulder,19,spine);
- const head=move(neck,21,spine);
+ // A real forward fold needs pelvic rotation plus a continuous lumbar/toracic chain.
+ const lumbarAngle=angleMix(from.lumbar,target.lumbar,t);
+ const thoraxAngle=angleMix(from.thorax,target.thorax,t);
+ const lumbar=move(hip,45,lumbarAngle);
+ const shoulder=move(lumbar,63,thoraxAngle);
+ const neck=move(shoulder,19,thoraxAngle);
+ const head=move(neck,21,thoraxAngle);
  const armAngle=angleMix(from.arm,target.arm,t);
- const joints={hip,shoulder,neck,head};
- const segments=[["hip","shoulder"],["shoulder","neck"],["neck","head"]];
+ const joints={hip,lumbar,shoulder,neck,head};
+ const segments=[["hip","lumbar"],["lumbar","shoulder"],["shoulder","neck"],["neck","head"]];
  for(const [side,shift] of [["left",-9],["right",9]]){
   const name=side[0].toUpperCase()+side.slice(1);
   const sideHip=pt(hip.x+shift,hip.y);
@@ -68,7 +71,7 @@ export function solveAsana(id,{progress=1,kneeBend=0}={}){
  Object.assign(joints,{elbow:joints.rightElbow,wrist:joints.rightWrist,
   knee:joints.rightKnee,ankle:joints.rightAnkle,toe:joints.rightToe});
  for(const [name,v] of Object.entries(joints))if(!Number.isFinite(v.x)||!Number.isFinite(v.y))throw new Error("Invalid joint "+name);
- return {id,progress:t,joints,segments,floor:EARTH,anatomicalStatus:"side-view prototype"};
+ return {id,progress:t,joints,segments,floor:EARTH,headAngle:thoraxAngle,anatomicalStatus:"side-view prototype"};
 }
 export function svgSkeleton(pose){
  const {joints,segments}=pose;

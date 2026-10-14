@@ -11,4 +11,7 @@ test('breathing companion is opt-in, minimizable and closable',async({page})=>{
  await page.locator('.breath-extension-open').click();
  await page.locator('.studio-modes [data-studio-mode="meditation"]').click();
  await expect(page.locator('.sanctuary-dock')).toBeHidden();
+ await expect(page.locator('#instructor-flow')).toHaveAttribute('data-studio-mode','meditation');
+ await page.locator('.studio-modes [data-studio-mode="asanas"]').click();
+ await expect(page.locator('#instructor-flow')).toHaveAttribute('data-studio-mode','asanas');
 });

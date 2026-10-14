@@ -6,6 +6,7 @@ test('Canvas presents every library posture with full-body framing',async({page}
  for(const button of await buttons.all()){
   await button.click();const id=await button.getAttribute('data-library-pose');
   await expect(canvas).toHaveAttribute('data-pose',id);
+  await expect(canvas).toHaveAttribute('data-skin','anatomical');
   expect(await canvas.evaluate(el=>el.width>0&&el.height>0)).toBe(true);
  }
  await page.locator('#studio-asana-library .canvas-view-controls button').click();

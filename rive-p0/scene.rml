@@ -48,24 +48,24 @@
       <KeyedObject objectId="0:10"><KeyedProperty propertyKey="15">
         <KeyFrameDouble frame="0" value="0" interpolationType="linear"/>
         <KeyFrameDouble frame="32" value="0.95" interpolationType="linear"/>
-        <KeyFrameDouble frame="60" value="2.92" interpolationType="linear"/>
-        <KeyFrameDouble frame="102" value="2.92" interpolationType="linear"/>
+        <KeyFrameDouble frame="60" value="2.5" interpolationType="linear"/>
+        <KeyFrameDouble frame="102" value="2.5" interpolationType="linear"/>
         <KeyFrameDouble frame="160" value="0" interpolationType="linear"/>
         <KeyFrameDouble frame="180" value="0" interpolationType="linear"/>
       </KeyedProperty></KeyedObject>
       <KeyedObject objectId="0:11"><KeyedProperty propertyKey="15">
         <KeyFrameDouble frame="0" value="0" interpolationType="linear"/>
         <KeyFrameDouble frame="32" value="-0.95" interpolationType="linear"/>
-        <KeyFrameDouble frame="60" value="-2.92" interpolationType="linear"/>
-        <KeyFrameDouble frame="102" value="-2.92" interpolationType="linear"/>
+        <KeyFrameDouble frame="60" value="-2.5" interpolationType="linear"/>
+        <KeyFrameDouble frame="102" value="-2.5" interpolationType="linear"/>
         <KeyFrameDouble frame="160" value="0" interpolationType="linear"/>
         <KeyFrameDouble frame="180" value="0" interpolationType="linear"/>
       </KeyedProperty></KeyedObject>
       <KeyedObject objectId="0:12"><KeyedProperty propertyKey="15">
         <KeyFrameDouble frame="0" value="0" interpolationType="linear"/>
         <KeyFrameDouble frame="32" value="-0.95" interpolationType="linear"/>
-        <KeyFrameDouble frame="60" value="-2.92" interpolationType="linear"/>
-        <KeyFrameDouble frame="102" value="-2.92" interpolationType="linear"/>
+        <KeyFrameDouble frame="60" value="-2.5" interpolationType="linear"/>
+        <KeyFrameDouble frame="102" value="-2.5" interpolationType="linear"/>
         <KeyFrameDouble frame="160" value="0" interpolationType="linear"/>
         <KeyFrameDouble frame="180" value="0" interpolationType="linear"/>
       </KeyedProperty></KeyedObject>

@@ -15,6 +15,7 @@ panel.querySelector('[data-music="toggle"]').setAttribute("aria-pressed",String(
 panel.querySelector('[data-music="previous"]').setAttribute("aria-label",en()?"Previous song":"Canción anterior");
 panel.querySelector('[data-music="next"]').setAttribute("aria-label",en()?"Next song":"Siguiente canción");
 panel.querySelector("label span").textContent=en()?"Volume":"Volumen";
+const heroVolume=document.getElementById("audio-vol");if(heroVolume&&document.activeElement!==heroVolume)heroVolume.value=String(bus.audio.volume);
 const volume=panel.querySelector("input");if(document.activeElement!==volume)volume.value=bus.audio.volume;
 for(const [i,b] of [...list.children].entries())b.setAttribute("aria-pressed",String(!bus.localName&&bus.trackIndex===i));
 for(const id of ["playlist-title","playlist-origin"]){const el=document.getElementById(id);if(el)el.textContent=bus.trackName;}

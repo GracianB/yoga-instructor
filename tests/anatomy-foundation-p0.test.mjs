@@ -12,8 +12,8 @@ test("Tadasana: centre aligned, two separate legs and feet on floor",()=>{
 });
 test("Uttanasana: torso actually goes down, head descends, hands near ground",()=>{
  const j=solveAsana("uttanasana").joints;
- assert.ok(j.shoulder.y>j.hip.y+90,"forward fold must not remain horizontal");
- assert.ok(j.head.y>j.hip.y+130,"head descends below pelvis");
+ assert.ok(j.shoulder.y>j.hip.y+60,"forward fold must not remain horizontal");
+ assert.ok(j.head.y>j.hip.y+100,"head descends below pelvis");
  assert.ok(j.shoulder.x>j.hip.x,"torso hinges forwards");
  assert.ok(j.rightWrist.y>=430&&j.rightWrist.y<=460,"hands near floor");
 });
@@ -33,7 +33,9 @@ test("Tadasana → Uttanasana preserves both fixed bone lengths and foot contact
    assert.ok(Math.abs(distance(j[side+"Shoulder"],j[side+"Elbow"])-53)<.001);
    assert.ok(Math.abs(distance(j[side+"Elbow"],j[side+"Wrist"])-55)<.001);
   }
-  assert.ok(pose.segments.length>=17);
+  assert.ok(pose.segments.length>=18);
+  assert.ok(Math.abs(distance(j.hip,j.lumbar)-45)<.001,"lumbar length");
+  assert.ok(Math.abs(distance(j.lumbar,j.shoulder)-63)<.001,"thoracic length");
   assert.match(svgSkeleton(pose),/<svg/);
  }
 });

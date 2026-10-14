@@ -44,7 +44,7 @@ jobs:
       - name: Inspect and render pose checkpoints
         shell: bash
         run: |
-          rive inspect rive-p0/build/nila-yoga-p0.riv --summary
+          rive inspect rive-p0 --summary
           mkdir -p rive-p0/build/frames
           rive rive-p0 --screenshot=rive-p0/build/frames/01-tadasana.png --advance=1
           rive rive-p0 --screenshot=rive-p0/build/frames/02-uttanasana.png --advance=60

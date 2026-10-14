@@ -4,16 +4,16 @@ test("V73: hiring-facing teaching portfolio precedes the studio", async ({page})
   await page.goto("/");
   const portfolio = page.locator("#portfolio");
   await expect(portfolio).toBeVisible();
-  await expect(portfolio.locator(".p73-proof-card")).toHaveCount(3);
+  await expect(page.locator(".yoga-credentials .p73-proof-card")).toHaveCount(3);
   const positions = await page.evaluate(() => {
-    const ids = ["portfolio", "soundtrack", "ritual", "instructor-flow", "experiencia"];
+    const ids = ["portfolio", "learning", "instructor-flow", "experiencia"];
     return ids.map(id => document.getElementById(id)?.compareDocumentPosition(document.getElementById("portfolio")));
   });
   expect(positions[0]).toBe(0);
   for (const value of positions.slice(1)) {
     expect(Boolean(value & 2)).toBe(true);
   }
-  await expect(page.locator('a[href="#portfolio"]')).toHaveCount(3); // V75 adds the native chapter-atlas link
+  await expect(page.locator('.yoga-paths a[href="#teaching"]')).toHaveCount(1); // V75 adds the native chapter-atlas link
 });
 
 test("V73: keyboard tabs update offer, evidence and email context", async ({page}) => {

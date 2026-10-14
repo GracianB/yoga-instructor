@@ -43,3 +43,9 @@ test("P0: demo .riv loads only on explicit click, from same origin",async()=>{
  assert.match(client,/new File\(\[blob\],"nila-yoga-p0\.riv"/);
  assert.match(build,/copyFile\('rive-nila-demo-p0\.riv'/);
 });
+
+test("P0: compiled Rive demo is a real binary with RIVE magic bytes",async()=>{
+ const buffer=await readFile(new URL("../rive-nila-demo-p0.riv",import.meta.url));
+ assert.equal(buffer.toString("ascii",0,4),"RIVE");
+ assert.ok(buffer.length>1000&&buffer.length<100000);
+});

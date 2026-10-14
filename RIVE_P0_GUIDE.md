@@ -15,7 +15,7 @@ Experimentar con un rig 2D de verdad sin reemplazar ni dañar el motor SVG de pr
 - `rive-lab.html`, `rive-lab.css`, `rive-lab.js`: laboratorio con la plantilla y visor de archivos `.riv`. Selección local (Blob URL), sin carga a servidor, con limpieza, control de pausa y respeto por movimiento reducido.
 - `anatomy-foundation-p0.mjs` y `anatomy-skin-p0.mjs`: cinemática side-view con pelvis, columna lumbar y torácica, dos brazos y dos piernas independientes, contactos y render SVG continuo con control de 0–100 %. Este cálculo **no depende de Rive** y todavía es prototipo anatómico.
 - `rive-p0/scene.rml` y `rive-p0/rive.yaml`: **archivo fuente Rive real** con anatomía vectorial estilizada, pivote de torso, brazos contrarrotados y línea temporal Tadasana → Uttanasana → Tadasana. La CLI construye `rive-p0/build/nila-yoga-p0.riv` sin pago ni sesión de cuenta.
-- `.github/workflows/rive-p0.yml`: instala la CLI oficial, verifica, compila y captura fotogramas para revisión. El archivo `.riv` se guarda como artefacto y, si las capturas son coherentes y la rama no ha cambiado, en `rive-nila-demo-p0.riv` dentro de esta misma rama experimental.
+- `.github/workflows/rive-p0.yml`: ejecuta la CLI **solo cuando cambia el RML o el propio workflow** en `yoga-p0-anatomy-foundation`, evitando compilarlo en cada PR; verifica, compila y captura fotogramas para revisión. El archivo `.riv` se guarda como artefacto y, si las capturas superan los controles automáticos y la rama no ha cambiado, en `rive-nila-demo-p0.riv` dentro de esta misma rama experimental.
 - `tests/rive-lab-p0.test.mjs`, `tests/anatomy-skin-p0.test.mjs` y pruebas Playwright: empaquetado, 505 muestras geométricas, capas, seguridad y carga diferida.
 - `tools/build.mjs`: copia los activos del laboratorio al artefacto Pages (incluido el .riv generado, cuando esté presente), sin añadir su runtime a index.
 
@@ -43,3 +43,8 @@ No hay scripts Luau. Este .riv es una **demostración exportable de articulació
 - No está integrado en las secuencias de la app ni sincronizado con el reloj de respiración. Solo debe integrarse tras una prueba visual completa.
 - La disponibilidad del CDN afecta únicamente a este laboratorio y nunca a la web pública.
 - Las pruebas Node comprueban contratos; la CLI genera capturas para revisión visual, pero falta una auditoría manual de anatomía y las pruebas de reproducción en navegador con el .riv real.
+
+## Criterio de publicación (bloqueante)
+- Una compilación limpia **no demuestra anatomía correcta**. En las capturas iniciales, la flexión de Uttanasana presenta un torso y brazos todavía rígidos. La referencia experimental **no sustituye** las asanas originales.
+- Antes de fusionar se requiere revisión manual de los fotogramas de Rive, pruebas reales en Chromium/Firefox/WebKit, comprobación del .riv en navegador y adaptación de brazos/caderas/rodillas con malla y huesos.
+- El laboratorio de Rive queda desacoplado de la página principal y la PR permanece draft hasta completar la revisión visual.

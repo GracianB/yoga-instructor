@@ -27,7 +27,7 @@ if(active&&originalSvg){
  const names=en()?['Shoulder','Elbow','Wrist','Hip','Knee','Ankle']:['Hombro','Codo','Muñeca','Cadera','Rodilla','Tobillo'];
  const chains=[...p.arms,...p.legs].map(path=>model.curve(path));
  ctx.strokeStyle=dark?'#fff4fa':'#123b2d';ctx.lineWidth=3;
- chains.forEach((chain,index)=>{const points=[chain.start,chain.joint,chain.end];ctx.beginPath();ctx.moveTo(...points[0]);ctx.lineTo(...points[1]);ctx.lineTo(...points[2]);ctx.stroke();points.forEach(([x,y],joint)=>{ellipse(x,y,7,7,dark?'#edbfd2':'#234e40');ellipse(x,y,3,3,dark?'#123b2d':'#fff7fa');if(index===0||index===2){ctx.font='bold 12px system-ui';ctx.fillStyle=dark?'#fff4fa':'#123b2d';ctx.fillText(names[(index===0?0:3)+joint],x+12,y-9);}});});
+ chains.forEach((chain,index)=>{const points=[chain.start,chain.joint,chain.end];ctx.beginPath();ctx.moveTo(...points[0]);ctx.lineTo(...points[1]);ctx.lineTo(...points[2]);ctx.stroke();points.forEach(([x,y],joint)=>{ellipse(x,y,7,7,dark?'#edbfd2':'#234e40');ellipse(x,y,3,3,dark?'#123b2d':'#fff7fa');if(index===0||index===2){const lx=index===0?left+22:right-118,ly=top+24+joint*25;ctx.font='bold 13px system-ui';ctx.strokeStyle=dark?'#edbfd280':'#234e4060';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(lx+45,ly+4);ctx.stroke();ctx.fillStyle=dark?'#123b2d':'#fff7fa';ctx.fillRect(lx-5,ly-14,104,20);ctx.fillStyle=dark?'#fff4fa':'#123b2d';ctx.fillText(names[(index===0?0:3)+joint],lx,ly);}});});
 }
 ctx.restore();canvas.dataset.framing='full-body';canvas.hidden=false;host.classList.add('canvas-character-ready');canvas.dataset.skin='anatomical';};
  picture.onerror=()=>{if(revision!==requestRevision)return;host.classList.remove('canvas-character-ready');canvas.hidden=true;};

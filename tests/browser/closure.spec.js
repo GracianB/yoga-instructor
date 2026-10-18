@@ -9,7 +9,12 @@ async function open(page, options = {}) {
   const errors = [];
   page.on('response', response => { if (response.url().startsWith('http://127.0.0.1:4185') && response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
   page.on('pageerror', error => errors.push(error.message));
-  page.on('console', message => { if (['error', 'warning'].includes(message.type())) errors.push(message.text()); });
+  page.on('console', message => {
+    // Firefox emits its own anti-tracking warning on localhost. This is a
+    // browser diagnostic, not a warning produced by the Yoga application.
+    if (message.type() === 'warning' && message.text().includes('has been classified as a bounce tracker')) return;
+    if (['error', 'warning'].includes(message.type())) errors.push(message.text());
+  });
   // All classic deferred scripts finish before DOMContentLoaded. Waiting for the
   // full load event also waits on unrelated assets and can freeze Firefox CI.
   await page.goto(options.url || '/', { waitUntil: 'domcontentloaded' });
@@ -31,7 +36,7 @@ for (const width of [320, 390, 768, 1440]) {
     await expect(page.locator('[data-cv-link]').first()).toHaveAttribute('href', './assets/CV_Gracian_Baena_Yoga_EN.pdf');
     await page.locator('[data-set-theme="dark"]').click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-    await page.reload();
+    await page.reload({ waitUntil: 'domcontentloaded' });
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     const toggle = page.locator('.menu-toggle');
@@ -109,7 +114,7 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   await page.locator('[data-practice="focus"]').evaluate(button=>button.click());
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
   expect(await page.evaluate(() => localStorage.getItem('gb-yoga-practice'))).toBe('focus');
-  await page.reload();
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
   // The dock pointer path is tested separately. Here verify the production
   // click handlers after reload without WebKit RAF/layout stability races.
@@ -122,7 +127,7 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   // cover the visible controls on desktop.
   await page.locator('.sanctuary-quiet').evaluate(button => button.click());
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
-  await page.reload();
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
   await page.locator('#audio-play').evaluate(button => button.scrollIntoView({ behavior: 'instant', block: 'center' }));
   await page.locator('#audio-play').click();

@@ -42,3 +42,19 @@ Production must continue to preserve the ordered CSS cascade via `tools/p4-produ
 - [ ] Capture desktop and mobile screenshots before merging.
 
 Execution is still pending. No automated test result or deployed change is claimed here.
+
+
+## Automated evidence now available
+
+- `npm run audit:inventory`: ordered entrypoint inventory with SHA-256, byte size and page ownership.
+- `npm run audit:coupling`: read-only heuristic map of literal global accesses, DOM element IDs, emitted/listened custom event strings, and event edges.
+- Both are part of `npm run quality`; audit output is printed to CI logs and does not change deployed assets.
+- To save a reproducible inventory locally, run `node tools/architecture-inventory.mjs --write` (writes `artifacts/architecture-inventory.json`).
+- A heuristic event edge is *not* proof of exclusive ownership. Verify listeners, initialization order, dynamic references and browser behavior before relocating modules.
+
+## Next code-migration checkpoints
+
+1. Identify which globals are written by which file, and distinguish producers/consumers.
+2. Introduce explicit adapters for the clock, pose data and rendering one boundary at a time.
+3. Keep the existing public entrypoint contract until E2E and screenshot comparisons agree.
+4. Validate actual Tadasana/Uttanasana joints and supports independently from studio skins.

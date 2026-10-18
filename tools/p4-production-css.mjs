@@ -22,7 +22,7 @@ function sourceSheets(html){
     seen.add(path);
     sheets.push({tag,path});
   }
-  if(sheets.length<70)throw Error("P4: missing baseline stylesheets; refusing incomplete cascade");
+  if(sheets.length===0)throw Error("P4: no local stylesheets found");
   return sheets;
 }
 

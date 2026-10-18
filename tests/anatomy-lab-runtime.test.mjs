@@ -9,8 +9,9 @@ const solver=require("../rig-constraints.js");
 const motion=require("../rig-motion.js");
 
 class Element {
- constructor(tag="div"){this.tagName=tag;this.children=[];this.attributes={};this.style={};this.handlers={};this.textContent="";this.value="0";this.checked=false}
+ constructor(tag="div"){this.tagName=tag;this.children=[];this.attributes={};this.style={};this.handlers={};this.textContent="";this.value="0";this.checked=false;this.classes=new Set();this.classList={toggle:(name,on)=>{if(on)this.classes.add(name);else this.classes.delete(name)}}}
  append(node){this.children.push(node);return node}
+ replaceChildren(...nodes){this.children=nodes}
  insertBefore(node,before){const i=this.children.indexOf(before);this.children.splice(i<0?this.children.length:i,0,node);return node}
  setAttribute(key,value){this.attributes[key]=String(value)}
  getAttribute(key){return this.attributes[key]}
@@ -18,11 +19,11 @@ class Element {
  fire(type){assert.equal(typeof this.handlers[type],"function",this.tagName+"."+type);this.handlers[type]()}
 }
 test("anatomy laboratory renders real SVG nodes and readable angles without a browser",async()=>{
- const ids=["stage","progress","status","stand","fold","play","reverse","overlay","compare","value","knee-left","knee-right","hip-left","torso-angle"];
+ const ids=["findings","error-map","stage","progress","status","stand","fold","play","reverse","overlay","compare","value","knee-left","knee-right","hip-left","torso-angle"];
  const nodes=Object.fromEntries(ids.map(id=>[id,new Element(id)]));
  nodes.overlay.checked=true;
  const requested=[],canceled=[];
- const document={getElementById:id=>nodes[id],createElementNS:(_ns,tag)=>new Element(tag)};
+ const document={getElementById:id=>nodes[id],createElementNS:(_ns,tag)=>new Element(tag),createElement:tag=>new Element(tag)};
  const context={window:{YOGA_ARTICULATED_RIG:rig,YOGA_RIG_CONSTRAINTS:solver,YOGA_RIG_MOTION:motion},document,
   requestAnimationFrame:cb=>{requested.push(cb);return requested.length},cancelAnimationFrame:id=>canceled.push(id)};
  const source=await readFile(new URL("../anatomy-lab.js",import.meta.url),"utf8");
@@ -36,6 +37,8 @@ test("anatomy laboratory renders real SVG nodes and readable angles without a br
  assert.match(nodes["torso-angle"].textContent,/°$/);
  nodes.overlay.checked=false;nodes.overlay.fire("change");
  assert.ok(nodes.stage.children.filter(n=>n.tagName==="circle").some(n=>n.style.display==="none"));
+ nodes["error-map"].checked=true;nodes["error-map"].fire("change");
+ assert.equal(nodes.findings.children.length,3);
  nodes.compare.checked=true;nodes.compare.fire("change");
  assert.ok(nodes.stage.children.some(n=>n.attributes.class==="reference"&&n.style.display===""));
  nodes.play.fire("click");assert.equal(nodes.play.getAttribute("aria-pressed"),"true");

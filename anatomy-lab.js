@@ -43,7 +43,8 @@ function render(){
  document.getElementById("torso-angle").textContent=angle(result.metrics.torsoInclination);
  reference.forEach(line=>line.style.display=compare.checked?"":"none");
  document.getElementById("value").textContent=Math.round(t*100)+"%";
- status.textContent="Error máximo de segmento: "+result.maxError.toFixed(2)+" px · "+result.iterationsUsed+" iteraciones · "+(result.converged?"Convergente":"Requiere revisión");
+ const unreachable=result.ik.some(item=>!item.reachable);
+ status.textContent="Error máximo de segmento: "+result.maxError.toFixed(2)+" px · "+result.iterationsUsed+" iteraciones · "+(result.converged?"Convergente":"Requiere revisión")+(unreachable?" · Flexión objetivo fuera del alcance de los segmentos":"");
  document.getElementById("stand").setAttribute("aria-pressed",String(t===0));
  document.getElementById("fold").setAttribute("aria-pressed",String(t===1));
 }

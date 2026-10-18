@@ -19,9 +19,9 @@ for(const path of ["/anatomy-lab.html","/dist/anatomy-lab.html"]){
   await expect(page.locator("#compare")).toBeChecked();
   await expect(page.locator("line.reference").first()).not.toHaveCSS("display","none");
   await expect(page.locator("line.reference").first()).toHaveAttribute("x1",/^[0-9.]+$/);
-  // Capture reproducible rendered evidence of both poses in the source lab.
+  // Capture reproducible rendered evidence of the mid-transition and fold.
   // Reports are visual review material, not unapproved snapshot baselines.
-  if(path==="/anatomy-lab.html")await test.info().attach("uttanasana-reference",{
+  if(path==="/anatomy-lab.html")await test.info().attach("transition-halfway",{
    body:await page.screenshot({animations:"disabled"}),contentType:"image/png"
   });
   await page.getByRole("button",{name:"Uttanasana"}).click();

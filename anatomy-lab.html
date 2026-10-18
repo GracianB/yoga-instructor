@@ -1,41 +1,68 @@
 <!doctype html>
-<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Laboratorio anatómico de Tadasana y Uttanasana, con articulaciones y restricciones.">
-<title>Yoga · Laboratorio anatómico</title>
-<style>
-:root{color-scheme:light;background:#f5f1e8;color:#203d31;font:16px system-ui}
-body{margin:0;padding:clamp(1rem,4vw,3rem);max-width:1100px;margin-inline:auto}
-h1{font:clamp(2rem,5vw,4rem) Georgia,serif;margin:0 0 1rem}
-p{max-width:68ch;line-height:1.6}
-.controls{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin:1.5rem 0}
-button{background:#203d31;color:white;border:0;border-radius:2rem;padding:.75rem 1rem;cursor:pointer}
-button[aria-pressed=true]{background:#987244}
-.controls label{display:inline-flex;align-items:center;gap:.5rem}.controls input[type=checkbox]{width:auto}.reference{stroke:#b49b72;stroke-width:3;stroke-dasharray:5 8;opacity:.65}.hidden-joints circle{display:none}
-@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
-input{width:min(20rem,65vw);accent-color:#527a60}
-svg{width:100%;max-height:65vh;background:#e7e2d6;border-radius:1rem}
-line{stroke:#315746;stroke-width:7;stroke-linecap:round}circle{fill:#c28d55;stroke:white;stroke-width:2}
-.floor{stroke:#a6a496;stroke-width:2}
-.output{font-variant-numeric:tabular-nums}small{color:#52645a}
-.lab-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-top:1.25rem}.lab-metrics>div{background:#fff8ed;border:1px solid #d7cabb;border-radius:1rem;padding:1rem}.lab-metrics dt{font-size:.8rem;text-transform:uppercase;letter-spacing:.075em;color:#52645a}.lab-metrics dd{font-size:1.55rem;font-variant-numeric:tabular-nums;margin:.35rem 0 0;font-weight:650}.lab-metrics small{font-size:.7rem}.bone-volume{stroke:#e5c9aa;stroke-linecap:round;opacity:.95}.rig-head{fill:#e5c9aa;stroke:#926c51;stroke-width:2}.joint-label{font:10px system-ui;fill:#203d31;paint-order:stroke;stroke:#f5f1e8;stroke-width:3}.frame-notes{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}.anatomy-findings{background:#fff8ed;border:1px solid #d7cabb;border-radius:1rem;padding:1rem;margin-block:1.5rem}.anatomy-findings h2{font:1.3rem Georgia,serif;margin:.1rem 0 .5rem}.anatomy-findings ul{padding-left:1.25rem;line-height:1.5}.anatomy-findings li+li{margin-top:.25rem}.error-segment{stroke:#b55436!important;stroke-width:8!important}.controls button:focus-visible,.controls input:focus-visible{outline:3px solid #987244;outline-offset:3px}.warning{color:#9b5129;font-weight:600}
-</style>
-<h1>Laboratorio anatómico</h1>
-<p>Vista técnica aislada para observar un esqueleto de 16 articulaciones, sin modificar el personaje de producción. Esta demostración es geométrica, no un modelo médico de movimiento.</p>
-<div class="controls">
-<button id="stand" aria-pressed="true">Tadasana</button>
-<button id="fold" aria-pressed="false">Uttanasana</button>
-<label for="progress">Transición <output id="value">0%</output></label><input type="range" id="progress" min="0" max="100" value="0">
-<button id="play" aria-pressed="false">Reproducir transición</button>
-<button id="reverse" aria-pressed="false">Invertir</button>
-<label><input type="checkbox" id="overlay" checked> Mostrar articulaciones</label>
-<label><input type="checkbox" id="compare"> Referencia inicial</label>
-<label><input type="checkbox" id="error-map"> Ver segmentos deformados</label>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Laboratorio de anatomía vectorial: transiciones de Tadasana a Uttanasana, articulaciones, apoyos y restricciones.">
+<title>Laboratorio anatómico · Yoga Instructor</title>
+<link rel="stylesheet" href="./anatomy-lab.css">
+</head>
+<body>
+<div class="lab-shell">
+ <header class="lab-header">
+  <a class="back-link" href="./index.html#studio-asana-library">← Volver a Yoga Instructor</a>
+  <p class="eyebrow">Movimiento / Anatomía / Laboratorio experimental</p>
+  <h1>Laboratorio anatómico</h1>
+  <p class="lab-lead">Cómo se transforma una postura sin que el cuerpo pierda su estructura. Explora Tadasana y Uttanasana, examina cada articulación y detecta deformaciones en una vista de trabajo independiente.</p>
+ </header>
+ <main class="lab-layout">
+  <section class="workbench" aria-labelledby="workbench-title">
+   <div class="workbench-top"><h2 id="workbench-title">Estudio de movimiento</h2><small>Esqueleto 2D · 16 articulaciones</small></div>
+   <div class="controls">
+    <div class="primary-controls" role="group" aria-label="Control de las posturas">
+     <button id="stand" type="button" aria-pressed="true">Tadasana</button>
+     <button id="fold" type="button" aria-pressed="false">Uttanasana</button>
+     <button id="play" type="button" aria-pressed="false">Reproducir transición</button>
+     <button id="reverse" type="button" aria-pressed="false">Invertir</button>
+    </div>
+    <div class="range-control">
+     <div class="progress-label"><label for="progress">Transición articulada</label><output id="value" for="progress">0%</output></div>
+     <input id="progress" aria-label="Progreso de la transición" type="range" min="0" max="100" step="1" value="0">
+    </div>
+    <div class="secondary-controls" role="group" aria-label="Capas de visualización">
+     <label><input id="overlay" type="checkbox" checked> Articulaciones</label>
+     <label><input id="compare" type="checkbox"> Referencia inicial</label>
+     <label><input id="error-map" type="checkbox"> Deformaciones</label>
+    </div>
+   </div>
+   <div class="stage-wrap">
+    <svg id="stage" viewBox="100 65 520 375" role="img" aria-label="Estudio SVG de un cuerpo articulado en transición entre Tadasana y Uttanasana">
+     <line class="floor" x1="120" y1="401" x2="600" y2="401"/>
+    </svg>
+   </div>
+   <p class="stage-note">Los tobillos mantienen su posición y el solucionador intenta preservar las longitudes de cada segmento durante la transición.</p>
+  </section>
+  <aside class="inspector" aria-label="Inspector anatómico">
+   <h2>Mediciones en vivo</h2>
+   <dl class="lab-metrics" aria-label="Ángulos geométricos">
+    <div><dt>Rodilla izquierda</dt><dd id="knee-left">—</dd></div>
+    <div><dt>Rodilla derecha</dt><dd id="knee-right">—</dd></div>
+    <div><dt>Cadera izquierda</dt><dd id="hip-left">—</dd></div>
+    <div><dt>Inclinación del tronco</dt><dd id="torso-angle">—</dd></div>
+   </dl>
+   <p class="output" id="status" aria-live="polite"></p>
+   <section class="anatomy-findings" aria-labelledby="findings-heading">
+    <h3 id="findings-heading">Integridad de segmentos</h3>
+    <p>Las desviaciones comparan longitudes del dibujo respecto a Tadasana. No representan riesgos ni diagnósticos clínicos.</p>
+    <ul id="findings"></ul>
+   </section>
+  </aside>
+ </main>
+ <footer>Experimento técnico, no guía de práctica física. Este modelo bidimensional todavía no representa la anatomía humana completa ni sustituye las indicaciones de un instructor cualificado.</footer>
 </div>
-<svg id="stage" viewBox="100 65 520 375" role="img" aria-label="Esqueleto articulado de referencia"><line class="floor" x1="120" y1="401" x2="600" y2="401"/></svg>
-<dl class="lab-metrics" aria-label="Mediciones geométricas"><div><dt>Rodilla izquierda</dt><dd id="knee-left">—</dd></div><div><dt>Rodilla derecha</dt><dd id="knee-right">—</dd></div><div><dt>Flexión cadera (izquierda)</dt><dd id="hip-left">—</dd></div><div><dt>Inclinación tronco</dt><dd id="torso-angle">—</dd></div></dl>
-<p class="output" id="status" aria-live="polite"></p>
-<section class="anatomy-findings" aria-labelledby="findings-heading"><h2 id="findings-heading">Integridad del esqueleto</h2><p>Desviaciones de longitud respecto a Tadasana. No equivalen a riesgos ni diagnósticos clínicos.</p><ul id="findings"></ul></section><small>Los tobillos son puntos fijos. La longitud de segmentos se ajusta mediante un solucionador iterativo.</small>
 <script src="./articulated-rig.js"></script>
 <script src="./rig-constraints.js"></script>
 <script src="./rig-motion.js"></script>
 <script src="./anatomy-lab.js"></script>
+</body>
 </html>

@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("D28: hiding the page sleeps visual tick and resumes the same live clock",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  await page.locator('[data-studio-action="primary"]').evaluate(el=>el.click());
@@ -26,7 +26,7 @@ test("D28: hiding the page sleeps visual tick and resumes the same live clock",a
 });
 
 test("D28: sculpted body channels are connected to clock, freeze, and still under reduced motion",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  const panel=page.locator("#studio-guided");

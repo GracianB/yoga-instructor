@@ -3,7 +3,7 @@ for(const width of [320,390,768,1440]){
  test("D29: breath/meditation dragon remains grounded and usable at "+width+"px",async({page})=>{
   test.setTimeout(90000);
   await page.setViewportSize({width,height:850});
-  await page.goto("/");
+  await page.goto("/",{waitUntil:"domcontentloaded"});
   await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
   await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
   const figure=page.locator(".studio-companion");
@@ -23,7 +23,7 @@ for(const width of [320,390,768,1440]){
  });
 }
 test("D29: mode and tongue never leave hidden controls active",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await page.locator('[data-set-lang="en"]').evaluate(el=>el.click());
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  await expect(page.locator(".studio-breath-patterns")).toHaveAttribute("aria-label","Breathing pace");
@@ -41,7 +41,7 @@ test("D29: mode and tongue never leave hidden controls active",async({page})=>{
 
 test("D29: focus view removes clutter without losing pause, restart or keyboard escape",async({page})=>{
  await page.setViewportSize({width:390,height:844});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  const panel=page.locator("#studio-guided");
@@ -70,7 +70,7 @@ test("D29: focus view removes clutter without losing pause, restart or keyboard 
 test("D29: translated focus view works on a 320px reduced-motion display",async({page})=>{
  await page.setViewportSize({width:320,height:760});
  await page.emulateMedia({reducedMotion:"reduce"});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await page.locator('[data-set-lang="en"]').evaluate(el=>el.click());
  await page.locator('[data-set-theme="dark"]').evaluate(el=>el.click());
  await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());

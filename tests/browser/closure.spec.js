@@ -314,7 +314,10 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   const guide=page.locator('#flow-guide');
   const act=async action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
   await expect(guide).toHaveAttribute('data-ready','true');
-  await act('preview');
+  // The preview intentionally advances every phase after five seconds.
+  // Cat-Cow needs the real 120-second warmup to test pause/resume without
+  // accidentally inspecting the next Warrior pose (confirmed in WebKit trace).
+  await act('start');
   await expect(guide).toHaveAttribute('data-status','running');
   for(const phase of ['centering','breath','warmup']){
     await expect(guide).toHaveAttribute('data-ready','true');
@@ -339,7 +342,9 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
     .evaluateAll(nodes=>nodes.map(n=>n.getAttribute("transform")))).toEqual(grounded);
   const spineNow=await spine.getAttribute('d');
   expect(spineNow).toContain('Q0 ');
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await act('pause');
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await expect(guide).toHaveAttribute('data-asana-state','paused');
   const frozen=await back.getAttribute('d');
   await page.waitForTimeout(450);
@@ -350,7 +355,9 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   await page.bringToFront();
   await act('pause');
   await expect(guide).toHaveAttribute('data-asana-state','running');
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await expect.poll(()=>back.getAttribute('d'),{timeout:12000}).not.toBe(frozen);
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(guide).toHaveAttribute('data-asana-state','reduced');
   const reduced=await back.getAttribute('d');

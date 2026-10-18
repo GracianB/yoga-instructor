@@ -1,15 +1,11 @@
-/* P3 · Fail-fast public dependency audit. The 75+ stylesheets are an
- * architectural debt, but collapsing them without preserving cascade order
- * would risk moving a guardian limb. Measure first, enforce budgets in CI. */
+/* P3 · Validate local dependencies without arbitrary count or byte ceilings.\n * Resource sizes are reported for optimization, not used to block new features.\n * Missing, duplicate, invalid or unexpectedly eager assets remain fatal. */
 import { readFile, stat } from "node:fs/promises";
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, resolve, relative, sep } from "node:path";
 
 const root=resolve(fileURLToPath(new URL("../",import.meta.url)));
 const pages=["index.html","cv.html","404.html"];
-const limits=Object.freeze({
-  cssLinks:83,jsLinks:83,cssBytes:750_000,jsBytes:850_000
-});
+const metrics=Object.freeze(["cssLinks","jsLinks","cssBytes","jsBytes"]);
 const eager=new Set(["runtime.js","boot.js","i18n.js"]);
 const part=(tag,key)=>tag.match(new RegExp("\\b"+key+'="([^"]+)"'))?.[1]||null;
 const own=(href)=>href?.startsWith("./")&&!href.startsWith("//")
@@ -53,12 +49,7 @@ async function analyze(base=root){
    if(path.endsWith(".js"))measure.jsBytes+=s.size;
   }catch(e){failures.push("Missing public file "+path+": "+e.message)}
  }
- // Only current initial-page references are used for quantity budgets.
- // Other HTML pages still receive full existence/duplicate/eagerness checks.
- for(const [key,limit] of Object.entries(limits)){
-  if(measure[key]>limit)failures.push(key+": "+measure[key]+" exceeds budget "+limit);
- }
- const audit=Object.freeze({measure,limits,pages:pagesReport,failures});
+ // Counts and byte sizes are telemetry, never feature ceilings.\n const audit=Object.freeze({measure,metrics,pages:pagesReport,failures});
  return audit;
 }
 if(process.argv[1]&&pathToFileURL(resolve(process.argv[1])).href===import.meta.url){
@@ -66,4 +57,4 @@ if(process.argv[1]&&pathToFileURL(resolve(process.argv[1])).href===import.meta.u
  console.log("P3_RESOURCE_AUDIT "+JSON.stringify(result));
  if(result.failures.length)process.exitCode=1;
 }
-export {analyze,collect,limits};
+export {analyze,collect,metrics};

@@ -20,3 +20,28 @@ test("solver rejects invalid configuration",()=>{
  assert.throws(()=>solve(rig.standing,rig.fold,{iterations:0}),RangeError);
  assert.throws(()=>solve(rig.standing,rig.fold,{anchors:["fictional"]}),RangeError);
 });
+
+test("collapsed bone reopens in rest-pose direction instead of silently remaining zero",()=>{
+ const reference={joints:{A:[0,0],B:[2,0]},links:[["A","B"]]};
+ const target={joints:{A:[0,0],B:[0,0]}};
+ const out=solve(reference,target,{anchors:["A"],iterations:5,tolerance:.0001});
+ assert.deepEqual(out.joints.A,[0,0]);
+ assert.ok(Math.abs(out.joints.B[0]-2)<.0001);
+ assert.equal(out.converged,true);
+ assert.equal(out.segmentErrors.length,1);
+ assert.ok(Object.isFrozen(out.segmentErrors[0]));
+});
+test("bad tolerances, duplicate anchors and non-finite joint coordinates are rejected",()=>{
+ for(const tolerance of [-1,Infinity,NaN,101])assert.throws(()=>solve(rig.standing,rig.fold,{tolerance}),RangeError);
+ assert.throws(()=>solve(rig.standing,rig.fold,{anchors:["leftAnkle","leftAnkle"]}),RangeError);
+ const malformed={joints:{...rig.fold.joints,leftKnee:[NaN,100]}};
+ assert.throws(()=>solve(rig.standing,malformed),TypeError);
+});
+test("conflicting pinned endpoints report residual error without moving anchors",()=>{
+ const ref={joints:{A:[0,0],B:[10,0]},links:[["A","B"]]};
+ const target={joints:{A:[0,0],B:[12,0]}};
+ const out=solve(ref,target,{anchors:["A","B"],iterations:10,tolerance:.01});
+ assert.deepEqual(out.joints,target.joints);
+ assert.equal(out.converged,false);
+ assert.ok(Math.abs(out.maxError-2)<1e-9);
+});

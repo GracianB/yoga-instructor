@@ -14,7 +14,11 @@ for(const path of ["/anatomy-lab.html","/dist/anatomy-lab.html"]){
   await page.locator("#error-map").check();
   await expect(page.locator("#findings li")).toHaveCount(3);
   await page.locator("#compare").check();
-  await expect(page.locator("line.reference").first()).toBeVisible();
+  // WebKit sometimes reports zero-area SVG <line> elements as hidden. Verify
+  // the overlay state and actual computed presentation instead of box visibility.
+  await expect(page.locator("#compare")).toBeChecked();
+  await expect(page.locator("line.reference").first()).not.toHaveCSS("display","none");
+  await expect(page.locator("line.reference").first()).toHaveAttribute("x1",/^[0-9.]+$/);
   await page.getByRole("button",{name:"Uttanasana"}).click();
   await expect(page.locator("#value")).toHaveText("100%");
   await page.getByRole("button",{name:"Tadasana"}).click();

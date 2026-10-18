@@ -58,3 +58,10 @@ Execution is still pending. No automated test result or deployed change is claim
 2. Introduce explicit adapters for the clock, pose data and rendering one boundary at a time.
 3. Keep the existing public entrypoint contract until E2E and screenshot comparisons agree.
 4. Validate actual Tadasana/Uttanasana joints and supports independently from studio skins.
+
+
+## Anatomy diagnostic milestone
+
+A pure `anatomy-diagnostics.js` module now measures elbow/knee angles and tracks support labels from the existing authored SVG and V84 kinematics model. It is intentionally read-only and does not alter the visible poses. Dedicated tests cover the catalog, Tadasana and the forward fold. The module is included in the production allowlist and loaded after the V84 kinematics source.
+
+**Important limits:** SVG bezier joint waypoints approximate illustration geometry; they do not demonstrate biomechanical plausibility, safe range of motion, whole-body balance, or correct hip hinging. The diagnostic baseline is groundwork for a future articulated skeleton and visual acceptance suite. It should not be marketed as anatomy correction.

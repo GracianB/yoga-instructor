@@ -15,6 +15,8 @@ test("Nila contact anchors are attached to their actual SVG limb terminals in 12
   await book.locator('button[data-library-pose="'+id+'"]').evaluate(node=>node.click());
   const pose=book.locator('.yy-pose.is-current');
   await expect(pose).toHaveAttribute("data-pose",id);
+  await expect(pose).toHaveCSS("visibility","visible");
+  await expect(pose.locator(".mg-hand").first()).toHaveCSS("visibility","visible");
   const pairs=await pose.locator(".movement-guardian").evaluate(guardian=>{
    const values=[];
    for(const type of ["arm","leg"])for(let i=0;i<2;i++){
@@ -48,6 +50,7 @@ test("Warrior II and Tree now connect the upper arms visually and align raised h
   await book.locator('button[data-library-pose="'+id+'"]').evaluate(node=>node.click());
   const active=book.locator(".yy-pose.is-current .movement-guardian");
   await expect(active).toHaveCount(1);
+  await expect(active).toHaveCSS("visibility","visible");
   const distances=await active.evaluate(guardian=>[0,1].map(index=>{
    const arm=guardian.querySelector('[data-mg-limb="arm-'+index+'"] .mg-limb-plane');
    const visible=guardian.querySelector('[data-visible-arm="'+index+'"]');

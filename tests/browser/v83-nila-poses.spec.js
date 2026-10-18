@@ -1,6 +1,20 @@
 const{test,expect}=require("@playwright/test");
+/* Capture only the relevant viewport of the Asana Book.
+ * Full-page shots of this long portfolio can exceed the 30s test timeout.
+ * Browser visual audits capture complete pages independently.
+ */
+const capturePose=async(page,testInfo,name)=>{
+ await page.locator("#studio-asana-library .studio-library-stage").evaluate(
+  el=>el.scrollIntoView({block:"center",behavior:"instant"})
+ );
+ await testInfo.attach(name,{
+  body:await page.screenshot({animations:"disabled",timeout:15000}),
+  contentType:"image/png"
+ });
+};
+
 test("V83: Nila draws four grounded Downward Dog contacts in the real book",async({page})=>{
-await page.goto("/");const book=page.locator("#studio-asana-library");
+await page.goto("/",{waitUntil:"domcontentloaded"});const book=page.locator("#studio-asana-library");
 await book.locator('button[data-library-pose="d24-downward"]').evaluate(e=>e.click());
 const dog=book.locator('.yy-pose[data-pose="d24-downward"] .movement-guardian');
 await expect(dog).toBeVisible();
@@ -8,7 +22,7 @@ await expect(dog.locator("[data-contact]")).toHaveCount(4);
 await expect(dog.locator(".mg-torso[data-pose-kind='downward'] .mg-body")).toHaveAttribute("d",/M274 264/);
 });
 test("V83: balance pose shows one grounded shadow and raised calf contact",async({page})=>{
-await page.goto("/");const book=page.locator("#studio-asana-library");
+await page.goto("/",{waitUntil:"domcontentloaded"});const book=page.locator("#studio-asana-library");
 await book.locator('button[data-library-pose="v68-tree"]').evaluate(e=>e.click());
 const tree=book.locator('.yy-pose[data-pose="v68-tree"] .movement-guardian');
 await expect(tree).toBeVisible();
@@ -44,10 +58,7 @@ test("Nila's Downward Dog profile has a distinct readable face in Yin and Yang",
   expect(info.width).toBeGreaterThan(15);
   expect(info.height).toBeGreaterThan(15);
   expect(info.face).not.toBe(info.muzzle);
-  await testInfo.attach("nila-downward-"+spirit,{
-   body:await page.screenshot({animations:"disabled",fullPage:true}),
-   contentType:"image/png"
-  });
+  await capturePose(page,testInfo,"nila-downward-"+spirit);
  }
 });
 
@@ -80,9 +91,7 @@ test("Tadasana's relaxed hands point downward and Uttanasana's head faces the ma
     expect(angle).toBe(0);
    }
   }
-  await testInfo.attach("nila-"+data.name+"-anatomy",{
-   body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"
-  });
+  await capturePose(page,testInfo,"nila-"+data.name+"-anatomy");
  }
 });
 
@@ -97,12 +106,12 @@ test("Warrior II front knee is bent over its foot; forward fold hinges from the 
  await expect(front.locator(".mg-knee")).toHaveAttribute("data-rig-source","authored");
  const bend=await front.locator(".mg-limb-plane").getAttribute("d");
  expect((bend.match(/Q/g)||[]).length).toBe(2);
- await testInfo.attach("warrior-ii-knee",{body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"});
+ await capturePose(page,testInfo,"warrior-ii-knee");
  await book.locator('button[data-library-pose="v68-forward-fold"]').evaluate(node=>node.click());
  active=book.locator('.yy-pose.is-current[data-pose="v68-forward-fold"]');
  await expect(active).toHaveCSS("visibility","visible");
  const torso=active.locator(".mg-torso");
  await expect(torso).toHaveAttribute("transform",/rotate\(0\.0 366\.0 236\.0\)/);
  await expect(torso.locator(".mg-body")).toHaveAttribute("d",/^M342 294 C326 277/);
- await testInfo.attach("uttanasana-hip-hinge",{body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"});
+ await capturePose(page,testInfo,"uttanasana-hip-hinge");
 });

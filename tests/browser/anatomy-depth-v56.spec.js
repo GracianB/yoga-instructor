@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("V56 Nila's ten poses have torso covering arm sockets but hands over chest",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  const poses=page.locator("#flow-guide .yy-pose");
  await expect(poses).toHaveCount(10);
  for(const pose of await poses.all()){
@@ -24,7 +24,7 @@ test("V56 Nila's ten poses have torso covering arm sockets but hands over chest"
  await expect(page.locator('#flow-guide .yy-pose[data-pose="pose-1"] .mg-gesture-forearm')).toHaveCount(0);
 });
 test("V56/V68 twelve additional asanas reuse the exact same shoulder construction",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  const gallery=page.locator("#studio-asana-library .movement-guardian");
  await expect(gallery).toHaveCount(12);
  await expect(gallery.locator(".mg-arms-behind .mg-shoulder")).toHaveCount(24);

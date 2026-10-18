@@ -10,13 +10,16 @@
   if(!root||!svg||!art||svg.querySelector(".movement-guardian"))return;
   const esc=n=>Number(n).toFixed(1);
   const point=(x,y)=>esc(x)+" "+esc(y);
+  // Kind 'fold' is shared by standing Uttanasana and seated Paschimottanasana.
+  // Only the standing pose owns these specifically authored torso contours.
+  const standingFold=p=>p.id==="v68-forward-fold";
   const bodyPath=(p)=>{
     const [x,y,rx,ry]=p.body;
     // V83: A sculpted inverted-V torso joins shoulders to an elevated pelvis.
     if(p.kind==="downward")return "M274 264 C300 242 341 183 418 183 C451 184 466 218 461 239 C442 248 431 236 409 229 C360 220 344 282 290 284 Z";
     // Uttanasana: shoulder line and belly turn around fixed hips instead of
     // rotating a vertical oval away from the real femur attachment points.
-    if(p.kind==="fold")return "M342 294 C326 277 315 250 289 241 C273 238 260 249 262 269 C268 291 302 300 339 308 C359 313 381 303 382 281 C369 292 351 298 342 294Z";
+    if(standingFold(p))return "M342 294 C326 277 315 250 289 241 C273 238 260 249 262 269 C268 291 302 300 339 308 C359 313 381 303 382 281 C369 292 351 298 342 294Z";
     // All four contour quadrants share tangents; no overlapping ovals or hip stickers.
     return [
       "M",point(x-rx*.92,y-ry*.29),
@@ -175,8 +178,8 @@
     // Downward Dog needs a readable side profile. The original forward-facing
     // mask was rotated into the front limbs, making the face disappear.
     // Keep the authored head anchor, support contacts and body untouched.
-    if(p.kind==="downward"||p.kind==="fold"){
-      const folding=p.kind==="fold";
+    if(p.kind==="downward"||standingFold(p)){
+      const folding=standingFold(p);
       const profileScale=Math.max(scale,folding ? .70 : .73);
       const profileAngle=folding?-73:-10;
       const profileClass=folding?"mg-head-fold":"mg-head-downward";
@@ -241,14 +244,14 @@
   };
   const trunk=(p)=>{
     const [x,y,rx,ry,r]=p.body;
-    const torsoAngle=p.kind==="downward"||p.kind==="fold"?0:r;
+    const torsoAngle=p.kind==="downward"||standingFold(p)?0:r;
     return '<g class="mg-torso" data-pose-kind="'+p.kind+'" transform="rotate('+esc(torsoAngle)+' '+esc(x)+' '+esc(y)+')">'+
       '<path class="mg-body" d="'+bodyPath(p)+'"/>'+
       '<path class="mg-body-light" d="'+(p.kind==="downward"?
-        "M318 246Q362 202 420 207":p.kind==="fold"?
+        "M318 246Q362 202 420 207":standingFold(p)?
         "M336 289Q317 251 285 250":
         "M"+point(x-rx*.53,y-ry*.30)+" Q"+point(x-rx*.37,y-ry*.72)+" "+point(x+rx*.18,y-ry*.72))+'"/>'+
-      '<path class="mg-breath-plane" d="'+(p.kind==="fold"?
+      '<path class="mg-breath-plane" d="'+(standingFold(p)?
         "M310 277Q339 293 362 286Q351 309 310 277Z":
         "M"+point(x-rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.71)+" "+point(x+rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.38)+" "+point(x-rx*.40,y+ry*.13)+"Z")+'"/>'+
       '</g>';

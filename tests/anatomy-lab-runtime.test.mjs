@@ -7,6 +7,7 @@ const require=createRequire(import.meta.url);
 const rig=require("../articulated-rig.js");
 const solver=require("../rig-constraints.js");
 const motion=require("../rig-motion.js");
+const ik=require("../rig-ik.js");
 
 class Element {
  constructor(tag="div"){this.tagName=tag;this.children=[];this.attributes={};this.style={};this.handlers={};this.textContent="";this.value="0";this.checked=false;this.classes=new Set();this.classList={toggle:(name,on)=>{if(on)this.classes.add(name);else this.classes.delete(name)}}}
@@ -24,7 +25,7 @@ test("anatomy laboratory renders real SVG nodes and readable angles without a br
  nodes.overlay.checked=true;
  const requested=[],canceled=[];
  const document={getElementById:id=>nodes[id],createElementNS:(_ns,tag)=>new Element(tag),createElement:tag=>new Element(tag)};
- const context={window:{YOGA_ARTICULATED_RIG:rig,YOGA_RIG_CONSTRAINTS:solver,YOGA_RIG_MOTION:motion},document,
+ const context={window:{YOGA_ARTICULATED_RIG:rig,YOGA_RIG_CONSTRAINTS:solver,YOGA_RIG_MOTION:motion,YOGA_LIMB_IK:ik},document,
   requestAnimationFrame:cb=>{requested.push(cb);return requested.length},cancelAnimationFrame:id=>canceled.push(id)};
  const source=await readFile(new URL("../anatomy-lab.js",import.meta.url),"utf8");
  runInNewContext(source,context,{timeout:5000});

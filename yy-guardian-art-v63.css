@@ -121,3 +121,39 @@ body.quiet-mode #instructor-flow .studio-breath-dragon .sd31-wings{transform:non
  .movement-guardian{
   transform:translateY(14px);
 }
+
+
+/* Nila / Downward Dog: a true side-facing head instead of a rotated frontal
+   mask. Scoped to the active movement guardian and respects Yin/Yang palette. */
+:is(#instructor-flow,#studio-asana-library)
+ :is(#flow-guide,.studio-library-stage) .movement-guardian[data-kind="downward"] .mg-head-downward{
+  shape-rendering:geometricPrecision;
+}
+:is(#instructor-flow,#studio-asana-library)
+ :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-downward-face{
+  fill:var(--mg-coat,#e6ac85);stroke:var(--mg-deep,#a55d48);
+  stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;
+}
+:is(#instructor-flow,#studio-asana-library)
+ :is(#flow-guide,.studio-library-stage) .movement-guardian :is(.mg-downward-ear,.mg-downward-crest){
+  fill:var(--mg-ear,#eecaa1);stroke:var(--mg-deep,#a55d48);
+  stroke-width:2.8;stroke-linejoin:round;
+}
+:is(#instructor-flow,#studio-asana-library)
+ :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-downward-crest{
+  fill:var(--mg-leaf,#8aa690);
+}
+:is(#instructor-flow,#studio-asana-library)
+ :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-downward-muzzle{
+  fill:var(--mg-chest,#fae6ca);stroke:var(--mg-deep,#a55d48);
+  stroke-width:2.6;stroke-linejoin:round;
+}
+:is(#instructor-flow,#studio-asana-library)
+ :is(#flow-guide,.studio-library-stage) .movement-guardian :is(.mg-downward-eye,.mg-downward-brow,.mg-downward-nostril,.mg-downward-mouth,.mg-downward-cheek){
+  fill:none;stroke:var(--mg-eye,#58453d);stroke-width:4;
+  stroke-linecap:round;stroke-linejoin:round;
+}
+:is(#instructor-flow,#studio-asana-library)
+ :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-downward-brow{
+  stroke-width:2.8;stroke-opacity:.6;
+}

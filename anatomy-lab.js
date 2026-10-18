@@ -19,7 +19,7 @@ const play=document.getElementById("play"),reverse=document.getElementById("reve
 const sets=(n,attrs)=>Object.entries(attrs).forEach(([k,v])=>n.setAttribute(k,String(v)));
 function render(){
  const t=Number(slider.value)/100;
- const result=motion.frame(rig,solver,t,{iterations:180,tolerance:.75});
+ const result=motion.frame(rig,solver,t,{iterations:180,tolerance:.75,ik:window.YOGA_LIMB_IK});
  for(let i=0;i<rig.links.length;i++){const [a,b]=rig.links[i];const A=result.joints[a],B=result.joints[b];sets(links[i],{x1:A[0],y1:A[1],x2:B[0],y2:B[1]});sets(volumes[i],{x1:A[0],y1:A[1],x2:B[0],y2:B[1]})}
  for(let i=0;i<rig.names.length;i++){const A=result.joints[rig.names[i]];sets(dots[i],{cx:A[0],cy:A[1]})}
  for(let i=0;i<links.length;i++){

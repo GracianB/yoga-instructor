@@ -85,3 +85,24 @@ test("Tadasana's relaxed hands point downward and Uttanasana's head faces the ma
   });
  }
 });
+
+test("Warrior II front knee is bent over its foot; forward fold hinges from the pelvis",async({page},testInfo)=>{
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ const book=page.locator("#studio-asana-library");
+ await book.locator('button[data-library-pose="v68-warrior-ii"]').evaluate(node=>node.click());
+ let active=book.locator('.yy-pose.is-current[data-pose="v68-warrior-ii"]');
+ await expect(active).toHaveCSS("visibility","visible");
+ const front=active.locator('[data-mg-limb="leg-0"]');
+ await expect(front).toHaveAttribute("data-mg-limb","leg-0");
+ await expect(front.locator(".mg-knee")).toHaveAttribute("data-rig-source","authored");
+ const bend=await front.locator(".mg-limb-plane").getAttribute("d");
+ expect((bend.match(/Q/g)||[]).length).toBe(2);
+ await testInfo.attach("warrior-ii-knee",{body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"});
+ await book.locator('button[data-library-pose="v68-forward-fold"]').evaluate(node=>node.click());
+ active=book.locator('.yy-pose.is-current[data-pose="v68-forward-fold"]');
+ await expect(active).toHaveCSS("visibility","visible");
+ const torso=active.locator(".mg-torso");
+ await expect(torso).toHaveAttribute("transform",/rotate\(0\.0 366\.0 236\.0\)/);
+ await expect(torso.locator(".mg-body")).toHaveAttribute("d",/^M342 294 C326 277/);
+ await testInfo.attach("uttanasana-hip-hinge",{body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"});
+});

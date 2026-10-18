@@ -50,7 +50,7 @@
       support:["Rodilla alineada con el pie, hombros sueltos; acorta la zancada si es necesario.","Knee tracking over the foot, shoulders soft; shorten the stance if needed."],
       body:[361,234,72,87,-3],head:[355,105,.78,-8,"focus"],
       arms:["M312 187Q253 189 191 185","M412 189Q476 185 531 189"],
-      legs:["M328 298Q258 332 235 370","M401 294Q452 302 513 376"],
+      legs:["M328 298Q280 320 235 322Q235 345 235 370","M401 294Q452 302 513 376"],
       hands:[[191,185],[531,189]],feet:[[235,370],[513,376]],tail:[444,254,.54,-18]
     },
     {
@@ -118,7 +118,7 @@
       name:["Pinza de pie · Uttanasana","Standing forward fold · Uttanasana"],
       cue:["Flexiona las caderas y deja caer el peso del torso; dobla las rodillas sin problema.","Hinge at the hips and let the torso release; soft knees are welcome."],
       support:["Apoya las manos en bloques y evita forzar los isquiotibiales.","Rest hands on blocks and avoid forcing the hamstrings."],
-      body:[366,236,64,91,70],head:[272,281,.7,69,"closed"],
+      body:[366,236,64,91,0],head:[272,281,.7,-73,"closed"],
       arms:["M323 220Q277 280 264 362","M368 246Q328 305 335 369"],
       legs:["M338 294Q339 347 337 384","M389 295Q397 347 401 384"],
       hands:[[264,362],[335,369]],feet:[[337,384],[401,384]],tail:[419,248,.54,-10]

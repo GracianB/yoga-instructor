@@ -168,6 +168,24 @@
   // temple fins, almond eyes, long muzzle and a distinct chin silhouette.
   const head=(p)=>{
     const [x,y,scale,angle,expression]=p.head;
+    // Downward Dog needs a readable side profile. The original forward-facing
+    // mask was rotated into the front limbs, making the face disappear.
+    // Keep the authored head anchor, support contacts and body untouched.
+    if(p.kind==="downward"){
+      const profileScale=Math.max(scale,.73);
+      return '<g class="mg-head mg-head-downward" data-head-profile="side" transform="translate('+
+        esc(x)+' '+esc(y)+') rotate(-10) scale('+esc(profileScale)+')">'+
+        '<path class="mg-downward-ear" d="M21-43Q38-87 65-95Q62-61 48-34Z"/>'+
+        '<path class="mg-downward-crest" d="M5-52Q20-77 34-72L30-46Q45-66 59-55L48-24Z"/>'+
+        '<path class="mg-downward-face" d="M45-46Q12-69-27-45Q-52-33-57-7Q-84 10-80 37Q-70 65-18 66Q29 65 50 39Q64 15 56-17Q52-36 45-46Z"/>'+
+        '<path class="mg-downward-cheek" d="M-48 14Q-35 22-26 15Q-21 36-36 43"/>'+
+        '<path class="mg-downward-muzzle" d="M-51 8Q-76 1-96 22Q-106 39-82 49Q-60 53-42 43Q-30 32-35 21Z"/>'+
+        '<path class="mg-downward-eye" d="M-38-18Q-27-9-13-16"/>'+
+        '<path class="mg-downward-brow" d="M-41-27Q-24-36-10-26"/>'+
+        '<path class="mg-downward-nostril" d="M-85 30Q-80 27-75 32"/>'+
+        '<path class="mg-downward-mouth" d="M-83 44Q-69 50-53 40"/>'+
+        '</g>';
+    }
     const awake=["open","focus","smile"].includes(expression);
     // V62: pose-authored emotion, not an independent blinking timer.
     // Gentle brows communicate attention; a soft cheek lift reads as joy.

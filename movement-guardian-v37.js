@@ -175,6 +175,10 @@
       const profileScale=Math.max(scale,.73);
       return '<g class="mg-head mg-head-downward" data-head-profile="side" transform="translate('+
         esc(x)+' '+esc(y)+') rotate(-10) scale('+esc(profileScale)+')">'+
+        // Both swept horns remain part of Nila's established two-horn identity,
+        // but are offset in depth so the side-profile muzzle stays legible.
+        '<path class="mg-horn mg-horn-left mg-downward-horn-back" d="M-16-48Q-35-77-28-104Q-8-87 6-49Z"/>'+
+        '<path class="mg-horn mg-horn-right mg-downward-horn-front" d="M26-50Q42-91 68-104Q63-63 46-37Z"/>'+
         '<path class="mg-ear mg-downward-ear" d="M21-43Q38-87 65-95Q62-61 48-34Z"/>'+
         '<path class="mg-crest mg-downward-crest" d="M5-52Q20-77 34-72L30-46Q45-66 59-55L48-24Z"/>'+
         '<path class="mg-face mg-downward-face" d="M45-46Q12-69-27-45Q-52-33-57-7Q-84 10-80 37Q-70 65-18 66Q29 65 50 39Q64 15 56-17Q52-36 45-46Z"/>'+

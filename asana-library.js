@@ -119,9 +119,9 @@
       cue:["Flexiona las caderas y deja caer el peso del torso; dobla las rodillas sin problema.","Hinge at the hips and let the torso release; soft knees are welcome."],
       support:["Apoya las manos en bloques y evita forzar los isquiotibiales.","Rest hands on blocks and avoid forcing the hamstrings."],
       body:[366,236,64,91,0],head:[272,281,.7,-73,"closed"],
-      arms:["M323 220Q277 280 264 362","M368 246Q328 305 335 369"],
+      arms:["M323 220Q305 291 315 350","M368 246Q350 309 368 358"],
       legs:["M338 294Q339 347 337 384","M389 295Q397 347 401 384"],
-      hands:[[264,362],[335,369]],feet:[[337,384],[401,384]],tail:[419,248,.54,-10]
+      hands:[[315,350],[368,358]],feet:[[337,384],[401,384]],tail:[419,248,.54,-10]
     },
     {
       id:"v68-gratitude",kind:"seat",category:"restorative",

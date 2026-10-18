@@ -33,3 +33,15 @@ test("standing and seated forward folds keep separate authored torso rigs",()=>{
   assert.doesNotMatch(html,/NaN|Infinity/);
  }
 });
+
+test("Uttanasana hands hang beside the shins instead of becoming extra ground supports",()=>{
+ const pose=library.byId("v68-forward-fold");
+ for(let i=0;i<2;i++){
+  const [hx,hy]=pose.hands[i], [fx,fy]=pose.feet[i];
+  assert.ok(fy-hy>=20,"Hand must remain above the supporting foot");
+  assert.ok(Math.abs(fx-hx)<=36,"Relaxed wrist should stay near its shin");
+  const numbers=[...pose.arms[i].matchAll(/-?\\d+(?:\\.\\d+)?/g)].map(m=>Number(m[0]));
+  assert.deepEqual(numbers.slice(-2),[hx,hy]);
+ }
+ assert.deepEqual(pose.feet,[[337,384],[401,384]]);
+});

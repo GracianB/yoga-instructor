@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="es"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yoga · Laboratorio anatómico</title>
+<style>
+:root{color-scheme:light;background:#f5f1e8;color:#203d31;font:16px system-ui}
+body{margin:0;padding:clamp(1rem,4vw,3rem);max-width:1100px;margin-inline:auto}
+h1{font:clamp(2rem,5vw,4rem) Georgia,serif;margin:0 0 1rem}
+p{max-width:68ch;line-height:1.6}
+.controls{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin:1.5rem 0}
+button{background:#203d31;color:white;border:0;border-radius:2rem;padding:.75rem 1rem;cursor:pointer}
+button[aria-pressed=true]{background:#987244}
+input{width:min(20rem,65vw);accent-color:#527a60}
+svg{width:100%;max-height:65vh;background:#e7e2d6;border-radius:1rem}
+line{stroke:#315746;stroke-width:7;stroke-linecap:round}circle{fill:#c28d55;stroke:white;stroke-width:2}
+.floor{stroke:#a6a496;stroke-width:2}
+.output{font-variant-numeric:tabular-nums}small{color:#52645a}
+</style>
+<h1>Laboratorio anatómico</h1>
+<p>Vista técnica aislada para observar un esqueleto de 16 articulaciones, sin modificar el personaje de producción. Esta demostración es geométrica, no un modelo médico de movimiento.</p>
+<div class="controls">
+<button id="stand" aria-pressed="true">Tadasana</button>
+<button id="fold" aria-pressed="false">Uttanasana</button>
+<label for="progress">Transición <output id="value">0%</output></label><input type="range" id="progress" min="0" max="100" value="0">
+</div>
+<svg id="stage" viewBox="100 65 520 375" role="img" aria-label="Esqueleto articulado de referencia"><line class="floor" x1="120" y1="401" x2="600" y2="401"/></svg>
+<p class="output" id="status" aria-live="polite"></p><small>Los tobillos son puntos fijos. La longitud de segmentos se ajusta mediante un solucionador iterativo.</small>
+<script src="./articulated-rig.js"></script>
+<script src="./rig-constraints.js"></script>
+<script src="./anatomy-lab.js"></script>
+</html>

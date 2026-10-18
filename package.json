@@ -20,7 +20,7 @@
     "audit:architecture": "node tools/p3-architecture.mjs",
     "audit:inventory": "node tools/architecture-inventory.mjs",
     "audit:coupling": "node tools/runtime-coupling.mjs",
-    "test:anatomy": "node --test tests/anatomy-diagnostics.test.mjs tests/articulated-rig.test.mjs tests/rig-constraints.test.mjs tests/rig-motion.test.mjs tests/anatomy-lab.test.mjs tests/anatomy-lab-runtime.test.mjs tests/asana-domain.test.mjs",
+    "test:anatomy": "node --test tests/anatomy-diagnostics.test.mjs tests/articulated-rig.test.mjs tests/rig-constraints.test.mjs tests/rig-ik.test.mjs tests/rig-motion.test.mjs tests/anatomy-lab.test.mjs tests/anatomy-lab-runtime.test.mjs tests/asana-domain.test.mjs",
     "test:lab:browser": "playwright test tests/browser/anatomy-lab.spec.js"
   },
   "engines": {

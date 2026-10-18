@@ -6,6 +6,9 @@ for(const path of ["/anatomy-lab.html","/dist/anatomy-lab.html"]){
   await expect(page.getByRole("heading",{name:"Laboratorio anatómico"})).toBeVisible();
   await expect(page.locator("#stage line")).toHaveCount(46);
   await expect(page.locator("#knee-left")).toContainText("°");
+  if(path==="/anatomy-lab.html")await test.info().attach("tadasana-standing",{
+   body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"
+  });
   await page.locator("#progress").evaluate(input=>{
    input.value="50";input.dispatchEvent(new Event("input",{bubbles:true}));
   });
@@ -22,12 +25,12 @@ for(const path of ["/anatomy-lab.html","/dist/anatomy-lab.html"]){
   // Capture reproducible rendered evidence of the mid-transition and fold.
   // Reports are visual review material, not unapproved snapshot baselines.
   if(path==="/anatomy-lab.html")await test.info().attach("transition-halfway",{
-   body:await page.screenshot({animations:"disabled"}),contentType:"image/png"
+   body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"
   });
   await page.getByRole("button",{name:"Uttanasana"}).click();
   await expect(page.locator("#value")).toHaveText("100%");
   if(path==="/anatomy-lab.html")await test.info().attach("uttanasana-fold",{
-   body:await page.screenshot({animations:"disabled"}),contentType:"image/png"
+   body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"
   });
   await page.getByRole("button",{name:"Tadasana"}).click();
   await expect(page.locator("#value")).toHaveText("0%");

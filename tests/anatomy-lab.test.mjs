@@ -8,7 +8,7 @@ const solver=require("../rig-constraints.js");
 test("anatomy lab references independent engines, exposes reachable controls",async()=>{
  const html=await readFile(new URL("../anatomy-lab.html",import.meta.url),"utf8");
  const js=await readFile(new URL("../anatomy-lab.js",import.meta.url),"utf8");
- for(const id of ["stand","fold","progress","value","stage","status"])assert.ok(html.includes('id="'+id+'"'));
+ for(const id of ["stand","fold","progress","value","stage","status","play","reverse","overlay","compare"])assert.ok(html.includes('id="'+id+'"'));
  assert.ok(html.indexOf("articulated-rig.js")<html.indexOf("rig-constraints.js"));
  assert.ok(html.indexOf("rig-constraints.js")<html.indexOf("anatomy-lab.js"));
  assert.match(js,/addEventListener\("input",render\)/);
@@ -22,4 +22,9 @@ test("lab reference transition is finite and maintains anchored ankles",()=>{
   assert.deepEqual(out.joints.rightAnkle,target.joints.rightAnkle);
   for(const point of Object.values(out.joints))assert.ok(point.every(Number.isFinite));
  }
+});
+
+test("lab playback has pause, reverse and manual slider cancellation",async()=>{
+ const js=await readFile(new URL("../anatomy-lab.js",import.meta.url),"utf8");
+ for(const token of ['requestAnimationFrame(tick)','cancelAnimationFrame(raf)','reverse.addEventListener','overlay.addEventListener','compare.addEventListener','stop();render()'])assert.ok(js.includes(token),token);
 });

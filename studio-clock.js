@@ -1,4 +1,4 @@
-/* D18 Practice Studio: deterministic elapsed-time clock; no background loops. */
+/* D18 adapter: public clock contract backed by isolated time calculations. */
 (() => {
   "use strict";
 
@@ -48,9 +48,11 @@
     }
 
     snapshot() {
-      let elapsedMs = this.elapsedBefore;
+      const core = typeof window !== "undefined" ? window.YOGA_TIME_CORE : require("./practice-time-core.js");
+      let elapsedMs = this.status === "running"
+        ? core.elapsed(this.elapsedBefore, this.startedAt, this.now(), this.durationMs)
+        : this.elapsedBefore;
       if (this.status === "running") {
-        elapsedMs += Math.max(0, this.now() - this.startedAt);
         if (elapsedMs >= this.durationMs) {
           elapsedMs = this.durationMs;
           this.elapsedBefore = elapsedMs;
@@ -59,13 +61,7 @@
         }
       }
       elapsedMs = Math.min(this.durationMs, elapsedMs);
-      return Object.freeze({
-        status: this.status,
-        durationMs: this.durationMs,
-        elapsedMs,
-        remainingMs: Math.max(0, this.durationMs - elapsedMs),
-        progress: this.durationMs ? elapsedMs / this.durationMs : 0
-      });
+      return core.frame(this.status, this.durationMs, elapsedMs);
     }
   }
 

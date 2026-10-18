@@ -19,8 +19,16 @@ for(const path of ["/anatomy-lab.html","/dist/anatomy-lab.html"]){
   await expect(page.locator("#compare")).toBeChecked();
   await expect(page.locator("line.reference").first()).not.toHaveCSS("display","none");
   await expect(page.locator("line.reference").first()).toHaveAttribute("x1",/^[0-9.]+$/);
+  // Capture reproducible rendered evidence of both poses in the source lab.
+  // Reports are visual review material, not unapproved snapshot baselines.
+  if(path==="/anatomy-lab.html")await test.info().attach("uttanasana-reference",{
+   body:await page.screenshot({animations:"disabled"}),contentType:"image/png"
+  });
   await page.getByRole("button",{name:"Uttanasana"}).click();
   await expect(page.locator("#value")).toHaveText("100%");
+  if(path==="/anatomy-lab.html")await test.info().attach("uttanasana-fold",{
+   body:await page.screenshot({animations:"disabled"}),contentType:"image/png"
+  });
   await page.getByRole("button",{name:"Tadasana"}).click();
   await expect(page.locator("#value")).toHaveText("0%");
   await expect(page.locator("#status")).toContainText("Error máximo");

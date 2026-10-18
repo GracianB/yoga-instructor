@@ -1,7 +1,7 @@
 const {test,expect}=require("@playwright/test");
 
 test("D19: breathing and meditation reuse real D17 closed-eyed SVG poses",async({page})=>{
-  await page.goto("/");
+  await page.goto("/",{waitUntil:"domcontentloaded"});
   const dragon=page.locator("#flow-guide");
   await expect(dragon).toHaveAttribute("data-ready","true",{timeout:12000});
   const companion=page.locator(".studio-companion");
@@ -34,7 +34,7 @@ test("D19: breathing and meditation reuse real D17 closed-eyed SVG poses",async(
 
 test("D19: Yin/Yang preference carries to guided mode, reduced motion stays static",async({page})=>{
   await page.setViewportSize({width:320,height:760});
-  await page.goto("/");
+  await page.goto("/",{waitUntil:"domcontentloaded"});
   const guide=page.locator("#flow-guide");
   await expect(guide).toHaveAttribute("data-ready","true",{timeout:12000});
   await guide.locator('[data-yy-form="yin"]').evaluate(el=>el.click());

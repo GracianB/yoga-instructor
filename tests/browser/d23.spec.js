@@ -1,7 +1,7 @@
 const {test,expect}=require("@playwright/test");
 async function enter(page){
  await page.addInitScript(()=>{try{sessionStorage.setItem("gb-yoga-intro-seen","1")}catch(_){}});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  const root=page.locator("#flow-guide");
  await expect(root).toHaveAttribute("data-ready","true",{timeout:12000});
  await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());

@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');
 async function guide(page){
- await page.goto('/');
+ await page.goto('/',{waitUntil:'domcontentloaded'});
  const root=page.locator('#flow-guide');
  await expect(root).toHaveAttribute('data-ready','true',{timeout:12000});
  return root;

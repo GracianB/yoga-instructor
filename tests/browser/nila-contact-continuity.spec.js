@@ -18,7 +18,7 @@ test("Nila contact anchors are attached to their actual SVG limb terminals in 12
   const pairs=await pose.locator(".movement-guardian").evaluate(guardian=>{
    const values=[];
    for(const type of ["arm","leg"])for(let i=0;i<2;i++){
-    const limb=guardian.querySelector('[data-mg-limb="'+type+'-'+i+'"] .mg-limb-shell');
+    const limb=guardian.querySelector('[data-mg-limb="'+type+'-'+i+'"] .mg-limb-plane');
     const paw=guardian.querySelector('[data-contact="'+(type==="arm"?"hand":"foot")+'-'+i+'"]');
     if(!limb||!paw){values.push({type,i,missing:true});continue}
     const end=limb.getPointAtLength(limb.getTotalLength()).matrixTransform(limb.getScreenCTM());

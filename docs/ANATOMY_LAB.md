@@ -36,6 +36,7 @@ in a PR build does **not** mean that a public preview or GitHub Pages deployment
 | Diagnostics | `anatomy-diagnostics.js` | Joint angle and support diagnostics, read-only |
 | Reference rig | `articulated-rig.js` | 16 joints, connections, illustrative standing/fold targets |
 | Constraints | `rig-constraints.js` | Iterative segment-length correction, anchored ankles, residuals |
+| Two-bone IK | `rig-ik.js` | Side-selectable knee/elbow bend, contact reach residuals |
 | Motion | `rig-motion.js` | Smooth easing, deterministic frames, angle measurements |
 | Lab UI | `anatomy-lab.js` | SVG body rendering, controls, overlays and error visualizations |
 | Presentation | `anatomy-lab.css` | Scoped responsive layout independent of portfolio styles |

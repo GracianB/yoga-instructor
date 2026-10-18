@@ -174,7 +174,7 @@
     // Keep the authored head anchor, support contacts and body untouched.
     if(p.kind==="downward"||p.kind==="fold"){
       const folding=p.kind==="fold";
-      const profileScale=Math.max(scale,folding?.70:.73);
+      const profileScale=Math.max(scale,folding ? .70 : .73);
       const profileAngle=folding?-73:-10;
       const profileClass=folding?"mg-head-fold":"mg-head-downward";
       return '<g class="mg-head '+profileClass+'" data-head-profile="side" transform="translate('+

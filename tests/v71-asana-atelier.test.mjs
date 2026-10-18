@@ -25,12 +25,12 @@ test('V71: twelve bilingual asanas each have setup, breath and release',()=>{
 });
 
 test('V71: same Nila rig gives a tangent-based palm and grounded feet',()=>{
-  assert.match(guardian,/paw=\(xy,kind,index,curve,atHeart\)=>/);
+  assert.match(guardian,/paw=\(xy,kind,index,curve,atHeart,poseKind\)=>/);
   assert.match(guardian,/const tip=sample\(parts\[parts\.length-1\],\.985\)/);
   assert.match(guardian,/vertical\|\|y>=346\?0/);
   assert.match(guardian,/mg-prayer-palm/);
   assert.match(guardian,/p\.kind==="downward"/);
-  assert.match(guardian,/p\.hands\.map\(\(pt,i\)=>paw\(pt,"hand",i,p\.arms\[i\],joined\)\)/);
+  assert.match(guardian,/p\.hands\.map\(\(pt,i\)=>paw\(pt,"hand",i,p\.arms\[i\],joined,p\.kind\)\)/);
   assert.doesNotMatch(guardian,/setInterval\(|requestAnimationFrame\(/);
 });
 

@@ -20,8 +20,8 @@ test('V60: limb joints interpolate tangent without moving contact endpoints', ()
   assert.match(movement, /u>\.41 && u<\.59/);
   assert.match(movement, /v\*v\*\(3-2\*v\)/);
   assert.match(movement, /const pos=sample\(sections\[seg\],t\)/);
-  assert.match(movement, /p\.feet\.map\(\(pt,i\)=>paw\(pt,"foot",i,p\.legs\[i\],false\)\)/);
-  assert.match(movement, /p\.hands\.map\(\(pt,i\)=>paw\(pt,"hand",i,p\.arms\[i\],joined\)\)/);
+  assert.match(movement, /p\.feet\.map\(\(pt,i\)=>paw\(pt,"foot",i,p\.legs\[i\],false,p\.kind\)\)/);
+  assert.match(movement, /p\.hands\.map\(\(pt,i\)=>paw\(pt,"hand",i,p\.arms\[i\],joined,p\.kind\)\)/);
 });
 
 test('V58/V60: guardian styling included in release', () => {

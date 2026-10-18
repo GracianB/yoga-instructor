@@ -11,16 +11,16 @@ const source=await get("index.html");
 const links=sourceSheets(source);
 const build=()=>compileProductionStyles(source,path=>get(path));
 
-test("P4: 77 original sheets become one versioned request without changing cascade order",async()=>{
+test("P4: original sheets become one versioned request without changing cascade order",async()=>{
  const result=await build();
- assert.equal(links.length,77);
- assert.equal(result.sourceCount,77);
+ assert.ok(links.length>0);
+ assert.equal(result.sourceCount,links.length);
  assert.equal(sourceSheetsForOutput(result.html).length,1);
  assert.deepEqual(result.sources,links.map(x=>x.path));
  assert.ok(result.filename.startsWith("yoga-styles-v105."));
  assert.equal(createHash("sha256").update(result.css).digest("hex"),result.digest);
  assert.ok(result.filename.includes(result.digest.slice(0,16)));
- // Byte-for-byte reproduction of all 77 CSS modules in source order.
+ // Byte-for-byte reproduction of all CSS modules in source order.
  const exact=(await Promise.all(links.map(async ({path})=>
    "/* P4 original: "+path+" */\n"+await get(path)+"\n"))).join("\n");
  assert.equal(result.css,exact);
@@ -38,7 +38,7 @@ test("P4: build-only CSS optimization retains fonts, all deferred scripts and co
  assert.equal(result.html.replace('<link rel="stylesheet" href="./'+result.filename+'">',"")
    .replace(/\n\s*\n/g,"\n").includes("<body>"),true);
  assert.equal(result.html.match(/<link\b[^>]*rel="stylesheet"[^>]*>/g)?.length,2);
- assert.equal((result.html.match(/<script\b[^>]*\bsrc=/g)||[]).length,77);
+ assert.equal((result.html.match(/<script\b[^>]*\bsrc=/g)||[]).length,(source.match(/<script\b[^>]*\bsrc=/g)||[]).length);
  assert.ok(result.html.includes('id="studio-asana-library"')===source.includes('id="studio-asana-library"'));
 });
 
@@ -54,4 +54,16 @@ test("P4: reject duplicate CSS, semantic media links and imports rather than sil
  await assert.rejects(
    ()=>compileProductionStyles(source,async path=>path===links[0].path
      ?"":"body{color:red}"),/empty stylesheet/);
+});
+
+test("P4: one stylesheet remains supported after full architecture consolidation",async()=>{
+ const html='<html><head><link rel="stylesheet" href="./only.css"></head><body>Yoga</body></html>';
+ const a=await compileProductionStyles(html,async()=>"body { color: #123; }");
+ const b=await compileProductionStyles(html,async()=>"body { color: #123; }");
+ assert.equal(a.sourceCount,1);
+ assert.equal(a.digest,b.digest);
+ assert.equal(a.html,b.html);
+ assert.equal(sourceSheetsForOutput(a.html).length,1);
+ assert.match(a.css,/body \{ color: #123; \}/);
+ assert.throws(()=>sourceSheets("<html></html>"),/no local stylesheets/);
 });

@@ -40,7 +40,7 @@ test("Uttanasana hands hang beside the shins instead of becoming extra ground su
   const [hx,hy]=pose.hands[i], [fx,fy]=pose.feet[i];
   assert.ok(fy-hy>=20,"Hand must remain above the supporting foot");
   assert.ok(Math.abs(fx-hx)<=36,"Relaxed wrist should stay near its shin");
-  const numbers=[...pose.arms[i].matchAll(/-?\\d+(?:\\.\\d+)?/g)].map(m=>Number(m[0]));
+  const numbers=pose.arms[i].match(/[0-9]+/g).map(Number);
   assert.deepEqual(numbers.slice(-2),[hx,hy]);
  }
  assert.deepEqual(pose.feet,[[337,384],[401,384]]);

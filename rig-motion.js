@@ -29,7 +29,8 @@ function frame(rig,solver,t,options={}){
  const target=rig.interpolate(rig.standing,rig.fold,eased);
  const result=solver.solve(rig.standing,target,{iterations:options.iterations??180,tolerance:options.tolerance??0.75,anchors:["leftAnkle","rightAnkle"]});
  return Object.freeze({progress:t,eased,joints:result.joints,maxError:result.maxError,
-  converged:result.converged,metrics:measure(result.joints)});
+  converged:result.converged,iterationsUsed:result.iterationsUsed,
+  segmentErrors:result.segmentErrors,metrics:measure(result.joints)});
 }
 const api=Object.freeze({ease,measure,jointAngle,frame});
 if(root)root.YOGA_RIG_MOTION=api;

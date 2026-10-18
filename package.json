@@ -12,13 +12,14 @@
     "start": "node tools/serve.mjs",
     "test": "node --test tests/*.test.mjs",
     "test:browser": "playwright test",
-    "quality": "npm run syntax && npm run check && npm test && npm run audit:v80 && npm run audit:v99 && npm run audit:release && npm run audit:architecture && npm run audit:inventory",
+    "quality": "npm run syntax && npm run check && npm test && npm run audit:v80 && npm run audit:v99 && npm run audit:release && npm run audit:architecture && npm run audit:inventory && npm run audit:coupling",
     "build": "node tools/build.mjs",
     "audit:release": "node tools/release-audit.mjs",
     "audit:v80": "node tools/v80-audit.mjs",
     "audit:v99": "node tools/v99-integrity.mjs",
     "audit:architecture": "node tools/p3-architecture.mjs",
-    "audit:inventory": "node tools/architecture-inventory.mjs"
+    "audit:inventory": "node tools/architecture-inventory.mjs",
+    "audit:coupling": "node tools/runtime-coupling.mjs"
   },
   "engines": {
     "node": ">=24"

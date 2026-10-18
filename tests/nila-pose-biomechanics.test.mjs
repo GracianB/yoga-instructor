@@ -27,7 +27,7 @@ test("Uttanasana has a horizontal hip-hinged body, not a rotating detached oval"
  assert.ok(pose.head[0]<pose.body[0]&&pose.head[1]>pose.body[1]);
  assert.ok(pose.head[3]<0);
  assert.match(source,/standingFold=p=>p\.id==="v68-forward-fold"/);
- assert.match(source,/if\(standingFold\(p\)\)return "M342 294 C326 277/);
+ assert.match(source,/if\(standingFold\(p\)\)return "M398 234 C372 218/);
  assert.match(source,/p\.kind==="downward"\|\|standingFold\(p\)\?0:r/);
  assert.deepEqual(pose.feet,[[337,384],[401,384]]);
 });

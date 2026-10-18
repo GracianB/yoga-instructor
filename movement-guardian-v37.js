@@ -19,7 +19,7 @@
     if(p.kind==="downward")return "M274 264 C300 242 341 183 418 183 C451 184 466 218 461 239 C442 248 431 236 409 229 C360 220 344 282 290 284 Z";
     // Uttanasana: shoulder line and belly turn around fixed hips instead of
     // rotating a vertical oval away from the real femur attachment points.
-    if(standingFold(p))return "M342 294 C326 277 315 250 289 241 C273 238 260 249 262 269 C268 291 302 300 339 308 C359 313 381 303 382 281 C369 292 351 298 342 294Z";
+    if(standingFold(p))return "M398 234 C372 218 349 222 337 243 C315 264 297 275 283 287 C266 302 268 322 283 323 C302 319 318 304 337 283 C353 268 380 263 398 264 C413 258 415 242 398 234Z";
     // All four contour quadrants share tangents; no overlapping ovals or hip stickers.
     return [
       "M",point(x-rx*.92,y-ry*.29),
@@ -249,10 +249,10 @@
       '<path class="mg-body" d="'+bodyPath(p)+'"/>'+
       '<path class="mg-body-light" d="'+(p.kind==="downward"?
         "M318 246Q362 202 420 207":standingFold(p)?
-        "M336 289Q317 251 285 250":
+        "M397 242Q354 232 301 294":
         "M"+point(x-rx*.53,y-ry*.30)+" Q"+point(x-rx*.37,y-ry*.72)+" "+point(x+rx*.18,y-ry*.72))+'"/>'+
       '<path class="mg-breath-plane" d="'+(standingFold(p)?
-        "M310 277Q339 293 362 286Q351 309 310 277Z":
+        "M348 258Q336 277 305 302Q354 284 366 262Z":
         "M"+point(x-rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.71)+" "+point(x+rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.38)+" "+point(x-rx*.40,y+ry*.13)+"Z")+'"/>'+
       '</g>';
   };
@@ -262,8 +262,8 @@
     const [hx,hy,scale,angle]=p.head;
     const [x,y,rx,ry]=p.body;
     const lateral=Math.abs(angle)>35||Math.abs(x-hx)>85;
-    const topX=lateral?x-rx*.63:x;
-    const topY=lateral?y-ry*.18:y-ry*.75;
+    const topX=standingFold(p)?294:lateral?x-rx*.63:x;
+    const topY=standingFold(p)?286:lateral?y-ry*.18:y-ry*.75;
     const endX=lateral?hx+46*scale:hx;
     const endY=lateral?hy+12*scale:hy+54*scale;
     const dx=endX-topX,dy=endY-topY;
@@ -324,7 +324,7 @@
   const joins=p=>{
     const [x,y,rx,ry]=p.body;
     const horizontal=ry<60||p.kind==="downward";
-    const cx=horizontal?x+rx*.54:x,cy=horizontal?y+ry*.20:y+ry*.67;
+    const cx=standingFold(p)?367:horizontal?x+rx*.54:x,cy=standingFold(p)?250:horizontal?y+ry*.20:y+ry*.67;
     const w=horizontal?rx*.44:rx*.68,h=horizontal?Math.max(25,ry*.60):Math.max(22,ry*.35);
     const pelvis='M'+point(cx-w,cy)+' Q'+point(cx-w*.95,cy-h)+
       ' '+point(cx,cy-h)+' Q'+point(cx+w*.95,cy-h)+

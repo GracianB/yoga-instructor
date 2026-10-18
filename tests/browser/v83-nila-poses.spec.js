@@ -111,7 +111,7 @@ test("Warrior II front knee is bent over its foot; forward fold hinges from the 
  active=book.locator('.yy-pose.is-current[data-pose="v68-forward-fold"]');
  await expect(active).toHaveCSS("visibility","visible");
  const torso=active.locator(".mg-torso");
- await expect(torso).toHaveAttribute("transform",/rotate\(0\.0 366\.0 236\.0\)/);
- await expect(torso.locator(".mg-body")).toHaveAttribute("d",/^M342 294 C326 277/);
+ await expect(torso).toHaveAttribute("transform",/rotate\(0\.0 370\.0 250\.0\)/);
+ await expect(torso.locator(".mg-body")).toHaveAttribute("d",/^M398 234 C372 218/);
  await capturePose(page,testInfo,"uttanasana-hip-hinge");
 });

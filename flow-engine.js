@@ -56,10 +56,8 @@
 
     emit() {
       const snapshot = this.snapshot();
-      if (typeof window !== "undefined" && typeof window.dispatchEvent === "function") {
-        window.dispatchEvent(new CustomEvent("yoga:flow", { detail: snapshot }));
-      }
-      return snapshot;
+      const bridge=typeof window!=="undefined" ? window.YOGA_FLOW_EVENTS : require("./flow-event-bridge.js");
+      return bridge.dispatch(snapshot);
     }
 
     record() {

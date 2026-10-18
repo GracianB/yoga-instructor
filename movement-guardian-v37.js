@@ -32,8 +32,11 @@
     const tip=sample(parts[parts.length-1],.985);
     const degrees=Math.atan2(tip.dy,tip.dx)*180/Math.PI;
     const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+    // Hands follow the undirected wrist axis: an extended LEFT arm must
+    // stay horizontal like the right arm, rather than twisting 66 degrees.
+    const handAxis=((degrees+90)%180+180)%180-90;
     const orientation=atHeart?(index===0?-18:18):
-      vertical&&y<350?-27:vertical||y>=346?0:clamp(degrees,-66,66);
+      vertical&&y<350?-27:vertical||y>=346?0:clamp(handAxis,-66,66);
     const palm=atHeart
       ?'M-12 -12 Q-9 -24 1 -20 Q15 -16 16 -2 Q17 13 4 17 Q-11 17 -15 6 Q-17 -6 -12 -12Z'
       :vertical
@@ -309,12 +312,15 @@
   // Its tapered visible surface prevents the chest from hiding whole limbs.
   const frontArms=p=>p.arms.map((d,i)=>{
     const sections=curveSections(d),left=[],right=[];
-    for(let k=0;k<=18;k++){
-      const u=.21+.79*k/18,scaled=u*sections.length;
+    // Extend the visible silhouette back beneath the shoulder socket;
+    // the older .21 start left a visible void on horizontal Warrior II arms.
+    for(let k=0;k<=32;k++){
+      const u=.06+.94*k/32,scaled=u*sections.length;
       const index=Math.min(sections.length-1,Math.floor(scaled));
       const at=sample(sections[index],Math.min(1,scaled-index));
       const mag=Math.max(.001,Math.hypot(at.dx,at.dy));
-      const nx=-at.dy/mag,ny=at.dx/mag,width=21-(k/18)*7;
+      const nx=-at.dy/mag,ny=at.dx/mag;
+      const phase=k/32,width=24-10*phase+1.5*Math.sin(Math.PI*phase);
       left.push(point(at.x+nx*width,at.y+ny*width));
       right.push(point(at.x-nx*width,at.y-ny*width));
     }

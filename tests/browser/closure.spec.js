@@ -10,7 +10,9 @@ async function open(page, options = {}) {
   page.on('response', response => { if (response.url().startsWith('http://127.0.0.1:4185') && response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
   page.on('pageerror', error => errors.push(error.message));
   page.on('console', message => { if (['error', 'warning'].includes(message.type())) errors.push(message.text()); });
-  await page.goto(options.url || '/');
+  // All classic deferred scripts finish before DOMContentLoaded. Waiting for the
+  // full load event also waits on unrelated assets and can freeze Firefox CI.
+  await page.goto(options.url || '/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('h1')).toBeVisible();
   return errors;
 }

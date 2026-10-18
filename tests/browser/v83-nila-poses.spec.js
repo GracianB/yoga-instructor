@@ -50,3 +50,34 @@ test("Nila's Downward Dog profile has a distinct readable face in Yin and Yang",
   });
  }
 });
+
+
+test("Tadasana's relaxed hands point downward and Uttanasana's head faces the mat",async({page},testInfo)=>{
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ const book=page.locator("#studio-asana-library");
+ for(const data of [
+  {id:"d24-mountain",profile:false,name:"tadasana"},
+  {id:"v68-forward-fold",profile:true,name:"uttanasana"}
+ ]){
+  await book.locator('button[data-library-pose="'+data.id+'"]').evaluate(node=>node.click());
+  const active=book.locator('.yy-pose.is-current[data-pose="'+data.id+'"]');
+  await expect(active).toHaveCSS("visibility","visible");
+  const guardian=active.locator(".movement-guardian");
+  await expect(guardian.locator(".mg-knee")).toHaveCount(2);
+  await expect(guardian.locator('[data-contact^="foot-"]')).toHaveCount(2);
+  if(data.profile){
+   const face=guardian.locator(".mg-head-fold");
+   await expect(face).toHaveAttribute("data-head-profile","side");
+   await expect(face.locator(".mg-horn")).toHaveCount(2);
+   await expect(face).toHaveAttribute("transform",/rotate\\(-73\\)/);
+  }else{
+   await expect(guardian.locator(".mg-head-fold")).toHaveCount(0);
+   const hands=await guardian.locator(".mg-hand").evaluateAll(nodes=>nodes.map(n=>n.getAttribute("transform")));
+   expect(hands).toHaveLength(2);
+   for(const hand of hands)expect(hand).toMatch(/rotate\\(0\\)/);
+  }
+  await testInfo.attach("nila-"+data.name+"-anatomy",{
+   body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"
+  });
+ }
+});

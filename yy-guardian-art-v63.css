@@ -157,3 +157,10 @@ body.quiet-mode #instructor-flow .studio-breath-dragon .sd31-wings{transform:non
  :is(#flow-guide,.studio-library-stage) .movement-guardian .mg-downward-brow{
   stroke-width:2.8;stroke-opacity:.6;
 }
+
+/* Spatial hierarchy: the far horn recedes, the nearer horn remains defined.
+   An upside-down Uttanasana profile uses the same single character face rig. */
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian :is(.mg-downward-horn-back){opacity:.72;stroke-opacity:.74}
+:is(#instructor-flow,#studio-asana-library) :is(#flow-guide,.studio-library-stage)
+ .movement-guardian .mg-head-fold .mg-downward-face{stroke-width:2.8}

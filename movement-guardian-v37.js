@@ -26,7 +26,7 @@
   // V71: limbs and paws share an authored terminal tangent. A palm
   // should follow an elevated arm, while weight-bearing contacts stay
   // flat on the mat. Prayer palms have a recognizable joined silhouette.
-  const paw=(xy,kind,index,curve,atHeart)=>{
+  const paw=(xy,kind,index,curve,atHeart,poseKind)=>{
     const [x,y]=xy,vertical=kind==="foot";
     const parts=curveSections(curve);
     const tip=sample(parts[parts.length-1],.985);
@@ -36,6 +36,7 @@
     // stay horizontal like the right arm, rather than twisting 66 degrees.
     const handAxis=((degrees+90)%180+180)%180-90;
     const orientation=atHeart?(index===0?-18:18):
+      poseKind==="mountain"&&kind==="hand"?0:
       vertical&&y<350?-27:vertical||y>=346?0:clamp(handAxis,-66,66);
     const palm=atHeart
       ?'M-12 -12 Q-9 -24 1 -20 Q15 -16 16 -2 Q17 13 4 17 Q-11 17 -15 6 Q-17 -6 -12 -12Z'
@@ -171,10 +172,13 @@
     // Downward Dog needs a readable side profile. The original forward-facing
     // mask was rotated into the front limbs, making the face disappear.
     // Keep the authored head anchor, support contacts and body untouched.
-    if(p.kind==="downward"){
-      const profileScale=Math.max(scale,.73);
-      return '<g class="mg-head mg-head-downward" data-head-profile="side" transform="translate('+
-        esc(x)+' '+esc(y)+') rotate(-10) scale('+esc(profileScale)+')">'+
+    if(p.kind==="downward"||p.kind==="fold"){
+      const folding=p.kind==="fold";
+      const profileScale=Math.max(scale,folding?.70:.73);
+      const profileAngle=folding?-73:-10;
+      const profileClass=folding?"mg-head-fold":"mg-head-downward";
+      return '<g class="mg-head '+profileClass+'" data-head-profile="side" transform="translate('+
+        esc(x)+' '+esc(y)+') rotate('+esc(profileAngle)+') scale('+esc(profileScale)+')">'+
         // Both swept horns remain part of Nila's established two-horn identity,
         // but are offset in depth so the side-profile muzzle stays legible.
         '<path class="mg-horn mg-horn-left mg-downward-horn-back" d="M-16-48Q-35-77-28-104Q-8-87 6-49Z"/>'+
@@ -357,8 +361,8 @@
     // Only the hands and a soft joining-gesture forearm pass in FRONT.
     const anatomy=joins(p);
     const joined=p.kind==="finish"||p.id==="v68-gratitude";
-    const feet=p.feet.map((pt,i)=>paw(pt,"foot",i,p.legs[i],false)).join("");
-    const hands=p.hands.map((pt,i)=>paw(pt,"hand",i,p.arms[i],joined)).join("");
+    const feet=p.feet.map((pt,i)=>paw(pt,"foot",i,p.legs[i],false,p.kind)).join("");
+    const hands=p.hands.map((pt,i)=>paw(pt,"hand",i,p.arms[i],joined,p.kind)).join("");
     const front=joined?'<g class="mg-gesture-forearms">'+
       p.arms.map(d=>'<path class="mg-gesture-forearm" d="'+d+'"/>').join("")+'</g>':"";
     return '<g class="movement-guardian" data-guardian="nila" data-kind="'+p.kind+'" aria-hidden="true">'+

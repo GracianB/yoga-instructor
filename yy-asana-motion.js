@@ -109,8 +109,12 @@
     stop();settle();
   });
   window.addEventListener("yoga:pose-ready",({detail})=>{
+    // A previous scene can finish rendering after navigation or pause/resume.
+    // Never let a stale pose-ready event replace the active flow phase.
+    const phase=root.dataset.phase;
+    if(detail?.phase && detail.phase!==phase)return;
     clock.ready=!!detail?.ok;
-    clock.phase=detail?.phase||root.dataset.phase;
+    clock.phase=phase;
     settle();
   });
   window.addEventListener("yoga:flow",({detail})=>{

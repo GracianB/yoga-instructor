@@ -12,7 +12,7 @@ const css=read('yy-guardian-art-v63.css');
 
 test('V63 Nila: single filled cervical volume retains authored pose endpoints',()=>{
  assert.match(movement,/const left=\[\],right=\[\]/);
- assert.match(movement,/const topX=standingFold\(p\)\?294:lateral\?x-rx\*\.63:x/);
+ assert.match(movement,/const topX=standingFold\(p\)\?301:lateral\?x-rx\*\.63:x/);
  assert.match(movement,/const endX=lateral\?hx\+46\*scale:hx/);
  assert.match(movement,/return '<path class="mg-neck" d="M'/);
  assert.ok(movement.includes("right.reverse().join(' L')+'Z\"/>'"));

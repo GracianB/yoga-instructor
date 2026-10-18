@@ -118,10 +118,10 @@
       name:["Pinza de pie · Uttanasana","Standing forward fold · Uttanasana"],
       cue:["Flexiona las caderas y deja caer el peso del torso; dobla las rodillas sin problema.","Hinge at the hips and let the torso release; soft knees are welcome."],
       support:["Apoya las manos en bloques y evita forzar los isquiotibiales.","Rest hands on blocks and avoid forcing the hamstrings."],
-      body:[370,250,66,84,0],head:[285,302,.7,-73,"closed"],
-      arms:["M300 285Q294 313 315 350","M327 280Q347 311 376 353"],
-      legs:["M338 249Q328 317 337 384","M389 250Q404 319 401 384"],
-      hands:[[315,350],[376,353]],feet:[[337,384],[401,384]],tail:[419,248,.54,-10]
+      body:[380,192,52,50,0],head:[277,286,.58,-73,"closed"],
+      arms:["M307 245Q307 291 311 342","M337 235Q348 293 365 350"],
+      legs:["M347 205Q337 308 337 384","M397 205Q402 308 401 384"],
+      hands:[[311,342],[365,350]],feet:[[337,384],[401,384]],tail:[400,188,.32,-8]
     },
     {
       id:"v68-gratitude",kind:"seat",category:"restorative",

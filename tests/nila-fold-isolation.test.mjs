@@ -21,13 +21,13 @@ test("standing and seated forward folds keep separate authored torso rigs",()=>{
  const standingArt=draw(standing);
  const seatedArt=draw(seated);
  const body=html=>html.match(/<path class="mg-body" d="([^"]+)"/)?.[1];
- assert.ok(body(standingArt)?.startsWith("M398 234 C372 218"));
+ assert.ok(body(standingArt)?.startsWith("M404 172 C382 170"));
  assert.ok(body(seatedArt)?.startsWith("M"));
  assert.notEqual(body(standingArt),body(seatedArt),"No shared standing torso on seated fold");
  assert.doesNotMatch(seatedArt,/<g class="mg-head mg-head-fold"/);
  assert.match(standingArt,/<g class="mg-head mg-head-fold"/);
  assert.match(seatedArt,/class="mg-torso"[^>]*rotate\(-33(?:\.0)? 353(?:\.0)? 291(?:\.0)?\)/);
- assert.match(standingArt,/class="mg-torso"[^>]*rotate\(0(?:\.0)? 370(?:\.0)? 250(?:\.0)?\)/);
+ assert.match(standingArt,/class="mg-torso"[^>]*rotate\(0(?:\.0)? 380(?:\.0)? 192(?:\.0)?\)/);
  for(const html of [standingArt,seatedArt]){
   assert.equal((html.match(/data-contact="(?:hand|foot)-[01]"/g)||[]).length,4);
   assert.doesNotMatch(html,/NaN|Infinity/);
@@ -64,4 +64,17 @@ test("Uttanasana retains vertical supporting legs and a forward-downward shoulde
   "Head must hang beneath the shoulders");
  assert.ok(pose.head[0]<leftLeg[0],
   "Head hangs ahead of the support legs");
+});
+
+test("Standing Uttanasana has high load-bearing hips, vertical legs, and a smaller hanging head",()=>{
+ const pose=library.byId("v68-forward-fold");
+ assert.ok(pose.body[1]<215,"Hip must be elevated, not near knee height");
+ for(const leg of pose.legs){
+  const values=leg.match(/[0-9]+/g).map(Number);
+  assert.ok(values[5]-values[1]>165,"Supporting leg should remain long");
+  assert.ok(Math.abs(values[4]-values[0])<13,"Supporting shin is nearly vertical");
+ }
+ assert.ok(pose.head[2]<=.6,"Folded head should not overwhelm the body");
+ assert.ok(pose.head[1]>pose.body[1]+80,"Head hangs well below the pelvis");
+ assert.ok(pose.hands.every(([x,y])=>y<365&&y>330));
 });

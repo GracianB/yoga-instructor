@@ -1,5 +1,5 @@
 /* Deterministic inventory of public entrypoint dependencies. Read-only. */
-import {readFile,writeFile,mkdir,stat} from "node:fs/promises";
+import {readFile,writeFile,mkdir} from "node:fs/promises";
 import {resolve,dirname,relative} from "node:path";
 import {fileURLToPath,pathToFileURL} from "node:url";
 import {createHash} from "node:crypto";
@@ -12,7 +12,7 @@ export async function inventory(base=root){
  for(const page of pages){
   const html=await readFile(resolve(base,page),"utf8");
   const refs=collect(html);
-  const scripts=refs.script.map((x,index)=>({path:x.path,index,deferred:/\\sdefer(?:\\s|>|$)/.test(x.tag),module:/\\stype="module"/.test(x.tag)}));
+  const scripts=refs.script.map((x,index)=>({path:x.path,index,deferred:/\sdefer(?:\s|>|$)/.test(x.tag),module:/\stype="module"/.test(x.tag)}));
   const styles=refs.sheet.map((x,index)=>({path:x.path,index}));
   entries.push({page,scripts,styles});
   for(const path of [...new Set([...refs.href,...scripts.map(x=>x.path),...styles.map(x=>x.path)])]){

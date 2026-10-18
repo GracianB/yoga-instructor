@@ -31,7 +31,8 @@ test("Mountain hands are relaxed, while the fold face points toward the mat",()=
   assert.equal(Number(m[1]),0);
  }
  assert.match(fold,/mg-head-fold[^>]*data-head-profile="side"/);
- const angle=fold.match(/mg-head-fold[^>]*rotate\\(([^)]+)\\)/);
- assert.ok(angle);
- assert.equal(Number(angle[1]),-73);
+ const faceTag=fold.match(/<g class="mg-head mg-head-fold"[^>]+>/)?.[0];
+ assert.ok(faceTag,"Forward-fold face must be present");
+ const angle=faceTag.split("rotate(")[1]?.split(")")[0];
+ assert.equal(Number(angle),-73);
 });

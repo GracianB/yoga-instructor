@@ -26,5 +26,5 @@ test("lab reference transition is finite and maintains anchored ankles",()=>{
 
 test("lab playback has pause, reverse and manual slider cancellation",async()=>{
  const js=await readFile(new URL("../anatomy-lab.js",import.meta.url),"utf8");
- for(const token of ['requestAnimationFrame(tick)','cancelAnimationFrame(raf)','reverse.addEventListener','overlay.addEventListener','compare.addEventListener','stop();render()'])assert.ok(js.includes(token),token);
+ for(const token of ['position=v','requestAnimationFrame(tick)','cancelAnimationFrame(raf)','reverse.addEventListener','overlay.addEventListener','compare.addEventListener','stop();render()'])assert.ok(js.includes(token),token);
 });

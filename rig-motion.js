@@ -4,7 +4,6 @@
  */
 (function(root){
 "use strict";
-const clamp=t=>Math.max(0,Math.min(1,t));
 const xy=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1]);
 function ease(t){
  if(!Number.isFinite(t)||t<0||t>1)throw RangeError("Progress must be between 0 and 1");
@@ -26,11 +25,25 @@ function measure(j){
 function frame(rig,solver,t,options={}){
  if(!rig?.standing||!rig?.fold||typeof rig.interpolate!=="function"||typeof solver?.solve!=="function")throw TypeError("Rig and constraint solver are required");
  const eased=ease(t);
- const target=rig.interpolate(rig.standing,rig.fold,eased);
+ let target=rig.interpolate(rig.standing,rig.fold,eased);
+ const ik=[];
+ if(options.ik&&t>0){
+  if(typeof options.ik.solve!=="function"||typeof rig.pose!=="function")throw TypeError("Two-bone IK and rig.pose required");
+  const adjusted={...target.joints};
+  for(const side of ["left","right"]){
+   const rest=rig.standing.joints,j=target.joints;
+   const upper=xy(rest[side+"Hip"],rest[side+"Knee"]);
+   const lower=xy(rest[side+"Knee"],rest[side+"Ankle"]);
+   const solution=options.ik.solve(j[side+"Hip"],j[side+"Ankle"],upper,lower,{bend:side==="left"?1:-1});
+   adjusted[side+"Knee"]=solution.joint;
+   ik.push(Object.freeze({side,reachable:solution.reachable,reachError:solution.reachError}));
+  }
+  target=rig.pose(target.id+"+ik",adjusted);
+ }
  const result=solver.solve(rig.standing,target,{iterations:options.iterations??180,tolerance:options.tolerance??0.75,anchors:["leftAnkle","rightAnkle"]});
  return Object.freeze({progress:t,eased,joints:result.joints,maxError:result.maxError,
   converged:result.converged,iterationsUsed:result.iterationsUsed,
-  segmentErrors:result.segmentErrors,metrics:measure(result.joints)});
+  segmentErrors:result.segmentErrors,ik:Object.freeze(ik),metrics:measure(result.joints)});
 }
 const api=Object.freeze({ease,measure,jointAngle,frame});
 if(root)root.YOGA_RIG_MOTION=api;

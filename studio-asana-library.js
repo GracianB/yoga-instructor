@@ -4,7 +4,9 @@
   "use strict";
   const root=document.getElementById("instructor-flow");
   const guide=root?.querySelector("#flow-guide");
-  const art=window.YIN_YANG_ART,library=window.YOGA_ASANA_DOMAIN?.library||window.YOGA_ASANA_LIBRARY;
+  const art=window.YIN_YANG_ART,library=window.YOGA_ASANA_LIBRARY;
+  const lessonDomain=window.YOGA_ASANA_DOMAIN;
+  const editorial=lessonDomain?{poses:lessonDomain.lessons,byId:lessonDomain.lesson}:library;
   const guardian=window.YOGA_MOVEMENT_GUARDIAN;
   const source=guide?.querySelector("svg.yy-svg");
   const intro=root?.querySelector(".studio-entrance");
@@ -159,7 +161,7 @@
   svg.setAttribute("role","presentation");
   stage.appendChild(svg);
   stage.dataset.libraryGuardian="nila";
-  let current=library.poses[0].id;
+  let current=editorial.poses[0].id;
   let busy=false;
   const render=()=>{
     const index=language()==="en"?1:0,w=copy[language()];
@@ -178,7 +180,7 @@
     dockToggle.setAttribute("aria-pressed",String(dockOpen));
     section.querySelector(".studio-library-foot").textContent=w.foot;
     choices.setAttribute("aria-label",w.choose);
-    let active=library.byId(current);
+    let active=editorial.byId(current);
     if(!active)return;
     if(Curriculum){
       const en=!!index;
@@ -204,11 +206,11 @@
         button.querySelector("small").textContent=record.intro[index];
         button.setAttribute("aria-pressed",String(button.dataset.v81Route===routeId));
       }
-      const matches=new Set(Curriculum.search(library.poses,searchText,language()).map(p=>p.id));
+      const matches=new Set(Curriculum.search(editorial.poses,searchText,language()).map(p=>p.id));
       const track=routeId?Curriculum.route(routeId):null;
       let count=0;
       for(const button of choices.querySelectorAll("button[data-library-pose]")){
-        const pose=library.byId(button.dataset.libraryPose);
+        const pose=editorial.byId(button.dataset.libraryPose);
         const visible=(filter==="all"||category(pose)===filter)&&matches.has(pose.id)&&(!track||track.poses.includes(pose.id));
         button.hidden=!visible;if(visible)count++;
       }
@@ -219,9 +221,9 @@
         if(first)current=first.dataset.libraryPose;
       }
     }
-    active=library.byId(current);
+    active=editorial.byId(current);
     for(const button of choices.querySelectorAll("button[data-library-pose]")){
-      const pose=library.byId(button.dataset.libraryPose);
+      const pose=editorial.byId(button.dataset.libraryPose);
       if(!Curriculum)button.hidden=filter!=="all" && category(pose)!==filter;
       button.textContent=pose.name[index];
       button.setAttribute("aria-pressed",String(current===pose.id));
@@ -257,14 +259,14 @@
     if(chip){
       filter=chip.dataset.asanaFilter;
       routeId=null;
-      const active=library.byId(current);
+      const active=editorial.byId(current);
       if(filter!=="all" && category(active)!==filter)
-        current=library.poses.find(p=>category(p)===filter)?.id||current;
+        current=editorial.poses.find(p=>category(p)===filter)?.id||current;
       render();return;
     }
     const button=event.target.closest("button[data-library-pose]");
     if(!button||button.hidden)return;
-    if(library.byId(button.dataset.libraryPose)){
+    if(editorial.byId(button.dataset.libraryPose)){
       current=button.dataset.libraryPose;
       render();
     }

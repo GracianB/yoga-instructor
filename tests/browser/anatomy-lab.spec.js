@@ -5,6 +5,10 @@ for(const path of ["/anatomy-lab.html","/dist/anatomy-lab.html"]){
   await page.goto(path);
   await expect(page.getByRole("heading",{name:"Laboratorio anatómico"})).toBeVisible();
   await expect(page.locator("#stage line")).toHaveCount(46);
+  if(path==="/anatomy-lab.html"){
+   const top=await page.locator("#stage").evaluate(el=>el.getBoundingClientRect().top);
+   expect(top,"The pose should be partly visible without scrolling on a 720px desktop").toBeLessThan(600);
+  }
   await expect(page.locator("#knee-left")).toContainText("°");
   if(path==="/anatomy-lab.html")await test.info().attach("tadasana-standing",{
    body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"

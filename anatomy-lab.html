@@ -16,7 +16,7 @@ svg{width:100%;max-height:65vh;background:#e7e2d6;border-radius:1rem}
 line{stroke:#315746;stroke-width:7;stroke-linecap:round}circle{fill:#c28d55;stroke:white;stroke-width:2}
 .floor{stroke:#a6a496;stroke-width:2}
 .output{font-variant-numeric:tabular-nums}small{color:#52645a}
-.lab-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-top:1.25rem}.lab-metrics>div{background:#fff8ed;border:1px solid #d7cabb;border-radius:1rem;padding:1rem}.lab-metrics dt{font-size:.8rem;text-transform:uppercase;letter-spacing:.075em;color:#52645a}.lab-metrics dd{font-size:1.55rem;font-variant-numeric:tabular-nums;margin:.35rem 0 0;font-weight:650}.lab-metrics small{font-size:.7rem}.bone-volume{stroke:#e5c9aa;stroke-linecap:round;opacity:.95}.rig-head{fill:#e5c9aa;stroke:#926c51;stroke-width:2}.joint-label{font:10px system-ui;fill:#203d31;paint-order:stroke;stroke:#f5f1e8;stroke-width:3}.frame-notes{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}.warning{color:#9b5129;font-weight:600}
+.lab-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:.75rem;margin-top:1.25rem}.lab-metrics>div{background:#fff8ed;border:1px solid #d7cabb;border-radius:1rem;padding:1rem}.lab-metrics dt{font-size:.8rem;text-transform:uppercase;letter-spacing:.075em;color:#52645a}.lab-metrics dd{font-size:1.55rem;font-variant-numeric:tabular-nums;margin:.35rem 0 0;font-weight:650}.lab-metrics small{font-size:.7rem}.bone-volume{stroke:#e5c9aa;stroke-linecap:round;opacity:.95}.rig-head{fill:#e5c9aa;stroke:#926c51;stroke-width:2}.joint-label{font:10px system-ui;fill:#203d31;paint-order:stroke;stroke:#f5f1e8;stroke-width:3}.frame-notes{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center}.anatomy-findings{background:#fff8ed;border:1px solid #d7cabb;border-radius:1rem;padding:1rem;margin-block:1.5rem}.anatomy-findings h2{font:1.3rem Georgia,serif;margin:.1rem 0 .5rem}.anatomy-findings ul{padding-left:1.25rem;line-height:1.5}.anatomy-findings li+li{margin-top:.25rem}.error-segment{stroke:#b55436!important;stroke-width:8!important}.controls button:focus-visible,.controls input:focus-visible{outline:3px solid #987244;outline-offset:3px}.warning{color:#9b5129;font-weight:600}
 </style>
 <h1>Laboratorio anatómico</h1>
 <p>Vista técnica aislada para observar un esqueleto de 16 articulaciones, sin modificar el personaje de producción. Esta demostración es geométrica, no un modelo médico de movimiento.</p>
@@ -28,10 +28,12 @@ line{stroke:#315746;stroke-width:7;stroke-linecap:round}circle{fill:#c28d55;stro
 <button id="reverse" aria-pressed="false">Invertir</button>
 <label><input type="checkbox" id="overlay" checked> Mostrar articulaciones</label>
 <label><input type="checkbox" id="compare"> Referencia inicial</label>
+<label><input type="checkbox" id="error-map"> Ver segmentos deformados</label>
 </div>
 <svg id="stage" viewBox="100 65 520 375" role="img" aria-label="Esqueleto articulado de referencia"><line class="floor" x1="120" y1="401" x2="600" y2="401"/></svg>
 <dl class="lab-metrics" aria-label="Mediciones geométricas"><div><dt>Rodilla izquierda</dt><dd id="knee-left">—</dd></div><div><dt>Rodilla derecha</dt><dd id="knee-right">—</dd></div><div><dt>Flexión cadera (izquierda)</dt><dd id="hip-left">—</dd></div><div><dt>Inclinación tronco</dt><dd id="torso-angle">—</dd></div></dl>
-<p class="output" id="status" aria-live="polite"></p><small>Los tobillos son puntos fijos. La longitud de segmentos se ajusta mediante un solucionador iterativo.</small>
+<p class="output" id="status" aria-live="polite"></p>
+<section class="anatomy-findings" aria-labelledby="findings-heading"><h2 id="findings-heading">Integridad del esqueleto</h2><p>Desviaciones de longitud respecto a Tadasana. No equivalen a riesgos ni diagnósticos clínicos.</p><ul id="findings"></ul></section><small>Los tobillos son puntos fijos. La longitud de segmentos se ajusta mediante un solucionador iterativo.</small>
 <script src="./articulated-rig.js"></script>
 <script src="./rig-constraints.js"></script>
 <script src="./rig-motion.js"></script>

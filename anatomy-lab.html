@@ -9,6 +9,8 @@ p{max-width:68ch;line-height:1.6}
 .controls{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin:1.5rem 0}
 button{background:#203d31;color:white;border:0;border-radius:2rem;padding:.75rem 1rem;cursor:pointer}
 button[aria-pressed=true]{background:#987244}
+.controls label{display:inline-flex;align-items:center;gap:.5rem}.controls input[type=checkbox]{width:auto}.reference{stroke:#b49b72;stroke-width:3;stroke-dasharray:5 8;opacity:.65}.hidden-joints circle{display:none}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 input{width:min(20rem,65vw);accent-color:#527a60}
 svg{width:100%;max-height:65vh;background:#e7e2d6;border-radius:1rem}
 line{stroke:#315746;stroke-width:7;stroke-linecap:round}circle{fill:#c28d55;stroke:white;stroke-width:2}
@@ -21,6 +23,10 @@ line{stroke:#315746;stroke-width:7;stroke-linecap:round}circle{fill:#c28d55;stro
 <button id="stand" aria-pressed="true">Tadasana</button>
 <button id="fold" aria-pressed="false">Uttanasana</button>
 <label for="progress">Transición <output id="value">0%</output></label><input type="range" id="progress" min="0" max="100" value="0">
+<button id="play" aria-pressed="false">Reproducir transición</button>
+<button id="reverse" aria-pressed="false">Invertir</button>
+<label><input type="checkbox" id="overlay" checked> Mostrar articulaciones</label>
+<label><input type="checkbox" id="compare"> Referencia inicial</label>
 </div>
 <svg id="stage" viewBox="100 65 520 375" role="img" aria-label="Esqueleto articulado de referencia"><line class="floor" x1="120" y1="401" x2="600" y2="401"/></svg>
 <p class="output" id="status" aria-live="polite"></p><small>Los tobillos son puntos fijos. La longitud de segmentos se ajusta mediante un solucionador iterativo.</small>

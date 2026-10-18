@@ -7,20 +7,29 @@ test("Nila contact anchors are attached to their actual SVG limb terminals in 12
  await page.goto("/",{waitUntil:"domcontentloaded"});
  const book=page.locator("#studio-asana-library");
  await expect(book.locator(".movement-guardian")).toHaveCount(12);
- const report=await book.locator(".movement-guardian").evaluateAll(guardians=>guardians.map((guardian,index)=>{
-  const m=guardian.closest(".yy-pose");
-  const pairs=[];
-  for(const type of ["arm","leg"])for(let i=0;i<2;i++){
-   const limb=guardian.querySelector('[data-mg-limb="'+type+'-'+i+'"] .mg-limb-shell');
-   const paw=guardian.querySelector('[data-contact="'+(type==="arm"?"hand":"foot")+'-'+i+'"]');
-   if(!limb||!paw){pairs.push({type,i,missing:true});continue}
-   const end=limb.getPointAtLength(limb.getTotalLength()).matrixTransform(limb.getScreenCTM());
-   const origin=new DOMPoint(0,0).matrixTransform(paw.getScreenCTM());
-   const delta=Math.hypot(end.x-origin.x,end.y-origin.y);
-   pairs.push({type,i,delta,opacity:getComputedStyle(paw).opacity,visibility:getComputedStyle(paw).visibility});
-  }
-  return {id:m?.getAttribute("data-pose"),index,pairs};
- }));
+ const report=[];
+ const buttons=book.locator('button[data-library-pose]');
+ await expect(buttons).toHaveCount(12);
+ const ids=await buttons.evaluateAll(nodes=>nodes.map(node=>node.dataset.libraryPose));
+ for(const id of ids){
+  await book.locator('button[data-library-pose="'+id+'"]').evaluate(node=>node.click());
+  const pose=book.locator('.yy-pose.is-current');
+  await expect(pose).toHaveAttribute("data-pose",id);
+  const pairs=await pose.locator(".movement-guardian").evaluate(guardian=>{
+   const values=[];
+   for(const type of ["arm","leg"])for(let i=0;i<2;i++){
+    const limb=guardian.querySelector('[data-mg-limb="'+type+'-'+i+'"] .mg-limb-shell');
+    const paw=guardian.querySelector('[data-contact="'+(type==="arm"?"hand":"foot")+'-'+i+'"]');
+    if(!limb||!paw){values.push({type,i,missing:true});continue}
+    const end=limb.getPointAtLength(limb.getTotalLength()).matrixTransform(limb.getScreenCTM());
+    const origin=new DOMPoint(0,0).matrixTransform(paw.getScreenCTM());
+    const delta=Math.hypot(end.x-origin.x,end.y-origin.y);
+    values.push({type,i,delta,opacity:getComputedStyle(paw).opacity,visibility:getComputedStyle(paw).visibility});
+   }
+   return values;
+  });
+  report.push({id,pairs});
+ }
  for(const pose of report){
   expect(pose.pairs,"Four hands/feet required on "+pose.id).toHaveLength(4);
   for(const x of pose.pairs){

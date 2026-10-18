@@ -4,7 +4,7 @@
   "use strict";
   const root=document.getElementById("instructor-flow");
   const guide=root?.querySelector("#flow-guide");
-  const art=window.YIN_YANG_ART,library=window.YOGA_ASANA_LIBRARY;
+  const art=window.YIN_YANG_ART,library=window.YOGA_ASANA_DOMAIN?.library||window.YOGA_ASANA_LIBRARY;
   const guardian=window.YOGA_MOVEMENT_GUARDIAN;
   const source=guide?.querySelector("svg.yy-svg");
   const intro=root?.querySelector(".studio-entrance");

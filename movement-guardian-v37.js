@@ -19,7 +19,7 @@
     if(p.kind==="downward")return "M274 264 C300 242 341 183 418 183 C451 184 466 218 461 239 C442 248 431 236 409 229 C360 220 344 282 290 284 Z";
     // Uttanasana: shoulder line and belly turn around fixed hips instead of
     // rotating a vertical oval away from the real femur attachment points.
-    if(standingFold(p))return "M404 172 C382 170 363 174 346 186 C334 196 316 215 297 241 C287 250 287 264 295 269 C310 270 317 259 334 243 C352 220 373 209 396 215 C414 207 416 187 404 172Z";
+    if(standingFold(p))return "M396 168 C379 166 365 174 354 197 C346 220 335 246 317 267 C305 284 300 307 313 318 C329 324 344 301 353 281 C371 250 390 231 403 204 C411 185 409 171 396 168Z";
     // All four contour quadrants share tangents; no overlapping ovals or hip stickers.
     return [
       "M",point(x-rx*.92,y-ry*.29),
@@ -249,10 +249,10 @@
       '<path class="mg-body" d="'+bodyPath(p)+'"/>'+
       '<path class="mg-body-light" d="'+(p.kind==="downward"?
         "M318 246Q362 202 420 207":standingFold(p)?
-        "M396 184Q358 178 308 248":
+        "M387 185Q361 207 321 281":
         "M"+point(x-rx*.53,y-ry*.30)+" Q"+point(x-rx*.37,y-ry*.72)+" "+point(x+rx*.18,y-ry*.72))+'"/>'+
       '<path class="mg-breath-plane" d="'+(standingFold(p)?
-        "M339 214Q322 231 307 258Q353 227 366 214Z":
+        "M350 216Q330 250 318 281Q346 250 366 218Z":
         "M"+point(x-rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.71)+" "+point(x+rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.38)+" "+point(x-rx*.40,y+ry*.13)+"Z")+'"/>'+
       '</g>';
   };
@@ -262,8 +262,8 @@
     const [hx,hy,scale,angle]=p.head;
     const [x,y,rx,ry]=p.body;
     const lateral=Math.abs(angle)>35||Math.abs(x-hx)>85;
-    const topX=standingFold(p)?301:lateral?x-rx*.63:x;
-    const topY=standingFold(p)?249:lateral?y-ry*.18:y-ry*.75;
+    const topX=standingFold(p)?320:lateral?x-rx*.63:x;
+    const topY=standingFold(p)?272:lateral?y-ry*.18:y-ry*.75;
     const endX=lateral?hx+46*scale:hx;
     const endY=lateral?hy+12*scale:hy+54*scale;
     const dx=endX-topX,dy=endY-topY;

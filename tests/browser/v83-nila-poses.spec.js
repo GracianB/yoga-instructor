@@ -112,6 +112,15 @@ test("Warrior II front knee is bent over its foot; forward fold hinges from the 
  await expect(active).toHaveCSS("visibility","visible");
  const torso=active.locator(".mg-torso");
  await expect(torso).toHaveAttribute("transform",/rotate\(0\.0 380\.0 192\.0\)/);
- await expect(torso.locator(".mg-body")).toHaveAttribute("d",/^M404 172 C382 170/);
+ await expect(torso.locator(".mg-body")).toHaveAttribute("d",/^M396 168 C379 166/);
+ const contour=await torso.locator(".mg-body").evaluate(el=>{
+   const bounds=el.getBBox();
+   return {width:bounds.width,height:bounds.height};
+ });
+ expect(contour.height,"Folded torso should hang more vertically than it spans horizontally")
+  .toBeGreaterThan(contour.width*1.2);
+ const head=active.locator(".mg-head-fold");
+ const headBox=await head.boundingBox(),feetBox=await active.locator('[data-contact="foot-0"]').boundingBox();
+ expect(headBox&&feetBox&&headBox.y<feetBox.y,"Head should remain suspended above the soles").toBeTruthy();
  await capturePose(page,testInfo,"uttanasana-hip-hinge");
 });

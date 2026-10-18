@@ -21,7 +21,7 @@ test("standing and seated forward folds keep separate authored torso rigs",()=>{
  const standingArt=draw(standing);
  const seatedArt=draw(seated);
  const body=html=>html.match(/<path class="mg-body" d="([^"]+)"/)?.[1];
- assert.ok(body(standingArt)?.startsWith("M404 172 C382 170"));
+ assert.ok(body(standingArt)?.startsWith("M396 168 C379 166"));
  assert.ok(body(seatedArt)?.startsWith("M"));
  assert.notEqual(body(standingArt),body(seatedArt),"No shared standing torso on seated fold");
  assert.doesNotMatch(seatedArt,/<g class="mg-head mg-head-fold"/);
@@ -77,4 +77,19 @@ test("Standing Uttanasana has high load-bearing hips, vertical legs, and a small
  assert.ok(pose.head[2]<=.6,"Folded head should not overwhelm the body");
  assert.ok(pose.head[1]>pose.body[1]+80,"Head hangs well below the pelvis");
  assert.ok(pose.hands.every(([x,y])=>y<365&&y>330));
+});
+
+test("standing Uttanasana torso hangs distinctly downward rather than making a horizontal bridge",()=>{
+ const p=library.byId("v68-forward-fold");
+ const html=draw(p);
+ const body=html.match(/<path class="mg-body" d="([^"]+)"/)?.[1];
+ assert.ok(body,"Drawn body contour required");
+ const numbers=(body.match(/[0-9]+/g)||[]).map(Number);
+ const xs=numbers.filter((_,i)=>i%2===0),ys=numbers.filter((_,i)=>i%2===1);
+ const width=Math.max(...xs)-Math.min(...xs);
+ const height=Math.max(...ys)-Math.min(...ys);
+ assert.ok(height>width*1.2,"The fold should have a taller than wide torso contour");
+ assert.ok(p.head[0]>285&&p.head[0]<p.body[0]-45);
+ assert.ok(p.head[1]>300&&p.head[1]<345);
+ assert.deepEqual(p.feet,[[337,384],[401,384]],"Feet stay planted");
 });

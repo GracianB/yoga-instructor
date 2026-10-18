@@ -69,12 +69,12 @@ test("Tadasana's relaxed hands point downward and Uttanasana's head faces the ma
    const face=guardian.locator(".mg-head-fold");
    await expect(face).toHaveAttribute("data-head-profile","side");
    await expect(face.locator(".mg-horn")).toHaveCount(2);
-   await expect(face).toHaveAttribute("transform",/rotate\\(-73\\)/);
+   expect(await face.getAttribute("transform")).toContain("rotate(-73)");
   }else{
    await expect(guardian.locator(".mg-head-fold")).toHaveCount(0);
    const hands=await guardian.locator(".mg-hand").evaluateAll(nodes=>nodes.map(n=>n.getAttribute("transform")));
    expect(hands).toHaveLength(2);
-   for(const hand of hands)expect(hand).toMatch(/rotate\\(0\\)/);
+   for(const hand of hands)expect(hand).toContain("rotate(0)");
   }
   await testInfo.attach("nila-"+data.name+"-anatomy",{
    body:await page.screenshot({animations:"disabled",fullPage:true}),contentType:"image/png"

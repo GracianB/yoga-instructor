@@ -5,6 +5,7 @@ const require=createRequire(import.meta.url);
 const rig=require("../articulated-rig.js");
 const solver=require("../rig-constraints.js");
 const motion=require("../rig-motion.js");
+const ik=require("../rig-ik.js");
 
 test("rig motion uses a smooth monotone easing with stationary endpoints",()=>{
  assert.equal(motion.ease(0),0);
@@ -42,4 +43,16 @@ test("twenty-one transition snapshots stay finite, deterministic and planted",()
  }
  assert.throws(()=>motion.frame(rig,solver,-.5),RangeError);
  assert.throws(()=>motion.frame(null,solver,.5),TypeError);
+});
+
+test("knee IK is deterministic, symmetric in side selection and preserves planted feet",()=>{
+ for(const t of [.1,.25,.5,.75,1]){
+  const f=motion.frame(rig,solver,t,{ik});
+  assert.equal(f.ik.length,2);
+  assert.deepEqual(f.ik.map(i=>i.side),["left","right"]);
+  assert.ok(f.ik.every(i=>Number.isFinite(i.reachError)&&i.reachError>=0));
+  assert.deepEqual(f.joints.leftAnkle,rig.standing.joints.leftAnkle);
+  assert.deepEqual(f.joints.rightAnkle,rig.standing.joints.rightAnkle);
+  assert.deepEqual(f,motion.frame(rig,solver,t,{ik}));
+ }
 });

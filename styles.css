@@ -6141,10 +6141,11 @@ body:has(#main[data-p2-mode="short"]) .sanctuary-dock{display:none!important}
 .p25-summary,#p2-toggle{display:none!important}
 
 /* One chosen destination at a time, never the old multi-screen archive. */
-#main[data-p2-mode="short"][data-p2-focus] > :is(#proyectos,#experiencia,#contacto){display:none!important}
+#main[data-p2-mode="short"][data-p2-focus] > :is(#proyectos,#experiencia,#metodo,#contacto){display:none!important}
 #main[data-p2-mode="short"][data-p2-focus="proyectos"] > #proyectos,
 #main[data-p2-mode="short"][data-p2-focus="experiencia"] > #experiencia,
-#main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto{display:block!important}
+#main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto,
+#main[data-p2-mode="short"][data-p2-focus="metodo"] > #metodo{display:block!important}
 
 /* Route index: three short destinations, not three presentation slides. */
 #main #explora{padding:clamp(16px,2.5vw,28px);margin-block:12px 26px}
@@ -6219,7 +6220,7 @@ body .v97-skip,
 body #zintro { display:none!important; }
 body:has(#main) { padding-bottom:0!important; }
 /* Keep only these five visible main-page destinations. */
-#main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#contacto) {display:none!important;}
+#main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#metodo):not(#contacto) {display:none!important;}
 #main #inicio.hero{--lotus-band:clamp(104px,30vw,155px);}
 #main #inicio.hero .mandala-parallax{
   pointer-events:auto!important;

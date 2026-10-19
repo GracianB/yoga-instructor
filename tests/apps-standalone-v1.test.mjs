@@ -114,3 +114,11 @@ test("App V1: both standalone apps reference ONLY shared local assets and suppor
  assert.match(read("apps/shared/theme.css"),/prefers-reduced-motion:reduce/);
  assert.match(read("apps/shared/figure.css"),/prefers-reduced-motion:reduce/);
 });
+
+test("App V1: human motion is paced, pose-specific and stops with the main practice",()=>{
+ const style=read("apps/shared/figure.css"),app=read("apps/yoga-practice/app.mjs");
+ for(const key of ["figureStand","figureFold","figureRest","figureSeat"])assert.match(style,new RegExp("@keyframes "+key));
+ assert.match(style,/data-active="true"/);
+ assert.match(style,/prefers-reduced-motion:reduce/);
+ assert.match(app,/data-active",String\(snapshot\.status==="running"&&!guided\)/);
+});

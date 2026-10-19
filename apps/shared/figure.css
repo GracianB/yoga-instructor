@@ -16,3 +16,16 @@
 .yoga-figure[data-pose="child"] .figure-shoulders,.yoga-figure[data-pose="fold"] .figure-shoulders{opacity:0}
 .yoga-figure[data-pose="warrior"] .figure-measure{stroke-dasharray:3 6}
 @media(prefers-reduced-motion:reduce){.yoga-figure *{transition:none!important;animation:none!important}}
+
+/* Articulated live movement: one shared human, pose-specific micro-choreography.
+   Never force body position with cartoon bounce or perpetual hover zoom. */
+.yoga-figure[data-active="true"][data-pose="mountain"] .figure-human{animation:figureStand 7s ease-in-out infinite}
+.yoga-figure[data-active="true"][data-pose="fold"] .figure-human{animation:figureFold 8s ease-in-out infinite}
+.yoga-figure[data-active="true"][data-pose="child"] .figure-human{animation:figureRest 9s ease-in-out infinite}
+.yoga-figure[data-active="true"][data-pose="seated"] .figure-human{animation:figureSeat 9s ease-in-out infinite}
+.yoga-figure .figure-human{transform-origin:210px 265px}
+@keyframes figureStand{0%,100%{transform:translateY(2px) rotate(-.35deg)}50%{transform:translateY(-4px) rotate(.35deg)}}
+@keyframes figureFold{0%,100%{transform:translateY(1px) rotate(-.4deg)}50%{transform:translateY(-2px) rotate(.55deg)}}
+@keyframes figureRest{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+@keyframes figureSeat{0%,100%{transform:translateY(1px)}50%{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){.yoga-figure .figure-human{animation:none!important;transform:none!important}}

@@ -71,6 +71,7 @@ function formatTime(seconds){
 }
 function paint(){
  const t=vocabulary[lang],snapshot=clock.snapshot(),guided=mode==="meditation"&&meditation==="guided";
+ figure.setAttribute("data-active",String(snapshot.status==="running"&&!guided));
  const base=t[mode];
  $("#stage-eyebrow").textContent=base[0];
  $("#stage-title").innerHTML=base[1];

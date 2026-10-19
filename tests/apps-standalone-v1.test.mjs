@@ -74,7 +74,7 @@ test("App V1: one monotonic clock starts, pauses, resumes, finishes and resets",
 test("App V1: one human figure reused by all three modes and by the Asana Book",()=>{
  for(const p of BOOK_POSES)assert.ok(FIGURE_POSES.includes(p.pose),p.id);
  assert.equal(BOOK_POSES.length,10);
- assert.equal(new Set(BOOK_POSES.map(x=>x.id)).size,6);
+ assert.equal(new Set(BOOK_POSES.map(x=>x.id)).size,BOOK_POSES.length);
  for(const p of BOOK_POSES)for(const key of ["es","en"]){
   assert.ok(p.name[key]&&p.cue[key]&&p.support[key],p.id+" "+key);
  }

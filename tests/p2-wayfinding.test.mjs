@@ -11,7 +11,7 @@ test("P2 keeps one direct studio entrance and all visitor journeys reachable",()
  const nav=html.match(/<nav class="nav" id="nav"[^>]*>([\s\S]*?)<\/nav>/)?.[1]??"";
  assert.match(nav,/href="#instructor-flow"/);
  assert.match(nav,/href="#portfolio"/);
- assert.match(nav,/href="#experiencia"/);
+ assert.equal((nav.match(/href="#instructor-flow"/g)||[]).length,1);
  assert.match(nav,/href="#contacto"/);
  assert.equal((html.match(/class="btn primary" href="#instructor-flow"/g)||[]).length,1);
  for(const dest of ["instructor-flow","portfolio","orientacion","experiencia","contacto","demostracion","preguntas"]){

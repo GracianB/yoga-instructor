@@ -627,3 +627,27 @@ html[data-theme="light"] #instructor-flow #studio-asana-library .studio-library-
  background:#285945!important;color:#f7fbf6!important;border-color:#285945!important;
  opacity:1!important;
 }
+
+/* P2: full P1 session designer is opt-in, not a second giant app card. */
+#studio-asana-library .p2-asana-planner{
+ margin:clamp(12px,2vw,22px) 0;border:1px solid var(--line);
+ border-radius:14px;background:var(--surface2);color:var(--ink);overflow:clip;
+ width:100%;
+}
+#studio-asana-library .p2-asana-planner>summary{
+ display:flex;align-items:center;gap:8px;list-style:none;min-height:48px;
+ padding:12px 17px;cursor:pointer;font:650 .94rem/1.35 Inter,system-ui,sans-serif;
+ color:var(--ink);
+}
+#studio-asana-library .p2-asana-planner>summary::-webkit-details-marker{display:none}
+#studio-asana-library .p2-asana-planner>summary::after{
+ content:"+";margin-left:auto;font-size:1.25rem;font-weight:400;
+}
+#studio-asana-library .p2-asana-planner[open]>summary::after{content:"−"}
+#studio-asana-library .p2-asana-planner>summary:focus-visible{
+ outline:3px solid var(--sage);outline-offset:-3px;
+}
+#studio-asana-library .p2-asana-planner #p1-sequence{
+ margin:0!important;border:0!important;box-shadow:none!important;
+ border-radius:0!important;max-width:100%!important;
+}

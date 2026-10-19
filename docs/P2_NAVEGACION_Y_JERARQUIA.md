@@ -55,3 +55,6 @@ En P2 se suprime visualmente la antigua superposición `zintro` incluso en la pr
 
 ## Contraste en la lista de asanas
 Corregidas las fichas no seleccionadas que quedaban en gris con texto verdoso poco legible, especialmente en modo oscuro. Los 12 botones reciben superficies opacas y colores explícitos en ambos temas. La matriz Playwright comprueba una relación de contraste de texto mínima 4,5:1 en las opciones visibles.
+
+## Compositor de sesiones P1
+El editor real de 3–8 posturas permanece funcional dentro de la biblioteca, plegado bajo «Crear sesión de 3–8 posturas». El acceso profundo `#p1-sequence` despliega tanto Libro como editor; nunca inicia el Flow automáticamente. Su sección no compite visualmente con Nila ni con el selector de modos.

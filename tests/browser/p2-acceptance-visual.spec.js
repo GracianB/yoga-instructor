@@ -57,6 +57,8 @@ for(const width of screens){
    await info.attach("p2-practice-"+width+"-"+theme,{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
    await book.locator("#p2-asana-toggle").evaluate(el=>el.click());
    await expect(book.locator("#p2-asana-advanced")).not.toHaveAttribute("open",/./);
+   await expect(book.locator("#p2-planner > summary")).toBeVisible();
+   await expect(book.locator("#p1-sequence")).toBeHidden();
    await expect(book.locator("#p2-asana-advanced > summary")).toBeVisible();
    await expect(book.locator(".studio-library-stage")).toBeVisible();
    // WCAG AA: each selectable asana must have readable contrast, including
@@ -150,5 +152,14 @@ test("P2 first visit has no blocking cover slideshow",async({page})=>{
  await expect(page.locator("#p2-lotus-focus")).toBeVisible();
  await page.locator("#p2-lotus-focus").focus();
  await expect(page.locator("#p2-lotus-focus")).toBeFocused();
+ await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
+});
+
+test("P2 deep link reopens the actual full-width P1 planner",async({page})=>{
+ await page.goto("/#p1-sequence",{waitUntil:"domcontentloaded"});
+ await expect(page.locator("#p2-asana-toggle")).toHaveAttribute("aria-expanded","true");
+ await expect(page.locator("#p2-planner")).toHaveAttribute("open","");
+ await expect(page.locator("#p1-sequence")).toBeVisible();
+ await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","idle");
  await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
 });

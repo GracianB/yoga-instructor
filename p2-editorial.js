@@ -52,6 +52,17 @@ body.id="p2-book-content";
 body.className="p2-book-content";
 for(const element of [...book.children].filter(x=>x!==heading))body.append(element);
 heading?.after(toggle,body);
+// P1 sequence builder is a full-width studio tool, never a second landing.
+const planner=book.querySelector("#p1-sequence");
+let planDetails,planSummary;
+if(planner){
+  planDetails=document.createElement("details");
+  planDetails.id="p2-planner";
+  planDetails.className="p2-asana-planner";
+  planSummary=document.createElement("summary");
+  planner.before(planDetails);
+  planDetails.append(planSummary,planner);
+}
 function setBook(open,focus=false){
   // An invisible running movement session would be unsafe and confusing.
   // Pause through the existing controller before switching to study mode.
@@ -146,6 +157,9 @@ function revealAnchor(hash){
  const target=document.getElementById(id);
  if(!target)return;
  if(id==="studio-asana-library" || book.contains(target))setBook(true);
+ if(planDetails?.contains(target))planDetails.open=true;
+ if(document.getElementById("p2-asana-advanced")?.contains(target))
+  document.getElementById("p2-asana-advanced").open=true;
  if(extras.contains(target) || auxiliaryIds.has(id))extras.open=true;
  if(audioDetails?.contains(target))audioDetails.open=true;
 }
@@ -158,6 +172,7 @@ revealAnchor(location.hash);
 const update=()=>{
  if(lotus)document.getElementById("p2-lotus-focus").setAttribute("aria-label",t("lotus"));
  if(advancedSummary)advancedSummary.textContent=t("advanced");
+ if(planSummary)planSummary.textContent=lang()==="en"?"Build a 3–8 pose practice":"Crear sesión de 3–8 posturas";
  extrasSummary.textContent=t("more");
  extrasNote.textContent=t("note");
  if(audioDetails)document.getElementById("p2-audio-summary").textContent=t("audio");

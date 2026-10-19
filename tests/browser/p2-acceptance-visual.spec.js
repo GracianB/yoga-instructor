@@ -70,6 +70,22 @@ for(const width of screens){
       return {actual,expected};
     });
     expect(colors.actual).toBe(colors.expected);
+    const family=await book.locator(".v81-familynote").evaluate(el=>{
+      const text=el.querySelector("strong");
+      const intent=el.querySelector("span");
+      const resolve=name=>{
+        const probe=document.createElement("span");
+        probe.style.color=getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        document.body.append(probe);
+        const color=getComputedStyle(probe).color;probe.remove();return color;
+      };
+      return {
+        heading:getComputedStyle(text).color,expectedHeading:resolve("--ink"),
+        detail:getComputedStyle(intent).color,expectedDetail:resolve("--muted")
+      };
+    });
+    expect(family.heading).toBe(family.expectedHeading);
+    expect(family.detail).toBe(family.expectedDetail);
    }
    await expect(studio.locator(".studio-entrance")).toBeHidden();
    await expect(page.locator("#movement-stage")).toBeHidden();

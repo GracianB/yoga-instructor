@@ -178,6 +178,7 @@
   <script src="./studio-wayfinder-ui-v101.js?v=v101-1" defer></script>
   <script src="./studio-presence-v72.js?v=v72-1" defer></script>
   <script src="./portfolio-v73.js?v=v73-1" defer></script>
+  <script src="./p2-navigation.js?v=p2" defer></script>
   <script src="./teaching-casebook-v74.js?v=v74-1" defer></script>
   <script src="./editorial-atlas-v75.js?v=v75-1" defer></script>
   <script src="./yoga-enquiry-v76.js?v=v76-1" defer></script>
@@ -252,10 +253,9 @@
       </span>
     </a>
     <nav class="nav" id="nav" data-i18n-aria-label="navLabel" aria-label="Primary">
-      <a href="#portfolio" data-v73-nav>Portfolio</a>
       <a href="#sobre" data-i18n="navAbout">Sobre mí</a>
-      <a href="#campo" data-i18n="navField">Campo</a>
-      <a href="#ritual" data-i18n="navRitual">Práctica</a>
+      <a href="#oferta" data-i18n="navClasses">Clases</a>
+      <a href="#instructor-flow" data-i18n="navStudio">Estudio</a>
       <a href="#experiencia" data-i18n="navExp">Experiencia</a>
       <a href="#contacto" data-i18n="navContact">Contacto</a>
     </nav>
@@ -275,7 +275,7 @@
     </div>
   </header>
 
-  <main id="main" class="presence-main">
+  <main id="main" class="presence-main" data-p2-mode="full">
 
     <!-- HERO — presence practice space -->
     <section class="hero" id="inicio" data-breath="idle">
@@ -409,9 +409,8 @@
             Instructor certificado (Madrid 2019). Yoga corporativo en Majorel · Google / YouTube. Sala en Mood Fitness (Murcia) hasta junio 2026.
           </p>
           <div class="hero-actions">
-            <a class="btn primary" href="#contacto" data-i18n="heroCta1">Hablemos</a>
-            <a class="btn ghost" href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-i18n="heroCta2">CV Yoga</a>
-            <a class="btn ghost" href="https://gracianb.github.io/GracianB/" target="_blank" rel="noreferrer" data-i18n="heroCta3">El otro track →</a>
+            <a class="btn primary" href="#explora" data-i18n="heroCtaExplore">Explorar mi yoga</a>
+            <a class="btn ghost" href="#instructor-flow" data-i18n="heroCtaPractice">Entrar al estudio ↗</a>
           </div>
           <div class="hero-manifesto">
             <span class="manifesto-rule" aria-hidden="true"></span>
@@ -428,11 +427,58 @@
           </ul>
         </div>
       </div>
-      <a class="hero-scroll-cue" href="#portfolio" data-i18n="scrollCue">Scroll · Respira</a>
+      <a class="hero-scroll-cue" href="#explora" data-i18n="scrollCue">Scroll · Respira</a>
     </section>
 
     
     
+
+    <!-- P2: concise home. Five destinations, no presentation slider. -->
+    <section class="p2-explore" id="explora" aria-labelledby="p2-explore-title">
+      <div class="p2-explore-intro">
+        <p class="p2-eyebrow"><span data-p2-lang="es">ENCUENTRA TU CAMINO</span><span data-p2-lang="en">FIND YOUR WAY</span></p>
+        <h2 id="p2-explore-title"><span data-p2-lang="es">Menos vueltas. Más práctica.</span><span data-p2-lang="en">Less scrolling. More practice.</span></h2>
+        <p><span data-p2-lang="es">Elige lo que te interesa. Puedes ir directo a la sala, conocer mi manera de enseñar o hablar conmigo.</span><span data-p2-lang="en">Choose what matters to you. Head straight to the studio, explore my approach or get in touch.</span></p>
+      </div>
+      <nav class="p2-route-grid" aria-label="Explorar Yoga Instructor" data-p2-map>
+        <a class="p2-route p2-route-featured" href="#instructor-flow" data-p2-route="studio">
+          <span class="p2-route-index">01 · <span data-p2-lang="es">PRÁCTICA</span><span data-p2-lang="en">PRACTICE</span></span>
+          <strong><span data-p2-lang="es">Entrar al estudio</span><span data-p2-lang="en">Enter the studio</span></strong>
+          <small><span data-p2-lang="es">Asanas, secuencias y respiración. La app tiene aquí su sitio.</span><span data-p2-lang="en">Asanas, sequences and breathwork. One place for the app.</span></small>
+          <span class="p2-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="p2-route" href="#sobre" data-p2-route="about">
+          <span class="p2-route-index">02 · <span data-p2-lang="es">PERSONA</span><span data-p2-lang="en">PERSON</span></span>
+          <strong><span data-p2-lang="es">Quién soy</span><span data-p2-lang="en">Who I am</span></strong>
+          <small><span data-p2-lang="es">Experiencia, enfoque y forma de acompañar.</span><span data-p2-lang="en">Experience, approach and teaching style.</span></small>
+          <span class="p2-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="p2-route" href="#oferta" data-p2-route="classes">
+          <span class="p2-route-index">03 · <span data-p2-lang="es">CLASES</span><span data-p2-lang="en">CLASSES</span></span>
+          <strong><span data-p2-lang="es">Qué podemos hacer</span><span data-p2-lang="en">What we can do</span></strong>
+          <small><span data-p2-lang="es">Sala, clases individuales y equipos.</span><span data-p2-lang="en">Groups, individual sessions and teams.</span></small>
+          <span class="p2-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="p2-route" href="#experiencia" data-p2-route="experience">
+          <span class="p2-route-index">04 · <span data-p2-lang="es">TRAYECTORIA</span><span data-p2-lang="en">BACKGROUND</span></span>
+          <strong><span data-p2-lang="es">Dónde he enseñado</span><span data-p2-lang="en">Where I've taught</span></strong>
+          <small><span data-p2-lang="es">Credenciales y experiencia profesional.</span><span data-p2-lang="en">Credentials and professional work.</span></small>
+          <span class="p2-route-arrow" aria-hidden="true">↗</span>
+        </a>
+        <a class="p2-route" href="#contacto" data-p2-route="contact">
+          <span class="p2-route-index">05 · <span data-p2-lang="es">CONTACTO</span><span data-p2-lang="en">CONTACT</span></span>
+          <strong><span data-p2-lang="es">Hablemos</span><span data-p2-lang="en">Let's talk</span></strong>
+          <small><span data-p2-lang="es">Una conversación concreta, sin formularios eternos.</span><span data-p2-lang="en">A real conversation without endless forms.</span></small>
+          <span class="p2-route-arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+      <div class="p2-explore-foot">
+        <a href="#portfolio" data-v73-nav><span data-p2-lang="es">Ver mi enfoque en profundidad</span><span data-p2-lang="en">Explore my teaching approach</span> ↗</a>
+        <button id="p2-toggle" type="button" aria-pressed="false" aria-controls="main">
+          <span data-p2-toggle-label><span data-p2-lang="es">Ver todo el contenido</span><span data-p2-lang="en">See everything</span></span>
+        </button>
+      </div>
+    </section>
 
     <!-- V80 · One arrival, three meaningful visitor journeys -->
     <section class="v80-gateway" id="orientacion" aria-labelledby="v80-title">
@@ -808,221 +854,6 @@
       </section>
     </section>
 
-    <section class="section soundtrack-section" id="soundtrack" aria-labelledby="soundtrack-title">
-      <div class="soundtrack-intro">
-        <span class="studio-overline" data-i18n="soundtrackKicker">01 · EL SONIDO DE LA PRESENCIA</span>
-        <h2 id="soundtrack-title" data-i18n-html="soundtrackTitle">El sonido de <em>estar aquí.</em></h2>
-        <p data-i18n="soundtrackLead">Música para respirar, moverse o simplemente escuchar. Tú decides cuándo empieza. Dos canciones, un reproductor para toda la experiencia.</p>
-      </div>
-        <div class="focus-player" id="focus-player">
-          <button type="button" class="player-play" id="audio-play" aria-label="Play" disabled>
-            <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l12-6.5z"/></svg>
-            <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
-          </button>
-          <div class="player-meta">
-            <strong id="playlist-title">Silence Between Notes</strong>
-            <small data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM.</small>
-          </div>
-          <div class="player-timeline">
-            <span id="audio-cur">0:00</span>
-            <input type="range" id="audio-seek" min="0" max="100" value="0" step="0.1" data-i18n-aria-label="seekLabel" aria-label="Seek">
-            <span id="audio-dur">0:00</span>
-          </div>
-          <div class="player-vol">
-            <button type="button" class="player-mute" id="audio-mute" data-i18n="fieldMute">Mute</button>
-            <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" data-i18n-aria-label="volumeLabel" aria-label="Volume">
-          </div>
-          <span class="player-origin" id="playlist-origin">Silence Between Notes</span>
-          <audio id="focus-audio" src="./audio/silence-between-notes.mp3" preload="metadata" loop></audio>
-        </div>
-    </section>
-
-    <section class="section ritual reveal" id="ritual" aria-labelledby="ritual-title">
-  <div class="ritual-intro">
-    <div class="ritual-intro-top">
-      <span class="section-number">02</span>
-      <p class="kicker" data-i18n="ritualKicker">RITUAL · TU PUNTO DE PARTIDA</p>
-    </div>
-
-    <h2 id="ritual-title" data-i18n-html="ritualH2">No necesitas llegar<br><em>de ninguna manera.</em></h2>
-    <p class="about-lead" data-i18n="ritualLead">Elige cómo llegas hoy. La práctica puede empezar con quietud, movimiento, atención o compañía.</p>
-
-    <div class="ritual-arrival" aria-live="polite">
-      <div class="ritual-orb" aria-hidden="true">
-        <span class="ritual-orb-ring"></span>
-        <span class="ritual-orb-core"></span>
-      </div>
-      <div class="ritual-status">
-        <span class="ritual-status-kicker" data-i18n="ritualStatusKicker">HOY</span>
-        <strong id="ritual-state" data-i18n="ritualStateDefault">Aterrizar</strong>
-        <small id="ritual-state-detail" data-i18n="ritualStateDetail">Baja el ruido. Empieza aquí.</small>
-      </div>
-    </div>
-  </div>
-
-  <div class="ritual-panel">
-    <div class="ritual-panel-head">
-      <div>
-        <span class="ritual-panel-index">03</span>
-        <span class="ritual-panel-label">PRACTICE COMPASS</span>
-      </div>
-      <p data-i18n="ritualHint">Tu práctica no empieza en la postura. Empieza en cómo llegas.</p>
-    </div>
-
-    <div class="ritual-choices" role="group" data-i18n-aria-label="intentionLabel" aria-label="Practice intention">
-      <button class="ritual-choice is-active" type="button" data-practice="arrive" data-target="#sobre" aria-pressed="true">
-        <span class="choice-index">01</span>
-        <span class="choice-copy"><b data-i18n="ritual1t">Aterrizar</b><small data-i18n="ritual1p">Calmar, escuchar, estar.</small></span>
-        <span class="choice-arrow" aria-hidden="true">↗</span>
-      </button>
-      <button class="ritual-choice" type="button" data-practice="move" data-target="#campo" aria-pressed="false">
-        <span class="choice-index">02</span>
-        <span class="choice-copy"><b data-i18n="ritual2t">Mover</b><small data-i18n="ritual2p">Despertar el cuerpo sin prisa.</small></span>
-        <span class="choice-arrow" aria-hidden="true">↗</span>
-      </button>
-      <button class="ritual-choice" type="button" data-practice="focus" data-target="#filosofia" aria-pressed="false">
-        <span class="choice-index">03</span>
-        <span class="choice-copy"><b data-i18n="ritual3t">Afinar</b><small data-i18n="ritual3p">Respirar, observar, encontrar centro.</small></span>
-        <span class="choice-arrow" aria-hidden="true">↗</span>
-      </button>
-      <button class="ritual-choice" type="button" data-practice="share" data-target="#contacto" aria-pressed="false">
-        <span class="choice-index">04</span>
-        <span class="choice-copy"><b data-i18n="ritual4t">Compartir</b><small data-i18n="ritual4p">Llevar la práctica a una sala o equipo.</small></span>
-        <span class="choice-arrow" aria-hidden="true">↗</span>
-      </button>
-    </div>
-
-    <div class="ritual-foot">
-      <span class="ritual-line" aria-hidden="true"></span>
-      <span data-i18n="ritualFoot">Presencia · Respiración · Movimiento · Atención</span>
-    </div>
-  </div>
-</section>
-
-    <section class="section instructor-flow reveal" id="instructor-flow" data-studio-mode="asanas" data-movement-view="sequence" aria-labelledby="instructor-flow-title">
-      <div class="section-head instructor-flow-head">
-        <p class="kicker" data-i18n="flowKicker">INSTRUCTOR FLOW · SESIÓN</p>
-        <h2 id="instructor-flow-title" data-i18n-html="flowH2">Una práctica.<br><em>Un ritmo claro.</em></h2>
-        <p class="about-lead" data-i18n="flowLead">El instructor marca el pulso. La interfaz acompaña sin competir con la práctica.</p>
-      </div>
-
-      <div class="studio-entrance" aria-label="Sala de práctica">
-        <div class="studio-intro">
-          <div>
-            <span class="studio-overline" data-studio-copy="overline">TU ESPACIO · TRES CAMINOS</span>
-            <h3 data-studio-copy="entranceTitle">¿Qué necesita tu cuerpo hoy?</h3>
-          </div>
-          <p data-studio-copy="entranceLead">Elige una práctica. Sin prisa, sin tener que demostrar nada.</p>
-        </div>
-        <div class="studio-modes" role="group" aria-label="Elige el tipo de práctica">
-          <button class="studio-mode is-selected" type="button" data-studio-mode="asanas" aria-pressed="true">
-            <span class="studio-number" aria-hidden="true">01</span>
-            <span class="studio-mode-copy"><strong data-studio-copy="asanas">Movimiento</strong><small data-studio-copy="asanasDetail">Nila · secuencia guiada Yin/Yang</small></span>
-            <span class="studio-symbol" aria-hidden="true">✺</span>
-          </button>
-          <button class="studio-mode" type="button" data-studio-mode="breath" aria-pressed="false">
-            <span class="studio-number" aria-hidden="true">02</span>
-            <span class="studio-mode-copy"><strong data-studio-copy="breath">Respiración</strong><small data-studio-copy="breathDetail">Dragón sereno · a tu ritmo</small></span>
-            <span class="studio-symbol" aria-hidden="true">◌</span>
-          </button>
-          <button class="studio-mode" type="button" data-studio-mode="meditation" aria-pressed="false">
-            <span class="studio-number" aria-hidden="true">03</span>
-            <span class="studio-mode-copy"><strong data-studio-copy="meditation">Meditación</strong><small data-studio-copy="meditationDetail">Uma · guardiana lunar</small></span>
-            <span class="studio-symbol" aria-hidden="true">✧</span>
-          </button>
-        </div>
-
-      </div>
-
-      <div class="flow-console" id="movement-stage" data-flow-status="idle">
-        <div class="flow-theater" role="group" aria-label="Navegación de posturas">
-          <div class="flow-side flow-side-prev"><button type="button" class="flow-control ghost flow-rail-button" data-flow-action="previous" data-i18n="flowPrevious" aria-label="Anterior">Anterior</button></div>
-          <figure class="flow-guide" id="flow-guide"><figcaption>Un gesto a la vez · One gesture at a time</figcaption></figure>
-          <div class="flow-side flow-side-next"><button type="button" class="flow-control primary flow-rail-button" data-flow-action="next" data-i18n="flowNext" aria-label="Siguiente">Siguiente</button></div>
-        </div>
-        <div class="flow-console-top">
-          <div class="flow-phase">
-            <span class="flow-phase-kicker" data-i18n="flowCurrent">FASE ACTUAL</span>
-            <strong id="flow-phase-label" aria-live="polite">START</strong>
-            <small id="flow-phase-meta">1 / 10</small>
-            <p id="flow-phase-cue" aria-live="polite">Llegar y preparar la práctica.</p>
-          </div>
-          <div class="flow-session-clock" aria-live="off">
-            <span data-i18n="flowClock">TIEMPO</span>
-            <strong id="flow-session-time" aria-label="Tiempo de sesión">00:00</strong>
-            <div class="flow-phase-timing"><small><span data-i18n="guideRemaining">Quedan</span><b id="flow-phase-time" aria-label="Tiempo restante de fase">00:30</b></small><small><span data-i18n="guideTarget">Objetivo</span><b id="flow-phase-target" data-i18n-aria-label="targetLabel" aria-label="Duración objetivo">00:30</b></small></div>
-          </div>
-          <div class="flow-state" id="flow-state" aria-live="polite">IDLE</div>
-        </div>
-
-        <div class="flow-progress" role="progressbar" data-i18n-aria-label="progressLabel" aria-label="Progreso de la práctica">
-          <span id="flow-progress-bar"></span>
-        </div>
-
-        <div class="flow-phase-progress" aria-hidden="true"><span id="flow-phase-progress-bar"></span></div>
-
-        <div class="flow-controls" role="group" data-i18n-aria-label="flowControlsLabel" aria-label="Controles de práctica">
-          <button type="button" class="flow-control ghost" data-flow-action="pause" data-i18n="flowPause">Pausa</button>
-          <button type="button" class="flow-control ghost" data-flow-action="reset" data-i18n="flowReset">Reiniciar</button>
-        </div>
-
-        <div class="flow-console-foot">
-          <div class="flow-entry-actions"><button type="button" class="flow-start" data-flow-action="start" data-i18n="flowStart">Empezar práctica</button><button type="button" class="flow-preview" data-flow-action="preview" data-i18n="guidePreview">Ver recorrido</button></div>
-          <span data-i18n="flowSequence">START · CENTERING · BREATH · WARMUP · POSE · TRANSITION · POSE · COOLDOWN · SAVASANA · FINISH</span>
-        </div>
-      </div>
-
-        <section class="studio-guided" id="studio-guided" data-studio-active="breath" data-studio-status="idle" aria-labelledby="studio-guided-title" hidden>
-          <div class="studio-guided-stage">
-            <div class="studio-guided-top">
-              <span class="studio-session-label" data-studio-copy="overline">TU ESPACIO · TRES CAMINOS</span>
-              <div class="studio-top-actions">
-                <span class="studio-live-state" id="studio-live-state" aria-live="polite">PREPARADO</span>
-                <button type="button" class="studio-immersion-toggle" data-studio-action="immersion" aria-pressed="false" data-studio-copy="enterImmersion" aria-label="Activar vista de concentración">Concentración</button>
-              </div>
-            </div>
-            <div class="studio-breath-orb" aria-hidden="true"><span class="studio-orb-mark">✧</span></div>
-            <h3 class="studio-guided-title" id="studio-guided-title">Encuentra tu propia respiración</h3>
-            <p class="studio-guided-cue" id="studio-guided-cue">Inspirar 4 segundos, espirar 6.</p>
-            <p class="studio-breath-phase-detail" id="studio-breath-phase-detail" aria-live="off" hidden></p>
-            <p class="studio-guided-countdown" id="studio-guided-countdown" aria-label="Tiempo restante">05:00</p>
-            <div class="studio-guided-progress" role="progressbar" aria-label="Progreso de la sesión" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
-              <span id="studio-guided-progress"></span>
-            </div>
-          </div>
-          <div class="studio-breath-patterns" role="group" aria-label="Ritmo de respiración" hidden>
-            <span class="studio-pattern-label" data-studio-copy="patternLabel">RITMO</span>
-            <button type="button" data-breath-pattern="soft" data-studio-copy="softPattern" aria-pressed="false">Suave · 3/5</button>
-            <button type="button" data-breath-pattern="natural" data-studio-copy="naturalPattern" aria-pressed="true">Natural · 4/6</button>
-            <button type="button" data-breath-pattern="free" data-studio-copy="freePattern" aria-pressed="false">Libre</button>
-          </div>
-          <div class="studio-meditation-choices" role="group" aria-label="Tipo de meditación" hidden>
-            <span data-studio-copy="meditationStyleLabel">GUÍA</span>
-            <button type="button" data-meditation-style="guided" data-studio-copy="meditationGuided" aria-pressed="true">Acompañada</button>
-            <button type="button" data-meditation-style="silent" data-studio-copy="meditationSilent" aria-pressed="false">En silencio</button>
-          </div>
-          <div class="studio-meditation-focus" role="group" aria-label="Punto de atención" hidden>
-            <span data-studio-copy="meditationFocusLabel">ENFOQUE</span>
-            <button type="button" data-meditation-focus="breath" data-studio-copy="focusBreath" aria-pressed="true">Respiración</button>
-            <button type="button" data-meditation-focus="body" data-studio-copy="focusBody" aria-pressed="false">Cuerpo</button>
-            <button type="button" data-meditation-focus="space" data-studio-copy="focusSpace" aria-pressed="false">Entorno</button>
-          </div>
-          <div class="studio-guided-controls">
-            <div class="studio-duration" role="group" aria-label="Duración de la práctica">
-              <span class="studio-duration-label" data-studio-copy="minutes">DURACIÓN</span>
-              <button type="button" data-studio-duration-index="0" aria-pressed="false">3 min</button>
-              <button type="button" data-studio-duration-index="1" aria-pressed="true">5 min</button>
-              <button type="button" data-studio-duration-index="2" aria-pressed="false">8 min</button>
-            </div>
-            <div class="studio-action-buttons">
-              <button type="button" class="studio-primary" data-studio-action="primary">Empezar</button>
-              <button type="button" data-studio-action="reset" disabled>Reiniciar</button>
-            </div>
-          </div>
-          <p class="studio-guided-note" id="studio-guided-note">Un ritmo orientativo, no una prueba. Puedes volver a la respiración natural en cualquier momento.</p>
-        </section>
-    </section>
-
     <section class="section campo reveal" id="campo">
       <div class="section-head">
         <p class="kicker" data-i18n="fieldKicker">CAMPO · PULSO</p>
@@ -1303,6 +1134,223 @@
     </section>
 
     <!-- TRAINING -->
+    <!-- P2: coherent practice destination. Music belongs with the studio. -->
+    <section class="section ritual reveal" id="ritual" aria-labelledby="ritual-title">
+  <div class="ritual-intro">
+    <div class="ritual-intro-top">
+      <span class="section-number">02</span>
+      <p class="kicker" data-i18n="ritualKicker">RITUAL · TU PUNTO DE PARTIDA</p>
+    </div>
+
+    <h2 id="ritual-title" data-i18n-html="ritualH2">No necesitas llegar<br><em>de ninguna manera.</em></h2>
+    <p class="about-lead" data-i18n="ritualLead">Elige cómo llegas hoy. La práctica puede empezar con quietud, movimiento, atención o compañía.</p>
+
+    <div class="ritual-arrival" aria-live="polite">
+      <div class="ritual-orb" aria-hidden="true">
+        <span class="ritual-orb-ring"></span>
+        <span class="ritual-orb-core"></span>
+      </div>
+      <div class="ritual-status">
+        <span class="ritual-status-kicker" data-i18n="ritualStatusKicker">HOY</span>
+        <strong id="ritual-state" data-i18n="ritualStateDefault">Aterrizar</strong>
+        <small id="ritual-state-detail" data-i18n="ritualStateDetail">Baja el ruido. Empieza aquí.</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="ritual-panel">
+    <div class="ritual-panel-head">
+      <div>
+        <span class="ritual-panel-index">03</span>
+        <span class="ritual-panel-label">PRACTICE COMPASS</span>
+      </div>
+      <p data-i18n="ritualHint">Tu práctica no empieza en la postura. Empieza en cómo llegas.</p>
+    </div>
+
+    <div class="ritual-choices" role="group" data-i18n-aria-label="intentionLabel" aria-label="Practice intention">
+      <button class="ritual-choice is-active" type="button" data-practice="arrive" data-target="#sobre" aria-pressed="true">
+        <span class="choice-index">01</span>
+        <span class="choice-copy"><b data-i18n="ritual1t">Aterrizar</b><small data-i18n="ritual1p">Calmar, escuchar, estar.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="ritual-choice" type="button" data-practice="move" data-target="#campo" aria-pressed="false">
+        <span class="choice-index">02</span>
+        <span class="choice-copy"><b data-i18n="ritual2t">Mover</b><small data-i18n="ritual2p">Despertar el cuerpo sin prisa.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="ritual-choice" type="button" data-practice="focus" data-target="#filosofia" aria-pressed="false">
+        <span class="choice-index">03</span>
+        <span class="choice-copy"><b data-i18n="ritual3t">Afinar</b><small data-i18n="ritual3p">Respirar, observar, encontrar centro.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+      <button class="ritual-choice" type="button" data-practice="share" data-target="#contacto" aria-pressed="false">
+        <span class="choice-index">04</span>
+        <span class="choice-copy"><b data-i18n="ritual4t">Compartir</b><small data-i18n="ritual4p">Llevar la práctica a una sala o equipo.</small></span>
+        <span class="choice-arrow" aria-hidden="true">↗</span>
+      </button>
+    </div>
+
+    <div class="ritual-foot">
+      <span class="ritual-line" aria-hidden="true"></span>
+      <span data-i18n="ritualFoot">Presencia · Respiración · Movimiento · Atención</span>
+    </div>
+  </div>
+</section>
+
+    <section class="section instructor-flow reveal" id="instructor-flow" data-studio-mode="asanas" data-movement-view="sequence" aria-labelledby="instructor-flow-title">
+      <div class="section-head instructor-flow-head">
+        <p class="kicker" data-i18n="flowKicker">INSTRUCTOR FLOW · SESIÓN</p>
+        <h2 id="instructor-flow-title" data-i18n-html="flowH2">Una práctica.<br><em>Un ritmo claro.</em></h2>
+        <p class="about-lead" data-i18n="flowLead">El instructor marca el pulso. La interfaz acompaña sin competir con la práctica.</p>
+      </div>
+
+      <div class="studio-entrance" aria-label="Sala de práctica">
+        <div class="studio-intro">
+          <div>
+            <span class="studio-overline" data-studio-copy="overline">TU ESPACIO · TRES CAMINOS</span>
+            <h3 data-studio-copy="entranceTitle">¿Qué necesita tu cuerpo hoy?</h3>
+          </div>
+          <p data-studio-copy="entranceLead">Elige una práctica. Sin prisa, sin tener que demostrar nada.</p>
+        </div>
+        <div class="studio-modes" role="group" aria-label="Elige el tipo de práctica">
+          <button class="studio-mode is-selected" type="button" data-studio-mode="asanas" aria-pressed="true">
+            <span class="studio-number" aria-hidden="true">01</span>
+            <span class="studio-mode-copy"><strong data-studio-copy="asanas">Movimiento</strong><small data-studio-copy="asanasDetail">Nila · secuencia guiada Yin/Yang</small></span>
+            <span class="studio-symbol" aria-hidden="true">✺</span>
+          </button>
+          <button class="studio-mode" type="button" data-studio-mode="breath" aria-pressed="false">
+            <span class="studio-number" aria-hidden="true">02</span>
+            <span class="studio-mode-copy"><strong data-studio-copy="breath">Respiración</strong><small data-studio-copy="breathDetail">Dragón sereno · a tu ritmo</small></span>
+            <span class="studio-symbol" aria-hidden="true">◌</span>
+          </button>
+          <button class="studio-mode" type="button" data-studio-mode="meditation" aria-pressed="false">
+            <span class="studio-number" aria-hidden="true">03</span>
+            <span class="studio-mode-copy"><strong data-studio-copy="meditation">Meditación</strong><small data-studio-copy="meditationDetail">Uma · guardiana lunar</small></span>
+            <span class="studio-symbol" aria-hidden="true">✧</span>
+          </button>
+        </div>
+
+      </div>
+
+      <div class="flow-console" id="movement-stage" data-flow-status="idle">
+        <div class="flow-theater" role="group" aria-label="Navegación de posturas">
+          <div class="flow-side flow-side-prev"><button type="button" class="flow-control ghost flow-rail-button" data-flow-action="previous" data-i18n="flowPrevious" aria-label="Anterior">Anterior</button></div>
+          <figure class="flow-guide" id="flow-guide"><figcaption>Un gesto a la vez · One gesture at a time</figcaption></figure>
+          <div class="flow-side flow-side-next"><button type="button" class="flow-control primary flow-rail-button" data-flow-action="next" data-i18n="flowNext" aria-label="Siguiente">Siguiente</button></div>
+        </div>
+        <div class="flow-console-top">
+          <div class="flow-phase">
+            <span class="flow-phase-kicker" data-i18n="flowCurrent">FASE ACTUAL</span>
+            <strong id="flow-phase-label" aria-live="polite">START</strong>
+            <small id="flow-phase-meta">1 / 10</small>
+            <p id="flow-phase-cue" aria-live="polite">Llegar y preparar la práctica.</p>
+          </div>
+          <div class="flow-session-clock" aria-live="off">
+            <span data-i18n="flowClock">TIEMPO</span>
+            <strong id="flow-session-time" aria-label="Tiempo de sesión">00:00</strong>
+            <div class="flow-phase-timing"><small><span data-i18n="guideRemaining">Quedan</span><b id="flow-phase-time" aria-label="Tiempo restante de fase">00:30</b></small><small><span data-i18n="guideTarget">Objetivo</span><b id="flow-phase-target" data-i18n-aria-label="targetLabel" aria-label="Duración objetivo">00:30</b></small></div>
+          </div>
+          <div class="flow-state" id="flow-state" aria-live="polite">IDLE</div>
+        </div>
+
+        <div class="flow-progress" role="progressbar" data-i18n-aria-label="progressLabel" aria-label="Progreso de la práctica">
+          <span id="flow-progress-bar"></span>
+        </div>
+
+        <div class="flow-phase-progress" aria-hidden="true"><span id="flow-phase-progress-bar"></span></div>
+
+        <div class="flow-controls" role="group" data-i18n-aria-label="flowControlsLabel" aria-label="Controles de práctica">
+          <button type="button" class="flow-control ghost" data-flow-action="pause" data-i18n="flowPause">Pausa</button>
+          <button type="button" class="flow-control ghost" data-flow-action="reset" data-i18n="flowReset">Reiniciar</button>
+        </div>
+
+        <div class="flow-console-foot">
+          <div class="flow-entry-actions"><button type="button" class="flow-start" data-flow-action="start" data-i18n="flowStart">Empezar práctica</button><button type="button" class="flow-preview" data-flow-action="preview" data-i18n="guidePreview">Ver recorrido</button></div>
+          <span data-i18n="flowSequence">START · CENTERING · BREATH · WARMUP · POSE · TRANSITION · POSE · COOLDOWN · SAVASANA · FINISH</span>
+        </div>
+      </div>
+
+        <section class="studio-guided" id="studio-guided" data-studio-active="breath" data-studio-status="idle" aria-labelledby="studio-guided-title" hidden>
+          <div class="studio-guided-stage">
+            <div class="studio-guided-top">
+              <span class="studio-session-label" data-studio-copy="overline">TU ESPACIO · TRES CAMINOS</span>
+              <div class="studio-top-actions">
+                <span class="studio-live-state" id="studio-live-state" aria-live="polite">PREPARADO</span>
+                <button type="button" class="studio-immersion-toggle" data-studio-action="immersion" aria-pressed="false" data-studio-copy="enterImmersion" aria-label="Activar vista de concentración">Concentración</button>
+              </div>
+            </div>
+            <div class="studio-breath-orb" aria-hidden="true"><span class="studio-orb-mark">✧</span></div>
+            <h3 class="studio-guided-title" id="studio-guided-title">Encuentra tu propia respiración</h3>
+            <p class="studio-guided-cue" id="studio-guided-cue">Inspirar 4 segundos, espirar 6.</p>
+            <p class="studio-breath-phase-detail" id="studio-breath-phase-detail" aria-live="off" hidden></p>
+            <p class="studio-guided-countdown" id="studio-guided-countdown" aria-label="Tiempo restante">05:00</p>
+            <div class="studio-guided-progress" role="progressbar" aria-label="Progreso de la sesión" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+              <span id="studio-guided-progress"></span>
+            </div>
+          </div>
+          <div class="studio-breath-patterns" role="group" aria-label="Ritmo de respiración" hidden>
+            <span class="studio-pattern-label" data-studio-copy="patternLabel">RITMO</span>
+            <button type="button" data-breath-pattern="soft" data-studio-copy="softPattern" aria-pressed="false">Suave · 3/5</button>
+            <button type="button" data-breath-pattern="natural" data-studio-copy="naturalPattern" aria-pressed="true">Natural · 4/6</button>
+            <button type="button" data-breath-pattern="free" data-studio-copy="freePattern" aria-pressed="false">Libre</button>
+          </div>
+          <div class="studio-meditation-choices" role="group" aria-label="Tipo de meditación" hidden>
+            <span data-studio-copy="meditationStyleLabel">GUÍA</span>
+            <button type="button" data-meditation-style="guided" data-studio-copy="meditationGuided" aria-pressed="true">Acompañada</button>
+            <button type="button" data-meditation-style="silent" data-studio-copy="meditationSilent" aria-pressed="false">En silencio</button>
+          </div>
+          <div class="studio-meditation-focus" role="group" aria-label="Punto de atención" hidden>
+            <span data-studio-copy="meditationFocusLabel">ENFOQUE</span>
+            <button type="button" data-meditation-focus="breath" data-studio-copy="focusBreath" aria-pressed="true">Respiración</button>
+            <button type="button" data-meditation-focus="body" data-studio-copy="focusBody" aria-pressed="false">Cuerpo</button>
+            <button type="button" data-meditation-focus="space" data-studio-copy="focusSpace" aria-pressed="false">Entorno</button>
+          </div>
+          <div class="studio-guided-controls">
+            <div class="studio-duration" role="group" aria-label="Duración de la práctica">
+              <span class="studio-duration-label" data-studio-copy="minutes">DURACIÓN</span>
+              <button type="button" data-studio-duration-index="0" aria-pressed="false">3 min</button>
+              <button type="button" data-studio-duration-index="1" aria-pressed="true">5 min</button>
+              <button type="button" data-studio-duration-index="2" aria-pressed="false">8 min</button>
+            </div>
+            <div class="studio-action-buttons">
+              <button type="button" class="studio-primary" data-studio-action="primary">Empezar</button>
+              <button type="button" data-studio-action="reset" disabled>Reiniciar</button>
+            </div>
+          </div>
+          <p class="studio-guided-note" id="studio-guided-note">Un ritmo orientativo, no una prueba. Puedes volver a la respiración natural en cualquier momento.</p>
+        </section>
+    </section>
+
+    <section class="section soundtrack-section" id="soundtrack" aria-labelledby="soundtrack-title">
+      <div class="soundtrack-intro">
+        <span class="studio-overline" data-i18n="soundtrackKicker">01 · EL SONIDO DE LA PRESENCIA</span>
+        <h2 id="soundtrack-title" data-i18n-html="soundtrackTitle">El sonido de <em>estar aquí.</em></h2>
+        <p data-i18n="soundtrackLead">Música para respirar, moverse o simplemente escuchar. Tú decides cuándo empieza. Dos canciones, un reproductor para toda la experiencia.</p>
+      </div>
+        <div class="focus-player" id="focus-player">
+          <button type="button" class="player-play" id="audio-play" aria-label="Play" disabled>
+            <svg class="ico-play" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M8 5.5v13l12-6.5z"/></svg>
+            <svg class="ico-pause" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M7 5h4v14H7zm6 0h4v14h-4z"/></svg>
+          </button>
+          <div class="player-meta">
+            <strong id="playlist-title">Silence Between Notes</strong>
+            <small data-i18n="fieldTrackP">Instrumental for Vortex. Slow pulse, no voice, no drop. ~62 BPM.</small>
+          </div>
+          <div class="player-timeline">
+            <span id="audio-cur">0:00</span>
+            <input type="range" id="audio-seek" min="0" max="100" value="0" step="0.1" data-i18n-aria-label="seekLabel" aria-label="Seek">
+            <span id="audio-dur">0:00</span>
+          </div>
+          <div class="player-vol">
+            <button type="button" class="player-mute" id="audio-mute" data-i18n="fieldMute">Mute</button>
+            <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" data-i18n-aria-label="volumeLabel" aria-label="Volume">
+          </div>
+          <span class="player-origin" id="playlist-origin">Silence Between Notes</span>
+          <audio id="focus-audio" src="./audio/silence-between-notes.mp3" preload="metadata" loop></audio>
+        </div>
+    </section>
+
+
     <section class="section alt reveal" id="formacion">
       <div class="section-head">
         <p class="kicker" data-i18n="eduKicker">FORMACIÓN</p>

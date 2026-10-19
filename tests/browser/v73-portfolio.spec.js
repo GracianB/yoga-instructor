@@ -13,7 +13,7 @@ test("V73: hiring-facing teaching portfolio precedes the studio", async ({page})
   for (const value of positions.slice(1)) {
     expect(Boolean(value & 2)).toBe(true);
   }
-  await expect(page.locator('a[href="#portfolio"]')).toHaveCount(3); // V75 adds the native chapter-atlas link
+  await expect(page.locator('a[href="#portfolio"]')).toHaveCount(2); // P2: one concise index link plus the preserved historic atlas route
 });
 
 test("V73: keyboard tabs update offer, evidence and email context", async ({page}) => {

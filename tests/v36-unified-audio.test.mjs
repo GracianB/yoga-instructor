@@ -19,13 +19,14 @@ test("V36 one first-party sound source and a single common transport",()=>{
  assert.match(bus,/audio\.pause\(\)/);
  assert.doesNotMatch(html,/<audio[^>]*autoplay/);
 });
-test("V36 soundtrack follows hero, Vortex only mounts on explicit action",()=>{
+test("V36 soundtrack accompanies the studio, Vortex only mounts on explicit action",()=>{
  const html=read("index.html");
  const idx=html.indexOf('id="inicio"');
  const song=html.indexOf('id="soundtrack"');
  const ritual=html.indexOf('id="ritual"');
+ const studio=html.indexOf('id="instructor-flow"');
  const field=html.indexOf('id="campo"');
- assert.ok(idx<song&&song<ritual&&ritual<field);
+ assert.ok(idx<field&&field<ritual&&ritual<studio&&studio<song);
  assert.equal((html.match(/id="focus-player"/g)||[]).length,1);
  assert.match(html,/id="vortex-activate"/);
  assert.match(html,/id="vortex-stop" hidden/);

@@ -6028,3 +6028,106 @@ html[data-theme="light"] #studio-asana-library :is(.v82-lead,.v82-disclaimer,.v8
 html[data-theme="dark"] #studio-asana-library :is(.v82-lead,.v82-disclaimer,.v82-safety p,.v81-tracks small,.v81-results){color:#e3eee4}
 
 .music-playlist{grid-column:1/-1;flex-basis:100%;width:100%;color:inherit;font:inherit;border-top:1px solid #8885;padding:12px 0}.music-playlist summary{cursor:pointer;font-weight:600;list-style:none}.music-controls{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:14px 0}.music-playlist button{font:inherit;color:inherit;background:transparent;border:1px solid #8886;border-radius:10px;padding:9px 12px;cursor:pointer}.music-playlist button[aria-pressed=true]{background:#7772;border-color:currentColor}.music-controls label{display:flex;align-items:center;gap:8px;font-size:12px}.music-controls input{max-width:100px;accent-color:currentColor}.music-tracks{display:grid;gap:6px}.music-tracks button{text-align:left}.music-status{font-size:11px;opacity:.75;margin-bottom:0}.hub-music{position:fixed;bottom:18px;right:18px;z-index:50;width:min(330px,calc(100vw - 36px));padding:12px 16px;border:1px solid var(--line,#8885);border-radius:16px;background:var(--bg,#111);color:var(--text,#eee);box-shadow:0 8px 35px #0003}.hub-music .music-playlist{border:0;padding:0}.hub-music:has(details[open]){max-height:65vh;overflow:auto}
+
+
+/* P2 · Route-first reading. No full-screen slides, no duplicate waypoint walls.
+   Secondary historical chapters remain in DOM and can be opened via deep links. */
+#main[data-p2-mode="short"] > :is(#orientacion,#atlas,#casos,#ritual,#campo,#camino,#trayectoria,#demostracion,#formacion,#filosofia,#cv,#preguntas) {
+  display:none !important;
+}
+.p2-explore{max-width:min(1180px,calc(100% - 2*var(--pad)));margin:clamp(16px,3vw,36px) auto clamp(28px,6vw,88px);padding:clamp(20px,3.6vw,48px);border:1px solid color-mix(in srgb,var(--sage) 42%,var(--line));border-radius:clamp(18px,2vw,30px);background:linear-gradient(137deg,color-mix(in srgb,var(--surface) 94%,var(--sage) 6%),var(--bg));box-shadow:0 26px 80px #00000012;scroll-margin-top:calc(var(--header) + 24px)}
+.p2-explore-intro{max-width:700px;margin:0 0 clamp(22px,3.3vw,44px)}
+.p2-explore-intro .p2-eyebrow{font:750 11px/1.5 var(--mono);letter-spacing:.18em;color:var(--sage);margin:0 0 10px}
+.p2-explore-intro h2{font:500 clamp(2.15rem,4.8vw,4rem)/1.04 var(--display);letter-spacing:-.05em;text-wrap:balance;margin:0 0 14px;color:var(--ink)}
+.p2-explore-intro>p:last-child{font:400 clamp(15px,1.4vw,18px)/1.6 var(--sans);color:var(--muted);margin:0;max-width:61ch}
+.p2-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.p2-route{min-height:156px;display:flex;flex-direction:column;align-items:flex-start;gap:9px;position:relative;padding:clamp(17px,2.4vw,28px);border:1px solid color-mix(in srgb,var(--sage) 24%,var(--line));border-radius:18px;background:color-mix(in srgb,var(--surface) 92%,transparent);color:var(--ink);text-decoration:none;transition:background .18s,border-color .18s,transform .18s,box-shadow .18s}
+.p2-route-featured{grid-column:1/-1;min-height:168px;background:linear-gradient(110deg,color-mix(in srgb,var(--sage) 22%,var(--surface)),color-mix(in srgb,var(--surface) 93%,transparent))}
+.p2-route:hover,.p2-route:focus-visible{border-color:var(--sage);background:color-mix(in srgb,var(--sage) 13%,var(--surface));box-shadow:0 12px 34px #00000012;transform:translateY(-2px)}
+.p2-route:focus-visible,.p2-explore-foot :focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+.p2-route-index{font:750 10px/1.3 var(--mono);letter-spacing:.13em;color:var(--sage)}
+.p2-route strong{font:500 clamp(1.35rem,2.4vw,2.1rem)/1.12 var(--display);letter-spacing:-.03em}
+.p2-route small{font:400 14px/1.48 var(--sans);color:var(--muted);max-width:48ch;padding-right:24px}
+.p2-route-arrow{position:absolute;right:20px;top:18px;font-size:22px;color:var(--sage)}
+.p2-explore-foot{display:flex;gap:14px;justify-content:space-between;align-items:center;margin-top:16px;flex-wrap:wrap}
+.p2-explore-foot a,.p2-explore-foot button{min-height:44px;padding:11px 17px;color:var(--ink);font:650 13px var(--sans);border:1px solid var(--line);border-radius:999px;background:color-mix(in srgb,var(--surface) 88%,transparent);cursor:pointer}
+.p2-explore-foot :is(a,button):hover{border-color:var(--sage);color:var(--sage)}
+html:not([data-lang="en"]) [data-p2-lang="en"],html[data-lang="en"] [data-p2-lang="es"]{display:none!important}
+.p2-explore:target,.p2-route:target{scroll-margin-top:calc(var(--header) + 24px)}
+/* Music sits immediately after its practice tools, never as a separate chapter
+   between professional evidence and the interactive application. */
+#soundtrack{max-width:min(1180px,calc(100% - 2*var(--pad)));margin:0 auto clamp(38px,5vw,64px);padding:clamp(16px,2.5vw,28px);border:1px solid var(--line);border-radius:20px}
+#soundtrack .soundtrack-intro{margin-bottom:10px}
+#soundtrack h2{font-size:clamp(1.25rem,2.6vw,2rem);line-height:1.12}
+#soundtrack .soundtrack-section,.p2-explore{overflow:visible}
+@media(max-width:760px){
+ .p2-explore{max-width:calc(100% - 24px);padding:20px 16px}
+ .p2-route-grid{grid-template-columns:1fr}
+ .p2-route-featured{grid-column:auto}
+ .p2-route{min-height:136px}
+ .p2-explore-foot{align-items:stretch}
+ .p2-explore-foot :is(a,button){flex:1 1 180px;text-align:center}
+ #soundtrack{max-width:calc(100% - 24px)}
+}
+@media(prefers-reduced-motion:reduce){.p2-route{transition:none}.p2-route:hover{transform:none}}
+
+
+/* P2 / first view: prioritize a useful introduction over a full-screen slide. */
+#main[data-p2-mode="short"] #inicio.hero{min-height:0!important;height:auto!important;max-height:none!important;align-content:start!important;padding-top:0!important;padding-bottom:0!important}
+#main[data-p2-mode="short"] #inicio .hero-stage{min-height:0!important}
+#main[data-p2-mode="short"] #inicio .hero-inner{padding:clamp(30px,5vw,64px) 0 clamp(22px,3vw,40px)!important}
+#main[data-p2-mode="short"] #inicio .hero-stats,
+#main[data-p2-mode="short"] #inicio .hero-manifesto{display:none!important}
+#main[data-p2-mode="short"] #inicio .hero-lead{max-width:62ch!important}
+#main[data-p2-mode="short"] #inicio .hero-actions{margin-bottom:12px!important}
+#main[data-p2-mode="short"] #inicio h1{margin-bottom:clamp(12px,2vw,24px)!important}
+@media(max-width:620px){
+ #main[data-p2-mode="short"] #inicio .hero-inner{padding:22px 0 30px!important}
+ #main[data-p2-mode="short"] #inicio .hero-lead{max-width:40ch!important}
+}
+
+/* P2 regression: compact copy must not sit underneath the lotus on mobile.
+   Keep a single intentional art band, not the old full-screen hero height. */
+@media(max-width:900px){
+ #main[data-p2-mode="short"] #inicio.hero{
+  padding-top:calc(var(--lotus-band) + 28px)!important;
+ }
+}
+
+/* P2 mobile: destinations read as a compact index, not five presentation slides. */
+@media(max-width:760px){
+ .p2-explore{margin-top:12px;margin-bottom:36px}
+ .p2-explore-intro{margin-bottom:18px}
+ .p2-explore-intro h2{font-size:clamp(1.85rem,7vw,2.45rem)}
+ .p2-route-grid{gap:8px}
+ .p2-route,.p2-route-featured{min-height:0;padding:14px 44px 14px 16px;border-radius:14px;gap:3px}
+ .p2-route-index{display:none}
+ .p2-route strong{font-size:clamp(1.2rem,5vw,1.48rem)}
+ .p2-route small{font-size:12px;line-height:1.42;padding-right:0;max-width:100%;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ .p2-route-arrow{right:16px;top:50%;transform:translateY(-50%)}
+}
+
+
+/* P2: a chosen destination is a chapter, not a compulsory stack of pages.
+   Default is progressive enhancement: no focus means all primary chapters still
+   exist (and legacy browser journeys keep their normal reading context). */
+#main[data-p2-mode="short"][data-p2-focus] > :is(#portfolio,#sobre,#oferta,#experiencia,#instructor-flow,#soundtrack,#contacto) {display:none!important}
+#main[data-p2-mode="short"][data-p2-focus="sobre"] > #sobre,
+#main[data-p2-mode="short"][data-p2-focus="oferta"] > #oferta,
+#main[data-p2-mode="short"][data-p2-focus="experiencia"] > #experiencia,
+#main[data-p2-mode="short"][data-p2-focus="instructor-flow"] > #instructor-flow,
+#main[data-p2-mode="short"][data-p2-focus="instructor-flow"] > #soundtrack,
+#main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto {display:block!important}
+#main[data-p2-focus] > :is(#sobre,#oferta,#experiencia,#instructor-flow,#contacto){scroll-margin-top:calc(var(--header) + 22px)}
+
+
+/* P2 · The home page is not an ambient music player. The floating sanctuary
+   dock consumed a substantial part of the 390px and desktop first viewport.
+   Its breath/music controls remain available in the complete archive.
+   In the short experience the integrated player lives beside the studio. */
+body:has(#main[data-p2-mode="short"]) .sanctuary-dock{display:none!important}
+#main[data-p2-mode="short"] .p2-route[aria-current="location"]{
+ border-color:var(--sage);
+ background:color-mix(in srgb,var(--sage) 20%,var(--surface));
+ box-shadow:inset 3px 0 0 var(--sage);
+}

@@ -1,4 +1,13 @@
 const {test,expect}=require("@playwright/test");
+// Legacy integration scenarios deliberately exercise the complete historical
+// interface. P2's default short route-first mode is independently tested in
+// p2-navigation.spec.js; neither experience is silently skipped.
+test.beforeEach(async({page})=>{
+ await page.addInitScript(()=>{
+  try{sessionStorage.setItem("gb-yoga-reading-mode","full")}catch{}
+ });
+});
+
 test("V77 role filters expose only selected narrative and preserve native disclosure",async({page})=>{
  await page.goto("/");
  const root=page.locator("#trayectoria");

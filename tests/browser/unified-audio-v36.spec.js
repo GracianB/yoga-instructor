@@ -29,6 +29,10 @@ test("V36: three visible controls share exactly one audio source and always star
 test("V36: Vortex uses explicit opt-in and yields to main soundtrack",async({page})=>{
  await page.route("https://vortex-gilt-xi.vercel.app/**",route=>route.fulfill({contentType:"text/html",body:"<html><body>Vortex preview</body></html>"}));
  await page.goto("/");
+ // P2 keeps legacy experiences behind an explicit full-content affordance.
+ // Open it as a real visitor would before checking Vortex's consent and audio isolation.
+ await page.locator("#p2-toggle").click();
+ await expect(page.locator("#main")).toHaveAttribute("data-p2-mode","full");
  const frame=page.locator(".campo-vortex-full iframe");
  await expect(frame).toHaveCount(0);
  await expect(page.locator("#vortex-activate")).toBeVisible();

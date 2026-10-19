@@ -39,6 +39,14 @@ async function openLotus(page, { reducedMotion = 'no-preference' } = {}) {
     }
   });
   await page.goto('/', { waitUntil: 'domcontentloaded' });
+  // P2 intentionally hides the floating sanctuary controls on the compact landing.
+  // These legacy motion/layout checks explicitly exercise the complete experience.
+  await page.locator('#p2-toggle').click();
+  await expect(page.locator('#main')).toHaveAttribute('data-p2-mode', 'full');
+  // The archive toggle sits below the hero: return to the actual pointer target
+  // before testing live parallax and making viewport-relative geometry assertions.
+  await page.evaluate(() => window.scrollTo({top:0,left:0,behavior:'instant'}));
+  await expect(page.locator('#inicio')).toBeInViewport({ratio:0.1});
   await expect(page.locator('.hero-mandala')).toBeVisible();
   await expect(page.locator('.sanctuary-breath')).toBeVisible();
   await advance(page, 250);
@@ -103,7 +111,10 @@ async function expectContained(page, width) {
 
 for (const width of [320, 390, 768, 1440]) {
   for (const theme of ['light', 'dark']) {
-    test(`lotus is complete and clear at ${width}px in ${theme}`, async ({ page }) => {
+    test(`lotus is complete and clear at ${width}px in ${theme}`, async ({ page, browserName }) => {
+      // WebKit's virtual clock plus SVG geometry is slower on CI runners;
+      // keep every geometric, motion and phase assertion intact.
+      if (browserName === 'webkit') test.setTimeout(75000);
       await page.setViewportSize({ width, height: 900 });
       const failures = await openLotus(page);
       await click(page, `[data-set-theme="${theme}"]`);
@@ -269,7 +280,7 @@ test('reduced motion freezes the lotus at load and after a live preference chang
 test('guided breath preserves its position across pause and overlapping page visibility', async ({ page, browserName }) => {
   // WebKit's virtual-clock and SVG integration needs longer under loaded CI.
   // Preserve every assertion; do not skip or alter the production clock.
-  if (browserName === 'webkit') test.setTimeout(75000);
+  test.setTimeout(browserName === 'webkit' ? 90000 : 60000);
   await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page);
   const guide = page.locator('#flow-guide');

@@ -90,6 +90,9 @@ test('V72: standalone book restores the dock without IntersectionObserver',async
  const errors=[];
  page.on('pageerror',e=>errors.push(e.message));
  await page.goto('/');
+ // Test the restored dock within P2's user-selectable complete experience.
+ await page.locator('#p2-toggle').click();
+ await expect(page.locator('#main')).toHaveAttribute('data-p2-mode','full');
  const book=page.locator('#studio-asana-library');
  const dock=page.locator('.sanctuary-dock');
  await expect(book).toBeVisible();

@@ -1,4 +1,13 @@
 const{test,expect}=require("@playwright/test");
+// Legacy integration scenarios deliberately exercise the complete historical
+// interface. P2's default short route-first mode is independently tested in
+// p2-navigation.spec.js; neither experience is silently skipped.
+test.beforeEach(async({page})=>{
+ await page.addInitScript(()=>{
+  try{sessionStorage.setItem("gb-yoga-reading-mode","full")}catch{}
+ });
+});
+
 test("V79 visible answers match structured metadata without hidden SEO text",async({page})=>{
  await page.goto("/");const root=page.locator("#preguntas");
  await expect(root.locator("details")).toHaveCount(6);

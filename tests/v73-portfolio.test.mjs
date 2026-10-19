@@ -3,13 +3,13 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 const read = path => readFileSync(new URL("../" + path, import.meta.url), "utf8");
 
-test("V73: substantive professional chapter appears before media and practice", () => {
+test("V73: substantive portfolio and evidence lead to the cohesive practice/music destination", () => {
   const page = read("index.html");
   const portfolio = page.indexOf('id="portfolio"');
   const soundtrack = page.indexOf('id="soundtrack"');
   const studio = page.indexOf('id="instructor-flow"');
   const experience = page.indexOf('id="experiencia"');
-  assert.ok(portfolio > 0 && portfolio < soundtrack && soundtrack < studio && studio < experience);
+  assert.ok(portfolio > 0 && portfolio < experience && experience < studio && studio < soundtrack);
   assert.match(page, /<a href="#portfolio" data-v73-nav>/);
   for (const item of [
     'id="portfolio-v73-title"',

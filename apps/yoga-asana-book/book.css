@@ -1,0 +1,35 @@
+.intro{display:grid;grid-template-columns:minmax(0,1fr) 255px;gap:45px;align-items:end;padding:clamp(52px,7vw,88px) 0 38px}
+.intro h1{margin:15px 0;max-width:14ch}.intro p{max-width:60ch}
+.intro-aside{border-left:1px solid var(--line);padding-left:24px}.intro-aside p{margin-top:20px;font-size:13px}
+.atlas{display:grid;grid-template-columns:minmax(265px,.8fr) minmax(0,1.2fr);gap:14px;align-items:start}
+.catalogue,.pose-feature{border:1px solid var(--line);border-radius:22px;background:var(--surface)}
+.catalogue{padding:clamp(18px,2.7vw,29px);position:sticky;top:18px}
+.catalogue h2{font-size:clamp(27px,2.8vw,37px);margin-bottom:25px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:23px}
+.filters button{padding:9px 12px;border:1px solid var(--line);border-radius:99px;background:var(--bg);color:var(--muted);font:550 11px var(--sans)}
+.filters button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:var(--bg)}
+.pose-list{display:grid;gap:7px}
+.pose-list button{width:100%;display:grid;grid-template-columns:34px 1fr 24px;align-items:center;gap:10px;text-align:left;min-height:67px;padding:12px 14px;border-radius:12px;border:1px solid transparent;background:var(--bg);color:var(--ink)}
+.pose-list button[aria-pressed=true]{border-color:var(--accent);background:rgba(154,207,181,.1)}
+.pose-list button:hover{border-color:var(--line)}
+.pose-list .ordinal{color:var(--accent);font:500 11px var(--sans)}
+.pose-list strong{display:block;font-weight:600;font-size:13px}
+.pose-list small{font:400 11px var(--sans);color:var(--muted)}
+.pose-list .arrow{color:var(--accent)}
+.catalogue-foot{font-size:12px;margin:23px 0 0}
+.pose-feature{padding:clamp(18px,2.8vw,32px)}
+.pose-title,.figure-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.figure-frame{border:1px solid var(--line);border-radius:17px;background:radial-gradient(circle at 50% 42%,rgba(154,207,181,.09),transparent 63%),var(--bg);margin:20px 0 24px;padding:17px}
+.figure-top{font:600 10px var(--sans);letter-spacing:.09em;color:var(--muted)}
+.figure-top span:last-child{color:var(--accent)}
+#figure-root{min-height:360px;display:grid;place-items:center}
+#figure-root .yoga-figure{max-width:400px}
+.pose-feature h2{font-size:clamp(31px,3.5vw,46px);margin-bottom:3px}
+.sanskrit{color:var(--accent);font:italic 16px var(--serif);margin-bottom:24px}
+.teaching-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;border-top:1px solid var(--line);padding-top:22px}
+.teaching-grid>div p:last-child{font-size:13px;line-height:1.65}
+.pose-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:23px}
+.disclaimer{font-size:12px;text-align:center;margin:30px 0}
+footer{display:flex;justify-content:space-between;gap:15px}
+@media(max-width:850px){.intro{grid-template-columns:1fr;gap:0}.intro-aside{border-top:1px solid var(--line);border-left:0;padding:17px 0 0}.atlas{grid-template-columns:1fr}.catalogue{position:static}.pose-list{grid-template-columns:repeat(2,minmax(0,1fr))}#figure-root{min-height:260px}}
+@media(max-width:560px){.pose-list{grid-template-columns:1fr}.teaching-grid{grid-template-columns:1fr;gap:5px}.pose-actions{justify-content:stretch}.pose-actions .btn{flex:1}footer{flex-direction:column}}

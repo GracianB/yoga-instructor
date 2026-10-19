@@ -37,10 +37,14 @@ jobs:
           node --check apps/yoga-practice/app.mjs
           node --check apps/yoga-asana-book/book.mjs
   browser:
-    name: Studio and Asana Book · Chromium
+    name: Studio and Asana Book · ${{ matrix.browser }}
     needs: models
     runs-on: ubuntu-latest
     timeout-minutes: 17
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
     steps:
       - uses: actions/checkout@v6
       - uses: actions/setup-node@v7
@@ -48,12 +52,12 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npx playwright install --with-deps chromium
-      - run: npx playwright test tests/browser/apps-standalone-v1.spec.js --project=chromium --workers=2
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - run: npx playwright test tests/browser/apps-standalone-v1.spec.js --project=${{ matrix.browser }} --workers=2
       - uses: actions/upload-artifact@v6
         if: failure()
         with:
-          name: yoga-apps-browser-failures
+          name: yoga-apps-browser-failures-${{ matrix.browser }}
           path: |
             test-results/
             playwright-report/

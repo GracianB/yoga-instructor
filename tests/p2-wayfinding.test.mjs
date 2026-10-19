@@ -13,7 +13,7 @@ test("P2 keeps one direct studio entrance and all visitor journeys reachable",()
  assert.match(nav,/href="#portfolio"/);
  assert.match(nav,/href="#experiencia"/);
  assert.match(nav,/href="#contacto"/);
- assert.equal((html.match(/href="#instructor-flow" class="btn primary"/g)||[]).length,1);
+ assert.equal((html.match(/class="btn primary" href="#instructor-flow"/g)||[]).length,1);
  for(const dest of ["instructor-flow","portfolio","orientacion","experiencia","contacto","demostracion","preguntas"]){
   assert.ok(html.includes('id="'+dest+'"'),"missing destination "+dest);
  }

@@ -19,7 +19,7 @@ const CHEST=Object.freeze({
 });
 const round=v=>Math.round(v*10)/10;
 const blendNumber=(a,b,t)=>round(a+(b-a)*t);
-const NUMBER=/[-+]?(?:\\d*\\.)?\\d+/g;
+const NUMBER=/[-+]?(?:\d*\.)?\d+/g;
 function blendPath(a,b,t){
  const from=[...a.matchAll(NUMBER)].map(x=>Number(x[0]));
  const to=[...b.matchAll(NUMBER)].map(x=>Number(x[0]));
@@ -41,7 +41,6 @@ export function figurePoseFrame(from,to,progress){
 function paintFrame(svg,frame){
  for(const key of ["torso","leftArm","rightArm","leftLeg"])
   svg.querySelector('[data-figure-part="'+key+'"]').setAttribute("d",frame[key]);
- svg.querySelector('[data-figure-part="rightLeg"]').setAttribute("d",frame.rightLeg);
  const head=svg.querySelector("[data-figure-head]");
  head.setAttribute("cx",frame.head[0]);head.setAttribute("cy",frame.head[1]);
  for(const side of ["left","right"])for(const [part,xy]of [["hand",frame[side+"Hand"]],["foot",frame[side+"Foot"]]]){

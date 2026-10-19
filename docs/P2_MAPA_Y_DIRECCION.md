@@ -63,3 +63,8 @@ Un visitante debe identificar en menos de una pantalla **quién eres, qué ofrec
 - La sala interactiva se ha reubicado después de experiencia y la música inmediatamente después de la sala, sin pistas duplicadas ni autoplay.
 - La animación introductoria de dos segundos ya no se presenta de forma obligatoria. Solo se activa expresamente con `?intro=1`.
 - Las fases creativas y el archivo histórico no se eliminan del proyecto; se dejan de imponer como pantallas sucesivas a quien llega a la web.
+
+
+## P2 | Recorrido por destino seleccionado
+
+Al pulsar uno de los cinco destinos del mapa, la portada pasa de un índice de secciones a **una sola sección protagonista**. La navegación superior cambia entre destinos; la música solo se muestra acompañando al estudio. El botón de contenido completo y los enlaces históricos conservan toda la información, y los enlaces directos abren la sección solicitada. La experiencia original sin JavaScript no oculta contenido.

@@ -58,3 +58,35 @@ test("P2 music follows studio physically and starts silent",async({page})=>{
  await expect(page.locator("#focus-audio")).toHaveCount(1);
  expect(await page.locator("#focus-audio").evaluate(el=>el.paused)).toBe(true);
 });
+
+test("P2 choosing a destination reveals one chapter without mandatory endless scrolling",async({page})=>{
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ const root=page.locator("#main");
+ await page.locator('[data-p2-route="classes"]').click();
+ await expect(root).toHaveAttribute("data-p2-focus","oferta");
+ await expect(page.locator("#oferta")).toBeVisible();
+ await expect(page.locator("#instructor-flow")).toBeHidden();
+ await expect(page.locator("#sobre")).toBeHidden();
+ await expect(page.locator("#portfolio")).toBeHidden();
+ await page.locator('#nav a[href="#instructor-flow"]').click();
+ await expect(root).toHaveAttribute("data-p2-focus","instructor-flow");
+ await expect(page.locator("#instructor-flow")).toBeVisible();
+ await expect(page.locator("#soundtrack")).toBeVisible();
+ await expect(page.locator("#oferta")).toBeHidden();
+ await page.locator("#p2-toggle").click();
+ await expect(root).toHaveAttribute("data-p2-mode","full");
+ await expect(page.locator("#oferta")).toBeVisible();
+ await page.locator('#nav a[href="#contacto"]').click();
+ await expect(page.locator("#contacto")).toBeVisible();
+});
+test("P2 direct URL focuses the requested chapter rather than losing it in hidden content",async({page})=>{
+ await page.goto("/#experiencia",{waitUntil:"domcontentloaded"});
+ await expect(page.locator("#main")).toHaveAttribute("data-p2-focus","experiencia");
+ await expect(page.locator("#experiencia")).toBeVisible();
+ await expect(page.locator("#sobre")).toBeHidden();
+ await page.locator('#explora a[href="#sobre"]').click();
+ await expect(page.locator("#main")).toHaveAttribute("data-p2-focus","sobre");
+ await expect(page.locator("#sobre")).toBeVisible();
+ await page.locator('.hero-scroll-cue').evaluate(el=>el.click());
+ await expect(page.locator("#main")).not.toHaveAttribute("data-p2-focus",/./);
+});

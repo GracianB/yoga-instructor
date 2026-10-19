@@ -6106,3 +6106,16 @@ html:not([data-lang="en"]) [data-p2-lang="en"],html[data-lang="en"] [data-p2-lan
  .p2-route small{font-size:12px;line-height:1.42;padding-right:0;max-width:100%;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
  .p2-route-arrow{right:16px;top:50%;transform:translateY(-50%)}
 }
+
+
+/* P2: a chosen destination is a chapter, not a compulsory stack of pages.
+   Default is progressive enhancement: no focus means all primary chapters still
+   exist (and legacy browser journeys keep their normal reading context). */
+#main[data-p2-mode="short"][data-p2-focus] > :is(#portfolio,#sobre,#oferta,#experiencia,#instructor-flow,#soundtrack,#contacto) {display:none!important}
+#main[data-p2-mode="short"][data-p2-focus="sobre"] > #sobre,
+#main[data-p2-mode="short"][data-p2-focus="oferta"] > #oferta,
+#main[data-p2-mode="short"][data-p2-focus="experiencia"] > #experiencia,
+#main[data-p2-mode="short"][data-p2-focus="instructor-flow"] > #instructor-flow,
+#main[data-p2-mode="short"][data-p2-focus="instructor-flow"] > #soundtrack,
+#main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto {display:block!important}
+#main[data-p2-focus] > :is(#sobre,#oferta,#experiencia,#instructor-flow,#contacto){scroll-margin-top:calc(var(--header) + 22px)}

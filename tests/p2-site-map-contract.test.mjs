@@ -50,3 +50,15 @@ test("P2 arrival animation is optional, not a mandatory splash slide",()=>{
  const styles=readFileSync(new URL("../styles.css",import.meta.url),"utf8");
  assert.match(styles,/#main\[data-p2-mode="short"\] #inicio \.hero-stats/);
 });
+
+test("P2 supports focused visitor chapters while preserving browser access to the full archive",()=>{
+ const js=readFileSync(new URL("../p2-navigation.js",import.meta.url),"utf8");
+ const css=readFileSync(new URL("../styles.css",import.meta.url),"utf8");
+ assert.match(js,/const chapterFor=node=>/);
+ assert.match(js,/root\.dataset\.p2Focus=id/);
+ assert.match(js,/scrollToTarget\(target\)/);
+ for(const id of ["sobre","oferta","experiencia","instructor-flow","contacto"]){
+  assert.ok(css.includes('[data-p2-focus="'+id+'"] > #'+id));
+ }
+ assert.match(css,/#main\[data-p2-mode="short"\]\[data-p2-focus\]/);
+});

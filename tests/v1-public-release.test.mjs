@@ -28,7 +28,7 @@ test("Pages excludes legacy app and book scripts from published HTML",()=>{
  assert.match(build,/function stripRetiredPublicScripts/);
  assert.match(build,/function stripRetiredPublicSkipLinks/);
  assert.match(build,/PUBLIC_JS_ONLY/);
- const included=build.match(/const publicScripts=new Set\\(\\[(.*?)\\]\\)/);
+ const included=build.match(/const publicScripts=new Set\(\[(.*?)\]\)/);
  assert.ok(included);
  const allow=[...included[1].matchAll(/"([^"]+)"/g)].map(m=>m[1]);
  assert.deepEqual(allow,["runtime.js","boot.js","i18n.js","main.js","p2-navigation.js"]);

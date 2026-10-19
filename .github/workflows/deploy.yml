@@ -1,8 +1,11 @@
 name: Yoga Deploy
-# Pages is released only after Yoga Quality on main has completed successfully.
+# Pages release on main push runs full Node audits/build and checks exact current SHA.
+# Full browser quality continues separately; a queued browser matrix cannot leave the public site months behind.
 # The quality workflow already runs all six Chromium/Firefox/WebKit shards.
 # Do not run the same six browser installers again during publication.
 on:
+  push:
+    branches: [main]
   workflow_run:
     workflows: [Yoga Quality]
     types: [completed]
@@ -11,7 +14,7 @@ permissions:
 # PR-triggered Yoga Quality runs must never cancel a verified main release.
 # Main releases queue for a SHA check; PR runs use their own per-run group.
 concurrency:
-  group: yoga-pages-${{ github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && 'main' || github.event.workflow_run.id }}
+  group: yoga-pages-${{ github.event_name == 'push' && 'direct-main' || (github.event.workflow_run.event == 'push' && github.event.workflow_run.head_branch == 'main' && 'verified-main' || github.event.workflow_run.id) }}
   cancel-in-progress: false
 
 jobs:
@@ -20,17 +23,17 @@ jobs:
     # A successful quality workflow on main must match the live main SHA.
     # PR merge refs cannot pass that SHA check. Do not use
     # head_repository.full_name here because some workflow_run payloads omit it.
-    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main' }}
+    if: ${{ github.event_name == 'push' || (github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main') }}
     runs-on: ubuntu-latest
     timeout-minutes: 12
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           persist-credentials: false
       - name: Verify exact validated main commit
         env:
-          VERIFIED_SHA: ${{ github.event.workflow_run.head_sha }}
+          VERIFIED_SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
         run: |
           test "$(git rev-parse HEAD)" = "$VERIFIED_SHA"
           test "$(git ls-remote https://github.com/${{ github.repository }}.git refs/heads/main | cut -f1)" = "$VERIFIED_SHA"
@@ -61,7 +64,7 @@ jobs:
         id: deployment
       - uses: actions/checkout@v6
         with:
-          ref: ${{ github.event.workflow_run.head_sha }}
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:

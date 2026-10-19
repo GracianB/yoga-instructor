@@ -407,7 +407,7 @@ const required = [
   ["reduced motion", css.includes("prefers-reduced-motion")],
   ["CV ES canonical path", main.includes("./assets/CV_Gracian_Baena_Yoga_ES.pdf")],
   ["CV EN canonical path", main.includes("./assets/CV_Gracian_Baena_Yoga_EN.pdf")],
-  ["README ritual docs", readme.includes("### El ritual")],
+  ["README portfolio and future apps", readme.includes("Yoga Practice") && readme.includes("Yoga Asana Book") && readme.includes("Under construction")],
   ["sanctuary script include", index.includes("./sanctuary-experience.js")],
   ["editorial rail", index.includes('class="hero-rail"')],
   ["hero manifesto", index.includes('data-i18n="heroManifesto"')],

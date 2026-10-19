@@ -10,10 +10,16 @@
   if(!root||!svg||!art||svg.querySelector(".movement-guardian"))return;
   const esc=n=>Number(n).toFixed(1);
   const point=(x,y)=>esc(x)+" "+esc(y);
+  // Kind 'fold' is shared by standing Uttanasana and seated Paschimottanasana.
+  // Only the standing pose owns these specifically authored torso contours.
+  const standingFold=p=>p.id==="v68-forward-fold";
   const bodyPath=(p)=>{
     const [x,y,rx,ry]=p.body;
     // V83: A sculpted inverted-V torso joins shoulders to an elevated pelvis.
     if(p.kind==="downward")return "M274 264 C300 242 341 183 418 183 C451 184 466 218 461 239 C442 248 431 236 409 229 C360 220 344 282 290 284 Z";
+    // Uttanasana: shoulder line and belly turn around fixed hips instead of
+    // rotating a vertical oval away from the real femur attachment points.
+    if(standingFold(p))return "M396 168 C379 166 365 174 354 197 C346 220 335 246 317 267 C305 284 300 307 313 318 C329 324 344 301 353 281 C371 250 390 231 403 204 C411 185 409 171 396 168Z";
     // All four contour quadrants share tangents; no overlapping ovals or hip stickers.
     return [
       "M",point(x-rx*.92,y-ry*.29),
@@ -26,14 +32,18 @@
   // V71: limbs and paws share an authored terminal tangent. A palm
   // should follow an elevated arm, while weight-bearing contacts stay
   // flat on the mat. Prayer palms have a recognizable joined silhouette.
-  const paw=(xy,kind,index,curve,atHeart)=>{
+  const paw=(xy,kind,index,curve,atHeart,poseKind)=>{
     const [x,y]=xy,vertical=kind==="foot";
     const parts=curveSections(curve);
     const tip=sample(parts[parts.length-1],.985);
     const degrees=Math.atan2(tip.dy,tip.dx)*180/Math.PI;
     const clamp=(n,min,max)=>Math.min(max,Math.max(min,n));
+    // Hands follow the undirected wrist axis: an extended LEFT arm must
+    // stay horizontal like the right arm, rather than twisting 66 degrees.
+    const handAxis=((degrees+90)%180+180)%180-90;
     const orientation=atHeart?(index===0?-18:18):
-      vertical&&y<350?-27:vertical||y>=346?0:clamp(degrees,-66,66);
+      poseKind==="mountain"&&kind==="hand"?0:
+      vertical&&y<350?-27:vertical||y>=346?0:clamp(handAxis,-66,66);
     const palm=atHeart
       ?'M-12 -12 Q-9 -24 1 -20 Q15 -16 16 -2 Q17 13 4 17 Q-11 17 -15 6 Q-17 -6 -12 -12Z'
       :vertical
@@ -165,6 +175,31 @@
   // temple fins, almond eyes, long muzzle and a distinct chin silhouette.
   const head=(p)=>{
     const [x,y,scale,angle,expression]=p.head;
+    // Downward Dog needs a readable side profile. The original forward-facing
+    // mask was rotated into the front limbs, making the face disappear.
+    // Keep the authored head anchor, support contacts and body untouched.
+    if(p.kind==="downward"||standingFold(p)){
+      const folding=standingFold(p);
+      const profileScale=Math.max(scale,folding ? .58 : .73);
+      const profileAngle=folding?-73:-10;
+      const profileClass=folding?"mg-head-fold":"mg-head-downward";
+      return '<g class="mg-head '+profileClass+'" data-head-profile="side" transform="translate('+
+        esc(x)+' '+esc(y)+') rotate('+esc(profileAngle)+') scale('+esc(profileScale)+')">'+
+        // Both swept horns remain part of Nila's established two-horn identity,
+        // but are offset in depth so the side-profile muzzle stays legible.
+        '<path class="mg-horn mg-horn-left mg-downward-horn-back" d="M-16-48Q-35-77-28-104Q-8-87 6-49Z"/>'+
+        '<path class="mg-horn mg-horn-right mg-downward-horn-front" d="M26-50Q42-91 68-104Q63-63 46-37Z"/>'+
+        '<path class="mg-ear mg-downward-ear" d="M21-43Q38-87 65-95Q62-61 48-34Z"/>'+
+        '<path class="mg-crest mg-downward-crest" d="M5-52Q20-77 34-72L30-46Q45-66 59-55L48-24Z"/>'+
+        '<path class="mg-face mg-downward-face" d="M45-46Q12-69-27-45Q-52-33-57-7Q-84 10-80 37Q-70 65-18 66Q29 65 50 39Q64 15 56-17Q52-36 45-46Z"/>'+
+        '<path class="mg-downward-cheek" d="M-48 14Q-35 22-26 15Q-21 36-36 43"/>'+
+        '<path class="mg-snout mg-downward-muzzle" d="M-51 8Q-76 1-96 22Q-106 39-82 49Q-60 53-42 43Q-30 32-35 21Z"/>'+
+        '<path class="mg-eye mg-downward-eye" d="M-38-18Q-27-9-13-16"/>'+
+        '<path class="mg-downward-brow" d="M-41-27Q-24-36-10-26"/>'+
+        '<path class="mg-downward-nostril" d="M-85 30Q-80 27-75 32"/>'+
+        '<path class="mg-mouth mg-downward-mouth" d="M-83 44Q-69 50-53 40"/>'+
+        '</g>';
+    }
     const awake=["open","focus","smile"].includes(expression);
     // V62: pose-authored emotion, not an independent blinking timer.
     // Gentle brows communicate attention; a soft cheek lift reads as joy.
@@ -209,13 +244,16 @@
   };
   const trunk=(p)=>{
     const [x,y,rx,ry,r]=p.body;
-    const torsoAngle=p.kind==="downward"?0:r;
+    const torsoAngle=p.kind==="downward"||standingFold(p)?0:r;
     return '<g class="mg-torso" data-pose-kind="'+p.kind+'" transform="rotate('+esc(torsoAngle)+' '+esc(x)+' '+esc(y)+')">'+
       '<path class="mg-body" d="'+bodyPath(p)+'"/>'+
       '<path class="mg-body-light" d="'+(p.kind==="downward"?
-        "M318 246Q362 202 420 207":
+        "M318 246Q362 202 420 207":standingFold(p)?
+        "M387 185Q361 207 321 281":
         "M"+point(x-rx*.53,y-ry*.30)+" Q"+point(x-rx*.37,y-ry*.72)+" "+point(x+rx*.18,y-ry*.72))+'"/>'+
-      '<path class="mg-breath-plane" d="M'+point(x-rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.71)+' '+point(x+rx*.40,y+ry*.13)+' Q'+point(x,y+ry*.38)+' '+point(x-rx*.40,y+ry*.13)+'Z"/>'+
+      '<path class="mg-breath-plane" d="'+(standingFold(p)?
+        "M350 216Q330 250 318 281Q346 250 366 218Z":
+        "M"+point(x-rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.71)+" "+point(x+rx*.40,y+ry*.13)+" Q"+point(x,y+ry*.38)+" "+point(x-rx*.40,y+ry*.13)+"Z")+'"/>'+
       '</g>';
   };
   // V63: one sculpted cervical silhouette, sampled from the existing
@@ -224,8 +262,8 @@
     const [hx,hy,scale,angle]=p.head;
     const [x,y,rx,ry]=p.body;
     const lateral=Math.abs(angle)>35||Math.abs(x-hx)>85;
-    const topX=lateral?x-rx*.63:x;
-    const topY=lateral?y-ry*.18:y-ry*.75;
+    const topX=standingFold(p)?320:lateral?x-rx*.63:x;
+    const topY=standingFold(p)?272:lateral?y-ry*.18:y-ry*.75;
     const endX=lateral?hx+46*scale:hx;
     const endY=lateral?hy+12*scale:hy+54*scale;
     const dx=endX-topX,dy=endY-topY;
@@ -286,7 +324,7 @@
   const joins=p=>{
     const [x,y,rx,ry]=p.body;
     const horizontal=ry<60||p.kind==="downward";
-    const cx=horizontal?x+rx*.54:x,cy=horizontal?y+ry*.20:y+ry*.67;
+    const cx=standingFold(p)?380:horizontal?x+rx*.54:x,cy=standingFold(p)?195:horizontal?y+ry*.20:y+ry*.67;
     const w=horizontal?rx*.44:rx*.68,h=horizontal?Math.max(25,ry*.60):Math.max(22,ry*.35);
     const pelvis='M'+point(cx-w,cy)+' Q'+point(cx-w*.95,cy-h)+
       ' '+point(cx,cy-h)+' Q'+point(cx+w*.95,cy-h)+
@@ -309,12 +347,15 @@
   // Its tapered visible surface prevents the chest from hiding whole limbs.
   const frontArms=p=>p.arms.map((d,i)=>{
     const sections=curveSections(d),left=[],right=[];
-    for(let k=0;k<=18;k++){
-      const u=.21+.79*k/18,scaled=u*sections.length;
+    // Extend the visible silhouette back beneath the shoulder socket;
+    // the older .21 start left a visible void on horizontal Warrior II arms.
+    for(let k=0;k<=32;k++){
+      const u=.06+.94*k/32,scaled=u*sections.length;
       const index=Math.min(sections.length-1,Math.floor(scaled));
       const at=sample(sections[index],Math.min(1,scaled-index));
       const mag=Math.max(.001,Math.hypot(at.dx,at.dy));
-      const nx=-at.dy/mag,ny=at.dx/mag,width=21-(k/18)*7;
+      const nx=-at.dy/mag,ny=at.dx/mag;
+      const phase=k/32,width=24-10*phase+1.5*Math.sin(Math.PI*phase);
       left.push(point(at.x+nx*width,at.y+ny*width));
       right.push(point(at.x-nx*width,at.y-ny*width));
     }
@@ -329,8 +370,8 @@
     // Only the hands and a soft joining-gesture forearm pass in FRONT.
     const anatomy=joins(p);
     const joined=p.kind==="finish"||p.id==="v68-gratitude";
-    const feet=p.feet.map((pt,i)=>paw(pt,"foot",i,p.legs[i],false)).join("");
-    const hands=p.hands.map((pt,i)=>paw(pt,"hand",i,p.arms[i],joined)).join("");
+    const feet=p.feet.map((pt,i)=>paw(pt,"foot",i,p.legs[i],false,p.kind)).join("");
+    const hands=p.hands.map((pt,i)=>paw(pt,"hand",i,p.arms[i],joined,p.kind)).join("");
     const front=joined?'<g class="mg-gesture-forearms">'+
       p.arms.map(d=>'<path class="mg-gesture-forearm" d="'+d+'"/>').join("")+'</g>':"";
     return '<g class="movement-guardian" data-guardian="nila" data-kind="'+p.kind+'" aria-hidden="true">'+

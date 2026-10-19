@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("D18: three modes are actionable and dragon remains intact",async({page})=>{
-  await page.goto("/");
+  await page.goto("/",{waitUntil:"domcontentloaded"});
   await expect(page.locator('#flow-guide')).toHaveAttribute("data-ready","true",{timeout:12000});
   const modes=page.locator("button[data-studio-mode]");
   await expect(modes).toHaveCount(3);
@@ -31,7 +31,7 @@ test("D18: three modes are actionable and dragon remains intact",async({page})=>
 test("D18: mobile layout has no horizontal overflow and respects reduced motion",async({page})=>{
   await page.setViewportSize({width:320,height:780});
   await page.emulateMedia({reducedMotion:"reduce"});
-  await page.goto("/");
+  await page.goto("/",{waitUntil:"domcontentloaded"});
   await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
   await expect(page.locator(".studio-breath-orb")).toHaveCSS("transition-duration","0s");

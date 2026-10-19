@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("D26: dragon breath and orb follow one clock; pause holds exact frame",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  const panel=page.locator("#studio-guided");
@@ -42,7 +42,7 @@ test("D26: dragon breath and orb follow one clock; pause holds exact frame",asyn
 test("D26: controls translate, hide outside breathing, remain accessible at 320px",async({page})=>{
  await page.setViewportSize({width:320,height:760});
  await page.emulateMedia({reducedMotion:"reduce"});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await page.locator('[data-studio-mode="breath"]').evaluate(el=>el.click());
  const controls=page.locator(".studio-breath-patterns");
  await expect(controls).toBeVisible();

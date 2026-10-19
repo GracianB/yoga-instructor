@@ -200,6 +200,7 @@ if (
    INSTRUCTOR FLOW ENGINE · #32
    ================================================================ */
 const flowEngine = read("flow-engine.js");
+const flowBridge = read("flow-event-bridge.js");
 
 const expectedFlow = [
   "start",
@@ -232,7 +233,7 @@ for (const token of [
   "reset()",
   "goTo(id)",
   "snapshot()",
-  "yoga:flow",
+  "bridge.dispatch(snapshot)",
   "window.YOGA_FLOW"
 ]) {
   if (!flowEngine.includes(token)) {
@@ -243,7 +244,9 @@ for (const token of [
 if (
   flowEngine.includes("class YogaFlowEngine") &&
   flowEngine.includes("snapshot()") &&
-  flowEngine.includes("yoga:flow") &&
+  flowEngine.includes("bridge.dispatch(snapshot)") &&
+  flowBridge.includes("yoga:flow") &&
+  flowBridge.includes("dispatchEvent") &&
   flowEngine.includes("window.YOGA_FLOW")
 ) {
   pass.push("Flow Engine deterministic contract");

@@ -9,8 +9,15 @@ async function open(page, options = {}) {
   const errors = [];
   page.on('response', response => { if (response.url().startsWith('http://127.0.0.1:4185') && response.status() >= 400) errors.push(`${response.status()} ${response.url()}`); });
   page.on('pageerror', error => errors.push(error.message));
-  page.on('console', message => { if (['error', 'warning'].includes(message.type())) errors.push(message.text()); });
-  await page.goto(options.url || '/');
+  page.on('console', message => {
+    // Firefox emits its own anti-tracking warning on localhost. This is a
+    // browser diagnostic, not a warning produced by the Yoga application.
+    if (message.type() === 'warning' && message.text().includes('has been classified as a bounce tracker')) return;
+    if (['error', 'warning'].includes(message.type())) errors.push(message.text());
+  });
+  // All classic deferred scripts finish before DOMContentLoaded. Waiting for the
+  // full load event also waits on unrelated assets and can freeze Firefox CI.
+  await page.goto(options.url || '/', { waitUntil: 'domcontentloaded' });
   await expect(page.locator('h1')).toBeVisible();
   return errors;
 }
@@ -29,7 +36,7 @@ for (const width of [320, 390, 768, 1440]) {
     await expect(page.locator('[data-cv-link]').first()).toHaveAttribute('href', './assets/CV_Gracian_Baena_Yoga_EN.pdf');
     await page.locator('[data-set-theme="dark"]').click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
-    await page.reload();
+    await page.reload({ waitUntil: 'domcontentloaded' });
     await expect(page.locator('html')).toHaveAttribute('lang', 'en');
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     const toggle = page.locator('.menu-toggle');
@@ -107,7 +114,7 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   await page.locator('[data-practice="focus"]').evaluate(button=>button.click());
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
   expect(await page.evaluate(() => localStorage.getItem('gb-yoga-practice'))).toBe('focus');
-  await page.reload();
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await expect(page.locator('#ritual-state')).toHaveText('Afinar');
   // The dock pointer path is tested separately. Here verify the production
   // click handlers after reload without WebKit RAF/layout stability races.
@@ -120,7 +127,7 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   // cover the visible controls on desktop.
   await page.locator('.sanctuary-quiet').evaluate(button => button.click());
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
-  await page.reload();
+  await page.reload({ waitUntil: 'domcontentloaded' });
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
   await page.locator('#audio-play').evaluate(button => button.scrollIntoView({ behavior: 'instant', block: 'center' }));
   await page.locator('#audio-play').click();
@@ -307,7 +314,10 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   const guide=page.locator('#flow-guide');
   const act=async action=>page.locator('[data-flow-action="'+action+'"]').evaluate(el=>el.click());
   await expect(guide).toHaveAttribute('data-ready','true');
-  await act('preview');
+  // The preview intentionally advances every phase after five seconds.
+  // Cat-Cow needs the real 120-second warmup to test pause/resume without
+  // accidentally inspecting the next Warrior pose (confirmed in WebKit trace).
+  await act('start');
   await expect(guide).toHaveAttribute('data-status','running');
   for(const phase of ['centering','breath','warmup']){
     await expect(guide).toHaveAttribute('data-ready','true');
@@ -332,7 +342,9 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
     .evaluateAll(nodes=>nodes.map(n=>n.getAttribute("transform")))).toEqual(grounded);
   const spineNow=await spine.getAttribute('d');
   expect(spineNow).toContain('Q0 ');
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await act('pause');
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await expect(guide).toHaveAttribute('data-asana-state','paused');
   const frozen=await back.getAttribute('d');
   await page.waitForTimeout(450);
@@ -343,7 +355,9 @@ test('Phase B: cat-cow visibly flexes back with anchored paws and freezes on pau
   await page.bringToFront();
   await act('pause');
   await expect(guide).toHaveAttribute('data-asana-state','running');
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await expect.poll(()=>back.getAttribute('d'),{timeout:12000}).not.toBe(frozen);
+  await expect(guide).toHaveAttribute('data-phase','warmup');
   await page.emulateMedia({reducedMotion:'reduce'});
   await expect(guide).toHaveAttribute('data-asana-state','reduced');
   const reduced=await back.getAttribute('d');

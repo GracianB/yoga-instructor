@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Laboratorio de anatomía vectorial: transiciones de Tadasana a Uttanasana, articulaciones, apoyos y restricciones.">
+<title>Laboratorio anatómico · Yoga Instructor</title>
+<link rel="stylesheet" href="./anatomy-lab.css">
+</head>
+<body>
+<div class="lab-shell">
+ <header class="lab-header">
+  <a class="back-link" href="./index.html#studio-asana-library">← Volver a Yoga Instructor</a>
+  <p class="eyebrow">Movimiento / Anatomía / Laboratorio experimental</p>
+  <h1>Laboratorio anatómico</h1>
+  <p class="lab-lead">Cómo se transforma una postura sin que el cuerpo pierda su estructura. Explora Tadasana y Uttanasana, examina cada articulación y detecta deformaciones en una vista de trabajo independiente.</p>
+ </header>
+ <main class="lab-layout">
+  <section class="workbench" aria-labelledby="workbench-title">
+   <div class="workbench-top"><h2 id="workbench-title">Estudio de movimiento</h2><small>Esqueleto 2D · 16 articulaciones</small></div>
+   <div class="controls">
+    <div class="primary-controls" role="group" aria-label="Control de las posturas">
+     <button id="stand" type="button" aria-pressed="true">Tadasana</button>
+     <button id="fold" type="button" aria-pressed="false">Uttanasana</button>
+     <button id="play" type="button" aria-pressed="false">Reproducir transición</button>
+     <button id="reverse" type="button" aria-pressed="false">Invertir</button>
+    </div>
+    <div class="range-control">
+     <div class="progress-label"><label for="progress">Transición articulada</label><output id="value" for="progress">0%</output></div>
+     <input id="progress" aria-label="Progreso de la transición" type="range" min="0" max="100" step="1" value="0">
+    </div>
+    <div class="secondary-controls" role="group" aria-label="Capas de visualización">
+     <label><input id="overlay" type="checkbox" checked> Articulaciones</label>
+     <label><input id="compare" type="checkbox"> Referencia inicial</label>
+     <label><input id="error-map" type="checkbox"> Deformaciones</label>
+    </div>
+   </div>
+   <div class="stage-wrap">
+    <svg id="stage" viewBox="100 65 520 375" role="img" aria-label="Estudio SVG de un cuerpo articulado en transición entre Tadasana y Uttanasana">
+     <line class="floor" x1="120" y1="401" x2="600" y2="401"/>
+    </svg>
+   </div>
+   <p class="stage-note">Los tobillos mantienen su posición y el solucionador intenta preservar las longitudes de cada segmento durante la transición.</p>
+  </section>
+  <aside class="inspector" aria-label="Inspector anatómico">
+   <h2>Mediciones en vivo</h2>
+   <dl class="lab-metrics" aria-label="Ángulos geométricos">
+    <div><dt>Rodilla izquierda</dt><dd id="knee-left">—</dd></div>
+    <div><dt>Rodilla derecha</dt><dd id="knee-right">—</dd></div>
+    <div><dt>Cadera izquierda</dt><dd id="hip-left">—</dd></div>
+    <div><dt>Inclinación del tronco</dt><dd id="torso-angle">—</dd></div>
+   </dl>
+   <p class="output" id="status" aria-live="polite"></p>
+   <section class="anatomy-findings" aria-labelledby="findings-heading">
+    <h3 id="findings-heading">Integridad de segmentos</h3>
+    <p>Las desviaciones comparan longitudes del dibujo respecto a Tadasana. No representan riesgos ni diagnósticos clínicos.</p>
+    <ul id="findings"></ul>
+   </section>
+  </aside>
+ </main>
+ <footer>Experimento técnico, no guía de práctica física. Este modelo bidimensional todavía no representa la anatomía humana completa ni sustituye las indicaciones de un instructor cualificado.</footer>
+</div>
+<script src="./articulated-rig.js"></script>
+<script src="./rig-constraints.js"></script>
+<script src="./rig-ik.js"></script>
+<script src="./rig-motion.js"></script>
+<script src="./anatomy-lab.js"></script>
+</body>
+</html>

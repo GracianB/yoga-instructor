@@ -21,6 +21,14 @@
 Una práctica para volver a donde estás. Sin competir. Sin postureo.
 
 
+> **Dos planes distintos:** las 10 fases históricas de *Living Sanctuary* describen
+> la experiencia creativa del sitio. La reconstrucción técnica actual tiene **6 fases**:
+> [Plan de reconstrucción](docs/ROADMAP_RECONSTRUCCION_6_FASES.md). P1 es
+> arquitectura; P2 comienza con el diseño y el mapa del sitio.
+>
+> La [auditoría de P1](docs/P1_AUDITORIA_CIERRE.md) distingue ingeniería validada
+> de pendientes visuales; la anatomía experimental no es un modelo clínico.
+
 ### Living Sanctuary · 10 fases
 
 Esta versión trata la web como un pequeño espacio de práctica, no como un portfolio estático.
@@ -321,13 +329,15 @@ recommendation or an automatically started class.
 
 ### Resource and deployment checks
 
-- `npm run audit:architecture` inventories stylesheet/script requests, their bytes,
-  eager JS exceptions, duplicated dependencies, broken local links and budgets.
-  It reports existing architectural debt without pretending to have already bundled
-  the stylesheets or changed browser rendering order.
-- `npm run quality` runs those budgets alongside Node tests, asset integrity and
-  accessibility/safety contracts. Browser acceptance still requires Chromium,
-  Firefox and WebKit, including a 320px viewport.
+- `npm run audit:architecture` checks dependency integrity (duplicate,
+  eager and missing references, plus unsafe local paths), and reports request and
+  byte counts **without arbitrary numeric ceilings**.
+- `npm run audit:inventory` records dependency order, SHA-256 and byte sizes;
+  `npm run audit:coupling` reports heuristic global/DOM/event dependencies.
+- `npm run build` compiles the ordered CSS cascade into **one production CSS
+  file**, while preserving the legacy deferred JavaScript dependencies.
+- `npm run quality` runs these checks, Node tests, integrity and safety rules.
+  Browser acceptance separately requires Chromium, Firefox and WebKit.
 - Pages publication requires a fully successful quality **push on main**, matches
   the published SHA and verifies every served resource against the manifest.
   PR validations cannot cancel a valid main release. The deploy job requires

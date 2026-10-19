@@ -187,17 +187,12 @@
     steps.setAttribute("aria-label", lang()==="en"?"Session phases":"Fases de la sesión");
     renderPlan();
   }
-  root.querySelectorAll("a[data-v74-choose]").forEach(link => link.addEventListener("click", event => {
-    event.preventDefault();
+  root.querySelectorAll("a[data-v74-choose]").forEach(link => link.addEventListener("click", () => {
+    // Preserve the actual href="#programa" navigation. Blocking the default
+    // browser action and manually rewriting location.hash sometimes left
+    // Firefox at "/" despite correctly changing the selected plan.
     setting.value = link.dataset.v74Choose;
     renderPlan();
-    // Keep both the selected teaching context and a real, shareable anchor.
-    // Other site navigation scripts can otherwise consume the native jump.
-    // Use the native fragment setter: Firefox can leave the address bar
-    // unchanged after a history-only replacement during scripted scrolling.
-    // A real hash also works with browser history, keyboard and shared links.
-    if (window.location.hash !== "#programa") window.location.hash = "programa";
-    document.getElementById("programa")?.scrollIntoView({block:"start",behavior:"instant"});
   }));
   setting.addEventListener("change", renderPlan);
   duration.addEventListener("change", renderPlan);

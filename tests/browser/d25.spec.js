@@ -11,7 +11,7 @@ async function enableRecovery(root){
 
 async function open(page){
  await page.addInitScript(()=>{try{sessionStorage.setItem("gb-yoga-intro-seen","1")}catch(_){}});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  return page.locator("#instructor-flow");
 }
@@ -62,7 +62,7 @@ test("D25: options survive reload, disappear in meditation and fit 320px reduced
  await root.locator('[data-d25-option="length"]').selectOption("extended");
  await root.locator('[data-d25-option="level"]').selectOption("gentle");
  await enableRecovery(root);
- await page.reload();
+ await page.reload({waitUntil:'domcontentloaded'});
  await expect(root.locator('[data-d25-option="length"]')).toHaveValue("extended");
  await expect(root.locator('[data-d25-option="recovery"]')).toBeChecked();
  await root.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());

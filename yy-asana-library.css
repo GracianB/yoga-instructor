@@ -55,7 +55,9 @@
 }
 #instructor-flow .studio-library-stage .yy-pose{
   opacity:0;visibility:hidden;transform:none!important;animation:none!important;
-  transition:opacity .4s ease,visibility .4s linear;
+  /* Visibility is not animated: switching asanas must expose the new pose
+     immediately, while opacity retains the soft visual crossfade. */
+  transition:opacity .25s ease;
 }
 #instructor-flow .studio-library-stage .yy-pose.is-current{
   opacity:1;visibility:visible;transform:none!important;

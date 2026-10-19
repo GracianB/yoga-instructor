@@ -1,6 +1,6 @@
 const {test,expect}=require('@playwright/test');
 test('D16: two folded shoulder wings and one unicorn horn in both energies',async({page})=>{
- await page.goto('/');
+ await page.goto('/',{waitUntil:'domcontentloaded'});
  const root=page.locator('#flow-guide');
  await expect(root).toHaveAttribute('data-ready','true',{timeout:12000});
  for(const spirit of ['yin','yang']){
@@ -15,7 +15,7 @@ test('D16: two folded shoulder wings and one unicorn horn in both energies',asyn
 });
 test('D16: compact wings and cinematic passage in 320px cat-cow',async({page})=>{
  await page.setViewportSize({width:320,height:760});
- await page.goto('/');
+ await page.goto('/',{waitUntil:'domcontentloaded'});
  const root=page.locator('#flow-guide');
  await expect(root).toHaveAttribute('data-ready','true',{timeout:12000});
  await page.locator('[data-flow-action="start"]').evaluate(e=>e.click());

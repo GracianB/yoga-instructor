@@ -1,0 +1,60 @@
+/* Experimental anatomy workbench. Scoped, independent of production site cascade. */
+:root{
+ color-scheme:light;
+ --page:#f1eee5;--paper:#fffdf7;--canvas:#e6e5d9;--ink:#213b31;
+ --muted:#526b5d;--line:#d8d9cb;--accent:#a47549;--earth:#dbb88e;
+ font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--page);color:var(--ink)
+}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:radial-gradient(circle at 4% 5%,#e9d7b9 0,transparent 34%),linear-gradient(150deg,#f2f1e9,var(--page))}
+button,input{font:inherit}a{color:inherit}
+.lab-shell{width:min(1340px,100%);padding:clamp(.85rem,2.4vw,2.25rem);margin:auto}
+.lab-header{max-width:960px;padding:.35rem 0 clamp(1rem,1.8vw,1.5rem)}
+.back-link{font-size:.82rem;font-weight:700;letter-spacing:.02em;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}
+.back-link:hover{color:var(--accent)}
+.eyebrow{font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;font-weight:750;color:#866039;margin:1rem 0 .35rem}
+.lab-header h1{font:400 clamp(2.5rem,5vw,4.1rem)/1.03 Georgia,"Times New Roman",serif;letter-spacing:-.045em;margin:0 0 .5rem}
+.lab-lead{max-width:78ch;font-size:clamp(.9rem,1.1vw,1rem);color:var(--muted);line-height:1.5;margin:0}
+.lab-layout{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(290px,.72fr);align-items:start;gap:clamp(1rem,2vw,2rem)}
+.workbench,.inspector{background:var(--paper);border:1px solid #d9d9ce;box-shadow:0 20px 65px #213b310c;border-radius:1.5rem;overflow:hidden}
+.workbench-top{padding:clamp(.8rem,1.2vw,1.15rem);display:flex;align-items:baseline;justify-content:space-between;gap:1rem;border-bottom:1px solid var(--line)}
+.workbench-top h2{font:400 1.65rem Georgia,serif;margin:0}
+.workbench-top small{color:var(--muted);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.controls{padding:.9rem clamp(.8rem,1.2vw,1.15rem);display:grid;gap:.7rem}
+.primary-controls,.secondary-controls{display:flex;align-items:center;gap:.5rem;flex-wrap:wrap}
+button{appearance:none;background:var(--ink);color:white;border:1px solid var(--ink);border-radius:999px;padding:.65rem .95rem;line-height:1.2;font-size:.84rem;font-weight:680;cursor:pointer;transition:background .15s ease,color .15s ease}
+button:hover{background:#335a48}
+button[aria-pressed=true]{background:var(--accent);border-color:var(--accent);color:#fff}
+#reverse{background:transparent;color:var(--ink);border-color:#a3b4a7}
+#reverse:hover{background:#eef0e6}
+.progress-label{display:flex;justify-content:space-between;gap:1rem;font-size:.86rem;font-weight:670}
+#value{font-variant-numeric:tabular-nums;color:#926744}
+#progress{width:100%;accent-color:var(--accent);height:1.1rem;cursor:pointer}
+.secondary-controls label{display:inline-flex;align-items:center;gap:.35rem;font-size:.76rem;font-weight:650;color:var(--muted);cursor:pointer}
+.secondary-controls input{accent-color:var(--accent);width:1rem;height:1rem}
+.stage-wrap{padding:clamp(.4rem,1vw,.8rem);background:linear-gradient(135deg,#efe9dc,#e5e8da)}
+#stage{display:block;width:100%;height:auto;aspect-ratio:520/375;border-radius:.9rem;background:radial-gradient(circle at 50% 33%,#f6f2e7 0%,var(--canvas) 75%)}
+#stage line:not(.reference):not(.bone-volume):not(.floor){stroke:#315746;stroke-width:6;stroke-linecap:round}
+#stage circle:not(.rig-head){fill:#a87549;stroke:#fffdf7;stroke-width:2}
+#stage .floor{stroke:#c1b79f;stroke-width:2;stroke-dasharray:7 9}
+#stage .reference{stroke:#b49b72;stroke-width:3;stroke-dasharray:5 8;opacity:.75}
+#stage .bone-volume{stroke:var(--earth);stroke-linecap:round;opacity:.92}
+#stage .rig-head{fill:var(--earth);stroke:#916748;stroke-width:2}
+#stage .error-segment{stroke:#bf563b!important;stroke-width:8!important}
+.stage-note{display:flex;align-items:flex-start;gap:.65rem;color:var(--muted);font-size:.78rem;line-height:1.5;padding:1rem 1.5rem;margin:0}
+.stage-note::before{content:"●";font-size:.7rem;color:#a47549}
+.inspector{padding:clamp(1rem,2vw,1.75rem)}
+.inspector h2{font:400 1.6rem Georgia,serif;margin:.2rem 0 1rem}
+.lab-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.7rem;margin:0}
+.lab-metrics>div{border:1px solid var(--line);background:#f8f5ec;border-radius:.85rem;padding:1rem;min-width:0}
+.lab-metrics dt{font-size:.66rem;line-height:1.35;text-transform:uppercase;letter-spacing:.1em;font-weight:800;color:var(--muted)}
+.lab-metrics dd{font-size:clamp(1.15rem,2.2vw,1.6rem);font-variant-numeric:tabular-nums;font-weight:680;margin:.6rem 0 0;letter-spacing:-.03em}
+.output{font-size:.82rem;font-variant-numeric:tabular-nums;line-height:1.6;color:var(--muted);padding:1rem 0;border-bottom:1px solid var(--line)}
+.anatomy-findings{margin-top:1.25rem}
+.anatomy-findings h3{font:400 1.25rem Georgia,serif;margin:0 0 .4rem}
+.anatomy-findings p{font-size:.77rem;line-height:1.55;color:var(--muted)}
+.anatomy-findings ul{padding-left:1.3rem;font-size:.79rem;line-height:1.7;font-variant-numeric:tabular-nums}
+footer{padding:2rem 0 .5rem;color:var(--muted);font-size:.76rem;max-width:72ch;line-height:1.65}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #a47549;outline-offset:4px}
+@media(max-width:900px){.lab-layout{grid-template-columns:1fr}.inspector{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.inspector>h2{grid-column:1/-1}.output{margin:0}}
+@media(max-width:550px){.lab-header h1{font-size:2.7rem}.workbench-top{align-items:flex-start;flex-direction:column;gap:.2rem}.inspector{display:block}.lab-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.primary-controls button{padding:.58rem .75rem}.stage-note{padding:1rem}}
+@media(prefers-reduced-motion:reduce){button{transition:none}*{scroll-behavior:auto!important}}

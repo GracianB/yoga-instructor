@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("D20: personalized practice timings and Yin/Yang never change Flow order",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  const controls=page.locator("button[data-studio-plan]");
  await expect(controls).toHaveCount(3);
@@ -18,10 +18,10 @@ test("D20: personalized practice timings and Yin/Yang never change Flow order",a
  await expect(page.locator("#flow-phase-target")).toHaveText("00:36");
 });
 test("D20: rhythm preference survives reload and hides in guided paths",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  await page.locator('button[data-studio-plan="deep"]').evaluate(el=>el.click());
- await page.reload();
+ await page.reload({waitUntil:'domcontentloaded'});
  await expect(page.locator('#instructor-flow')).toHaveAttribute("data-studio-pace","deep");
  await expect(page.locator('button[data-studio-plan="deep"]')).toHaveAttribute("aria-pressed","true");
  await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());

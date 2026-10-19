@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("D27: guided meditation vs silent, same clock and pause",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
  const guide=page.locator("#studio-guided");
@@ -32,7 +32,7 @@ test("D27: guided meditation vs silent, same clock and pause",async({page})=>{
 test("D27: hide meditation choices in breathing; responsive and EN",async({page})=>{
  await page.setViewportSize({width:320,height:760});
  await page.emulateMedia({reducedMotion:"reduce"});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await page.locator('[data-studio-mode="meditation"]').evaluate(el=>el.click());
  const group=page.locator(".studio-meditation-choices");
  await page.locator('[data-set-lang="en"]').evaluate(el=>el.click());

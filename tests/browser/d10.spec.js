@@ -4,7 +4,7 @@ async function openPractice(page){
  await page.route('https://fonts.googleapis.com/**',r=>r.fulfill({contentType:'text/css',body:''}));
  await page.route('https://vortex-gilt-xi.vercel.app/**',r=>r.fulfill({contentType:'text/html',body:'<!doctype html>'}));
  await page.addInitScript(()=>{try{sessionStorage.setItem('gb-yoga-intro-seen','1')}catch(_){}});
- await page.goto('/');
+ await page.goto('/',{waitUntil:'domcontentloaded'});
  const guide=page.locator('#flow-guide');
  await expect(guide).toHaveAttribute('data-ready','true',{timeout:12000});
  return guide;

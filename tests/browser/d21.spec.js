@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("D21: immersive view isolates the practice and Escape restores document",async({page})=>{
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:12000});
  const toggle=page.locator('[data-studio-focus-toggle]');
  await toggle.evaluate(el=>el.click());
@@ -17,7 +17,7 @@ test("D21: immersive view isolates the practice and Escape restores document",as
 });
 test("D21: guided mode and optional voice survive focus toggling on mobile",async({page})=>{
  await page.setViewportSize({width:320,height:760});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
  const focus=page.locator('[data-studio-focus-toggle]');
  await focus.evaluate(el=>el.click());

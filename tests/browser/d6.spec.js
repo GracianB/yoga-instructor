@@ -7,7 +7,7 @@ async function openPractice(page){
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
   page.on('console',m=>{if(['error','warning'].includes(m.type()))errors.push(m.text())});
-  await page.goto('/');
+  await page.goto('/',{waitUntil:'domcontentloaded'});
   await expect(page.locator('#flow-guide')).toHaveAttribute('data-ready','true',{timeout:10000});
   return errors;
 }
@@ -23,7 +23,7 @@ test('D6: initial guide unlocks even when animation frames are stalled',async ({
   });
   const errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  await page.goto('/');
+  await page.goto('/',{waitUntil:'domcontentloaded'});
   const guide=page.locator('#flow-guide');
   await expect(guide).toHaveAttribute('data-ready','true',{timeout:2000});
   await expect(guide).toHaveAttribute('data-asana-state','idle');

@@ -1,7 +1,7 @@
 const {test,expect}=require("@playwright/test");
 async function open(page){
  await page.addInitScript(()=>{try{sessionStorage.setItem("gb-yoga-intro-seen","1")}catch(_){}});
- await page.goto("/");
+ await page.goto("/",{waitUntil:"domcontentloaded"});
  const guide=page.locator("#flow-guide");
  await expect(guide).toHaveAttribute("data-ready","true",{timeout:12000});
  const explorer=page.locator("#studio-asana-library");

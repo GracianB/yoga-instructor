@@ -1,7 +1,7 @@
 const {test,expect}=require("@playwright/test");
 
 test("V75: five visual chapter links navigate to the correct sections",async({page})=>{
- await page.goto("/");
+ await page.goto("/"); await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  const atlas=page.locator("#atlas"),nav=page.locator("#v75-atlas-nav");
  await expect(atlas).toBeVisible();
  await expect(nav.locator("a")).toHaveCount(5);
@@ -15,7 +15,7 @@ test("V75: five visual chapter links navigate to the correct sections",async({pa
 });
 
 test("V75: light and dark editorial identities remain readable at multiple widths",async({page})=>{
- await page.goto("/");
+ await page.goto("/"); await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  for(const width of [320,375,768,1280]){
   await page.setViewportSize({width,height:900});
   for(const theme of ["dark","light"]){
@@ -30,7 +30,7 @@ test("V75: light and dark editorial identities remain readable at multiple width
 
 test("V75: English chapter labels and keyboard focus work; reduced motion disables petal animation",async({page})=>{
  await page.emulateMedia({reducedMotion:"reduce"});
- await page.goto("/");
+ await page.goto("/"); await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
  const atlas=page.locator("#atlas");
  await expect(atlas.locator("h2")).toContainText("From intention");

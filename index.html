@@ -248,13 +248,13 @@
 
   <header class="site-header">
     <a class="brand" href="https://gracianb.github.io/GracianB/" aria-label="Gracián Baena — hub">
-      <span class="brand-mark">GB</span>
+      <span class="brand-mark" aria-hidden="true">✳</span>
       <span class="brand-text">
         <b>GRACIÁN BAENA</b>
         <small data-i18n="brandSub">PASIÓN · yoga</small>
       </span>
     </a>
-    <nav class="nav" id="nav" data-i18n-aria-label="navLabel" aria-label="Primary"><a href="#proyectos"><span data-p2-lang="es">Apps</span><span data-p2-lang="en">Apps</span></a><a href="#experiencia"><span data-p2-lang="es">Experiencia</span><span data-p2-lang="en">Experience</span></a><a href="#metodo"><span data-p2-lang="es">Método</span><span data-p2-lang="en">Approach</span></a><a href="#contacto"><span data-p2-lang="es">Contacto</span><span data-p2-lang="en">Contact</span></a></nav>
+    <nav class="nav" id="nav" data-i18n-aria-label="navLabel" aria-label="Primary"><a href="#proyectos"><span data-p2-lang="es">Clases</span><span data-p2-lang="en">Classes</span></a><a href="#experiencia"><span data-p2-lang="es">Experiencia</span><span data-p2-lang="en">Experience</span></a><a href="#metodo"><span data-p2-lang="es">Método</span><span data-p2-lang="en">Approach</span></a><a href="#contacto"><span data-p2-lang="es">Contacto</span><span data-p2-lang="en">Contact</span></a></nav>
     <div class="header-actions">
       <div class="seg" role="group" data-i18n-aria-label="languageLabel" aria-label="Language">
         <button type="button" class="seg-btn" data-set-lang="es" aria-pressed="true">ES</button>
@@ -276,7 +276,7 @@
 
     <!-- HERO — presence practice space -->
     <section class="hero" id="inicio" data-breath="cycle">
-      <div class="hero-atmosphere" aria-hidden="true">
+      <div class="hero-atmosphere" aria-hidden="true"><canvas id="yoga-lotus-field" class="yoga-lotus-field" width="1200" height="680"></canvas>
         <div class="hero-grain"></div>
         <div class="hero-vignette"></div>
         <div class="hero-halo"></div>
@@ -406,8 +406,8 @@
             Instructor certificado (Madrid 2019). Yoga corporativo en Majorel · Google / YouTube. Sala en Mood Fitness (Murcia) hasta junio 2026.
           </p>
           <div class="hero-actions">
-            <a class="btn primary" href="#explora" data-i18n="heroCtaExplore">Explorar mi yoga</a>
-            <a class="btn ghost" href="#contacto" data-i18n="heroCtaPractice">Entrar al estudio ↗</a>
+            <a class="btn primary" href="#explora" data-i18n="heroCtaExplore">Conoce las clases</a>
+            <a class="btn ghost" href="#contacto" data-i18n="heroCtaPractice">Solicitar una sesión ↗</a>
           </div>
           <div class="hero-manifesto">
             <span class="manifesto-rule" aria-hidden="true"></span>
@@ -431,38 +431,57 @@
     
 
     <!-- P2: concise home. Five destinations, no presentation slider. -->
-    <section class="p2-explore" id="explora" aria-labelledby="p2-explore-title">
+    <section class="p2-explore yoga-showcase-map" id="explora" aria-labelledby="p2-explore-title">
       <div class="p2-explore-intro">
-        <p class="p2-eyebrow"><span data-p2-lang="es">TU ESPACIO DE YOGA</span><span data-p2-lang="en">YOUR YOGA SPACE</span></p>
-        <h2 id="p2-explore-title"><span data-p2-lang="es">Elige adónde ir.</span><span data-p2-lang="en">Choose your path.</span></h2>
+        <p class="p2-eyebrow"><span data-p2-lang="es">YOGA · TU PRÁCTICA</span><span data-p2-lang="en">YOGA · YOUR PRACTICE</span></p>
+        <h2 id="p2-explore-title"><span data-p2-lang="es">Un lugar para empezar.</span><span data-p2-lang="en">Your place to begin.</span></h2>
+        <p class="yoga-showcase-lead"><span data-p2-lang="es">Cuatro caminos sencillos: encuentra el tuyo, conoce mi experiencia o hablemos de una clase.</span><span data-p2-lang="en">Four simple paths: find yours, explore my experience or talk about a class.</span></p>
       </div>
-      <nav class="p2-route-grid" aria-label="Explorar Yoga Instructor" data-p2-map>
-        <a class="p2-route p2-route-featured" href="#proyectos" data-p2-route="projects"><span class="p2-route-index">01</span><strong><span data-p2-lang="es">Apps de yoga</span><span data-p2-lang="en">Yoga apps</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
-        <a class="p2-route" href="#experiencia" data-p2-route="experience"><span class="p2-route-index">02</span><strong><span data-p2-lang="es">Experiencia</span><span data-p2-lang="en">Experience</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
-        
-        <a class="p2-route" href="#contacto" data-p2-route="contact"><span class="p2-route-index">03</span><strong><span data-p2-lang="es">Contacto</span><span data-p2-lang="en">Contact</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
+      <nav class="p2-route-grid yoga-showcase-route-grid" aria-label="Explorar Yoga Instructor" data-p2-map>
+        <a class="p2-route p2-route-featured" href="#proyectos" data-p2-route="projects"><span class="p2-route-index">01 / PRACTICE</span><strong><span data-p2-lang="es">Clases</span><span data-p2-lang="en">Classes</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
+        <a class="p2-route" href="#experiencia" data-p2-route="experience"><span class="p2-route-index">02 / JOURNEY</span><strong><span data-p2-lang="es">Experiencia</span><span data-p2-lang="en">Experience</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
+        <a class="p2-route" href="#metodo" data-p2-route="method"><span class="p2-route-index">03 / APPROACH</span><strong><span data-p2-lang="es">Mi método</span><span data-p2-lang="en">My approach</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
+        <a class="p2-route" href="#contacto" data-p2-route="contact"><span class="p2-route-index">04 / CONNECT</span><strong><span data-p2-lang="es">Reserva una clase</span><span data-p2-lang="en">Plan a class</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
       </nav>
-      <div class="p2-explore-foot"><button id="p2-toggle" type="button" aria-pressed="false" aria-controls="main"><span data-p2-toggle-label><span data-p2-lang="es">Ver archivo completo</span><span data-p2-lang="en">Open full archive</span></span></button></div>
+      <div class="p2-explore-foot"><button id="p2-toggle" type="button" aria-pressed="false" aria-controls="main" hidden><span data-p2-toggle-label>Ver archivo completo</span></button></div>
     </section>
 
-    <section class="p26-projects section" id="proyectos" aria-labelledby="p26-projects-title">
-      <p class="kicker"><span data-p2-lang="es">APLICACIONES DE YOGA</span><span data-p2-lang="en">YOGA APPLICATIONS</span></p>
-      <h2 id="p26-projects-title"><span data-p2-lang="es">Dos experiencias en preparación.</span><span data-p2-lang="en">Two experiences in development.</span></h2>
-      <div class="p26-project-grid">
-        <article class="p26-project-card" aria-labelledby="p26-practice-title">
-          <span>01 / YOGA APP</span>
-          <strong id="p26-practice-title">Yoga Practice</strong>
-          <small><span data-p2-lang="es">Práctica guiada de posturas, respiración y meditación.</span><span data-p2-lang="en">Guided postures, breathing and meditation.</span></small>
-          <span class="p26-status"><span data-p2-lang="es">En construcción</span><span data-p2-lang="en">Under construction</span></span>
-        </article>
-        <article class="p26-project-card" aria-labelledby="p26-book-title">
-          <span>02 / ASANA BOOK</span>
-          <strong id="p26-book-title">Yoga Asana Book</strong>
-          <small><span data-p2-lang="es">Libro visual de asanas, variantes y apoyos.</span><span data-p2-lang="en">Visual asana book with variations and supports.</span></small>
-          <span class="p26-status"><span data-p2-lang="es">En construcción</span><span data-p2-lang="en">Under construction</span></span>
-        </article>
-      </div>
-    </section>
+    <section class="p26-projects section yoga-offer-section" id="proyectos" aria-labelledby="p26-projects-title">
+  <p class="kicker"><span data-p2-lang="es">TU PRÁCTICA, A TU MANERA</span><span data-p2-lang="en">YOUR PRACTICE, YOUR WAY</span></p>
+  <h2 id="p26-projects-title"><span data-p2-lang="es">Yoga que se adapta a tu vida.</span><span data-p2-lang="en">Yoga that fits your life.</span></h2>
+  <p class="yoga-offer-intro"><span data-p2-lang="es">Individual, colectivo, en línea o en el trabajo. La misma atención, el formato que mejor encaja contigo.</span><span data-p2-lang="en">One-to-one, groups, online or at work. The same attention, in a format that fits you.</span></p>
+  <div class="yoga-offer-grid"><article class="yoga-offer-card" data-offer="online">
+  <div class="yoga-offer-top"><span>01 / YOGA</span><span class="yoga-offer-symbol" aria-hidden="true">◎</span></div>
+  <h3><span data-p2-lang="es">Yoga online</span><span data-p2-lang="en">Online yoga</span></h3>
+  <p><span data-p2-lang="es">Encuentros en directo, estés donde estés. Respiración, movimiento y acompañamiento sin complicaciones.</span><span data-p2-lang="en">Live sessions wherever you are. Breathwork, movement and personal guidance without the fuss.</span></p>
+  <button type="button" class="yoga-offer-action" data-yoga-service="online"><span data-p2-lang="es">Consultar disponibilidad</span><span data-p2-lang="en">Ask about availability</span><span aria-hidden="true">↗</span></button>
+</article>
+<article class="yoga-offer-card" data-offer="individual">
+  <div class="yoga-offer-top"><span>02 / YOGA</span><span class="yoga-offer-symbol" aria-hidden="true">◌</span></div>
+  <h3><span data-p2-lang="es">Sesiones 1:1</span><span data-p2-lang="en">One-to-one</span></h3>
+  <p><span data-p2-lang="es">Una práctica que se adapta a tu ritmo, experiencia y objetivos, con espacio para hacer preguntas.</span><span data-p2-lang="en">A practice adapted to your pace, experience and goals, with time to ask questions.</span></p>
+  <button type="button" class="yoga-offer-action" data-yoga-service="individual"><span data-p2-lang="es">Consultar disponibilidad</span><span data-p2-lang="en">Ask about availability</span><span aria-hidden="true">↗</span></button>
+</article>
+<article class="yoga-offer-card" data-offer="sala">
+  <div class="yoga-offer-top"><span>03 / YOGA</span><span class="yoga-offer-symbol" aria-hidden="true">✳</span></div>
+  <h3><span data-p2-lang="es">Grupos</span><span data-p2-lang="en">Groups</span></h3>
+  <p><span data-p2-lang="es">Clases compartidas y accesibles, con variantes y progresiones para distintos niveles.</span><span data-p2-lang="en">Accessible shared classes with variations and progressions for different levels.</span></p>
+  <button type="button" class="yoga-offer-action" data-yoga-service="sala"><span data-p2-lang="es">Consultar disponibilidad</span><span data-p2-lang="en">Ask about availability</span><span aria-hidden="true">↗</span></button>
+</article>
+<article class="yoga-offer-card" data-offer="equipos">
+  <div class="yoga-offer-top"><span>04 / YOGA</span><span class="yoga-offer-symbol" aria-hidden="true">⌁</span></div>
+  <h3><span data-p2-lang="es">Empresas</span><span data-p2-lang="en">Workplace</span></h3>
+  <p><span data-p2-lang="es">Pausas de bienestar, movimiento consciente y sesiones adaptadas a la jornada de tu equipo.</span><span data-p2-lang="en">Mindful breaks, movement and sessions adapted to your team’s working day.</span></p>
+  <button type="button" class="yoga-offer-action" data-yoga-service="equipos"><span data-p2-lang="es">Consultar disponibilidad</span><span data-p2-lang="en">Ask about availability</span><span aria-hidden="true">↗</span></button>
+</article></div>
+  <details class="yoga-future"><summary><span data-p2-lang="es">En pausa · proyectos digitales de yoga</span><span data-p2-lang="en">On hold · upcoming yoga projects</span><span aria-hidden="true">＋</span></summary>
+    <p class="yoga-future-intro"><span data-p2-lang="es">El desarrollo de estas dos herramientas está aparcado mientras priorizo la enseñanza y las clases.</span><span data-p2-lang="en">These two products are on hold while I focus on teaching and classes.</span></p>
+    <div class="p26-project-grid">
+      <article class="p26-project-card" aria-labelledby="p26-practice-title"><span>01 / YOGA APP</span><strong id="p26-practice-title">Yoga Practice</strong><small><span data-p2-lang="es">Práctica guiada de posturas, respiración y meditación.</span><span data-p2-lang="en">Guided postures, breathing and meditation.</span></small><span class="p26-status"><span data-p2-lang="es">En pausa</span><span data-p2-lang="en">On hold</span></span></article>
+      <article class="p26-project-card" aria-labelledby="p26-book-title"><span>02 / ASANA BOOK</span><strong id="p26-book-title">Yoga Asana Book</strong><small><span data-p2-lang="es">Libro visual de asanas, variantes y apoyos.</span><span data-p2-lang="en">Visual asana book with variations and supports.</span></small><span class="p26-status"><span data-p2-lang="es">En pausa</span><span data-p2-lang="en">On hold</span></span></article>
+    </div>
+  </details>
+</section>
 
     <!-- V80 · One arrival, three meaningful visitor journeys -->
     <section class="v80-gateway" id="orientacion" aria-labelledby="v80-title" hidden inert aria-hidden="true">
@@ -1561,7 +1580,7 @@
           Disponible para clases, colaboraciones y bienestar en equipos. Murcia · abierto a propuestas.
         </p>
 
-        <section class="v76-enquiry" id="v76-enquiry" aria-labelledby="v76-title" hidden inert aria-hidden="true">
+        <section class="v76-enquiry" id="v76-enquiry" aria-labelledby="v76-title">
           <div class="v76-intro">
             <p class="v76-kicker" data-v76-text="kicker">VAMOS A TRABAJAR JUNTOS</p>
             <h3 id="v76-title" data-v76-text="title">Cuéntame qué necesitas.</h3>
@@ -1583,6 +1602,10 @@
               <fieldset class="v76-services">
                 <legend data-v76-text="step1">01 / TIPO DE PRÁCTICA</legend>
                 <div class="v76-service-grid">
+                  <label class="v76-service">
+                    <input type="radio" name="v76-service" value="online">
+                    <span><strong data-v76-text="online">Yoga online</strong><small data-v76-text="onlineSub">En directo desde cualquier lugar</small></span>
+                  </label>
                   <label class="v76-service is-selected">
                     <input type="radio" name="v76-service" value="sala" checked>
                     <span><strong data-v76-text="sala">Clases en sala</strong><small data-v76-text="salaSub">Grupo y progresiones</small></span>
@@ -1643,7 +1666,7 @@
               </div>
               <p id="v76-live" class="v76-status" role="status" aria-live="polite"></p>
             </form>
-            <section class="v76-results" id="v76-results" aria-labelledby="v76-preview-title" hidden inert aria-hidden="true">
+            <section class="v76-results" id="v76-results" aria-labelledby="v76-preview-title" hidden>
               <div class="v76-results-head">
                 <span class="v76-kicker" data-v76-text="previewTitle">TU MENSAJE, A TU MANERA</span>
                 <p data-v76-text="previewLead">Puedes revisar y editar este texto antes de enviar el correo.</p>
@@ -1659,7 +1682,7 @@
         <div class="contact-actions">
           <a class="btn primary" href="mailto:gracianbaenagonzalez@gmail.com">Email ↗</a>
           <a class="btn ghost" href="https://calendar.app.google/n99psBFktwYyoAWi9" target="_blank" rel="noreferrer" data-i18n="contactAgenda">Agendar ↗</a>
-          <a class="btn ghost" href="tel:+34687470725">+34 687 470 725</a>
+          
           <a class="btn ghost" href="https://www.linkedin.com/in/gracianbaena" target="_blank" rel="noreferrer">LinkedIn ↗</a>
           <a class="btn ghost" href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-cv-link data-i18n="navCv">CV Yoga ↗</a>
         </div>

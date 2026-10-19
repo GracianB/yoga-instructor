@@ -317,7 +317,7 @@
     const amount=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-
       Math.max(bounds.top,0));
     const minimum=Math.min(48,window.innerHeight*.04);
-    const overlaps=amount>minimum;
+    const overlaps=amount>minimum && section.dataset.p2BookOpen==="true";
     if(leavingBook){
       if(!overlaps)leftViewport=true;
       else if(leftViewport)leavingBook=false;

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import {mkdtemp,writeFile,rm} from "node:fs/promises";
 import {tmpdir} from "node:os";
 import {join} from "node:path";
-import {inventory} from "../tools/architecture-inventory.mjs";
+import {inventory,serializeInventory} from "../tools/architecture-inventory.mjs";
 test("architecture inventory preserves script/style order, de-duplicates and hashes",async()=>{
  const dir=await mkdtemp(join(tmpdir(),"yoga-inventory-"));
  try{
@@ -21,4 +21,11 @@ test("architecture inventory preserves script/style order, de-duplicates and has
   assert.deepEqual(r.assets.find(x=>x.path==="b.js").usedBy,["index.html","cv.html"]);
   assert.match(r.assets[0].sha256,/^[a-f0-9]{64}$/);
  }finally{await rm(dir,{force:true,recursive:true})}
+});
+
+test("architecture inventory writes parseable JSON with a real final newline",()=>{
+ const serial=serializeInventory({schema:1,entries:[],assets:[],summary:{missing:[]}});
+ assert.ok(serial.endsWith("\n"));
+ assert.equal(serial.charCodeAt(serial.length-1),10);
+ assert.deepEqual(JSON.parse(serial).entries,[]);
 });

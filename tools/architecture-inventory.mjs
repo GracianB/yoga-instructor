@@ -32,9 +32,10 @@ export async function inventory(base=root){
  const totalBytes=assets.reduce((sum,f)=>sum+(f.bytes||0),0);
  return {schema:1,entries,assets,summary:{uniqueAssets:assets.length,totalBytes,missing:assets.filter(x=>x.missing).map(x=>x.path)}};
 }
+export const serializeInventory=report=>JSON.stringify(report,null,2)+"\n";
 if(process.argv[1]&&pathToFileURL(resolve(process.argv[1])).href===import.meta.url){
  const report=await inventory();
- const json=JSON.stringify(report,null,2)+"\\n";
+ const json=serializeInventory(report);
  if(process.argv.includes("--write")){
   const output=resolve(root,"artifacts/architecture-inventory.json");
   await mkdir(dirname(output),{recursive:true});await writeFile(output,json);

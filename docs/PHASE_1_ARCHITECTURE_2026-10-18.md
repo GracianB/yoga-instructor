@@ -36,12 +36,17 @@ Production must continue to preserve the ordered CSS cascade via `tools/p4-produ
 
 - [x] Remove numeric resource ceilings in architecture audit.
 - [x] Update corresponding regression test to validate telemetry.
-- [ ] Run `npm run quality` against the branch in a checkout with Node >=24.
-- [ ] Run `npm run build` and verify dist HTML and manifest.
-- [ ] Run `npm run test:browser` after dependencies/browser installation.
-- [ ] Capture desktop and mobile screenshots before merging.
+- [x] Run `npm run quality` with Node 24 in the GitHub Actions quality job.
+- [x] Run `npm run build` and verify dist HTML and manifest.
+- [x] Run browser tests across Chromium (2 shards), Firefox (2 shards) and WebKit.
+- [x] Capture screenshots in browser artifacts, including poses and responsive views.
+- [ ] **Visual acceptance** of the character's final poses is intentionally deferred
+  to P3; tests passing do not make the anatomy realistic.
 
-Execution is still pending. No automated test result or deployed change is claimed here.
+Verified on PR head `8adeeb46`, workflow `39176911282`, 594 Node tests
+passed and all seven jobs were green. Documentation-only commits after this
+baseline must also pass their own required checks. See
+[`P1_AUDITORIA_CIERRE.md`](P1_AUDITORIA_CIERRE.md).
 
 
 ## Automated evidence now available

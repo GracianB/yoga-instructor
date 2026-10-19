@@ -1,0 +1,18 @@
+/* Consistent, architectural figure shared across both apps. */
+.yoga-figure{display:block;width:100%;height:auto;max-width:460px;color:var(--accent);overflow:visible}
+.yoga-figure .figure-guide{fill:none;stroke:currentColor;stroke-width:.75;opacity:.18;stroke-dasharray:2 9}
+.yoga-figure .figure-guide-two{stroke-dasharray:none;opacity:.11}
+.yoga-figure .figure-floor{fill:none;stroke:var(--muted);stroke-width:2;opacity:.24}
+.yoga-figure .figure-aura{opacity:calc(.3 + var(--figure-breath,.5)*.55);transform-origin:210px 215px;transform:scale(calc(.85 + var(--figure-breath,.5)*.25));transition:transform .15s linear,opacity .15s linear}
+.yoga-figure .figure-human{fill:none;stroke:var(--ink);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;transition:opacity .25s ease}
+.yoga-figure .figure-human [data-figure-part]{transition:opacity .3s ease}
+.yoga-figure .figure-torso{stroke:var(--accent);stroke-width:13}
+.yoga-figure .figure-shoulders{opacity:.22;stroke-width:5}
+.yoga-figure .figure-breath-zone{fill:var(--accent);stroke:none;opacity:calc(.09 + var(--figure-breath,.5)*.18);transform-box:fill-box;transform-origin:center;transform:scale(calc(.86 + var(--figure-breath,.5)*.24));transition:transform .12s linear,opacity .12s linear}
+.yoga-figure .figure-head{fill:var(--surface);stroke:var(--ink);stroke-width:6}
+.yoga-figure .figure-joint{fill:var(--accent);stroke:none}
+.yoga-figure .figure-contact{fill:var(--ink);stroke:none}
+.yoga-figure .figure-measure{stroke:var(--accent);stroke-width:1.5;opacity:.6}
+.yoga-figure[data-pose="child"] .figure-shoulders,.yoga-figure[data-pose="fold"] .figure-shoulders{opacity:0}
+.yoga-figure[data-pose="warrior"] .figure-measure{stroke-dasharray:3 6}
+@media(prefers-reduced-motion:reduce){.yoga-figure *{transition:none!important;animation:none!important}}

@@ -31,7 +31,7 @@
 .pose-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:23px}
 .disclaimer{font-size:12px;text-align:center;margin:30px 0}
 footer{display:flex;justify-content:space-between;gap:15px}
-@media(max-width:850px){.intro{grid-template-columns:1fr;gap:0}.intro-aside{border-top:1px solid var(--line);border-left:0;padding:17px 0 0}.atlas{grid-template-columns:1fr}.catalogue{position:static;max-height:none;overflow:visible}.pose-list{display:flex;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding:2px 2px 8px;scrollbar-width:thin}.pose-list button{flex:0 0 180px;scroll-snap-align:start}#figure-root{min-height:260px}}
+@media(max-width:850px){.intro{grid-template-columns:1fr;gap:0}.intro-aside{border-top:1px solid var(--line);border-left:0;padding:17px 0 0}.atlas{grid-template-columns:minmax(0,1fr)}.catalogue{position:static;max-height:none;overflow:visible}.pose-list{display:flex;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;padding:2px 2px 8px;scrollbar-width:thin}.pose-list button{flex:0 0 180px;scroll-snap-align:start}#figure-root{min-height:260px}}
 @media(max-width:560px){.pose-list{grid-template-columns:1fr}.pose-list button{flex-basis:160px}.intro-aside{display:none}.teaching-grid{grid-template-columns:1fr;gap:5px}.pose-actions{justify-content:stretch}.pose-actions .btn{flex:1}footer{flex-direction:column}}
 
 /* Selection remains visible without hiding the active detail below a long list. */
@@ -39,3 +39,7 @@ footer{display:flex;justify-content:space-between;gap:15px}
 .pose-list button[aria-current="true"] .arrow{transform:rotate(45deg)}
 .pose-list .arrow{transition:transform .2s ease}
 @media(hover:hover){.figure-frame:hover{border-color:rgba(145,207,194,.4)}.pose-list button:hover{background:var(--panel)}}
+
+/* Grid tracks must not inherit the intrinsic width of the horizontal mobile catalogue. */
+.atlas,.catalogue,.pose-feature,.pose-list{min-width:0}
+.pose-list{max-width:100%}

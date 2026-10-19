@@ -52,15 +52,15 @@ function stripRetiredSections(document){
 // Keep source bundles in the repository for historical/standalone tests.
 const publicScripts=new Set(["runtime.js","boot.js","i18n.js","main.js","p2-navigation.js"]);
 function stripRetiredPublicScripts(html){
-  return html.replace(/<script\\b[^>]*\\bsrc="\\.\\/([^"?#]+\\.js)(?:\\?[^"]*)?"[^>]*><\\/script>/gi,
+  return html.replace(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"[^>]*><\/script>/gi,
     (tag,file)=>publicScripts.has(file)?tag:"");
 }
 function stripRetiredPublicSkipLinks(html){
-  return html.replace(/<a\\b[^>]*class="skip v97-skip"[^>]*>[\\s\\S]*?<\\/a>/gi,"");
+  return html.replace(/<a\b[^>]*class="skip v97-skip"[^>]*>[\s\S]*?<\/a>/gi,"");
 }
 const publicHtml=stripRetiredPublicSkipLinks(
   stripRetiredPublicScripts(stripRetiredSections(optimized.html)));
-const publicIncluded=[...publicHtml.matchAll(/<script\\b[^>]*\\bsrc="\\.\\/([^"?#]+\\.js)/gi)].map(m=>m[1]);
+const publicIncluded=[...publicHtml.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)/gi)].map(m=>m[1]);
 if(publicIncluded.length!==publicScripts.size||publicIncluded.some(file=>!publicScripts.has(file))){
   throw Error("Public script allowlist integrity failed: "+publicIncluded.join(", "));
 }

@@ -6174,3 +6174,8 @@ body .sanctuary-dock{display:none!important}
 #main[data-p2-mode="short"][data-p2-focus]:not([data-p2-focus="campo"]) > #campo{display:none!important}
 @media(max-width:760px){#main #explora .p2-route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#main #explora .p2-route,#main #explora .p2-route-featured{min-height:84px}}
 @media(max-width:390px){#main #explora .p2-route-grid{grid-template-columns:1fr}}
+
+/* P2.6: practice engines migrate to dedicated apps. Keep their source code
+   for now, but do not show app or asana book in the instructor portfolio. */
+#main > #instructor-flow, #main > #studio-asana-library, #p25-book-body, .p25-book-toggle, #p25-app-body {display:none!important}
+#main[data-p2-mode="short"][data-p2-focus="instructor-flow"] > #instructor-flow{display:none!important}

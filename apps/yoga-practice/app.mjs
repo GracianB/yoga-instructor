@@ -141,7 +141,7 @@ function paint(){
  selectOne(".progress").setAttribute("aria-valuenow",String(Math.round(progress*100)));
  if(pose!==lastPose){setFigurePose(figure,pose);lastPose=pose;}
  figure.dataset.transitioning=String(Boolean(movementTransition));
- if(movementTransition)setFigureTransition(figure,movementTransition.from,movementTransition.to,movementTransition.progress);
+ if(movementTransition&&!window.matchMedia("(prefers-reduced-motion: reduce)").matches)setFigureTransition(figure,movementTransition.from,movementTransition.to,movementTransition.progress);
  const figureLabel=mode==="movement"?(lang==="es"?"Postura: ":"Pose: ")+phase:mode==="breath"?(lang==="es"?"Respiración: ":"Breathing: ")+phase:(lang==="es"?"Figura humana en meditación":"Human figure in meditation");
  if(figure.getAttribute("aria-label")!==figureLabel)figure.setAttribute("aria-label",figureLabel);
  setFigureBreath(figure,expansion);

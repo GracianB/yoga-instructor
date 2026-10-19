@@ -1,6 +1,6 @@
 const{test,expect}=require("@playwright/test");
 test("V85 manual Movement journey reuses original book and never starts canonical flow",async({page})=>{
-await page.goto("/");const root=page.locator("#movement-mini"),book=page.locator("#studio-asana-library");
+await page.goto("/"); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());const root=page.locator("#movement-mini"),book=page.locator("#studio-asana-library");
 await expect(root).toBeVisible();
 await expect(root.locator("progress")).toHaveAttribute("value","1");
 await root.locator('[data-v85-action="next"]').evaluate(el=>el.click());
@@ -14,7 +14,7 @@ await expect(root.locator("progress")).toHaveAttribute("value","1");
 await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","idle");
 });
 test("V85 switch route and language without second studio or forced autoplay",async({page})=>{
-await page.goto("/");const root=page.locator("#movement-mini");
+await page.goto("/"); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());const root=page.locator("#movement-mini");
 await root.locator("#v85-route").selectOption("mobility");
 await expect(root.locator(".v85-asana-title")).toContainText("Postura fácil");
 await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
@@ -24,7 +24,7 @@ await expect(root.locator(".v85-main-link")).toHaveAttribute("href","#instructor
 });
 test("V85 reduced motion disables transition even after Nila pose change",async({page})=>{
 await page.emulateMedia({reducedMotion:"reduce"});
-await page.goto("/");const root=page.locator("#movement-mini");
+await page.goto("/"); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());const root=page.locator("#movement-mini");
 await root.locator('[data-v85-action="next"]').evaluate(el=>el.click());
 const active=page.locator("#studio-asana-library .yy-pose.is-current .movement-guardian").first();
 await expect(active).toBeVisible();

@@ -36,3 +36,11 @@ test("Pages excludes legacy app and book scripts from published HTML",()=>{
   assert.ok(!allow.includes(file),"retired public script: "+file);
  }
 });
+
+test("post-deploy smoke validates public scripts, never the removed Yin/Yang art",()=>{
+ const smoke=read("tools/pages-smoke.mjs");
+ assert.match(smoke,/publicScriptAllowlist/);
+ assert.match(smoke,/Unexpected public portfolio script/);
+ assert.match(smoke,/Retired public module survived build/);
+ assert.doesNotMatch(smoke,/expectedArtRef/);
+});

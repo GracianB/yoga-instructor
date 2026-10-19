@@ -7,7 +7,7 @@ test('V72: the Asana Book is part of the studio, not a second entrance',()=>{
  const html=read('index.html'),library=read('studio-asana-library.js');
  const modes=read('studio-unified-v66.js');
  assert.doesNotMatch(html,/class="studio-v66-submodes"/);
- assert.match(library,/root\\.appendChild\\(section\\)/);
+ assert.match(library,/root\.appendChild\(section\)/);
  assert.match(library,/studio-asana-book/);
  assert.match(library,/studio-book-practice-link/);
  assert.match(library,/section\.hidden=false/);

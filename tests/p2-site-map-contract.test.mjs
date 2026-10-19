@@ -40,7 +40,7 @@ test("P2 keeps a legible short route-first experience and music beside the actua
  const script=readFileSync(new URL("../p2-navigation.js",import.meta.url),"utf8");
  assert.match(script,/hashchange/);
  assert.match(script,/revealHash\(\)/);
- assert.match(script,/setFull\(false\)/);
+ assert.match(script,/setFull\(remembered\)/);
 });
 
 test("P2 arrival animation is optional, not a mandatory splash slide",()=>{

@@ -79,3 +79,33 @@ test("P2.6 portfolio never autoplays music",async({page})=>{
  expect(await page.locator("#focus-audio").evaluate(el=>el.paused)).toBe(true);
  await expect(page.locator("#soundtrack")).toBeHidden();
 });
+
+test("V1 public lotus stays compact, opens visibly and removes retired content",async({page})=>{
+ await page.setViewportSize({width:1280,height:800});
+ await page.goto("/index.html",{waitUntil:"domcontentloaded"});
+ await expect(page.locator("#inicio .hero-mandala")).toBeVisible();
+ const size=await page.locator("#inicio .hero-mandala").boundingBox();
+ expect(size.width).toBeLessThanOrEqual(250);
+ await expect(page.locator("#inicio")).toHaveAttribute("data-breath","cycle");
+ await expect(page.locator("#portfolio")).toBeHidden();
+ await expect(page.locator("#ritual")).toBeHidden();
+ await expect(page.locator("#instructor-flow")).toBeHidden();
+ await expect(page.locator(".hub-music")).toBeHidden();
+ await expect(page.locator(".sanctuary-dock")).toBeHidden();
+ await expect(page.locator(".v97-skip")).toBeHidden();
+ const animation=await page.locator("#inicio .hero-mandala").evaluate(el=>getComputedStyle(el).animationName);
+ expect(animation).toContain("yogaLotusFloatV1");
+ await expect(page.locator('#inicio .hero-actions a[href="#contacto"]')).toBeVisible();
+ await expect(page.locator("#contacto")).toBeVisible();
+});
+test("V1 mobile lotus does not occupy the whole cover and reduced-motion stays still",async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto("/index.html",{waitUntil:"domcontentloaded"});
+ const width=await page.locator("#inicio .hero-mandala").evaluate(el=>el.getBoundingClientRect().width);
+ expect(width).toBeLessThanOrEqual(185);
+ const noOverflow=await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1);
+ expect(noOverflow).toBe(true);
+ await page.emulateMedia({reducedMotion:"reduce"});
+ const animation=await page.locator("#inicio .hero-mandala").evaluate(el=>getComputedStyle(el).animationName);
+ expect(animation).toBe("none");
+});

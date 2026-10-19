@@ -39,6 +39,10 @@ async function openLotus(page, { reducedMotion = 'no-preference' } = {}) {
     }
   });
   await page.goto('/', { waitUntil: 'domcontentloaded' });
+  // P2 intentionally hides the floating sanctuary controls on the compact landing.
+  // These legacy motion/layout checks explicitly exercise the complete experience.
+  await page.locator('#p2-toggle').click();
+  await expect(page.locator('#main')).toHaveAttribute('data-p2-mode', 'full');
   await expect(page.locator('.hero-mandala')).toBeVisible();
   await expect(page.locator('.sanctuary-breath')).toBeVisible();
   await advance(page, 250);

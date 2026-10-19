@@ -1,7 +1,12 @@
 const {test,expect}=require('@playwright/test');
 
-const openLibrary=async page=>{
+const openLibrary=async (page,{full=false}={})=>{
   await page.goto('/');
+  // The global dock belongs to the opt-in complete view in P2.
+  if(full){
+    await page.locator('#p2-toggle').click();
+    await expect(page.locator('#main')).toHaveAttribute('data-p2-mode','full');
+  }
   const gallery=page.locator('#studio-asana-library');
   await expect(gallery).toBeVisible();
   await gallery.evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
@@ -79,7 +84,7 @@ test('V71: visual anatomy references for four individual postures',async({page,b
 });
 
 test('V71: asana coaching is not covered by the global breathing dock, but controls remain available',async({page})=>{
-  const gallery=await openLibrary(page);
+  const gallery=await openLibrary(page,{full:true});
   const dock=page.locator('.sanctuary-dock');
   const toggle=gallery.locator('.studio-library-dock-toggle');
   await expect(gallery.locator('.studio-library-coaching')).toBeVisible();

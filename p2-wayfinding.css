@@ -115,3 +115,168 @@
 @media(prefers-reduced-motion:reduce){
   #orientacion *,#atlas *{scroll-behavior:auto!important;transition:none!important}
 }
+
+
+/* P2 / Editorial reduction, appended after the original wayfinding layer.
+   One primary room, a closed reference book, optional music and extras. */
+#inicio.hero{
+  max-width:1300px;
+  min-height:clamp(410px,69svh,650px)!important;
+  padding:clamp(44px,6vw,80px) var(--pad) clamp(54px,6vw,86px)!important;
+  overflow:visible;
+}
+#inicio .hero-inner{max-width:710px}
+#inicio .hero-inner h1{
+  font-size:clamp(3.25rem,8vw,6.5rem)!important;
+  line-height:1!important;
+  max-width:12ch!important;
+  letter-spacing:-.06em!important;
+}
+#inicio .hero-lead{
+  max-width:36ch!important;
+  font-size:clamp(.96rem,1.5vw,1.15rem)!important;
+  line-height:1.6!important;
+  margin-bottom:26px!important;
+}
+#inicio :is(.hero-stats,.hero-manifesto,.hero-rail,.hero-scroll-cue,.hero-breath-wave,.breath-caption,.hero-sparks,.mandala-parallax){
+  display:none!important;
+}
+#inicio .hero-stage{max-width:900px}
+#inicio .hero-actions{margin:0!important}
+#inicio .p2-lotus-focus{
+  position:absolute;
+  top:clamp(18px,9%,84px);
+  right:clamp(12px,6%,105px);
+  z-index:6;
+  width:clamp(84px,12vw,142px);
+  aspect-ratio:1;
+  padding:9px;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+  border:1px solid color-mix(in srgb,var(--sage) 33%,transparent);
+  border-radius:50%;
+  background:color-mix(in srgb,var(--surface) 72%,transparent);
+  box-shadow:0 8px 24px rgba(24,46,34,.04);
+  color:var(--sage);
+  cursor:pointer;
+  transition:background .25s ease,box-shadow .25s ease,transform .25s ease;
+}
+#inicio .p2-lotus-focus .hero-mandala{
+  display:block!important;
+  position:static!important;
+  top:auto!important;right:auto!important;
+  width:100%!important;height:auto!important;
+  max-width:100%!important;
+  transform:none!important;
+  opacity:.78!important;
+  filter:none!important;
+  pointer-events:none;
+  transition:opacity .25s ease,filter .25s ease,transform .25s ease;
+}
+#inicio .p2-lotus-focus:is(:hover,:focus-visible){
+  background:color-mix(in srgb,var(--sage) 9%,var(--surface));
+  box-shadow:0 0 0 9px color-mix(in srgb,var(--sage) 10%,transparent),0 12px 32px color-mix(in srgb,var(--sage) 24%,transparent);
+  transform:translateY(-2px);
+}
+#inicio .p2-lotus-focus:is(:hover,:focus-visible) .hero-mandala{
+  opacity:1!important;
+  filter:drop-shadow(0 0 7px color-mix(in srgb,var(--sage) 45%,transparent))!important;
+  transform:scale(1.08)!important;
+}
+#inicio .p2-lotus-focus:focus-visible{outline:3px solid var(--sage);outline-offset:6px}
+#instructor-flow{scroll-margin-top:calc(var(--header,68px) + 14px)}
+#instructor-flow .studio-asana-library{
+  width:min(100%,1100px);
+  margin:clamp(14px,2vw,26px) auto!important;
+  padding:clamp(16px,2.2vw,26px)!important;
+  border-radius:20px!important;
+  border:1px solid var(--line)!important;
+  background:var(--surface)!important;
+  box-shadow:none!important;
+  color:var(--ink)!important;
+}
+#studio-asana-library .studio-library-heading{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+#studio-asana-library .studio-library-heading h3{
+  color:var(--ink)!important;
+  font-size:clamp(1.25rem,2vw,1.7rem)!important;
+  margin:4px 0!important;
+}
+#studio-asana-library .studio-library-heading .studio-library-lead,
+#studio-asana-library .studio-library-heading .studio-library-eyebrow,
+#studio-asana-library .studio-library-heading :is(.studio-book-practice-link,.studio-library-dock-toggle){
+  display:none!important;
+}
+#studio-asana-library .p2-book-toggle{
+  margin-left:auto;min-height:44px;max-width:100%;
+  border:1px solid var(--line-strong);border-radius:999px;
+  background:var(--surface2);color:var(--ink);
+  padding:8px 18px;font-weight:650;font-size:.85rem;
+  cursor:pointer;
+}
+#studio-asana-library .p2-book-toggle:hover{border-color:var(--sage)}
+#studio-asana-library .p2-book-toggle:focus-visible{outline:3px solid var(--sage);outline-offset:4px}
+#studio-asana-library .p2-book-content{display:none}
+#studio-asana-library[data-p2-book-open="true"] .p2-book-content{display:block}
+#studio-asana-library[data-p2-book-open="true"] .studio-library-body{
+  display:grid;
+}
+#studio-asana-library[data-p2-book-open="true"] .p2-book-toggle{
+  background:var(--sage);color:var(--accent-ink);
+}
+#instructor-flow[data-p2-book="open"] #movement-stage{display:none!important}
+#instructor-flow .p2-book-content #movement-mini{
+  margin-top:clamp(16px,2vw,24px);
+}
+/* A support drawer rather than a third competing route/reproductor. */
+.p2-disclosure{
+  width:min(100% - 36px,1130px);
+  margin:clamp(15px,2.2vw,27px) auto;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--surface);
+  color:var(--ink);
+  scroll-margin-top:calc(var(--header,68px) + 16px);
+  overflow:clip;
+}
+.p2-disclosure>summary{
+  cursor:pointer;min-height:54px;
+  display:flex;align-items:center;gap:12px;
+  padding:14px clamp(17px,2.2vw,26px);
+  font-weight:650;font-size:clamp(.91rem,1.4vw,1rem);
+  list-style:none;
+}
+.p2-disclosure>summary::-webkit-details-marker{display:none}
+.p2-disclosure>summary::after{content:"+";margin-left:auto;font-size:1.25rem;font-weight:400;color:var(--sage)}
+.p2-disclosure[open]>summary::after{content:"−"}
+.p2-disclosure>summary:hover{background:var(--surface2)}
+.p2-disclosure>summary:focus-visible{outline:3px solid var(--sage);outline-offset:-4px}
+.p2-audio #soundtrack{margin:0!important;max-width:100%;padding:clamp(14px,3vw,30px)!important}
+.p2-extras{margin-block:clamp(35px,5vw,66px)!important}
+.p2-extras .p2-extras-note{margin:-2px 25px 14px;color:var(--muted);font-size:.8rem}
+.p2-extras:not([open]) .p2-extras-note{display:none}
+.p2-extras>section{max-width:100%;margin-inline:auto}
+#instructor-flow+.p2-audio{margin-top:0}
+#portfolio,#casos,#trayectoria,#preguntas,#contacto{scroll-margin-top:calc(var(--header,68px) + 16px)}
+@media(max-width:820px){
+ #inicio.hero{min-height:clamp(380px,64svh,560px)!important}
+ #inicio .hero-stage{padding-top:clamp(55px,9vw,84px)}
+ #inicio .p2-lotus-focus{right:var(--pad);top:16px;width:100px}
+ #studio-asana-library .studio-library-body{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+ #inicio.hero{min-height:430px!important;padding-block:35px 55px!important}
+ #inicio .hero-stage{padding-top:85px}
+ #inicio .hero-inner h1{font-size:clamp(2.9rem,12vw,4.6rem)!important}
+ #inicio .p2-lotus-focus{width:76px;top:12px}
+ #studio-asana-library .studio-library-heading{display:grid;grid-template-columns:1fr}
+ #studio-asana-library .p2-book-toggle{margin-left:0;width:100%}
+ .p2-disclosure{width:calc(100% - 24px)}
+}
+@media(prefers-reduced-motion:reduce){
+ #inicio .p2-lotus-focus,#inicio .p2-lotus-focus .hero-mandala{
+  transition:none!important;transform:none!important;animation:none!important;
+ }
+}

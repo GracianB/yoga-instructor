@@ -26,6 +26,7 @@ test("Lotus constellation obeys reduced-motion and offscreen limits",()=>{
  assert.match(nav,/requestAnimationFrame\(tick\)/);
  assert.match(nav,/prefers-reduced-motion: reduce/);
  assert.match(nav,/IntersectionObserver/);
+ assert.match(nav,/flower\.getBoundingClientRect\(\)/);
  assert.match(nav,/document\.hidden/);
  assert.match(css,/\.yoga-lotus-field/);
  assert.match(read("README.md"),/readme-yoga\.svg/);

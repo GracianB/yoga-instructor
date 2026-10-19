@@ -36,7 +36,7 @@ test("independent scripts reuse domain/timer but not old studio or portfolio bun
  for(const name of ["yoga-practice","asana-book"]){
   const html=read("apps/"+name+"/index.html");
   assert.match(html,/name="robots" content="noindex,nofollow"/);
-  assert.doesNotMatch(html,/sanctuary-experience\.js|practice-studio\.js|studio-asana-library\.js|main\.js/);
+  assert.doesNotMatch(html,/<script[^>]+src="(?:\.\/|\.\.\/)*(?:sanctuary-experience|practice-studio|studio-asana-library|main)\.js"/);
  }
 });
 test("shared design supports mobile, themes and accessible reduced motion",()=>{

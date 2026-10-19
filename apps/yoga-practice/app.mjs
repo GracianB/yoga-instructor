@@ -1,5 +1,6 @@
 import {BREATH_PATTERNS,MOVEMENT_STEPS,GUIDED_VIDEOS,SessionClock,breathFrame,movementFrame,sumMovementSeconds} from "../shared/core.mjs";
 import {createFigure,setFigurePose,setFigureBreath} from "../shared/figure.mjs";
+import {setFigureTransition} from "../shared/figure.mjs";
 
 const selectOne=s=>document.querySelector(s),selectAll=s=>[...document.querySelectorAll(s)];
 const updateText=(key,value)=>{const node=selectOne(key);if(node.textContent!==value)node.textContent=value;};
@@ -32,7 +33,16 @@ const vocabulary={
  breathSupport:"Breath holds are optional. Avoid them if they cause discomfort.",
  noAudio:"No voice will play automatically."}
 };
-function applyLanguage(next){
+function syncUrl(){
+ const url=new URL(location.href);
+ if(mode==="movement")url.searchParams.delete("mode");else url.searchParams.set("mode",mode);
+ for(const key of ["pattern","meditation","minutes"])url.searchParams.delete(key);
+ if(mode==="breath")url.searchParams.set("pattern",pattern);
+ if(mode==="meditation"){url.searchParams.set("meditation",meditation);if(meditation==="silent")url.searchParams.set("minutes",String(minutes));}
+ if(lang==="en")url.searchParams.set("lang","en");else url.searchParams.delete("lang");
+ history.replaceState(null,"",url.pathname+url.search+url.hash);
+}
+function applyLanguage(next,{save=true}={}){
  lang=next==="en"?"en":"es";
  document.documentElement.lang=lang;
  for(const el of selectAll("[data-es][data-en]")){
@@ -41,6 +51,9 @@ function applyLanguage(next){
   else el.textContent=value;
  }
  for(const btn of selectAll("[data-lang]"))btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang));
+ const atlasLink=selectOne(".bar-right>a");
+ atlasLink.href="../yoga-asana-book/"+(lang==="en"?"?lang=en":"");
+ if(save)syncUrl();
  paint();
 }
 const durationFor=()=>mode==="movement"?sumMovementSeconds():mode==="breath"?300:minutes*60;
@@ -59,7 +72,7 @@ function startFrames(){
 function resetSession(){
  stopFrames();clock.reset(durationFor());paint();
 }
-function setMode(next,{focus=false}={}){
+function setMode(next,{focus=false,save=true}={}){
  if(!["movement","breath","meditation"].includes(next))return;
  mode=next;
  for(const button of selectAll("[data-mode]")){
@@ -73,6 +86,7 @@ function setMode(next,{focus=false}={}){
  document.documentElement.dataset.mode=mode;
  selectOne("#mode-panel").setAttribute("aria-labelledby","tab-"+mode);
  resetSession();
+ if(save)syncUrl();
 }
 function formatTime(seconds){
  const whole=Math.ceil(Math.max(0,seconds));
@@ -91,12 +105,13 @@ function paint(){
  updateText("#clock",guided?"—:—":formatTime(snapshot.remaining));
  updateText("#stage-status",guided?t.noAudio:t.statuses[snapshot.status]);
  updateText("#primary",snapshot.status==="running"?t.actions.pause:snapshot.status==="paused"?t.actions.resume:snapshot.status==="finished"?t.actions.restart:t.actions.start);
- let progress=snapshot.progress,phase="",detail="",pose="seated",expansion=.5;
+ let progress=snapshot.progress,phase="",detail="",pose="seated",expansion=.5,movementTransition=null;
  if(mode==="movement"){
   const f=movementFrame(snapshot.elapsed);
-  selectOne("#pose-book-link").href="../yoga-asana-book/?pose="+encodeURIComponent(f.item.id);
+  selectOne("#pose-book-link").href="../yoga-asana-book/?pose="+encodeURIComponent(f.item.id)+(lang==="en"?"&lang=en":"");
   phase=f.item.title[lang];detail=f.item.support[lang];
   pose=f.item.pose;progress=f.totalProgress;
+  if(f.index>0&&f.elapsed<12)movementTransition={from:MOVEMENT_STEPS[f.index-1].pose,to:pose,progress:f.elapsed/12};
   updateText("#phase-remaining",formatTime(f.remaining));
   selectAll("#movement-steps li").forEach((node,i)=>{node.classList.toggle("current",i===f.index);});
   updateText("#visual-caption",f.item.pose.toUpperCase());
@@ -125,6 +140,8 @@ function paint(){
  selectOne("#progress-fill").style.width=(Math.max(0,Math.min(1,progress))*100).toFixed(2)+"%";
  selectOne(".progress").setAttribute("aria-valuenow",String(Math.round(progress*100)));
  if(pose!==lastPose){setFigurePose(figure,pose);lastPose=pose;}
+ figure.dataset.transitioning=String(Boolean(movementTransition));
+ if(movementTransition)setFigureTransition(figure,movementTransition.from,movementTransition.to,movementTransition.progress);
  const figureLabel=mode==="movement"?(lang==="es"?"Postura: ":"Pose: ")+phase:mode==="breath"?(lang==="es"?"Respiración: ":"Breathing: ")+phase:(lang==="es"?"Figura humana en meditación":"Human figure in meditation");
  if(figure.getAttribute("aria-label")!==figureLabel)figure.setAttribute("aria-label",figureLabel);
  setFigureBreath(figure,expansion);
@@ -153,7 +170,7 @@ for(const button of selectAll("[data-pattern]")){
  button.addEventListener("click",()=>{
   pattern=button.dataset.pattern;
   selectAll("[data-pattern]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
-  resetSession();
+  resetSession();syncUrl();
  });
 }
 for(const button of selectAll("[data-meditation]")){
@@ -162,14 +179,14 @@ for(const button of selectAll("[data-meditation]")){
   selectAll("[data-meditation]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
   selectOne("#silent-options").hidden=meditation!=="silent";
   selectOne("#guided-options").hidden=meditation!=="guided";
-  resetSession();
+  resetSession();syncUrl();
  });
 }
 for(const button of selectAll("[data-minutes]")){
  button.addEventListener("click",()=>{
   minutes=Number(button.dataset.minutes);
   selectAll("[data-minutes]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
-  resetSession();
+  resetSession();syncUrl();
  });
 }
 for(const button of selectAll("[data-lang]"))button.addEventListener("click",()=>applyLanguage(button.dataset.lang));
@@ -188,5 +205,16 @@ document.addEventListener("visibilitychange",()=>{
  if(document.hidden&&clock.status==="running"){clock.pause();stopFrames();paint();}
 });
 window.addEventListener("pagehide",stopFrames,{once:true});
-setMode("movement");
-applyLanguage("es");
+const incoming=new URLSearchParams(location.search);
+const requestedMode=incoming.get("mode");
+const requestedPattern=incoming.get("pattern"),requestedMinutes=Number(incoming.get("minutes"));
+if(BREATH_PATTERNS.some(x=>x.id===requestedPattern))pattern=requestedPattern;
+if(["guided","silent"].includes(incoming.get("meditation")))meditation=incoming.get("meditation");
+if([5,10,15].includes(requestedMinutes))minutes=requestedMinutes;
+selectAll("[data-pattern]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.pattern===pattern)));
+selectAll("[data-meditation]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.meditation===meditation)));
+selectAll("[data-minutes]").forEach(el=>el.setAttribute("aria-pressed",String(Number(el.dataset.minutes)===minutes)));
+selectOne("#silent-options").hidden=meditation!=="silent";
+selectOne("#guided-options").hidden=meditation!=="guided";
+setMode(["movement","breath","meditation"].includes(requestedMode)?requestedMode:"movement",{save:false});
+applyLanguage(incoming.get("lang"),{save:false});

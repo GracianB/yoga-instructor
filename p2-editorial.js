@@ -81,6 +81,12 @@ function setBook(open,focus=false){
   if(focus)toggle.focus({preventScroll:true});
 }
 toggle.addEventListener("click",()=>setBook(book.dataset.p2BookOpen!=="true",true));
+// Preparing a real Movement session returns to the visible original Flow.
+// Never start the timer or media automatically.
+window.addEventListener("yoga:p1-prepared",()=>{
+ setBook(false);
+ if(planDetails)planDetails.open=false;
+});
 book.addEventListener("click",event=>{
   if(event.target.closest("[data-library-pose], [data-v81-route]"))setBook(true);
 });

@@ -163,3 +163,16 @@ test("P2 deep link reopens the actual full-width P1 planner",async({page})=>{
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","idle");
  await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
 });
+
+test("P2 creating an actual sequence closes the book and returns focus to Flow",async({page})=>{
+ await page.goto("/#p1-sequence",{waitUntil:"domcontentloaded"});
+ const plan=page.locator("#p1-sequence"),studio=page.locator("#instructor-flow");
+ await expect(plan).toBeVisible();
+ await plan.locator('[data-p1="prepare"]').evaluate(el=>el.click());
+ await expect(studio).toHaveAttribute("data-movement-sequence","guided");
+ await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","idle");
+ await expect(page.locator("#p2-asana-toggle")).toHaveAttribute("aria-expanded","false");
+ await expect(page.locator("#movement-stage")).toBeVisible();
+ await expect(page.locator('[data-flow-action="start"]')).toBeFocused();
+ await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
+});

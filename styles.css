@@ -6179,3 +6179,16 @@ body .sanctuary-dock{display:none!important}
    for now, but do not show app or asana book in the instructor portfolio. */
 #main > #instructor-flow, #main > #studio-asana-library, #p25-book-body, .p25-book-toggle, #p25-app-body {display:none!important}
 #main[data-p2-mode="short"][data-p2-focus="instructor-flow"] > #instructor-flow{display:none!important}
+
+/* Portfolio projects: compact Systems Lab-style showcases, not embedded apps. */
+#proyectos{width:min(1180px,calc(100% - 2*var(--pad)));max-width:none;margin:0 auto clamp(36px,5vw,70px);padding:clamp(18px,3vw,38px);border:1px solid var(--line);border-radius:22px;background:var(--surface)}
+#proyectos h2{font:500 clamp(1.9rem,4vw,3.3rem)/1.1 var(--display);margin:10px 0 25px;color:var(--ink)}
+.p26-project-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.p26-project-grid>a{position:relative;display:flex;flex-direction:column;gap:12px;min-height:190px;padding:22px;border:1px solid var(--line);border-radius:18px;background:var(--bg);text-decoration:none;color:var(--ink);transition:transform .2s,border-color .2s}
+.p26-project-grid>a:hover,.p26-project-grid>a:focus-visible{transform:translateY(-3px);border-color:var(--sage)}
+.p26-project-grid span{font:650 10px var(--mono);letter-spacing:.14em;color:var(--sage)}
+.p26-project-grid strong{font:500 clamp(1.5rem,2.7vw,2.2rem)/1.12 var(--display)}
+.p26-project-grid small{font:400 13px/1.5 var(--sans);color:var(--muted)}
+.p26-project-grid b{position:absolute;right:20px;top:18px;color:var(--sage)}
+@media(max-width:720px){.p26-project-grid{grid-template-columns:1fr}.p26-project-grid>a{min-height:120px}#proyectos{width:calc(100% - 24px)}}
+@media(prefers-reduced-motion:reduce){.p26-project-grid>a{transition:none}.p26-project-grid>a:hover{transform:none}}

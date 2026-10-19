@@ -1,69 +1,76 @@
 <div align="center">
 
+<a href="https://gracianb.github.io/yoga-instructor/">
+  <img src="./assets/readme-yoga.svg" width="100%" alt="Yoga Instructor: portada nocturna con loto geométrico y cuatro formas de practicar" />
+</a>
+
 # Yoga Instructor · Gracián Baena
 
-**Presencia · respiración · movimiento · atención**
+**Presencia · Respiración · Movimiento · Enseñanza**
 
-Portfolio profesional de enseñanza de yoga. Una presentación clara de la experiencia docente, con acceso directo a contacto y documentación.
+Un espacio de yoga personal y accesible. Cuatro formatos, una idea: **escuchar y adaptar**.
 
-[**Visitar el portfolio**](https://gracianb.github.io/yoga-instructor/) · [**Ver experiencia**](https://gracianb.github.io/yoga-instructor/#experiencia) · [**Contacto**](https://gracianb.github.io/yoga-instructor/#contacto)
+[**Explorar el portfolio ↗**](https://gracianb.github.io/yoga-instructor/) · [**Clases ↗**](https://gracianb.github.io/yoga-instructor/#proyectos) · [**Consultar disponibilidad ↗**](https://gracianb.github.io/yoga-instructor/#contacto)
 
 </div>
 
 ---
 
-## Español
+## Cuatro maneras de practicar
 
-La web presenta la trayectoria de un instructor de yoga formado en Madrid en 2019, con experiencia en **clases grupales**, **sesiones individuales** y **bienestar corporativo**.
+<table>
+<tr>
+<td width="50%" valign="top">
+<h3><a href="https://gracianb.github.io/yoga-instructor/#contacto">01 · Yoga online ↗</a></h3>
+<p>Sesiones en directo desde donde estés. Respiración, movimiento y acompañamiento.</p>
+</td>
+<td width="50%" valign="top">
+<h3><a href="https://gracianb.github.io/yoga-instructor/#contacto">02 · Sesiones individuales ↗</a></h3>
+<p>Yoga 1:1 para distintas necesidades, ritmos y experiencias.</p>
+</td>
+</tr>
+</table>
 
-La propuesta docente parte de la escucha, las variantes accesibles, la respiración y la adaptación al contexto de cada persona o grupo. Sin promesas médicas ni cifras de resultados no verificadas.
+<table>
+<tr>
+<td width="50%" valign="top">
+<h3><a href="https://gracianb.github.io/yoga-instructor/#contacto">03 · Grupos ↗</a></h3>
+<p>Clases multinivel con opciones y progresiones accesibles.</p>
+</td>
+<td width="50%" valign="top">
+<h3><a href="https://gracianb.github.io/yoga-instructor/#contacto">04 · Empresas ↗</a></h3>
+<p>Sesiones y pausas de bienestar adaptadas a cada equipo.</p>
+</td>
+</tr>
+</table>
 
-| Ámbito | Experiencia |
+## Trayectoria y método
+
+- Formación en yoga en Madrid (2019).
+- Yoga en sala: Mood Fitness, Murcia (2022 – junio de 2026).
+- Bienestar corporativo: Majorel, entorno Google/YouTube (2020–2021).
+- Experiencia en sesiones individuales y adaptación de la práctica.
+
+**Escuchar · Respirar · Adaptar.** El método se presenta en una única sección interactiva, sin duplicar aplicaciones ni controles de estudio.
+
+## Contacto que funciona
+
+El [formulario de clases](https://gracianb.github.io/yoga-instructor/#contacto) permite elegir modalidad, enfoque y tamaño del grupo. No envía datos automáticamente a ningún servidor: prepara un correo editable que solo se remite cuando el visitante decide enviarlo.
+
+## Proyectos futuros, en pausa
+
+**Yoga Practice** y **Yoga Asana Book** están aparcados para priorizar la enseñanza. No se presentan como aplicaciones disponibles ni se enlazan demos incompletas.
+
+## Diseño, tecnología y calidad
+
+| Capa | Implementación |
 | --- | --- |
-| Sala | Mood Fitness, Murcia · 2022–2026 |
-| Individual | Clases 1:1 · 2019–2022 |
-| Corporativo | Majorel · entorno Google/YouTube · 2020–2021 |
-| Idiomas | Español, inglés, italiano y portugués |
-
-### Dos aplicaciones de yoga · prioridad baja
-
-Estas aplicaciones **no están publicadas**. La web solo muestra dos tarjetas informativas con el estado «En construcción»:
-
-- **Yoga Practice:** práctica guiada de posturas, respiración y meditación.
-- **Yoga Asana Book:** libro visual de asanas, variantes y apoyos.
-
-No se enlazan demos incompletas ni se presentan como funcionalidades disponibles. El código experimental histórico se conserva por ahora para una futura separación, sin aparecer en la navegación pública.
-
-### Documentación profesional
-
-| Documento | Español | English |
-| --- | --- | --- |
-| CV de yoga | [PDF](./assets/CV_Gracian_Baena_Yoga_ES.pdf) | [PDF](./assets/CV_Gracian_Baena_Yoga_EN.pdf) |
-| Carta de presentación | [PDF](./Gracian_Baena_Carta_Yoga_ES.pdf) | [PDF](./Gracian_Baena_Cover_Letter_Yoga_EN.pdf) |
-
-Los cuatro PDF son documentos existentes y **no se modifican** en esta actualización.
-
----
-
-## English
-
-This is a **professional yoga-instructor portfolio**, focused on teaching experience, an adaptable approach and straightforward contact details.
-
-Teaching background includes group classes at **Mood Fitness (2022–2026)**, individual sessions and workplace wellbeing at **Majorel (2020–2021)**. The approach emphasizes observation, breathing, accessible options and individual needs.
-
-Two future yoga applications, **Yoga Practice** and **Yoga Asana Book**, are marked **Under construction**. They are lower-priority projects, not live products.
-
----
-
-## Diseño y calidad
-
-- Navegación principal: **Apps · Experiencia · Contacto**.
-- Español e inglés, temas claro y oscuro, diseño adaptable a móvil.
-- Sin música automática ni controles de la app o el libro incrustados en la página pública.
-- Pruebas automáticas de Node, compilación de producción y Playwright (Chromium, Firefox y WebKit) mediante [GitHub Actions](https://github.com/GracianB/yoga-instructor/actions/workflows/quality.yml).
-- [Plan de reconstrucción en seis fases](docs/ROADMAP_RECONSTRUCCION_6_FASES.md) y [auditoría de arquitectura](docs/P1_AUDITORIA_CIERRE.md) disponibles como documentación técnica histórica.
-
-### Desarrollo local
+| Sitio | HTML, CSS y JavaScript; ES/EN; modo claro/oscuro |
+| Arte | Loto SVG original; campo floral Canvas adaptado del lenguaje visual de Systems Lab |
+| Movimiento | Animación acotada, pausa fuera de pantalla y preferencia de movimiento reducido |
+| Solicitudes | Formulario local, sin backend ni seguimiento |
+| Calidad | Node 24, pruebas de contrato y Playwright (Chromium, Firefox, WebKit) |
+| Publicación | GitHub Actions → GitHub Pages |
 
 ```bash
 npm ci
@@ -72,14 +79,8 @@ npm run build
 npm run test:browser
 ```
 
-La web se publica en [GitHub Pages](https://gracianb.github.io/yoga-instructor/) cuando los controles de publicación correspondientes terminan correctamente.
+**Documentos:** [CV yoga ES](assets/CV_Gracian_Baena_Yoga_ES.pdf) · [Yoga CV EN](assets/CV_Gracian_Baena_Yoga_EN.pdf) · [Carta ES](Gracian_Baena_Carta_Yoga_ES.pdf) · [Cover letter EN](Gracian_Baena_Cover_Letter_Yoga_EN.pdf).
 
-### Ecosistema profesional
+**Ecosistema:** [Portfolio principal](https://gracianb.github.io/) · [Professional Deck](https://gracianb.github.io/professional-deck/) · [Systems Lab](https://gracianb.github.io/systems-lab/).
 
-[GracianB](https://gracianb.github.io/) · [Professional Deck](https://gracianb.github.io/professional-deck/) · [Systems Lab](https://gracianb.github.io/systems-lab/)
-
-**Systems Lab** es el espacio de los proyectos técnicos externos. No se muestran Vortex, Ohana ni Aigoritmo como aplicaciones de yoga.
-
----
-
-<sub>Yoga Instructor · Gracián Baena · Murcia, España</sub>
+<sub>Yoga Instructor · Gracián Baena · Murcia. Sin promesas médicas ni música automática.</sub>

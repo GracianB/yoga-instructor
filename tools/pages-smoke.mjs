@@ -53,7 +53,7 @@ const expected=[
 ];
 const files=expected.map(file=>file.name);
 // Check the real PUBLIC portfolio rather than the hidden experimental art.
-const publicScriptAllowlist=['runtime.js','boot.js','i18n.js','main.js','p2-navigation.js'];
+const publicScriptAllowlist=['runtime.js','boot.js','i18n.js','main.js','p2-navigation.js','yoga-enquiry-v76.js'];
 const actualPublicScripts=[...expectedIndex.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)].map(m=>m[1]);
 if(JSON.stringify(actualPublicScripts)!==JSON.stringify(publicScriptAllowlist))
   throw Error('Unexpected public portfolio script(s): '+actualPublicScripts.join(', '));

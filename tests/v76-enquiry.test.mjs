@@ -13,10 +13,11 @@ test("V76: professional enquiry is integrated without replacing direct contact r
  assert.match(html,/https:\/\/calendar\.app\.google\//);
  assert.match(html,/type="submit"/);
  assert.match(html,/type="radio" name="v76-service" value="sala"/);
+ assert.match(html,/type="radio" name="v76-service" value="online"/);
  assert.match(html,/type="radio" name="v76-service" value="individual"/);
  assert.match(html,/type="radio" name="v76-service" value="equipos"/);
  assert.match(html,/id="v76-details"[^>]*maxlength="500"/);
- assert.match(html,/<section class="v76-results"[^>]*hidden inert aria-hidden="true">/);
+ assert.match(html,/<section class="v76-results"[^>]*hidden>/);
 });
 
 test("V76: no telemetry or storage, just deliberate mailto link with encoded text",()=>{
@@ -40,7 +41,7 @@ test("V76: three independent settings, bilingual native form semantics",()=>{
  for(const control of ["v76-format","v76-focus","v76-size","v76-details"])
   assert.ok(html.includes('for="'+control+'"'));
  assert.equal((html.match(/<fieldset class="v76-/g)||[]).length,3);
- assert.equal((html.match(/name="v76-service"/g)||[]).length,3);
+ assert.equal((html.match(/name="v76-service"/g)||[]).length,4);
  assert.match(html,/role="status"/);
  assert.match(js,/details\.value\.trim\(\)/);
 });

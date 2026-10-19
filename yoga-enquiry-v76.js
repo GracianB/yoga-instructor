@@ -20,7 +20,8 @@
       lead:"Una conversación empieza mejor con un poco de contexto. Diseña tu consulta en tres pasos y abre tu correo cuando el mensaje te represente.",
       intro:"TU CONSULTA, SIN FORMULARIOS QUE ENVÍAN DATOS",
       step1:"01 / TIPO DE PRÁCTICA",step2:"02 / FORMATO Y OBJETIVO",step3:"03 / TU CONTEXTO",
-      sala:"Clases en sala",salaSub:"Grupo y progresiones",
+      sala:"Grupos",salaSub:"Clases compartidas y progresiones",
+      online:"Yoga online",onlineSub:"Sesiones en directo desde casa",
       individual:"Sesión individual",individualSub:"Atención personal",
       equipos:"Bienestar para equipos",equiposSub:"Pausas adaptables",
       formatLabel:"Modalidad preferida",formatDefault:"Sin preferencia",
@@ -37,7 +38,7 @@
       mail:"Abrir mi correo ↗",copyTip:"El correo se abre en tu aplicación habitual; aquí no se envía automáticamente.",
       reset:"Limpiar selección",status:"Mensaje preparado. Revísalo antes de abrir tu correo.",
       empty:"Completa tus opciones para preparar un mensaje.",
-      subjectSala:"Consulta sobre clases de yoga en sala",
+      subjectSala:"Consulta sobre clases de yoga en grupo",subjectOnline:"Consulta sobre clases de yoga online",
       subjectIndividual:"Consulta sobre sesiones individuales de yoga",
       subjectEquipos:"Consulta sobre yoga para equipos",
       greeting:"Hola Gracián:",
@@ -53,6 +54,7 @@
       intro:"YOUR ENQUIRY, WITHOUT DATA-COLLECTING FORMS",
       step1:"01 / PRACTICE TYPE",step2:"02 / SETTING AND GOAL",step3:"03 / YOUR CONTEXT",
       sala:"Group yoga",salaSub:"Shared class and progressions",
+      online:"Online yoga",onlineSub:"Live sessions from anywhere",
       individual:"One-to-one",individualSub:"Personal attention",
       equipos:"Workplace wellbeing",equiposSub:"Adaptable breaks",
       formatLabel:"Preferred setting",formatDefault:"No preference",
@@ -69,7 +71,7 @@
       mail:"Open my email ↗",copyTip:"This opens your usual email app. Nothing is sent automatically from this website.",
       reset:"Clear choices",status:"Message ready. Review it before opening your email.",
       empty:"Choose your options to prepare a message.",
-      subjectSala:"Enquiry about group yoga classes",subjectIndividual:"Enquiry about private yoga sessions",
+      subjectSala:"Enquiry about group yoga classes",subjectOnline:"Enquiry about online yoga sessions",subjectIndividual:"Enquiry about private yoga sessions",
       subjectEquipos:"Enquiry about workplace yoga",
       greeting:"Hello Gracián,",
       bodyIntro:"I'd like to enquire about a possible yoga class or collaboration.",
@@ -110,7 +112,7 @@
   }
   function compose(announce=true){
     const copy=t();
-    const subject={sala:copy.subjectSala,individual:copy.subjectIndividual,equipos:copy.subjectEquipos}[service()];
+    const subject={sala:copy.subjectSala,online:copy.subjectOnline,individual:copy.subjectIndividual,equipos:copy.subjectEquipos}[service()];
     const serviceLabel=copy[service()];
     const formatLabel=valueOr("#v76-format",copy.formatDefault);
     const focusLabel=valueOr("#v76-focus",copy.focusGeneral);
@@ -139,7 +141,10 @@
     preview.focus();
   });
   form.addEventListener("change",event=>{
-    if(event.target.matches('input[name="v76-service"]'))paint();
+    if(event.target.matches('input[name="v76-service"]')){
+      if(service()==="online")form.querySelector("#v76-format").value="online";
+      paint();
+    }
     if(!results.hidden)compose(false);
   });
   details.addEventListener("input",()=>{
@@ -148,7 +153,7 @@
   });
   // Editing the preview intentionally changes the outbound email body.
   preview.addEventListener("input",()=>{
-    const subject={sala:t().subjectSala,individual:t().subjectIndividual,equipos:t().subjectEquipos}[service()];
+    const subject={sala:t().subjectSala,online:t().subjectOnline,individual:t().subjectIndividual,equipos:t().subjectEquipos}[service()];
     email.href="mailto:"+targetEmail+"?subject="+encodeURIComponent(subject)+"&body="+encodeURIComponent(preview.value);
   });
   reset.addEventListener("click",()=>{

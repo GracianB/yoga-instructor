@@ -31,7 +31,7 @@ test("P4 · production CSS preserves the public portfolio across source and Page
  const sheets=await page.locator('link[rel="stylesheet"][href^="./"]').count();
  expect(sheets).toBe(1);
  expect(localCss.length,localCss.join("\\n")).toBe(1);
- expect(localCss[0]).toMatch(/yoga-styles-v105\\.[0-9a-f]{16}\\.css$/);
+ expect(localCss[0]).toMatch(/yoga-styles-v105\.[0-9a-f]{16}\.css$/);
  expect(await sample()).toEqual(baseline);
  expect(failed).toEqual([]);
  const cards=page.locator("#proyectos .p26-project-card");

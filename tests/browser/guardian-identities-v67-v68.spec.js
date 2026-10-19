@@ -4,6 +4,8 @@ test('V68: twelve distinct asanas and their accessible category filters',async({
   await page.goto('/');
   const root=page.locator('#instructor-flow');
   const library=page.locator('#studio-asana-library');
+  await page.locator('#p2-asana-toggle').evaluate(el=>el.click());
+  await page.locator('#p2-asana-advanced > summary').evaluate(el=>el.click());
   await expect(library).toBeVisible();
   await expect(library.locator('.yy-pose')).toHaveCount(12);
   await expect(library.locator('.movement-guardian')).toHaveCount(12);

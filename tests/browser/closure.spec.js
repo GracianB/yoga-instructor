@@ -129,6 +129,7 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
   await page.reload({ waitUntil: 'domcontentloaded' });
   await expect(page.locator('body')).toHaveClass(/quiet-mode/);
+  await page.locator('#p2-audio > summary').click();
   await page.locator('#audio-play').evaluate(button => button.scrollIntoView({ behavior: 'instant', block: 'center' }));
   await page.locator('#audio-play').click();
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.paused)).toBe(false);
@@ -571,6 +572,7 @@ for(const width of [320,390,768,1440]){
 
 test('D4 audio player shows only the correct Play/Pause icon',async ({page})=>{
  const errors=await open(page);
+ await page.locator('#p2-audio > summary').click();
  const player=page.locator('#focus-player');
  const button=player.locator('#audio-play');
  const playIcon=button.locator('.ico-play');
@@ -599,6 +601,7 @@ test('D4 audio transport click toggles playback, labels and icons',async ({page}
    };
  });
  const errors=await open(page);
+  await page.locator('#p2-audio > summary').click();
  const player=page.locator('#focus-player');
  const button=player.locator('#audio-play');
  // D29 interaction gate: browser must not accept an early click before the

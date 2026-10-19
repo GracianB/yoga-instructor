@@ -184,6 +184,9 @@ if(dock){
   dock.dataset.p2Open=String(open);
   expand.setAttribute("aria-expanded",String(open));
   expand.textContent=open?"×":"+";
+  // The floating breath icon requires an accessible name when copy is hidden.
+  dock.querySelector(".sanctuary-breath")?.setAttribute("aria-label",
+    lang()==="en"?"Start or pause breathing":"Iniciar o pausar respiración");
   expand.setAttribute("aria-label",open?
    (lang()==="en"?"Close quick controls":"Cerrar controles rápidos"):
    (lang()==="en"?"Open quick controls":"Abrir controles rápidos"));

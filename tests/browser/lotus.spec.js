@@ -83,9 +83,11 @@ async function expectContained(page, width) {
   expect(bloom.height).toBeGreaterThanOrEqual(24);
   expect(overlap(svg, title)).toBe(false);
   expect(overlap(svg, actions)).toBe(false);
-  if (width <= 900) {
+  // P2: 768px uses side placement; reject collisions rather than assuming
+  // the compact lotus must sit completely above the headline.
+  if (width <= 620) {
     expect(svg.y + svg.height).toBeLessThanOrEqual(title.y + 1);
-  } else {
+  } else if (width > 900) {
     expect(svg.x).toBeGreaterThanOrEqual(title.x + title.width - 1);
   }
   const petals = await page.locator('.hero-mandala .lotus-petal').evaluateAll(shapes => shapes.map(shape => {

@@ -49,7 +49,7 @@ test("P2 extra portfolio journeys remain accessible and bilingual",async({page})
  await open(page);
  const extras=page.locator("#p2-extras");
  await expect(extras).not.toHaveAttribute("open",/./);
- await extras.locator("summary").click();
+ await page.locator("#p2-extras > summary").click();
  await expect(extras).toHaveAttribute("open","");
  const routes=page.locator("#orientacion [data-v80-route]");
  await expect(routes).toHaveCount(3);

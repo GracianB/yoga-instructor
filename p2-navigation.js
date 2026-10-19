@@ -8,7 +8,7 @@
  const hidden=new Set(["orientacion","atlas","camino","trayectoria","demostracion","formacion","filosofia","cv","preguntas"]);
  // These five chapters are available as a real interactive destination.
  // A route choice shows one chapter rather than another 15-screen journey.
- const chapters=new Set(["experiencia","instructor-flow","contacto"]);
+ const chapters=new Set(["experiencia","instructor-flow","campo","contacto"]);
  const chapterFor=node=>{
   if(!node)return null;
   for(const id of chapters)if(node.id===id||node.closest("#"+id))return id;
@@ -37,7 +37,7 @@
  const sync=()=>{
   const full=root.dataset.p2Mode==="full";
   toggle.setAttribute("aria-pressed",String(full));
-  if(label)label.textContent=full?translated("Ver recorrido breve","Show shorter view"):translated("Ver todo el contenido","See everything");
+  if(label)label.textContent=full?translated("Volver al inicio breve","Back to short page"):translated("Ver archivo completo","Open full archive");
  };
  const setFull=(full)=>{
   root.dataset.p2Mode=full?"full":"short";

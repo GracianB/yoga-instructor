@@ -1,0 +1,60 @@
+name: Yoga Apps · Independent QA
+on:
+  pull_request:
+    paths:
+      - 'apps/**'
+      - 'tests/apps-standalone-v1.test.mjs'
+      - 'tests/browser/apps-standalone-v1.spec.js'
+      - '.github/workflows/yoga-apps.yml'
+  push:
+    branches: [apps-v1-unified-practice-and-asana-book-20261019]
+    paths:
+      - 'apps/**'
+      - 'tests/apps-standalone-v1.test.mjs'
+      - 'tests/browser/apps-standalone-v1.spec.js'
+  workflow_dispatch:
+concurrency:
+  group: yoga-apps-${{ github.ref }}
+  cancel-in-progress: true
+permissions:
+  contents: read
+jobs:
+  models:
+    name: Deterministic movement, breath, clock and sharing
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: node --test tests/apps-standalone-v1.test.mjs
+      - run: |
+          node --check apps/shared/core.mjs
+          node --check apps/shared/figure.mjs
+          node --check apps/yoga-practice/app.mjs
+          node --check apps/yoga-asana-book/book.mjs
+  browser:
+    name: Studio and Asana Book · Chromium
+    needs: models
+    runs-on: ubuntu-latest
+    timeout-minutes: 17
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test tests/browser/apps-standalone-v1.spec.js --project=chromium --workers=2
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: yoga-apps-browser-failures
+          path: |
+            test-results/
+            playwright-report/
+          if-no-files-found: ignore

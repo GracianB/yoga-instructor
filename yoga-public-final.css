@@ -11,7 +11,7 @@ html body .sanctuary-dock,
 html body .hub-music,
 html body .v97-skip,
 html body #zintro {display:none!important}
-html body #main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#contacto){display:none!important}
+html body #main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#metodo):not(#contacto){display:none!important}
 html body:has(#main){padding-bottom:0!important}
 html body #main #inicio.hero,
 html body #main[data-p2-mode="short"] #inicio.hero{
@@ -211,3 +211,145 @@ body.quiet-mode #experiencia .section-head .yoga-growth,
 body.quiet-mode #experiencia .yoga-growth-plant{
  animation:none!important;transform:none!important;
 }
+
+/* One final interactive editorial slide: teaching method, not another app. */
+html body #main #metodo.section{
+  --method-lilac:#a381ba;
+  position:relative;
+  width:min(1250px,calc(100% - 32px));
+  max-width:none;
+  min-height:clamp(620px,83svh,860px);
+  margin:clamp(28px,5vw,70px) auto;
+  padding:clamp(25px,4vw,58px)!important;
+  overflow:hidden;
+  isolation:isolate;
+  border:1px solid var(--line);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 84% 17%,color-mix(in srgb,var(--sage) 9%,transparent),transparent 41%),
+    radial-gradient(circle at 12% 91%,color-mix(in srgb,var(--method-lilac) 7%,transparent),transparent 38%),
+    var(--surface);
+}
+html[data-theme="dark"] #metodo{--method-lilac:#c7a6df}
+#metodo .yoga-method-shell{max-width:1130px;margin:0 auto}
+#metodo .yoga-method-heading{max-width:66ch}
+#metodo .yoga-method-heading .kicker{display:flex;align-items:center;gap:20px}
+#metodo .yoga-method-index{margin-left:auto;color:var(--muted);font:500 11px var(--mono)}
+#metodo h2{
+  margin:12px 0 14px;
+  font:500 clamp(2.4rem,5vw,4.5rem)/1.07 var(--display);
+  letter-spacing:-.038em;
+  color:var(--ink);
+}
+#metodo h2 em,#metodo h3 em{font-style:italic;color:var(--sage);font-weight:400}
+#metodo .yoga-method-intro{max-width:55ch;color:var(--muted);font:400 clamp(14px,1.5vw,17px)/1.65 var(--sans)}
+#metodo .yoga-method-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(270px,.94fr);
+  gap:clamp(28px,4vw,62px);
+  align-items:stretch;
+  margin-top:clamp(28px,4vw,50px);
+}
+#metodo .yoga-method-content{display:flex;flex-direction:column;min-width:0}
+#metodo .yoga-method-tabs{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 clamp(32px,4vw,54px)}
+#metodo .yoga-method-tabs button{
+  display:inline-flex;align-items:center;gap:10px;min-height:44px;
+  padding:11px 14px;border:1px solid var(--line);border-radius:999px;
+  color:var(--muted);background:transparent;font:600 12px/1.2 var(--sans);
+  cursor:pointer;transition:background .2s,color .2s,border-color .2s,box-shadow .2s;
+}
+#metodo .yoga-method-tabs button>span:first-child{
+  font:500 10px var(--mono);letter-spacing:.06em;opacity:.6
+}
+#metodo .yoga-method-tabs button[aria-selected="true"]{
+  background:var(--sage);border-color:var(--sage);color:var(--accent-ink);
+}
+#metodo .yoga-method-tabs button:hover:not([aria-selected="true"]){
+  background:var(--sage-dim);border-color:var(--sage);color:var(--ink)
+}
+#metodo .yoga-method-tabs button:focus-visible{
+  outline:2px solid var(--sage);outline-offset:4px;
+}
+#metodo .yoga-method-panel[hidden]{display:none!important}
+#metodo .yoga-method-panel{max-width:48ch;min-height:205px}
+#metodo .yoga-method-eyebrow{
+  margin:0 0 15px;color:var(--sage);font:650 10px var(--mono);letter-spacing:.16em
+}
+#metodo h3{
+  font:500 clamp(2rem,3.3vw,3rem)/1.14 var(--display);
+  letter-spacing:-.025em;color:var(--ink);margin:0 0 18px;
+}
+#metodo .yoga-method-panel>p:last-child{
+  color:var(--muted);font:400 15px/1.75 var(--sans);margin:0
+}
+#metodo .yoga-method-contact,
+#experiencia .yoga-method-next{
+  display:inline-flex;gap:12px;align-items:center;align-self:flex-start;
+  margin-top:clamp(24px,3vw,44px);padding:12px 0 8px;
+  text-decoration:none;color:var(--sage);
+  border-bottom:1px solid color-mix(in srgb,var(--sage) 42%,transparent);
+  font:600 13px/1.4 var(--sans);
+}
+#metodo .yoga-method-contact:hover,#experiencia .yoga-method-next:hover{border-bottom-color:var(--sage)}
+#metodo .yoga-method-contact:focus-visible,#experiencia .yoga-method-next:focus-visible{
+  outline:2px solid var(--sage);outline-offset:4px;
+}
+#metodo .yoga-method-art{
+  --method-accent:var(--sage);
+  display:flex;flex-direction:column;justify-content:space-between;
+  position:relative;min-height:clamp(350px,33vw,445px);
+  padding:18px;border:1px solid var(--line);
+  border-radius:21px;overflow:hidden;
+  background:radial-gradient(circle at 50% 51%,color-mix(in srgb,var(--method-accent) 13%,transparent),transparent 62%),var(--bg);
+  transition:background .4s ease;
+}
+#metodo[data-method-state="breath"] .yoga-method-art{--method-accent:var(--method-lilac)}
+#metodo[data-method-state="move"] .yoga-method-art{--method-accent:var(--sage-bright)}
+#metodo .yoga-method-art-top,#metodo .yoga-method-art-bottom{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  color:var(--muted);font:550 10px var(--mono);letter-spacing:.09em;
+  position:relative;z-index:1
+}
+#metodo .yoga-method-visual{display:block;width:min(100%,360px);aspect-ratio:1;margin:auto;color:var(--method-accent)}
+#metodo .yoga-method-field{fill:color-mix(in srgb,var(--method-accent) 9%,transparent);stroke:none}
+#metodo .yoga-method-ring{fill:none;stroke:currentColor;stroke-width:1;opacity:.2}
+#metodo .yoga-method-ring-one{stroke-dasharray:2 9;animation:yogaMethodOrbit 60s linear infinite;transform-origin:210px 210px}
+#metodo .yoga-method-ring-three{stroke-width:1.3;opacity:.33}
+#metodo .yoga-method-axis{fill:none;stroke:currentColor;stroke-width:2;opacity:.43}
+#metodo .yoga-method-core{fill:currentColor}
+#metodo .yoga-method-drawing{
+  fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round;
+  opacity:0;transform:translateY(9px);transform-origin:210px 210px;
+  transition:opacity .55s ease,transform .55s var(--ease);pointer-events:none;
+}
+#metodo[data-method-state="presence"] .yoga-method-drawing-presence,
+#metodo[data-method-state="breath"] .yoga-method-drawing-breath,
+#metodo[data-method-state="move"] .yoga-method-drawing-move{
+  opacity:1;transform:translateY(0);
+}
+#metodo .yoga-method-drawing-detail{stroke-width:1.6;opacity:.55}
+#metodo .yoga-method-pulse{width:8px;height:8px;border-radius:50%;background:var(--method-accent);box-shadow:0 0 0 5px color-mix(in srgb,var(--method-accent) 12%,transparent);animation:yogaMethodPulse 4.2s ease-in-out infinite}
+#metodo .yoga-method-art-top span:last-child{color:var(--method-accent)}
+@keyframes yogaMethodOrbit{to{transform:rotate(360deg)}}
+@keyframes yogaMethodPulse{50%{opacity:.38;box-shadow:0 0 0 11px color-mix(in srgb,var(--method-accent) 6%,transparent)}}
+@media(max-width:800px){
+ html body #main #metodo.section{width:calc(100% - 24px);min-height:auto;padding:26px 19px!important}
+ #metodo .yoga-method-layout{grid-template-columns:1fr;gap:22px}
+ #metodo .yoga-method-tabs{margin-bottom:24px}
+ #metodo .yoga-method-panel{min-height:0}
+ #metodo .yoga-method-art{min-height:290px}
+ #metodo .yoga-method-visual{width:min(100%,265px)}
+}
+@media(max-width:420px){
+ #metodo .yoga-method-tabs button{padding:10px 12px;font-size:11px;gap:6px}
+ #metodo .yoga-method-art{min-height:252px}
+ #metodo .yoga-method-visual{width:min(100%,223px)}
+}
+@media(prefers-reduced-motion:reduce){
+ #metodo .yoga-method-tabs button,#metodo .yoga-method-drawing,#metodo .yoga-method-art{
+  transition:none!important
+ }
+ #metodo .yoga-method-ring-one,#metodo .yoga-method-pulse{animation:none!important}
+}
+body.quiet-mode #metodo .yoga-method-ring-one,
+body.quiet-mode #metodo .yoga-method-pulse{animation:none!important}

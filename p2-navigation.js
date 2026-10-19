@@ -8,7 +8,7 @@
  const hidden=new Set(["orientacion","atlas","camino","trayectoria","demostracion","formacion","filosofia","cv","preguntas"]);
  // These five chapters are available as a real interactive destination.
  // A route choice shows one chapter rather than another 15-screen journey.
- const chapters=new Set(["proyectos","experiencia","contacto"]);
+ const chapters=new Set(["proyectos","experiencia","metodo","contacto"]);
  const retired=new Set(["portfolio","casos","ritual","sobre","oferta","campo","instructor-flow","soundtrack"]);
  const retiredTarget=node=>node&&[...retired].some(id=>node.id===id||node.closest("#"+id));
  const chapterFor=node=>{
@@ -91,4 +91,39 @@
  try{remembered=sessionStorage.getItem("gb-yoga-reading-mode")==="full"}catch{}
  setFull(remembered);
  revealHash();sync();
+
+ /* Single interactive chapter: no application engine or extra network scripts. */
+ const method=document.getElementById("metodo");
+ if(method){
+  const tabs=[...method.querySelectorAll("[data-method-tab]")];
+  const panels=[...method.querySelectorAll("[data-method-panel]")];
+  const counter=method.querySelector("[data-method-counter]");
+  const setMethod=(index,focusTab=false)=>{
+   const selected=(index+tabs.length)%tabs.length;
+   const state=tabs[selected].dataset.methodTab;
+   method.dataset.methodState=state;
+   for(let i=0;i<tabs.length;i++){
+    const active=i===selected;
+    tabs[i].setAttribute("aria-selected",String(active));
+    tabs[i].tabIndex=active?0:-1;
+   }
+   for(const panel of panels)panel.hidden=panel.dataset.methodPanel!==state;
+   if(counter)counter.textContent=String(selected+1).padStart(2,"0")+" / 03";
+   if(focusTab)tabs[selected].focus();
+  };
+  tabs.forEach((tab,index)=>{
+   tab.addEventListener("click",()=>setMethod(index));
+   tab.addEventListener("keydown",event=>{
+    let next=null;
+    if(event.key==="ArrowRight"||event.key==="ArrowDown")next=index+1;
+    if(event.key==="ArrowLeft"||event.key==="ArrowUp")next=index-1;
+    if(event.key==="Home")next=0;
+    if(event.key==="End")next=tabs.length-1;
+    if(next===null)return;
+    event.preventDefault();
+    setMethod(next,true);
+   });
+  });
+  setMethod(0);
+ }
 })();

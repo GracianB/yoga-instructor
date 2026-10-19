@@ -17,6 +17,10 @@ for (const page of [html, await readFile('cv.html', 'utf8'), await readFile('404
 }
 for (const file of rootFiles) await copyFile(file, `dist/${file}`);
 for (const directory of ['assets', 'audio']) await cp(directory, `dist/${directory}`, { recursive: true });
+// Standalone previews are independent of the public Yoga Instructor page.
+// The apps remain deliberately unlinked from the portfolio until separate releases.
+await cp("apps","dist/apps",{recursive:true});
+
 // Preserve the source index and 77 independent CSS files in GitHub.
 // Only the assembled Pages HTML uses one content-hashed, ordered stylesheet.
 const optimized=await compileProductionStyles(html,path=>readFile(path,"utf8"));

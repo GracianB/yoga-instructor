@@ -16,3 +16,5 @@ body[data-theme="dark"]{color-scheme:dark;--bg:#0b1110;--panel:#131e19;--ink:#ec
 @media(max-width:920px){.app-grid,.book-layout{grid-template-columns:1fr}.practice-visual{min-height:385px}.practice-panel{min-height:auto}.asana-list{max-height:300px}.asana-details{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:600px){.app-page{padding:14px}.app-bar{margin-bottom:30px}.app-brand-copy small{display:none}.app-intro{margin-bottom:23px}.panel{padding:20px;border-radius:18px}.practice-visual{min-height:300px}.practice-symbol{width:min(100%,260px)}.practice-timer{font-size:4rem}.asana-details{grid-template-columns:1fr}.asana-art{min-height:230px}.book-previous-next button{font-size:12px;padding:9px 12px}.app-footer{flex-wrap:wrap}.app-footer span:last-child{text-align:left}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{animation:none!important;transition:none!important}.action:hover{transform:none!important}}
+
+.practice-visual .panel-head{align-self:stretch;width:100%}

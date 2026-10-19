@@ -3,11 +3,11 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
 
-test('V72: the Asana Book is a separate chapter before all guided modes',()=>{
+test('V72: the Asana Book is part of the studio, not a second entrance',()=>{
  const html=read('index.html'),library=read('studio-asana-library.js');
  const modes=read('studio-unified-v66.js');
  assert.doesNotMatch(html,/class="studio-v66-submodes"/);
- assert.match(library,/root\.before\(section\)/);
+ assert.match(library,/root\\.appendChild\\(section\\)/);
  assert.match(library,/studio-asana-book/);
  assert.match(library,/studio-book-practice-link/);
  assert.match(library,/section\.hidden=false/);

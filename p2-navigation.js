@@ -57,7 +57,7 @@
    if(chapter) {
     focus(chapter);
     scrollToTarget(target);
-   }else if(target.id==="explora"||target.id==="inicio")focus(null);
+   }else focus(null); // The overview and other public anchors must never stay hidden.
   }
  };
  toggle.addEventListener("click",()=>{
@@ -76,7 +76,7 @@
    }else if(node){
     const chapter=chapterFor(node);
     if(chapter)focus(chapter);
-    else if(id==="explora"||id==="inicio")focus(null);
+    else focus(null); // Non-chapter destination, such as portfolio or explore.
    }
   }
   if(event.target.closest("[data-set-lang]"))sync();

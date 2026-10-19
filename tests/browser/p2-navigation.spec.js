@@ -108,3 +108,13 @@ test("P2 removes the distracting global music dock from the compact homepage",as
  await expect(page.locator(".sanctuary-dock")).toBeVisible();
  await expect(page.locator('[data-p2-route="about"]')).not.toHaveAttribute("aria-current",/./);
 });
+
+test("P2 portfolio overview remains reachable after focusing a chapter",async({page})=>{
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.locator('[data-p2-route="classes"]').click();
+ await expect(page.locator("#portfolio")).toBeHidden();
+ await page.locator('#explora a[href="#portfolio"]').click();
+ await expect(page.locator("#main")).not.toHaveAttribute("data-p2-focus",/./);
+ await expect(page.locator("#portfolio")).toBeVisible();
+ await expect(page).toHaveURL(/#portfolio$/);
+});

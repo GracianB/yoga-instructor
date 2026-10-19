@@ -24,3 +24,15 @@ test("Direct verified SHA release is triggered by push main without waiting for 
  assert.match(deploy,/npm run build/);
  assert.match(deploy,/pages-smoke\.mjs --root=dist/);
 });
+test("Pages excludes legacy app and book scripts from published HTML",()=>{
+ assert.match(build,/function stripRetiredPublicScripts/);
+ assert.match(build,/function stripRetiredPublicSkipLinks/);
+ assert.match(build,/PUBLIC_JS_ONLY/);
+ const included=build.match(/const publicScripts=new Set\(\[(.*?)\]\)/);
+ assert.ok(included);
+ const allow=[...included[1].matchAll(/"([^"]+)"/g)].map(m=>m[1]);
+ assert.deepEqual(allow,["runtime.js","boot.js","i18n.js","main.js","p2-navigation.js"]);
+ for(const file of ["sanctuary-experience.js","studio-asana-library.js","asana-library.js","music-playlist.js","practice-studio.js"]){
+  assert.ok(!allow.includes(file),"retired public script: "+file);
+ }
+});

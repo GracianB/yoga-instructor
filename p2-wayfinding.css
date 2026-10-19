@@ -592,3 +592,7 @@ body[data-asana-book-visible="true"] .sanctuary-dock:has(.p2-dock-expand){displa
   text-shadow:none!important;
  }
 }
+
+/* P2 first visit is immediately useful, never a non-dismissible cover slide. */
+html.intro-on .zintro,
+html.intro-done .zintro{display:none!important;visibility:hidden!important;pointer-events:none!important}

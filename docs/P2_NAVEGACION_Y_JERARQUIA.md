@@ -49,3 +49,6 @@ El `display:contents` del Libro móvil elimina la superficie clara que heredaban
 
 ## Cierre de la cola editorial
 Se incorporaron `#programa` y `#v76-enquiry` al bloque avanzado, evitando que queden visibles después de Contacto. Los enlaces profundos reabren el bloque y la creación del correo sigue siendo operativa. El formulario completo no aparece al visitante que solo quiere practicar.
+
+## Sin pantalla de espera
+En P2 se suprime visualmente la antigua superposición `zintro` incluso en la primera visita. La animación histórica deja de impedir que se vean la portada y los accesos inmediatamente; su código legado se podrá eliminar al auditar P6.

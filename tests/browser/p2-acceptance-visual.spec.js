@@ -109,3 +109,15 @@ test("P2 VISUAL · direct deep links, keyboard lotus and two languages",async({p
  await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
  await info.attach("p2-breath-keyboard-en",{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
 });
+
+test("P2 first visit has no blocking cover slideshow",async({page})=>{
+ await page.setViewportSize({width:375,height:812});
+ await page.addInitScript(()=>{try{sessionStorage.removeItem("gb-yoga-intro-seen")}catch{}});
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ await expect(page.locator(".zintro")).toBeHidden();
+ await expect(page.locator('#inicio a[href="#instructor-flow"].btn.primary')).toBeVisible();
+ await expect(page.locator("#p2-lotus-focus")).toBeVisible();
+ await page.locator("#p2-lotus-focus").focus();
+ await expect(page.locator("#p2-lotus-focus")).toBeFocused();
+ await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
+});

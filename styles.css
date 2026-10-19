@@ -6195,7 +6195,7 @@ body:has(#main[data-p2-mode="short"]) .sanctuary-dock{display:none!important}
 }
 .p26-project-grid>a:hover,.p26-project-grid>a:focus-visible{
  transform:translateY(-3px);border-color:var(--sage);
- box-shadow:0 14px 36px var(--shadow-sm)
+ box-shadow:var(--shadow-sm)
 }
 .p26-project-grid span{font:650 10px var(--mono);letter-spacing:.14em;color:var(--sage)}
 .p26-project-grid strong{font:500 clamp(1.5rem,2.7vw,2.2rem)/1.12 var(--display)}

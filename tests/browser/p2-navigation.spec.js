@@ -8,6 +8,10 @@ test("P2 short homepage presents five real routes and can reveal the legacy arch
  const grid=page.locator("#explora .p2-route");
  await expect(grid).toHaveCount(5);
  await expect(page.locator("#explora")).toBeVisible();
+ // The route index must remain a compact list, not five mobile slides.
+ const routeGrid=await page.locator(".p2-route-grid").boundingBox();
+ expect(routeGrid).toBeTruthy();
+ expect(routeGrid.height).toBeLessThan(600);
  await expect(page.locator("#orientacion")).toBeHidden();
  await expect(page.locator("#instructor-flow")).toBeVisible();
  await expect(page.locator("#soundtrack")).toBeVisible();
@@ -25,6 +29,10 @@ test("P2 short homepage presents five real routes and can reveal the legacy arch
 test("P2 route links work bilingually; deep links reopen hidden chapters",async({page},testInfo)=>{
  await page.setViewportSize({width:1280,height:800});
  await page.goto("/",{waitUntil:"domcontentloaded"});
+ // Desktop P2 must not inherit the previous full-viewport presentation frame.
+ const hero=await page.locator("#inicio").boundingBox();
+ expect(hero).toBeTruthy();
+ expect(hero.height).toBeLessThan(750);
  await page.locator('[data-set-lang="en"]').first().evaluate(x=>x.click());
  await expect(page.locator("#p2-explore-title")).toContainText("Less scrolling");
  await expect(page.locator('#nav a[href="#instructor-flow"]')).toContainText("Studio");

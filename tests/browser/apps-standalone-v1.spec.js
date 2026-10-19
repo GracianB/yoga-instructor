@@ -1,4 +1,16 @@
 const {test,expect}=require("@playwright/test");
+async function expectNoHorizontalOverflow(page){
+ const info=await page.evaluate(()=>{
+  const offenders=[...document.querySelectorAll("body *")].map(el=>{
+   const r=el.getBoundingClientRect();
+   return {tag:el.tagName.toLowerCase(),id:el.id||"",className:el.getAttribute("class")||"",right:Math.round(r.right),left:Math.round(r.left),width:Math.round(r.width)};
+  }).filter(x=>x.right>innerWidth+2||x.left< -2).slice(0,25);
+  return {page:location.pathname,viewport:innerWidth,scrollWidth:document.documentElement.scrollWidth,offenders};
+ });
+ if(info.scrollWidth>info.viewport+1)console.log("MOBILE_OVERFLOW_DIAGNOSTIC",JSON.stringify(info));
+ expect(info.scrollWidth).toBeLessThanOrEqual(info.viewport+1);
+}
+
 
 test("Practice V1 is visually coherent and movement follows three fixed actions",async({page})=>{
  await page.goto("/apps/yoga-practice/",{waitUntil:"domcontentloaded"});
@@ -52,7 +64,7 @@ test("Standalone apps stay usable on mobile without horizontal scroll or autopla
  for(const url of ["/apps/yoga-practice/","/apps/yoga-asana-book/"]){
   await page.goto(url,{waitUntil:"domcontentloaded"});
   await expect(page.locator(".yoga-figure")).toBeVisible();
-  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+  await expectNoHorizontalOverflow(page);
   await page.emulateMedia({reducedMotion:"reduce"});
   await expect(page.locator("audio,video,iframe")).toHaveCount(0);
  }
@@ -139,5 +151,5 @@ test("Asana Book V1.4 keeps keyboard focus when changing postures",async({page})
  await expect(page.locator("#pose-name")).toContainText("Esfinge");
  await page.setViewportSize({width:390,height:844});
  await expect(page.locator(".pose-list")).toHaveCSS("overflow-x","auto");
- expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+ await expectNoHorizontalOverflow(page);
 });

@@ -109,7 +109,7 @@ html body #main #inicio .hero-scroll-cue{pointer-events:auto!important}
    animation:yogaLotusGlowV1 13s ease-in-out infinite!important;
  }
  html body #main #inicio .mandala-parallax:hover .hero-mandala{
-   animation-duration:3.5s!important;
+   animation-duration:7s!important;
  }
 }
 @media(prefers-reduced-motion:reduce){
@@ -124,4 +124,90 @@ body.quiet-mode #main #inicio .mandala-parallax .hero-mandala,
 body.quiet-mode #main #inicio .lotus-bloom,
 body.quiet-mode #main #inicio .lotus-wing{
   animation:none!important;
+}
+
+/* Final editorial detail: a little living plant beside past teaching experience.
+   Existing palette + deliberate lilac accent; pure CSS, no extra requests. */
+#experiencia{
+  --yoga-growth-green:#598f71;
+  --yoga-growth-lilac:#a381ba;
+}
+html[data-theme="dark"] #experiencia{
+  --yoga-growth-green:#99c7ab;
+  --yoga-growth-lilac:#c7a6df;
+}
+#experiencia .section-head{
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr) clamp(78px,10vw,112px);
+  column-gap:clamp(10px,2.2vw,24px);
+  align-items:center;
+}
+#experiencia .section-head > .kicker{grid-column:1;grid-row:1}
+#experiencia .section-head > h2{grid-column:1;grid-row:2;min-width:0}
+#experiencia .section-head::after{grid-column:1;grid-row:3;margin-top:8px}
+#experiencia .section-head .yoga-growth{
+  display:block;
+  grid-column:2;
+  grid-row:1 / span 3;
+  justify-self:center;
+  width:clamp(78px,10vw,112px);
+  height:auto;
+  overflow:visible;
+  color:var(--yoga-growth-green);
+  animation:yogaGrowthColor 9s ease-in-out infinite;
+}
+#experiencia .yoga-growth-plant{
+  transform-box:view-box;
+  transform-origin:63px 128px;
+  animation:yogaGrowthSway 6.8s ease-in-out infinite;
+}
+#experiencia .yoga-growth-leaf{
+  fill:currentColor;
+  stroke:currentColor;
+  stroke-width:.7;
+  stroke-linejoin:round;
+  opacity:.78;
+}
+#experiencia .yoga-growth-bud{fill:currentColor;opacity:.94}
+#experiencia .yoga-growth-earth{opacity:.24}
+@keyframes yogaGrowthColor{
+  0%,100%{color:var(--yoga-growth-green)}
+  45%,60%{color:var(--yoga-growth-lilac)}
+}
+@keyframes yogaGrowthSway{
+  0%,100%{transform:rotate(-3deg)}
+  50%{transform:rotate(4deg)}
+}
+
+/* Hover is a soft spotlight, NOT magnification or accelerated lotus motion. */
+@media(hover:hover){
+  html body #main #inicio .mandala-parallax:hover .hero-mandala{
+    animation-duration:7s!important;
+    filter:brightness(1.16)
+      drop-shadow(0 0 17px color-mix(in srgb,var(--sage) 60%,transparent))
+      drop-shadow(0 0 34px rgba(163,129,186,.4))!important;
+  }
+  html body #main #inicio .mandala-parallax:hover .lotus-bloom,
+  html body #main #inicio .mandala-parallax:hover::before{
+    animation-duration:13s!important;
+  }
+  html body #main #inicio .mandala-parallax:hover::before{
+    filter:blur(7px) brightness(1.5)!important;
+  }
+}
+@media(max-width:480px){
+  #experiencia .section-head{grid-template-columns:minmax(0,1fr) 74px}
+  #experiencia .section-head .yoga-growth{width:74px}
+}
+@media(prefers-reduced-motion:reduce){
+  #experiencia .section-head .yoga-growth,
+  #experiencia .yoga-growth-plant{
+    animation:none!important;
+    transform:none!important;
+  }
+  html body #main #inicio .mandala-parallax:hover::before{filter:none!important}
+}
+body.quiet-mode #experiencia .section-head .yoga-growth,
+body.quiet-mode #experiencia .yoga-growth-plant{
+ animation:none!important;transform:none!important;
 }

@@ -6080,8 +6080,16 @@ html:not([data-lang="en"]) [data-p2-lang="en"],html[data-lang="en"] [data-p2-lan
 #main[data-p2-mode="short"] #inicio .hero-manifesto{display:none!important}
 #main[data-p2-mode="short"] #inicio .hero-lead{max-width:62ch!important}
 #main[data-p2-mode="short"] #inicio .hero-actions{margin-bottom:12px!important}
-#main[data-p2-mode="short"] #inicio .hero h1{margin-bottom:clamp(12px,2vw,24px)!important}
+#main[data-p2-mode="short"] #inicio h1{margin-bottom:clamp(12px,2vw,24px)!important}
 @media(max-width:620px){
  #main[data-p2-mode="short"] #inicio .hero-inner{padding:22px 0 30px!important}
  #main[data-p2-mode="short"] #inicio .hero-lead{max-width:40ch!important}
+}
+
+/* P2 regression: compact copy must not sit underneath the lotus on mobile.
+   Keep a single intentional art band, not the old full-screen hero height. */
+@media(max-width:900px){
+ #main[data-p2-mode="short"] #inicio.hero{
+  padding-top:calc(var(--lotus-band) + 28px)!important;
+ }
 }

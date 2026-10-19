@@ -111,3 +111,33 @@ test("Keyboard switching updates the real practice tabpanel",async({page})=>{
  await page.locator("#tab-meditation").press("Home");
  await expect(panel).toHaveAttribute("aria-labelledby","tab-movement");
 });
+
+test("Practice V1.4 preserves English breathing deep links and cross-app language",async({page})=>{
+ await page.goto("/apps/yoga-practice/?mode=breath&pattern=4444&lang=en",{waitUntil:"domcontentloaded"});
+ await expect(page.locator("#tab-breath")).toHaveAttribute("aria-selected","true");
+ await expect(page.locator('[data-pattern="4444"]')).toHaveAttribute("aria-pressed","true");
+ await expect(page.locator("#phase-label")).toHaveText("Inhale");
+ await page.reload();
+ await expect(page.locator("#tab-breath")).toHaveAttribute("aria-selected","true");
+ await expect(page.locator("#phase-label")).toHaveText("Inhale");
+ await page.locator('[data-mode="movement"]').click();
+ await expect(page.locator("#pose-book-link")).toHaveAttribute("href",/pose=mountain&lang=en$/);
+ await page.locator("#pose-book-link").click();
+ await expect(page.locator("#pose-name")).toHaveText("Mountain");
+ await expect(page).toHaveURL(/pose=mountain&lang=en/);
+});
+test("Asana Book V1.4 keeps keyboard focus when changing postures",async({page})=>{
+ await page.goto("/apps/yoga-asana-book/",{waitUntil:"domcontentloaded"});
+ const first=page.locator('[data-pose-id="mountain"]');
+ await first.focus();
+ await first.press("ArrowDown");
+ await expect(page.locator('[data-pose-id="tree"]')).toBeFocused();
+ await expect(page.locator("#pose-name")).toHaveText("Árbol");
+ await expect(page.locator('[data-pose-id="tree"]')).toHaveAttribute("aria-current","true");
+ await page.locator('[data-pose-id="tree"]').press("End");
+ await expect(page.locator('[data-pose-id="sphinx"]')).toBeFocused();
+ await expect(page.locator("#pose-name")).toContainText("Esfinge");
+ await page.setViewportSize({width:390,height:844});
+ await expect(page.locator(".pose-list")).toHaveCSS("overflow-x","auto");
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+});

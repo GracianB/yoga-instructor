@@ -28,7 +28,8 @@ test("Method tabs are accessible by click, arrows, Home and End without a new JS
  assert.match(nav,/panel\.hidden=panel\.dataset\.methodPanel!==state/);
  for(const name of ["ArrowRight","ArrowLeft","ArrowDown","ArrowUp","Home","End"])assert.ok(nav.includes(name),name);
  assert.match(html,/role="tablist"/);
- assert.equal((html.match(/role="tabpanel"/g)||[]).length,3);
+ const method=html.split('id="metodo"')[1].split('<!-- LANGUAGES + CONTACT -->')[0];
+ assert.equal((method.match(/role="tabpanel"/g)||[]).length,3);
  assert.match(html,/aria-controls="method-panel-move"/);
  assert.match(html,/aria-labelledby="method-tab-breath"/);
 });

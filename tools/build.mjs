@@ -25,16 +25,16 @@ await writeFile("dist/"+optimized.filename,optimized.css);
 // The PUBLIC Pages document must contain only the actual professional portfolio.
 function stripRetiredSections(document){
   const stack=[],spans=[];
-  const tokens=/<\\/?section\\b[^>]*>/gi;
+  const tokens=/<\/?section\b[^>]*>/gi;
   for(const match of document.matchAll(tokens)){
-    if(/^<\\/section/i.test(match[0])){
+    if(/^<\/section/i.test(match[0])){
       const frame=stack.pop();
       if(!frame)throw Error("Unbalanced section closing tag in production");
       if(frame.retired&&!stack.some(parent=>parent.retired)){
         spans.push([frame.offset,match.index+match[0].length]);
       }
     }else{
-      stack.push({offset:match.index,retired:/\\bhidden\\s+inert\\b/.test(match[0])});
+      stack.push({offset:match.index,retired:/\bhidden\s+inert\b/.test(match[0])});
     }
   }
   if(stack.length)throw Error("Unbalanced section opening tag in production");

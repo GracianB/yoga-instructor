@@ -4,7 +4,10 @@
         var reduce = window.YOGA_RUNTIME.mediaMatches("(prefers-reduced-motion: reduce)");
         var seen = false;
         try { seen = sessionStorage.getItem("gb-yoga-intro-seen") === "1"; } catch (e) {}
-        if (!reduce && !seen) {
+        // The two-second splash is no longer imposed on visitors.
+        // It remains testable as an optional design easter egg via ?intro=1.
+        var requested = new URLSearchParams(location.search).get("intro") === "1";
+        if (requested && !reduce && !seen) {
           document.documentElement.classList.add("intro-on");
           setTimeout(function () { document.documentElement.classList.add("intro-done"); }, 2150);
         }

@@ -42,3 +42,11 @@ test("P2 keeps a legible short route-first experience and music beside the actua
  assert.match(script,/revealHash\(\)/);
  assert.match(script,/setFull\(false\)/);
 });
+
+test("P2 arrival animation is optional, not a mandatory splash slide",()=>{
+ const boot=readFileSync(new URL("../boot.js",import.meta.url),"utf8");
+ assert.match(boot,/get\("intro"\) === "1"/);
+ assert.match(boot,/requested && !reduce && !seen/);
+ const styles=readFileSync(new URL("../styles.css",import.meta.url),"utf8");
+ assert.match(styles,/#main\[data-p2-mode="short"\] #inicio \.hero-stats/);
+});

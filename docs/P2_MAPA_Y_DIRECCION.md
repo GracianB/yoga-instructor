@@ -51,3 +51,15 @@ La portada conserva más de treinta secciones/nodos con ID. Un visitante encuent
 Un visitante debe identificar en menos de una pantalla **quién eres, qué ofreces y dónde practicar o contactar**. La navegación no requiere memorizar diez nombres poéticos. Completar la batería de calidad, verificar visualmente ambos temas, idiomas, móvil y escritorio y comprobar que las anclas anteriores siguen resolviendo.
 
 **Estado:** especificación de P2 iniciada sobre la base técnica de P1, sin merge ni despliegue.
+
+
+## Primera implementación en la PR #202
+
+- Se ha reemplazado la navegación superior de términos abstractos por cinco accesos: Sobre mí, Clases, Estudio, Experiencia y Contacto.
+- El hero tiene únicamente dos acciones relevantes. Se ocultan las tarjetas de métricas y manifiestos duplicados en lectura breve; siguen disponibles en lectura completa.
+- Un mapa interactivo de cinco tarjetas aparece inmediatamente después del hero. No hay diapositivas automáticas ni elección obligatoria.
+- El modo **breve** es la entrada normal con JavaScript; «Ver todo el contenido» restaura todas las secciones de origen. Sin JavaScript, todo el contenido queda disponible.
+- Los enlaces existentes a secciones secundarias expanden el modo completo antes de navegar; los enlaces directos URL con hash hacen lo mismo.
+- La sala interactiva se ha reubicado después de experiencia y la música inmediatamente después de la sala, sin pistas duplicadas ni autoplay.
+- La animación introductoria de dos segundos ya no se presenta de forma obligatoria. Solo se activa expresamente con `?intro=1`.
+- Las fases creativas y el archivo histórico no se eliminan del proyecto; se dejan de imponer como pantallas sucesivas a quien llega a la web.

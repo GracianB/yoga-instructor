@@ -45,7 +45,13 @@ const durationFor=()=>mode==="movement"?sumMovementSeconds():mode==="breath"?300
 function stopFrames(){if(frameHandle!==null){cancelAnimationFrame(frameHandle);frameHandle=null;}}
 function startFrames(){
  stopFrames();
- const loop=()=>{paint();if(clock.status==="running")frameHandle=requestAnimationFrame(loop);else frameHandle=null;};
+ let lastPaint=-Infinity;
+ const loop=(now)=>{
+  // 10Hz is sufficient for slow breathing: SVG transitions interpolate between updates.
+  if(now-lastPaint>=100){paint();lastPaint=now;}
+  if(clock.status==="running")frameHandle=requestAnimationFrame(loop);
+  else frameHandle=null;
+ };
  frameHandle=requestAnimationFrame(loop);
 }
 function resetSession(){
@@ -77,12 +83,14 @@ function paint(){
  $("#stage-title").innerHTML=base[1];
  $("#stage-cue").textContent=base[2];
  $("#controls").hidden=guided;
+ $("#pose-book-link").hidden=mode!=="movement";
  $("#clock").textContent=guided?"—:—":formatTime(snapshot.remaining);
  $("#stage-status").textContent=guided?t.noAudio:t.statuses[snapshot.status];
  $("#primary").textContent=snapshot.status==="running"?t.actions.pause:snapshot.status==="paused"?t.actions.resume:snapshot.status==="finished"?t.actions.restart:t.actions.start;
  let progress=snapshot.progress,phase="",detail="",pose="seated",expansion=.5;
  if(mode==="movement"){
   const f=movementFrame(snapshot.elapsed);
+  $("#pose-book-link").href="../yoga-asana-book/?pose="+encodeURIComponent(f.item.id);
   phase=f.item.title[lang];detail=f.item.support[lang];
   pose=f.item.pose;progress=f.totalProgress;
   $("#phase-remaining").textContent=formatTime(f.remaining);

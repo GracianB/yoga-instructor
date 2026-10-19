@@ -11,7 +11,7 @@
 
 ## 2. Yoga Asana Book
 `apps/yoga-asana-book/`
-- Atlas inicial de seis posturas revisables, clasificado por categoría, con propósito, alternativa y apoyos.
+- Atlas inicial de diez posturas revisables, clasificado por categoría, con propósito, alternativa y apoyos.
 - La misma figura SVG, paleta y proporciones que Practice.
 - Español/inglés, teclado, responsive, sin scripts externos.
 
@@ -31,3 +31,8 @@ npm run test:browser -- --grep "V1"
 La rama no modifica el `index.html` público, ni el `README.md`, ni los workflows. El sitio del instructor seguirá mostrando ambas apps como **En construcción** hasta que sean validadas y se planifique su despliegue independiente. No cambiar enlaces de portfolio ni fusionar los experimentos originales en la web del instructor.
 
 Fuentes de las tres guías de YouTube: canal Meditación3, vídeos `0sjVoX5ASwg`, `Q3zncqKCiEQ`, `rFLXCWOjb_Y`. Enlaces externos verificados; contenido ajeno, no almacenado ni reutilizado.
+
+## Continuidad entre las dos apps
+Movimiento muestra «Explorar esta postura en el libro» con un enlace directo de tipo `?pose=mountain`, `?pose=fold` o `?pose=child`. El libro valida el identificador antes de utilizarlo y permite compartir la postura mediante su URL. Las figuras nuevas se añaden al mismo renderer sin duplicar estilos.
+
+El reloj de práctica renderiza los cambios a **10 Hz** con interpolación visual y continúa usando un único reloj monotónico; pausar cancela la animación.

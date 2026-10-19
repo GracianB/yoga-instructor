@@ -1,7 +1,8 @@
 import {BOOK_POSES} from "../shared/core.mjs";
 import {createFigure,setFigurePose,setFigureBreath} from "../shared/figure.mjs";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-let lang="es",category="all",selected=BOOK_POSES[0].id;
+const sharedPose=new URLSearchParams(location.search).get("pose");
+let lang="es",category="all",selected=BOOK_POSES.find(p=>p.id===sharedPose)?.id||BOOK_POSES[0].id;
 const figure=createFigure($("#figure-root"),{pose:selected,label:"Postura vectorial de yoga"});
 setFigureBreath(figure,.42);
 const names={standing:{es:"DE PIE",en:"STANDING"},fold:{es:"FLEXIÓN",en:"FOLD"},seated:{es:"SENTADO",en:"SEATED"},rest:{es:"DESCANSO",en:"REST"}};
@@ -30,7 +31,12 @@ function populate(){
 }
 function choose(id){
  if(!BOOK_POSES.some(p=>p.id===id))return;
- selected=id;populate();showPose();
+ selected=id;
+ // Direct links remain shareable without exposing invalid identifiers.
+ const url=new URL(location.href);
+ url.searchParams.set("pose",selected);
+ history.replaceState(null,"",url.pathname+url.search+url.hash);
+ populate();showPose();
 }
 function showPose(){
  const p=BOOK_POSES.find(p=>p.id===selected);
@@ -54,6 +60,9 @@ for(const b of $$("[data-category]")){
   category=b.dataset.category;
   $$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el===b)));
   if(!visible().some(p=>p.id===selected))selected=visible()[0].id;
+  const url=new URL(location.href);
+  url.searchParams.set("pose",selected);
+  history.replaceState(null,"",url.pathname+url.search+url.hash);
   populate();showPose();
  });
 }

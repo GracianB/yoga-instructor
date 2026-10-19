@@ -5,10 +5,10 @@
  const root=document.getElementById("main");
  const toggle=document.getElementById("p2-toggle");
  if(!root||!toggle)return;
- const hidden=new Set(["orientacion","atlas","casos","ritual","campo","camino","trayectoria","demostracion","formacion","filosofia","cv","preguntas"]);
+ const hidden=new Set(["orientacion","atlas","camino","trayectoria","demostracion","formacion","filosofia","cv","preguntas"]);
  // These five chapters are available as a real interactive destination.
  // A route choice shows one chapter rather than another 15-screen journey.
- const chapters=new Set(["sobre","oferta","experiencia","instructor-flow","contacto"]);
+ const chapters=new Set(["experiencia","instructor-flow","contacto"]);
  const chapterFor=node=>{
   if(!node)return null;
   for(const id of chapters)if(node.id===id||node.closest("#"+id))return id;

@@ -179,6 +179,7 @@
   <script src="./studio-presence-v72.js?v=v72-1" defer></script>
   <script src="./portfolio-v73.js?v=v73-1" defer></script>
   <script src="./p2-navigation.js?v=p2" defer></script>
+  <script src="./p25-closed-studio.js?v=1" defer></script>
   <script src="./teaching-casebook-v74.js?v=v74-1" defer></script>
   <script src="./editorial-atlas-v75.js?v=v75-1" defer></script>
   <script src="./yoga-enquiry-v76.js?v=v76-1" defer></script>
@@ -253,8 +254,8 @@
       </span>
     </a>
     <nav class="nav" id="nav" data-i18n-aria-label="navLabel" aria-label="Primary">
-      <a href="#sobre" data-i18n="navAbout">Sobre mí</a>
-      <a href="#oferta" data-i18n="navClasses">Clases</a>
+      <a href="#experiencia" data-i18n="navAbout">Sobre mí</a>
+      <a href="#instructor-flow" data-i18n="navClasses">Clases</a>
       <a href="#instructor-flow" data-i18n="navStudio">Estudio</a>
       <a href="#experiencia" data-i18n="navExp">Experiencia</a>
       <a href="#contacto" data-i18n="navContact">Contacto</a>
@@ -276,6 +277,10 @@
   </header>
 
   <main id="main" class="presence-main" data-p2-mode="full">
+
+    <section class="p25-summary" id="p25-summary" aria-label="Experiencia resumida">
+      <p><span data-p25-lang="es">Clases en sala, individuales y bienestar en equipos.</span><span data-p25-lang="en">Group classes, individual sessions and workplace wellbeing.</span></p>
+    </section>
 
     <!-- HERO — presence practice space -->
     <section class="hero" id="inicio" data-breath="idle">
@@ -1204,6 +1209,10 @@
         <p class="about-lead" data-i18n="flowLead">El instructor marca el pulso. La interfaz acompaña sin competir con la práctica.</p>
       </div>
 
+      <div class="p25-launcher">
+        <button type="button" class="p25-app-toggle" aria-controls="p25-app-body" aria-expanded="false"><span data-p25-lang="es">Abrir práctica guiada</span><span data-p25-lang="en">Open guided practice</span> <span aria-hidden="true">↗</span></button>
+      </div>
+      <div id="p25-app-body" hidden>
       <div class="studio-entrance" aria-label="Sala de práctica">
         <div class="studio-intro">
           <div>
@@ -1319,6 +1328,7 @@
           </div>
           <p class="studio-guided-note" id="studio-guided-note">Un ritmo orientativo, no una prueba. Puedes volver a la respiración natural en cualquier momento.</p>
         </section>
+      </div>
     </section>
 
     <section class="section soundtrack-section" id="soundtrack" aria-labelledby="soundtrack-title">

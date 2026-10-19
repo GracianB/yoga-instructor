@@ -1,7 +1,9 @@
 import {BREATH_PATTERNS,MOVEMENT_STEPS,GUIDED_VIDEOS,SessionClock,breathFrame,movementFrame,sumMovementSeconds} from "../shared/core.mjs";
 import {createFigure,setFigurePose,setFigureBreath} from "../shared/figure.mjs";
 
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const $=s=>document.querySelector(s), $=s=>[...document.querySelectorAll(s)];
+const updateText=(key,value)=>{const node=$(key);if(node.textContent!==value)node.textContent=value;};
+const updateHTML=(key,value)=>{const node=$(key);if(node.innerHTML!==value)node.innerHTML=value;};
 let lang="es",mode="movement",pattern="natural",meditation="silent",minutes=5,lastPose="";
 const clock=new SessionClock();
 let frameHandle=null;
@@ -69,6 +71,7 @@ function setMode(next,{focus=false}={}){
  $("#breath-options").hidden=mode!=="breath";
  $("#meditation-options").hidden=mode!=="meditation";
  document.documentElement.dataset.mode=mode;
+ $("#mode-panel").setAttribute("aria-labelledby","tab-"+mode);
  resetSession();
 }
 function formatTime(seconds){
@@ -80,49 +83,50 @@ function paint(){
  figure.setAttribute("data-active",String(snapshot.status==="running"&&!guided));
  figure.dataset.mode=mode;figure.dataset.phase="";
  const base=t[mode];
- $("#stage-eyebrow").textContent=base[0];
- $("#stage-title").innerHTML=base[1];
- $("#stage-cue").textContent=base[2];
+ updateText("#stage-eyebrow",base[0]);
+ updateHTML("#stage-title",base[1]);
+ updateText("#stage-cue",base[2]);
  $("#controls").hidden=guided;
  $("#pose-book-link").hidden=mode!=="movement";
- $("#clock").textContent=guided?"—:—":formatTime(snapshot.remaining);
- $("#stage-status").textContent=guided?t.noAudio:t.statuses[snapshot.status];
- $("#primary").textContent=snapshot.status==="running"?t.actions.pause:snapshot.status==="paused"?t.actions.resume:snapshot.status==="finished"?t.actions.restart:t.actions.start;
+ updateText("#clock",guided?"—:—":formatTime(snapshot.remaining));
+ updateText("#stage-status",guided?t.noAudio:t.statuses[snapshot.status]);
+ updateText("#primary",snapshot.status==="running"?t.actions.pause:snapshot.status==="paused"?t.actions.resume:snapshot.status==="finished"?t.actions.restart:t.actions.start);
  let progress=snapshot.progress,phase="",detail="",pose="seated",expansion=.5;
  if(mode==="movement"){
   const f=movementFrame(snapshot.elapsed);
   $("#pose-book-link").href="../yoga-asana-book/?pose="+encodeURIComponent(f.item.id);
   phase=f.item.title[lang];detail=f.item.support[lang];
   pose=f.item.pose;progress=f.totalProgress;
-  $("#phase-remaining").textContent=formatTime(f.remaining);
+  updateText("#phase-remaining",formatTime(f.remaining));
   $$("#movement-steps li").forEach((node,i)=>{node.classList.toggle("current",i===f.index);});
-  $("#visual-caption").textContent=f.item.pose.toUpperCase();
+  updateText("#visual-caption",f.item.pose.toUpperCase());
   // Subtle body response. No fantasy creature and no animated face.
   expansion=.45+.06*Math.sin(snapshot.elapsed*2*Math.PI/6);
-  $("#stage-cue").textContent=f.item.cue[lang];
+  updateText("#stage-cue",f.item.cue[lang]);
  }else if(mode==="breath"){
   const f=breathFrame(snapshot.elapsed,pattern);
   figure.dataset.phase=f.phase;
   phase=t.phases[f.phase];detail=t.breathSupport;
   expansion=snapshot.status==="running"||snapshot.status==="paused"?f.expansion:.5;
-  $("#phase-remaining").textContent=formatTime(f.remaining);
-  $("#visual-caption").textContent=f.pattern.name;
-  $("#stage-cue").textContent=base[2]+" "+t.cue;
+  updateText("#phase-remaining",formatTime(f.remaining));
+  updateText("#visual-caption",f.pattern.name);
+  updateText("#stage-cue",base[2]+" "+t.cue);
  }else{
   phase=guided?t.guided[0]:t.silent[0];
   detail=guided?t.guided[1]:t.silent[1];
   progress=guided?0:snapshot.progress;
-  $("#phase-remaining").textContent=guided?"YOUTUBE":formatTime(snapshot.remaining);
-  $("#visual-caption").textContent=guided?"GUIDED":"SILENCE";
-  $("#stage-cue").textContent=detail;
+  updateText("#phase-remaining",guided?"YOUTUBE":formatTime(snapshot.remaining));
+  updateText("#visual-caption",guided?"GUIDED":"SILENCE");
+  updateText("#stage-cue",detail);
   expansion=.48+.02*Math.sin(snapshot.elapsed/6);
  }
- $("#phase-label").textContent=phase;
- $("#stage-support").textContent=detail;
+ updateText("#phase-label",phase);
+ updateText("#stage-support",detail);
  $("#progress-fill").style.width=(Math.max(0,Math.min(1,progress))*100).toFixed(2)+"%";
  $(".progress").setAttribute("aria-valuenow",String(Math.round(progress*100)));
  if(pose!==lastPose){setFigurePose(figure,pose);lastPose=pose;}
- figure.setAttribute("aria-label",mode==="movement"?(lang==="es"?"Postura: ":"Pose: ")+phase:mode==="breath"?(lang==="es"?"Respiración: ":"Breathing: ")+phase:(lang==="es"?"Figura humana en meditación":"Human figure in meditation"));
+ const figureLabel=mode==="movement"?(lang==="es"?"Postura: ":"Pose: ")+phase:mode==="breath"?(lang==="es"?"Respiración: ":"Breathing: ")+phase:(lang==="es"?"Figura humana en meditación":"Human figure in meditation");
+ if(figure.getAttribute("aria-label")!==figureLabel)figure.setAttribute("aria-label",figureLabel);
  setFigureBreath(figure,expansion);
 }
 function play(){

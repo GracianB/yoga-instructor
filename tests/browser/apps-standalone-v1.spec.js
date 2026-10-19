@@ -97,3 +97,17 @@ test("Breathing uses the same figure, announces each phase and respects reduced 
  const transform=await figure.locator(".figure-human").evaluate(e=>getComputedStyle(e).transform);
  expect(transform).toBe("none");
 });
+
+test("Keyboard switching updates the real practice tabpanel",async({page})=>{
+ await page.goto("/apps/yoga-practice/",{waitUntil:"domcontentloaded"});
+ const panel=page.getByRole("tabpanel");
+ await expect(panel).toHaveAttribute("aria-labelledby","tab-movement");
+ await page.locator("#tab-movement").focus();
+ await page.locator("#tab-movement").press("ArrowRight");
+ await expect(page.locator("#tab-breath")).toBeFocused();
+ await expect(panel).toHaveAttribute("aria-labelledby","tab-breath");
+ await page.locator("#tab-breath").press("End");
+ await expect(panel).toHaveAttribute("aria-labelledby","tab-meditation");
+ await page.locator("#tab-meditation").press("Home");
+ await expect(panel).toHaveAttribute("aria-labelledby","tab-movement");
+});

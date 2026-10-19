@@ -149,3 +149,12 @@ test("Apps V1.2: breathing makes the full human silhouette follow phase timing",
  assert.match(practice,/figure\.dataset\.mode=mode/);
  assert.match(styles,/prefers-reduced-motion:reduce/);
 });
+
+test("Apps V1.3: active tab is a real tabpanel and live regions avoid repeated identical content",()=>{
+ const html=read("apps/yoga-practice/index.html"),source=read("apps/yoga-practice/app.mjs");
+ assert.match(html,/id="mode-panel" role="tabpanel" aria-labelledby="tab-movement"/);
+ for(const id of ["movement","breath","meditation"])assert.match(html,new RegExp('id="tab-'+id+'" data-mode="'+id+'"'));
+ assert.match(source,/setAttribute\("aria-labelledby","tab-"\+mode\)/);
+ assert.match(source,/if\(node\.textContent!==value\)node\.textContent=value/);
+ assert.match(source,/if\(node\.innerHTML!==value\)node\.innerHTML=value/);
+});

@@ -61,7 +61,7 @@ test("App V1: one monotonic clock starts, pauses, resumes, finishes and resets",
  clock.pause();ms+=15000;
  assert.equal(clock.snapshot().elapsed,3.2);
  clock.resume();ms+=900;
- assert.equal(clock.snapshot().elapsed,4.1);
+ assert.ok(Math.abs(clock.snapshot().elapsed-4.1)<1e-9);
  ms+=30000;
  assert.equal(clock.snapshot().status,"finished");
  assert.equal(clock.snapshot().remaining,0);

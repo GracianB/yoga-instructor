@@ -6131,3 +6131,75 @@ body:has(#main[data-p2-mode="short"]) .sanctuary-dock{display:none!important}
  background:color-mix(in srgb,var(--sage) 20%,var(--surface));
  box-shadow:inset 3px 0 0 var(--sage);
 }
+
+
+/* P2.6 · Public portfolio. The studio and asana book remain in source
+   solely for extraction to their own applications. No hidden UI is launched. */
+#main > :is(#orientacion,#atlas,#portfolio,#casos,#ritual,#sobre,#oferta,#campo,#camino,#trayectoria,#demostracion,#instructor-flow,#soundtrack,#studio-asana-library,#formacion,#filosofia,#cv,#preguntas),
+#main #v76-enquiry,#main #v76-results,
+.sanctuary-dock,.p25-book-toggle,#p25-book-body,#p25-app-body,
+.p25-summary,#p2-toggle{display:none!important}
+
+/* One chosen destination at a time, never the old multi-screen archive. */
+#main[data-p2-mode="short"][data-p2-focus] > :is(#proyectos,#experiencia,#contacto){display:none!important}
+#main[data-p2-mode="short"][data-p2-focus="proyectos"] > #proyectos,
+#main[data-p2-mode="short"][data-p2-focus="experiencia"] > #experiencia,
+#main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto{display:block!important}
+
+/* Route index: three short destinations, not three presentation slides. */
+#main #explora{padding:clamp(16px,2.5vw,28px);margin-block:12px 26px}
+#main #explora .p2-explore-intro{margin-bottom:15px}
+#main #explora .p2-route-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+#main #explora .p2-route,#main #explora .p2-route-featured{
+ grid-column:auto;min-height:88px;padding:17px 40px 17px 18px;
+ justify-content:center;background:var(--surface)
+}
+#main #explora .p2-route strong{font-size:clamp(1.05rem,1.65vw,1.35rem);max-width:22ch}
+
+/* Concise, factual experience instead of three full case studies. */
+#main #experiencia .roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#main #experiencia .role{min-width:0;padding:clamp(14px,2vw,22px)}
+#main #experiencia .role>p:not(.role-title),#main #experiencia .role header em{display:none}
+#main #experiencia .section-head h2{font-size:clamp(1.6rem,3vw,2.8rem)}
+
+/* Two quiet, non-clickable yoga-app previews. Both are under construction. */
+#proyectos{
+ width:min(1180px,calc(100% - 2*var(--pad)));max-width:none;
+ margin:0 auto clamp(36px,5vw,70px);padding:clamp(18px,3vw,38px);
+ border:1px solid var(--line);border-radius:22px;background:var(--surface)
+}
+#proyectos h2{font:500 clamp(1.9rem,4vw,3.3rem)/1.1 var(--display);margin:10px 0 25px;color:var(--ink)}
+.p26-project-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.p26-project-card{
+ position:relative;display:flex;flex-direction:column;gap:11px;min-width:0;
+ min-height:215px;padding:24px 20px 19px;overflow:hidden;
+ border:1px solid var(--line);border-radius:18px;
+ background:var(--bg);color:var(--ink);
+ transition:none
+}
+.p26-project-card::before{
+ content:"";display:block;width:100%;height:66px;margin:0 0 3px;
+ border:1px solid var(--line);border-radius:12px;opacity:.8;
+ background:radial-gradient(circle at 50% 50%,var(--sage-glow) 2px,transparent 4px),
+ repeating-radial-gradient(ellipse at 50% 50%,transparent 0 10px,var(--line-strong) 11px 12px,transparent 13px 24px)
+}
+.p26-project-card:nth-child(2)::before{
+ background:radial-gradient(circle at 25% 50%,var(--sage-glow) 0 13px,transparent 14px),
+ radial-gradient(circle at 50% 36%,var(--sage-dim) 0 18px,transparent 19px),
+ radial-gradient(circle at 76% 50%,var(--sage-glow) 0 13px,transparent 14px)
+}
+
+
+.p26-project-card > span:first-child{font:650 10px var(--mono);letter-spacing:.14em;color:var(--sage)}
+.p26-project-card strong{font:500 clamp(1.5rem,2.7vw,2.2rem)/1.12 var(--display)}
+.p26-project-card small{font:400 13px/1.5 var(--sans);color:var(--muted)}
+.p26-project-grid b{position:absolute;right:20px;top:18px;color:var(--sage)}
+@media(max-width:760px){
+ #main #explora .p2-route-grid,.p26-project-grid,#main #experiencia .roles{grid-template-columns:1fr}
+ #main #explora .p2-route,#main #explora .p2-route-featured{min-height:70px}
+ #proyectos{width:calc(100% - 24px)}
+ .p26-project-card{min-height:170px}
+}
+
+
+.p26-project-card .p26-status{align-self:flex-start;margin-top:auto;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font:600 11px/1.2 var(--sans);letter-spacing:.02em}

@@ -33,7 +33,11 @@ const server = createServer(async (req, res) => {
     if (pathname.split("/").some((part) => part.startsWith(".")) || /\\/.test(pathname)) {
       res.writeHead(403); res.end("Forbidden"); return;
     }
-    if (pathname === "/") pathname = "/index.html";
+    // During E2E, legacy studio suites exercise the preserved standalone studio
+    // snapshot, while portfolio tests explicitly visit /index.html (or /dist/).
+    // The public npm start and GitHub Pages are never redirected.
+    if (pathname === "/") pathname = process.env.YOGA_E2E_LEGACY_ROOT === "1"
+      ? "/tests/fixtures/legacy-studio.html" : "/index.html";
 
     const target = normalize(join(root, pathname));
     if (!target.startsWith(root + sep) && target !== root) {

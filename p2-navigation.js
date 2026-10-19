@@ -152,19 +152,26 @@
  const ctx=canvas.getContext("2d",{alpha:true});
  if(!ctx)return;
  const motion=window.matchMedia("(prefers-reduced-motion: reduce)");
- let visible=true,frame=0,last=0,width=0,height=0,dpr=1;
+ let visible=true,frame=0,last=0,width=0,height=0,dpr=1,lotusX=0,lotusY=0;
  function resize(){
    const box=hero.getBoundingClientRect();
    width=Math.max(1,box.width);height=Math.max(1,box.height);
    dpr=Math.min(1.5,window.devicePixelRatio||1);
    canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);
    canvas.style.width=width+"px";canvas.style.height=height+"px";
+   // Anchor the ambient petals to the actual SVG in mobile and desktop layouts.
+   const flower=hero.querySelector(".hero-mandala");
+   if(flower){
+     const rect=flower.getBoundingClientRect();
+     lotusX=rect.left-box.left+rect.width/2;
+     lotusY=rect.top-box.top+rect.height/2;
+   }
  }
  function draw(time){
    ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,width,height);
    const dark=document.documentElement.dataset.theme==="dark";
    const color=dark?"122,215,207":"69,129,108";
-   const cx=width*(width>900?.73:.50),cy=height*(width>900?.46:.34);
+   const cx=lotusX||width*.73,cy=lotusY||height*.46;
    const scale=Math.min(width*.37,height*.54,330);
    const phase=motion.matches?0:Math.sin(time*.00022)*.1;
    for(let ring=0;ring<3;ring++){

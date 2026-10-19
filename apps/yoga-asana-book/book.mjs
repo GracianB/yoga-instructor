@@ -13,12 +13,12 @@ function translate(next){
   const val=el.getAttribute("data-"+lang);
   if(val.includes("<br>"))el.innerHTML=val;else el.textContent=val;
  }
- for(const btn of $("[data-lang]"))btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang));
+ for(const btn of $$("[data-lang]"))btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang));
  $(".bar-right>a").href="../yoga-practice/"+(lang==="en"?"?lang=en":"");
  const url=new URL(location.href);
  if(lang==="en")url.searchParams.set("lang","en");else url.searchParams.delete("lang");
  history.replaceState(null,"",url.pathname+url.search+url.hash);
- showPose();
+ populate();showPose();
 }
 function visible(){return BOOK_POSES.filter(p=>category==="all"||p.category===category);}
 function populate(){
@@ -41,7 +41,7 @@ function choose(id){
  const url=new URL(location.href);
  url.searchParams.set("pose",selected);
  history.replaceState(null,"",url.pathname+url.search+url.hash);
- populate();showPose();
+ showPose();
 }
 function showPose(){
  const p=BOOK_POSES.find(p=>p.id===selected);
@@ -54,7 +54,7 @@ function showPose(){
  setFigurePose(figure,p.pose);
  figure.setAttribute("aria-label",p.name[lang]+": ilustración estilizada");
  const list=visible(),index=list.findIndex(x=>x.id===p.id);
- for(const button of $("#pose-list button")){
+ for(const button of $$("#pose-list button")){
   const active=button.dataset.poseId===selected;
   button.setAttribute("aria-pressed",String(active));
   if(active)button.setAttribute("aria-current","true");else button.removeAttribute("aria-current");
@@ -68,7 +68,7 @@ function next(delta){
 for(const b of $$("[data-category]")){
  b.addEventListener("click",()=>{
   category=b.dataset.category;
-  $$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el===b)));
+  $$$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el===b)));
   if(!visible().some(p=>p.id===selected))selected=visible()[0].id;
   const url=new URL(location.href);
   url.searchParams.set("pose",selected);

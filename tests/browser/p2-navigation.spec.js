@@ -57,11 +57,13 @@ test("P2.6 section navigation focuses visible content without revealing retired 
  await page.locator('#nav a[href="#proyectos"]').click();
  await expect(root).toHaveAttribute("data-p2-focus","proyectos");
  await expect(page.locator("#proyectos")).toBeVisible();
- await page.locator("#p2-toggle").click();
- await expect(root).toHaveAttribute("data-p2-mode","full");
+ // The public portfolio no longer offers the old full archive.
+ await expect(page.locator("#p2-toggle")).toBeHidden();
  await expect(page.locator("#instructor-flow")).toBeHidden();
  await expect(page.locator("#portfolio")).toBeHidden();
  await expect(page.locator("#campo")).toBeHidden();
+ await expect(page.locator("#orientacion")).toBeHidden();
+ await expect(page.locator("#formacion")).toBeHidden();
 });
 
 test("P2.6 deep links open published chapters and legacy studio remains hidden",async({page})=>{

@@ -6135,10 +6135,10 @@ body:has(#main[data-p2-mode="short"]) .sanctuary-dock{display:none!important}
 
 /* P2.6 · Public portfolio. The studio and asana book remain in source
    solely for extraction to their own applications. No hidden UI is launched. */
-#main > :is(#portfolio,#casos,#ritual,#sobre,#oferta,#campo,#instructor-flow,#soundtrack,#studio-asana-library),
+#main > :is(#orientacion,#atlas,#portfolio,#casos,#ritual,#sobre,#oferta,#campo,#camino,#trayectoria,#demostracion,#instructor-flow,#soundtrack,#studio-asana-library,#formacion,#filosofia,#cv,#preguntas),
 #main #v76-enquiry,#main #v76-results,
 .sanctuary-dock,.p25-book-toggle,#p25-book-body,#p25-app-body,
-.p25-summary{display:none!important}
+.p25-summary,#p2-toggle{display:none!important}
 
 /* One chosen destination at a time, never the old multi-screen archive. */
 #main[data-p2-mode="short"][data-p2-focus] > :is(#proyectos,#experiencia,#contacto){display:none!important}

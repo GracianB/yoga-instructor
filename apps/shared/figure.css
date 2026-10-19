@@ -23,9 +23,22 @@
 .yoga-figure[data-active="true"][data-pose="fold"] .figure-human{animation:figureFold 8s ease-in-out infinite}
 .yoga-figure[data-active="true"][data-pose="child"] .figure-human{animation:figureRest 9s ease-in-out infinite}
 .yoga-figure[data-active="true"][data-pose="seated"] .figure-human{animation:figureSeat 9s ease-in-out infinite}
+/* Breath is special: entire torso follows the SAME breathing clock; hold phases stay still. */
+.yoga-figure[data-mode="breath"] .figure-human,
+.yoga-figure[data-mode="meditation"] .figure-human{
+ animation:none!important;
+ transform:translateY(var(--figure-lift,0px));
+ transition:transform .15s linear;
+}
+.yoga-figure[data-mode="breath"][data-phase="hold"] .figure-breath-zone{fill:var(--violet)}
+.yoga-figure[data-mode="breath"][data-phase="rest"] .figure-breath-zone{fill:var(--muted)}
 .yoga-figure .figure-human{transform-origin:210px 265px}
 @keyframes figureStand{0%,100%{transform:translateY(2px) rotate(-.35deg)}50%{transform:translateY(-4px) rotate(.35deg)}}
 @keyframes figureFold{0%,100%{transform:translateY(1px) rotate(-.4deg)}50%{transform:translateY(-2px) rotate(.55deg)}}
 @keyframes figureRest{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
 @keyframes figureSeat{0%,100%{transform:translateY(1px)}50%{transform:translateY(-2px)}}
-@media(prefers-reduced-motion:reduce){.yoga-figure .figure-human{animation:none!important;transform:none!important}}
+@media(prefers-reduced-motion:reduce){
+ .yoga-figure .figure-human,
+ .yoga-figure .figure-aura,
+ .yoga-figure .figure-breath-zone{animation:none!important;transform:none!important;transition:none!important}
+}

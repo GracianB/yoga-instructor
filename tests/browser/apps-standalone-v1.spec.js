@@ -83,3 +83,17 @@ test("Book ignores untrusted pose links and chooses a real posture",async({page}
  await expect(page.locator("#pose-name")).toContainText("Montaña");
  await expect(page.locator(".yoga-figure")).toHaveAttribute("data-pose","mountain");
 });
+
+test("Breathing uses the same figure, announces each phase and respects reduced motion",async({page})=>{
+ await page.goto("/apps/yoga-practice/",{waitUntil:"domcontentloaded"});
+ await page.locator('[data-mode="breath"]').click();
+ const figure=page.locator(".yoga-figure");
+ await expect(figure).toHaveAttribute("data-mode","breath");
+ await expect(figure).toHaveAttribute("data-phase","inhale");
+ await page.locator('[data-pattern="444"]').click();
+ await expect(page.locator("#phase-label")).toHaveText("Inhala");
+ await expect(figure).toHaveAttribute("aria-label",/Respiración: Inhala/);
+ await page.emulateMedia({reducedMotion:"reduce"});
+ const transform=await figure.locator(".figure-human").evaluate(e=>getComputedStyle(e).transform);
+ expect(transform).toBe("none");
+});

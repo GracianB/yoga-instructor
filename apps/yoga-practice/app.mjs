@@ -78,6 +78,7 @@ function formatTime(seconds){
 function paint(){
  const t=vocabulary[lang],snapshot=clock.snapshot(),guided=mode==="meditation"&&meditation==="guided";
  figure.setAttribute("data-active",String(snapshot.status==="running"&&!guided));
+ figure.dataset.mode=mode;figure.dataset.phase="";
  const base=t[mode];
  $("#stage-eyebrow").textContent=base[0];
  $("#stage-title").innerHTML=base[1];
@@ -101,6 +102,7 @@ function paint(){
   $("#stage-cue").textContent=f.item.cue[lang];
  }else if(mode==="breath"){
   const f=breathFrame(snapshot.elapsed,pattern);
+  figure.dataset.phase=f.phase;
   phase=t.phases[f.phase];detail=t.breathSupport;
   expansion=snapshot.status==="running"||snapshot.status==="paused"?f.expansion:.5;
   $("#phase-remaining").textContent=formatTime(f.remaining);
@@ -120,6 +122,7 @@ function paint(){
  $("#progress-fill").style.width=(Math.max(0,Math.min(1,progress))*100).toFixed(2)+"%";
  $(".progress").setAttribute("aria-valuenow",String(Math.round(progress*100)));
  if(pose!==lastPose){setFigurePose(figure,pose);lastPose=pose;}
+ figure.setAttribute("aria-label",mode==="movement"?(lang==="es"?"Postura: ":"Pose: ")+phase:mode==="breath"?(lang==="es"?"Respiración: ":"Breathing: ")+phase:(lang==="es"?"Figura humana en meditación":"Human figure in meditation"));
  setFigureBreath(figure,expansion);
 }
 function play(){

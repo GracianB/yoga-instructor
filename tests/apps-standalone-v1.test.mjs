@@ -139,3 +139,13 @@ test("Apps V1.1: ten distinct editorial book poses use shared anatomical shapes 
  assert.match(practice,/now-lastPaint>=100/);
  assert.match(read("apps/yoga-practice/index.html"),/id="pose-book-link"/);
 });
+
+test("Apps V1.2: breathing makes the full human silhouette follow phase timing",()=>{
+ const figure=read("apps/shared/figure.mjs"),styles=read("apps/shared/figure.css"),practice=read("apps/yoga-practice/app.mjs");
+ assert.match(figure,/--figure-lift/);
+ assert.match(styles,/data-mode="breath"/);
+ assert.match(styles,/data-phase="hold"/);
+ assert.match(practice,/figure\.dataset\.phase=f\.phase/);
+ assert.match(practice,/figure\.dataset\.mode=mode/);
+ assert.match(styles,/prefers-reduced-motion:reduce/);
+});

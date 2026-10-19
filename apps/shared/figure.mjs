@@ -47,5 +47,6 @@ export function setFigurePose(svg,pose){
 export function setFigureBreath(svg,expansion){
  const value=Math.max(0,Math.min(1,Number.isFinite(expansion)?expansion:.5));
  svg.style.setProperty("--figure-breath",value.toFixed(3));
+ svg.style.setProperty("--figure-lift",(-4*value).toFixed(2)+"px");
  return value;
 }

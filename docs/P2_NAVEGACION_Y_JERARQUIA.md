@@ -1,22 +1,31 @@
-# P2 · Navegación directa y primera simplificación visual
+# P2 · Simplificación integral de Yoga Instructor
 
-Rama: `phase-2-visitor-experience-20261019` (stacked sobre P1, sin publicación).
+**Estado:** rama `phase-2-visitor-experience-20261019`, PR #203 abierta en borrador, apilada sobre PR #201. No se fusiona ni publica sin pruebas y revisión visual.
 
-## Cambio observable
-- Portada: una entrada directa al estudio y otra a contacto. CV y Hub permanecen accesibles fuera de la zona principal.
-- Cabecera: cuatro destinos explícitos: portfolio, estudio, trayectoria y contacto.
-- Orientación V80: conservamos tres caminos interactivos, pero el recorrido de práctica abre primero la sala, con demo y preguntas como recursos.
-- Atlas V75: deja de ser otra portada enorme; se convierte en un índice de cinco destinos, con la navegación y su estado activo intactos.
-- Música: pasa tras la sección de estudio mediante reubicación DOM (no se duplica ni se reinicia el audio).
-- CSS: una capa pequeña, aislada, al final de la cascada. Ajustes móvil y teclado, sin efectos nuevos que necesiten animación.
-- Anatomía de Nila, motores, documentos y `main`: sin cambios.
+## Principio de producto
+Una sola práctica y tres modos reales: **Movimiento (Nila)**, **Respiración (Dragón)** y **Meditación (Uma)**. Nada de mostrar al mismo tiempo un libro, una segunda demo del personaje, un reproductor y una sesión.
 
-## Aceptación técnica
-1. `npm run quality` y `npm run build` sin regresiones.
-2. Navegadores Chromium, Firefox y WebKit, con foco en 375 px y 1440 px.
-3. Rutas V80 y CV en ES/EN; sin desbordamiento horizontal.
-4. Comprobar que Soundtrack aparece después del estudio en orden del DOM y de tabulación.
-5. Revisar capturas reales para aprobar el balance visual. **Una CI verde no equivale a aceptación estética.**
+## Orden visible
+1. **Portada breve:** Presencia. Sin prisa. Un enunciado y dos acciones.
+2. **Sala de práctica:** tres modos, un motor por modo y controles existentes. Es la primera experiencia tras el hero.
+3. **Música (opcional):** disclosure cerrado de inicio; mantiene el único audio y su estado.
+4. **Portfolio:** enfoque, pruebas y formatos; se ocultan la ilustración/metodología redundantes.
+5. **Explorar detalles y recursos:** disclosure cerrado de inicio. Casos, cronología, demostración de 60 s, Vortex, ritual, atlas y bloques históricos siguen accesibles sin dominar la portada.
+6. **Preguntas y contacto:** enlaces y consulta reales.
 
-## Siguientes ajustes de P2
-La compactación resuelve la navegación de primer nivel. La simplificación profunda del contenido repetido entre casos, cronología, formación, filosofía y documentación necesita una revisión editorial y visual comparativa antes de borrar contenido.
+## Cambios técnicos
+- **Loto:** SVG original pequeño, movido fuera de un contenedor `aria-hidden`. Se ilumina al hover y al foco de teclado. Enter o clic abre el modo Respiración sin iniciar audio.
+- **Asanas:** el Libro D24 ahora se inserta dentro de la sala como herramienta optativa. Las 12 posturas y el rig de Nila siguen disponibles. Cerrado por defecto; al abrirlo se oculta el otro escenario de Movement. No se crean personajes o timers extra.
+- **Tres caminos V80:** siguen siendo accesibles bajo recursos, no otra portada delante del producto.
+- **CSS final:** `p2-wayfinding.css`; orquestación de jerarquía sin duplicación de nodos en `p2-editorial.js`.
+- **Acceso directo:** anchors en `#extras` y `#studio-asana-library` abren su disclosure correspondiente; idiomas ES/EN y tema claro/oscuro conservados.
+- **Documentos:** cuatro PDF originales sin modificar; `main` sin tocar.
+
+## Deuda a eliminar con seguridad
+P2 reduce la **superficie visible** sin borrar módulos históricos, sus contratos, ni romper enlaces existentes. La limpieza de JS/CSS no usados, reducción de descargas, eliminación definitiva de secciones y optimización de interacciones será P6 tras medir dependencias. La revisión anatómica profunda de las 12 posturas sigue siendo P3.
+
+## Criterios de cierre P2
+- `npm run quality`, `npm run build` y Chromium/Firefox/WebKit en verde para el HEAD de esta PR.
+- Hero, sala, book, audio y extras sin overflow a 320/375/1440 px.
+- Foco/Enter en el loto, selector de 3 modos, libro plegable, enlaces profundos, ES/EN y accesibilidad básica.
+- Capturas reales de claro/oscuro y escritorio/móvil; aceptación artística independiente de pasar CI.

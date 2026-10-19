@@ -44,7 +44,8 @@ test("D24: Yin/Yang and bilingual keyboard exploration, no interference with gui
  await page.keyboard.press("ArrowRight");
  await expect(explorer.locator('button[data-library-pose="d24-downward"]')).toHaveAttribute("aria-pressed","true");
  await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
- await expect(explorer).toBeVisible();
+ // P2: the Asana Book does not appear in unrelated practice modes.
+ await expect(explorer).toBeHidden();
  await page.locator('button[data-studio-mode="asanas"]').evaluate(el=>el.click());
  await expect(explorer).toBeVisible();
  await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());

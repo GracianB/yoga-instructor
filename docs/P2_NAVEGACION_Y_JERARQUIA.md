@@ -52,3 +52,6 @@ Se incorporaron `#programa` y `#v76-enquiry` al bloque avanzado, evitando que qu
 
 ## Sin pantalla de espera
 En P2 se suprime visualmente la antigua superposición `zintro` incluso en la primera visita. La animación histórica deja de impedir que se vean la portada y los accesos inmediatamente; su código legado se podrá eliminar al auditar P6.
+
+## Contraste en la lista de asanas
+Corregidas las fichas no seleccionadas que quedaban en gris con texto verdoso poco legible, especialmente en modo oscuro. Los 12 botones reciben superficies opacas y colores explícitos en ambos temas. La matriz Playwright comprueba una relación de contraste de texto mínima 4,5:1 en las opciones visibles.

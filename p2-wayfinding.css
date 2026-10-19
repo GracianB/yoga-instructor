@@ -608,3 +608,22 @@ html.intro-done .zintro{display:none!important;visibility:hidden!important;point
   color:var(--muted)!important;
  }
 }
+
+/* P2 AA correction: unselected asanas are enabled controls, never ghosted
+   placeholders. Solid surfaces avoid semi-transparent gray/green blends. */
+html[data-theme="dark"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose]:not([aria-pressed="true"]){
+ background:#203b32!important;color:#edf7ee!important;border:1px solid #627d70!important;
+ opacity:1!important;
+}
+html[data-theme="dark"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose][aria-pressed="true"]{
+ background:#98c7ae!important;color:#102a1e!important;border-color:#a9d5be!important;
+ opacity:1!important;
+}
+html[data-theme="light"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose]:not([aria-pressed="true"]){
+ background:#f5f4ed!important;color:#244332!important;border:1px solid #9cad9d!important;
+ opacity:1!important;
+}
+html[data-theme="light"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose][aria-pressed="true"]{
+ background:#285945!important;color:#f7fbf6!important;border-color:#285945!important;
+ opacity:1!important;
+}

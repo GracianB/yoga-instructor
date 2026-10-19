@@ -59,6 +59,21 @@ for(const width of screens){
    await expect(book.locator("#p2-asana-advanced")).not.toHaveAttribute("open",/./);
    await expect(book.locator("#p2-asana-advanced > summary")).toBeVisible();
    await expect(book.locator(".studio-library-stage")).toBeVisible();
+   // WCAG AA: each selectable asana must have readable contrast, including
+   // unselected postures that previously looked like disabled gray cards.
+   const palette=await book.locator('button[data-library-pose]:not([hidden])').evaluateAll(nodes=>{
+    const linear=channel=>{const n=channel/255;return n<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4)};
+    const luminance=color=>{
+      const v=(color.match(/[0-9.]+/g)||[]).slice(0,3).map(Number);
+      return .2126*linear(v[0])+.7152*linear(v[1])+.0722*linear(v[2]);
+    };
+    return nodes.map(button=>{
+      const css=getComputedStyle(button),fg=luminance(css.color),bg=luminance(css.backgroundColor);
+      return {name:button.textContent.trim(),ratio:(Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)};
+    });
+   });
+   for(const button of palette)expect(button.ratio,button.name).toBeGreaterThanOrEqual(4.5);
+
    if(width<=375 && theme==="dark"){
     const colors=await book.locator(".studio-library-name").evaluate(el=>{
       const actual=getComputedStyle(el).color;

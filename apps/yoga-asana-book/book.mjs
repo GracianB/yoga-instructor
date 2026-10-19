@@ -68,7 +68,7 @@ function next(delta){
 for(const b of $$("[data-category]")){
  b.addEventListener("click",()=>{
   category=b.dataset.category;
-  $$$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el===b)));
+  $("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el===b)));
   if(!visible().some(p=>p.id===selected))selected=visible()[0].id;
   const url=new URL(location.href);
   url.searchParams.set("pose",selected);

@@ -77,7 +77,7 @@ if(soundtrack){
 // Full evidence and experimental extras become optional, while the primary
 // professional story remains readable in Portfolio and Trajectory.
 const extraIds=["orientacion","atlas","ritual","campo","sobre","oferta","camino",
-  "demostracion","experiencia","formacion","filosofia","cv"];
+  "casos","trayectoria","demostracion","experiencia","formacion","filosofia","cv"];
 const extras=document.createElement("details");
 extras.className="p2-disclosure p2-extras";
 extras.id="p2-extras";
@@ -90,13 +90,9 @@ for(const id of extraIds){
  const element=document.getElementById(id);
  if(element)extras.append(element);
 }
-const trajectory=document.getElementById("trayectoria");
-const cases=document.getElementById("casos");
 const faq=document.getElementById("preguntas");
 const contact=document.getElementById("contacto");
-if(cases)insertAfter(cases,portfolio);
-if(trajectory)insertAfter(trajectory,cases||portfolio);
-insertAfter(extras,trajectory||cases||portfolio);
+insertAfter(extras,portfolio);
 if(faq)insertAfter(faq,extras);
 if(contact)insertAfter(contact,faq||extras);
 

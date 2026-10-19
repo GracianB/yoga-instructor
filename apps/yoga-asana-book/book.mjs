@@ -1,7 +1,8 @@
 import {BOOK_POSES} from "../shared/core.mjs";
 import {createFigure,setFigurePose,setFigureBreath} from "../shared/figure.mjs";
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
-const sharedPose=new URLSearchParams(location.search).get("pose");
+const initialParams=new URLSearchParams(location.search);
+const sharedPose=initialParams.get("pose");
 let lang="es",category="all",selected=BOOK_POSES.find(p=>p.id===sharedPose)?.id||BOOK_POSES[0].id;
 const figure=createFigure($("#figure-root"),{pose:selected,label:"Postura vectorial de yoga"});
 setFigureBreath(figure,.42);
@@ -12,8 +13,12 @@ function translate(next){
   const val=el.getAttribute("data-"+lang);
   if(val.includes("<br>"))el.innerHTML=val;else el.textContent=val;
  }
- for(const btn of $$("[data-lang]"))btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang));
- populate();showPose();
+ for(const btn of $("[data-lang]"))btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang));
+ $(".bar-right>a").href="../yoga-practice/"+(lang==="en"?"?lang=en":"");
+ const url=new URL(location.href);
+ if(lang==="en")url.searchParams.set("lang","en");else url.searchParams.delete("lang");
+ history.replaceState(null,"",url.pathname+url.search+url.hash);
+ showPose();
 }
 function visible(){return BOOK_POSES.filter(p=>category==="all"||p.category===category);}
 function populate(){
@@ -48,8 +53,13 @@ function showPose(){
  $("#pose-support").textContent=p.support[lang];
  setFigurePose(figure,p.pose);
  figure.setAttribute("aria-label",p.name[lang]+": ilustración estilizada");
- const index=visible().findIndex(x=>x.id===p.id);
- $("#previous").disabled=index<=0;$("#next").disabled=index===visible().length-1;
+ const list=visible(),index=list.findIndex(x=>x.id===p.id);
+ for(const button of $("#pose-list button")){
+  const active=button.dataset.poseId===selected;
+  button.setAttribute("aria-pressed",String(active));
+  if(active)button.setAttribute("aria-current","true");else button.removeAttribute("aria-current");
+ }
+ $("#previous").disabled=index<=0;$("#next").disabled=index===list.length-1;
 }
 function next(delta){
  const list=visible(),idx=list.findIndex(p=>p.id===selected);
@@ -69,4 +79,20 @@ for(const b of $$("[data-category]")){
 for(const b of $$("[data-lang]"))b.addEventListener("click",()=>translate(b.dataset.lang));
 $("#previous").addEventListener("click",()=>next(-1));
 $("#next").addEventListener("click",()=>next(1));
-translate("es");
+$("#pose-list").addEventListener("keydown",event=>{
+ if(!["ArrowDown","ArrowUp","Home","End"].includes(event.key))return;
+ const list=visible(),target=event.target.closest("button[data-pose-id]");
+ if(!target)return;
+ event.preventDefault();
+ const at=list.findIndex(p=>p.id===target.dataset.poseId);
+ const index=event.key==="Home"?0:event.key==="End"?list.length-1:(at+(event.key==="ArrowDown"?1:-1)+list.length)%list.length;
+ choose(list[index].id);
+ $("#pose-list").querySelector('[data-pose-id="'+list[index].id+'"]').focus();
+});
+window.addEventListener("popstate",()=>{
+ const params=new URLSearchParams(location.search);
+ const pose=BOOK_POSES.find(p=>p.id===params.get("pose"));
+ if(pose){category="all";$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.category==="all")));selected=pose.id;}
+ translate(params.get("lang"));
+});
+translate(initialParams.get("lang"));

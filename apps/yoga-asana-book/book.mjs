@@ -68,7 +68,7 @@ function next(delta){
 for(const b of $$("[data-category]")){
  b.addEventListener("click",()=>{
   category=b.dataset.category;
-  $("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el===b)));
+  $$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el===b)));
   if(!visible().some(p=>p.id===selected))selected=visible()[0].id;
   const url=new URL(location.href);
   url.searchParams.set("pose",selected);
@@ -92,7 +92,7 @@ $("#pose-list").addEventListener("keydown",event=>{
 window.addEventListener("popstate",()=>{
  const params=new URLSearchParams(location.search);
  const pose=BOOK_POSES.find(p=>p.id===params.get("pose"));
- if(pose){category="all";$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.category==="all")));selected=pose.id;}
+ if(pose){category="all";$$("[data-category]").forEach(el=>el.setAttribute("aria-pressed",String(el.dataset.category==="all")));selected=pose.id;}
  translate(params.get("lang"));
 });
 translate(initialParams.get("lang"));

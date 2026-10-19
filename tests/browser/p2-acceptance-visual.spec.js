@@ -54,6 +54,7 @@ for(const width of screens){
    await expect(book.locator("#p2-asana-advanced")).not.toHaveAttribute("open",/./);
    await expect(book.locator("#p2-asana-advanced > summary")).toBeVisible();
    await expect(book.locator(".studio-library-stage")).toBeVisible();
+   await expect(studio.locator(".studio-entrance")).toBeHidden();
    await expect(page.locator("#movement-stage")).toBeHidden();
    await book.evaluate(el=>el.scrollIntoView({behavior:"instant",block:"start"}));
    if(width<=375){

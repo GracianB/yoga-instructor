@@ -554,3 +554,13 @@ body[data-asana-book-visible="true"] .sanctuary-dock:has(.p2-dock-expand){displa
  #studio-asana-library .studio-library-choices{display:flex!important;flex-direction:column!important}
  #studio-asana-library .p2-asana-advanced{order:-1}
 }
+
+/* P2: studying a pose is a focused screen, not the mode chooser plus a second
+   title plus the book. The back-to-session button remains available. */
+#instructor-flow[data-p2-book="open"] > .instructor-flow-head,
+#instructor-flow[data-p2-book="open"] > .studio-entrance{
+  display:none!important;
+}
+#instructor-flow[data-p2-book="open"] #studio-asana-library{
+  scroll-margin-top:calc(var(--header,68px) + 14px);
+}

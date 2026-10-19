@@ -52,8 +52,14 @@ const expected=[
     .map(file=>({name:file.path,digest:file.sha256}))
 ];
 const files=expected.map(file=>file.name);
-const expectedArtRef = expectedIndex.match(/yin-yang-art\.js\?v=[^"']+/)?.[0];
-if (!expectedArtRef) throw Error('No versioned Yin/Yang art reference in release HTML');
+// Check the real PUBLIC portfolio rather than the hidden experimental art.
+const publicScriptAllowlist=['runtime.js','boot.js','i18n.js','main.js','p2-navigation.js'];
+const actualPublicScripts=[...expectedIndex.matchAll(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"/g)].map(m=>m[1]);
+if(JSON.stringify(actualPublicScripts)!==JSON.stringify(publicScriptAllowlist))
+  throw Error('Unexpected public portfolio script(s): '+actualPublicScripts.join(', '));
+for(const id of ['instructor-flow','studio-asana-library','ritual','campo','soundtrack']){
+  if(expectedIndex.includes('id="'+id+'"'))throw Error('Retired public module survived build: '+id);
+}
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 const digest = data => createHash('sha256').update(data).digest('hex');
 const readPublished = async (name, attempt) => {
@@ -86,13 +92,7 @@ for (let attempt = 1; attempt <= attempts; attempt++) {
           problems.push(file.name + ': content mismatch (' + actual.slice(0, 12) + ' != ' + file.digest.slice(0, 12) + ')');
           continue;
         }
-        if (file.name === 'index.html') {
-          const html = Buffer.from(published).toString('utf8');
-          if (!html.includes(expectedArtRef)) {
-            problems.push('index.html: missing expected art reference ' + expectedArtRef);
-            continue;
-          }
-        }
+        // The exact SHA-256 match above verifies every byte of index.html.
         pending.delete(file.name);
       } catch (error) {
         problems.push(file.name + ': ' + error.message);

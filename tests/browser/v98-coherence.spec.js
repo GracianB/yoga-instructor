@@ -21,7 +21,10 @@ await panel.locator(".v98-preferences").evaluate(x=>x.click());
 await expect(page.locator("#studio-preferences")).toHaveAttribute("open","");
 });
 test("V98 remains horizontally contained at 320 and 375 px",async({page})=>{
+// Two full navigations on Firefox CI need room for complete script initialization.
+test.setTimeout(70000);
 for(const width of [320,375]){await page.setViewportSize({width,height:812});await page.goto("/");
+await expect(page.locator("#studio-readiness")).toHaveCount(1,{timeout:15000});
 await expect(page.locator("#studio-readiness")).toBeVisible();
 const overflow=await page.locator("#studio-readiness").evaluate(el=>el.scrollWidth-el.clientWidth);
 expect(overflow).toBeLessThanOrEqual(1);}

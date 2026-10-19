@@ -6093,3 +6093,16 @@ html:not([data-lang="en"]) [data-p2-lang="en"],html[data-lang="en"] [data-p2-lan
   padding-top:calc(var(--lotus-band) + 28px)!important;
  }
 }
+
+/* P2 mobile: destinations read as a compact index, not five presentation slides. */
+@media(max-width:760px){
+ .p2-explore{margin-top:12px;margin-bottom:36px}
+ .p2-explore-intro{margin-bottom:18px}
+ .p2-explore-intro h2{font-size:clamp(1.85rem,7vw,2.45rem)}
+ .p2-route-grid{gap:8px}
+ .p2-route,.p2-route-featured{min-height:0;padding:14px 44px 14px 16px;border-radius:14px;gap:3px}
+ .p2-route-index{display:none}
+ .p2-route strong{font-size:clamp(1.2rem,5vw,1.48rem)}
+ .p2-route small{font-size:12px;line-height:1.42;padding-right:0;max-width:100%;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+ .p2-route-arrow{right:16px;top:50%;transform:translateY(-50%)}
+}

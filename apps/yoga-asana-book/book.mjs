@@ -80,12 +80,12 @@ for(const b of $$("[data-lang]"))b.addEventListener("click",()=>translate(b.data
 $("#previous").addEventListener("click",()=>next(-1));
 $("#next").addEventListener("click",()=>next(1));
 $("#pose-list").addEventListener("keydown",event=>{
- if(!["ArrowDown","ArrowUp","Home","End"].includes(event.key))return;
+ if(!["ArrowDown","ArrowUp","ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;
  const list=visible(),target=event.target.closest("button[data-pose-id]");
  if(!target)return;
  event.preventDefault();
  const at=list.findIndex(p=>p.id===target.dataset.poseId);
- const index=event.key==="Home"?0:event.key==="End"?list.length-1:(at+(event.key==="ArrowDown"?1:-1)+list.length)%list.length;
+ const index=event.key==="Home"?0:event.key==="End"?list.length-1:(at+(["ArrowDown","ArrowRight"].includes(event.key)?1:-1)+list.length)%list.length;
  choose(list[index].id);
  $("#pose-list").querySelector('[data-pose-id="'+list[index].id+'"]').focus();
 });

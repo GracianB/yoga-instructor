@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 import {MOVEMENT_STEPS,BREATH_PATTERNS,GUIDED_VIDEOS,BOOK_POSES,movementFrame,breathFrame,sumMovementSeconds,SessionClock} from "../apps/shared/core.mjs";
-import {FIGURE_POSES} from "../apps/shared/figure.mjs";
+import {FIGURE_POSES,figurePoseFrame} from "../apps/shared/figure.mjs";
 const read=path=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 
 test("App V1: Movement has exactly three fixed actions, no editor or customization",()=>{
@@ -157,4 +157,28 @@ test("Apps V1.3: active tab is a real tabpanel and live regions avoid repeated i
  assert.match(source,/setAttribute\("aria-labelledby","tab-"\+mode\)/);
  assert.match(source,/if\(node\.textContent!==value\)node\.textContent=value/);
  assert.match(source,/if\(node\.innerHTML!==value\)node\.innerHTML=value/);
+});
+
+test("Apps V1.4: fixed movement transitions interpolate real path geometry",()=>{
+ const start=figurePoseFrame("mountain","fold",0),middle=figurePoseFrame("mountain","fold",.5),end=figurePoseFrame("mountain","fold",1);
+ assert.notEqual(start.torso,middle.torso);
+ assert.notEqual(middle.torso,end.torso);
+ assert.deepEqual(middle.head,[174.5,159]);
+ assert.equal(start.head[0],210);
+ assert.equal(end.head[0],139);
+ for(const key of ["torso","leftArm","rightArm","leftLeg","rightLeg"]){
+  assert.match(middle[key],/^M[-\d. ]+Q[-\d. ]+$/);
+ }
+ assert.deepEqual(figurePoseFrame("mountain","mountain",.7).chest,[210,204,43,58]);
+ const app=read("apps/yoga-practice/app.mjs");
+ assert.match(app,/setFigureTransition/);
+ assert.match(app,/f\.elapsed<12/);
+});
+test("Apps V1.4: shareable links remain strictly manual, without autoplay",()=>{
+ const app=read("apps/yoga-practice/app.mjs"),book=read("apps/yoga-asana-book/book.mjs");
+ assert.match(app,/const incoming=new URLSearchParams\(location\.search\)/);
+ assert.match(app,/history\.replaceState/);
+ assert.match(book,/initialParams\.get\("lang"\)/);
+ assert.match(book,/aria-current/);
+ assert.doesNotMatch(app,/sessionStorage|localStorage|autoplay|speechSynthesis/);
 });

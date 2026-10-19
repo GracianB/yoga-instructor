@@ -73,7 +73,7 @@ test("App V1: one monotonic clock starts, pauses, resumes, finishes and resets",
 
 test("App V1: one human figure reused by all three modes and by the Asana Book",()=>{
  for(const p of BOOK_POSES)assert.ok(FIGURE_POSES.includes(p.pose),p.id);
- assert.equal(BOOK_POSES.length,6);
+ assert.equal(BOOK_POSES.length,10);
  assert.equal(new Set(BOOK_POSES.map(x=>x.id)).size,6);
  for(const p of BOOK_POSES)for(const key of ["es","en"]){
   assert.ok(p.name[key]&&p.cue[key]&&p.support[key],p.id+" "+key);
@@ -82,7 +82,7 @@ test("App V1: one human figure reused by all three modes and by the Asana Book",
  assert.match(figure,/createFigure/);
  assert.match(practice,/import \{createFigure,setFigurePose,setFigureBreath\}/);
  assert.match(book,/import \{createFigure,setFigurePose,setFigureBreath\}/);
- for(const id of ["mountain","fold","child","tree","warrior","seated"])assert.ok(figure.includes(id+":{"));
+ for(const id of ["mountain","fold","child","tree","warrior","seated","triangle","downward","butterfly","sphinx"])assert.ok(figure.includes(id+":{"));
 });
 
 test("App V1: guided meditation uses verified explicit YouTube links, never autoplay",()=>{
@@ -121,4 +121,21 @@ test("App V1: human motion is paced, pose-specific and stops with the main pract
  assert.match(style,/data-active="true"/);
  assert.match(style,/prefers-reduced-motion:reduce/);
  assert.match(app,/data-active",String\(snapshot\.status==="running"&&!guided\)/);
+});
+
+test("Apps V1.1: ten distinct editorial book poses use shared anatomical shapes and stable deep links",()=>{
+ assert.equal(BOOK_POSES.length,10);
+ assert.equal(new Set(BOOK_POSES.map(p=>p.id)).size,BOOK_POSES.length);
+ for(const pose of BOOK_POSES){
+  assert.ok(FIGURE_POSES.includes(pose.pose),pose.id);
+  assert.match(pose.sanskrit,/\S/);
+ }
+ const practice=read("apps/yoga-practice/app.mjs"),book=read("apps/yoga-asana-book/book.mjs"),figure=read("apps/shared/figure.mjs");
+ assert.match(practice,/pose-book-link"\)\.href="\.\.\/yoga-asana-book\/\?pose="/);
+ assert.match(book,/new URLSearchParams\(location\.search\)/);
+ assert.match(book,/BOOK_POSES\.find\(p=>p\.id===sharedPose\)/);
+ assert.match(book,/history\.replaceState/);
+ for(const id of ["triangle","downward","butterfly","sphinx"])assert.ok(figure.includes(id+":{"));
+ assert.match(practice,/now-lastPaint>=100/);
+ assert.match(read("apps/yoga-practice/index.html"),/id="pose-book-link"/);
 });

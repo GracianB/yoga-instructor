@@ -55,3 +55,11 @@ footer{display:flex;justify-content:space-between;gap:20px}
 @media(max-width:900px){.intro{grid-template-columns:1fr;gap:10px}.intro-side{border-left:0;border-top:1px solid var(--line);padding:14px 0 0}.stage{grid-template-columns:1fr}#figure-root{min-height:260px}.visual-stage{min-height:350px}.option-panel{grid-template-columns:1fr;gap:18px}}
 @media(max-width:560px){.intro{padding-top:45px}.mode-nav{gap:6px}.mode-nav button{min-height:104px;padding:13px 10px}.mode-nav strong{font-size:18px}.mode-nav small{font-size:10px}.stage{padding:18px}.visual-stage{padding:13px}#figure-root{min-height:235px}.option-panel{padding:18px}.rhythm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}footer{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.mode-nav button:hover{transform:none}}
+
+.pose-book-link{
+ display:inline-flex;align-self:flex-start;align-items:center;
+ gap:8px;margin-top:16px;padding-bottom:4px;
+ color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line);
+ font-size:12px;font-weight:650;letter-spacing:.01em;
+}
+.pose-book-link:hover{border-bottom-color:var(--accent)}

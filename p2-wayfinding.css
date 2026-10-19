@@ -596,3 +596,15 @@ body[data-asana-book-visible="true"] .sanctuary-dock:has(.p2-dock-expand){displa
 /* P2 first visit is immediately useful, never a non-dismissible cover slide. */
 html.intro-on .zintro,
 html.intro-done .zintro{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+/* V81 legacy assumes pale paper even on dark mode; the focused mobile book
+   uses the actual dark background, so its family heading needs light text. */
+@media(max-width:600px){
+ html[data-theme="dark"] #studio-asana-library .v81-familynote,
+ html[data-theme="dark"] #studio-asana-library .v81-familynote strong{
+  color:var(--ink)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .v81-familynote span{
+  color:var(--muted)!important;
+ }
+}

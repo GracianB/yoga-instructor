@@ -1,0 +1,34 @@
+name: Yoga P2 Cross-browser Regression
+on:
+  pull_request:
+    paths:
+      - 'p2-*.js'
+      - 'p2-*.css'
+      - 'tests/browser/**'
+      - 'index.html'
+      - '.github/workflows/p2-regression.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  focused:
+    name: P2 focused / ${{ matrix.browser }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    strategy:
+      fail-fast: false
+      matrix:
+        browser: [chromium, firefox, webkit]
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - run: npx playwright install --with-deps ${{ matrix.browser }}
+      - name: Verify opt-in legacy behavior and keyboard safety
+        run: >-
+          npm run test:browser -- --project=${{ matrix.browser }} --workers=2
+          --grep "reduced motion, accessibility and document links|ritual persistence, breathing|D4 audio|V68: twelve distinct|P1 ·|P2 extra portfolio|V94 chooses|V94 rejects|V95 remembers|P4 ·|V97 after moving"

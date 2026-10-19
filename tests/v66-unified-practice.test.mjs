@@ -12,11 +12,11 @@ const nila=read('movement-guardian-v37.js');
 const breath=read('studio-breath-dragon.js');
 const uma=read('studio-meditation-guardian-v42.js');
 
-test('V66/V72: three guided modes share a studio; the book is a separate chapter',()=>{
+test('V66/V72: three guided modes share a studio; the book is an optional studio reference',()=>{
  assert.match(html,/id="instructor-flow" data-studio-mode="asanas" data-movement-view="sequence"/);
  assert.doesNotMatch(html,/class="studio-v66-submodes"/);
  assert.match(js,/workspace\.append\(sequence,guided\)/);
- assert.match(lib,/root\.before\(section\)/);
+ assert.match(lib,/root\.appendChild\(section\)/);
  assert.match(lib,/studio-asana-book/);
  assert.ok(!lib.includes('root.dataset.movementView||"sequence"'));
 });

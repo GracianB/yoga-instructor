@@ -1,41 +1,38 @@
 const {test,expect}=require('@playwright/test');
 
-test('V72: the twelve-asana book precedes the studio and Movement only has a sequence',async({page})=>{
+test('P2: one Movement studio and a closed optional twelve-asana reference',async({page})=>{
  await page.goto('/');
  const book=page.locator('#studio-asana-library');
  const root=page.locator('#instructor-flow');
  await expect(book).toBeVisible();
- await expect(book).toHaveAttribute('data-book-standalone','true');
+ await expect(book).toHaveAttribute('data-book-standalone','false');
  await expect(book.locator('button[data-library-pose]')).toHaveCount(12);
  await expect(root.locator('.studio-v66-submodes')).toHaveCount(0);
  await expect(root.locator('#movement-stage')).toBeVisible();
- await expect(root.locator('.studio-plan')).toBeVisible();
- await expect(root.locator('.studio-adaptation')).toBeVisible();
- expect(await page.evaluate(()=>{
-  const book=document.querySelector('#studio-asana-library');
-  const root=document.querySelector('#instructor-flow');
-  return !root.contains(book)&&Boolean(book.compareDocumentPosition(root)&Node.DOCUMENT_POSITION_FOLLOWING);
- })).toBe(true);
- await expect(book.locator('.studio-book-practice-link')).toHaveAttribute('href','#instructor-flow');
+ await expect(book.locator('.studio-library-stage')).toBeHidden();
+ expect(await page.evaluate(()=>document.getElementById('instructor-flow').contains(document.getElementById('studio-asana-library')))).toBe(true);
+ await book.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await expect(book.locator('.studio-library-stage')).toBeVisible();
+ await expect(root.locator('#movement-stage')).toBeHidden();
+ await book.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await expect(root.locator('#movement-stage')).toBeVisible();
 });
 
-test('V72: Breath and Meditation retain the shared workspace while the book remains independent',async({page})=>{
+test('P2: Breathing and Meditation keep one workspace; book is unavailable in unrelated modes',async({page})=>{
  await page.goto('/');
  const root=page.locator('#instructor-flow');
  const space=root.locator('#studio-v66-workspace');
- const book=page.locator('#studio-asana-library');
+ const book=root.locator('#studio-asana-library');
  await expect(space.locator('> #movement-stage')).toHaveCount(1);
  await expect(space.locator('> #studio-guided')).toHaveCount(1);
- await expect(space.locator('> #studio-asana-library')).toHaveCount(0);
  await page.locator('button[data-studio-mode="breath"]').evaluate(el=>el.click());
  await expect(root).toHaveAttribute('data-studio-mode','breath');
  await expect(space.locator('.studio-breath-dragon')).toBeVisible();
- await expect(book).toBeVisible();
+ await expect(book).toBeHidden();
  await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
  await expect(root).toHaveAttribute('data-studio-mode','meditation');
  await expect(space.locator('.meditation-guardian')).toBeVisible();
- await expect(space.locator('.studio-breath-dragon')).toBeHidden();
- await expect(book).toBeVisible();
+ await expect(book).toBeHidden();
  await page.locator('button[data-studio-mode="asanas"]').evaluate(el=>el.click());
  await expect(root.locator('#movement-stage')).toBeVisible();
 });

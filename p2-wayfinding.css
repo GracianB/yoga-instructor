@@ -1,0 +1,653 @@
+/* P2 / Visitor clarity. Applied last, keeps studio/anatomy engines untouched.
+   One inviting entrance, a working route selector and a compact section index. */
+#inicio.hero{
+  min-height:min(760px,calc(100svh - var(--header,68px)))!important;
+  padding-block:clamp(28px,5vw,72px)!important;
+}
+#inicio .hero-inner{max-width:760px}
+#inicio .hero-inner h1{
+  font-size:clamp(2.8rem,6.8vw,5.8rem)!important;
+  line-height:1.03!important;
+}
+#inicio .hero-lead{max-width:59ch!important;line-height:1.65!important}
+#inicio .hero-actions{gap:12px;align-items:center}
+#inicio .hero-actions .btn{
+  min-height:48px;
+  border-radius:999px;
+  padding-inline:clamp(18px,2.3vw,28px);
+}
+#inicio .hero-stats{
+  grid-template-columns:repeat(4,minmax(0,1fr))!important;
+  max-width:760px;
+}
+#inicio .hero-stats li{background:transparent!important;border-color:transparent!important;box-shadow:none!important;padding:8px 0!important}
+#inicio .hero-stats li:hover{background:transparent!important;box-shadow:none!important}
+#inicio .hero-scroll-cue{bottom:14px}
+#orientacion.v80-gateway{
+  padding-block:clamp(36px,5vw,74px);
+}
+#orientacion .v80-header{
+  margin:clamp(22px,3vw,40px) auto;
+  align-items:end;
+}
+#orientacion h2{font-size:clamp(2.15rem,4.2vw,4.6rem)}
+#orientacion .v80-shell{grid-template-columns:minmax(240px,.43fr) minmax(0,.57fr);gap:16px}
+#orientacion .v80-options{gap:8px}
+#orientacion .v80-options button{
+  padding:clamp(12px,1.5vw,19px);
+  border-radius:16px;
+  min-height:86px;
+}
+#orientacion .v80-options button[aria-pressed="true"]{padding:calc(clamp(12px,1.5vw,19px) - 1px)}
+#orientacion .v80-choice-body{gap:3px}
+#orientacion .v80-choice-body strong{font-size:clamp(1.08rem,1.7vw,1.45rem)}
+#orientacion .v80-route-content{
+  border-radius:20px;
+  padding:clamp(20px,2.5vw,32px);
+}
+#orientacion .v80-route-art{height:70px;margin:8px 0 0;opacity:.8}
+#orientacion #v80-route-title{font-size:clamp(1.55rem,2.5vw,2.4rem);margin:10px 0}
+#orientacion #v80-route-description{margin-bottom:14px;line-height:1.55}
+#orientacion .v80-route-steps{margin-bottom:16px}
+#orientacion .v80-route-steps a{min-height:44px;padding:9px 4px}
+#atlas.v75-atlas{
+  padding:clamp(20px,3.2vw,42px) var(--pad,24px);
+  width:min(100%,1340px);
+}
+#atlas.v75-atlas::before{inset:8px 0;border-radius:16px}
+#atlas .v75-atlas-content{
+  display:block;
+  margin:0 0 clamp(12px,2vw,24px);
+}
+#atlas .v75-atlas-art,#atlas .v75-atlas-signature{display:none}
+#atlas .v75-overline{margin-bottom:7px}
+#atlas h2{
+  font-size:clamp(1.45rem,2.8vw,2.2rem);
+  line-height:1.12;
+  margin:0 0 8px;
+}
+#atlas h2 span,#atlas h2 em{display:inline}
+#atlas h2 em::before{content:" "}
+#atlas .v75-atlas-story>p{font-size:.88rem;line-height:1.55;max-width:78ch}
+#atlas .v75-atlas-nav{
+  border-radius:14px;
+  grid-template-columns:repeat(5,minmax(0,1fr));
+}
+#atlas .v75-atlas-nav a{
+  min-height:70px;
+  display:flex;
+  gap:8px;
+  align-items:center;
+  padding:12px clamp(8px,1.25vw,16px);
+}
+#atlas .v75-route-copy{gap:3px}
+#atlas .v75-route-copy b{font-size:clamp(.82rem,1.2vw,1rem);line-height:1.2}
+#atlas .v75-route-copy small{font-size:.68rem;line-height:1.3}
+#atlas .v75-route-arrow{margin-left:auto}
+#atlas .v75-atlas-bottom{display:none}
+#soundtrack.soundtrack-section{
+  border-top:1px solid var(--line);
+}
+#inicio .btn:focus-visible,#orientacion :is(a,button):focus-visible,
+#atlas .v75-atlas-nav a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+@media(max-width:910px){
+  #orientacion .v80-shell{grid-template-columns:1fr}
+  #orientacion .v80-options{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:none}
+  #orientacion .v80-options button{flex-direction:column;min-height:112px;align-items:flex-start}
+  #orientacion .v80-choice-arrow{display:none}
+  #atlas .v75-atlas-nav{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:620px){
+  #inicio.hero{min-height:auto!important;padding:40px var(--pad) 52px!important}
+  #inicio .hero-inner h1{font-size:clamp(2.6rem,10vw,4rem)!important}
+  #inicio .hero-stats{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+  #inicio .hero-actions{flex-direction:column;align-items:stretch}
+  #inicio .hero-actions .btn{width:100%}
+  #orientacion .v80-options{grid-template-columns:1fr}
+  #orientacion .v80-options button{flex-direction:row;min-height:68px;align-items:center}
+  #orientacion .v80-route-art{height:55px}
+  #atlas .v75-atlas-nav{grid-template-columns:1fr}
+  #atlas .v75-atlas-nav a{min-height:54px;border-right:0!important;border-top:1px solid var(--v75-divider)}
+  #atlas .v75-atlas-nav a:first-child{border-top:0}
+  #atlas .v75-route-copy small{display:none}
+  #atlas .v75-route-arrow{display:block}
+}
+@media(prefers-reduced-motion:reduce){
+  #orientacion *,#atlas *{scroll-behavior:auto!important;transition:none!important}
+}
+
+
+/* P2 / Editorial reduction, appended after the original wayfinding layer.
+   One primary room, a closed reference book, optional music and extras. */
+#inicio.hero{
+  max-width:1300px;
+  min-height:clamp(410px,69svh,650px)!important;
+  padding:clamp(44px,6vw,80px) var(--pad) clamp(54px,6vw,86px)!important;
+  overflow:visible;
+}
+#inicio .hero-inner{max-width:710px}
+#inicio .hero-inner h1{
+  font-size:clamp(3.25rem,8vw,6.5rem)!important;
+  line-height:1!important;
+  max-width:12ch!important;
+  letter-spacing:-.06em!important;
+}
+#inicio .hero-lead{
+  max-width:36ch!important;
+  font-size:clamp(.96rem,1.5vw,1.15rem)!important;
+  line-height:1.6!important;
+  margin-bottom:26px!important;
+}
+#inicio :is(.hero-stats,.hero-manifesto,.hero-rail,.hero-scroll-cue,.hero-breath-wave,.breath-caption,.hero-sparks,.mandala-parallax){
+  display:none!important;
+}
+#inicio .hero-stage{max-width:900px}
+#inicio .hero-actions{margin:0!important}
+#inicio .p2-lotus-focus{
+  position:absolute;
+  top:clamp(18px,9%,84px);
+  right:clamp(12px,6%,105px);
+  z-index:6;
+  width:clamp(84px,12vw,142px);
+  aspect-ratio:1;
+  padding:9px;
+  display:grid;
+  place-items:center;
+  overflow:visible;
+  border:1px solid color-mix(in srgb,var(--sage) 33%,transparent);
+  border-radius:50%;
+  background:color-mix(in srgb,var(--surface) 72%,transparent);
+  box-shadow:0 8px 24px rgba(24,46,34,.04);
+  color:var(--sage);
+  cursor:pointer;
+  transition:background .25s ease,box-shadow .25s ease,transform .25s ease;
+}
+#inicio .p2-lotus-focus .hero-mandala{
+  display:block!important;
+  position:static!important;
+  top:auto!important;right:auto!important;
+  width:100%!important;height:auto!important;
+  max-width:100%!important;
+  transform:none!important;
+  opacity:.78!important;
+  filter:none!important;
+  pointer-events:none;
+  transition:opacity .25s ease,filter .25s ease,transform .25s ease;
+}
+#inicio .p2-lotus-focus:is(:hover,:focus-visible){
+  background:color-mix(in srgb,var(--sage) 9%,var(--surface));
+  box-shadow:0 0 0 9px color-mix(in srgb,var(--sage) 10%,transparent),0 12px 32px color-mix(in srgb,var(--sage) 24%,transparent);
+  transform:translateY(-2px);
+}
+#inicio .p2-lotus-focus:is(:hover,:focus-visible) .hero-mandala{
+  opacity:1!important;
+  filter:drop-shadow(0 0 7px color-mix(in srgb,var(--sage) 45%,transparent))!important;
+  transform:scale(1.08)!important;
+}
+#inicio .p2-lotus-focus:focus-visible{outline:3px solid var(--sage);outline-offset:6px}
+#instructor-flow{scroll-margin-top:calc(var(--header,68px) + 14px)}
+#instructor-flow .studio-asana-library{
+  width:min(100%,1100px);
+  margin:clamp(14px,2vw,26px) auto!important;
+  padding:clamp(16px,2.2vw,26px)!important;
+  border-radius:20px!important;
+  border:1px solid var(--line)!important;
+  background:var(--surface)!important;
+  box-shadow:none!important;
+  color:var(--ink)!important;
+}
+#studio-asana-library .studio-library-heading{
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+#studio-asana-library .studio-library-heading h3{
+  color:var(--ink)!important;
+  font-size:clamp(1.25rem,2vw,1.7rem)!important;
+  margin:4px 0!important;
+}
+#studio-asana-library .studio-library-heading .studio-library-lead,
+#studio-asana-library .studio-library-heading .studio-library-eyebrow,
+#studio-asana-library .studio-library-heading :is(.studio-book-practice-link,.studio-library-dock-toggle){
+  display:none!important;
+}
+#studio-asana-library .p2-book-toggle{
+  margin-left:auto;min-height:44px;max-width:100%;
+  border:1px solid var(--line-strong);border-radius:999px;
+  background:var(--surface2);color:var(--ink);
+  padding:8px 18px;font-weight:650;font-size:.85rem;
+  cursor:pointer;
+}
+#studio-asana-library .p2-book-toggle:hover{border-color:var(--sage)}
+#studio-asana-library .p2-book-toggle:focus-visible{outline:3px solid var(--sage);outline-offset:4px}
+#studio-asana-library .p2-book-content{display:none}
+#studio-asana-library[data-p2-book-open="true"] .p2-book-content{display:block}
+#studio-asana-library[data-p2-book-open="true"] .studio-library-body{
+  display:grid;
+}
+#studio-asana-library[data-p2-book-open="true"] .p2-book-toggle{
+  background:var(--sage);color:var(--accent-ink);
+}
+#instructor-flow[data-p2-book="open"] #movement-stage{display:none!important}
+#instructor-flow .p2-book-content #movement-mini{
+  margin-top:clamp(16px,2vw,24px);
+}
+/* A support drawer rather than a third competing route/reproductor. */
+.p2-disclosure{
+  width:min(100% - 36px,1130px);
+  margin:clamp(15px,2.2vw,27px) auto;
+  border:1px solid var(--line);
+  border-radius:18px;
+  background:var(--surface);
+  color:var(--ink);
+  scroll-margin-top:calc(var(--header,68px) + 16px);
+  overflow:clip;
+}
+.p2-disclosure>summary{
+  cursor:pointer;min-height:54px;
+  display:flex;align-items:center;gap:12px;
+  padding:14px clamp(17px,2.2vw,26px);
+  font-weight:650;font-size:clamp(.91rem,1.4vw,1rem);
+  list-style:none;
+}
+.p2-disclosure>summary::-webkit-details-marker{display:none}
+.p2-disclosure>summary::after{content:"+";margin-left:auto;font-size:1.25rem;font-weight:400;color:var(--sage)}
+.p2-disclosure[open]>summary::after{content:"−"}
+.p2-disclosure>summary:hover{background:var(--surface2)}
+.p2-disclosure>summary:focus-visible{outline:3px solid var(--sage);outline-offset:-4px}
+.p2-audio #soundtrack{margin:0!important;max-width:100%;padding:clamp(14px,3vw,30px)!important}
+.p2-extras{margin-block:clamp(35px,5vw,66px)!important}
+.p2-extras .p2-extras-note{margin:-2px 25px 14px;color:var(--muted);font-size:.8rem}
+.p2-extras:not([open]) .p2-extras-note{display:none}
+.p2-extras>section{max-width:100%;margin-inline:auto}
+#instructor-flow+.p2-audio{margin-top:0}
+#portfolio,#casos,#trayectoria,#preguntas,#contacto{scroll-margin-top:calc(var(--header,68px) + 16px)}
+@media(max-width:820px){
+ #inicio.hero{min-height:clamp(380px,64svh,560px)!important}
+ #inicio .hero-stage{padding-top:clamp(55px,9vw,84px)}
+ #inicio .p2-lotus-focus{right:var(--pad);top:16px;width:100px}
+ #studio-asana-library .studio-library-body{grid-template-columns:1fr}
+}
+@media(max-width:620px){
+ #inicio.hero{min-height:430px!important;padding-block:35px 55px!important}
+ #inicio .hero-stage{padding-top:85px}
+ #inicio .hero-inner h1{font-size:clamp(2.9rem,12vw,4.6rem)!important}
+ #inicio .p2-lotus-focus{width:76px;top:12px}
+ #studio-asana-library .studio-library-heading{display:grid;grid-template-columns:1fr}
+ #studio-asana-library .p2-book-toggle{margin-left:0;width:100%}
+ .p2-disclosure{width:calc(100% - 24px)}
+}
+@media(prefers-reduced-motion:reduce){
+ #inicio .p2-lotus-focus,#inicio .p2-lotus-focus .hero-mandala{
+  transition:none!important;transform:none!important;animation:none!important;
+ }
+}
+
+
+/* One heading, three modes, not another lesson before the practice. */
+#instructor-flow .instructor-flow-head{margin-bottom:clamp(12px,2vw,24px)}
+#instructor-flow .instructor-flow-head .kicker,
+#instructor-flow .instructor-flow-head .about-lead,
+#instructor-flow .studio-entrance .studio-intro{display:none!important}
+#instructor-flow .instructor-flow-head h2{
+ font-size:clamp(2.2rem,5vw,4.2rem)!important;
+ line-height:1.04;
+ max-width:16ch;
+ margin:0!important;
+}
+#instructor-flow .studio-modes{margin-top:0!important}
+#instructor-flow[data-studio-mode="breath"] #studio-asana-library,
+#instructor-flow[data-studio-mode="meditation"] #studio-asana-library{display:none!important}
+#portfolio .p73-journey,
+#portfolio .p73-method{display:none!important}
+#portfolio .p73-story{grid-template-columns:1fr!important;max-width:960px;margin-inline:auto}
+#portfolio .p73-manifesto{width:100%}
+#portfolio .p73-heading{margin-bottom:clamp(18px,3vw,34px)}
+
+/* P2 music uses exactly one visible transport and an optional song chooser. */
+#p2-audio .soundtrack-intro,
+#p2-audio #playlist-origin,
+#p2-audio .music-playlist .music-controls,
+#p2-audio .music-playlist .music-status{display:none!important}
+#p2-audio .focus-player{max-width:980px;margin:auto}
+#p2-audio .music-playlist{margin-top:clamp(8px,1.5vw,16px)}
+#p2-audio .music-playlist>summary{cursor:pointer;min-height:44px}
+#p2-audio .music-tracks button{min-height:44px}
+#p2-audio .music-playlist>summary:focus-visible,
+#p2-audio .music-tracks button:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+
+/* P2 overrides the legacy V66 rule that hid the now-integrated book whenever
+   Movement used its canonical sequence. Do not conceal a requested reference. */
+#instructor-flow[data-studio-mode="asanas"][data-movement-view="sequence"] #studio-asana-library.studio-asana-book{
+  display:block!important;
+}
+
+
+/* P2 visual audit: the empty cinematic runway should not delay the app. */
+#inicio.hero{
+ min-height:0!important;
+ height:auto!important;
+ max-width:none!important;
+ padding:clamp(45px,7vh,85px) var(--pad) clamp(45px,7vh,85px)!important;
+}
+#inicio .hero-stage{
+ min-height:0!important;height:auto!important;max-width:1080px!important;
+ padding:0!important;margin:0 auto!important;
+}
+#inicio .hero-inner{
+ min-height:0!important;padding:0!important;
+ transform:none!important;
+}
+#inicio .hero-inner h1{max-width:15ch!important;line-height:1.02!important}
+#inicio .hero-lead{max-width:38ch!important}
+#inicio .hero-actions{flex-direction:row!important;align-items:center!important;gap:10px!important}
+#inicio .hero-actions .btn{width:auto!important;min-width:124px!important;margin:0!important}
+#inicio .p2-lotus-focus{top:clamp(15px,9%,58px)!important}
+#inicio.hero .hero-atmosphere,
+#inicio.hero .hero-halo{pointer-events:none}
+
+/* Collapsible corner controls, not a giant floating audio/respiration card. */
+.sanctuary-dock:has(.p2-dock-expand){
+ left:auto!important;right:clamp(12px,2.4vw,30px)!important;
+ bottom:clamp(12px,2.4vw,25px)!important;
+ width:auto!important;max-width:min(360px,calc(100vw - 24px))!important;
+ min-height:48px!important;
+ padding:6px!important;
+ display:flex!important;align-items:center!important;gap:6px!important;
+ border-radius:24px!important;
+ box-shadow:0 10px 25px rgba(0,0,0,.15)!important;
+ backdrop-filter:blur(16px);
+}
+.sanctuary-dock .p2-dock-expand{
+ display:grid;place-items:center;flex:0 0 42px;
+ width:42px;height:42px;min-height:42px;
+ border-radius:17px;border:1px solid currentColor;
+ background:transparent;color:inherit;font-size:26px;font-weight:350;line-height:1;
+ cursor:pointer;touch-action:manipulation;
+}
+.sanctuary-dock .p2-dock-expand:focus-visible{
+ outline:3px solid var(--sage);outline-offset:3px;
+}
+.sanctuary-dock:has(.p2-dock-expand) .sanctuary-breath{
+ flex:0 0 42px!important;min-width:42px!important;width:42px!important;
+ height:42px!important;min-height:42px!important;padding:4px!important;
+ border:0!important;display:grid!important;place-items:center!important;
+}
+.sanctuary-dock:has(.p2-dock-expand) .sanctuary-breath .breath-copy{display:none!important}
+.sanctuary-dock:has(.p2-dock-expand) .sanctuary-breath .breath-ring{
+ width:32px!important;height:32px!important;margin:0!important;
+}
+.sanctuary-dock[data-p2-open="false"] .sanctuary-dock-tools{display:none!important}
+.sanctuary-dock[data-p2-open="true"]{
+ flex-wrap:wrap!important;width:min(320px,calc(100vw - 24px))!important;
+ border-radius:19px!important;
+}
+.sanctuary-dock[data-p2-open="true"] .sanctuary-dock-tools{
+ display:flex!important;flex:1 1 100%;align-items:center;gap:8px;
+ border:0!important;padding:4px 6px 3px!important;
+}
+.sanctuary-dock[data-p2-open="true"] .sanctuary-dock-tools>button{
+ flex:1 1 0;min-height:44px!important;
+}
+.sanctuary-dock[data-p2-open="true"] .sanctuary-section{display:none!important}
+body[data-asana-book-visible="true"] .sanctuary-dock:has(.p2-dock-expand){display:none!important}
+
+/* The first thing in the reference book is Nila, not another syllabus. */
+#studio-asana-library .studio-library-heading .studio-library-eyebrow,
+#studio-asana-library .v81-intro,
+#studio-asana-library .studio-library-foot{display:none!important}
+#studio-asana-library .studio-library-heading h3{font-size:clamp(1.2rem,1.8vw,1.6rem)!important}
+#studio-asana-library .v81-tracks{gap:6px!important}
+#studio-asana-library .v81-tracks button{min-height:48px!important}
+#studio-asana-library .studio-library-body{gap:clamp(8px,1.4vw,18px)!important}
+#studio-asana-library .studio-library-coaching{margin-top:14px!important}
+
+/* On mobile, put the live drawing ahead of route filters and metadata. */
+@media(max-width:620px){
+ #inicio.hero{height:auto!important;min-height:0!important;
+   padding:28px 18px 35px!important}
+ #inicio .hero-stage{min-height:0!important;padding:62px 0 0!important}
+ #inicio .hero-inner h1{font-size:clamp(2.65rem,11vw,4rem)!important}
+ #inicio .hero-lead{margin:10px 0 18px!important;font-size:.92rem!important;line-height:1.52!important}
+ #inicio .hero-actions{display:flex!important;flex-direction:row!important;justify-content:flex-start!important;gap:9px!important}
+ #inicio .hero-actions .btn{width:auto!important;min-width:0!important;
+   min-height:44px!important;padding:8px 17px!important;font-size:.72rem!important}
+ #inicio .p2-lotus-focus{width:67px!important;top:14px!important;right:18px!important}
+ #instructor-flow .instructor-flow-head h2{font-size:clamp(2rem,9vw,3rem)!important}
+ #studio-asana-library .studio-library-body{
+  display:flex!important;flex-direction:column!important;gap:12px!important
+ }
+ #studio-asana-library .studio-library-display{order:0}
+ #studio-asana-library .studio-library-choices{order:1}
+ #studio-asana-library .v81-tracks{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ #studio-asana-library .v81-tracks button{padding:8px!important;font-size:.72rem}
+ #studio-asana-library .v81-tracks small{display:none}
+ #studio-asana-library .studio-library-choices button[data-library-pose]{
+  min-height:42px!important;padding:8px 10px!important;
+ }
+ .sanctuary-dock:has(.p2-dock-expand){bottom:10px!important;right:10px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .sanctuary-dock:has(.p2-dock-expand),.sanctuary-dock .p2-dock-expand{
+  transition:none!important;animation:none!important
+ }
+}
+
+/* P2 · final measured refinements following source screenshots:
+   the book presents one Nila before filters; mobile navigation stays one row. */
+.sanctuary-dock{
+  left:auto!important;right:clamp(9px,2vw,20px)!important;bottom:clamp(9px,2vw,20px)!important;
+  width:min(215px,calc(100vw - 20px))!important;max-width:215px!important;
+  padding:5px!important;gap:5px!important;display:flex!important;align-items:center!important;
+  border-radius:999px!important;box-shadow:0 6px 26px rgba(0,0,0,.16)!important;
+}
+.sanctuary-dock .sanctuary-breath{
+  width:auto!important;flex:1 1 auto!important;min-width:0;min-height:40px!important;
+  padding:3px 5px!important;gap:7px!important;
+  display:flex!important;align-items:center!important;
+}
+.sanctuary-dock .breath-ring{width:29px!important;height:29px!important;flex:0 0 29px!important}
+.sanctuary-dock .breath-copy{min-width:0;gap:0}
+.sanctuary-dock .breath-copy strong{font-size:13px!important;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sanctuary-dock :is(.breath-kicker,.breath-time,.sanctuary-section,.sanctuary-music){display:none!important}
+.sanctuary-dock .sanctuary-dock-tools{
+ display:flex!important;align-items:center!important;flex:0 0 auto!important;
+ gap:0!important;padding:0!important;border:0!important;
+}
+.sanctuary-dock .sanctuary-quiet{
+ width:32px;min-width:32px;min-height:32px!important;
+ padding:0!important;border-radius:50%;font-size:0!important;
+ display:grid;place-items:center;
+}
+.sanctuary-dock .sanctuary-quiet::after{content:"◌";font-size:19px;line-height:1;color:var(--ink)}
+.sanctuary-dock .sanctuary-quiet[aria-pressed="true"]::after{content:"●";font-size:13px}
+@media(max-width:600px){
+ :root{--header:60px}
+ .site-header{
+  --header:60px!important;min-height:60px!important;max-height:60px!important;
+  display:flex!important;flex-wrap:nowrap!important;
+  padding:5px 8px!important;gap:6px!important;
+ }
+ .site-header .brand{
+  flex:1 1 auto!important;min-width:0!important;max-width:none!important;
+  gap:5px!important;overflow:visible!important;
+ }
+ .site-header .brand-mark{
+  width:32px!important;height:32px!important;flex:0 0 32px!important;
+  font-size:10px!important;
+ }
+ .site-header .brand-text{min-width:0!important}
+ .site-header .brand-text b{font-size:9px!important;letter-spacing:.09em!important}
+ .site-header .brand-text small{display:none!important}
+ .site-header .header-actions{
+  display:flex!important;flex:0 0 auto!important;min-width:0!important;
+  width:auto!important;gap:4px!important;justify-content:flex-end!important;
+ }
+ .site-header .header-actions .seg-btn{min-width:29px!important;min-height:34px!important;padding:0 6px!important;font-size:10px!important}
+ .site-header .header-actions .menu-toggle{
+  width:36px!important;height:36px!important;min-width:36px!important;
+  border-radius:10px!important;
+ }
+ #inicio.hero{
+  min-height:clamp(365px,57svh,420px)!important;
+  max-height:none!important;
+  padding:18px var(--pad) 30px!important;
+  align-content:center!important;
+ }
+ #inicio .hero-stage{padding-top:48px!important}
+ #inicio .p2-lotus-focus{top:11px!important;right:var(--pad)!important;width:69px!important}
+ #inicio .hero-inner h1{font-size:clamp(2.8rem,11vw,4rem)!important}
+ #inicio .hero-lead{font-size:.93rem!important;line-height:1.5!important;max-width:32ch!important}
+ #inicio .hero-actions{display:flex!important;flex-direction:row!important;flex-wrap:wrap!important;gap:9px!important;justify-content:flex-start!important}
+ #inicio .hero-actions .btn{width:auto!important;min-height:44px!important;padding-inline:17px!important}
+ #studio-asana-library .studio-library-body{
+  display:flex!important;flex-direction:column!important;
+  align-items:stretch!important;gap:9px!important;
+ }
+ #studio-asana-library .studio-library-display{display:contents!important}
+ #studio-asana-library .studio-library-stage{
+  order:0;min-height:265px!important;height:265px!important;
+  margin-bottom:2px!important;background:var(--surface2);
+ }
+ #studio-asana-library .studio-library-name{order:1;margin:0!important}
+ #studio-asana-library .studio-library-cue{order:2;margin:0!important}
+ #studio-asana-library .studio-library-ground{order:3;margin:0!important}
+ #studio-asana-library .studio-library-choices{
+  order:4;max-height:none!important;overflow:visible!important;
+  padding:2px!important;gap:5px!important;
+ }
+ #studio-asana-library .studio-library-coaching{order:5;margin-top:12px!important}
+ #studio-asana-library .v81-intro h4{font-size:1.1rem!important;line-height:1.15!important;margin:10px 0 2px!important}
+ #studio-asana-library .v81-intro p{font-size:.8rem!important;margin:0 0 9px!important}
+ #studio-asana-library .v81-tracks{gap:6px!important}
+ #studio-asana-library .studio-library-choices button[data-library-pose]{
+  min-height:42px!important;padding:8px 11px!important;
+ }
+ #studio-asana-library .studio-library-heading{gap:4px!important}
+ #studio-asana-library .studio-library-heading h3{font-size:1.4rem!important}
+ #studio-asana-library .studio-library-body .studio-library-stage .yy-pose{overflow:visible}
+}
+@media(max-width:360px){
+ .site-header .brand-text b{font-size:8px!important;letter-spacing:.07em!important}
+ .site-header .header-actions .seg-btn{min-width:27px!important;padding:0 4px!important}
+ .site-header .header-actions .menu-toggle{width:34px!important;min-width:34px!important}
+ #inicio.hero{min-height:370px!important}
+}
+
+/* Keep advanced learning tools fully operable without a duplicate atlas. */
+#studio-asana-library .p2-asana-advanced{
+ grid-column:1/-1;width:100%;margin:8px 0;
+ border:1px solid var(--line);border-radius:13px;background:var(--surface2);
+}
+#studio-asana-library .p2-asana-advanced>summary{
+ cursor:pointer;min-height:44px;display:flex;align-items:center;gap:9px;
+ padding:11px 14px;list-style:none;
+ font:600 .85rem/1.4 'Inter',sans-serif;color:var(--ink);
+}
+#studio-asana-library .p2-asana-advanced>summary::-webkit-details-marker{display:none}
+#studio-asana-library .p2-asana-advanced>summary::after{content:"+";font-size:1.18rem;margin-left:auto}
+#studio-asana-library .p2-asana-advanced[open]>summary::after{content:"−"}
+#studio-asana-library .p2-asana-advanced>summary:focus-visible{outline:3px solid var(--sage);outline-offset:2px}
+#studio-asana-library .p2-asana-advanced .v81-atlas,
+#studio-asana-library .p2-asana-advanced .studio-library-filters{margin:8px 12px 12px!important}
+#studio-asana-library .p2-asana-advanced .v81-intro{display:none!important}
+@media(max-width:620px){
+ #studio-asana-library .p2-asana-advanced .v81-tracks{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ #studio-asana-library .studio-library-choices{display:flex!important;flex-direction:column!important}
+ #studio-asana-library .p2-asana-advanced{order:-1}
+}
+
+/* P2: studying a pose is a focused screen, not the mode chooser plus a second
+   title plus the book. The back-to-session button remains available. */
+#instructor-flow[data-p2-book="open"] > .instructor-flow-head,
+#instructor-flow[data-p2-book="open"] > .studio-entrance{
+  display:none!important;
+}
+#instructor-flow[data-p2-book="open"] #studio-asana-library{
+  scroll-margin-top:calc(var(--header,68px) + 14px);
+}
+
+/* P2 dark/mobile contrast: display:contents removes the original pale panel.
+   Ensure posture labels and instructions use the actual dark surface palette. */
+@media(max-width:600px){
+ html[data-theme="dark"] #studio-asana-library .studio-library-name{
+  color:var(--ink)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-cue,
+ html[data-theme="dark"] #studio-asana-library .studio-library-foot{
+  color:var(--muted)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-ground{
+  color:#e2f3e9!important;background:#1b342c!important;
+  border-color:#a6d4bb!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-coaching{
+  background:var(--surface2)!important;color:var(--ink)!important;
+  border-color:var(--line-strong)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-coaching
+  :is(h5,.studio-library-step-label,.studio-library-step-text){
+  color:var(--ink)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-name,
+ html[data-theme="dark"] #studio-asana-library .studio-library-cue{
+  text-shadow:none!important;
+ }
+}
+
+/* P2 first visit is immediately useful, never a non-dismissible cover slide. */
+html.intro-on .zintro,
+html.intro-done .zintro{display:none!important;visibility:hidden!important;pointer-events:none!important}
+
+/* V81 legacy assumes pale paper even on dark mode; the focused mobile book
+   uses the actual dark background, so its family heading needs light text. */
+@media(max-width:600px){
+ html[data-theme="dark"] #studio-asana-library .v81-familynote,
+ html[data-theme="dark"] #studio-asana-library .v81-familynote strong{
+  color:var(--ink)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .v81-familynote span{
+  color:var(--muted)!important;
+ }
+}
+
+/* P2 AA correction: unselected asanas are enabled controls, never ghosted
+   placeholders. Solid surfaces avoid semi-transparent gray/green blends. */
+html[data-theme="dark"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose]:not([aria-pressed="true"]){
+ background:#203b32!important;color:#edf7ee!important;border:1px solid #627d70!important;
+ opacity:1!important;
+}
+html[data-theme="dark"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose][aria-pressed="true"]{
+ background:#98c7ae!important;color:#102a1e!important;border-color:#a9d5be!important;
+ opacity:1!important;
+}
+html[data-theme="light"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose]:not([aria-pressed="true"]){
+ background:#f5f4ed!important;color:#244332!important;border:1px solid #9cad9d!important;
+ opacity:1!important;
+}
+html[data-theme="light"] #instructor-flow #studio-asana-library .studio-library-choices button[data-library-pose][aria-pressed="true"]{
+ background:#285945!important;color:#f7fbf6!important;border-color:#285945!important;
+ opacity:1!important;
+}
+
+/* P2: full P1 session designer is opt-in, not a second giant app card. */
+#studio-asana-library .p2-asana-planner{
+ margin:clamp(12px,2vw,22px) 0;border:1px solid var(--line);
+ border-radius:14px;background:var(--surface2);color:var(--ink);overflow:clip;
+ width:100%;
+}
+#studio-asana-library .p2-asana-planner>summary{
+ display:flex;align-items:center;gap:8px;list-style:none;min-height:48px;
+ padding:12px 17px;cursor:pointer;font:650 .94rem/1.35 Inter,system-ui,sans-serif;
+ color:var(--ink);
+}
+#studio-asana-library .p2-asana-planner>summary::-webkit-details-marker{display:none}
+#studio-asana-library .p2-asana-planner>summary::after{
+ content:"+";margin-left:auto;font-size:1.25rem;font-weight:400;
+}
+#studio-asana-library .p2-asana-planner[open]>summary::after{content:"−"}
+#studio-asana-library .p2-asana-planner>summary:focus-visible{
+ outline:3px solid var(--sage);outline-offset:-3px;
+}
+#studio-asana-library .p2-asana-planner #p1-sequence{
+ margin:0!important;border:0!important;box-shadow:none!important;
+ border-radius:0!important;max-width:100%!important;
+}

@@ -34,6 +34,7 @@ test("D24: three distinct authored postures share one anatomically complete drag
 
 test("D24: Yin/Yang and bilingual keyboard exploration, no interference with guided sessions",async({page})=>{
  const {guide,explorer}=await open(page);
+ await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
  await guide.locator('[data-yy-form="yin"]').evaluate(el=>el.click());
  await expect(explorer.locator(".studio-library-stage")).toHaveAttribute("data-spirit","yin");
  await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
@@ -43,7 +44,8 @@ test("D24: Yin/Yang and bilingual keyboard exploration, no interference with gui
  await page.keyboard.press("ArrowRight");
  await expect(explorer.locator('button[data-library-pose="d24-downward"]')).toHaveAttribute("aria-pressed","true");
  await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
- await expect(explorer).toBeVisible();
+ // P2: the Asana Book does not appear in unrelated practice modes.
+ await expect(explorer).toBeHidden();
  await page.locator('button[data-studio-mode="asanas"]').evaluate(el=>el.click());
  await expect(explorer).toBeVisible();
  await page.locator('[data-flow-action="start"]').evaluate(el=>el.click());

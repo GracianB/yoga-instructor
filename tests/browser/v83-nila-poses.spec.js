@@ -14,7 +14,7 @@ const capturePose=async(page,testInfo,name)=>{
 };
 
 test("V83: Nila draws four grounded Downward Dog contacts in the real book",async({page})=>{
-await page.goto("/",{waitUntil:"domcontentloaded"});const book=page.locator("#studio-asana-library");
+await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());const book=page.locator("#studio-asana-library");
 await book.locator('button[data-library-pose="d24-downward"]').evaluate(e=>e.click());
 const dog=book.locator('.yy-pose[data-pose="d24-downward"] .movement-guardian');
 await expect(dog).toBeVisible();
@@ -22,7 +22,7 @@ await expect(dog.locator("[data-contact]")).toHaveCount(4);
 await expect(dog.locator(".mg-torso[data-pose-kind='downward'] .mg-body")).toHaveAttribute("d",/M274 264/);
 });
 test("V83: balance pose shows one grounded shadow and raised calf contact",async({page})=>{
-await page.goto("/",{waitUntil:"domcontentloaded"});const book=page.locator("#studio-asana-library");
+await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());const book=page.locator("#studio-asana-library");
 await book.locator('button[data-library-pose="v68-tree"]').evaluate(e=>e.click());
 const tree=book.locator('.yy-pose[data-pose="v68-tree"] .movement-guardian');
 await expect(tree).toBeVisible();
@@ -33,7 +33,7 @@ await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","idle");
 
 
 test("Nila's Downward Dog profile has a distinct readable face in Yin and Yang",async({page},testInfo)=>{
- await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
  const book=page.locator("#studio-asana-library");
  await book.locator('button[data-library-pose="d24-downward"]').evaluate(node=>node.click());
  const pose=book.locator('.yy-pose.is-current[data-pose="d24-downward"]');
@@ -64,7 +64,7 @@ test("Nila's Downward Dog profile has a distinct readable face in Yin and Yang",
 
 
 test("Tadasana's relaxed hands point downward and Uttanasana's head faces the mat",async({page},testInfo)=>{
- await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
  const book=page.locator("#studio-asana-library");
  for(const data of [
   {id:"d24-mountain",profile:false,name:"tadasana"},
@@ -96,7 +96,7 @@ test("Tadasana's relaxed hands point downward and Uttanasana's head faces the ma
 });
 
 test("Warrior II front knee is bent over its foot; forward fold hinges from the pelvis",async({page},testInfo)=>{
- await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
  const book=page.locator("#studio-asana-library");
  await book.locator('button[data-library-pose="v68-warrior-ii"]').evaluate(node=>node.click());
  let active=book.locator('.yy-pose.is-current[data-pose="v68-warrior-ii"]');

@@ -44,9 +44,10 @@
         '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
       '</ol></section></div></div>'+
     '<p class="studio-library-foot"></p>';
-  // A separate editorial chapter BEFORE the three-mode practice studio.
-  // The book is not a Movement sub-tab and never starts the guided clock.
-  root.before(section);
+  // P2: the book belongs inside Movement as an optional reference, not
+  // another character stage preceding the three-mode studio.
+  section.dataset.p2BookOpen="false";
+  root.appendChild(section);
   const dockToggle=section.querySelector(".studio-library-dock-toggle");
   // The global floating dock obscured long asana coaching text. Keep its
   // controls available on demand, never permanently discard them.
@@ -316,13 +317,16 @@
     const amount=Math.max(0,Math.min(bounds.bottom,window.innerHeight)-
       Math.max(bounds.top,0));
     const minimum=Math.min(48,window.innerHeight*.04);
-    const overlaps=amount>minimum;
+    const overlaps=amount>minimum && section.dataset.p2BookOpen==="true";
     if(leavingBook){
       if(!overlaps)leftViewport=true;
       else if(leftViewport)leavingBook=false;
     }
     document.body.dataset.asanaBookVisible=String(overlaps&&!leavingBook);
   };
+  // P2 opening/closing must immediately release the corner dock; no scroll
+  // or IntersectionObserver is needed to synchronize the visibility flag.
+  window.addEventListener("yoga:p2-book-change",syncBookVisibility);
   // Re-entering by mouse or keyboard makes the book an active reading
   // surface again; an explicit visit to the practice room always wins
   // over transient viewport overlap during the site's cinematic scroll.
@@ -347,6 +351,7 @@
   window.addEventListener("pagehide",()=>{
     window.removeEventListener("scroll",syncBookVisibility);
     window.removeEventListener("resize",syncBookVisibility);
+    window.removeEventListener("yoga:p2-book-change",syncBookVisibility);
     delete document.body.dataset.asanaBookVisible;
   },{once:true});
   new MutationObserver(()=>{stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";})

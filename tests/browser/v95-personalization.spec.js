@@ -23,6 +23,8 @@ await expect.poll(()=>page.evaluate(()=>localStorage.getItem("yoga-personalizati
 });
 test("V95 remembers the actual custom pose order and restores it without autoplay",async({page})=>{
 await page.goto("/");
+await page.locator('#p2-asana-toggle').evaluate(x=>x.click());
+await page.locator('#p2-asana-advanced > summary').evaluate(x=>x.click());
 const editor=page.locator("#studio-asana-library .v94-editor");await editor.locator("summary").evaluate(x=>x.click());
 const picks=editor.locator("select[data-v94-position]");
 await picks.nth(0).selectOption("v68-tree");

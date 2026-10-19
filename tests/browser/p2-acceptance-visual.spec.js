@@ -1,0 +1,178 @@
+const {test,expect}=require("@playwright/test");
+const screens=[320,375,768,1440];
+for(const width of screens){
+ for(const theme of ["light","dark"]){
+  test(`P2 VISUAL acceptance · ${width}px · ${theme}`,async({page},info)=>{
+   test.setTimeout(75000);
+   const failures=[];page.on("pageerror",error=>failures.push(error.message));
+   await page.setViewportSize({width,height:850});
+   await page.addInitScript(()=>{try{sessionStorage.setItem("gb-yoga-intro-seen","1")}catch{}});
+   await page.emulateMedia({reducedMotion:"reduce"});
+   await page.goto("/",{waitUntil:"domcontentloaded"});
+   await expect(page.locator("#p2-lotus-focus")).toBeVisible();
+   await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true",{timeout:15000});
+   await page.locator('[data-set-theme="'+theme+'"]').first().evaluate(x=>x.click());
+   const html=page.locator("html");
+   await expect(html).toHaveAttribute("data-theme",theme);
+   const hero=page.locator("#inicio");
+   const lotus=page.locator("#p2-lotus-focus");
+   const studio=page.locator("#instructor-flow");
+   const book=page.locator("#studio-asana-library");
+   await expect(page.locator("#nav a")).toHaveCount(3);
+   // No duplicate program builder or long enquiry below contact.
+   await expect(page.locator("#p2-extras #programa")).toHaveCount(1);
+   await expect(page.locator("#p2-extras #v76-enquiry")).toHaveCount(1);
+   await expect(page.locator("#programa")).toBeHidden();
+   await expect(page.locator("#v76-enquiry")).toBeHidden();
+   await expect(book.locator(".studio-library-stage")).toBeHidden();
+   await expect(page.locator("#p2-dock-expand")).toBeVisible();
+   await expect(page.locator("#p2-dock-expand")).toHaveAttribute("aria-expanded","false");
+   await expect(page.locator(".sanctuary-dock-tools")).toBeHidden();
+   await page.locator("#p2-dock-expand").evaluate(el=>el.click());
+   await expect(page.locator(".sanctuary-dock-tools")).toBeVisible();
+   await page.locator("#p2-dock-expand").evaluate(el=>el.click());
+   await expect(page.locator(".sanctuary-dock-tools")).toBeHidden();
+   const bounds=await page.evaluate(()=>{
+    const h=document.getElementById("inicio").getBoundingClientRect();
+    const l=document.getElementById("p2-lotus-focus").getBoundingClientRect();
+    return {hero:h.toJSON(),lotus:l.toJSON(),viewport:innerWidth};
+   });
+   expect(bounds.lotus.width).toBeLessThanOrEqual(150);
+   if(width<=375){
+     const header=page.locator(".site-header");
+     const rect=await header.boundingBox();
+     expect(rect.height).toBeLessThanOrEqual(65);
+     const menu=await page.locator(".site-header .menu-toggle").boundingBox();
+     const brand=await page.locator(".site-header .brand-mark").boundingBox();
+     expect(menu.y).toBeGreaterThanOrEqual(brand.y-9);
+     expect(menu.y).toBeLessThanOrEqual(brand.y+9);
+   }
+   expect(bounds.lotus.x).toBeGreaterThanOrEqual(-1);
+   expect(bounds.lotus.right).toBeLessThanOrEqual(width+1);
+   expect(bounds.lotus.top).toBeGreaterThanOrEqual(bounds.hero.top-1);
+   expect(bounds.lotus.bottom).toBeLessThanOrEqual(bounds.hero.bottom+1);
+   await info.attach("p2-home-"+width+"-"+theme,{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
+   await studio.evaluate(el=>el.scrollIntoView({behavior:"instant",block:"start"}));
+   await expect(page.locator("#flow-guide")).toBeVisible();
+   await info.attach("p2-practice-"+width+"-"+theme,{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
+   await book.locator("#p2-asana-toggle").evaluate(el=>el.click());
+   await expect(book.locator("#p2-asana-advanced")).not.toHaveAttribute("open",/./);
+   await expect(book.locator("#p2-planner > summary")).toBeVisible();
+   await expect(book.locator("#p1-sequence")).toBeHidden();
+   await expect(book.locator("#p2-asana-advanced > summary")).toBeVisible();
+   await expect(book.locator(".studio-library-stage")).toBeVisible();
+   // WCAG AA: each selectable asana must have readable contrast, including
+   // unselected postures that previously looked like disabled gray cards.
+   const palette=await book.locator('button[data-library-pose]:not([hidden])').evaluateAll(nodes=>{
+    const linear=channel=>{const n=channel/255;return n<=.04045?n/12.92:Math.pow((n+.055)/1.055,2.4)};
+    const luminance=color=>{
+      const v=(color.match(/[0-9.]+/g)||[]).slice(0,3).map(Number);
+      return .2126*linear(v[0])+.7152*linear(v[1])+.0722*linear(v[2]);
+    };
+    return nodes.map(button=>{
+      const css=getComputedStyle(button),fg=luminance(css.color),bg=luminance(css.backgroundColor);
+      return {name:button.textContent.trim(),ratio:(Math.max(fg,bg)+.05)/(Math.min(fg,bg)+.05)};
+    });
+   });
+   for(const button of palette)expect(button.ratio,button.name).toBeGreaterThanOrEqual(4.5);
+
+   if(width<=375 && theme==="dark"){
+    const colors=await book.locator(".studio-library-name").evaluate(el=>{
+      const actual=getComputedStyle(el).color;
+      const p=document.createElement("span");
+      p.style.color=getComputedStyle(document.documentElement).getPropertyValue("--ink").trim();
+      document.body.append(p);
+      const expected=getComputedStyle(p).color;
+      p.remove();
+      return {actual,expected};
+    });
+    expect(colors.actual).toBe(colors.expected);
+    const family=await book.locator(".v81-familynote").evaluate(el=>{
+      const text=el.querySelector("strong");
+      const intent=el.querySelector("span");
+      const resolve=name=>{
+        const probe=document.createElement("span");
+        probe.style.color=getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+        document.body.append(probe);
+        const color=getComputedStyle(probe).color;probe.remove();return color;
+      };
+      return {
+        heading:getComputedStyle(text).color,expectedHeading:resolve("--ink"),
+        detail:getComputedStyle(intent).color,expectedDetail:resolve("--muted")
+      };
+    });
+    expect(family.heading).toBe(family.expectedHeading);
+    expect(family.detail).toBe(family.expectedDetail);
+   }
+   await expect(studio.locator(".studio-entrance")).toBeHidden();
+   await expect(page.locator("#movement-stage")).toBeHidden();
+   await book.evaluate(el=>el.scrollIntoView({behavior:"instant",block:"start"}));
+   if(width<=375){
+     const position=await page.evaluate(()=>{
+       const stage=document.querySelector("#studio-asana-library .studio-library-stage");
+       const choices=document.querySelector("#studio-asana-library .studio-library-choices");
+       return {stage:stage.getBoundingClientRect().top,choices:choices.getBoundingClientRect().top};
+     });
+     expect(position.stage).toBeLessThan(position.choices);
+   }
+   await info.attach("p2-asanas-"+width+"-"+theme,{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
+   await book.locator("#p2-asana-toggle").evaluate(el=>el.click());
+   await expect(page.locator("#movement-stage")).toBeVisible();
+   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+   expect(await page.locator("audio").count()).toBe(1);
+   expect(await page.locator("#focus-audio").evaluate(x=>x.paused)).toBe(true);
+   expect(failures).toEqual([]);
+  });
+ }
+}
+test("P2 VISUAL · direct deep links, keyboard lotus and two languages",async({page},info)=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.addInitScript(()=>{try{sessionStorage.setItem("gb-yoga-intro-seen","1")}catch{}});
+ await page.goto("/#studio-asana-library",{waitUntil:"domcontentloaded"});
+ await expect(page.locator("#p2-asana-toggle")).toHaveAttribute("aria-expanded","true");
+ await expect(page.locator("#studio-asana-library .studio-library-stage")).toBeVisible();
+ await page.locator('[data-set-lang="en"]').first().evaluate(x=>x.click());
+ await expect(page.locator("#p2-asana-toggle")).toContainText("Return to");
+ await page.locator("#p2-asana-toggle").evaluate(x=>x.click());
+ const lotus=page.locator("#p2-lotus-focus");
+ await lotus.focus();
+ await page.keyboard.press("Enter");
+ await expect(page.locator("#instructor-flow")).toHaveAttribute("data-studio-mode","breath");
+ await expect(page.locator("#studio-guided")).toBeVisible();
+ await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
+ await info.attach("p2-breath-keyboard-en",{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
+});
+
+test("P2 first visit has no blocking cover slideshow",async({page})=>{
+ await page.setViewportSize({width:375,height:812});
+ await page.addInitScript(()=>{try{sessionStorage.removeItem("gb-yoga-intro-seen")}catch{}});
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ await expect(page.locator(".zintro")).toBeHidden();
+ await expect(page.locator('#inicio a[href="#instructor-flow"].btn.primary')).toBeVisible();
+ await expect(page.locator("#p2-lotus-focus")).toBeVisible();
+ await page.locator("#p2-lotus-focus").focus();
+ await expect(page.locator("#p2-lotus-focus")).toBeFocused();
+ await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
+});
+
+test("P2 deep link reopens the actual full-width P1 planner",async({page})=>{
+ await page.goto("/#p1-sequence",{waitUntil:"domcontentloaded"});
+ await expect(page.locator("#p2-asana-toggle")).toHaveAttribute("aria-expanded","true");
+ await expect(page.locator("#p2-planner")).toHaveAttribute("open","");
+ await expect(page.locator("#p1-sequence")).toBeVisible();
+ await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","idle");
+ await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
+});
+
+test("P2 creating an actual sequence closes the book and returns focus to Flow",async({page})=>{
+ await page.goto("/#p1-sequence",{waitUntil:"domcontentloaded"});
+ const plan=page.locator("#p1-sequence"),studio=page.locator("#instructor-flow");
+ await expect(plan).toBeVisible();
+ await plan.locator('[data-p1="prepare"]').evaluate(el=>el.click());
+ await expect(studio).toHaveAttribute("data-movement-sequence","guided");
+ await expect(page.locator("#flow-guide")).toHaveAttribute("data-status","idle");
+ await expect(page.locator("#p2-asana-toggle")).toHaveAttribute("aria-expanded","false");
+ await expect(page.locator("#movement-stage")).toBeVisible();
+ await expect(page.locator('[data-flow-action="start"]')).toBeFocused();
+ await expect(page.locator("#focus-audio")).toHaveJSProperty("paused",true);
+});

@@ -10,6 +10,7 @@ test.beforeEach(async ({page})=>{
 
 test("V76: enquiry creates a contextual email without submitting data",async({page})=>{
  await page.goto("/");
+ await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  const root=page.locator("#v76-enquiry");
  await expect(root).toBeVisible();
  await expect(root.locator("#v76-results")).toBeHidden();
@@ -30,6 +31,7 @@ test("V76: enquiry creates a contextual email without submitting data",async({pa
 
 test("V76: edited preview overrides generated body and reset erases values",async({page})=>{
  await page.goto("/");
+ await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  const root=page.locator("#v76-enquiry");
  // Other V76 tests cover pointer clicks. Isolate the email-editor contract
  // from long scroll-driven animations under Firefox CI load.
@@ -46,6 +48,7 @@ test("V76: edited preview overrides generated body and reset erases values",asyn
 
 test("V76: language change keeps selected options and translates the new mail",async({page})=>{
  await page.goto("/");
+ await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  const root=page.locator("#v76-enquiry");
  // Keep the earlier end-to-end test for real pointer selection;
  // this translation test isolates the radio change event from page scrolling.
@@ -64,6 +67,7 @@ test("V76: form and its email preview work on a 375px screen and without motion"
  await page.emulateMedia({reducedMotion:"reduce"});
  await page.setViewportSize({width:375,height:812});
  await page.goto("/");
+ await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  const root=page.locator("#v76-enquiry");
  await root.locator("#v76-details").fill("Consulta de yoga.");
  await root.locator("#v76-compose").click();

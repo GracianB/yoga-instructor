@@ -2,6 +2,8 @@ const {test,expect}=require("@playwright/test");
 test("P1 · choosing three library poses prepares, but never autostarts, the SAME Flow",async({page})=>{
  test.setTimeout(90000);
  await page.goto("/");
+ await page.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await page.locator('#p2-planner > summary').evaluate(el=>el.click());
  const plan=page.locator("#p1-sequence"),flow=page.locator("#flow-guide");
  await expect(plan).toBeVisible();
  await expect(page.locator("#studio-asana-library .movement-guardian")).toHaveCount(12);
@@ -39,6 +41,8 @@ test("P1 · choosing three library poses prepares, but never autostarts, the SAM
 test("P1 · 8 distinct asanas become 20 phases, art exists, exact labels survive EN",async({page})=>{
  test.setTimeout(75000);
  await page.goto("/");
+ await page.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await page.locator('#p2-planner > summary').evaluate(el=>el.click());
  const panel=page.locator("#p1-sequence"),flow=page.locator("#flow-guide");
  for(let i=3;i<8;i++)await panel.locator('[data-p1="add"]').evaluate(el=>el.click());
  await expect(panel.locator(".p1-row")).toHaveCount(8);
@@ -60,6 +64,8 @@ test("P1 · 8 distinct asanas become 20 phases, art exists, exact labels survive
 });
 test("P1 · impossible extra-rest combination fails safely without changing Flow",async({page})=>{
  await page.goto("/");
+ await page.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await page.locator('#p2-planner > summary').evaluate(el=>el.click());
  const panel=page.locator("#p1-sequence"),flow=page.locator("#flow-guide");
  for(let i=3;i<8;i++)await panel.locator('[data-p1="add"]').evaluate(el=>el.click());
  await panel.locator(".p1-duration").selectOption("10");
@@ -76,6 +82,8 @@ test("P1 · impossible extra-rest combination fails safely without changing Flow
 test("P1 · 320px, keyboard and dark mode preserve responsive planner and idle safety",async({page})=>{
  await page.setViewportSize({width:320,height:780});
  await page.goto("/");
+ await page.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await page.locator('#p2-planner > summary').evaluate(el=>el.click());
  await page.locator('[data-set-theme="dark"]').first().evaluate(el=>el.click());
  const panel=page.locator("#p1-sequence");
  await expect(panel).toBeVisible();

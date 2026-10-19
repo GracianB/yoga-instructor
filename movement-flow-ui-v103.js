@@ -150,6 +150,9 @@ panel.addEventListener("click",event=>{
    const plan=model.build({poses:ids,minutes:Number(duration.value),recovery:rest.checked});
    if(!controller.configure(plan)){status.textContent=t.busy;return}
    status.textContent=t.ready;
+   // Explicit handoff: the P2 editorial layer can close the reference book
+   // before the unchanged Flow start button receives focus.
+   window.dispatchEvent(new CustomEvent("yoga:p1-prepared"));
    studio.scrollIntoView({block:"start",behavior:"instant"});
    studio.querySelector('[data-flow-action="start"]')?.focus({preventScroll:true});
   }catch(_){status.textContent=t.invalid}

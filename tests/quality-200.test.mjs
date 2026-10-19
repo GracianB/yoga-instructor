@@ -56,7 +56,7 @@ test("200Q 045: volume control exists",()=>assert.ok(index.includes('id="audio-v
 test("200Q 046: seek control exists",()=>assert.ok(index.includes('id="audio-seek"')));
 test("200Q 047: current time exists",()=>assert.ok(index.includes('id="audio-cur"')));
 test("200Q 048: duration exists",()=>assert.ok(index.includes('id="audio-dur"')));
-test("200Q 049: audio preloads metadata",()=>assert.ok(/id="focus-audio"[^>]*preload="metadata"/.test(index)));
+test("200Q 049: optional music is not downloaded before the visitor opts in",()=>assert.ok(/id="focus-audio"[^>]*preload="none"/.test(index)));
 test("200Q 050: audio loops",()=>assert.ok(/id="focus-audio"[^>]*loop/.test(index)));
 test("200Q 051: play handler exists",()=>assert.ok(main.includes("playBtn.addEventListener(\"click\"")));
 test("200Q 052: play event exists",()=>assert.ok(main.includes('audio.addEventListener("play"')));

@@ -33,6 +33,15 @@ for(const width of screens){
     return {hero:h.toJSON(),lotus:l.toJSON(),viewport:innerWidth};
    });
    expect(bounds.lotus.width).toBeLessThanOrEqual(150);
+   if(width<=375){
+     const header=page.locator(".site-header");
+     const rect=await header.boundingBox();
+     expect(rect.height).toBeLessThanOrEqual(65);
+     const menu=await page.locator(".site-header .menu-toggle").boundingBox();
+     const brand=await page.locator(".site-header .brand-mark").boundingBox();
+     expect(menu.y).toBeGreaterThanOrEqual(brand.y-9);
+     expect(menu.y).toBeLessThanOrEqual(brand.y+9);
+   }
    expect(bounds.lotus.x).toBeGreaterThanOrEqual(-1);
    expect(bounds.lotus.right).toBeLessThanOrEqual(width+1);
    expect(bounds.lotus.top).toBeGreaterThanOrEqual(bounds.hero.top-1);
@@ -45,6 +54,14 @@ for(const width of screens){
    await expect(book.locator(".studio-library-stage")).toBeVisible();
    await expect(page.locator("#movement-stage")).toBeHidden();
    await book.evaluate(el=>el.scrollIntoView({behavior:"instant",block:"start"}));
+   if(width<=375){
+     const position=await page.evaluate(()=>{
+       const stage=document.querySelector("#studio-asana-library .studio-library-stage");
+       const choices=document.querySelector("#studio-asana-library .studio-library-choices");
+       return {stage:stage.getBoundingClientRect().top,choices:choices.getBoundingClientRect().top};
+     });
+     expect(position.stage).toBeLessThan(position.choices);
+   }
    await info.attach("p2-asanas-"+width+"-"+theme,{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
    await book.locator("#p2-asana-toggle").evaluate(el=>el.click());
    await expect(page.locator("#movement-stage")).toBeVisible();

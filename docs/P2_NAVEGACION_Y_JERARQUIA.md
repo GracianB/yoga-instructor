@@ -33,3 +33,10 @@ P2 reduce la **superficie visible** sin borrar módulos históricos, sus contrat
 ## Segunda revisión visual (capturas reales)
 
 La inspección de 25 capturas móviles/escritorio detectó un hero sobredimensionado, un dock flotante que tapaba la app y controles didácticos demasiado numerosos antes de ver la figura. Segunda intervención: hero compacto (sin altura mínima cinematográfica), acciones en línea, dock plegado con botón de 44 px y acceso por teclado/Escape, y Nila antes de los filtros en móvil. La batería visual específica debe repetirse sobre el commit que incorpora esta intervención.
+
+## Ajustes a partir de las capturas de aceptación
+- Cabecera móvil en una fila de 60 px, con iconos y controles operativos.
+- Hero más corto y con dos acciones alineadas, sin una pantalla vacía entre la frase y la sala.
+- Libro de asanas: en ≤600 px Nila aparece **antes** de las categorías, los filtros y las instrucciones. Sin segunda pantalla o temporizador.
+- Dock de respiración reducido a una píldora discreta; no muestra un botón de música repetido. El reproductor está en el disclosure optativo.
+- Test visual `p2-acceptance-visual.spec.js` genera evidencia por cada ancho 320/375/768/1440 × claro/oscuro y comprueba ausencia de overflow.

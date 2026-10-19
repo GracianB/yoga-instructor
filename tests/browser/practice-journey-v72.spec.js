@@ -1,27 +1,25 @@
 const {test,expect}=require('@playwright/test');
 
-test('V72 book stands before the three-mode app, without hijacking Movement',async({page})=>{
+test('P2: Asana Book is opt-in within the same studio, never another homepage',async({page})=>{
  await page.goto('/');
  const book=page.locator('#studio-asana-library'),room=page.locator('#instructor-flow');
- await expect(book).toBeVisible();
- // Book is created after the site's static reveal observer initializes;
- // it must not remain opacity:0 and visually vanish.
- const opacity=await book.evaluate(el=>getComputedStyle(el).opacity);
- expect(Number(opacity)).toBeGreaterThanOrEqual(.99);
+ await expect(book).toHaveAttribute('data-book-standalone','false');
+ await expect(book.locator('.studio-library-stage')).toBeHidden();
  await expect(book.locator('.studio-library-stage .movement-guardian')).toHaveCount(12);
- await expect(room.locator('.studio-v66-submodes')).toHaveCount(0);
  await expect(room.locator('#movement-stage')).toBeVisible();
  expect(await page.evaluate(()=>{
-   const book=document.getElementById('studio-asana-library'),studio=document.getElementById('instructor-flow');
-   return !studio.contains(book)&&Boolean(book.compareDocumentPosition(studio)&Node.DOCUMENT_POSITION_FOLLOWING);
+  const book=document.getElementById('studio-asana-library'),room=document.getElementById('instructor-flow');
+  return room.contains(book);
  })).toBe(true);
+ await book.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await expect(room.locator('#movement-stage')).toBeHidden();
+ await expect(book.locator('.studio-library-stage')).toBeVisible();
+ await book.locator('#p2-asana-toggle').evaluate(el=>el.click());
  await page.locator('button[data-studio-mode="breath"]').evaluate(el=>el.click());
- await expect(book).toBeVisible();
+ await expect(book).toBeHidden();
  await page.locator('button[data-studio-mode="meditation"]').evaluate(el=>el.click());
- await expect(book).toBeVisible();
- await expect(book.locator('.studio-book-practice-link')).toHaveAttribute('href','#instructor-flow');
+ await expect(book).toBeHidden();
 });
-
 test('V72 dragon visibly breathes in sync with the existing clock, then holds when paused',async({page})=>{
  await page.goto('/');
  await page.locator('button[data-studio-mode="breath"]').evaluate(el=>el.click());
@@ -76,6 +74,7 @@ test('V72 mobile reading remains bounded, focus visible and guided studio remain
  await page.setViewportSize({width:375,height:812});
  await page.goto('/');
  const book=page.locator('#studio-asana-library');
+ await book.locator('#p2-asana-toggle').evaluate(el=>el.click());
  await book.locator('[data-asana-filter="seated"]').evaluate(el=>el.click());
  await expect(book.locator('button[data-library-pose]:visible').first()).toBeVisible();
  await expect(book.locator('.studio-library-coaching')).toBeVisible();
@@ -85,18 +84,17 @@ test('V72 mobile reading remains bounded, focus visible and guided studio remain
 });
 
 
-test('V72: standalone book restores the dock without IntersectionObserver',async({page})=>{
+test('P2: book opening and closing restores dock without IntersectionObserver',async({page})=>{
  await page.addInitScript(()=>{window.IntersectionObserver=undefined;});
- const errors=[];
- page.on('pageerror',e=>errors.push(e.message));
+ const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('/');
  const book=page.locator('#studio-asana-library');
  const dock=page.locator('.sanctuary-dock');
- await expect(book).toBeVisible();
+ await book.locator('#p2-asana-toggle').evaluate(el=>el.click());
  await book.evaluate(el=>el.scrollIntoView({block:'center',behavior:'instant'}));
  await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','true');
  await expect(dock).toBeHidden();
- await book.locator('.studio-book-practice-link').evaluate(el=>el.click());
+ await book.locator('#p2-asana-toggle').evaluate(el=>el.click());
  await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','false');
  await expect(dock).toBeVisible();
  expect(errors).toEqual([]);

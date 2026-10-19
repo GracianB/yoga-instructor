@@ -25,6 +25,7 @@ insertAfter(portfolio,studio);
 // The book is available inside the Movement experience, not as a second
 // page-sized app. Preserve its pose controls, search, renderer and coaching.
 if(book.parentElement!==studio)studio.append(book);
+book.dataset.bookStandalone="false";
 book.dataset.p2BookOpen="false";
 const heading=book.querySelector(".studio-library-heading");
 const toggle=document.createElement("button");
@@ -39,10 +40,17 @@ body.className="p2-book-content";
 for(const element of [...book.children].filter(x=>x!==heading))body.append(element);
 heading?.after(toggle,body);
 function setBook(open,focus=false){
+  // An invisible running movement session would be unsafe and confusing.
+  // Pause through the existing controller before switching to study mode.
+  if(open && studio.dataset.studioMode==="asanas" &&
+     studio.querySelector("#flow-guide")?.dataset.status==="running"){
+    studio.querySelector('[data-flow-action="pause"]')?.click();
+  }
   book.dataset.p2BookOpen=String(open);
   studio.dataset.p2Book=open?"open":"closed";
   toggle.setAttribute("aria-expanded",String(open));
   toggle.textContent=t(open?"closeBook":"book");
+  window.dispatchEvent(new Event("yoga:p2-book-change"));
   if(open && studio.dataset.studioMode!=="asanas"){
     studio.querySelector('[data-studio-mode="asanas"]')?.click();
   }
@@ -104,7 +112,7 @@ if(lotus){
  focus.type="button";
  focus.id="p2-lotus-focus";
  focus.className="p2-lotus-focus";
- lotus.removeAttribute("aria-hidden");
+ lotus.setAttribute("aria-hidden","true");
  lotus.setAttribute("focusable","false");
  focus.append(lotus);
  hero.insertBefore(focus,hero.querySelector(".hero-stage"));

@@ -5,6 +5,7 @@ const {test,expect}=require("@playwright/test");
 test("Nila contact anchors are attached to their actual SVG limb terminals in 12 asanas",async({page})=>{
  test.setTimeout(90000);
  await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
  const book=page.locator("#studio-asana-library");
  await expect(book.locator(".movement-guardian")).toHaveCount(12);
  const report=[];
@@ -45,6 +46,7 @@ test("Nila contact anchors are attached to their actual SVG limb terminals in 12
 
 test("Warrior II and Tree now connect the upper arms visually and align raised hands",async({page})=>{
  await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
  const book=page.locator("#studio-asana-library");
  for(const id of ["v68-warrior-ii","v68-tree"]){
   await book.locator('button[data-library-pose="'+id+'"]').evaluate(node=>node.click());

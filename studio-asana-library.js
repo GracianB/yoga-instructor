@@ -324,6 +324,9 @@
     }
     document.body.dataset.asanaBookVisible=String(overlaps&&!leavingBook);
   };
+  // P2 opening/closing must immediately release the corner dock; no scroll
+  // or IntersectionObserver is needed to synchronize the visibility flag.
+  window.addEventListener("yoga:p2-book-change",syncBookVisibility);
   // Re-entering by mouse or keyboard makes the book an active reading
   // surface again; an explicit visit to the practice room always wins
   // over transient viewport overlap during the site's cinematic scroll.
@@ -348,6 +351,7 @@
   window.addEventListener("pagehide",()=>{
     window.removeEventListener("scroll",syncBookVisibility);
     window.removeEventListener("resize",syncBookVisibility);
+    window.removeEventListener("yoga:p2-book-change",syncBookVisibility);
     delete document.body.dataset.asanaBookVisible;
   },{once:true});
   new MutationObserver(()=>{stage.dataset.spirit=guide.dataset.spirit==="yin"?"yin":"yang";})

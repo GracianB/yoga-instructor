@@ -26,7 +26,7 @@ await expect(guided).toHaveAttribute("data-studio-status","idle");
 expect(errors).toEqual([]);
 });
 test("V99 persisted custom route, language and reading mode survive refresh with no autoplay",async({page})=>{
-await page.goto("/");
+await page.goto("/"); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
 const prefs=page.locator("#studio-preferences");await prefs.locator("summary").evaluate(x=>x.click());
 const editor=page.locator(".v94-editor");await editor.locator("summary").evaluate(x=>x.click());
 const selects=editor.locator("select[data-v94-position]");
@@ -49,7 +49,7 @@ await page.locator('[data-v93-action="clear"]').evaluate(x=>x.click());
 await expect.poll(()=>page.evaluate(()=>localStorage.getItem("yoga-personalization-v95"))).toBeNull();
 });
 test("V99 Axe audits keyboard/personalization surfaces, not just the hero",async({page})=>{
-await page.goto("/");
+await page.goto("/"); await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
 await page.locator("#studio-preferences summary").evaluate(x=>x.click());
 await page.locator("#studio-asana-library .v94-editor summary").evaluate(x=>x.click());
 const report=await new AxeBuilder({page}).options({preload:false})

@@ -2,6 +2,7 @@ const {test,expect}=require("@playwright/test");
 
 test("Standing Uttanasana and seated Paschimottanasana use distinct torso geometry",async({page},testInfo)=>{
  await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.locator("#p2-asana-toggle").evaluate(el=>el.click());
  const book=page.locator("#studio-asana-library");
  const results=[];
  for(const [id,label] of [["v68-forward-fold","standing"],["v68-seated-fold","seated"]]){

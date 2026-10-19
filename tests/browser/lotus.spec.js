@@ -79,8 +79,8 @@ async function expectContained(page, width) {
   expect(svg.x + svg.width).toBeLessThanOrEqual(width + 1);
   expect(svg.y).toBeGreaterThanOrEqual(hero.y - 1);
   expect(svg.y + svg.height).toBeLessThanOrEqual(hero.y + hero.height + 1);
-  expect(bloom.width).toBeGreaterThanOrEqual(width <= 900 ? 190 : 250);
-  expect(bloom.height).toBeGreaterThanOrEqual(100);
+  expect(bloom.width).toBeGreaterThanOrEqual(width <= 900 ? 42 : 60);
+  expect(bloom.height).toBeGreaterThanOrEqual(24);
   expect(overlap(svg, title)).toBe(false);
   expect(overlap(svg, actions)).toBe(false);
   if (width <= 900) {

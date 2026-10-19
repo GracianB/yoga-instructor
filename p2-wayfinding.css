@@ -301,3 +301,15 @@
 #portfolio .p73-story{grid-template-columns:1fr!important;max-width:960px;margin-inline:auto}
 #portfolio .p73-manifesto{width:100%}
 #portfolio .p73-heading{margin-bottom:clamp(18px,3vw,34px)}
+
+/* P2 music uses exactly one visible transport and an optional song chooser. */
+#p2-audio .soundtrack-intro,
+#p2-audio #playlist-origin,
+#p2-audio .music-playlist .music-controls,
+#p2-audio .music-playlist .music-status{display:none!important}
+#p2-audio .focus-player{max-width:980px;margin:auto}
+#p2-audio .music-playlist{margin-top:clamp(8px,1.5vw,16px)}
+#p2-audio .music-playlist>summary{cursor:pointer;min-height:44px}
+#p2-audio .music-tracks button{min-height:44px}
+#p2-audio .music-playlist>summary:focus-visible,
+#p2-audio .music-tracks button:focus-visible{outline:3px solid var(--sage);outline-offset:3px}

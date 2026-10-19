@@ -2,6 +2,7 @@ const {test,expect}=require('@playwright/test');
 
 const openLibrary=async page=>{
   await page.goto('/');
+  await page.locator('#p2-asana-toggle').evaluate(el=>el.click());
   const gallery=page.locator('#studio-asana-library');
   await expect(gallery).toBeVisible();
   await gallery.evaluate(el=>el.scrollIntoView({block:'start',behavior:'instant'}));
@@ -78,19 +79,14 @@ test('V71: visual anatomy references for four individual postures',async({page,b
   }
 });
 
-test('V71: asana coaching is not covered by the global breathing dock, but controls remain available',async({page})=>{
-  const gallery=await openLibrary(page);
-  const dock=page.locator('.sanctuary-dock');
-  const toggle=gallery.locator('.studio-library-dock-toggle');
-  await expect(gallery.locator('.studio-library-coaching')).toBeVisible();
-  await expect(dock).toBeHidden();
-  await expect(toggle).toHaveAttribute('aria-pressed','false');
-  await toggle.evaluate(el=>el.click());
-  await expect(dock).toBeVisible();
-  await expect(toggle).toHaveAttribute('aria-pressed','true');
-  await toggle.evaluate(el=>el.click());
-  await expect(dock).toBeHidden();
-  await gallery.locator('.studio-book-practice-link').evaluate(el=>el.click());
-  await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','false');
-  await expect(dock).toBeVisible();
+test('P2: asana coaching has one visible canvas, no duplicate music controls, and returns to Movement',async({page})=>{
+ const gallery=await openLibrary(page);
+ await expect(gallery.locator('.studio-library-coaching')).toBeVisible();
+ await expect(page.locator('#movement-stage')).toBeHidden();
+ await expect(gallery.locator('.studio-library-dock-toggle')).toBeHidden();
+ await expect(page.locator('#p2-audio')).not.toHaveAttribute('open',/./);
+ await gallery.locator('#p2-asana-toggle').evaluate(el=>el.click());
+ await expect(page.locator('#movement-stage')).toBeVisible();
+ await expect(gallery.locator('.studio-library-coaching')).toBeHidden();
+ await expect(page.locator('body')).toHaveAttribute('data-asana-book-visible','false');
 });

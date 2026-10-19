@@ -6,12 +6,6 @@ on:
       - 'tests/apps-standalone-v1.test.mjs'
       - 'tests/browser/apps-standalone-v1.spec.js'
       - '.github/workflows/yoga-apps.yml'
-  push:
-    branches: [apps-v1-unified-practice-and-asana-book-20261019]
-    paths:
-      - 'apps/**'
-      - 'tests/apps-standalone-v1.test.mjs'
-      - 'tests/browser/apps-standalone-v1.spec.js'
   workflow_dispatch:
 concurrency:
   group: yoga-apps-${{ github.ref }}

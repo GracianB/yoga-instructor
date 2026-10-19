@@ -1,0 +1,36 @@
+name: Yoga P2 Visual Acceptance
+on:
+  pull_request:
+    paths:
+      - 'p2-*.js'
+      - 'p2-*.css'
+      - 'index.html'
+      - 'studio-asana-library.js'
+      - 'tests/browser/p2-*.spec.js'
+      - '.github/workflows/p2-acceptance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  visual:
+    name: P2 visual, keyboard and responsive evidence
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Capture actual source UX in Chromium
+        run: npm run test:browser -- --project=chromium tests/browser/p2-acceptance-visual.spec.js --workers=2
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: yoga-p2-mobile-desktop-captures
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 14

@@ -27,6 +27,6 @@ test("V1 botanical lotus is smaller and has visible motion with accessibility fa
 });
 test("V1 has no CTA or visible skip route to the retired practice studio",()=>{
  assert.match(html,/href="#contacto" data-i18n="heroCtaPractice"/);
- assert.match(i18n,/heroCtaPractice: "Hablemos/);
- assert.match(i18n,/heroCtaPractice: "Contact me/);
+ assert.match(i18n,/heroCtaPractice: "Solicitar una sesión/);
+ assert.match(i18n,/heroCtaPractice: "Plan a session/);
 });

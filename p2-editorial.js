@@ -98,7 +98,7 @@ if(soundtrack){
 // Full evidence and experimental extras become optional, while the primary
 // professional story remains readable in Portfolio and Trajectory.
 const extraIds=["orientacion","atlas","ritual","campo","sobre","oferta","camino",
-  "casos","trayectoria","demostracion","experiencia","formacion","filosofia","cv"];
+  "casos","programa","trayectoria","demostracion","experiencia","formacion","filosofia","cv","v76-enquiry"];
 const extras=document.createElement("details");
 extras.className="p2-disclosure p2-extras";
 extras.id="p2-extras";

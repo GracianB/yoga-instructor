@@ -19,6 +19,11 @@ for(const width of screens){
    const studio=page.locator("#instructor-flow");
    const book=page.locator("#studio-asana-library");
    await expect(page.locator("#nav a")).toHaveCount(3);
+   // No duplicate program builder or long enquiry below contact.
+   await expect(page.locator("#p2-extras #programa")).toHaveCount(1);
+   await expect(page.locator("#p2-extras #v76-enquiry")).toHaveCount(1);
+   await expect(page.locator("#programa")).toBeHidden();
+   await expect(page.locator("#v76-enquiry")).toBeHidden();
    await expect(book.locator(".studio-library-stage")).toBeHidden();
    await expect(page.locator("#p2-dock-expand")).toBeVisible();
    await expect(page.locator("#p2-dock-expand")).toHaveAttribute("aria-expanded","false");

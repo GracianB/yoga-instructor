@@ -46,3 +46,6 @@ El atlas V81, filtros y búsqueda viven dentro del desplegable “Buscar, filtra
 
 ## Auditoría de contraste tras captura oscura
 El `display:contents` del Libro móvil elimina la superficie clara que heredaban los textos V72. P2 debe usar la tinta del tema oscuro en los nombres de posturas, descripciones y coaching; se añade una comprobación automática en 320/375 px con tema oscuro.
+
+## Cierre de la cola editorial
+Se incorporaron `#programa` y `#v76-enquiry` al bloque avanzado, evitando que queden visibles después de Contacto. Los enlaces profundos reabren el bloque y la creación del correo sigue siendo operativa. El formulario completo no aparece al visitante que solo quiere practicar.

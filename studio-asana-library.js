@@ -53,12 +53,12 @@
   bookButton.setAttribute("aria-controls","p25-book-body");bookButton.setAttribute("aria-expanded","false");
   const bookBody=document.createElement("div");bookBody.id="p25-book-body";bookBody.hidden=true;
   section.parentNode.insertBefore(bookButton,section);
+  section.after(bookBody);
   bookBody.appendChild(section);
   const paintBookToggle=()=>{bookButton.textContent=document.documentElement.lang==="en"?"Open the asana book · 12 postures":"Abrir el libro de asanas · 12 posturas"};
   bookButton.addEventListener("click",()=>{bookBody.hidden=!bookBody.hidden;bookButton.setAttribute("aria-expanded",String(!bookBody.hidden));if(!bookBody.hidden)section.scrollIntoView({block:"start",behavior:"smooth"});});
   paintBookToggle();
   new MutationObserver(paintBookToggle).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
-  section.after(bookBody);
   const dockToggle=section.querySelector(".studio-library-dock-toggle");
   // The global floating dock obscured long asana coaching text. Keep its
   // controls available on demand, never permanently discard them.

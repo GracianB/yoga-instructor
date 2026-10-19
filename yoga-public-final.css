@@ -457,3 +457,15 @@ html body #main #inicio.hero .mandala-parallax .hero-mandala{
   width:clamp(90px,25vw,118px)!important;max-width:118px!important;
  }
 }
+
+/* Hover adds a spotlight, never speed or scale. Match the old selectors' specificity. */
+@media(hover:hover) and (prefers-reduced-motion:no-preference){
+ html body #main #inicio.hero[data-breath="cycle"] .mandala-parallax:hover .hero-mandala{
+  animation-duration:7s!important;
+  filter:brightness(1.17) drop-shadow(0 0 19px color-mix(in srgb,var(--sage) 52%,transparent))!important;
+ }
+ html body #main #inicio.hero[data-breath="cycle"] .mandala-parallax:hover .lotus-bloom,
+ html body #main #inicio.hero[data-breath="cycle"] .mandala-parallax:hover .lotus-wing{
+  animation-duration:13s!important;
+ }
+}

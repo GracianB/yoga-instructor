@@ -39,3 +39,12 @@ footer{margin:38px auto 20px;padding-top:18px;border-top:1px solid var(--line);c
 html{scroll-padding-top:20px}
 button,a{-webkit-tap-highlight-color:transparent}
 @media(hover:hover){.btn{transition:background .2s ease,border-color .2s ease,transform .2s ease}.btn:hover:not(:disabled){transform:translateY(-1px);border-color:var(--accent)}}
+
+/* Compact mobile masthead: retain the cross-app link and language control. */
+@media(max-width:560px){
+ .bar .wrap{gap:8px}
+ .brand{gap:0;flex:0 0 auto}
+ .brand>span:last-child{font-size:0;line-height:0;max-width:0;overflow:hidden}
+ .bar-right{gap:8px;min-width:0}
+ .bar-right>a{max-width:150px;text-align:right;line-height:1.25;font-size:11px;overflow-wrap:anywhere}
+}

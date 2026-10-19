@@ -12,8 +12,8 @@ if(!main||!hero||!studio||!book||!portfolio)return;
 
 const lang=()=>document.documentElement.lang==="en"?"en":"es";
 const short={
- es:{lotus:"Abrir respiración",book:"Explorar las 12 asanas",closeBook:"Volver a la sesión",audio:"Música (opcional)",more:"Explorar detalles y recursos",note:"Contenido adicional, sin interrumpir la práctica"},
- en:{lotus:"Open breathing practice",book:"Explore the 12 asanas",closeBook:"Return to the session",audio:"Music (optional)",more:"Explore details and resources",note:"Extra information, without interrupting your practice"}
+ es:{lotus:"Abrir respiración",book:"Explorar las 12 asanas",closeBook:"Volver a la sesión",audio:"Música (opcional)",advanced:"Buscar, filtrar y crear rutas",more:"Explorar detalles y recursos",note:"Contenido adicional, sin interrumpir la práctica"},
+ en:{lotus:"Open breathing practice",book:"Explore the 12 asanas",closeBook:"Return to the session",audio:"Music (optional)",advanced:"Search, filter and build routes",more:"Explore details and resources",note:"Extra information, without interrupting your practice"}
 };
 const t=(key)=>short[lang()][key];
 function insertAfter(node,anchor){if(node&&anchor&&node!==anchor)anchor.after(node);}
@@ -28,6 +28,19 @@ if(book.parentElement!==studio)studio.append(book);
 book.dataset.bookStandalone="false";
 book.dataset.p2BookOpen="false";
 const heading=book.querySelector(".studio-library-heading");
+// Curriculum, filters and search are optional, not another entry screen.
+const choicePanel=book.querySelector(".studio-library-choices");
+const curriculum=choicePanel?.querySelector(".v81-atlas");
+const categoryFilters=choicePanel?.querySelector(".studio-library-filters");
+let advancedSummary;
+if(choicePanel && (curriculum||categoryFilters)){
+ const advanced=document.createElement("details");
+ advanced.id="p2-asana-advanced";advanced.className="p2-asana-advanced";
+ advancedSummary=document.createElement("summary");advanced.append(advancedSummary);
+ choicePanel.prepend(advanced);
+ if(curriculum)advanced.append(curriculum);
+ if(categoryFilters)advanced.append(categoryFilters);
+}
 const toggle=document.createElement("button");
 toggle.type="button";
 toggle.id="p2-asana-toggle";
@@ -144,6 +157,7 @@ window.addEventListener("hashchange",()=>revealAnchor(location.hash));
 revealAnchor(location.hash);
 const update=()=>{
  if(lotus)document.getElementById("p2-lotus-focus").setAttribute("aria-label",t("lotus"));
+ if(advancedSummary)advancedSummary.textContent=t("advanced");
  extrasSummary.textContent=t("more");
  extrasNote.textContent=t("note");
  if(audioDetails)document.getElementById("p2-audio-summary").textContent=t("audio");

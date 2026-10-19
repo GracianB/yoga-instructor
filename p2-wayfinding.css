@@ -531,3 +531,26 @@ body[data-asana-book-visible="true"] .sanctuary-dock:has(.p2-dock-expand){displa
  .site-header .header-actions .menu-toggle{width:34px!important;min-width:34px!important}
  #inicio.hero{min-height:370px!important}
 }
+
+/* Keep advanced learning tools fully operable without a duplicate atlas. */
+#studio-asana-library .p2-asana-advanced{
+ grid-column:1/-1;width:100%;margin:8px 0;
+ border:1px solid var(--line);border-radius:13px;background:var(--surface2);
+}
+#studio-asana-library .p2-asana-advanced>summary{
+ cursor:pointer;min-height:44px;display:flex;align-items:center;gap:9px;
+ padding:11px 14px;list-style:none;
+ font:600 .85rem/1.4 'Inter',sans-serif;color:var(--ink);
+}
+#studio-asana-library .p2-asana-advanced>summary::-webkit-details-marker{display:none}
+#studio-asana-library .p2-asana-advanced>summary::after{content:"+";font-size:1.18rem;margin-left:auto}
+#studio-asana-library .p2-asana-advanced[open]>summary::after{content:"−"}
+#studio-asana-library .p2-asana-advanced>summary:focus-visible{outline:3px solid var(--sage);outline-offset:2px}
+#studio-asana-library .p2-asana-advanced .v81-atlas,
+#studio-asana-library .p2-asana-advanced .studio-library-filters{margin:8px 12px 12px!important}
+#studio-asana-library .p2-asana-advanced .v81-intro{display:none!important}
+@media(max-width:620px){
+ #studio-asana-library .p2-asana-advanced .v81-tracks{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+ #studio-asana-library .studio-library-choices{display:flex!important;flex-direction:column!important}
+ #studio-asana-library .p2-asana-advanced{order:-1}
+}

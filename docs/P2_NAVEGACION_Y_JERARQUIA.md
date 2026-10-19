@@ -40,3 +40,6 @@ La inspección de 25 capturas móviles/escritorio detectó un hero sobredimensio
 - Libro de asanas: en ≤600 px Nila aparece **antes** de las categorías, los filtros y las instrucciones. Sin segunda pantalla o temporizador.
 - Dock de respiración reducido a una píldora discreta; no muestra un botón de música repetido. El reproductor está en el disclosure optativo.
 - Test visual `p2-acceptance-visual.spec.js` genera evidencia por cada ancho 320/375/768/1440 × claro/oscuro y comprueba ausencia de overflow.
+
+## Libro sin ruido
+El atlas V81, filtros y búsqueda viven dentro del desplegable “Buscar, filtrar y crear rutas”. La referencia de Nila y los 12 selectores son lo primero, sin eliminar material didáctico ni traducciones.

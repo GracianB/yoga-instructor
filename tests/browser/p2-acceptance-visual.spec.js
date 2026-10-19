@@ -51,6 +51,8 @@ for(const width of screens){
    await expect(page.locator("#flow-guide")).toBeVisible();
    await info.attach("p2-practice-"+width+"-"+theme,{body:await page.screenshot({animations:"disabled"}),contentType:"image/png"});
    await book.locator("#p2-asana-toggle").evaluate(el=>el.click());
+   await expect(book.locator("#p2-asana-advanced")).not.toHaveAttribute("open",/./);
+   await expect(book.locator("#p2-asana-advanced > summary")).toBeVisible();
    await expect(book.locator(".studio-library-stage")).toBeVisible();
    await expect(page.locator("#movement-stage")).toBeHidden();
    await book.evaluate(el=>el.scrollIntoView({behavior:"instant",block:"start"}));

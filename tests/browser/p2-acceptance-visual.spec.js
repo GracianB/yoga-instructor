@@ -54,6 +54,16 @@ for(const width of screens){
    await expect(book.locator("#p2-asana-advanced")).not.toHaveAttribute("open",/./);
    await expect(book.locator("#p2-asana-advanced > summary")).toBeVisible();
    await expect(book.locator(".studio-library-stage")).toBeVisible();
+   if(width<=375 && theme==="dark"){
+    const colors=await book.locator(".studio-library-name").evaluate(el=>({
+      actual:getComputedStyle(el).color,
+      expected:getComputedStyle(document.documentElement).getPropertyValue("--ink").trim()
+    }));
+    const p=document.createElement("span");
+    p.style.color=colors.expected;document.body.append(p);
+    const resolved=getComputedStyle(p).color;p.remove();
+    expect(colors.actual).toBe(resolved);
+   }
    await expect(studio.locator(".studio-entrance")).toBeHidden();
    await expect(page.locator("#movement-stage")).toBeHidden();
    await book.evaluate(el=>el.scrollIntoView({behavior:"instant",block:"start"}));

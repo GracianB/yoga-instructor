@@ -564,3 +564,31 @@ body[data-asana-book-visible="true"] .sanctuary-dock:has(.p2-dock-expand){displa
 #instructor-flow[data-p2-book="open"] #studio-asana-library{
   scroll-margin-top:calc(var(--header,68px) + 14px);
 }
+
+/* P2 dark/mobile contrast: display:contents removes the original pale panel.
+   Ensure posture labels and instructions use the actual dark surface palette. */
+@media(max-width:600px){
+ html[data-theme="dark"] #studio-asana-library .studio-library-name{
+  color:var(--ink)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-cue,
+ html[data-theme="dark"] #studio-asana-library .studio-library-foot{
+  color:var(--muted)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-ground{
+  color:#e2f3e9!important;background:#1b342c!important;
+  border-color:#a6d4bb!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-coaching{
+  background:var(--surface2)!important;color:var(--ink)!important;
+  border-color:var(--line-strong)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-coaching
+  :is(h5,.studio-library-step-label,.studio-library-step-text){
+  color:var(--ink)!important;
+ }
+ html[data-theme="dark"] #studio-asana-library .studio-library-name,
+ html[data-theme="dark"] #studio-asana-library .studio-library-cue{
+  text-shadow:none!important;
+ }
+}

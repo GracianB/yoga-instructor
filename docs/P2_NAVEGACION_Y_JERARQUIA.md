@@ -43,3 +43,6 @@ La inspección de 25 capturas móviles/escritorio detectó un hero sobredimensio
 
 ## Libro sin ruido
 El atlas V81, filtros y búsqueda viven dentro del desplegable “Buscar, filtrar y crear rutas”. La referencia de Nila y los 12 selectores son lo primero, sin eliminar material didáctico ni traducciones.
+
+## Auditoría de contraste tras captura oscura
+El `display:contents` del Libro móvil elimina la superficie clara que heredaban los textos V72. P2 debe usar la tinta del tema oscuro en los nombres de posturas, descripciones y coaching; se añade una comprobación automática en 320/375 px con tema oscuro.

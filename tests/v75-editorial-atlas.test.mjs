@@ -3,9 +3,9 @@ import assert from "node:assert/strict";
 import {readFileSync} from "node:fs";
 const read=path=>readFileSync(new URL("../"+path,import.meta.url),"utf8");
 
-test("V75: editorial atlas precedes the portfolio, evidence and live studio",()=>{
+test("V75: historic atlas, portfolio and evidence retain deep-link order before the relocated studio",()=>{
  const html=read("index.html");
- const indices=['id="atlas"','id="portfolio"','id="casos"','id="instructor-flow"','id="experiencia"'].map(x=>html.indexOf(x));
+ const indices=['id="atlas"','id="portfolio"','id="casos"','id="experiencia"','id="instructor-flow"'].map(x=>html.indexOf(x));
  assert.ok(indices.every(x=>x>0));
  assert.deepEqual([...indices].sort((a,b)=>a-b),indices);
  assert.equal((html.match(/data-v75-step="/g)||[]).length,5);

@@ -27,3 +27,18 @@ test("head keeps real anchors, skip navigation and current language/theme contro
  assert.match(html,/data-set-theme="dark"/);
  assert.match(html,/data-set-theme="light"/);
 });
+
+test("P2 keeps a legible short route-first experience and music beside the actual studio",()=>{
+ const order=["inicio","explora","portfolio","sobre","oferta","experiencia","instructor-flow","soundtrack","contacto"];
+ const at=order.map(id=>html.indexOf('id="'+id+'"'));
+ assert.ok(at.every(x=>x>0));
+ assert.deepEqual([...at].sort((a,b)=>a-b),at);
+ assert.equal((html.match(/data-p2-route="/g)||[]).length,5);
+ assert.match(html,/data-p2-mode="full"/); // Accessible content with JavaScript disabled
+ assert.match(html,/id="p2-toggle"/);
+ assert.match(html,/p2-navigation\.js\?v=p2/);
+ const script=readFileSync(new URL("../p2-navigation.js",import.meta.url),"utf8");
+ assert.match(script,/hashchange/);
+ assert.match(script,/revealHash\(\)/);
+ assert.match(script,/setFull\(false\)/);
+});

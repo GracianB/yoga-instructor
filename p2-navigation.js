@@ -33,5 +33,6 @@
  window.addEventListener("hashchange",revealHash);
  const observer=new MutationObserver(sync);
  observer.observe(document.documentElement,{attributes:true,attributeFilter:["data-lang"]});
+ setFull(false);
  revealHash();sync();
 })();

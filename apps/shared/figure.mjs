@@ -11,6 +11,53 @@ const SHAPES=Object.freeze({
  butterfly:{head:[210,135],torso:"M210 175Q211 231 210 283",leftArm:"M179 188Q167 242 187 320",rightArm:"M242 188Q255 243 234 320",leftLeg:"M194 283Q120 296 161 351",rightLeg:"M226 283Q299 296 260 351",leftHand:[187,320],rightHand:[234,320],leftFoot:[161,351],rightFoot:[260,351]},
  sphinx:{head:[116,203],torso:"M145 231Q218 271 290 304",leftArm:"M166 235Q178 285 155 362",rightArm:"M194 246Q223 291 217 363",leftLeg:"M288 304Q308 322 343 359",rightLeg:"M294 316Q328 341 360 368",leftHand:[155,362],rightHand:[217,363],leftFoot:[343,359],rightFoot:[360,368]}
 });
+const CHEST=Object.freeze({
+ mountain:[210,204,43,58],fold:[190,242,46,34],child:[225,285,57,31],
+ tree:[210,202,42,56],warrior:[210,202,43,55],seated:[210,225,41,53],
+ triangle:[212,211,47,34],downward:[207,220,45,37],butterfly:[210,228,43,50],
+ sphinx:[219,269,53,32]
+});
+const round=v=>Math.round(v*10)/10;
+const blendNumber=(a,b,t)=>round(a+(b-a)*t);
+const NUMBER=/[-+]?(?:\\d*\\.)?\\d+/g;
+function blendPath(a,b,t){
+ const from=[...a.matchAll(NUMBER)].map(x=>Number(x[0]));
+ const to=[...b.matchAll(NUMBER)].map(x=>Number(x[0]));
+ if(from.length!==to.length||a.replace(NUMBER,"#")!==b.replace(NUMBER,"#"))return t<.5?a:b;
+ let i=0;
+ return a.replace(NUMBER,()=>String(blendNumber(from[i],to[i++],t)));
+}
+export function figurePoseFrame(from,to,progress){
+ const start=SHAPES[from]||SHAPES.mountain,end=SHAPES[to]||SHAPES.mountain;
+ const t=Math.max(0,Math.min(1,Number.isFinite(progress)?progress:1));
+ const frame={};
+ for(const key of ["torso","leftArm","rightArm","leftLeg","rightLeg"])frame[key]=blendPath(start[key],end[key],t);
+ for(const key of ["head","leftHand","rightHand","leftFoot","rightFoot"])
+  frame[key]=start[key].map((n,i)=>blendNumber(n,end[key][i],t));
+ const a=CHEST[from]||CHEST.mountain,b=CHEST[to]||CHEST.mountain;
+ frame.chest=a.map((n,i)=>blendNumber(n,b[i],t));
+ return Object.freeze(frame);
+}
+function paintFrame(svg,frame){
+ for(const key of ["torso","leftArm","rightArm","leftLeg"])
+  svg.querySelector('[data-figure-part="'+key+'"]').setAttribute("d",frame[key]);
+ svg.querySelector('[data-figure-part="rightLeg"]').setAttribute("d",frame.rightLeg);
+ const head=svg.querySelector("[data-figure-head]");
+ head.setAttribute("cx",frame.head[0]);head.setAttribute("cy",frame.head[1]);
+ for(const side of ["left","right"])for(const [part,xy]of [["hand",frame[side+"Hand"]],["foot",frame[side+"Foot"]]]){
+  const node=svg.querySelector('[data-figure-'+part+'="'+side+'"]');
+  node.setAttribute("cx",xy[0]);node.setAttribute("cy",xy[1]);
+ }
+ const zone=svg.querySelector(".figure-breath-zone");
+ for(const [attribute,value]of [["cx",frame.chest[0]],["cy",frame.chest[1]],["rx",frame.chest[2]],["ry",frame.chest[3]]])zone.setAttribute(attribute,value);
+}
+export function setFigureTransition(svg,from,to,progress){
+ if(!SHAPES[to])to="mountain";
+ svg.dataset.pose=to;
+ paintFrame(svg,figurePoseFrame(from,to,progress));
+ return svg;
+}
+
 export const FIGURE_POSES=Object.freeze(Object.keys(SHAPES));
 const FIGURE_MARKUP="<svg class=\"yoga-figure\" viewBox=\"0 0 420 420\" xmlns=\"http://www.w3.org/2000/svg\" role=\"img\" aria-label=\"Figura humana abstracta realizando una postura de yoga\">\n  <defs><radialGradient id=\"humanAura\"><stop offset=\"0\" stop-color=\"currentColor\" stop-opacity=\".19\"/><stop offset=\"1\" stop-color=\"currentColor\" stop-opacity=\"0\"/></radialGradient></defs>\n  <circle class=\"figure-aura\" cx=\"210\" cy=\"215\" r=\"158\" fill=\"url(#humanAura)\"/>\n  <circle class=\"figure-guide figure-guide-one\" cx=\"210\" cy=\"215\" r=\"133\"/>\n  <circle class=\"figure-guide figure-guide-two\" cx=\"210\" cy=\"215\" r=\"104\"/>\n  <path class=\"figure-floor\" d=\"M66 376H354\"/>\n  <g class=\"figure-human\">\n    <path class=\"figure-torso\" data-figure-part=\"torso\"/>\n    <ellipse class=\"figure-breath-zone\" cx=\"210\" cy=\"204\" rx=\"43\" ry=\"58\"/>\n    <path class=\"figure-shoulders\" d=\"M177 165Q210 143 243 165\"/>\n    <path data-figure-part=\"leftArm\"/><path data-figure-part=\"rightArm\"/>\n    <path data-figure-part=\"leftLeg\"/><path data-figure-part=\"rightLeg\"/>\n    <circle class=\"figure-head\" data-figure-head r=\"27\"/>\n    <circle class=\"figure-joint\" data-figure-hand=\"left\" r=\"6\"/>\n    <circle class=\"figure-joint\" data-figure-hand=\"right\" r=\"6\"/>\n    <circle class=\"figure-contact\" data-figure-foot=\"left\" r=\"7\"/>\n    <circle class=\"figure-contact\" data-figure-foot=\"right\" r=\"7\"/>\n  </g>\n  <g class=\"figure-measure\" fill=\"none\"><path d=\"M210 20V47M210 383V402M19 215H47M373 215H401\"/></g>\n </svg>";
 
@@ -24,25 +71,7 @@ export function createFigure(host,{pose="mountain",label="Figura humana en movim
  return svg;
 }
 export function setFigurePose(svg,pose){
- const item=SHAPES[pose]||SHAPES.mountain;
- svg.dataset.pose=SHAPES[pose]?pose:"mountain";
- for(const key of ["torso","leftArm","rightArm","leftLeg","rightLeg"]){
-  svg.querySelector('[data-figure-part="'+key+'"]').setAttribute("d",item[key]);
- }
- svg.querySelector("[data-figure-head]").setAttribute("cx",item.head[0]);
- svg.querySelector("[data-figure-head]").setAttribute("cy",item.head[1]);
- for(const side of ["left","right"]){
-  for(const [part,xy]of [["hand",item[side+"Hand"]],["foot",item[side+"Foot"]]]){
-   const node=svg.querySelector('[data-figure-'+part+'="'+side+'"]');
-   node.setAttribute("cx",xy[0]);node.setAttribute("cy",xy[1]);
-  }
- }
- const chest=svg.querySelector(".figure-breath-zone");
- chest.setAttribute("cx",pose==="child"?225:pose==="fold"?196:210);
- chest.setAttribute("cy",pose==="child"?280:pose==="fold"?255:204);
- chest.setAttribute("rx",pose==="child"?57:43);
- chest.setAttribute("ry",pose==="child"?34:58);
- return svg;
+ return setFigureTransition(svg,pose,pose,1);
 }
 export function setFigureBreath(svg,expansion){
  const value=Math.max(0,Math.min(1,Number.isFinite(expansion)?expansion:.5));

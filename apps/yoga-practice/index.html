@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="robots" content="noindex,nofollow">
+ <meta name="theme-color" content="#f4f1e8">
+ <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; base-uri 'self'; object-src 'none'">
+ <title>Yoga Practice · Sesiones guiadas</title>
+ <meta name="description" content="Práctica independiente de yoga, respiración y meditación. Vista previa de desarrollo.">
+ <link rel="stylesheet" href="../shared/app.css">
+ <script src="../../practice-time-core.js" defer></script>
+ <script src="../../studio-clock.js" defer></script>
+ <script src="./app.js" defer></script>
+</head>
+<body data-theme="light">
+<main id="practice-app" class="app-page">
+ <header class="app-bar">
+  <div class="app-brand"><div class="app-monogram" aria-hidden="true">Y</div><div class="app-brand-copy"><strong>YOGA PRACTICE</strong><small class="lang-es">PRÁCTICA GUIADA</small><small class="lang-en">GUIDED PRACTICE</small></div></div>
+  <div class="app-actions"><button id="switch-language" class="pill-action" type="button" aria-label="Cambiar idioma">EN</button><button id="switch-theme" class="pill-action" type="button" aria-pressed="false" aria-label="Cambiar tema">☾</button></div>
+ </header>
+ <div class="app-intro">
+  <p class="app-kicker"><span class="lang-es">ESTUDIO PERSONAL · VISTA PREVIA</span><span class="lang-en">PERSONAL STUDIO · PREVIEW</span></p>
+  <h1><span class="lang-es">Tu tiempo.<br>Tu práctica.</span><span class="lang-en">Your time.<br>Your practice.</span></h1>
+  <p><span class="lang-es">Movimiento, respiración y meditación a tu ritmo. Sin comparaciones, sin prisas y sin música automática.</span><span class="lang-en">Movement, breathing and meditation at your own pace. No comparisons, no rush and no autoplay music.</span></p>
+ </div>
+ <div class="app-grid">
+  <section class="panel practice-panel" aria-labelledby="practice-modes-title">
+   <div class="panel-head"><p id="practice-modes-title" class="eyebrow"><span class="lang-es">ELIGE TU SESIÓN</span><span class="lang-en">CHOOSE YOUR SESSION</span></p><span class="panel-number">01 / 03</span></div>
+   <div id="practice-modes" class="segmented" role="tablist" aria-label="Tipo de práctica">
+    <button role="tab" id="mode-movement" data-mode="movement" aria-selected="true" tabindex="0" type="button"><span class="lang-es">Movimiento</span><span class="lang-en">Movement</span></button>
+    <button role="tab" id="mode-breath" data-mode="breath" aria-selected="false" tabindex="-1" type="button"><span class="lang-es">Respiración</span><span class="lang-en">Breathing</span></button>
+    <button role="tab" id="mode-meditation" data-mode="meditation" aria-selected="false" tabindex="-1" type="button"><span class="lang-es">Meditación</span><span class="lang-en">Meditation</span></button>
+   </div>
+   <div class="eyebrow"><span class="lang-es">DURACIÓN</span><span class="lang-en">DURATION</span></div>
+   <div class="duration-options" id="practice-durations" role="group" aria-label="Duración de la sesión">
+    <button type="button" data-minutes="5" aria-pressed="true">5 min</button>
+    <button type="button" data-minutes="10" aria-pressed="false">10 min</button>
+    <button type="button" data-minutes="15" aria-pressed="false">15 min</button>
+   </div>
+   <div class="practice-step" id="practice-step">Llegar</div>
+   <p class="practice-cue" id="practice-cue">Encuentra una posición cómoda y comprueba cómo te sientes hoy.</p>
+   <div class="practice-timer" id="practice-time" role="timer" aria-label="Tiempo restante">05:00</div>
+   <div id="practice-progress" class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Progreso de la sesión"><div id="practice-progress-fill"></div></div>
+   <div class="action-row"><button class="action action-primary" type="button" id="practice-primary">Empezar</button><button class="action" type="button" id="practice-reset">Reiniciar</button></div>
+   <p class="app-status" role="status" aria-live="polite" id="practice-status"></p>
+   <p class="small-note"><span class="lang-es">La sesión se pausa al salir de esta pestaña. No recopila datos ni reproduce audio.</span><span class="lang-en">Your session pauses when you leave the tab. No data collection or audio playback.</span></p>
+  </section>
+  <aside id="practice-visual" class="panel practice-visual" data-mode="movement" aria-label="Ilustración de práctica">
+   <div class="panel-head" style="align-self:stretch"><p class="eyebrow"><span class="lang-es">EL MOMENTO PRESENTE</span><span class="lang-en">THE PRESENT MOMENT</span></p><span class="panel-number" id="practice-mode-number">01 / 03</span></div>
+   <svg class="practice-symbol" viewBox="0 0 360 360" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <circle class="ring outer" cx="180" cy="180" r="158"/><circle class="ring inner" cx="180" cy="180" r="123"/><circle class="ring" cx="180" cy="180" r="90"/>
+    <g class="shape shape-movement"><path d="M113 250C133 224 153 206 180 180S224 136 249 110"/><path d="M110 160C150 159 168 145 180 111C192 145 212 159 250 160"/><path d="M180 180L144 254M180 180L218 254"/><circle cx="180" cy="92" r="18"/></g>
+    <g class="shape shape-breath"><path d="M65 149C105 112 135 112 180 149C224 186 255 186 295 149"/><path d="M65 207C105 170 135 170 180 207C224 244 255 244 295 207"/><path d="M65 264C105 227 135 227 180 264C224 301 255 301 295 264"/></g>
+    <g class="shape shape-meditation"><path d="M180 105C213 140 225 158 180 193C135 158 147 140 180 105Z"/><path d="M180 193C222 159 263 171 286 214C242 240 211 231 180 193Z"/><path d="M180 193C138 159 97 171 74 214C118 240 149 231 180 193Z"/><path d="M180 193C209 219 201 252 180 275C159 252 151 219 180 193Z"/></g>
+    <circle class="core" cx="180" cy="180" r="5"/>
+   </svg>
+   <div class="practice-stage-label" id="practice-visual-label">MOVIMIENTO · 01</div>
+  </aside>
+ </div>
+ <footer class="app-footer"><span>Yoga Practice · Gracián Baena</span><span class="lang-es">Una aplicación independiente en desarrollo</span><span class="lang-en">An independent app in development</span></footer>
+</main>
+</body>
+</html>

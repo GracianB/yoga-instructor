@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="es">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+ <meta name="robots" content="noindex,nofollow">
+ <meta name="theme-color" content="#f4f1e8">
+ <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self'; base-uri 'self'; object-src 'none'">
+ <title>Yoga Asana Book · 12 posturas</title>
+ <meta name="description" content="Libro de 12 posturas de yoga con instrucciones bilingües, apoyos y diagramas originales. Vista previa de desarrollo.">
+ <link rel="stylesheet" href="../shared/app.css">
+ <script src="../../asana-library.js" defer></script>
+ <script src="../../asana-domain.js" defer></script>
+ <script src="./app.js" defer></script>
+</head>
+<body data-theme="light">
+<main id="asana-app" class="app-page">
+ <header class="app-bar">
+  <div class="app-brand"><div class="app-monogram" aria-hidden="true">A</div><div class="app-brand-copy"><strong>YOGA ASANA BOOK</strong><small class="lang-es">LIBRO DE POSTURAS</small><small class="lang-en">POSTURE BOOK</small></div></div>
+  <div class="app-actions"><button id="switch-language" class="pill-action" type="button" aria-label="Cambiar idioma">EN</button><button id="switch-theme" class="pill-action" type="button" aria-pressed="false" aria-label="Cambiar tema">☾</button></div>
+ </header>
+ <div class="app-intro">
+  <p class="app-kicker"><span class="lang-es">ATLAS DE ASANAS · VISTA PREVIA</span><span class="lang-en">ASANA ATLAS · PREVIEW</span></p>
+  <h1><span class="lang-es">Un movimiento.<br>Muchas formas.</span><span class="lang-en">One movement.<br>Many ways.</span></h1>
+  <p><span class="lang-es">Explora doce posturas originales, sus apoyos y tres momentos: preparar, respirar y salir. Sin posturas obligatorias.</span><span class="lang-en">Explore twelve original postures, their supports and three moments: setting up, breathing and releasing. No forced poses.</span></p>
+ </div>
+ <div class="app-grid book-layout">
+  <aside class="panel book-controls" aria-labelledby="catalog-title">
+   <div class="panel-head"><p class="eyebrow" id="catalog-title"><span class="lang-es">ELIGE UNA POSTURA</span><span class="lang-en">CHOOSE A POSTURE</span></p><span class="panel-number" id="asana-count">12 / 12</span></div>
+   <input type="search" class="search" id="asana-search" placeholder="Buscar postura" autocomplete="off" aria-label="Buscar asana">
+   <div class="filters" id="asana-filters" role="group" aria-label="Filtrar por familia">
+    <button type="button" data-filter="all" aria-pressed="true"><span class="lang-es">Todas</span><span class="lang-en">All</span></button>
+    <button type="button" data-filter="standing" aria-pressed="false"><span class="lang-es">De pie</span><span class="lang-en">Standing</span></button>
+    <button type="button" data-filter="seated" aria-pressed="false"><span class="lang-es">Sentadas</span><span class="lang-en">Seated</span></button>
+    <button type="button" data-filter="restorative" aria-pressed="false"><span class="lang-es">Descanso</span><span class="lang-en">Restorative</span></button>
+   </div>
+   <div id="asana-list" class="asana-list" role="list" aria-label="Lista de asanas"></div>
+   <p class="small-note"><span class="lang-es">Material educativo. Respeta tus límites y detén cualquier postura que resulte dolorosa.</span><span class="lang-en">Educational material. Respect your limits and stop any painful position.</span></p>
+  </aside>
+  <section class="panel asana-view" aria-labelledby="asana-name">
+   <div class="panel-head"><p class="eyebrow"><span class="lang-es">ESTUDIO DE POSTURA</span><span class="lang-en">POSTURE STUDY</span></p><span class="book-badge" id="asana-category">DE PIE</span></div>
+   <div class="asana-art" id="asana-stage" role="img" aria-label="Diagrama de la postura"></div>
+   <h2 id="asana-name" tabindex="-1">Montaña · Tadasana</h2>
+   <p id="asana-cue" class="asana-description"></p>
+   <div class="asana-details">
+    <article><h3><span class="lang-es">Preparar</span><span class="lang-en">Set up</span></h3><p id="asana-setup"></p></article>
+    <article><h3><span class="lang-es">Respirar</span><span class="lang-en">Breathe</span></h3><p id="asana-breath"></p></article>
+    <article><h3><span class="lang-es">Salir</span><span class="lang-en">Release</span></h3><p id="asana-exit"></p></article>
+   </div>
+   <p id="asana-support" class="asana-support"></p>
+   <div class="book-previous-next"><button id="asana-previous" type="button"><span class="lang-es">← Anterior</span><span class="lang-en">← Previous</span></button><button id="asana-next" type="button"><span class="lang-es">Siguiente →</span><span class="lang-en">Next →</span></button></div>
+   <p class="app-status" id="asana-status" role="status" aria-live="polite"></p>
+  </section>
+ </div>
+ <footer class="app-footer"><span>Yoga Asana Book · Gracián Baena</span><span class="lang-es">12 ilustraciones construidas a partir de las geometrías originales</span><span class="lang-en">12 illustrations drawn from original posture geometry</span></footer>
+</main>
+</body>
+</html>

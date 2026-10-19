@@ -44,9 +44,10 @@
         '<li><span class="studio-library-step-label"></span><p class="studio-library-step-text"></p></li>'+
       '</ol></section></div></div>'+
     '<p class="studio-library-foot"></p>';
-  // A separate editorial chapter BEFORE the three-mode practice studio.
-  // The book is not a Movement sub-tab and never starts the guided clock.
-  root.before(section);
+  // P2: the book belongs inside Movement as an optional reference, not
+  // another character stage preceding the three-mode studio.
+  section.dataset.p2BookOpen="false";
+  root.appendChild(section);
   const dockToggle=section.querySelector(".studio-library-dock-toggle");
   // The global floating dock obscured long asana coaching text. Keep its
   // controls available on demand, never permanently discard them.

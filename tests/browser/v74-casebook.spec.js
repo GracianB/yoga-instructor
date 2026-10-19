@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 test("V74: casebook has three evidence cards and a transparent example plan",async({page})=>{
- await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  const root=page.locator("#casos");
  await expect(root).toBeVisible();
  await expect(root.locator(".v74-case")).toHaveCount(3);
@@ -10,7 +10,7 @@ test("V74: casebook has three evidence cards and a transparent example plan",asy
  await expect(root.locator("#v74-steps li")).toHaveCount(4);
 });
 test("V74: minute allocations sum perfectly for each setting and length",async({page})=>{
- await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  const root=page.locator("#casos");
  for(const setting of ["sala","individual","equipos"]){
   await root.locator("#v74-setting").selectOption(setting);
@@ -25,7 +25,7 @@ test("V74: minute allocations sum perfectly for each setting and length",async({
  await expect(root.locator('a[data-v74-text="trySequence"]')).toHaveAttribute("href","#studio-asana-library");
 });
 test("V74: links from each case open the matching example session",async({page})=>{
- await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  for(const [study,selected] of [["sala","sala"],["personal","individual"],["corporate","equipos"]]){
   const link=page.locator(".v74-case--"+study+" [data-v74-choose]");
   await expect(link).toHaveAttribute("href","#programa");
@@ -36,7 +36,7 @@ test("V74: links from each case open the matching example session",async({page})
 });
 test("V74: English translation and small-screen sizing",async({page})=>{
  await page.setViewportSize({width:375,height:812});
- await page.goto("/",{waitUntil:"domcontentloaded"});
+ await page.goto("/",{waitUntil:"domcontentloaded"}); await page.locator("#p2-extras > summary").evaluate(el=>el.click());
  await page.locator('[data-set-lang="en"]').first().evaluate(el=>el.click());
  const root=page.locator("#casos");
  await expect(root.locator("#v74-title")).toContainText("teaching poses");

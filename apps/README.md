@@ -36,3 +36,10 @@ Fuentes de las tres guías de YouTube: canal Meditación3, vídeos `0sjVoX5ASwg`
 Movimiento muestra «Explorar esta postura en el libro» con un enlace directo de tipo `?pose=mountain`, `?pose=fold` o `?pose=child`. El libro valida el identificador antes de utilizarlo y permite compartir la postura mediante su URL. Las figuras nuevas se añaden al mismo renderer sin duplicar estilos.
 
 El reloj de práctica renderiza los cambios a **10 Hz** con interpolación visual y continúa usando un único reloj monotónico; pausar cancela la animación.
+
+## V1.4 · Interacción consolidada
+- **Movimiento:** la secuencia permanece fija (240 s). Los primeros 12 s de la segunda y tercera asana interpolan puntos de la figura humana entre posturas. Un único reloj regula las transiciones, pausas y reinicios. Se respeta la preferencia de movimiento reducido.
+- **Respiración:** siguen los cinco ritmos, todos orientativos. Las retenciones son opcionales. Los enlaces de modo no inician una sesión automáticamente.
+- **Asana Book:** barra horizontal de posturas en móviles, catálogo con desplazamiento propio en escritorio. El teclado conserva el foco al seleccionar una ficha y admite flechas e Inicio/Fin.
+- **Enlaces:** ?pose=child&lang=en abre directamente una ficha en inglés; ?mode=breath&pattern=4444&lang=en abre una modalidad lista para empezar, sin autoplay. El idioma acompaña los enlaces entre apps.
+- **Calidad:** se añaden pruebas de geometría intermedia, deep links bilingües, recuperación tras recarga, accesibilidad de teclado y adaptación móvil.

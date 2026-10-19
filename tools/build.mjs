@@ -50,7 +50,7 @@ function stripRetiredSections(document){
 }
 // No legacy studio or book script is loaded by the PUBLIC document.
 // Keep source bundles in the repository for historical/standalone tests.
-const publicScripts=new Set(["runtime.js","boot.js","i18n.js","main.js","p2-navigation.js"]);
+const publicScripts=new Set(["runtime.js","boot.js","i18n.js","main.js","p2-navigation.js","yoga-enquiry-v76.js"]);
 function stripRetiredPublicScripts(html){
   return html.replace(/<script\b[^>]*\bsrc="\.\/([^"?#]+\.js)(?:\?[^"]*)?"[^>]*><\/script>/gi,
     (tag,file)=>publicScripts.has(file)?tag:"");

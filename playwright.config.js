@@ -20,7 +20,8 @@ module.exports = defineConfig({
     // Source / remains the historical baseline for all existing browser tests.
     command: 'npm run build && npm start',
     url: 'http://127.0.0.1:4185',
-    reuseExistingServer: !process.env.CI
+    reuseExistingServer: !process.env.CI,
+    env: { YOGA_E2E_LEGACY_ROOT: '1' }
   },
   projects: ['chromium', 'firefox', 'webkit'].map(browserName => ({
     name: browserName,

@@ -6119,3 +6119,15 @@ html:not([data-lang="en"]) [data-p2-lang="en"],html[data-lang="en"] [data-p2-lan
 #main[data-p2-mode="short"][data-p2-focus="instructor-flow"] > #soundtrack,
 #main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto {display:block!important}
 #main[data-p2-focus] > :is(#sobre,#oferta,#experiencia,#instructor-flow,#contacto){scroll-margin-top:calc(var(--header) + 22px)}
+
+
+/* P2 · The home page is not an ambient music player. The floating sanctuary
+   dock consumed a substantial part of the 390px and desktop first viewport.
+   Its breath/music controls remain available in the complete archive.
+   In the short experience the integrated player lives beside the studio. */
+body:has(#main[data-p2-mode="short"]) .sanctuary-dock{display:none!important}
+#main[data-p2-mode="short"] .p2-route[aria-current="location"]{
+ border-color:var(--sage);
+ background:color-mix(in srgb,var(--sage) 20%,var(--surface));
+ box-shadow:inset 3px 0 0 var(--sage);
+}

@@ -68,3 +68,8 @@ Un visitante debe identificar en menos de una pantalla **quién eres, qué ofrec
 ## P2 | Recorrido por destino seleccionado
 
 Al pulsar uno de los cinco destinos del mapa, la portada pasa de un índice de secciones a **una sola sección protagonista**. La navegación superior cambia entre destinos; la música solo se muestra acompañando al estudio. El botón de contenido completo y los enlaces históricos conservan toda la información, y los enlaces directos abren la sección solicitada. La experiencia original sin JavaScript no oculta contenido.
+
+
+### Auditoría de capturas: música y superposiciones
+
+La captura real del primer pantallazo de P2 aún mostraba un panel flotante de respiración/música de gran tamaño, aunque la sección sonora ya se había reunido con el estudio. En lectura breve se oculta ese panel global para evitar tapar contenido y ofrecer una sola entrada a la música: el reproductor de la sala. Al abrir el contenido completo se recuperan los controles ambientales. El mapa indica el destino seleccionado mediante estado visual y `aria-current=location`.

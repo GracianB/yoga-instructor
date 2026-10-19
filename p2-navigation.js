@@ -14,9 +14,19 @@
   for(const id of chapters)if(node.id===id||node.closest("#"+id))return id;
   return null;
  };
+ const routes=[...document.querySelectorAll(".p2-route")];
+ const markCurrentRoute=()=>{
+  for(const route of routes){
+   const active=root.dataset.p2Mode==="short"&&
+    route.getAttribute("href")==="#"+root.dataset.p2Focus;
+   if(active)route.setAttribute("aria-current","location");
+   else route.removeAttribute("aria-current");
+  }
+ };
  const focus=id=>{
   if(id&&chapters.has(id)&&root.dataset.p2Mode==="short")root.dataset.p2Focus=id;
   else delete root.dataset.p2Focus;
+  markCurrentRoute();
  };
  const scrollToTarget=target=>{
   if(!target)return;
@@ -32,6 +42,7 @@
  const setFull=(full)=>{
   root.dataset.p2Mode=full?"full":"short";
   if(full)delete root.dataset.p2Focus;
+  markCurrentRoute();
   sync();
  };
  const revealHash=()=>{

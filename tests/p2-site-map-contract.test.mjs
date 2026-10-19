@@ -62,3 +62,12 @@ test("P2 supports focused visitor chapters while preserving browser access to th
  }
  assert.match(css,/#main\[data-p2-mode="short"\]\[data-p2-focus\]/);
 });
+
+test("P2 keeps global music controls out of the short landing view without deleting audio",()=>{
+ const css=readFileSync(new URL("../styles.css",import.meta.url),"utf8");
+ assert.match(css,/body:has\(#main\[data-p2-mode="short"\]\) \.sanctuary-dock\{display:none!important\}/);
+ const js=readFileSync(new URL("../p2-navigation.js",import.meta.url),"utf8");
+ assert.match(js,/aria-current","location"/);
+ assert.match(js,/markCurrentRoute\(\)/);
+ assert.match(html,/id="focus-audio"/);
+});

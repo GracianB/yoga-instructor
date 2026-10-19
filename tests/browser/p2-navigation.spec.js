@@ -90,3 +90,21 @@ test("P2 direct URL focuses the requested chapter rather than losing it in hidde
  await page.locator('.hero-scroll-cue').evaluate(el=>el.click());
  await expect(page.locator("#main")).not.toHaveAttribute("data-p2-focus",/./);
 });
+
+test("P2 removes the distracting global music dock from the compact homepage",async({page})=>{
+ await page.goto("/",{waitUntil:"domcontentloaded"});
+ await expect(page.locator(".sanctuary-dock")).toHaveCount(1);
+ await expect(page.locator(".sanctuary-dock")).toBeHidden();
+ await expect(page.locator("#soundtrack")).toBeVisible();
+ await page.locator('[data-p2-route="studio"]').click();
+ await expect(page.locator(".sanctuary-dock")).toBeHidden();
+ await expect(page.locator("#soundtrack")).toBeVisible();
+ await expect(page.locator('[data-p2-route="studio"]')).toHaveAttribute("aria-current","location");
+ await page.locator('[data-p2-route="about"]').click();
+ await expect(page.locator('[data-p2-route="about"]')).toHaveAttribute("aria-current","location");
+ await expect(page.locator('[data-p2-route="studio"]')).not.toHaveAttribute("aria-current",/./);
+ await page.locator("#p2-toggle").click();
+ await expect(page.locator("#main")).toHaveAttribute("data-p2-mode","full");
+ await expect(page.locator(".sanctuary-dock")).toBeVisible();
+ await expect(page.locator('[data-p2-route="about"]')).not.toHaveAttribute("aria-current",/./);
+});

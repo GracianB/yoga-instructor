@@ -6203,3 +6203,153 @@ body:has(#main[data-p2-mode="short"]) .sanctuary-dock{display:none!important}
 
 
 .p26-project-card .p26-status{align-self:flex-start;margin-top:auto;padding:7px 11px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--muted);font:600 11px/1.2 var(--sans);letter-spacing:.02em}
+
+/* ===============================================================
+   V1 FINAL · SMALL, ALIVE LOTUS · ONLY THE PROFESSIONAL PORTFOLIO
+   This final rule group also protects the SSR/no-JS first paint:
+   retired sections are explicitly hidden + inert in index.html.
+   =============================================================== */
+#main > section[hidden],
+#main section[hidden],
+#main #v76-enquiry,
+#main #v76-results,
+body .sanctuary-dock,
+body .hub-music,
+body .v97-skip,
+body #zintro { display:none!important; }
+body:has(#main) { padding-bottom:0!important; }
+/* Keep only these five visible main-page destinations. */
+#main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#contacto) {display:none!important;}
+#main #inicio.hero{--lotus-band:clamp(104px,30vw,155px);}
+#main #inicio.hero .mandala-parallax{
+  pointer-events:auto!important;
+  z-index:2!important;
+  overflow:visible!important;
+}
+/* This botanical SVG is deliberately smaller than the previous 39vw/570px. */
+#main #inicio.hero .mandala-parallax .hero-mandala{
+  width:clamp(160px,19vw,248px)!important;
+  height:auto!important;
+  max-width:none!important;
+  aspect-ratio:560 / 400!important;
+  left:50%!important;
+  top:50%!important;
+  opacity:1!important;
+  transform-origin:50% 50%!important;
+  filter:drop-shadow(0 9px 20px color-mix(in srgb,var(--petal-leaf) 18%,transparent))!important;
+  will-change:transform,filter;
+}
+#main #inicio.hero .mandala-parallax .hero-mandala .lotus-bloom{
+  transform-box:view-box!important;
+  transform-origin:280px 330px!important;
+  transition:none!important;
+}
+#main #inicio.hero .hero-mandala .lotus-wing{
+  transform-box:view-box!important;
+  transform-origin:280px 320px!important;
+  transition:none!important;
+}
+#main #inicio.hero .hero-mandala .lotus-water{
+  stroke-width:1.1!important;
+  opacity:.32!important;
+}
+#main #inicio.hero .mandala-parallax::before{
+  display:block!important;
+  content:""!important;
+  position:absolute!important;
+  left:50%!important;top:50%!important;
+  width:clamp(160px,20vw,260px)!important;
+  aspect-ratio:1!important;
+  border-radius:50%!important;
+  background:radial-gradient(circle,color-mix(in srgb,var(--sage) 15%,transparent),transparent 72%)!important;
+  transform:translate(-50%,-50%)!important;
+  pointer-events:none!important;
+  opacity:.42!important;
+}
+/* Noticeable on the first seconds, not 0.03 scale units over 19 seconds. */
+@keyframes yogaLotusFloatV1{
+  0%,100%{transform:translate(-50%,-50%) rotate(-4deg) translateY(4px)}
+  50%{transform:translate(-50%,-50%) rotate(4deg) translateY(-5px)}
+}
+@keyframes yogaLotusBloomV1{
+  0%,100%{transform:translateY(5px) scale(.94)}
+  21%,58%{transform:translateY(-9px) scale(1.045)}
+}
+@keyframes yogaLotusLeftV1{
+  0%,100%{transform:rotate(0deg) translateX(0)}
+  21%,58%{transform:rotate(-11deg) translateX(-5px)}
+}
+@keyframes yogaLotusRightV1{
+  0%,100%{transform:rotate(0deg) translateX(0)}
+  21%,58%{transform:rotate(11deg) translateX(5px)}
+}
+@keyframes yogaLotusGlowV1{
+  0%,100%{opacity:.32;transform:translate(-50%,-50%) scale(.9)}
+  21%,58%{opacity:.73;transform:translate(-50%,-50%) scale(1.18)}
+}
+@media (prefers-reduced-motion:no-preference){
+  #main #inicio.hero[data-breath="cycle"] .mandala-parallax .hero-mandala{
+    animation:yogaLotusFloatV1 8s ease-in-out infinite!important;
+  }
+  #main #inicio.hero[data-breath="cycle"] .hero-mandala .lotus-bloom{
+    animation:yogaLotusBloomV1 19s ease-in-out infinite!important;
+  }
+  #main #inicio.hero[data-breath="cycle"] .hero-mandala .lotus-wing-left{
+    animation:yogaLotusLeftV1 19s ease-in-out infinite!important;
+  }
+  #main #inicio.hero[data-breath="cycle"] .hero-mandala .lotus-wing-right{
+    animation:yogaLotusRightV1 19s ease-in-out infinite!important;
+  }
+  #main #inicio.hero[data-breath="cycle"] .mandala-parallax::before{
+    animation:yogaLotusGlowV1 19s ease-in-out infinite!important;
+  }
+  #main #inicio.hero .mandala-parallax:hover .hero-mandala{
+    animation-duration:4.5s!important;
+    filter:brightness(1.08) drop-shadow(0 8px 24px color-mix(in srgb,var(--sage) 35%,transparent))!important;
+  }
+  #main #inicio.hero .mandala-parallax:hover .lotus-bloom{
+    animation-duration:9.5s!important;
+  }
+  #main #inicio.hero .mandala-parallax:hover::before{
+    animation-duration:9.5s!important;
+  }
+}
+@media(max-width:900px){
+  #main #inicio.hero{--lotus-band:clamp(112px,28vw,160px);}
+  #main[data-p2-mode="short"] #inicio.hero{
+    padding-top:calc(var(--lotus-band) + 24px)!important;
+  }
+  #main #inicio.hero .mandala-parallax{inset:0!important;pointer-events:none!important;}
+  #main #inicio.hero .mandala-parallax .hero-mandala{
+    width:clamp(126px,34vw,185px)!important;
+    left:50%!important;
+    top:calc(var(--lotus-band) / 2 + 15px)!important;
+  }
+  #main #inicio.hero .mandala-parallax::before{
+    width:clamp(128px,36vw,195px)!important;
+    left:50%!important;
+    top:calc(var(--lotus-band) / 2 + 15px)!important;
+  }
+  #main #inicio.hero .hero-inner{padding-top:14px!important;}
+}
+@media(max-width:420px){
+  #main #inicio.hero{--lotus-band:110px;}
+  #main #inicio.hero .mandala-parallax .hero-mandala{width:126px!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  #main #inicio.hero .mandala-parallax .hero-mandala,
+  #main #inicio.hero .hero-mandala .lotus-bloom,
+  #main #inicio.hero .hero-mandala .lotus-wing,
+  #main #inicio.hero .mandala-parallax::before{
+    animation:none!important;transition:none!important;
+  }
+  #main #inicio.hero .mandala-parallax .hero-mandala{
+    transform:translate(-50%,-50%)!important;will-change:auto!important;
+  }
+}
+body.quiet-mode #main #inicio.hero .mandala-parallax .hero-mandala,
+body.quiet-mode #main #inicio.hero .hero-mandala .lotus-bloom,
+body.quiet-mode #main #inicio.hero .hero-mandala .lotus-wing,
+body.quiet-mode #main #inicio.hero .mandala-parallax::before{
+ animation:none!important;transition:none!important;
+}

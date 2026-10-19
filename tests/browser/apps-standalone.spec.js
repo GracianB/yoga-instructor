@@ -1,0 +1,53 @@
+const {test,expect}=require("@playwright/test");
+for(const prefix of ["","/dist"]){
+ test("Yoga Practice mode switch, timer, theme, language: "+prefix,async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.goto(prefix+"/apps/yoga-practice/",{waitUntil:"domcontentloaded"});
+  await expect(page.locator("#practice-time")).toHaveText("05:00");
+  await page.locator('[data-minutes="10"]').click();
+  await expect(page.locator("#practice-time")).toHaveText("10:00");
+  await page.locator("#practice-primary").click();
+  await expect(page.locator("#practice-primary")).toHaveText("Pausar");
+  await page.locator("#practice-primary").click();
+  await expect(page.locator("#practice-primary")).toHaveText("Continuar");
+  await page.locator('[data-mode="breath"]').click();
+  await expect(page.locator('[data-mode="breath"]')).toHaveAttribute("aria-selected","true");
+  await expect(page.locator("#practice-primary")).toHaveText("Empezar");
+  await expect(page.locator("#practice-time")).toHaveText("10:00");
+  await page.locator("#mode-breath").focus();
+  await page.keyboard.press("ArrowRight");
+  await expect(page.locator("#mode-meditation")).toHaveAttribute("aria-selected","true");
+  await page.locator("#switch-language").click();
+  await expect(page.locator("#practice-primary")).toHaveText("Start");
+  await expect(page.locator("h1")).toContainText("Your time.");
+  await page.locator("#switch-theme").click();
+  await expect(page.locator("body")).toHaveAttribute("data-theme","dark");
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2)).toBe(true);
+ });
+ test("Yoga Asana Book search, filters, diagram, bilingual controls: "+prefix,async({page})=>{
+  await page.setViewportSize({width:390,height:844});
+  await page.goto(prefix+"/apps/asana-book/",{waitUntil:"domcontentloaded"});
+  await expect(page.locator("#asana-list [data-asana-id]")).toHaveCount(12);
+  await expect(page.locator("#asana-name")).toContainText("Montaña");
+  await expect(page.locator("#asana-stage svg")).toHaveCount(1);
+  await expect(page.locator("#asana-stage .stage-limb")).toHaveCount(4);
+  await page.locator('[data-asana-id="v68-warrior-ii"]').click();
+  await expect(page.locator("#asana-name")).toContainText("Guerrero");
+  await expect(page.locator("#asana-setup")).not.toBeEmpty();
+  await expect(page.locator("#asana-support")).not.toBeEmpty();
+  await page.locator("#asana-search").fill("mariposa");
+  await expect(page.locator("#asana-list [data-asana-id]")).toHaveCount(1);
+  await expect(page.locator("#asana-name")).toContainText("Mariposa");
+  await page.locator("#asana-search").fill("");
+  await page.locator('[data-filter="restorative"]').click();
+  await expect(page.locator("#asana-list [data-asana-id]")).toHaveCount(2);
+  await page.locator('[data-filter="all"]').click();
+  await page.locator('[data-asana-id="d24-butterfly"]').click();
+  await page.locator("#switch-language").click();
+  await expect(page.locator("#asana-name")).toContainText("Butterfly");
+  await expect(page.locator("#asana-search")).toHaveAttribute("placeholder","Search postures");
+  await page.locator("#switch-theme").click();
+  await expect(page.locator("body")).toHaveAttribute("data-theme","dark");
+  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+2)).toBe(true);
+ });
+}

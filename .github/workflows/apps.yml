@@ -1,0 +1,52 @@
+name: Yoga Apps
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/**'
+      - 'tests/apps-standalone.test.mjs'
+      - 'tests/browser/apps-standalone.spec.js'
+      - 'tools/build.mjs'
+      - '.github/workflows/apps.yml'
+  pull_request:
+    paths:
+      - 'apps/**'
+      - 'tests/apps-standalone.test.mjs'
+      - 'tests/browser/apps-standalone.spec.js'
+      - 'tools/build.mjs'
+      - '.github/workflows/apps.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: yoga-apps-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  apps:
+    name: Independent app smoke and browser
+    runs-on: ubuntu-latest
+    timeout-minutes: 16
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate the two app controllers and original domain data
+        run: node --test tests/apps-standalone.test.mjs
+      - name: Assemble the real Pages preview artifact
+        run: npm run build
+      - name: Install Chromium for app UI tests
+        run: npx playwright install --with-deps chromium
+      - name: Verify both apps at source and compiled preview URLs
+        run: npx playwright test tests/browser/apps-standalone.spec.js --project=chromium --workers=2
+      - uses: actions/upload-artifact@v6
+        if: failure()
+        with:
+          name: yoga-apps-browser-failures
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: warn
+          retention-days: 7

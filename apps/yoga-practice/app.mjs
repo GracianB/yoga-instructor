@@ -1,13 +1,13 @@
 import {BREATH_PATTERNS,MOVEMENT_STEPS,GUIDED_VIDEOS,SessionClock,breathFrame,movementFrame,sumMovementSeconds} from "../shared/core.mjs";
 import {createFigure,setFigurePose,setFigureBreath} from "../shared/figure.mjs";
 
-const $=s=>document.querySelector(s), $=s=>[...document.querySelectorAll(s)];
-const updateText=(key,value)=>{const node=$(key);if(node.textContent!==value)node.textContent=value;};
-const updateHTML=(key,value)=>{const node=$(key);if(node.innerHTML!==value)node.innerHTML=value;};
+const selectOne=s=>document.querySelector(s),selectAll=s=>[...document.querySelectorAll(s)];
+const updateText=(key,value)=>{const node=selectOne(key);if(node.textContent!==value)node.textContent=value;};
+const updateHTML=(key,value)=>{const node=selectOne(key);if(node.innerHTML!==value)node.innerHTML=value;};
 let lang="es",mode="movement",pattern="natural",meditation="silent",minutes=5,lastPose="";
 const clock=new SessionClock();
 let frameHandle=null;
-const figure=createFigure($("#figure-root"),{pose:"mountain",label:"Representación vectorial de una persona realizando una postura"});
+const figure=createFigure(selectOne("#figure-root"),{pose:"mountain",label:"Representación vectorial de una persona realizando una postura"});
 const vocabulary={
  es:{movement:["01 / MOVIMIENTO","Tres acciones.<br><em>Un solo recorrido.</em>","Una secuencia fija y progresiva: estar de pie, flexionar con apoyo y descansar."],
  breath:["02 / RESPIRACIÓN","Un ritmo.<br><em>Tu propia respiración.</em>","Observa cómo la figura acompaña cada fase sin pedir que fuerces el aire."],
@@ -35,12 +35,12 @@ const vocabulary={
 function applyLanguage(next){
  lang=next==="en"?"en":"es";
  document.documentElement.lang=lang;
- for(const el of $$("[data-es][data-en]")){
+ for(const el of selectAll("[data-es][data-en]")){
   const value=el.getAttribute("data-"+lang);
   if(value.includes("<br>"))el.innerHTML=value;
   else el.textContent=value;
  }
- for(const btn of $$("[data-lang]"))btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang));
+ for(const btn of selectAll("[data-lang]"))btn.setAttribute("aria-pressed",String(btn.dataset.lang===lang));
  paint();
 }
 const durationFor=()=>mode==="movement"?sumMovementSeconds():mode==="breath"?300:minutes*60;
@@ -62,16 +62,16 @@ function resetSession(){
 function setMode(next,{focus=false}={}){
  if(!["movement","breath","meditation"].includes(next))return;
  mode=next;
- for(const button of $$("[data-mode]")){
+ for(const button of selectAll("[data-mode]")){
   const active=button.dataset.mode===mode;
   button.setAttribute("aria-selected",String(active));button.tabIndex=active?0:-1;
   if(active&&focus)button.focus();
  }
- $("#movement-options").hidden=mode!=="movement";
- $("#breath-options").hidden=mode!=="breath";
- $("#meditation-options").hidden=mode!=="meditation";
+ selectOne("#movement-options").hidden=mode!=="movement";
+ selectOne("#breath-options").hidden=mode!=="breath";
+ selectOne("#meditation-options").hidden=mode!=="meditation";
  document.documentElement.dataset.mode=mode;
- $("#mode-panel").setAttribute("aria-labelledby","tab-"+mode);
+ selectOne("#mode-panel").setAttribute("aria-labelledby","tab-"+mode);
  resetSession();
 }
 function formatTime(seconds){
@@ -86,19 +86,19 @@ function paint(){
  updateText("#stage-eyebrow",base[0]);
  updateHTML("#stage-title",base[1]);
  updateText("#stage-cue",base[2]);
- $("#controls").hidden=guided;
- $("#pose-book-link").hidden=mode!=="movement";
+ selectOne("#controls").hidden=guided;
+ selectOne("#pose-book-link").hidden=mode!=="movement";
  updateText("#clock",guided?"—:—":formatTime(snapshot.remaining));
  updateText("#stage-status",guided?t.noAudio:t.statuses[snapshot.status]);
  updateText("#primary",snapshot.status==="running"?t.actions.pause:snapshot.status==="paused"?t.actions.resume:snapshot.status==="finished"?t.actions.restart:t.actions.start);
  let progress=snapshot.progress,phase="",detail="",pose="seated",expansion=.5;
  if(mode==="movement"){
   const f=movementFrame(snapshot.elapsed);
-  $("#pose-book-link").href="../yoga-asana-book/?pose="+encodeURIComponent(f.item.id);
+  selectOne("#pose-book-link").href="../yoga-asana-book/?pose="+encodeURIComponent(f.item.id);
   phase=f.item.title[lang];detail=f.item.support[lang];
   pose=f.item.pose;progress=f.totalProgress;
   updateText("#phase-remaining",formatTime(f.remaining));
-  $$("#movement-steps li").forEach((node,i)=>{node.classList.toggle("current",i===f.index);});
+  selectAll("#movement-steps li").forEach((node,i)=>{node.classList.toggle("current",i===f.index);});
   updateText("#visual-caption",f.item.pose.toUpperCase());
   // Subtle body response. No fantasy creature and no animated face.
   expansion=.45+.06*Math.sin(snapshot.elapsed*2*Math.PI/6);
@@ -122,8 +122,8 @@ function paint(){
  }
  updateText("#phase-label",phase);
  updateText("#stage-support",detail);
- $("#progress-fill").style.width=(Math.max(0,Math.min(1,progress))*100).toFixed(2)+"%";
- $(".progress").setAttribute("aria-valuenow",String(Math.round(progress*100)));
+ selectOne("#progress-fill").style.width=(Math.max(0,Math.min(1,progress))*100).toFixed(2)+"%";
+ selectOne(".progress").setAttribute("aria-valuenow",String(Math.round(progress*100)));
  if(pose!==lastPose){setFigurePose(figure,pose);lastPose=pose;}
  const figureLabel=mode==="movement"?(lang==="es"?"Postura: ":"Pose: ")+phase:mode==="breath"?(lang==="es"?"Respiración: ":"Breathing: ")+phase:(lang==="es"?"Figura humana en meditación":"Human figure in meditation");
  if(figure.getAttribute("aria-label")!==figureLabel)figure.setAttribute("aria-label",figureLabel);
@@ -136,7 +136,7 @@ function play(){
  else{clock.reset(durationFor());clock.start();startFrames();}
  paint();
 }
-for(const button of $$("[data-mode]")){
+for(const button of selectAll("[data-mode]")){
  button.addEventListener("click",()=>setMode(button.dataset.mode));
  button.addEventListener("keydown",event=>{
   const allowed=["ArrowRight","ArrowLeft","Home","End"];
@@ -147,32 +147,32 @@ for(const button of $$("[data-mode]")){
   setMode(values[next],{focus:true});
  });
 }
-$("#primary").addEventListener("click",play);
-$("#reset").addEventListener("click",resetSession);
-for(const button of $$("[data-pattern]")){
+selectOne("#primary").addEventListener("click",play);
+selectOne("#reset").addEventListener("click",resetSession);
+for(const button of selectAll("[data-pattern]")){
  button.addEventListener("click",()=>{
   pattern=button.dataset.pattern;
-  $$("[data-pattern]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
+  selectAll("[data-pattern]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
   resetSession();
  });
 }
-for(const button of $$("[data-meditation]")){
+for(const button of selectAll("[data-meditation]")){
  button.addEventListener("click",()=>{
   meditation=button.dataset.meditation;
-  $$("[data-meditation]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
-  $("#silent-options").hidden=meditation!=="silent";
-  $("#guided-options").hidden=meditation!=="guided";
+  selectAll("[data-meditation]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
+  selectOne("#silent-options").hidden=meditation!=="silent";
+  selectOne("#guided-options").hidden=meditation!=="guided";
   resetSession();
  });
 }
-for(const button of $$("[data-minutes]")){
+for(const button of selectAll("[data-minutes]")){
  button.addEventListener("click",()=>{
   minutes=Number(button.dataset.minutes);
-  $$("[data-minutes]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
+  selectAll("[data-minutes]").forEach(el=>el.setAttribute("aria-pressed",String(el===button)));
   resetSession();
  });
 }
-for(const button of $$("[data-lang]"))button.addEventListener("click",()=>applyLanguage(button.dataset.lang));
+for(const button of selectAll("[data-lang]"))button.addEventListener("click",()=>applyLanguage(button.dataset.lang));
 for(const video of GUIDED_VIDEOS){
  const a=document.createElement("a");
  a.href=video.url;a.target="_blank";a.rel="noopener noreferrer";
@@ -181,7 +181,7 @@ for(const video of GUIDED_VIDEOS){
  const credit=document.createElement("small");credit.textContent=video.channel;
  detail.append(name,document.createElement("br"),credit);
  const arrow=document.createElement("span");arrow.textContent="↗";
- a.append(minutes,detail,arrow);$("#video-list").append(a);
+ a.append(minutes,detail,arrow);selectOne("#video-list").append(a);
 }
 // Never leave the session "running" unattended in a background tab.
 document.addEventListener("visibilitychange",()=>{

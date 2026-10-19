@@ -8,7 +8,7 @@ test("P4 · production CSS preserves the public portfolio across source and Page
  await expect(page.locator("#instructor-flow")).toBeHidden();
  await expect(page.locator("#studio-asana-library")).toBeHidden();
  const sample=()=>page.evaluate(()=>{
-  const selectors=[".site-header","#explora .p2-route","#proyectos .p26-project-grid > a","#experiencia .role"];
+  const selectors=[".site-header","#explora .p2-route","#proyectos .p26-project-grid > article","#experiencia .role"];
   const fields=["display","position","color","backgroundColor","borderRadius","paddingLeft","boxShadow"];
   return selectors.map(selector=>{
    const el=document.querySelector(selector);
@@ -34,7 +34,7 @@ test("P4 · production CSS preserves the public portfolio across source and Page
  expect(localCss[0]).toMatch(/yoga-styles-v105\\.[0-9a-f]{16}\\.css$/);
  expect(await sample()).toEqual(baseline);
  expect(failed).toEqual([]);
- const cards=page.locator("#proyectos .p26-project-grid a");
- await expect(cards).toHaveCount(3);
- await expect(cards.nth(0)).toHaveAttribute("href","https://vortex-gilt-xi.vercel.app/");
+ const cards=page.locator("#proyectos .p26-project-card");
+ await expect(cards).toHaveCount(2);
+ await expect(page.locator("#proyectos a")).toHaveCount(0);
 });

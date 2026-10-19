@@ -11,7 +11,8 @@ test("V73: substantive portfolio and evidence lead to the cohesive practice/musi
   const experience = page.indexOf('id="experiencia"');
   assert.ok(portfolio > 0 && portfolio < experience && experience < studio && studio < soundtrack);
   assert.match(page, /id="proyectos"/);
-  assert.match(page, /href="https:\/\/vortex-gilt-xi\.vercel\.app\//);
+  assert.match(page, /id="p26-practice-title"/);
+  assert.match(page, /id="p26-book-title"/);
   for (const item of [
     'id="portfolio-v73-title"',
     'id="portfolio-v73-proof-title"',

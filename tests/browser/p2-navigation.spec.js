@@ -1,6 +1,6 @@
 const {test,expect}=require("@playwright/test");
 
-test("P2.6 professional landing offers three concise destinations, without yoga apps",async({page},testInfo)=>{
+test("P2.7 professional landing offers three destinations and two upcoming yoga apps",async({page},testInfo)=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto("/index.html",{waitUntil:"domcontentloaded"});
  const root=page.locator("#main");
@@ -17,28 +17,26 @@ test("P2.6 professional landing offers three concise destinations, without yoga 
  await testInfo.attach("p26-portfolio-mobile",{body:await page.screenshot({animations:"disabled",timeout:15000}),contentType:"image/png"});
 });
 
-test("P2.6 verified Vortex, Ohana and Aigoritmo showcase links",async({page})=>{
+test("P2.7 only Yoga Practice and Yoga Asana Book appear, both under construction",async({page})=>{
  await page.goto("/index.html",{waitUntil:"domcontentloaded"});
- const cards=page.locator("#proyectos .p26-project-grid a");
- await expect(cards).toHaveCount(3);
- const urls=await cards.evaluateAll(nodes=>nodes.map(node=>node.getAttribute("href")));
- expect(urls).toEqual([
-  "https://vortex-gilt-xi.vercel.app/",
-  "https://gracianb.github.io/project-ohana/",
-  "https://aigoritmo.vercel.app/"
- ]);
- for(const card of await cards.all()){
-  await expect(card).toHaveAttribute("target","_blank");
-  await expect(card).toHaveAttribute("rel",/noreferrer/);
- }
+ const cards=page.locator("#proyectos .p26-project-card");
+ await expect(cards).toHaveCount(2);
+ await expect(cards.nth(0)).toContainText("Yoga Practice");
+ await expect(cards.nth(1)).toContainText("Yoga Asana Book");
+ await expect(page.locator("#proyectos .p26-status")).toHaveCount(2);
+ await expect(page.locator("#proyectos .p26-status").first()).toContainText("En construcción");
+ await expect(page.locator("#proyectos a")).toHaveCount(0);
+ await expect(page.locator("#proyectos")).not.toContainText(/Vortex|Ohana|Aigoritmo|Systems Lab/i);
+ await page.locator('[data-set-lang="en"]').first().click();
+ await expect(page.locator("#proyectos .p26-status").first()).toContainText("Under construction");
 });
 
 test("P2.6 keyboard navigation and ES/EN remain functional",async({page},testInfo)=>{
  await page.setViewportSize({width:1280,height:800});
  await page.goto("/index.html",{waitUntil:"domcontentloaded"});
  await page.locator('[data-set-lang="en"]').first().click();
- await expect(page.locator("#p26-projects-title")).toContainText("Explore the work");
- await expect(page.locator('#nav a[href="#proyectos"]')).toContainText("Projects");
+ await expect(page.locator("#p26-projects-title")).toContainText("Two experiences in development");
+ await expect(page.locator('#nav a[href="#proyectos"]')).toContainText("Apps");
  await expect(page.locator("#p2-explore-title")).toContainText("Choose your path");
  const hero=await page.locator("#inicio").boundingBox();
  expect(hero).toBeTruthy();

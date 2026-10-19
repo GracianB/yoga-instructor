@@ -71,3 +71,16 @@ test("P2.6 keeps the global music dock out of the professional landing page",()=
  assert.match(js,/markCurrentRoute\(\)/);
  assert.match(html,/id="focus-audio"/);
 });
+
+test("P2.7 upcoming yoga apps belong to Yoga Instructor, not Systems Lab",()=>{
+ const start=html.indexOf('id="proyectos"');
+ const end=html.indexOf('<!-- V80',start);
+ assert.ok(start>0 && end>start);
+ const section=html.slice(start,end);
+ assert.equal((section.match(/class="p26-project-card"/g)||[]).length,2);
+ assert.equal((section.match(/class="p26-status"/g)||[]).length,2);
+ assert.match(section,/Yoga Practice/);
+ assert.match(section,/Yoga Asana Book/);
+ assert.match(section,/En construcción/);
+ assert.doesNotMatch(section,/Vortex|Ohana|Aigoritmo|Systems Lab|href="https?:/i);
+});

@@ -201,10 +201,11 @@ test('ambient breathing moves the petals and visual quiet holds the exact frame'
   expect(failures).toEqual([]);
 });
 
-test('one breath synchronizes the hero and dock through inhale, hold and exhale', async ({ page, browserName }) => {
-  // WebKit's virtual-clock and SVG integration needs longer under loaded CI.
-  // Preserve every assertion; do not skip or alter the production clock.
-  if (browserName === 'webkit') test.setTimeout(75000);
+test('one breath synchronizes the hero and dock through inhale, hold and exhale', async ({ page }) => {
+  // This virtual-clock + SVG integration test simulates an entire breath cycle.
+  // A shared CI runner can exceed the 30s default even on Chromium.
+  // Preserve every assertion; only the per-test time budget changes.
+  test.setTimeout(75000);
   await page.setViewportSize({ width: 390, height: 844 });
   const failures = await openLotus(page);
   await click(page, '.sanctuary-breath');

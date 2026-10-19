@@ -19,8 +19,10 @@ test('Pages publication requires a successful main push Quality workflow',()=>{
   assert.doesNotMatch(deploy,/workflow_dispatch:/);
 });
 
-test('Pages builds and verifies the exact SHA accepted by browser quality',()=>{
-  assert.match(deploy,/ref: \$\{\{ github.event.workflow_run.head_sha \}\}/);
+test('Pages verifies the exact main SHA on both direct pushes and browser-quality releases',()=>{
+  assert.match(deploy,/ref: \$\{\{ github.event.workflow_run.head_sha \|\| github.sha \}\}/);
+  assert.match(deploy,/push:\s*\n\s*branches: \[main\]/);
+  assert.match(deploy,/test "\$\(git rev-parse HEAD\)" = "\$VERIFIED_SHA"/);
   assert.match(deploy,/Verify exact validated main commit/);
   assert.match(deploy,/git ls-remote/);
   assert.match(deploy,/npm run quality/);

@@ -4,6 +4,7 @@ test("P4 · bundled Pages CSS retains source cascade and interactive studio acro
  test.setTimeout(100000);
  await page.setViewportSize({width:390,height:844});
  await page.goto("/");
+ await page.locator('#p2-extras > summary').evaluate(x=>x.click());
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true");
  await expect(page.locator("#p1-sequence")).toBeVisible();
  const sample=()=>page.evaluate(()=>{
@@ -27,6 +28,7 @@ test("P4 · bundled Pages CSS retains source cascade and interactive studio acro
    localCss.push(u.pathname);
  });
  await page.goto("/dist/");
+ await page.locator('#p2-extras > summary').evaluate(x=>x.click());
  await expect(page.locator("#flow-guide")).toHaveAttribute("data-ready","true");
  await expect(page.locator("#p1-sequence")).toBeVisible();
  const sheets=await page.locator('link[rel="stylesheet"][href^="./"]').count();

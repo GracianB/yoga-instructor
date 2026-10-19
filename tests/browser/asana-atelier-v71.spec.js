@@ -51,6 +51,7 @@ test('V71: Nila uses raised-hand anatomy, prayer palms and four dog contacts',as
 test('V71: category filters and vertical keyboard navigation keep labels and mobile layout accessible',async({page})=>{
   await page.setViewportSize({width:375,height:812});
   const gallery=await openLibrary(page);
+  await page.locator('#p2-asana-advanced > summary').evaluate(x=>x.click());
   await gallery.locator('[data-asana-filter="seated"]').evaluate(el=>el.click());
   const choices=gallery.locator('button[data-library-pose]:visible');
   expect(await choices.count()).toBeGreaterThan(1);

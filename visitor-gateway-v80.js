@@ -1,6 +1,10 @@
 /* V80 visitor wayfinding. No personal profiling, persistence or navigation trap. */
 (()=>{
 "use strict";
+// Optional music belongs after the practice room in DOM and keyboard order.
+const studio=document.getElementById("instructor-flow");
+const soundtrack=document.getElementById("soundtrack");
+if(studio&&soundtrack)studio.after(soundtrack);
 const root=document.getElementById("orientacion");if(!root)return;
 const buttons=[...root.querySelectorAll("[data-v80-route]")],steps=root.querySelector("#v80-route-steps"),
 primary=root.querySelector("#v80-primary"),panel=root.querySelector("#v80-route-content"),
@@ -19,7 +23,7 @@ es:{
  begin:"Comenzar el recorrido ↗",
  routes:{
  practice:{title:"Explora tu práctica.",description:"Empieza con una demostración breve, entra en la sala interactiva y aclara tus dudas.",
- links:[["#demostracion","Una demostración en un minuto"],["#instructor-flow","Prueba la sala interactiva"],["#preguntas","Resuelve tus preguntas"]]},
+ links:[["#instructor-flow","Entrar directamente en la sala"],["#demostracion","Ver una demostración de un minuto"],["#preguntas","Resuelve tus preguntas"]]},
  studio:{title:"Conoce el trabajo detrás de la clase.",description:"Mira experiencia contextualizada, observa casos y consulta el CV antes de escribir.",
  links:[["#trayectoria","Trayectoria y enfoque"],["#casos","Tres contextos reales de enseñanza"],["#cv","CV y carta en tu idioma"]]},
  teams:{title:"Diseñemos una propuesta útil.",description:"Revisa experiencia corporativa, un ejemplo de programación y prepara una consulta adaptada a tu equipo.",
@@ -38,7 +42,7 @@ en:{
  begin:"Start this journey ↗",
  routes:{
  practice:{title:"Discover your practice.",description:"Start with a short demonstration, enter the interactive studio and find answers.",
- links:[["#demostracion","One-minute demonstration"],["#instructor-flow","Try the interactive studio"],["#preguntas","Your questions answered"]]},
+ links:[["#instructor-flow","Enter the interactive studio"],["#demostracion","Watch a one-minute demonstration"],["#preguntas","Your questions answered"]]},
  studio:{title:"Meet the work behind the class.",description:"Read contextual experience, explore teaching cases and review the CV before contacting me.",
  links:[["#trayectoria","Professional experience and approach"],["#casos","Three real teaching contexts"],["#cv","CV and cover letter in your language"]]},
  teams:{title:"Let's design something useful.",description:"Explore workplace practice, a sample class plan and a message composer tailored to your team.",

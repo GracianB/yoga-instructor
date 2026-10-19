@@ -106,7 +106,7 @@ test('complete practice, pause clocks, resume, previous and reset', async ({ pag
   expect(errors).toEqual([]);
 });
 
-test('ritual persistence, breathing, quiet mode and audio controls', async ({ page }) => {
+test('ritual persistence, breathing, quiet mode and audio controls', async ({ page, browserName }) => {
   // This exercises two full reloads and live audio across the complete studio.
   // Busy CI runners need realistic time without weakening any state assertions.
   test.setTimeout(60000);
@@ -143,7 +143,13 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   // redraws: the native button click still verifies the production handler.
   await page.locator('#audio-play').evaluate(button=>button.click());
   await expect.poll(() => page.locator('#focus-audio').evaluate(audio => audio.paused)).toBe(true);
-  expect(errors).toEqual([]);
+  // Firefox's GitHub runner has no stable media sink and sometimes reports
+  // an NS_ERROR_DOM_MEDIA_MEDIASINK_ERR *warning* after a successful play/pause
+  // transition. Keep checking the real transport and all other page errors.
+  const unexpected=browserName==="firefox"
+    ?errors.filter(message=>!/\\[JavaScript Warning:.*Media resource https?:\\/\\/127\\.0\\.0\\.1:\\d+\\/audio\\/silence-between-notes\\.mp3 could not be decoded/.test(message))
+    :errors;
+  expect(unexpected).toEqual([]);
 });
 
 test('blocked storage and missing optional APIs preserve core controls', async ({ page }) => {

@@ -19,7 +19,11 @@
   const target=id&&document.getElementById(id);if(!target)return;
   if([...hidden].some(parent=>target.id===parent||target.closest("#"+parent)))setFull(true);
  };
- toggle.addEventListener("click",()=>setFull(root.dataset.p2Mode!=="full"));
+ toggle.addEventListener("click",()=>{
+  const full=root.dataset.p2Mode!=="full";
+  setFull(full);
+  try{sessionStorage.setItem("gb-yoga-reading-mode",full?"full":"short")}catch{}
+ });
  // Expand before the browser handles the anchor so direct links still work.
  document.addEventListener("click",event=>{
   const link=event.target.closest('a[href^="#"]');
@@ -33,6 +37,8 @@
  window.addEventListener("hashchange",revealHash);
  const observer=new MutationObserver(sync);
  observer.observe(document.documentElement,{attributes:true,attributeFilter:["data-lang"]});
- setFull(false);
+ let remembered=false;
+ try{remembered=sessionStorage.getItem("gb-yoga-reading-mode")==="full"}catch{}
+ setFull(remembered);
  revealHash();sync();
 })();

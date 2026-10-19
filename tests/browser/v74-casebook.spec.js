@@ -1,4 +1,13 @@
 const {test,expect}=require("@playwright/test");
+// Legacy integration scenarios deliberately exercise the complete historical
+// interface. P2's default short route-first mode is independently tested in
+// p2-navigation.spec.js; neither experience is silently skipped.
+test.beforeEach(async({page})=>{
+ await page.addInitScript(()=>{
+  try{sessionStorage.setItem("gb-yoga-reading-mode","full")}catch{}
+ });
+});
+
 test("V74: casebook has three evidence cards and a transparent example plan",async({page})=>{
  await page.goto("/",{waitUntil:"domcontentloaded"});
  const root=page.locator("#casos");

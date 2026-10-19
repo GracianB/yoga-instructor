@@ -449,11 +449,11 @@ html body #main #contacto #v76-results[hidden]{display:none!important}
 body.quiet-mode #main #inicio .yoga-lotus-field{opacity:.3}
 
 /* Keep the original botanical lotus visually small, including animated transforms. */
-html body #main #inicio .mandala-parallax .hero-mandala{
+html body #main #inicio.hero .mandala-parallax .hero-mandala{
  width:clamp(94px,9vw,122px)!important;max-width:122px!important;
 }
 @media(max-width:900px){
- html body #main #inicio .mandala-parallax .hero-mandala{
+ html body #main #inicio.hero .mandala-parallax .hero-mandala{
   width:clamp(90px,25vw,118px)!important;max-width:118px!important;
  }
 }

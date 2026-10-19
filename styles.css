@@ -6192,3 +6192,23 @@ body .sanctuary-dock{display:none!important}
 .p26-project-grid b{position:absolute;right:20px;top:18px;color:var(--sage)}
 @media(max-width:720px){.p26-project-grid{grid-template-columns:1fr}.p26-project-grid>a{min-height:120px}#proyectos{width:calc(100% - 24px)}}
 @media(prefers-reduced-motion:reduce){.p26-project-grid>a{transition:none}.p26-project-grid>a:hover{transform:none}}
+
+/* P2.6 visitor release: the instructor site is a professional showcase, not an app host. */
+#main > :is(#campo,#soundtrack,#instructor-flow,#portfolio,#casos,#ritual,#sobre,#oferta),
+#main > #programa,
+#main #v76-enquiry,
+#main #v76-results,
+.p25-book-toggle,
+#p25-book-body,
+#p25-app-body,
+body .sanctuary-dock{display:none!important}
+#main[data-p2-mode="short"][data-p2-focus] > :is(#campo,#soundtrack,#instructor-flow,#portfolio,#casos,#ritual,#sobre,#oferta){display:none!important}
+#main[data-p2-mode="short"][data-p2-focus="proyectos"] > #proyectos,
+#main[data-p2-mode="short"][data-p2-focus="experiencia"] > #experiencia,
+#main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto{display:block!important}
+#main[data-p2-mode="short"][data-p2-focus] > :is(#proyectos,#experiencia,#contacto){display:none!important}
+#main[data-p2-mode="short"][data-p2-focus="proyectos"] > #proyectos,
+#main[data-p2-mode="short"][data-p2-focus="experiencia"] > #experiencia,
+#main[data-p2-mode="short"][data-p2-focus="contacto"] > #contacto{display:block!important}
+#main #explora .p2-route-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+@media(max-width:720px){#main #explora .p2-route-grid{grid-template-columns:1fr}}

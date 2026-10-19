@@ -28,12 +28,12 @@ test("head keeps real anchors, skip navigation and current language/theme contro
  assert.match(html,/data-set-theme="light"/);
 });
 
-test("P2 keeps a legible short route-first experience and music beside the actual studio",()=>{
+test("P2.6 preserves original chapter ordering while replacing public routes with three portfolio destinations",()=>{
  const order=["inicio","explora","portfolio","sobre","oferta","experiencia","instructor-flow","soundtrack","contacto"];
  const at=order.map(id=>html.indexOf('id="'+id+'"'));
  assert.ok(at.every(x=>x>0));
  assert.deepEqual([...at].sort((a,b)=>a-b),at);
- assert.equal((html.match(/data-p2-route="/g)||[]).length,5);
+ assert.equal((html.match(/data-p2-route="/g)||[]).length,3);
  assert.match(html,/data-p2-mode="full"/); // Accessible content with JavaScript disabled
  assert.match(html,/id="p2-toggle"/);
  assert.match(html,/p2-navigation\.js\?v=p2/);
@@ -51,19 +51,19 @@ test("P2 arrival animation is optional, not a mandatory splash slide",()=>{
  assert.match(styles,/#main\[data-p2-mode="short"\] #inicio \.hero-stats/);
 });
 
-test("P2 supports focused visitor chapters while preserving browser access to the full archive",()=>{
+test("P2.6 focuses only published chapters, leaving studio and asana book out of the portfolio",()=>{
  const js=readFileSync(new URL("../p2-navigation.js",import.meta.url),"utf8");
  const css=readFileSync(new URL("../styles.css",import.meta.url),"utf8");
  assert.match(js,/const chapterFor=node=>/);
  assert.match(js,/root\.dataset\.p2Focus=id/);
  assert.match(js,/scrollToTarget\(target\)/);
- for(const id of ["sobre","oferta","experiencia","instructor-flow","contacto"]){
+ for(const id of ["proyectos","experiencia","contacto"]){
   assert.ok(css.includes('[data-p2-focus="'+id+'"] > #'+id));
  }
  assert.match(css,/#main\[data-p2-mode="short"\]\[data-p2-focus\]/);
 });
 
-test("P2 keeps global music controls out of the short landing view without deleting audio",()=>{
+test("P2.6 keeps the global music dock out of the professional landing page",()=>{
  const css=readFileSync(new URL("../styles.css",import.meta.url),"utf8");
  assert.match(css,/body:has\(#main\[data-p2-mode="short"\]\) \.sanctuary-dock\{display:none!important\}/);
  const js=readFileSync(new URL("../p2-navigation.js",import.meta.url),"utf8");

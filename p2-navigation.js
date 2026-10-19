@@ -8,7 +8,9 @@
  const hidden=new Set(["orientacion","atlas","camino","trayectoria","demostracion","formacion","filosofia","cv","preguntas"]);
  // These five chapters are available as a real interactive destination.
  // A route choice shows one chapter rather than another 15-screen journey.
- const chapters=new Set(["experiencia","instructor-flow","campo","contacto"]);
+ const chapters=new Set(["proyectos","experiencia","contacto"]);
+ const retired=new Set(["portfolio","casos","ritual","sobre","oferta","campo","instructor-flow","soundtrack"]);
+ const retiredTarget=node=>node&&[...retired].some(id=>node.id===id||node.closest("#"+id));
  const chapterFor=node=>{
   if(!node)return null;
   for(const id of chapters)if(node.id===id||node.closest("#"+id))return id;
@@ -47,7 +49,7 @@
  };
  const revealHash=()=>{
   let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}
-  const target=id&&document.getElementById(id);if(!target)return;
+  const target=id&&document.getElementById(id);if(!target||retiredTarget(target))return;
   if([...hidden].some(parent=>target.id===parent||target.closest("#"+parent))){
    setFull(true);
    focus(null);
@@ -71,6 +73,7 @@
   if(!link)return;
   const id=link.getAttribute("href").slice(1);
   if(id){const node=document.getElementById(id);
+   if(retiredTarget(node)){event.preventDefault();return;}
    if(node && [...hidden].some(parent=>node.id===parent||node.closest("#"+parent))){
     setFull(true);focus(null);
    }else if(node){

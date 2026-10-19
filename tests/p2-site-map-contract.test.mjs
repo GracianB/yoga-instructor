@@ -28,12 +28,12 @@ test("head keeps real anchors, skip navigation and current language/theme contro
  assert.match(html,/data-set-theme="light"/);
 });
 
-test("P2.6 preserves original chapter ordering while replacing public routes with three portfolio destinations",()=>{
+test("P2.6 preserves original chapter ordering while replacing public routes with four teaching destinations",()=>{
  const order=["inicio","explora","portfolio","sobre","oferta","experiencia","instructor-flow","soundtrack","contacto"];
  const at=order.map(id=>html.indexOf('id="'+id+'"'));
  assert.ok(at.every(x=>x>0));
  assert.deepEqual([...at].sort((a,b)=>a-b),at);
- assert.equal((html.match(/data-p2-route="/g)||[]).length,3);
+ assert.equal((html.match(/data-p2-route="/g)||[]).length,4);
  assert.match(html,/data-p2-mode="full"/); // Accessible content with JavaScript disabled
  assert.match(html,/id="p2-toggle"/);
  assert.match(html,/p2-navigation\.js\?v=p2/);
@@ -81,6 +81,6 @@ test("P2.7 upcoming yoga apps belong to Yoga Instructor, not Systems Lab",()=>{
  assert.equal((section.match(/class="p26-status"/g)||[]).length,2);
  assert.match(section,/Yoga Practice/);
  assert.match(section,/Yoga Asana Book/);
- assert.match(section,/En construcción/);
+ assert.match(section,/En pausa/);
  assert.doesNotMatch(section,/Vortex|Ohana|Aigoritmo|Systems Lab|href="https?:/i);
 });

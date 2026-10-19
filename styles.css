@@ -6223,9 +6223,12 @@ body:has(#main) { padding-bottom:0!important; }
 #main #inicio.hero{--lotus-band:clamp(104px,30vw,155px);}
 #main #inicio.hero .mandala-parallax{
   pointer-events:auto!important;
-  z-index:2!important;
+  z-index:4!important;
   overflow:visible!important;
 }
+#main #inicio.hero .hero-stage{pointer-events:none!important;}
+#main #inicio.hero .hero-inner,
+#main #inicio.hero .hero-scroll-cue{pointer-events:auto!important;}
 /* This botanical SVG is deliberately smaller than the previous 39vw/570px. */
 #main #inicio.hero .mandala-parallax .hero-mandala{
   width:clamp(160px,19vw,248px)!important;

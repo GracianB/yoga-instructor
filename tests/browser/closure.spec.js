@@ -147,7 +147,8 @@ test('ritual persistence, breathing, quiet mode and audio controls', async ({ pa
   // an NS_ERROR_DOM_MEDIA_MEDIASINK_ERR *warning* after a successful play/pause
   // transition. Keep checking the real transport and all other page errors.
   const unexpected=browserName==="firefox"
-    ?errors.filter(message=>!/\\[JavaScript Warning:.*Media resource https?:\\/\\/127\\.0\\.0\\.1:\\d+\\/audio\\/silence-between-notes\\.mp3 could not be decoded/.test(message))
+    ?errors.filter(message=>!(message.includes("[JavaScript Warning:") &&
+      message.includes("silence-between-notes.mp3 could not be decoded")))
     :errors;
   expect(unexpected).toEqual([]);
 });

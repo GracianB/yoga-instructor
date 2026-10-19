@@ -313,3 +313,9 @@
 #p2-audio .music-tracks button{min-height:44px}
 #p2-audio .music-playlist>summary:focus-visible,
 #p2-audio .music-tracks button:focus-visible{outline:3px solid var(--sage);outline-offset:3px}
+
+/* P2 overrides the legacy V66 rule that hid the now-integrated book whenever
+   Movement used its canonical sequence. Do not conceal a requested reference. */
+#instructor-flow[data-studio-mode="asanas"][data-movement-view="sequence"] #studio-asana-library.studio-asana-book{
+  display:block!important;
+}

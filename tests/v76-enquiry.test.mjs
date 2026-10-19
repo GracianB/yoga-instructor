@@ -16,7 +16,7 @@ test("V76: professional enquiry is integrated without replacing direct contact r
  assert.match(html,/type="radio" name="v76-service" value="individual"/);
  assert.match(html,/type="radio" name="v76-service" value="equipos"/);
  assert.match(html,/id="v76-details"[^>]*maxlength="500"/);
- assert.match(html,/<section class="v76-results"[^>]*hidden>/);
+ assert.match(html,/<section class="v76-results"[^>]*hidden inert aria-hidden="true">/);
 });
 
 test("V76: no telemetry or storage, just deliberate mailto link with encoded text",()=>{

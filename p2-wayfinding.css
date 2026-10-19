@@ -280,3 +280,24 @@
   transition:none!important;transform:none!important;animation:none!important;
  }
 }
+
+
+/* One heading, three modes, not another lesson before the practice. */
+#instructor-flow .instructor-flow-head{margin-bottom:clamp(12px,2vw,24px)}
+#instructor-flow .instructor-flow-head .kicker,
+#instructor-flow .instructor-flow-head .about-lead,
+#instructor-flow .studio-entrance .studio-intro{display:none!important}
+#instructor-flow .instructor-flow-head h2{
+ font-size:clamp(2.2rem,5vw,4.2rem)!important;
+ line-height:1.04;
+ max-width:16ch;
+ margin:0!important;
+}
+#instructor-flow .studio-modes{margin-top:0!important}
+#instructor-flow[data-studio-mode="breath"] #studio-asana-library,
+#instructor-flow[data-studio-mode="meditation"] #studio-asana-library{display:none!important}
+#portfolio .p73-journey,
+#portfolio .p73-method{display:none!important}
+#portfolio .p73-story{grid-template-columns:1fr!important;max-width:960px;margin-inline:auto}
+#portfolio .p73-manifesto{width:100%}
+#portfolio .p73-heading{margin-bottom:clamp(18px,3vw,34px)}

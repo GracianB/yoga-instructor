@@ -31,7 +31,7 @@ test("Pages excludes legacy app and book scripts from published HTML",()=>{
  const included=build.match(/const publicScripts=new Set\(\[(.*?)\]\)/);
  assert.ok(included);
  const allow=[...included[1].matchAll(/"([^"]+)"/g)].map(m=>m[1]);
- assert.deepEqual(allow,["runtime.js","boot.js","i18n.js","main.js","p2-navigation.js"]);
+ assert.deepEqual(allow,["runtime.js","boot.js","i18n.js","main.js","p2-navigation.js","yoga-enquiry-v76.js"]);
  for(const file of ["sanctuary-experience.js","studio-asana-library.js","asana-library.js","music-playlist.js","practice-studio.js"]){
   assert.ok(!allow.includes(file),"retired public script: "+file);
  }

@@ -20,6 +20,13 @@ for(const width of screens){
    const book=page.locator("#studio-asana-library");
    await expect(page.locator("#nav a")).toHaveCount(3);
    await expect(book.locator(".studio-library-stage")).toBeHidden();
+   await expect(page.locator("#p2-dock-expand")).toBeVisible();
+   await expect(page.locator("#p2-dock-expand")).toHaveAttribute("aria-expanded","false");
+   await expect(page.locator(".sanctuary-dock-tools")).toBeHidden();
+   await page.locator("#p2-dock-expand").evaluate(el=>el.click());
+   await expect(page.locator(".sanctuary-dock-tools")).toBeVisible();
+   await page.locator("#p2-dock-expand").evaluate(el=>el.click());
+   await expect(page.locator(".sanctuary-dock-tools")).toBeHidden();
    const bounds=await page.evaluate(()=>{
     const h=document.getElementById("inicio").getBoundingClientRect();
     const l=document.getElementById("p2-lotus-focus").getBoundingClientRect();

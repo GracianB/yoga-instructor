@@ -29,3 +29,7 @@ P2 reduce la **superficie visible** sin borrar módulos históricos, sus contrat
 - Hero, sala, book, audio y extras sin overflow a 320/375/1440 px.
 - Foco/Enter en el loto, selector de 3 modos, libro plegable, enlaces profundos, ES/EN y accesibilidad básica.
 - Capturas reales de claro/oscuro y escritorio/móvil; aceptación artística independiente de pasar CI.
+
+## Segunda revisión visual (capturas reales)
+
+La inspección de 25 capturas móviles/escritorio detectó un hero sobredimensionado, un dock flotante que tapaba la app y controles didácticos demasiado numerosos antes de ver la figura. Segunda intervención: hero compacto (sin altura mínima cinematográfica), acciones en línea, dock plegado con botón de 44 px y acceso por teclado/Escape, y Nila antes de los filtros en móvil. La batería visual específica debe repetirse sobre el commit que incorpora esta intervención.

@@ -152,4 +152,42 @@ const update=()=>{
 new MutationObserver(changes=>{if(changes.some(x=>x.attributeName==="lang"))update()})
  .observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
 update();
+
+// The global sanctuary controls remain accessible, but do not cover the
+// page until requested. The breathing action itself remains directly usable.
+const dock=document.querySelector(".sanctuary-dock");
+if(dock){
+ dock.dataset.p2Open="false";
+ const expand=document.createElement("button");
+ expand.type="button";
+ expand.id="p2-dock-expand";
+ expand.className="p2-dock-expand";
+ expand.setAttribute("aria-controls","p2-dock-tools");
+ expand.setAttribute("aria-expanded","false");
+ dock.querySelector(".sanctuary-dock-tools")?.setAttribute("id","p2-dock-tools");
+ dock.prepend(expand);
+ const setDock=(open)=>{
+  dock.dataset.p2Open=String(open);
+  expand.setAttribute("aria-expanded",String(open));
+  expand.textContent=open?"×":"+";
+  expand.setAttribute("aria-label",open?
+   (lang()==="en"?"Close quick controls":"Cerrar controles rápidos"):
+   (lang()==="en"?"Open quick controls":"Abrir controles rápidos"));
+ };
+ expand.addEventListener("click",()=>setDock(dock.dataset.p2Open!=="true"));
+ document.addEventListener("keydown",event=>{
+  if(event.key==="Escape" && dock.dataset.p2Open==="true"){
+   setDock(false);expand.focus({preventScroll:true});
+  }
+ });
+ document.addEventListener("pointerdown",event=>{
+  if(dock.dataset.p2Open==="true" && !dock.contains(event.target))setDock(false);
+ });
+ const currentUpdate=update;
+ new MutationObserver(changes=>{
+  if(changes.some(x=>x.attributeName==="lang"))setDock(dock.dataset.p2Open==="true");
+ }).observe(document.documentElement,{attributes:true,attributeFilter:["lang"]});
+ setDock(false);
+}
+
 })();

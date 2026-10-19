@@ -6073,7 +6073,7 @@ html:not([data-lang="en"]) [data-p2-lang="en"],html[data-lang="en"] [data-p2-lan
 
 
 /* P2 / first view: prioritize a useful introduction over a full-screen slide. */
-#main[data-p2-mode="short"] #inicio.hero{min-height:0!important;padding-top:0!important;padding-bottom:0!important}
+#main[data-p2-mode="short"] #inicio.hero{min-height:0!important;height:auto!important;max-height:none!important;align-content:start!important;padding-top:0!important;padding-bottom:0!important}
 #main[data-p2-mode="short"] #inicio .hero-stage{min-height:0!important}
 #main[data-p2-mode="short"] #inicio .hero-inner{padding:clamp(30px,5vw,64px) 0 clamp(22px,3vw,40px)!important}
 #main[data-p2-mode="short"] #inicio .hero-stats,

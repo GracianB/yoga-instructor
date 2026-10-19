@@ -6160,3 +6160,17 @@ html:not([lang="en"]) [data-p25-lang="en"],html[lang="en"] [data-p25-lang="es"]{
 #main #campo .section-head h2{font-size:clamp(1.5rem,3vw,2.4rem)}
 
 body .sanctuary-dock{display:none!important}
+
+/* P2.5 · Four compact destinations rather than full-screen cards. */
+#main #explora .p2-route-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+#main #explora .p2-route,#main #explora .p2-route-featured{grid-column:auto;min-height:95px;padding:18px 40px 18px 17px;justify-content:center;background:var(--surface)}
+#main #explora .p2-route strong{font-size:clamp(1.05rem,1.65vw,1.35rem);max-width:20ch}
+#main #explora .p2-explore-intro{margin-bottom:15px}
+#main #explora{padding:clamp(16px,2.5vw,28px);margin-block:12px 26px}
+#main[data-p2-mode="short"][data-p2-focus="campo"] > #campo{display:block!important}
+#main[data-p2-mode="short"][data-p2-focus] > #campo{display:none!important}
+#main[data-p2-mode="short"][data-p2-focus="campo"] > #campo{display:block!important}
+#main #campo{display:block!important}
+#main[data-p2-mode="short"][data-p2-focus]:not([data-p2-focus="campo"]) > #campo{display:none!important}
+@media(max-width:760px){#main #explora .p2-route-grid{grid-template-columns:repeat(2,minmax(0,1fr))}#main #explora .p2-route,#main #explora .p2-route-featured{min-height:84px}}
+@media(max-width:390px){#main #explora .p2-route-grid{grid-template-columns:1fr}}

@@ -1,11 +1,11 @@
 const {test,expect}=require("@playwright/test");
 
-test("P2.7 professional landing offers three destinations and two upcoming yoga apps",async({page},testInfo)=>{
+test("P2.7 professional landing offers four class paths and two paused yoga apps",async({page},testInfo)=>{
  await page.setViewportSize({width:390,height:844});
  await page.goto("/index.html",{waitUntil:"domcontentloaded"});
  const root=page.locator("#main");
  await expect(root).toHaveAttribute("data-p2-mode","short");
- await expect(page.locator("#explora .p2-route")).toHaveCount(3);
+ await expect(page.locator("#explora .p2-route")).toHaveCount(4);
  await expect(page.locator("#proyectos")).toBeVisible();
  await expect(page.locator("#experiencia")).toBeVisible();
  await expect(page.locator("#instructor-flow")).toBeHidden();
@@ -17,27 +17,27 @@ test("P2.7 professional landing offers three destinations and two upcoming yoga 
  await testInfo.attach("p26-portfolio-mobile",{body:await page.screenshot({animations:"disabled",timeout:15000}),contentType:"image/png"});
 });
 
-test("P2.7 only Yoga Practice and Yoga Asana Book appear, both under construction",async({page})=>{
+test("P2.7 only Yoga Practice and Yoga Asana Book appear, both on hold",async({page})=>{
  await page.goto("/index.html",{waitUntil:"domcontentloaded"});
  const cards=page.locator("#proyectos .p26-project-card");
  await expect(cards).toHaveCount(2);
  await expect(cards.nth(0)).toContainText("Yoga Practice");
  await expect(cards.nth(1)).toContainText("Yoga Asana Book");
  await expect(page.locator("#proyectos .p26-status")).toHaveCount(2);
- await expect(page.locator("#proyectos .p26-status").first()).toContainText("En construcción");
+ await expect(page.locator("#proyectos .p26-status").first()).toContainText("En pausa");
  await expect(page.locator("#proyectos a")).toHaveCount(0);
  await expect(page.locator("#proyectos")).not.toContainText(/Vortex|Ohana|Aigoritmo|Systems Lab/i);
  await page.locator('[data-set-lang="en"]').first().click();
- await expect(page.locator("#proyectos .p26-status").first()).toContainText("Under construction");
+ await expect(page.locator("#proyectos .p26-status").first()).toContainText("On hold");
 });
 
 test("P2.6 keyboard navigation and ES/EN remain functional",async({page},testInfo)=>{
  await page.setViewportSize({width:1280,height:800});
  await page.goto("/index.html",{waitUntil:"domcontentloaded"});
  await page.locator('[data-set-lang="en"]').first().click();
- await expect(page.locator("#p26-projects-title")).toContainText("Two experiences in development");
- await expect(page.locator('#nav a[href="#proyectos"]')).toContainText("Apps");
- await expect(page.locator("#p2-explore-title")).toContainText("Choose your path");
+ await expect(page.locator("#p26-projects-title")).toContainText("Yoga that fits your life");
+ await expect(page.locator('#nav a[href="#proyectos"]')).toContainText("Classes");
+ await expect(page.locator("#p2-explore-title")).toContainText("Your place to begin");
  const hero=await page.locator("#inicio").boundingBox();
  expect(hero).toBeTruthy();
  expect(hero.height).toBeLessThan(750);

@@ -2,7 +2,9 @@ const {test,expect}=require('@playwright/test');
 
 function contrast(fg,bg){
   const lum=c=>{
-    const values=c.match(/[\d.]+/g).slice(0,3).map(Number).map(v=>{
+    const source=String(c).trim();
+    const channels=source.startsWith('#')?[1,3,5].map(i=>parseInt(source.slice(i,i+2),16)):source.match(/[\d.]+/g).slice(0,3).map(Number);
+    const values=channels.map(v=>{
       const t=v/255;
       return t<=0.04045?t/12.92:((t+0.055)/1.055)**2.4;
     });
@@ -46,7 +48,7 @@ test('V2.2 evergreen palette preserves readable text and cohesive surfaces in li
     expect(ui.indexBg).toContain('gradient');
     expect(ui.cardsBg).toContain('gradient');
     expect(ui.formBg).toContain('gradient');
-    expect(ui.methodAccent).toContain('var(--yoga-eucalyptus)');
+    expect(ui.methodAccent).toBe(theme==='light'?'#4c8d68':'#a8e1c2');
   }
 });
 

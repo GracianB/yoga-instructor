@@ -106,6 +106,7 @@
   <link rel="stylesheet" href="./yy-guardian-reconstruction-v102.css?v=v102-1">
   <link rel="stylesheet" href="./practice-ritual-v104.css?v=v104-1">
   <link rel="stylesheet" href="./yoga-public-final.css?v=hero-v2">
+  <link rel="stylesheet" href="./yoga-showcase-v2.css?v=public-v2">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -207,6 +208,7 @@
   }
   </script>
 <script src="./music-playlist.js" defer></script>
+<script src="./yoga-showcase-v2.js?v=public-v2" defer></script>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"><i></i></div>
@@ -443,6 +445,11 @@
         <a class="p2-route" href="#metodo" data-p2-route="method"><span class="p2-route-index">03 / APPROACH</span><strong><span data-p2-lang="es">Mi método</span><span data-p2-lang="en">My approach</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
         <a class="p2-route" href="#contacto" data-p2-route="contact"><span class="p2-route-index">04 / CONNECT</span><strong><span data-p2-lang="es">Reserva una clase</span><span data-p2-lang="en">Plan a class</span></strong><span class="p2-route-arrow" aria-hidden="true">↗</span></a>
       </nav>
+
+      <div class="yoga-route-insight" aria-live="polite" data-yoga-route-insight>
+        <span class="yoga-route-insight-tag"><span data-p2-lang="es">TU PUNTO DE PARTIDA</span><span data-p2-lang="en">YOUR STARTING POINT</span></span>
+        <p class="yoga-route-insight-copy"><span data-p2-lang="es">Elige uno de los cuatro caminos. Te llevará directamente al contenido que buscas.</span><span data-p2-lang="en">Choose one of the four paths. Go directly to what matters to you.</span></p>
+      </div>
       <div class="p2-explore-foot"><button id="p2-toggle" type="button" aria-pressed="false" aria-controls="main" hidden><span data-p2-toggle-label>Ver archivo completo</span></button></div>
     </section>
 
@@ -474,6 +481,26 @@
   <p><span data-p2-lang="es">Pausas de bienestar, movimiento consciente y sesiones adaptadas a la jornada de tu equipo.</span><span data-p2-lang="en">Mindful breaks, movement and sessions adapted to your team’s working day.</span></p>
   <button type="button" class="yoga-offer-action" data-yoga-service="equipos"><span data-p2-lang="es">Consultar disponibilidad</span><span data-p2-lang="en">Ask about availability</span><span aria-hidden="true">↗</span></button>
 </article></div>
+
+  <aside class="yoga-pause" id="pausa" aria-labelledby="yoga-pause-title">
+    <div class="yoga-pause-copy">
+      <p class="kicker"><span data-p2-lang="es">UNA PAUSA · SIN ABRIR OTRA APP</span><span data-p2-lang="en">A SHORT PAUSE · NO EXTRA APP</span></p>
+      <h3 id="yoga-pause-title"><span data-p2-lang="es">Respira. Escucha. Vuelve.</span><span data-p2-lang="en">Breathe. Listen. Return.</span></h3>
+      <p><span data-p2-lang="es">Tres ciclos suaves: cuatro segundos al inhalar, seis al exhalar. Puedes detenerlo cuando quieras. No es una práctica médica.</span><span data-p2-lang="en">Three gentle cycles: four seconds in, six seconds out. Stop whenever you like. This is not medical guidance.</span></p>
+      <div class="yoga-pause-actions">
+        <button type="button" class="yoga-pause-toggle" data-pause-toggle aria-pressed="false"><span data-p2-lang="es">Comenzar pausa</span><span data-p2-lang="en">Start pause</span></button>
+        <span class="yoga-pause-remaining" data-pause-counter aria-live="off">00:30</span>
+      </div>
+      <div class="yoga-pause-music" role="group" aria-label="Música opcional" data-pause-music-group>
+        <button type="button" data-pause-sound aria-pressed="false"><span aria-hidden="true">♫</span> <span data-p2-lang="es">Escuchar música</span><span data-p2-lang="en">Play music</span></button>
+        <label><span data-p2-lang="es">Volumen</span><span data-p2-lang="en">Volume</span><input type="range" data-pause-volume min="0" max="1" step=".05" value=".35"></label>
+        <audio data-pause-audio preload="none" loop src="./audio/silence-between-notes.mp3"></audio>
+      </div>
+      <p class="yoga-pause-foot"><span data-p2-lang="es">La música no se reproduce automáticamente. Respira a tu ritmo si el patrón no te resulta cómodo.</span><span data-p2-lang="en">Music never starts automatically. Follow your own rhythm if the pattern feels uncomfortable.</span></p>
+    </div>
+    <div class="yoga-pause-art" aria-hidden="true"><div class="yoga-pause-orbit"><div class="yoga-pause-core"><span data-pause-phase>Presencia</span></div></div><small>04 <span>·</span> 06</small></div>
+  </aside>
+
   <details class="yoga-future"><summary><span data-p2-lang="es">En pausa · proyectos digitales de yoga</span><span data-p2-lang="en">On hold · upcoming yoga projects</span><span aria-hidden="true">＋</span></summary>
     <p class="yoga-future-intro"><span data-p2-lang="es">El desarrollo de estas dos herramientas está aparcado mientras priorizo la enseñanza y las clases.</span><span data-p2-lang="en">These two products are on hold while I focus on teaching and classes.</span></p>
     <div class="p26-project-grid">
@@ -1117,6 +1144,31 @@
           </g>
         </svg>
       </div>
+
+      <div class="yoga-journey" id="ruta" aria-labelledby="yoga-journey-title">
+        <div class="yoga-journey-heading">
+          <div><p class="kicker"><span data-p2-lang="es">MAPA DE MI TRAYECTORIA</span><span data-p2-lang="en">MY TEACHING JOURNEY</span></p>
+            <h3 id="yoga-journey-title"><span data-p2-lang="es">Tres lugares. Una forma de acompañar.</span><span data-p2-lang="en">Three places. One way to support people.</span></h3>
+            <p><span data-p2-lang="es">Selecciona una etapa para descubrir qué aprendí en cada contexto.</span><span data-p2-lang="en">Choose a stage to discover what I learned in each setting.</span></p>
+          </div>
+          <span class="yoga-journey-seal" aria-hidden="true">03 / <span>∞</span></span>
+        </div>
+        <div class="yoga-journey-layout">
+          <div class="yoga-journey-map" role="group" aria-label="Etapas de experiencia" data-journey-map>
+            <svg class="yoga-journey-path" viewBox="0 0 560 270" aria-hidden="true" focusable="false"><path class="yoga-journey-path-shadow" d="M87 202C158 149 194 69 281 91S422 178 480 54"/><path class="yoga-journey-path-line" d="M87 202C158 149 194 69 281 91S422 178 480 54"/></svg>
+            <button class="yoga-journey-stop is-active" type="button" data-journey-stop="madrid" aria-pressed="true"><span class="yoga-journey-index">01 · 2019</span><strong>Madrid</strong><small><span data-p2-lang="es">Formación</span><span data-p2-lang="en">Training</span></small></button>
+            <button class="yoga-journey-stop" type="button" data-journey-stop="lisboa" aria-pressed="false"><span class="yoga-journey-index">02 · 2020–21</span><strong><span data-p2-lang="es">Lisboa</span><span data-p2-lang="en">Lisbon</span></strong><small><span data-p2-lang="es">Equipos</span><span data-p2-lang="en">Teams</span></small></button>
+            <button class="yoga-journey-stop" type="button" data-journey-stop="murcia" aria-pressed="false"><span class="yoga-journey-index">03 · 2022–26</span><strong>Murcia</strong><small><span data-p2-lang="es">Clases</span><span data-p2-lang="en">Classes</span></small></button>
+          </div>
+          <div class="yoga-journey-detail" id="yoga-journey-detail" aria-live="polite" aria-atomic="true">
+            <span class="yoga-journey-detail-index" data-journey-number>01 / 03 · MADRID 2019</span>
+            <h4 data-journey-title><span data-p2-lang="es">Aprender a enseñar</span><span data-p2-lang="en">Learning to teach</span></h4>
+            <p data-journey-body><span data-p2-lang="es">Formación de instructor de yoga: asanas, pranayama, fundamentos filosóficos y práctica docente.</span><span data-p2-lang="en">Yoga instructor training: asanas, pranayama, philosophical foundations and supervised teaching practice.</span></p>
+            <a href="#contacto"><span data-p2-lang="es">Hablemos de una clase</span><span data-p2-lang="en">Let's discuss a class</span> ↗</a>
+          </div>
+        </div>
+      </div>
+
       <div class="roles">
         <article class="role">
           <header>
@@ -1146,6 +1198,20 @@
           <p data-i18n="r3p">Sesiones adaptadas a necesidades individuales: movilidad, estrés, constancia y técnica.</p>
         </article>
       </div>
+
+      <div class="yoga-credentials" id="credenciales" aria-labelledby="yoga-credentials-title">
+        <div class="yoga-credentials-head"><p class="kicker"><span data-p2-lang="es">FORMACIÓN Y BASE PROFESIONAL</span><span data-p2-lang="en">TRAINING AND BACKGROUND</span></p>
+          <h3 id="yoga-credentials-title"><span data-p2-lang="es">Formación, práctica y perspectiva.</span><span data-p2-lang="en">Training, practice and perspective.</span></h3>
+        </div>
+        <div class="yoga-credentials-grid">
+          <article><span>2019 · MADRID</span><strong><span data-p2-lang="es">Formación en yoga</span><span data-p2-lang="en">Yoga instructor training</span></strong><p><span data-p2-lang="es">Asanas, respiración, filosofía y metodología de enseñanza.</span><span data-p2-lang="en">Asanas, breathing, philosophy and teaching methods.</span></p></article>
+          <article><span>2020–2026</span><strong><span data-p2-lang="es">Enseñanza en distintos entornos</span><span data-p2-lang="en">Teaching across settings</span></strong><p><span data-p2-lang="es">Sesiones individuales, clases multinivel y bienestar en equipos.</span><span data-p2-lang="en">One-to-one sessions, mixed-level classes and workplace wellbeing.</span></p></article>
+          <article><span>ES · EN · IT · PT</span><strong><span data-p2-lang="es">Idiomas y comunicación</span><span data-p2-lang="en">Languages and communication</span></strong><p><span data-p2-lang="es">Español nativo, inglés e italiano C1; portugués básico. Estudios de Turismo y experiencia internacional.</span><span data-p2-lang="en">Native Spanish, C1 English and Italian, basic Portuguese. Tourism studies and international experience.</span></p></article>
+        </div>
+        <a class="yoga-credentials-cv" data-cv-link href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noopener" data-i18n="navCv">CV Yoga ↗</a>
+        <p class="yoga-credentials-note"><span data-p2-lang="es">Las acreditaciones y fechas pueden consultarse en el CV; no atribuyo organismos emisores ni horas no documentadas.</span><span data-p2-lang="en">Credentials and dates are detailed in the CV; no unverified awarding bodies or training hours are claimed.</span></p>
+      </div>
+
       <a class="yoga-method-next" href="#metodo"><span data-p2-lang="es">Descubre mi forma de enseñar</span><span data-p2-lang="en">Discover how I teach</span><span aria-hidden="true">↗</span></a>
     </section>
 

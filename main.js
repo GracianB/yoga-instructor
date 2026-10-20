@@ -17,11 +17,11 @@
 
   function syncCvLinks() {
     const href = lang === "en"
-      ? "./assets/CV_Gracian_Baena_Yoga_EN.pdf"
-      : "./assets/CV_Gracian_Baena_Yoga_ES.pdf";
+      ? "https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_EN.pdf"
+      : "https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_ES.pdf";
     const letter = lang === "en"
-      ? "./Gracian_Baena_Cover_Letter_Yoga_EN.pdf"
-      : "./Gracian_Baena_Carta_Yoga_ES.pdf";
+      ? "https://gracianb.github.io/GracianB/Gracian_Baena_Cover_Letter_Yoga_EN.pdf"
+      : "https://gracianb.github.io/GracianB/Gracian_Baena_Carta_Yoga_ES.pdf";
     document.querySelectorAll("[data-cv-link]").forEach((a) => {
       a.setAttribute("href", href);
       a.removeAttribute("download");

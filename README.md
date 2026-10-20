@@ -47,7 +47,7 @@ El [formulario de contacto ↗](https://gracianb.github.io/yoga-instructor/#cont
 
 ## Dos aplicaciones independientes · en desarrollo
 
-**Yoga Practice** y **Yoga Asana Book** no forman parte de la web pública V2.2.
+**Yoga Practice** y **Yoga Asana Book** están **en desarrollo y no disponibles** públicamente: no forman parte de la web pública V2.2.
 
 La [PR #213 · Apps V1.4 ↗](https://github.com/GracianB/yoga-instructor/pull/213) reúne dos aplicaciones separadas que comparten un motor visual y módulos comunes:
 

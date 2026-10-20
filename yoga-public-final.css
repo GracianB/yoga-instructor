@@ -924,6 +924,8 @@ html body #main #metodo .yoga-method-tabs button[aria-selected="true"] {
   border-color:var(--sage);
   color:var(--accent-ink);
   box-shadow:0 5px 17px var(--sage-glow);
+  /* Atomic theme changes prevent transient low-contrast text in Firefox. */
+  transition:none;
 }
 html body #main #metodo .yoga-method-tabs button:is(:hover,:focus-visible):not([aria-selected="true"]) {
   border-color:var(--sage);

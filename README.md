@@ -53,22 +53,30 @@ Un espacio de yoga personal y accesible. Cuatro formatos, una idea: **escuchar y
 
 **Escuchar · Respirar · Adaptar.** El método se presenta en una única sección interactiva, sin duplicar aplicaciones ni controles de estudio.
 
+La experiencia pública ahora incluye un **recorrido interactivo de tres etapas**: formación en Madrid (2019), bienestar corporativo en Lisboa (2020–2021) y clases en Murcia (2022–junio de 2026). Cada marcador aporta contexto al elegirlo con ratón o teclado. Los conectores se ajustan a su posición real y **no pretenden ser un mapa de coordenadas geográficas**.
+
+La formación se presenta con honestidad: estudios de instructor de yoga en Madrid, experiencia docente y capacidad de comunicación internacional. El CV sigue disponible en ES/EN para los detalles documentados.
+
+### Una pausa sencilla, no otra aplicación
+
+En la sección de clases hay un ejercicio **optativo de 30 segundos** (tres ciclos de 4 s de inspiración y 6 s de espiración), con señal visual y **música independiente y voluntaria**, sin autoplay. Es una demostración ligera del enfoque docente; no reemplaza una clase ni constituye una pauta médica.
+
 ## Contacto que funciona
 
 El [formulario de clases](https://gracianb.github.io/yoga-instructor/#contacto) permite elegir modalidad, enfoque y tamaño del grupo. No envía datos automáticamente a ningún servidor: prepara un correo editable que solo se remite cuando el visitante decide enviarlo.
 
-## Proyectos futuros, en pausa
+## Aplicaciones en desarrollo, aún no disponibles
 
-**Yoga Practice** y **Yoga Asana Book** están aparcados para priorizar la enseñanza. No se presentan como aplicaciones disponibles ni se enlazan demos incompletas.
+**Yoga Practice** y **Yoga Asana Book** siguen en desarrollo. La web pública las mantiene en una nota opcional, sin botones que simulen lanzar versiones incompletas ni prometer una fecha de publicación.
 
 ## Diseño, tecnología y calidad
 
 | Capa | Implementación |
 | --- | --- |
 | Sitio | HTML, CSS y JavaScript; ES/EN; modo claro/oscuro |
-| Arte | Loto SVG original; campo floral Canvas adaptado del lenguaje visual de Systems Lab |
+| Arte | Loto SVG original; campo floral Canvas y recorrido interactivo de tres etapas |
 | Movimiento | Animación acotada, pausa fuera de pantalla y preferencia de movimiento reducido |
-| Solicitudes | Formulario local, sin backend ni seguimiento |
+| Solicitudes | Formulario local, sin backend ni seguimiento |\n| Pausa y música | Temporizador voluntario 4/6, pista local con reproducción explícita y soporte de movimiento reducido |
 | Calidad | Node 24, pruebas de contrato y Playwright (Chromium, Firefox, WebKit) |
 | Publicación | GitHub Actions → GitHub Pages |
 

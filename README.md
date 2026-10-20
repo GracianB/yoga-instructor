@@ -16,6 +16,14 @@ Un espacio de yoga personal y accesible. Cuatro formatos, una idea: **escuchar y
 
 ---
 
+## Diseño público V2.2 · Evergreen
+
+La portada botánica y el loto original se conservan. La interfaz del portfolio comparte ahora una **retícula editorial de 1120 px** para clases, experiencia, método y contacto. El formulario se presenta **centrado en una única columna**; en móvil las opciones se apilan en tarjetas legibles.
+
+La paleta se concentra en **bosque, salvia y eucalipto**. El modo claro utiliza blanco vegetal, verdes profundos y superficies suaves; el oscuro usa un fondo bosque casi negro con acentos verde claro de contraste alto. Tarjetas, botones, etiquetas, navegación, respiración y contacto usan los mismos tokens. Sin zoom en hover ni animaciones forzadas; se respeta movimiento reducido.
+
+La validación de navegador incluye anchuras 1440/1100/800/390/320 px, cambios de tema, ausencia de desbordamiento, estados activos y contraste de texto, además de la batería previa de Yoga.
+
 ## Cuatro maneras de practicar
 
 <table>

@@ -469,3 +469,191 @@ html body #main #inicio.hero .mandala-parallax .hero-mandala{
   animation-duration:13s!important;
  }
 }
+
+
+/* =============================================================
+   PUBLIC V2.1 · CANONICAL EDITORIAL GRID
+   Five destinations, one shared container, one visual rhythm.
+   The original hero and lotus remain untouched.
+   ============================================================= */
+html body #main {
+  --yoga-page-width: 1120px;
+  --yoga-page-edge: clamp(14px, 3.2vw, 42px);
+  --yoga-page-inset: clamp(20px, 3.5vw, 43px);
+  --yoga-module-gap: clamp(28px, 4.2vw, 58px);
+  --yoga-module-block: clamp(32px, 4.8vw, 64px);
+}
+html body #main > :is(#explora, #proyectos, #experiencia, #metodo, #contacto) {
+  box-sizing: border-box!important;
+  width: min(var(--yoga-page-width), calc(100% - 2 * var(--yoga-page-edge)))!important;
+  max-width: var(--yoga-page-width)!important;
+  min-width: 0!important;
+  margin-inline: auto!important;
+  padding-inline: var(--yoga-page-inset)!important;
+  scroll-margin-top: calc(var(--header, 72px) + 22px);
+}
+html body #main > #explora.yoga-showcase-map {
+  margin-block: clamp(16px, 2vw, 28px) var(--yoga-module-gap)!important;
+  padding-block: var(--yoga-module-block)!important;
+  border-radius: 20px;
+}
+html body #main > #proyectos.yoga-offer-section,
+html body #main > #experiencia.section,
+html body #main > #contacto.section {
+  margin-block: 0 var(--yoga-module-gap)!important;
+  padding-block: var(--yoga-module-block)!important;
+}
+html body #main > #experiencia.section,
+html body #main > #contacto.section {
+  border-top: 1px solid var(--line);
+}
+html body #main > #metodo.yoga-method-slide {
+  min-height: 0!important;
+  margin-block: 0 var(--yoga-module-gap)!important;
+  padding-block: var(--yoga-module-block)!important;
+  border-radius: 20px;
+}
+/* Avoid nested contradictory widths inside identically sized sections. */
+html body #main :is(
+  #explora .p2-explore-intro,
+  #explora .p2-route-grid,
+  #explora .yoga-route-insight,
+  #proyectos .yoga-offer-grid,
+  #proyectos .yoga-pause,
+  #proyectos .yoga-future,
+  #experiencia .section-head,
+  #experiencia .yoga-journey,
+  #experiencia .roles,
+  #experiencia .yoga-credentials,
+  #metodo .yoga-method-shell,
+  #contacto .contact-inner
+) {
+  box-sizing: border-box;
+  min-width: 0;
+  width: 100%;
+  max-width: none!important;
+}
+/* Consistent section-head rhythm and readable measure. */
+html body #main #explora .p2-explore-intro,
+html body #main #proyectos > :is(.kicker,h2,.yoga-offer-intro),
+html body #main #experiencia .section-head,
+html body #main #metodo .yoga-method-heading {
+  text-align: left;
+}
+html body #main #explora .p2-explore-intro,
+html body #main #experiencia .section-head,
+html body #main #metodo .yoga-method-heading {
+  margin-inline: 0!important;
+}
+html body #main #proyectos > h2 {
+  font-size: clamp(2.25rem, 4.3vw, 4.3rem);
+}
+html body #main #proyectos .yoga-pause {
+  margin-block: clamp(32px, 4.3vw, 54px) clamp(20px, 3vw, 36px);
+}
+html body #main #experiencia .yoga-journey {
+  margin-block: clamp(27px, 4vw, 44px)!important;
+}
+html body #main #experiencia .yoga-credentials {
+  margin-inline: 0!important;
+}
+/* Contact is a centered chapter, not a left intro detached from a form. */
+html body #main #contacto .contact-inner {
+  margin-inline:auto!important;
+}
+html body #main #contacto .contact-inner > :is(.kicker,h2,.contact-lead) {
+  text-align:center!important;
+}
+html body #main #contacto .contact-inner > .contact-lead {
+  max-width: 62ch!important;
+  margin: 12px auto clamp(24px,3.8vw,40px)!important;
+  line-height:1.6;
+}
+html body #main #contacto #v76-enquiry.v76-enquiry {
+  box-sizing:border-box!important;
+  display:grid!important;
+  grid-template-columns:minmax(0,1fr)!important;
+  gap:clamp(22px,3vw,34px)!important;
+  width:100%!important;
+  max-width:none!important;
+  margin-inline:auto!important;
+  padding:clamp(20px,3.4vw,42px)!important;
+  border-radius:18px!important;
+  align-items:start;
+}
+html body #main #contacto #v76-enquiry .v76-intro {
+  display:block!important;
+  width:min(100%,710px)!important;
+  max-width:710px!important;
+  min-width:0;
+  margin-inline:auto!important;
+  text-align:center!important;
+}
+html body #main #contacto #v76-enquiry .v76-intro > :is(.v76-kicker,h3,.v76-lead,.v76-privacy) {
+  width:auto!important;
+  max-width:65ch!important;
+  margin-inline:auto!important;
+  text-align:center!important;
+}
+html body #main #contacto #v76-enquiry .v76-sigil {display:none!important}
+html body #main #contacto #v76-enquiry .v76-workspace {
+  width:min(100%,780px)!important;
+  max-width:780px!important;
+  min-width:0!important;
+  margin-inline:auto!important;
+}
+html body #main #contacto #v76-enquiry .v76-workspace > form,
+html body #main #contacto #v76-enquiry .v76-workspace > .v76-results {
+  width:100%;
+  min-width:0;
+}
+html body #main #contacto #v76-enquiry .v76-service-grid {
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:clamp(10px,1.5vw,16px);
+}
+html body #main #contacto #v76-enquiry .v76-service {
+  box-sizing:border-box;
+  min-width:0;
+  min-height:94px;
+}
+html body #main #contacto .contact-actions,
+html body #main #contacto .langs {
+  justify-content:center!important;
+}
+html body #main #contacto .contact-actions {
+  gap:10px;
+  margin-top:clamp(25px,4vw,40px);
+}
+html body #main #contacto .meta {text-align:center}
+/* Mobile composition: the same centered axis, narrower module padding. */
+@media (max-width: 760px) {
+  html body #main {
+    --yoga-page-edge:clamp(10px,3vw,20px);
+    --yoga-page-inset:clamp(18px,4.3vw,28px);
+    --yoga-module-gap:clamp(22px,4vw,38px);
+    --yoga-module-block:clamp(28px,5vw,42px);
+  }
+  html body #main #explora.yoga-showcase-map,
+  html body #main #metodo.yoga-method-slide,
+  html body #main #contacto #v76-enquiry.v76-enquiry {
+    border-radius:14px!important;
+  }
+  html body #main #proyectos .yoga-pause {
+    padding:clamp(17px,3vw,24px);
+  }
+}
+@media (max-width: 580px) {
+  html body #main #contacto #v76-enquiry .v76-service-grid {
+    grid-template-columns:minmax(0,1fr)!important;
+  }
+  html body #main #contacto #v76-enquiry .v76-service {
+    min-height:66px!important;
+  }
+  html body #main #contacto #v76-enquiry.v76-enquiry {
+    padding:clamp(16px,4vw,24px)!important;
+  }
+  html body #main #contacto .contact-actions {justify-content:center}
+  html body #main #contacto .contact-inner > h2 {
+    font-size:clamp(2.3rem,9vw,3.7rem);
+  }
+}

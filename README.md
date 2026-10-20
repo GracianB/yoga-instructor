@@ -84,7 +84,8 @@ El [formulario de clases](https://gracianb.github.io/yoga-instructor/#contacto) 
 | Sitio | HTML, CSS y JavaScript; ES/EN; modo claro/oscuro |
 | Arte | Loto SVG original; campo floral Canvas y recorrido interactivo de tres etapas |
 | Movimiento | Animación acotada, pausa fuera de pantalla y preferencia de movimiento reducido |
-| Solicitudes | Formulario local, sin backend ni seguimiento |\n| Pausa y música | Temporizador voluntario 4/6, pista local con reproducción explícita y soporte de movimiento reducido |
+| Solicitudes | Formulario local, sin backend ni seguimiento |
+| Pausa y música | Temporizador voluntario 4/6, pista local con reproducción explícita y soporte de movimiento reducido |
 | Calidad | Node 24, pruebas de contrato y Playwright (Chromium, Firefox, WebKit) |
 | Publicación | GitHub Actions → GitHub Pages |
 

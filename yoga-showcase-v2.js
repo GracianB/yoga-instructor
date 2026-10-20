@@ -80,6 +80,35 @@
     });
   });
   selectStop(currentStop);
+  // Draw the conceptual route from the *actual* responsive waypoint positions.
+  // No invented geographic coordinates and no loose connector lines.
+  function alignJourneyPath(){
+    const map=$('[data-journey-map]'),svg=map?.querySelector('svg');
+    if(!svg||stops.length!==3||map.getBoundingClientRect().width===0)return;
+    const box=map.getBoundingClientRect(),w=560,h=270;
+    const coords=stops.map(stop=>{
+      const rect=stop.getBoundingClientRect();
+      return {
+        x:Math.max(0,Math.min(w,((rect.left+rect.width/2)-box.left)/box.width*w)),
+        y:Math.max(0,Math.min(h,(rect.top-4-box.top)/box.height*h))
+      };
+    });
+    const [a,c,d]=coords;
+    const path='M'+a.x.toFixed(2)+' '+a.y.toFixed(2)+
+      ' C'+a.x.toFixed(2)+' '+((a.y+c.y)/2).toFixed(2)+
+      ' '+c.x.toFixed(2)+' '+((a.y+c.y)/2).toFixed(2)+
+      ' '+c.x.toFixed(2)+' '+c.y.toFixed(2)+
+      ' S'+d.x.toFixed(2)+' '+((c.y+d.y)/2).toFixed(2)+
+      ' '+d.x.toFixed(2)+' '+d.y.toFixed(2);
+    svg.querySelectorAll('path').forEach(node=>node.setAttribute('d',path));
+    svg.dataset.calibrated='true';
+  }
+  if(typeof ResizeObserver==='function'){
+    const map=$('[data-journey-map]');
+    if(map)new ResizeObserver(alignJourneyPath).observe(map);
+  }
+  window.addEventListener('resize',alignJourneyPath,{passive:true});
+  requestAnimationFrame(alignJourneyPath);
 
   // Brief optional practice. Animations do not dictate or constrain breathing.
   const pause=$('#pausa'),toggle=pause?.querySelector('[data-pause-toggle]'),counter=pause?.querySelector('[data-pause-counter]');

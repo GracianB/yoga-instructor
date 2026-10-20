@@ -9,7 +9,7 @@ test("V77 career ledger is complete, candid and linked to existing documents",()
 });
 test("V77 native filters and alternative language are functional without telemetry",()=>{
 const js=read("credential-ledger-v77.js");
-for(const term of ['aria-pressed','card.hidden=!match','new MutationObserver','lang==="en"','window.print()','CV_Gracian_Baena_Yoga_','Cover_Letter_Yoga_EN.pdf','count.textContent'])assert.ok(js.includes(term),term);
+for(const term of ['aria-pressed','card.hidden=!match','new MutationObserver','lang==="en"','window.print()','Gracian_Baena_CV_Yoga_','Cover_Letter_Yoga_EN.pdf','count.textContent'])assert.ok(js.includes(term),term);
 for(const term of ["fetch(","localStorage.","sendBeacon","XMLHttpRequest"])assert.ok(!js.includes(term));
 });
 test("V77 release includes accessibility and print layout",()=>{

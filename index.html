@@ -105,8 +105,8 @@
   <link rel="stylesheet" href="./movement-journey-v85.css?v=v85-1">
   <link rel="stylesheet" href="./yy-guardian-reconstruction-v102.css?v=v102-1">
   <link rel="stylesheet" href="./practice-ritual-v104.css?v=v104-1">
-  <link rel="stylesheet" href="./yoga-public-final.css?v=hero-v2">
   <link rel="stylesheet" href="./yoga-showcase-v2.css?v=public-v2">
+  <link rel="stylesheet" href="./yoga-public-final.css?v=hero-v2">
   <script src="./runtime.js?v=yoga-5"></script>
   <script src="./boot.js?v=yoga-5"></script>
 
@@ -494,7 +494,7 @@
       <div class="yoga-pause-music" role="group" aria-label="Música opcional" data-pause-music-group>
         <button type="button" data-pause-sound aria-pressed="false"><span aria-hidden="true">♫</span> <span data-p2-lang="es">Escuchar música</span><span data-p2-lang="en">Play music</span></button>
         <label><span data-p2-lang="es">Volumen</span><span data-p2-lang="en">Volume</span><input type="range" data-pause-volume min="0" max="1" step=".05" value=".35"></label>
-        <audio data-pause-audio preload="none" loop src="./audio/silence-between-notes.mp3"></audio>
+        <audio id="focus-audio" src="./audio/silence-between-notes.mp3" preload="metadata" loop data-pause-audio></audio>
       </div>
       <p class="yoga-pause-foot"><span data-p2-lang="es">La música no se reproduce automáticamente. Respira a tu ritmo si el patrón no te resulta cómodo.</span><span data-p2-lang="en">Music never starts automatically. Follow your own rhythm if the pattern feels uncomfortable.</span></p>
     </div>
@@ -1208,7 +1208,7 @@
           <article><span>2020–2026</span><strong><span data-p2-lang="es">Enseñanza en distintos entornos</span><span data-p2-lang="en">Teaching across settings</span></strong><p><span data-p2-lang="es">Sesiones individuales, clases multinivel y bienestar en equipos.</span><span data-p2-lang="en">One-to-one sessions, mixed-level classes and workplace wellbeing.</span></p></article>
           <article><span>ES · EN · IT · PT</span><strong><span data-p2-lang="es">Idiomas y comunicación</span><span data-p2-lang="en">Languages and communication</span></strong><p><span data-p2-lang="es">Español nativo, inglés e italiano C1; portugués básico. Estudios de Turismo y experiencia internacional.</span><span data-p2-lang="en">Native Spanish, C1 English and Italian, basic Portuguese. Tourism studies and international experience.</span></p></article>
         </div>
-        <a class="yoga-credentials-cv" data-cv-link href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noopener" data-i18n="navCv">CV Yoga ↗</a>
+        <a class="yoga-credentials-cv" data-cv-link href="./assets/CV_Gracian_Baena_Yoga_ES.pdf" target="_blank" rel="noreferrer" data-i18n="navCv">CV Yoga ↗</a>
         <p class="yoga-credentials-note"><span data-p2-lang="es">Las acreditaciones y fechas pueden consultarse en el CV; no atribuyo organismos emisores ni horas no documentadas.</span><span data-p2-lang="en">Credentials and dates are detailed in the CV; no unverified awarding bodies or training hours are claimed.</span></p>
       </div>
 
@@ -1429,7 +1429,7 @@
             <input type="range" id="audio-vol" min="0" max="1" step="0.01" value="0.45" data-i18n-aria-label="volumeLabel" aria-label="Volume">
           </div>
           <span class="player-origin" id="playlist-origin">Silence Between Notes</span>
-          <audio id="focus-audio" src="./audio/silence-between-notes.mp3" preload="metadata" loop></audio>
+          
         </div>
     </section>
 

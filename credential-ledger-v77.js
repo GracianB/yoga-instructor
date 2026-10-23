@@ -51,8 +51,8 @@
   cards.forEach(card=>{const match=selected==="all"||selected===card.dataset.v77Role;card.hidden=!match;if(match)visible++});
   buttons.forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.v77Filter===selected)));
   count.textContent=words.count(visible);
-  root.querySelector("#v77-cv").href="./assets/CV_Gracian_Baena_Yoga_"+lang.toUpperCase()+".pdf";
-  root.querySelector("#v77-letter").href=lang==="en"?"./Gracian_Baena_Cover_Letter_Yoga_EN.pdf":"./Gracian_Baena_Carta_Yoga_ES.pdf";
+  root.querySelector("#v77-cv").href="https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_"+lang.toUpperCase()+".pdf";
+  root.querySelector("#v77-letter").href=lang==="en"?"https://gracianb.github.io/GracianB/Gracian_Baena_Cover_Letter_Yoga_EN.pdf":"https://gracianb.github.io/GracianB/Gracian_Baena_Carta_Yoga_ES.pdf";
  }
  buttons.forEach(btn=>btn.addEventListener("click",()=>{selected=btn.dataset.v77Filter;render()}));
  root.querySelector("#v77-print").addEventListener("click",()=>window.print());

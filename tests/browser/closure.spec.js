@@ -42,7 +42,7 @@ for (const width of [320, 390, 768, 1440]) {
     expect(await page.locator('.hero-line').evaluateAll(lines => lines.every(line => line.scrollWidth <= line.clientWidth + 2))).toBe(true);
     await expect(page.locator('#flow-phase-cue')).toHaveText('Arrive and prepare for practice.');
     await expect(page.locator('#audio-vol')).toHaveAttribute('aria-label', 'Volume');
-    await expect(page.locator('[data-cv-link]').first()).toHaveAttribute('href', './assets/CV_Gracian_Baena_Yoga_EN.pdf');
+    await expect(page.locator('[data-cv-link]').first()).toHaveAttribute('href', 'https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_EN.pdf');
     await page.locator('[data-set-theme="dark"]').click();
     await expect(page.locator('html')).toHaveAttribute('data-theme', 'dark');
     await page.reload({ waitUntil: 'domcontentloaded' });

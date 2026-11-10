@@ -57,7 +57,7 @@ The short breathing animation is an **optional visual invitation**, not therapy,
 
 ### A separate idea in development
 
-Two independent concepts, **Yoga Practice** and **Yoga Asana Book**, are being developed outside the public instructor portfolio. The public site does **not** claim that either application is ready to use.
+Two independent concepts, **Yoga Practice** and **Yoga Asana Book**, are being developed outside the public instructor portfolio. The public site does **not** claim that either application is ready to use. They are **not publicly available**.
 
 The purpose is to keep teaching, self-guided practice and learning resources distinct, with their own scope and accessibility requirements.
 

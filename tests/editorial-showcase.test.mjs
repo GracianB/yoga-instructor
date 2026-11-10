@@ -22,4 +22,6 @@ test("GitHub README is an English visitor storefront",()=>{
   assert.match(readme,/Professional Deck/);
   assert.match(readme,/Systems Lab/);
   assert.doesNotMatch(readme,/Versión pública|npm run quality|Workflow V[0-9]/);
+  assert.match(readme,/<h1 align="center">Yoga Instructor/);
+  assert.doesNotMatch(readme,/<div align="center">/,"Markdown nested in HTML blocks breaks GitHub README typography");
 });

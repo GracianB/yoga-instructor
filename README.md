@@ -1,91 +1,90 @@
 <div align="center">
 
 <a href="https://gracianb.github.io/yoga-instructor/">
-  <img src="./assets/readme-yoga.svg" width="100%" alt="Yoga Instructor: loto botánico y cuatro modalidades de clases" />
+  <img src="./assets/readme-yoga.svg" width="100%" alt="Gracián Baena · Yoga Instructor — botanical lotus and a space for mindful movement">
 </a>
 
 # Yoga Instructor · Gracián Baena
 
-**Presencia · Respiración · Movimiento · Enseñanza**
+### Presence · Breath · Movement · Teaching
 
-Un espacio personal de yoga: práctica adaptable, experiencia docente y una forma de contacto clara.
+**A thoughtful practice begins by listening to the person in front of you.**
 
-[**Explorar el portfolio ↗**](https://gracianb.github.io/yoga-instructor/) · [**Modalidades ↗**](https://gracianb.github.io/yoga-instructor/#proyectos) · [**Contacto ↗**](https://gracianb.github.io/yoga-instructor/#contacto)
+*Murcia, Spain · Online, individual, group and workplace enquiries · Spanish / English / Italian*
+
+[**Explore the Yoga universe ↗**](https://gracianb.github.io/yoga-instructor/) &nbsp;·&nbsp; [**Discover class formats ↗**](https://gracianb.github.io/yoga-instructor/#proyectos) &nbsp;·&nbsp; [**Get in touch ↗**](https://gracianb.github.io/yoga-instructor/#contacto)
 
 </div>
 
 ---
 
-## Versión pública · V2.2 Evergreen
+## Movement with attention
 
-La interfaz actual utiliza una **retícula editorial compartida de 1120 px**, módulos proporcionados y un formulario centrado en una sola columna. En móvil, las opciones se reorganizan para evitar desbordamiento.
+Yoga has been a second professional language for me: an opportunity to work with people through presence, curiosity, clarity and patient instruction.
 
-**Paleta:** bosque, salvia y eucalipto. Modo claro vegetal y modo oscuro bosque profundo; superficies, botones, elementos interactivos y texto comparten los mismos colores. Sin efectos de zoom obligatorios y con respeto por movimiento reducido.
+My approach combines **breath, movement and observation**. Sessions are designed to be understandable and adaptable, with space for different abilities, experience levels and personal objectives. The goal is not a perfect pose or a dramatic performance, but a practice that someone can return to.
 
-**Estado verificado (20 oct. 2026, commit `0e6eac6`):** [Yoga Quality SUCCESS ↗](https://github.com/GracianB/yoga-instructor/actions/runs/39425361047) · [Yoga Deploy SUCCESS ↗](https://github.com/GracianB/yoga-instructor/actions/runs/39429219945).
+[**Enter the interactive instructor portfolio**](https://gracianb.github.io/yoga-instructor/)
 
-La validación contempla las anchuras 1440, 1100, 800, 390 y 320 px, tema claro/oscuro, ausencia de desbordamiento horizontal, contraste, controles activos y pruebas del navegador. CI correcto no sustituye una auditoría visual individual de todos los dispositivos.
+## Find your way to practice
 
-## Clases y experiencia
-
-| Modalidad | Propuesta |
+| Your starting point | What we can discuss |
 | --- | --- |
-| [Yoga online ↗](https://gracianb.github.io/yoga-instructor/#contacto) | Sesiones en directo con respiración, movimiento y acompañamiento |
-| [Sesiones individuales ↗](https://gracianb.github.io/yoga-instructor/#contacto) | Práctica 1:1 adaptable a objetivos y ritmos |
-| [Grupos ↗](https://gracianb.github.io/yoga-instructor/#contacto) | Clases multinivel y opciones accesibles |
-| [Empresas ↗](https://gracianb.github.io/yoga-instructor/#contacto) | Sesiones y pausas corporativas de bienestar |
+| **Online classes** | Guided sessions and a structure that works for remote participation. |
+| **One-to-one practice** | Individual pacing, alternatives and a conversation about your goals. |
+| **Group sessions** | A shared practice with clear guidance and room for different levels. |
+| **Workplace wellbeing** | Thoughtful movement and breathing breaks for teams and professional environments. |
 
-**Trayectoria documentada:** formación como instructor de yoga en Madrid (2019), bienestar corporativo en el entorno de Majorel/Google-YouTube en Lisboa (2020–2021) y docencia en Mood Fitness, Murcia (2022–junio de 2026).
+[**Explore formats and send an enquiry ↗**](https://gracianb.github.io/yoga-instructor/#contacto)
 
-El recorrido profesional público contiene **tres etapas seleccionables** con información contextual y navegación por teclado; sus conectores son narrativos, no un mapa geográfico.
+The contact experience prepares an **editable email**. It does not automatically confirm a reservation, process payment or store enquiry details on a booking server.
 
-## Una pausa optativa
+## A journey of teaching and learning
 
-La sección de clases presenta una pausa visual de **30 segundos**, con tres ciclos orientativos de inhalación de 4 s y exhalación de 6 s. Música y temporizador requieren activación voluntaria. No hay autoplay ni indicaciones médicas.
+The public portfolio documents these chapters:
 
-El [formulario de contacto ↗](https://gracianb.github.io/yoga-instructor/#contacto) recopila modalidad y necesidades para **preparar un correo editable**, que la persona decide si envía. No promete una reserva ni almacena las respuestas en un backend.
+- **Madrid, 2019:** yoga instructor training.
+- **Lisbon, 2020–2021:** workplace wellbeing practice in the Majorel / Google–YouTube operational environment.
+- **Murcia, 2022–June 2026:** yoga teaching at Mood Fitness.
 
-## Dos aplicaciones independientes · en desarrollo
+Each is presented as part of my professional journey, without inventing attendance totals, client testimonials or medical outcomes.
 
-**Yoga Practice** y **Yoga Asana Book** están **en desarrollo y no disponibles** públicamente: no forman parte de la web pública V2.2.
+## What you can explore on the site
 
-La [PR #213 · Apps V1.4 ↗](https://github.com/GracianB/yoga-instructor/pull/213) reúne dos aplicaciones separadas que comparten un motor visual y módulos comunes:
+The public experience includes an instructor story, class formats, an interactive professional timeline and a gentle optional breathing pause. Visitors can switch between Spanish and English and use light or dark presentation.
 
-- **Yoga Practice:** secuencia fija Montaña (75 s) → Flexión suave (75 s) → Niño (90 s), cinco patrones de respiración y meditación silenciosa o guiada voluntaria.
-- **Yoga Asana Book:** diez posturas con filtros, instrucciones, alternativas, enlaces directos y una figura SVG compartida.
-- **Calidad independiente:** [Node y E2E Chromium, Firefox y WebKit aprobados en `cffd2552` ↗](https://github.com/GracianB/yoga-instructor/actions/runs/39316868550).
+The short breathing animation is an **optional visual invitation**, not therapy, a clinical exercise or a substitute for individualized health advice. Sound and timing are user-initiated; the site does not need a visitor account to introduce my work.
 
-**Decisión de publicación:** mantener la PR #213 en borrador y sin fusionar mientras se prepara la entrega independiente. Sus pruebas verdes demuestran la validación técnica de esa rama; **no significan que las apps estén publicadas ni terminadas en la experiencia final**. Antes de publicarlas hace falta acordar destino, revisar contenido y accesibilidad final, comprobar enlaces y separar cualquier dependencia del portfolio. Evitar mostrar botones públicos que aparenten lanzar aplicaciones todavía privadas o en desarrollo.
+### A separate idea in development
 
-## Documentación canónica
+Two independent concepts, **Yoga Practice** and **Yoga Asana Book**, are being developed outside the public instructor portfolio. The public site does **not** claim that either application is ready to use.
 
-Los CV y cartas públicas vigentes se centralizan en el hub:
+The purpose is to keep teaching, self-guided practice and learning resources distinct, with their own scope and accessibility requirements.
 
-| Documento | Español | English |
+## Teaching documents
+
+The current Yoga résumé and cover letter are maintained in my [personal hub](https://github.com/GracianB/GracianB) as the canonical public documents.
+
+| | English | Español |
 | --- | --- | --- |
-| CV Yoga | [PDF ↗](https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_ES.pdf) | [PDF ↗](https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_EN.pdf) |
-| Carta Yoga | [PDF ↗](https://gracianb.github.io/GracianB/Gracian_Baena_Carta_Yoga_ES.pdf) | [PDF ↗](https://gracianb.github.io/GracianB/Gracian_Baena_Cover_Letter_Yoga_EN.pdf) |
+| **Yoga résumé** | [Read PDF](https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_EN.pdf) | [Ver PDF](https://gracianb.github.io/GracianB/Gracian_Baena_CV_Yoga_ES.pdf) |
+| **Cover letter** | [Read PDF](https://gracianb.github.io/GracianB/Gracian_Baena_Cover_Letter_Yoga_EN.pdf) | [Ver PDF](https://gracianb.github.io/GracianB/Gracian_Baena_Carta_Yoga_ES.pdf) |
 
-[**Candidaturas y documentos ↗**](https://gracianb.github.io/GracianB/apply.html?track=yoga)
+[**View my Yoga application materials ↗**](https://gracianb.github.io/GracianB/apply.html?track=yoga)
 
-## Diseño, tecnología y calidad
+## One of three connected universes
 
-| Capa | Implementación |
-| --- | --- |
-| Sitio | HTML, CSS y JavaScript; ES/EN; tema claro y oscuro |
-| Arte | Loto SVG original, ambiente botánico y recorrido docente interactivo |
-| Pausa y música | Temporizador optativo, reproducción explícita y movimiento reducido |
-| Contacto | Generación local de correo, sin backend de formularios |
-| Calidad | Node 24, contratos, Playwright Chromium/Firefox/WebKit |
-| Publicación | GitHub Actions → GitHub Pages; apps fuera de `main` |
+Yoga is not a side note to my work with people; it is another way I approach learning, trust and communication. Explore the other two worlds for different expressions of the same curiosity.
 
-```bash
-npm ci
-npm run quality
-npm run build
-npm run test:browser
-```
+[**Professional Deck**](https://gracianb.github.io/professional-deck/) · Customer Success, operations and data  
+[**Systems Lab**](https://gracianb.github.io/systems-lab/) · Software, AI and creative experiments
 
-**Ecosistema:** [GracianB](https://gracianb.github.io/GracianB/) · [Professional Deck](https://gracianb.github.io/professional-deck/) · [Systems Lab](https://gracianb.github.io/systems-lab/).
+---
 
-<sub>Yoga Instructor · V2.2 Evergreen · 20 de octubre de 2026. Sin promesas médicas, reproducción automática ni atribución de funcionalidades no publicadas.</sub>
+<div align="center">
+
+**Practice with attention. Teach with care. Keep learning.**
+
+[**Yoga Instructor**](https://gracianb.github.io/yoga-instructor/) · [**Contact**](https://gracianb.github.io/yoga-instructor/#contacto) · [**LinkedIn**](https://www.linkedin.com/in/gracianbaena/)
+
+</div>

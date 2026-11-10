@@ -29,7 +29,7 @@ jobs:
   browser:
     name: Browser / ${{ matrix.browser }} shard ${{ matrix.shard }}
     needs: quality
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     # WebKit runs both complete partitions serially in one installation.
     # Measured: shard 1 took 12.2m and shard 2 needed more than 7m;
     # the old 20m limit cancelled healthy tests midway through shard 2.

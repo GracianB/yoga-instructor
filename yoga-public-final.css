@@ -1023,3 +1023,7 @@ html body #main :is(
     .yoga-method-tabs button,.v76-service,.contact-actions a
   ){transition:none!important}
 }
+
+/* Public promise and language clarity: explicit working languages, no inflated counters. */
+#inicio .hero-stats li:last-child strong {font-size:clamp(.92rem,1.35vw,1.2rem);letter-spacing:.015em;line-height:1.3;overflow-wrap:anywhere;}
+@media (max-width:520px){#inicio .hero-stats li:last-child strong{font-size:.92rem;}}

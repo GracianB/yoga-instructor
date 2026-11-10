@@ -1,20 +1,17 @@
-<div align="center">
+<p align="center">
+  <a href="https://gracianb.github.io/yoga-instructor/"><img src="./assets/readme-yoga.svg" alt="Gracián Baena · Yoga Instructor — botanical lotus and a space for mindful movement" width="100%"></a>
+</p>
 
-<a href="https://gracianb.github.io/yoga-instructor/">
-  <img src="./assets/readme-yoga.svg" width="100%" alt="Gracián Baena · Yoga Instructor — botanical lotus and a space for mindful movement">
-</a>
+<h1 align="center">Yoga Instructor · Gracián Baena</h1>
 
-# Yoga Instructor · Gracián Baena
+<h3 align="center">Presence · Breath · Movement · Teaching</h3>
 
-### Presence · Breath · Movement · Teaching
+<p align="center"><strong>A thoughtful practice begins by listening to the person in front of you.</strong></p>
 
-**A thoughtful practice begins by listening to the person in front of you.**
+<p align="center"><em>Murcia, Spain · Online, individual, group and workplace enquiries · Spanish / English / Italian</em></p>
 
-*Murcia, Spain · Online, individual, group and workplace enquiries · Spanish / English / Italian*
+<p align="center"><a href="https://gracianb.github.io/yoga-instructor/"><strong>Explore the Yoga universe ↗</strong></a> &nbsp;·&nbsp; <a href="https://gracianb.github.io/yoga-instructor/#proyectos"><strong>Discover class formats ↗</strong></a> &nbsp;·&nbsp; <a href="https://gracianb.github.io/yoga-instructor/#contacto"><strong>Get in touch ↗</strong></a></p>
 
-[**Explore the Yoga universe ↗**](https://gracianb.github.io/yoga-instructor/) &nbsp;·&nbsp; [**Discover class formats ↗**](https://gracianb.github.io/yoga-instructor/#proyectos) &nbsp;·&nbsp; [**Get in touch ↗**](https://gracianb.github.io/yoga-instructor/#contacto)
-
-</div>
 
 ---
 
@@ -81,10 +78,7 @@ Yoga is not a side note to my work with people; it is another way I approach lea
 
 ---
 
-<div align="center">
+<p align="center"><strong>Practice with attention. Teach with care. Keep learning.</strong></p>
 
-**Practice with attention. Teach with care. Keep learning.**
+<p align="center"><a href="https://gracianb.github.io/yoga-instructor/"><strong>Yoga Instructor</strong></a> &nbsp;·&nbsp; <a href="https://gracianb.github.io/yoga-instructor/#contacto"><strong>Contact</strong></a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/gracianbaena/"><strong>LinkedIn</strong></a></p>
 
-[**Yoga Instructor**](https://gracianb.github.io/yoga-instructor/) · [**Contact**](https://gracianb.github.io/yoga-instructor/#contacto) · [**LinkedIn**](https://www.linkedin.com/in/gracianbaena/)
-
-</div>

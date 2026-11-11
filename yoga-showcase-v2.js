@@ -191,3 +191,36 @@
   }
   paintButtons();
 })();
+
+
+/* Public practice orientation. No personal inputs, persistence, tracking or booking. */
+(() => {
+  "use strict";
+  const root=document.querySelector("[data-match-root]");
+  if(!root)return;
+  const choices=[...root.querySelectorAll("[data-match-choice]")];
+  const answers=[...root.querySelectorAll("[data-match-answer]")];
+  const result=root.querySelector("[data-match-result]");
+  const enquiry=root.querySelector("[data-match-enquire]");
+  const services=new Set(["individual","sala","online","equipos"]);
+  let selected=null;
+  function choose(value){
+    if(!services.has(value))return;
+    selected=value;
+    for(const choice of choices){
+      const active=choice.dataset.matchChoice===value;
+      choice.setAttribute("aria-pressed",String(active));
+    }
+    for(const answer of answers)answer.hidden=answer.dataset.matchAnswer!==value;
+    result.hidden=false;
+  }
+  for(const choice of choices){
+    choice.addEventListener("click",()=>choose(choice.dataset.matchChoice));
+  }
+  enquiry?.addEventListener("click",()=>{
+    if(!selected)return;
+    // Delegate to the established enquiry handler: it sets the actual service,
+    // format, contact hash and scroll state. Do not create a second form engine.
+    document.querySelector('[data-yoga-service="'+selected+'"]')?.click();
+  });
+})();

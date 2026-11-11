@@ -36,5 +36,5 @@ test("P4 · production CSS preserves the public portfolio across source and Page
  expect(failed).toEqual([]);
  const cards=page.locator("#proyectos .p26-project-card");
  await expect(cards).toHaveCount(2);
- await expect(page.locator("#proyectos a")).toHaveCount(0);
+ await expect(page.locator("#proyectos .p26-project-card a")).toHaveCount(0);
 });

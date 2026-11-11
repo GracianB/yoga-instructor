@@ -36,6 +36,11 @@ My approach combines **breath, movement and observation**. Sessions are designed
 
 The contact experience prepares an **editable email**. It does not automatically confirm a reservation, process payment or store enquiry details on a booking server.
 
+### A gentle way to choose
+
+Not sure where to begin? The [**practice orientation**](https://gracianb.github.io/yoga-instructor/#guia) lets you start with your intention rather than a class label. It points to one of the established formats and prepares the existing editable enquiry. No answers are saved, sent to a server or treated as a health assessment. The [**practical questions**](https://gracianb.github.io/yoga-instructor/#dudas) explain availability, accessibility, languages and what the site does not book or charge for.
+
+
 ## A journey of teaching and learning
 
 The public portfolio documents these chapters:

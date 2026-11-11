@@ -43,7 +43,7 @@ function stripRetiredSections(document){
   for(const id of ["instructor-flow","studio-asana-library","orientacion","atlas","ritual","campo","soundtrack"]){
     if(result.includes('id="'+id+'"'))throw Error("Retired public module still present: "+id);
   }
-  for(const id of ["inicio","explora","proyectos","experiencia","contacto"]){
+  for(const id of ["inicio","explora","proyectos","guia","dudas","experiencia","contacto"]){
     if(!result.includes('id="'+id+'"'))throw Error("Public module missing: "+id);
   }
   return result;

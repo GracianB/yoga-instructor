@@ -6220,7 +6220,7 @@ body .v97-skip,
 body #zintro { display:none!important; }
 body:has(#main) { padding-bottom:0!important; }
 /* Keep only these five visible main-page destinations. */
-#main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#metodo):not(#contacto) {display:none!important;}
+#main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#metodo):not(#contacto):not(#dudas) {display:none!important;}
 #main #inicio.hero{--lotus-band:clamp(104px,30vw,155px);}
 #main #inicio.hero .mandala-parallax{
   pointer-events:auto!important;

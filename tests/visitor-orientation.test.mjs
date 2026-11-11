@@ -20,6 +20,9 @@ test("FAQ and orientation remain available to English and Spanish readers",()=>{
   assert.match(html,/Esta selección no se guarda ni se envía/);
   assert.match(css,/prefers-reduced-motion/);
   assert.match(css,/focus-visible/);
+  assert.match(read("styles.css"),/:not\(#dudas\) \{display:none!important;/);
+  assert.match(css,/:not\(#dudas\)\{display:none!important\}/);
+  assert.match(read("tools/build.mjs"),/"dudas","experiencia"/);
   assert.match(readme,/practice orientation/);
   assert.match(readme,/practical questions/);
 });

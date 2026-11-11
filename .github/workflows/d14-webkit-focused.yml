@@ -1,0 +1,32 @@
+name: Yoga D14 WebKit focused verification
+on:
+  push:
+    branches:
+      - qa/d14-webkit-motion-20261111
+permissions:
+  contents: read
+jobs:
+  d14_webkit:
+    name: Repeat Cat-Cow ground contact in WebKit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps webkit
+      - name: Repeat the failing 320px neck and paws scenario three times
+        run: npm run test:browser -- tests/browser/d14.spec.js --project=webkit --grep "Cat/Cow neck bends" --workers=1 --repeat-each=3
+      - name: Preserve traces on failure
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: yoga-d14-webkit-focus
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7

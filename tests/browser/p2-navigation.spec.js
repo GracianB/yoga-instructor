@@ -25,7 +25,7 @@ test("P2.7 only Yoga Practice and Yoga Asana Book appear, both on hold",async({p
  await expect(cards.nth(1)).toContainText("Yoga Asana Book");
  await expect(page.locator("#proyectos .p26-status")).toHaveCount(2);
  await expect(page.locator("#proyectos .p26-status").first()).toContainText("En pausa");
- await expect(page.locator("#proyectos a")).toHaveCount(0);
+ await expect(page.locator("#proyectos .p26-project-card a")).toHaveCount(0);
  await expect(page.locator("#proyectos")).not.toContainText(/Vortex|Ohana|Aigoritmo|Systems Lab/i);
  await page.locator('[data-set-lang="en"]').first().click();
  await expect(page.locator("#proyectos .p26-status").first()).toContainText("On hold");

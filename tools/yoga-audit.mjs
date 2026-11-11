@@ -407,7 +407,7 @@ const required = [
   ["reduced motion", css.includes("prefers-reduced-motion")],
   ["CV ES canonical path", main.includes("./assets/CV_Gracian_Baena_Yoga_ES.pdf")],
   ["CV EN canonical path", main.includes("./assets/CV_Gracian_Baena_Yoga_EN.pdf")],
-  ["README classes first, unfinished apps unavailable", ["Yoga Practice","Yoga Asana Book","Yoga online","Sesiones individuales","Grupos","Empresas","en desarrollo","no disponibles"].every(term=>readme.includes(term))],
+  ["README visitor-first class formats and unpublished app boundaries", ["Yoga Practice","Yoga Asana Book","Online classes","One-to-one practice","Group sessions","Workplace wellbeing"].every(term=>readme.includes(term)) && /not ready to use|not publicly available/i.test(readme) && /editable email/i.test(readme)],
   ["sanctuary script include", index.includes("./sanctuary-experience.js")],
   ["editorial rail", index.includes('class="hero-rail"')],
   ["hero manifesto", index.includes('data-i18n="heroManifesto"')],

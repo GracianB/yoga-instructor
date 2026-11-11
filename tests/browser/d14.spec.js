@@ -57,11 +57,23 @@ test('D14: Cat/Cow neck bends but all four contact paws stay fixed at 320px',asy
   return {paw,d,tail:pose.querySelector('.yy-d13-table-tail')!==null};
  });
  const before=await get();
- await page.waitForTimeout(360);
- const after=await get();
  expect(before.tail).toBe(true);
- expect(before.d).not.toBe(after.d);
- for(let i=0;i<4;i++)expect(Math.hypot(before.paw[i][0]-after.paw[i][0],before.paw[i][1]-after.paw[i][1])).toBeLessThan(1.2);
+ expect(before.paw).toHaveLength(4);
+ // WebKit can defer animation frames under CI CPU contention. A fixed
+ // 360ms snapshot occasionally samples the exact same SVG path even though
+ // Cat/Cow is running. Verify eventual *real* neck motion over several
+ // frames instead of assuming every browser paints on a fixed schedule.
+ // Keep the ground-contact assertion on every sampled frame, not just one.
+ await expect.poll(async()=>{
+  const sample=await get();
+  expect(sample.tail).toBe(true);
+  expect(sample.paw).toHaveLength(4);
+  for(let i=0;i<4;i++){
+   expect(Math.hypot(before.paw[i][0]-sample.paw[i][0],before.paw[i][1]-sample.paw[i][1])).toBeLessThan(1.2);
+  }
+  return sample.d;
+ },{timeout:6500,intervals:[120,180,240,360,480]}).not.toBe(before.d);
+ expect(await root.getAttribute('data-asana-state')).toBe('running');
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
 });
 test('D14: Tree balance pivots on planted sole without sliding',async({page})=>{

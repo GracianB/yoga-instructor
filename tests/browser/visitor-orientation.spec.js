@@ -32,7 +32,7 @@ test("Practice orientation and FAQ translate and work by keyboard",async({page})
   const choice=page.locator('[data-match-choice="sala"]');
   await choice.focus();await page.keyboard.press("Enter");
   await expect(choice).toHaveAttribute("aria-pressed","true");
-  await expect(page.locator('[data-match-answer="sala"] [data-p2-lang="en"]')).toBeVisible();
+  await expect(page.locator('[data-match-answer="sala"] strong [data-p2-lang="en"]')).toBeVisible();
   const faq=page.locator("#dudas details").first();
   await faq.locator("summary").focus();await page.keyboard.press("Enter");
   await expect(faq).toHaveAttribute("open","");

@@ -1,0 +1,36 @@
+name: Yoga D6 visual matrix focus
+on:
+  push:
+    branches: [qa/yoga-d6-chromium-20261111]
+permissions:
+  contents: read
+jobs:
+  d6-chromium:
+    name: Test Yin/Yang four viewport matrix
+    runs-on: ubuntu-24.04
+    timeout-minutes: 14
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Configure virtual audio
+        run: |
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=yoga_test
+          pactl set-default-sink yoga_test
+      - name: Verify D6 visuals at all four viewport sizes
+        run: npm run test:browser -- tests/browser/d6.spec.js --project=chromium --grep "real calm eyes and green/blush backdrop" --workers=2
+      - uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: yoga-d6-viewport-evidence
+          path: |
+            playwright-report/
+            test-results/
+          if-no-files-found: ignore
+          retention-days: 7

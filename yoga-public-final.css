@@ -9,7 +9,7 @@ html body .sanctuary-dock,
 html body .hub-music,
 html body .v97-skip,
 html body #zintro {display:none!important}
-html body #main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#metodo):not(#contacto){display:none!important}
+html body #main > section:not(#inicio):not(#explora):not(#proyectos):not(#experiencia):not(#metodo):not(#contacto):not(#dudas){display:none!important}
 html body:has(#main){padding-bottom:0!important}
 html body #main #inicio.hero,
 html body #main[data-p2-mode="short"] #inicio.hero{
@@ -483,7 +483,7 @@ html body #main {
   --yoga-module-gap: clamp(28px, 4.2vw, 58px);
   --yoga-module-block: clamp(32px, 4.8vw, 64px);
 }
-html body #main > :is(#explora, #proyectos, #experiencia, #metodo, #contacto) {
+html body #main > :is(#explora, #proyectos, #experiencia, #metodo, #contacto, #dudas) {
   box-sizing: border-box!important;
   width: min(var(--yoga-page-width), calc(100% - 2 * var(--yoga-page-edge)))!important;
   max-width: var(--yoga-page-width)!important;

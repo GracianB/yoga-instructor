@@ -8,7 +8,7 @@ No hace falta reconstruir la conversación ni volver a preguntar los datos profe
 “Lee docs/presencia/README.md y los documentos enlazados de la rama codex/presencia-foundation en GracianB/yoga-instructor. Continúa el diseño de PRESENCIA y prepara la ficha definitiva de Yogagenda con Gracián. Mantén las hipótesis diferenciadas de las decisiones, conserva la experiencia profesional y no publiques ni envíes nada sin una petición que lo autorice.”
 
 ## Próximas decisiones, agrupadas
-1. Disponibilidad: fecha y franja para el primer taller.
+1. Disponibilidad siempre por consulta: no fijar fecha ni convocatoria.
 2. Operación: plataforma disponible, método de cobro y plazo de confirmación.
 3. Oferta: confirmar 15 €, aforo 8 y mínimo 4 o ajustar con costes reales.
 4. Imagen: seleccionar archivo propio y autorizar uso.
@@ -16,7 +16,7 @@ No hace falta reconstruir la conversación ni volver a preguntar los datos profe
 6. Revisar ficha y respuesta; enviarlas solo cuando el usuario lo solicite.
 
 ## Integración web posterior
-No se ha solicitado aún construir/publicar la interfaz de PRESENCIA.
+El usuario ha solicitado rediseñar la interfaz en PR #222. Se mantiene sin fecha fija, con taller de 60 minutos, correo y agenda de conversación.
 Aprovechar el recorrido existente y la identidad actual; evitar otra aplicación independiente.
 
 Referencias técnicas verificadas:
@@ -43,7 +43,7 @@ No mostrar fechas, plazas disponibles, testimonios o pagos ficticios.
 ### Estados futuros
 planning → scheduled → registration_open → full → completed; cancelled como salida alternativa.
 El JSON de planificación utiliza planning para todas las actividades y no debe cargarse automáticamente en producción.
-Para pasar a scheduled: fecha, horario, plataforma y precio final decididos.
+Para pasar a scheduled: horario individualmente acordado, plataforma y precio final decididos.
 Para abrir inscripción: pago, condiciones y contacto operativo listos.
 
 ### Accesibilidad y calidad cuando se implemente

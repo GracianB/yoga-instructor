@@ -33,8 +33,9 @@ jobs:
     # WebKit runs both complete partitions serially in one installation.
     # Measured: shard 1 took 12.2m and shard 2 needed more than 7m;
     # the old 20m limit cancelled healthy tests midway through shard 2.
-    # Keep full coverage and allow enough time for the combined job.
-    timeout-minutes: 35
+    # Keep full coverage and allow enough time for both serial WebKit shards;
+    # the former 35 minute cap canceled an otherwise progressing browser run.
+    timeout-minutes: 60
     strategy:
       fail-fast: false
       max-parallel: 5

@@ -9,9 +9,10 @@ El usuario ha autorizado crear esta base en GitHub para continuar el trabajo con
 ## Lectura
 1. [Oferta y posicionamiento](./OFERTA.md)
 2. [Diseño del taller y operación](./TALLER.md)
-3. [Ficha y respuesta para Yogagenda](./YOGAGENDA.md)
-4. [Continuación con GPT e integración web](./CONTINUAR_CON_GPT.md)
-5. [Datos estructurados](../../planning/presencia/catalog.json)
+3. [Guía de continuidad (plantilla pendiente de validar)](./GUIA_CONTINUIDAD.md)
+4. [Ficha y respuesta para Yogagenda](./YOGAGENDA.md)
+5. [Continuación con GPT e integración web](./CONTINUAR_CON_GPT.md)
+6. [Datos estructurados](../../planning/presencia/catalog.json)
 
 ## Disponibilidad por consulta
 El taller dura 60 minutos. Sin fecha fija ni convocatoria candidata. Contacto por email y [huecos para conversar](https://calendar.app.google/n99psBFktwYyoAWi9). Las clases se acuerdan por correo.

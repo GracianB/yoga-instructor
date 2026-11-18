@@ -12,7 +12,7 @@ No hace falta reconstruir la conversación ni volver a preguntar los datos profe
 2. Operación: plataforma disponible, método de cobro y plazo de confirmación.
 3. Oferta: confirmar 15 €, aforo 8 y mínimo 4 o ajustar con costes reales.
 4. Imagen: seleccionar archivo propio y autorizar uso.
-5. Contenido: cerrar secuencia docente y guía de una página.
+5. Contenido: revisar [guía posterior](./GUIA_CONTINUIDAD.md), elegir y verificar los tres movimientos realmente enseñados; convertirla en página imprimible accesible solo después de la validación.
 6. Revisar ficha y respuesta; enviarlas solo cuando el usuario lo solicite.
 
 ## Integración web posterior

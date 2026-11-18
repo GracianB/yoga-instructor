@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="theme-color" content="#080d12">
+<title>Yoga Asana Book · Atlas de posturas</title>
+<meta name="description" content="Atlas visual de diez posturas de yoga con indicaciones claras, apoyos y la misma figura humana de Yoga Practice.">
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/figure.css">
+<link rel="stylesheet" href="./book.css">
+<script type="module" src="./book.mjs"></script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+ <a class="brand" href="./"><span class="brand-mark">Y</span><span>YOGA / ASANA BOOK</span></a>
+ <div class="bar-right"><a href="../yoga-practice/" data-es="Entrar a Yoga Practice ↗" data-en="Open Yoga Practice ↗">Entrar a Yoga Practice ↗</a>
+ <div class="switch" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div></div>
+</div></header>
+<main class="wrap">
+ <header class="intro"><div><p class="eyebrow">YOGA ATLAS / 001</p><h1 data-es="La forma sigue<br>al cuerpo." data-en="Let the form<br>fit the body.">La forma sigue<br>al cuerpo.</h1><p data-es="Un libro de asanas útil: postura, intención y alternativas. Sin decenas de opciones ni personajes inconexos." data-en="A useful asana book: posture, purpose and alternatives. No endless menus or mismatched characters.">Un libro de asanas útil: postura, intención y alternativas. Sin decenas de opciones ni personajes inconexos.</p></div><div class="intro-aside"><span class="pill" data-es="Atlas en desarrollo" data-en="Atlas in development">Atlas en desarrollo</span><p data-es="Las mismas figuras y proporciones que en Yoga Practice." data-en="The same figure and proportions used by Yoga Practice.">Las mismas figuras y proporciones que en Yoga Practice.</p></div></header>
+ <div class="atlas" aria-label="Libro de asanas">
+  <section class="catalogue" aria-labelledby="catalogue-heading">
+   <div class="catalogue-heading"><p class="eyebrow">01 / LIBRARY</p><h2 id="catalogue-heading" data-es="Explora las posturas." data-en="Explore the postures.">Explora las posturas.</h2></div>
+   <div class="filters" role="group" aria-label="Categoría">
+    <button data-category="all" type="button" aria-pressed="true" data-es="Todas" data-en="All">Todas</button>
+    <button data-category="standing" type="button" aria-pressed="false" data-es="De pie" data-en="Standing">De pie</button>
+    <button data-category="fold" type="button" aria-pressed="false" data-es="Flexión" data-en="Fold">Flexión</button>
+    <button data-category="seated" type="button" aria-pressed="false" data-es="Sentado" data-en="Seated">Sentado</button>
+    <button data-category="rest" type="button" aria-pressed="false" data-es="Descanso" data-en="Rest">Descanso</button>
+   </div>
+   <div id="pose-list" class="pose-list" role="group" aria-label="Posturas"></div>
+   <p class="catalogue-foot" data-es="Selección editorial inicial · el atlas crecerá después de validar cada postura." data-en="Initial edited selection · the atlas will grow after reviewing each posture.">Selección editorial inicial · el atlas crecerá después de validar cada postura.</p>
+  </section>
+  <article class="pose-feature" aria-labelledby="pose-name">
+   <div class="pose-title"><span class="eyebrow" id="pose-id">ASANA / 01</span><span class="pill" data-es="Guía de práctica" data-en="Practice notes">Guía de práctica</span></div>
+   <div class="figure-frame"><div class="figure-top"><span>HUMAN MOTION / ASANA</span><span id="pose-kind">STANDING</span></div><div id="figure-root"></div></div>
+   <h2 id="pose-name" aria-live="polite" aria-atomic="true">Montaña</h2>
+   <p class="sanskrit" id="pose-sanskrit">Tadasana</p>
+   <div class="teaching-grid">
+    <div><p class="eyebrow" data-es="EN LA POSTURA" data-en="IN THE POSE">EN LA POSTURA</p><p id="pose-cue">Siente el apoyo de los pies y alarga la columna.</p></div>
+    <div><p class="eyebrow" data-es="APOYO Y ALTERNATIVA" data-en="SUPPORT AND OPTION">APOYO Y ALTERNATIVA</p><p id="pose-support">Usa una pared si buscas estabilidad.</p></div>
+   </div>
+   <div class="pose-actions"><button type="button" class="btn" id="previous" data-es="← Anterior" data-en="← Previous">← Anterior</button><button type="button" class="btn primary" id="next" data-es="Siguiente →" data-en="Next →">Siguiente →</button></div>
+  </article>
+ </div>
+ <p class="disclaimer" data-es="Aprendizaje visual, no corrección clínica. Adapta la postura a tu movilidad y evita el dolor." data-en="Visual learning, not clinical assessment. Adapt each posture to your mobility and avoid pain.">Aprendizaje visual, no corrección clínica. Adapta la postura a tu movilidad y evita el dolor.</p>
+</main>
+<footer class="wrap"><span>YOGA ASANA BOOK / WORK IN PROGRESS</span><span data-es="Escuchar · Ajustar · Practicar" data-en="Listen · Adapt · Practice">Escuchar · Ajustar · Practicar</span></footer>
+</body>
+</html>

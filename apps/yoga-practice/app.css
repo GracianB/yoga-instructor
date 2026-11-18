@@ -1,0 +1,69 @@
+.intro{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:30px;align-items:end;padding:clamp(28px,5vw,55px) 0 24px}
+.intro h1{max-width:15ch}.intro h1 br{display:block}.intro p{max-width:62ch}
+.intro-side{border-left:1px solid var(--line);padding-left:24px;padding-block:6px}.intro-side p{margin:22px 0 0;font-size:13px}
+.mode-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin:0 0 16px}
+.mode-nav button{text-align:left;display:flex;flex-direction:column;min-height:80px;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:17px;padding:13px 17px;color:var(--ink);transition:background .25s,border-color .25s,transform .25s}
+.mode-nav button[aria-selected=true]{border-color:var(--accent);background:linear-gradient(130deg,rgba(145,207,194,.15),rgba(145,207,194,.025)),var(--surface)}
+.mode-nav button:hover{transform:translateY(-2px);border-color:var(--accent)}
+.mode-nav button>span{font-size:11px;color:var(--accent);letter-spacing:.1em}
+.mode-nav strong{font:400 clamp(19px,2vw,25px)/1.1 var(--serif)}
+.mode-nav small{font-size:12px;color:var(--muted)}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) minmax(330px,.94fr);gap:18px;padding:clamp(17px,2.4vw,28px);border:1px solid var(--line);border-radius:25px;background:var(--surface)}
+.stage-copy{display:flex;flex-direction:column;min-width:0;padding:4px 0}
+.stage-copy h2{font-size:clamp(29px,3vw,41px);margin-bottom:15px}
+.stage-copy h2 em{color:var(--accent);font-weight:400}
+.stage-cue{font-size:15px;line-height:1.7;max-width:49ch;min-height:44px}
+.stage-meta{display:flex;justify-content:space-between;align-items:center;gap:20px;border-bottom:1px solid var(--line);padding:16px 0 10px;color:var(--muted);font-size:12px}
+.stage-meta #phase-label{color:var(--accent);font-weight:600}
+.progress{height:5px;margin-top:12px;border-radius:99px;overflow:hidden;background:rgba(145,207,194,.1)}
+.progress>span{display:block;background:var(--accent);width:0;height:100%;transition:width .18s linear}
+.clock-face{display:flex;gap:25px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.clock-face strong{font:400 clamp(38px,5vw,65px)/1 var(--serif);font-variant-numeric:tabular-nums;letter-spacing:-.055em}
+.clock-face #stage-status{color:var(--muted);font-size:12px;max-width:22ch}
+.controls{display:flex;gap:10px;flex-wrap:wrap}
+.support{margin:15px 0 0;font-size:12px;max-width:53ch}
+.visual-stage{min-width:0;display:flex;flex-direction:column;justify-content:space-between;padding:14px;border:1px solid var(--line);border-radius:22px;background:radial-gradient(circle at 50% 48%,rgba(145,207,194,.075),transparent 70%),var(--bg)}
+.visual-top,.visual-bottom{display:flex;justify-content:space-between;align-items:center;gap:12px;font:600 10px/1.5 var(--sans);letter-spacing:.1em;color:var(--muted)}
+.visual-top span:last-child{color:var(--accent)}
+#figure-root{display:grid;place-items:center;min-height:255px;padding:5px}
+.live-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 6px rgba(145,207,194,.09)}
+.config-wrap{margin:17px 0}
+.option-panel{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,1.12fr);gap:20px;align-items:start;padding:20px;border:1px solid var(--line);border-radius:19px;background:var(--surface)}
+.option-head h3{font-size:clamp(23px,2.4vw,30px);line-height:1.15}
+.option-head p:last-child{font-size:13px}
+.movement-steps{list-style:none;padding:0;margin:0;border-top:1px solid var(--line)}
+.movement-steps li{display:grid;grid-template-columns:48px 1fr auto;gap:12px;align-items:center;padding:12px 5px;border-bottom:1px solid var(--line);color:var(--muted)}
+.movement-steps li>span{color:var(--accent);font:500 11px var(--sans)}.movement-steps b{font-weight:500;color:var(--ink)}.movement-steps small{font-variant-numeric:tabular-nums}
+.movement-steps li.current{background:rgba(145,207,194,.06);border-radius:10px;padding-inline:11px}
+.movement-steps li.current b{color:var(--accent)}
+.rhythm-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.rhythm-grid button{display:flex;flex-direction:column;justify-content:center;min-height:74px;gap:8px;text-align:left;padding:13px;border:1px solid var(--line);border-radius:13px;background:var(--bg);color:var(--ink)}
+.rhythm-grid button b{font:400 22px var(--serif);white-space:nowrap}
+.rhythm-grid button small{font-size:11px;color:var(--muted)}
+.rhythm-grid button[aria-pressed=true],.med-style button[aria-pressed=true],.duration-grid button[aria-pressed=true]{border-color:var(--accent);background:rgba(145,207,194,.12)}
+.med-style,.duration-grid{display:flex;flex-wrap:wrap;gap:8px}
+.med-style button,.duration-grid button{padding:11px 16px;min-height:44px;border:1px solid var(--line);border-radius:12px;color:var(--ink);background:var(--bg)}
+.minor-label{font-size:11px;color:var(--accent);margin:18px 0 10px;text-transform:uppercase;letter-spacing:.08em}
+.video-list{display:grid;gap:9px}
+.video-list a{display:grid;grid-template-columns:54px 1fr 18px;align-items:center;gap:10px;border:1px solid var(--line);border-radius:11px;padding:13px;text-decoration:none;background:var(--bg)}
+.video-list a:hover{border-color:var(--accent)}
+.video-list small{color:var(--muted)}
+.video-list .duration{color:var(--accent);font:400 19px var(--serif)}
+.footnote{font-size:12px;margin:14px 0 0}
+.bottom-note{font-size:12px;max-width:80ch;margin:26px auto 0;text-align:center}
+footer{display:flex;justify-content:space-between;gap:20px}
+@media(max-width:900px){.intro{grid-template-columns:1fr;gap:10px}.intro-side{border-left:0;border-top:1px solid var(--line);padding:14px 0 0}.stage{grid-template-columns:1fr}#figure-root{min-height:260px}.visual-stage{min-height:350px}.option-panel{grid-template-columns:1fr;gap:18px}}
+@media(max-width:560px){.intro{padding-top:45px}.mode-nav{gap:6px}.mode-nav button{min-height:76px;padding:10px 9px}.mode-nav strong{font-size:18px}.mode-nav small{font-size:10px}.stage{padding:18px}.visual-stage{padding:13px}#figure-root{min-height:215px}.option-panel{padding:18px}.rhythm-grid{grid-template-columns:repeat(2,minmax(0,1fr))}footer{flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.mode-nav button:hover{transform:none}}
+
+.pose-book-link{
+ display:inline-flex;align-self:flex-start;align-items:center;
+ gap:8px;margin-top:10px;padding-bottom:4px;
+ color:var(--accent);text-decoration:none;border-bottom:1px solid var(--line);
+ font-size:12px;font-weight:650;letter-spacing:.01em;
+}
+.pose-book-link:hover{border-bottom-color:var(--accent)}
+
+/* Pose morphing is driven by the same clock as the three fixed steps. */
+.yoga-figure[data-transitioning="true"] .figure-human{animation:none!important}
+@media(max-width:560px){.intro-side{display:none}.mode-nav small{display:none}.stage-copy h2{font-size:30px}.stage-cue{min-height:0}.visual-stage{min-height:260px}.option-panel{gap:12px}}

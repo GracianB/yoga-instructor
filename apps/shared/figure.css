@@ -1,0 +1,44 @@
+/* Consistent, architectural figure shared across both apps. */
+.yoga-figure{display:block;width:100%;height:auto;max-width:460px;color:var(--accent);overflow:visible}
+.yoga-figure .figure-guide{fill:none;stroke:currentColor;stroke-width:.75;opacity:.18;stroke-dasharray:2 9}
+.yoga-figure .figure-guide-two{stroke-dasharray:none;opacity:.11}
+.yoga-figure .figure-floor{fill:none;stroke:var(--muted);stroke-width:2;opacity:.24}
+.yoga-figure .figure-aura{opacity:calc(.3 + var(--figure-breath,.5)*.55);transform-origin:210px 215px;transform:scale(calc(.85 + var(--figure-breath,.5)*.25));transition:transform .15s linear,opacity .15s linear}
+.yoga-figure .figure-human{fill:none;stroke:var(--ink);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;transition:opacity .25s ease}
+.yoga-figure .figure-human [data-figure-part]{transition:opacity .3s ease}
+.yoga-figure .figure-torso{stroke:var(--accent);stroke-width:13}
+.yoga-figure .figure-shoulders{opacity:.22;stroke-width:5}
+.yoga-figure .figure-breath-zone{fill:var(--accent);stroke:none;opacity:calc(.09 + var(--figure-breath,.5)*.18);transform-box:fill-box;transform-origin:center;transform:scale(calc(.86 + var(--figure-breath,.5)*.24));transition:transform .12s linear,opacity .12s linear}
+.yoga-figure .figure-head{fill:var(--surface);stroke:var(--ink);stroke-width:6}
+.yoga-figure .figure-joint{fill:var(--accent);stroke:none}
+.yoga-figure .figure-contact{fill:var(--ink);stroke:none}
+.yoga-figure .figure-measure{stroke:var(--accent);stroke-width:1.5;opacity:.6}
+.yoga-figure[data-pose="child"] .figure-shoulders,.yoga-figure[data-pose="fold"] .figure-shoulders{opacity:0}
+.yoga-figure[data-pose="warrior"] .figure-measure{stroke-dasharray:3 6}
+@media(prefers-reduced-motion:reduce){.yoga-figure *{transition:none!important;animation:none!important}}
+
+/* Articulated live movement: one shared human, pose-specific micro-choreography.
+   Never force body position with cartoon bounce or perpetual hover zoom. */
+.yoga-figure[data-active="true"][data-pose="mountain"] .figure-human{animation:figureStand 7s ease-in-out infinite}
+.yoga-figure[data-active="true"][data-pose="fold"] .figure-human{animation:figureFold 8s ease-in-out infinite}
+.yoga-figure[data-active="true"][data-pose="child"] .figure-human{animation:figureRest 9s ease-in-out infinite}
+.yoga-figure[data-active="true"][data-pose="seated"] .figure-human{animation:figureSeat 9s ease-in-out infinite}
+/* Breath is special: entire torso follows the SAME breathing clock; hold phases stay still. */
+.yoga-figure[data-mode="breath"] .figure-human,
+.yoga-figure[data-mode="meditation"] .figure-human{
+ animation:none!important;
+ transform:translateY(var(--figure-lift,0px));
+ transition:transform .15s linear;
+}
+.yoga-figure[data-mode="breath"][data-phase="hold"] .figure-breath-zone{fill:var(--violet)}
+.yoga-figure[data-mode="breath"][data-phase="rest"] .figure-breath-zone{fill:var(--muted)}
+.yoga-figure .figure-human{transform-origin:210px 265px}
+@keyframes figureStand{0%,100%{transform:translateY(2px) rotate(-.35deg)}50%{transform:translateY(-4px) rotate(.35deg)}}
+@keyframes figureFold{0%,100%{transform:translateY(1px) rotate(-.4deg)}50%{transform:translateY(-2px) rotate(.55deg)}}
+@keyframes figureRest{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
+@keyframes figureSeat{0%,100%{transform:translateY(1px)}50%{transform:translateY(-2px)}}
+@media(prefers-reduced-motion:reduce){
+ .yoga-figure .figure-human,
+ .yoga-figure .figure-aura,
+ .yoga-figure .figure-breath-zone{animation:none!important;transform:none!important;transition:none!important}
+}

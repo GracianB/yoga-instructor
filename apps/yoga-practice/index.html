@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="theme-color" content="#080d12">
+<title>Yoga Practice · Movimiento, respiración y meditación</title>
+<meta name="description" content="Tres prácticas de yoga sin ruido: movimiento estructurado, respiración a distintos ritmos y meditación guiada o en silencio.">
+<link rel="stylesheet" href="../shared/theme.css">
+<link rel="stylesheet" href="../shared/figure.css">
+<link rel="stylesheet" href="./app.css">
+<script type="module" src="./app.mjs"></script>
+</head>
+<body>
+<header class="bar"><div class="wrap">
+  <a class="brand" href="./"><span class="brand-mark">Y</span><span>YOGA / PRACTICE</span></a>
+  <div class="bar-right"><a href="../yoga-asana-book/" data-es="Libro de asanas ↗" data-en="Asana book ↗">Libro de asanas ↗</a>
+    <div class="switch" aria-label="Idioma"><button type="button" data-lang="es" aria-pressed="true">ES</button><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+  </div>
+</div></header>
+<main class="wrap">
+  <div class="intro"><div><p class="eyebrow">YOGA STUDIO / 001</p><h1 data-es="Una práctica.<br> Tres maneras de estar." data-en="One practice.<br> Three ways to be.">Una práctica.<br> Tres maneras de estar.</h1><p data-es="Movimiento, respiración y meditación. Lo esencial, sin distracciones ni personajes que compitan con la práctica." data-en="Movement, breath and meditation. Just the essentials, without distractions or cartoon characters.">Movimiento, respiración y meditación. Lo esencial, sin distracciones ni personajes que compitan con la práctica.</p></div><div class="intro-side"><span class="pill" data-es="Versión en desarrollo" data-en="Work in progress">Versión en desarrollo</span><p data-es="Diseñada para acompañar, nunca para imponerse." data-en="Designed to support, never to overwhelm.">Diseñada para acompañar, nunca para imponerse.</p></div></div>
+  <nav class="mode-nav" aria-label="Práctica" role="tablist">
+    <button type="button" role="tab" aria-selected="true" tabindex="0" aria-controls="mode-panel" id="tab-movement" data-mode="movement"><span>01</span><strong data-es="Movimiento" data-en="Movement">Movimiento</strong><small data-es="Tres acciones, un orden" data-en="Three steps, fixed order">Tres acciones, un orden</small></button>
+    <button type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="mode-panel" id="tab-breath" data-mode="breath"><span>02</span><strong data-es="Respiración" data-en="Breathing">Respiración</strong><small data-es="Elige un ritmo" data-en="Choose a rhythm">Elige un ritmo</small></button>
+    <button type="button" role="tab" aria-selected="false" tabindex="-1" aria-controls="mode-panel" id="tab-meditation" data-mode="meditation"><span>03</span><strong data-es="Meditación" data-en="Meditation">Meditación</strong><small data-es="Guiada o en silencio" data-en="Guided or silent">Guiada o en silencio</small></button>
+  </nav>
+  <section class="stage" id="mode-panel" role="tabpanel" aria-labelledby="tab-movement" data-active-mode="movement">
+    <div class="stage-copy">
+      <p class="eyebrow" id="stage-eyebrow">01 / MOVIMIENTO</p>
+      <h2 id="stage-title">Tres acciones.<br><em>Un solo recorrido.</em></h2>
+      <p id="stage-cue" class="stage-cue">Empezamos de pie, nos plegamos suavemente y terminamos descansando.</p>
+      <div class="stage-meta"><span id="phase-label" aria-live="polite" aria-atomic="true">Montaña</span><span id="phase-remaining">01:15</span></div>
+      <div class="progress" role="progressbar" aria-label="Progreso de la práctica" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="progress-fill"></span></div>
+      <div class="clock-face"><strong id="clock">04:00</strong><span id="stage-status" role="status" aria-live="polite">Listo para empezar</span></div>
+      <div class="controls" id="controls"><button type="button" class="btn primary" id="primary">Empezar</button><button type="button" class="btn" id="reset" data-es="Reiniciar" data-en="Reset">Reiniciar</button></div>
+      <p class="support" id="stage-support" data-es="Puedes usar una pared, silla o cojín. El recorrido no requiere personalización." data-en="You may use a wall, chair or cushion. The sequence needs no setup.">Puedes usar una pared, silla o cojín. El recorrido no requiere personalización.</p>
+      <a class="pose-book-link" id="pose-book-link" href="../yoga-asana-book/?pose=mountain" data-es="Explorar esta postura en el libro ↗" data-en="Explore this posture in the book ↗">Explorar esta postura en el libro ↗</a>
+    </div>
+    <div class="visual-stage"><div class="visual-top"><span>HUMAN MOTION / 01</span><span id="visual-caption">MOUNTAIN</span></div><div id="figure-root"></div><div class="visual-bottom"><span data-es="Un mismo cuerpo · Tres prácticas" data-en="One body · Three practices">Un mismo cuerpo · Tres prácticas</span><span class="live-dot" aria-hidden="true"></span></div></div>
+  </section>
+  <div class="config-wrap">
+    <section id="movement-options" class="option-panel" aria-labelledby="movement-heading"><div class="option-head"><p class="eyebrow">MOVEMENT / SEQUENCE</p><h3 id="movement-heading" data-es="La secuencia viene preparada." data-en="The sequence is ready.">La secuencia viene preparada.</h3><p data-es="No hay editor, biblioteca infinita ni menús extra. Tres acciones con indicaciones y apoyos." data-en="No editor, endless catalogue or extra menus. Three set steps with clear cues and support.">No hay editor, biblioteca infinita ni menús extra. Tres acciones con indicaciones y apoyos.</p></div><ol class="movement-steps" id="movement-steps"><li data-step="0"><span>01</span><b data-es="Montaña" data-en="Mountain">Montaña</b><small>01:15</small></li><li data-step="1"><span>02</span><b data-es="Flexión suave" data-en="Gentle fold">Flexión suave</b><small>01:15</small></li><li data-step="2"><span>03</span><b data-es="Postura del niño" data-en="Child’s pose">Postura del niño</b><small>01:30</small></li></ol></section>
+    <section id="breath-options" class="option-panel" aria-labelledby="breath-heading" hidden><div class="option-head"><p class="eyebrow">BREATH / RHYTHM</p><h3 id="breath-heading" data-es="El ritmo acompaña al cuerpo." data-en="Let the rhythm follow the body.">El ritmo acompaña al cuerpo.</h3><p data-es="Ritmos orientativos, no objetivos. Si una retención resulta incómoda, deja la cuenta y respira con naturalidad." data-en="These are optional visual cues, not targets. If holding your breath feels uncomfortable, stop counting and breathe naturally.">Ritmos orientativos, no objetivos. Si una retención resulta incómoda, deja la cuenta y respira con naturalidad.</p></div><div class="rhythm-grid" role="group" aria-label="Ritmo"><button type="button" data-pattern="natural" aria-pressed="true"><b>4 · 6</b><small data-es="Natural" data-en="Natural">Natural</small></button><button type="button" data-pattern="444" aria-pressed="false"><b>4 · 4 · 4</b><small data-es="Tres fases" data-en="Three phases">Tres fases</small></button><button type="button" data-pattern="478" aria-pressed="false"><b>4 · 7 · 8</b><small data-es="Con retención" data-en="With hold">Con retención</small></button><button type="button" data-pattern="369" aria-pressed="false"><b>3 · 6 · 9</b><small data-es="Exhalación larga" data-en="Long exhale">Exhalación larga</small></button><button type="button" data-pattern="4444" aria-pressed="false"><b>4 · 4 · 4 · 4</b><small data-es="Cuatro fases" data-en="Four phases">Cuatro fases</small></button></div></section>
+    <section id="meditation-options" class="option-panel" aria-labelledby="med-heading" hidden><div class="option-head"><p class="eyebrow">MEDITATION / SPACE</p><h3 id="med-heading" data-es="Puedes escuchar. O simplemente estar." data-en="You can listen. Or simply be.">Puedes escuchar. O simplemente estar.</h3><p data-es="La figura acompaña en silencio. La guía de voz solo se abre en YouTube cuando tú lo decidas." data-en="The figure stays quiet. Guided audio opens on YouTube only when you choose it.">La figura acompaña en silencio. La guía de voz solo se abre en YouTube cuando tú lo decidas.</p></div>
+      <div class="med-style" role="group" aria-label="Tipo de meditación"><button type="button" data-meditation="silent" aria-pressed="true" data-es="En silencio" data-en="Silent">En silencio</button><button type="button" data-meditation="guided" aria-pressed="false" data-es="Guiada · YouTube" data-en="Guided · YouTube">Guiada · YouTube</button></div>
+      <div id="silent-options"><p class="minor-label" data-es="Duración de la pausa" data-en="Session length">Duración de la pausa</p><div class="duration-grid"><button type="button" data-minutes="5" aria-pressed="true">5 min</button><button type="button" data-minutes="10" aria-pressed="false">10 min</button><button type="button" data-minutes="15" aria-pressed="false">15 min</button></div><p class="footnote" data-es="Recomendación: medita sin música, sin voz y sin exigirte cerrar los ojos. La figura no necesita atención constante." data-en="Suggestion: meditate without music or voice. You need not close your eyes or watch the figure.">Recomendación: medita sin música, sin voz y sin exigirte cerrar los ojos. La figura no necesita atención constante.</p></div>
+      <div id="guided-options" hidden><p class="minor-label" data-es="Sesiones externas seleccionadas · Meditación3" data-en="Selected external sessions · Meditación3">Sesiones externas seleccionadas · Meditación3</p><div class="video-list" id="video-list"></div><p class="footnote" data-es="YouTube se abrirá en una pestaña nueva; no descargamos vídeos ni los iniciamos automáticamente." data-en="YouTube opens in a new tab. Videos are not downloaded or auto-played here.">YouTube se abrirá en una pestaña nueva; no descargamos vídeos ni los iniciamos automáticamente.</p></div>
+    </section>
+  </div>
+  <p class="bottom-note" data-es="Si aparece mareo, dolor o incomodidad, detente. Estas prácticas no sustituyen la orientación de un profesional sanitario." data-en="Stop if you feel dizzy, in pain or uncomfortable. These practices are not a substitute for professional medical advice.">Si aparece mareo, dolor o incomodidad, detente. Estas prácticas no sustituyen la orientación de un profesional sanitario.</p>
+</main>
+<footer class="wrap"><span>YOGA PRACTICE / WORK IN PROGRESS</span> <span data-es="Movimiento · Respiración · Meditación" data-en="Movement · Breath · Meditation">Movimiento · Respiración · Meditación</span></footer>
+</body>
+</html>

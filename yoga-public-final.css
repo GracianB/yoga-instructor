@@ -667,61 +667,61 @@ html body #main #contacto .meta {text-align:center}
    ============================================================= */
 html[data-theme="light"] {
   color-scheme:light;
-  --bg:#f3f7f1;
-  --bg2:#eaf2e9;
-  --bg-alt:#e6efe8;
-  --surface:#fcfefa;
-  --surface2:#f2f7f0;
-  --ink:#172d24;
-  --muted:#526b5e;
+  --bg:#f4f0e7;
+  --bg2:#ece8dc;
+  --bg-alt:#e5e5d9;
+  --surface:#fffdf8;
+  --surface2:#f1eee4;
+  --ink:#20382f;
+  --muted:#5c685d;
   --line:rgba(25,69,47,.15);
   --line-strong:rgba(25,69,47,.27);
-  --accent:#256448;
-  --accent-ink:#f8fcf7;
-  --sage:#256448;
-  --sage-2:#3b8060;
-  --sage-bright:#438965;
+  --accent:#345941;
+  --accent-ink:#fffdf5;
+  --sage:#345941;
+  --sage-2:#4f7151;
+  --sage-bright:#587852;
   --sage-dim:rgba(37,100,72,.09);
   --sage-glow:rgba(37,100,72,.17);
-  --earth:#75947c;
-  --clay:#8caa90;
-  --gold:#79916c;
-  --v75-forest:#256448;
+  --earth:#8e866b;
+  --clay:#a59074;
+  --gold:#8a7147;
+  --v75-forest:#345941;
   --v75-divider:rgba(25,69,47,.17);
   --yoga-shadow-card:0 16px 38px rgba(20,70,43,.055),0 3px 10px rgba(20,70,43,.03);
   --yoga-shadow-raised:0 22px 48px rgba(19,64,41,.095),0 6px 14px rgba(19,64,41,.035);
-  --yoga-eucalyptus:#4c8d68;
+  --yoga-eucalyptus:#6b8061;
   --yoga-border-soft:rgba(43,97,66,.16);
-  --yoga-on-accent:#f8fcf7;
+  --yoga-on-accent:#fffdf5;
 }
 html[data-theme="dark"] {
   color-scheme:dark;
-  --bg:#07140f;
-  --bg2:#0c1d16;
-  --bg-alt:#10231b;
-  --surface:#13271e;
-  --surface2:#182f25;
-  --ink:#eff7f0;
-  --muted:#acc3b5;
+  --bg:#101914;
+  --bg2:#15221a;
+  --bg-alt:#1b2b20;
+  --surface:#1e2e23;
+  --surface2:#26372a;
+  --ink:#f0eee3;
+  --muted:#bdc6b3;
   --line:rgba(178,224,190,.17);
   --line-strong:rgba(178,224,190,.28);
-  --accent:#9bddb6;
-  --accent-ink:#092016;
-  --sage:#9bddb6;
-  --sage-2:#7abf98;
-  --sage-bright:#b5eacb;
+  --accent:#c0ceab;
+  --accent-ink:#172218;
+  --sage:#c0ceab;
+  --sage-2:#a4b890;
+  --sage-bright:#d4debe;
   --sage-dim:rgba(155,221,182,.10);
   --sage-glow:rgba(155,221,182,.18);
-  --earth:#789e7e;
-  --clay:#91b299;
-  --gold:#a6c09e;
-  --v75-forest:#9bddb6;
+  --earth:#b19a77;
+  --clay:#c3ad8b;
+  --gold:#d1bb8d;
+  --v75-forest:#c0ceab;
   --v75-divider:rgba(178,224,190,.18);
   --yoga-shadow-card:0 16px 40px rgba(0,0,0,.16),inset 0 1px 0 rgba(229,255,235,.028);
   --yoga-shadow-raised:0 22px 50px rgba(0,0,0,.24),inset 0 1px 0 rgba(229,255,235,.04);
-  --yoga-eucalyptus:#a8e1c2;
+  --yoga-eucalyptus:#becda9;
   --yoga-border-soft:rgba(178,224,190,.18);
-  --yoga-on-accent:#092016;
+  --yoga-on-accent:#172218;
 }
 html body:has(#main) {
   background:
@@ -751,11 +751,11 @@ html body .site-header .brand-mark {
 }
 html[data-theme="light"] body .site-header .header-cv,
 html[data-theme="light"] body #contacto .contact-actions .btn.primary {
-  background:#256448!important;color:#f8fcf7!important;
+  background:#345941!important;color:#fffdf5!important;
 }
 html[data-theme="dark"] body .site-header .header-cv,
 html[data-theme="dark"] body #contacto .contact-actions .btn.primary {
-  background:#9bddb6!important;color:#092016!important;
+  background:#c0ceab!important;color:#172218!important;
 }
 html body #main #inicio.hero {
   background:
@@ -1103,3 +1103,11 @@ html body #main :is(
  #guia .yoga-match-options button,#dudas .yoga-clarity-plus{transition:none}
 }
 
+
+/* Forest / parchment: quieter surfaces and more deliberate hierarchy. */
+html[data-theme="light"]{--sage-dim:rgba(52,89,65,.075);--sage-glow:rgba(52,89,65,.12);--line:rgba(70,76,54,.14);--line-strong:rgba(70,76,54,.25)}
+html[data-theme="dark"]{--sage-dim:rgba(192,206,171,.09);--sage-glow:rgba(192,206,171,.13)}
+html body #main .yoga-offer-card{border-radius:8px!important}
+html body #main #guia.yoga-practice-match{border-radius:10px}
+html body #main #dudas .yoga-clarity-heading h2{letter-spacing:-.045em}
+html body #main #contacto #v76-enquiry.v76-enquiry{border-radius:12px!important}

@@ -13,8 +13,8 @@ El usuario ha autorizado crear esta base en GitHub para continuar el trabajo con
 4. [Continuación con GPT e integración web](./CONTINUAR_CON_GPT.md)
 5. [Datos estructurados](../../planning/presencia/catalog.json)
 
-## Propuesta de convocatoria piloto
-Ver [Lanzamiento piloto](./LANZAMIENTO_PILOTO.md): domingo 29/11/2026, 11:00–12:15, hora de Madrid, pendiente de confirmar. Google Meet gratuito no cubre los 75 minutos de grupo; falta elegir cuenta o plataforma compatible.
+## Disponibilidad por consulta
+El taller dura 60 minutos. Sin fecha fija ni convocatoria candidata. Contacto por email y [huecos para conversar](https://calendar.app.google/n99psBFktwYyoAWi9). Las clases se acuerdan por correo.
 
 ## Fuente de verdad y decisiones
 | Elemento | Estado |
@@ -22,7 +22,7 @@ Ver [Lanzamiento piloto](./LANZAMIENTO_PILOTO.md): domingo 29/11/2026, 11:00–1
 | Taller de iniciación, clases sueltas y flexibilidad/movilidad | Dirección aceptada por el usuario |
 | Bienvenida opcional y guía posterior breve | Concepto aceptado |
 | PRESENCIA | Nombre provisional; comprobar antes de consolidar marca |
-| Taller 75 minutos, 15 €, máximo 8 | Propuesta, no condición comercial aprobada |
+| Taller 60 minutos, 15 €, máximo 8 | Propuesta, no condición comercial aprobada |
 | Tarifas de continuidad | Hipótesis |
 | Fecha, hora, plataforma, pago, cancelaciones e imagen | Pendientes |
 | BODYCAREFITNESS, Madrid, febrero 2019–enero 2020 | Experiencia profesional; conservar un año como figura en Professional Deck |

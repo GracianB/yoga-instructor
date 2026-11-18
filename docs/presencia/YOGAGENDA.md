@@ -11,11 +11,11 @@ También distingue una actividad concreta de las clases regulares y respeta cont
 **Descripción:** Un taller online para personas que sienten curiosidad por el yoga y todavía no se han animado a probarlo, o quieren retomar con calma. Exploraremos movilidad, posturas con variantes y respiración consciente, terminando con una relajación guiada. Habrá espacio para preguntas y una pequeña guía digital para continuar.
 **Destinatarios:** Personas adultas; sin experiencia previa.
 **Formato:** Online en directo, grupo reducido.
-**Duración:** 75 minutos.
+**Duración:** 60 minutos.
 **Idioma:** Español.
-**Fecha:** [PENDIENTE].
+**Fecha:** A consultar, sin fecha fija.
 **Horario:** [PENDIENTE], zona Europe/Madrid; añadir CET/CEST según fecha.
-**Plataforma:** [PENDIENTE].
+**Plataforma:** A consultar.
 **Precio final:** [CONFIRMAR PROPUESTA: 15 € por participante].
 **Aforo:** [CONFIRMAR PROPUESTA: máximo 8; mínimo 4].
 **Incluye:** Sesión en directo y guía digital común.
@@ -45,9 +45,9 @@ Gracias por revisar mi propuesta y por tener en cuenta que prefiero el contacto 
 Me gustaría concretarla como un taller online: “No soy flexible. ¿Puedo hacer yoga?”, una introducción con movimiento suave, respiración y relajación para personas sin experiencia previa.
 
 Te paso los datos para la ficha:
-- Fecha y horario: [COMPLETAR, HORA DE MADRID].
+- Fecha y horario: a consultar por email, sin fecha fija anunciada.
 - Formato y plataforma: online en directo por [COMPLETAR].
-- Duración: 75 minutos.
+- Duración: 60 minutos.
 - Precio final y condiciones: [COMPLETAR].
 - Grupo: [COMPLETAR].
 - Inscripciones: gracianbaenagonzalez@gmail.com.

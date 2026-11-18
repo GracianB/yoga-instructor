@@ -14,7 +14,7 @@ También distingue una actividad concreta de las clases regulares y respeta cont
 **Duración:** 60 minutos.
 **Idioma:** Español.
 **Fecha:** A consultar, sin fecha fija.
-**Horario:** [PENDIENTE], zona Europe/Madrid; añadir CET/CEST según fecha.
+**Horario:** A consultar por email; no existe hora de convocatoria anunciada.
 **Plataforma:** A consultar.
 **Precio final:** [CONFIRMAR PROPUESTA: 15 € por participante].
 **Aforo:** [CONFIRMAR PROPUESTA: máximo 8; mínimo 4].
@@ -22,7 +22,7 @@ También distingue una actividad concreta de las clases regulares y respeta cont
 **Material:** Esterilla, manta, cojín y silla estable opcional.
 **Reservas:** gracianbaenagonzalez@gmail.com.
 **Condiciones:** [INCORPORAR POLÍTICA FINAL].
-**Presentación:** https://gracianb.github.io/yoga-instructor/
+**Presentación:** https://gracianb.github.io/yoga-instructor/ (actualmente publicada). La página específica `clases-online.html` está en la PR #222 y no debe enviarse como URL pública antes del despliegue.
 **Imagen:** [ARCHIVO PENDIENTE Y AUTORIZACIÓN].
 **Privacidad del contacto:** No publicar dirección física ni teléfono.
 
@@ -37,34 +37,27 @@ Texto alternativo descriptivo de la imagen elegida.
 Autorización candidata: “Autorizo a Yogagenda a utilizar la imagen adjunta para ilustrar y difundir la ficha de esta actividad”.
 La autorización solo se incorpora tras elegir imagen y confirmar derechos.
 
-## Respuesta propuesta a Musa
+## Restricción editorial de Yogagenda
+Musa explica que publica actividades concretas con fecha y horario y que no dispone de categoría independiente para profesores. Sin fecha fija, **no presentar esta ficha como evento programado ni pedir publicación inmediata**. El siguiente mensaje recomendado es una consulta previa sobre si pueden incluir la modalidad «a convenir», y, si no, conservar el borrador hasta tener una convocatoria concreta.
+
+## Respuesta propuesta a Musa (consulta previa, no solicitud de publicación)
 Hola, Musa:
 
-Gracias por revisar mi propuesta y por tener en cuenta que prefiero el contacto únicamente por email.
+Muchas gracias por tu respuesta y por tener en cuenta mi preferencia de contacto exclusivamente por correo electrónico.
 
-Me gustaría concretarla como un taller online: “No soy flexible. ¿Puedo hacer yoga?”, una introducción con movimiento suave, respiración y relajación para personas sin experiencia previa.
+He preparado una propuesta de taller online de iniciación: **«No soy flexible. ¿Puedo hacer yoga?»**, una sesión en directo de 60 minutos con movimiento suave, variantes de posturas, respiración y relajación. También ofrezco clases sueltas y sesiones individuales de yoga y movilidad.
 
-Te paso los datos para la ficha:
-- Fecha y horario: a consultar por email, sin fecha fija anunciada.
-- Formato y plataforma: online en directo por [COMPLETAR].
-- Duración: 60 minutos.
-- Precio final y condiciones: [COMPLETAR].
-- Grupo: [COMPLETAR].
-- Inscripciones: gracianbaenagonzalez@gmail.com.
-- Incluye: sesión guiada y pequeña guía digital posterior.
+Antes de enviarte una ficha para publicar, quería consultar algo: en este momento **la disponibilidad se acuerda individualmente por correo**, sin fecha u horario fijos. ¿Os encaja alguna modalidad de actividad «bajo consulta» o preferís que os escriba cuando haya una convocatoria con día y hora concretos? Entiendo perfectamente si vuestro formato requiere un evento fechado.
 
-Puedes conocer mi trayectoria en https://gracianb.github.io/yoga-instructor/.
-[ADJUNTAR IMAGEN Y AUTORIZACIÓN ACORDADA].
+Puedes ver mi trayectoria en https://gracianb.github.io/yoga-instructor/. El correo de contacto público sería **gracianbaenagonzalez@gmail.com**, sin dirección física ni teléfono. Si existe una modalidad adecuada, completaré con vosotros las condiciones y la imagen autorizada antes de su publicación.
 
-Además ofrezco clases sueltas y sesiones de flexibilidad y movilidad, pero para esta publicación propongo centrar la ficha en el taller.
+Gracias de nuevo por orientarme.
 
-Por favor, mantén el email como único contacto público, sin dirección física ni teléfono.
-
-Gracias,
+Un saludo,
 Gracián
 
 ## Lista de salida
-- [ ] Fecha y horario disponibles; conversión correcta Europe/Madrid.
+- [ ] Confirmar primero si Yogagenda admite actividades sin convocatoria; si no, esperar a disponer de fecha y horario reales.
 - [ ] Plataforma comprobada para duración y aforo.
 - [ ] Precio final, pago, cancelación y mínimo decididos.
 - [ ] Enlace revisado; no sugiere reserva automática.

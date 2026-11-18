@@ -4,3 +4,6 @@
 /* Language switch: same navigation, high visibility for keyboard and mobile users */
 .language-link{border:1px solid currentColor;border-radius:99px;padding:6px 10px;font-size:12px;font-weight:700;text-decoration:none}
 @media print{header nav,.actions,.contact-options,.footer-row a{display:none!important}.hero,.section{padding:20px 0}.dark{color:#173e34;background:#fff}.dark p{color:#334b40}.contact{background:#f6f4ef}.botanical{max-height:260px}}
+
+/* Prevent language toggle from pushing the brand outside narrow viewports. */
+@media(max-width:520px){header .wrap{flex-wrap:wrap;gap:12px}header nav{width:100%;justify-content:flex-start;flex-wrap:wrap;gap:10px}.brand{overflow-wrap:anywhere}.language-link{margin-left:auto}}

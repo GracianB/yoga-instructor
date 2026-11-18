@@ -34,7 +34,7 @@ My approach combines **breath, movement and observation**. Sessions are designed
 
 [**Explore formats and send an enquiry ↗**](https://gracianb.github.io/yoga-instructor/#contacto)
 
-[**Explore online yoga, breathwork and meditation ↗**](https://gracianb.github.io/yoga-instructor/clases-online.html) · A focused overview of live online formats, contact and the conditions agreed before booking. No public street address, phone number, invented timetable or price.
+[**Explore online yoga, breathwork and meditation (EN) ↗**](https://gracianb.github.io/yoga-instructor/clases-online-en.html) · [Ver clases online (ES)](https://gracianb.github.io/yoga-instructor/clases-online.html) · A focused overview of live online formats, contact and the conditions agreed before booking. No public street address, phone number, invented timetable or price.
 
 The contact experience prepares an **editable email**. It does not automatically confirm a reservation, process payment or store enquiry details on a booking server.
 

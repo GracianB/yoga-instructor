@@ -35,6 +35,8 @@ Puedes continuar sin un programa fijo. Si buscas **movilidad y flexibilidad**, *
 
 ---
 
+**Versión visual imprimible (borrador interno):** [GUIA_IMPRIMIBLE.html](./GUIA_IMPRIMIBLE.html). Abre el archivo en un navegador, edita los campos de los tres movimientos, valida con Gracián y después imprime o exporta a PDF. No se almacena nada automáticamente.
+
 ### Control de calidad previo al envío
 - [ ] Gracián valida los tres movimientos concretos, los apoyos y las indicaciones.
 - [ ] Se eliminan todos los marcadores `[...]` y esta lista editorial.

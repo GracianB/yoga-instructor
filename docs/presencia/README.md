@@ -13,6 +13,9 @@ El usuario ha autorizado crear esta base en GitHub para continuar el trabajo con
 4. [Continuación con GPT e integración web](./CONTINUAR_CON_GPT.md)
 5. [Datos estructurados](../../planning/presencia/catalog.json)
 
+## Propuesta de convocatoria piloto
+Ver [Lanzamiento piloto](./LANZAMIENTO_PILOTO.md): domingo 29/11/2026, 11:00–12:15, hora de Madrid, pendiente de confirmar. Google Meet gratuito no cubre los 75 minutos de grupo; falta elegir cuenta o plataforma compatible.
+
 ## Fuente de verdad y decisiones
 | Elemento | Estado |
 | --- | --- |

@@ -39,6 +39,7 @@ Una página accesible, común para el grupo:
 - Secuencia sugerida de cinco minutos.
 - Recordatorio de pausas, adaptación y contacto.
 Elegir los movimientos con Gracián al cerrar el guion. No inventar una prescripción personalizada.
+Plantilla editorial y comprobaciones: [Tu práctica empieza aquí](./GUIA_CONTINUIDAD.md). No enviar ni enlazar públicamente hasta completar y validar los movimientos.
 Primero versión HTML imprimible o PDF accesible; recorrido interactivo como mejora posterior.
 
 ## Flujo manual

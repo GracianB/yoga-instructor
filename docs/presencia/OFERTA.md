@@ -14,7 +14,7 @@ Yoga, movilidad y respiración con una base técnica, atención personal y opcio
 ## Catálogo propuesto
 | Experiencia | Contenido | Duración | Precio propuesto |
 | --- | --- | --- | --- |
-| No soy flexible. ¿Puedo hacer yoga? | Taller introductorio completo | 75 min | 15 € |
+| No soy flexible. ¿Puedo hacer yoga? | Taller introductorio completo | 60 min | 15 € |
 | Yoga para la vida real | Clase suelta: movilidad, asanas, respiración y cierre | 60 min | 12 € |
 | Moverse con más libertad | Flexibilidad, movilidad y control corporal | 55 min | 10 € |
 | El arte de parar | Movimiento suave, respiración y relajación | 40 min | 9 € |

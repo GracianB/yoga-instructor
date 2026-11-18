@@ -3,9 +3,9 @@
 ## Ficha de trabajo
 Título: No soy flexible. ¿Puedo hacer yoga?
 Subtítulo: No necesitas tocarte los pies para empezar.
-Online en directo · 75 minutos · español · 15 € propuestos · máximo inicial 8 participantes.
+Online en directo · 60 minutos · español · 15 € propuestos · máximo inicial 8 participantes.
 Público: personas adultas que se inician o retoman la práctica. No requiere experiencia previa.
-Fecha, horario, plataforma y cobro: pendientes. Google Meet es una opción, no una decisión.
+Sin fecha fija; horario y disponibilidad por consulta. Plataforma y cobro se acuerdan antes de confirmar. Google Meet es una opción, no una decisión.
 
 ## Objetivos de la sesión
 - Probar movimientos y posturas con diferentes variantes.
@@ -13,14 +13,14 @@ Fecha, horario, plataforma y cobro: pendientes. Google Meet es una opción, no u
 - Experimentar una pausa de respiración y relajación.
 - Salir con una propuesta breve de continuidad.
 
-## Guion de 75 minutos
+## Guion de 60 minutos
 | Minutos | Bloque | Acción del instructor |
 | --- | --- | --- |
-| 0–10 | Bienvenida | Presentarse, explicar opciones y recoger expectativas voluntarias |
-| 10–20 | Movilidad | Explorar movimientos sencillos y apoyos |
-| 20–50 | Yoga | Secuencia progresiva; mostrar variantes antes de aumentar complejidad |
-| 50–65 | Respiración y relajación | Respiración cómoda sin forzar y relajación guiada |
-| 65–75 | Cierre | Preguntas, recapitulación y explicación de la guía |
+| 0–5 | Bienvenida | Presentarse, explicar opciones y recoger expectativas voluntarias |
+| 5–15 | Movilidad | Explorar movimientos sencillos y apoyos |
+| 15–40 | Yoga | Secuencia progresiva; mostrar variantes antes de aumentar complejidad |
+| 40–55 | Respiración y relajación | Respiración cómoda sin forzar y relajación guiada |
+| 55–60 | Cierre | Preguntas, recapitulación y explicación de la guía |
 
 Pregunta de apertura opcional: “¿Qué te gustaría llevarte de esta sesión?”.
 La participación verbal no es obligatoria. Respiración natural y pausas disponibles.
@@ -29,7 +29,7 @@ La participación verbal no es obligatoria. Respiración natural y pausas dispon
 Esterilla, manta, cojín, silla estable opcional y espacio despejado.
 Si se desea recibir indicaciones visuales, orientar la cámara para que se vea el movimiento.
 Explicar los límites del acompañamiento si se participa sin cámara.
-No grabar por defecto. Confirmar que el plan de videollamada admite 75 minutos y 8 participantes antes de elegir plataforma.
+No grabar por defecto. La duración docente es de 60 minutos. Verificar el límite de la cuenta incluyendo bienvenida técnica; si el plan corta a los 60 minutos, reservar margen o elegir un plan adecuado.
 Ofrecer conexión de prueba breve antes del inicio; definir margen de acceso y procedimiento de reconexión.
 
 ## Guía incluida: Tu práctica empieza aquí
@@ -59,8 +59,8 @@ Estas condiciones requieren decisión del titular antes de enviarse a clientes.
 
 ## Economía orientativa
 A 15 €: 4 personas = 60 €, 6 = 90 €, 8 = 120 € de ingresos brutos.
-Hipótesis de tiempo total: 75 min en directo + 45 preparación + 30 administración/guía = 2,5 h.
-Ingreso bruto por hora total: 24 €, 36 € o 48 €, respectivamente.
+Hipótesis de tiempo total: 60 min en directo + 45 preparación + 30 administración/guía = 2,25 h.
+Ingreso bruto por hora total: 26,67 €, 40 € o 53,33 €, respectivamente.
 No son beneficios netos: faltan comisiones, herramientas, impuestos y costes reales.
 Reutilizar la guía reduce preparación futura; no asumir aforo completo.
 

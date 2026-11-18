@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-18",
+  "brand": {
+    "name": "PRESENCIA",
+    "tagline": "Yoga para la vida real",
+    "status": "provisional"
+  },
+  "publication_status": "planning",
+  "contact": {
+    "email": "gracianbaenagonzalez@gmail.com",
+    "public_phone": null,
+    "public_street_address": null
+  },
+  "activities": [
+    {
+      "id": "iniciacion",
+      "title": "No soy flexible. ¿Puedo hacer yoga?",
+      "status": "planning",
+      "duration_minutes": 60,
+      "price": {
+        "amount": 15,
+        "currency": "EUR",
+        "status": "proposed"
+      },
+      "format": "group",
+      "delivery": "online",
+      "language": "es",
+      "scheduled_at": null,
+      "timezone": "Europe/Madrid",
+      "platform": null,
+      "booking_url": null,
+      "proposed_capacity": {
+        "min": 4,
+        "max": 8
+      },
+      "includes": [
+        "Sesión en directo",
+        "Guía digital común"
+      ],
+      "platform_requirement": {
+        "minimum_group_duration_minutes": 60,
+        "technical_margin_required": true
+      }
+    },
+    {
+      "id": "yoga",
+      "title": "Yoga para la vida real",
+      "status": "planning",
+      "duration_minutes": 60,
+      "price": {
+        "amount": 12,
+        "currency": "EUR",
+        "status": "proposed"
+      },
+      "format": "group",
+      "delivery": "online",
+      "language": "es",
+      "scheduled_at": null,
+      "timezone": "Europe/Madrid",
+      "platform": null,
+      "booking_url": null
+    },
+    {
+      "id": "movilidad",
+      "title": "Moverse con más libertad",
+      "status": "planning",
+      "duration_minutes": 55,
+      "price": {
+        "amount": 10,
+        "currency": "EUR",
+        "status": "proposed"
+      },
+      "format": "group",
+      "delivery": "online",
+      "language": "es",
+      "scheduled_at": null,
+      "timezone": "Europe/Madrid",
+      "platform": null,
+      "booking_url": null
+    },
+    {
+      "id": "pausa",
+      "title": "El arte de parar",
+      "status": "planning",
+      "duration_minutes": 40,
+      "price": {
+        "amount": 9,
+        "currency": "EUR",
+        "status": "proposed"
+      },
+      "format": "group",
+      "delivery": "online",
+      "language": "es",
+      "scheduled_at": null,
+      "timezone": "Europe/Madrid",
+      "platform": null,
+      "booking_url": null
+    },
+    {
+      "id": "individual",
+      "title": "A tu ritmo",
+      "status": "planning",
+      "duration_minutes": 60,
+      "price": {
+        "amount": 35,
+        "currency": "EUR",
+        "status": "proposed"
+      },
+      "format": "individual",
+      "delivery": "online",
+      "language": "es",
+      "scheduled_at": null,
+      "timezone": "Europe/Madrid",
+      "platform": null,
+      "booking_url": null
+    }
+  ],
+  "pending_decisions": [
+    "platform",
+    "final_prices",
+    "payment_method",
+    "cancellation_policy",
+    "image_and_permission"
+  ],
+  "future_lines": [
+    "corporate",
+    "language_groups"
+  ],
+  "public_runtime_integration": false,
+  "scheduling": {
+    "mode": "by_enquiry",
+    "fixed_date": null,
+    "conversation_calendar_url": "https://calendar.app.google/n99psBFktwYyoAWi9"
+  }
+}

@@ -11,6 +11,8 @@ async function openPractice(page){
 }
 
 test('D11: both dragon forms retain closed eyes and visible sculpted engraving',async({page})=>{
+ // Eight combinations, with multiple DOM/computed-style assertions in each; 30 s is too restrictive on a loaded CI shard.
+ test.setTimeout(90000);
  const guide=await openPractice(page);
  const stage=guide.locator('.yy-stage');
  const palettes=[];

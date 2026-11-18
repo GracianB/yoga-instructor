@@ -30,6 +30,28 @@ test.describe('PRESENCIA · public bilingual online pages', () => {
     });
   }
 
+  test('Email consultations preserve context and request only availability and terms',async({page})=>{
+    for(const [path,language,fragment] of [
+      ['clases-online.html','es','disponibilidad'],
+      ['clases-online-en.html','en','availability']
+    ]){
+      await page.goto('/dist/'+path,{waitUntil:'domcontentloaded'});
+      const mails=await page.locator('a[href^="mailto:"][href*="subject="]').evaluateAll(els=>
+        els.map(a=>{const u=new URL(a.href);return {
+          subject:u.searchParams.get('subject'),
+          body:u.searchParams.get('body'),
+          text:a.textContent?.trim()
+        }}));
+      expect(mails.length,language+' email CTA count').toBeGreaterThanOrEqual(8);
+      for(const mail of mails){
+        expect(mail.subject,mail.text).toBeTruthy();
+        expect(mail.body,mail.text).toContain(fragment);
+        expect(mail.body,mail.text).toMatch(language==='es'?/precio final/i:/final price/i);
+        expect(mail.body,mail.text).not.toMatch(/historial m[eé]dico|medical history|diagn[oó]stico|diagnosis/i);
+      }
+    }
+  });
+
   test('ES ↔ EN switch preserves correct page and enquiry boundaries',async({page})=>{
     const res=await page.goto('/dist/clases-online.html',{waitUntil:'domcontentloaded'});
     expect(res?.status()).toBe(200);
